@@ -68,8 +68,9 @@
                             <div class="f-13 chat-header">Suzen</div>
                         </div>
                     </div>
-                    <div class="media userlist-box" data-id="6" data-status="offline" data-username="Michael Scofield"
-                        data-toggle="tooltip" data-placement="left" title="Michael Scofield">
+                    <div class="media userlist-box" data-id="6" data-status="offline"
+                        data-username="Michael Scofield" data-toggle="tooltip" data-placement="left"
+                        title="Michael Scofield">
                         <a class="media-left" href="#!">
                             <img class="media-object img-circle" src="{{ asset('assets/images/avatar-3.png') }}"
                                 alt="Generic placeholder image">
@@ -90,8 +91,9 @@
                             <div class="f-13 chat-header">Irina Shayk</div>
                         </div>
                     </div>
-                    <div class="media userlist-box" data-id="8" data-status="offline" data-username="Sara Tancredi"
-                        data-toggle="tooltip" data-placement="left" title="Sara Tancredi">
+                    <div class="media userlist-box" data-id="8" data-status="offline"
+                        data-username="Sara Tancredi" data-toggle="tooltip" data-placement="left"
+                        title="Sara Tancredi">
                         <a class="media-left" href="#!">
                             <img class="media-object img-circle" src="{{ asset('assets/images/avatar-5.png') }}"
                                 alt="Generic placeholder image">
@@ -112,8 +114,9 @@
                             <div class="f-13 chat-header">Samon</div>
                         </div>
                     </div>
-                    <div class="media userlist-box" data-id="10" data-status="online" data-username="Daizy Mendize"
-                        data-toggle="tooltip" data-placement="left" title="Daizy Mendize">
+                    <div class="media userlist-box" data-id="10" data-status="online"
+                        data-username="Daizy Mendize" data-toggle="tooltip" data-placement="left"
+                        title="Daizy Mendize">
                         <a class="media-left" href="#!">
                             <img class="media-object img-circle" src="{{ asset('assets/images/task/task-u3.jpg') }}"
                                 alt="Generic placeholder image">
@@ -123,8 +126,9 @@
                             <div class="f-13 chat-header">Daizy Mendize</div>
                         </div>
                     </div>
-                    <div class="media userlist-box" data-id="11" data-status="offline" data-username="Loren Scofield"
-                        data-toggle="tooltip" data-placement="left" title="Loren Scofield">
+                    <div class="media userlist-box" data-id="11" data-status="offline"
+                        data-username="Loren Scofield" data-toggle="tooltip" data-placement="left"
+                        title="Loren Scofield">
                         <a class="media-left" href="#!">
                             <img class="media-object img-circle" src="{{ asset('assets/images/avatar-3.png') }}"
                                 alt="Generic placeholder image">
@@ -235,7 +239,7 @@
                     <div class="main-menu-header">
                         <img class="img-40" src="{{ asset('assets/images/user.png') }}" alt="User-Profile-Image">
                         <div class="user-details">
-                            <span>John Doe</span>
+                            <span>{{Auth::user()->username}}</span>
                             <span id="more-details">UX Designer<i class="ti-angle-down"></i></span>
                         </div>
                     </div>
@@ -243,9 +247,9 @@
                     <div class="main-menu-content">
                         <ul>
                             <li class="more-details py-2 px-4 " style="background-color: #0b0b0b">
-                                <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                <a href="#!"><i class="ti-shift-right"></i>Logout</a>
+                                <a href="{{ route('user.profile') }}"><i class="ti-user"></i>View Profile</a>
+                                {{-- <a href="#!"><i class="ti-settings"></i>Settings</a> --}}
+                                <a href="{{ route('auth.logout') }}"><i class="ti-shift-right"></i>Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -314,6 +318,40 @@
                 </ul>
             </div>
         </nav>
-        
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+
+                <!-- Main-body start -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- Page header start -->
+                        <div class="page-header">
+                            <div class="page-header-title">
+                                <h4>{{ @$page_title }}</h4>
+                                <span>{{ @$page_heading }}</span>
+                            </div>
+                            <div class="page-header-breadcrumb">
+                                <ul class="breadcrumb-title">
+                                    <li class="breadcrumb-item">
+                                        <a href="index.html">
+                                            <i class="icofont icofont-home"></i>
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a
+                                            href="{{ url($module['action']) }}">{{ @$module['plural'] }}</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a>{{ @$module['page'] }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="pag-body">
+                                @yield('body')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 </div>

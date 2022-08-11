@@ -117,34 +117,34 @@
                         </a>
                     </li>
                     <li class="user-profile header-notification">
-                        <a href="#!">
+                        <a>
                             <img src="{{ asset('assets/images/user.png') }}" alt="User-Profile-Image">
-                            <span>John Doe</span>
+                            <span>{{ Auth::user()->username }}</span>
                             <i class="ti-angle-down"></i>
                         </a>
                         <ul class="show-notification profile-notification">
-                            <li>
+                            {{-- <li>
                                 <a href="#!">
                                     <i class="ti-settings"></i> Settings
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
-                                <a href="user-profile.html">
+                                <a href="{{ route('user.profile') }}">
                                     <i class="ti-user"></i> Profile
                                 </a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="email-inbox.html">
                                     <i class="ti-email"></i> My Messages
                                 </a>
-                            </li>
-                            <li>
+                            </li> --}}
+                            {{-- <li>
                                 <a href="auth-lock-screen.html">
                                     <i class="ti-lock"></i> Lock Screen
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
-                                <a href="#!">
+                                <a href="{{ route('auth.logout') }}">
                                     <i class="ti-layout-sidebar-left"></i> Logout
                                 </a>
                             </li>
@@ -180,14 +180,16 @@
                                 <h3>Page Preloading Effect</h3>
                             </a>
                             <a class="dummy-media-object" href="#!">
-                                <img src="{{ asset('assets/images/avatar-1.png') }}" alt="DraggableDualViewSlideshow" />
+                                <img src="{{ asset('assets/images/avatar-1.png') }}"
+                                    alt="DraggableDualViewSlideshow" />
                                 <h3>Draggable Dual-View Slideshow</h3>
                             </a>
                         </div>
                         <div class="dummy-column">
                             <h2>Recent</h2>
                             <a class="dummy-media-object" href="#!">
-                                <img src="{{ asset('assets/images/avatar-1.png') }}" alt="TooltipStylesInspiration" />
+                                <img src="{{ asset('assets/images/avatar-1.png') }}"
+                                    alt="TooltipStylesInspiration" />
                                 <h3>Tooltip Styles Inspiration</h3>
                             </a>
                             <a class="dummy-media-object" href="#!">
