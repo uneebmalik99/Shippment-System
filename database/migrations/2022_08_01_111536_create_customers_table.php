@@ -29,7 +29,8 @@ class CreateCustomersTable extends Migration
             $table->string('phone_two');
             $table->string('note');
             $table->foreignId('added_by_role')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('added_by_email')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('added_by_email');
+            $table->foreign('added_by_email')->references('email')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

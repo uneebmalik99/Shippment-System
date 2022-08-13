@@ -239,7 +239,7 @@
                     <div class="main-menu-header">
                         <img class="img-40" src="{{ asset('assets/images/user.png') }}" alt="User-Profile-Image">
                         <div class="user-details">
-                            <span>{{Auth::user()->username}}</span>
+                            <span>{{ Auth::user()->username }}</span>
                             <span id="more-details">UX Designer<i class="ti-angle-down"></i></span>
                         </div>
                     </div>
@@ -247,7 +247,7 @@
                     <div class="main-menu-content">
                         <ul>
                             <li class="more-details py-2 px-4 " style="background-color: #0b0b0b">
-                                <a href="{{ route('user.profile') }}"><i class="ti-user"></i>View Profile</a>
+                                <a href="#"><i class="ti-user"></i>View Profile</a>
                                 {{-- <a href="#!"><i class="ti-settings"></i>Settings</a> --}}
                                 <a href="{{ route('auth.logout') }}"><i class="ti-shift-right"></i>Logout</a>
                             </li>
@@ -280,30 +280,37 @@
                     </li> --}}
 
                     <li class="change-loges.html py-2">
-                        <a href="javascript:void(0)">
+                        <a href="{{ route('user.list') }}">
                             <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Customer</span>
+                            <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Users</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="change-loges.html py-2">
+                        <a href="{{ route('customer.list') }}">
+                            <span class="pcoded-micon"><i class="ti-calendar"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Customers</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
                         <a href="javascript:void(0)">
                             <span class="pcoded-micon"><i class="ti-package"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.image-cropper.main">Consignee</span>
+                            <span class="pcoded-mtext" data-i18n="nav.image-cropper.main">Consignees</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
                         <a href="javascript:void(0)">
                             <span class="pcoded-micon"><i class="ti-truck"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.file-upload.main">Vehicle</span>
+                            <span class="pcoded-mtext" data-i18n="nav.file-upload.main">Vehicles</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
                         <a href="javascript:void(0)">
                             <span class="pcoded-micon"><i class="ti-export"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Export</span>
+                            <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Exports</span>
 
                             <span class="pcoded-mcaret"></span>
                         </a>
@@ -311,7 +318,7 @@
                     <li class="change-loges.html py-2">
                         <a href="javascript:void(0)">
                             <span class="pcoded-micon"><i class="ti-bell"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.change-loges.main">Notification</span>
+                            <span class="pcoded-mtext" data-i18n="nav.change-loges.main">Notifications</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
@@ -320,7 +327,6 @@
         </nav>
         <div class="pcoded-content">
             <div class="pcoded-inner-content">
-
                 <!-- Main-body start -->
                 <div class="main-body">
                     <div class="page-wrapper">
@@ -344,7 +350,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="pag-body">
+                            <div class="page-body">
                                 @yield('body')
                             </div>
                         </div>

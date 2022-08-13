@@ -33,6 +33,7 @@ class UserController extends Controller
                 'db_key' => $this->db_key,
                 'action' => $this->action,
                 'page' => 'list',
+                'action' => $this->action,
             ],
         ];
         $records = User::all();
@@ -151,4 +152,5 @@ class UserController extends Controller
         User::find(Auth::id())->update($data);
         return back()->with('success', 'Profile successfully updated.');
     }
+
 }
