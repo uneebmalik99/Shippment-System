@@ -43,12 +43,15 @@
 <!-- Style.css -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 <!--color css-->
-
+<!--Multiple Image Upload -->
+<link href="{{ asset('assets/pages/jquery.filer/css/jquery.filer.css') }}" type="text/css" rel="stylesheet" />
+<link href="{{ asset('assets/pages/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css') }}" type="text/css"
+    rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/linearicons.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/simple-line-icons.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ionicons.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.mCustomScrollbar.css') }}">
+
 {{-- Datatable --}}
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-

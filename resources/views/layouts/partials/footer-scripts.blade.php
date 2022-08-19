@@ -31,6 +31,10 @@
 <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.mousewheel.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
+{{-- Multiple image upload --}}
+<script src="{{ asset('assets/pages/jquery.filer/js/jquery.filer.min.js') }}"></script>
+<script src="{{ asset('assets/pages/filer/custom-filer.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/pages/filer/jquery.fileuploads.init.js') }}" type="text/javascript"></script>
 {{-- Vehicles pagination and filter --}}
 <script>
     $('#search_vehicle').on('keyup', function() {
@@ -183,7 +187,7 @@
                 'pagination': $pagination,
             },
             success: function(data) {
-                console.log($check , $pagination);
+                console.log($check, $pagination);
                 $('#tbody').html(data.table);
                 $('#page').html(data.pagination);
                 // console.log($search, $pagination);
