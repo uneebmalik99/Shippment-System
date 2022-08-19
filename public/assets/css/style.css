@@ -19445,3 +19445,17 @@ body.menu-bottom .navbar-wrapper {
   overflow: visible !important; }
 
 /*# sourceMappingURL=style.css.map */
+/* Sortable tables */
+table.sortable thead {
+  background-color:#eee;
+  color:#666666;
+  font-weight: bold;
+  cursor: default;
+}
+table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
+    content: " \25B4\25BE" 
+}
+.scroll{
+  max-width:100%;
+  overflow-x: scroll;
+}

@@ -33,14 +33,14 @@ class Customer extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'id', 'id');
     }
 
     public function vehicles()
     {
         return $this->hasMany('App\Models\Vehicle');
     }
-    
+
     public function exports()
     {
         return $this->hasMany('App\Models\Export');

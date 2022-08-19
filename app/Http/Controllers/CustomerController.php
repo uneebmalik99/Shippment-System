@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
-use Liwewire\Component;
 
 class CustomerController extends Controller
 {
@@ -16,10 +14,11 @@ class CustomerController extends Controller
     private $view = "customer.";
     private $db_key = "id";
     private $user = [];
+    private $perpage = 100;
     private $directory = "customer_images";
     private $action = "/admin/customers";
 
-    public function index()
+    public function index(Request $request)
     {
         $data = [];
         $data = [
@@ -36,7 +35,7 @@ class CustomerController extends Controller
                 'page' => 'list',
             ],
         ];
-        $data['records'] = Customer::all();
+        $data['records'] = Customer::paginate($this->perpage);
         return view($this->view . 'list', $data);
     }
 
@@ -120,7 +119,6 @@ class CustomerController extends Controller
 
     public function delete($id = null)
     {
-        // dd('asd');
         $customer = Customer::find($id);
         $customer->delete();
         return redirect($this->action);
@@ -151,8 +149,55 @@ class CustomerController extends Controller
         return view($this->view . 'profile', $data);
     }
 
-    // public function sortBy($column_name)
-    // {
-    //     dd('asd');
-    // }
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $table = "";
+            $page = "";
+            $total = Customer::all()->toArray();
+            $records = new Customer;
+            if ($request->search) {
+                $records = $records->where('customer_name', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('company_name', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('phone', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('email', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('state', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('country', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('tax_id', 'LIKE', '%' . $request->search . "%");
+            }
+            if ($request->pagination) {
+                $this->perpage = $request->pagination;
+                $records = $records->paginate($this->perpage);
+            }
+
+            if ($records) {
+                $i = 1;
+                foreach ($records as $val) {
+                    $url_edit = url($this->action . '/edit/' . $val->id);
+                    $url_delete = url($this->action . '/delete/' . $val->id);
+                    $url_profile = url($this->action . '/profile/' . $val->id);
+                    $table .= '<tr>' .
+                    '<td>' . $i . '</td>' .
+                    '<td>' . $val->customer_name . '</td>' .
+                    '<td>' . $val->company_name . '</td>' .
+                    '<td>' . $val->phone . '</td>' .
+                    '<td>' . $val->email . '</td>' .
+                    '<td>' . $val->state . '</td>' .
+                    '<td>' . $val->country . '</td>' .
+                    '<td>' . $val->tax_id . '</td>' .
+                        '<td>' .
+                        '<button><a href=' . $url_edit . '><i class=' . "ti-pencil" . '></i></a></button>' . '<button><a href=' . $url_delete . '><i class=' . "ti-trash" . '></i></a></button>' . '<button><a href=' . $url_profile . '><i class=' . "ti-trash" . '></i></a></button>' .
+                        '</td>' .
+                        '</tr>';
+                    $i++;
+                }
+                $page .= '<p>' . 'Displaying ' . $records->count() . ' of ' . count($total) . ' customer(s)' . '</p>';
+                $output = [
+                    'table' => $table,
+                    'pagination' => $page,
+                ];
+                return Response($output);
+            }
+        }
+    }
 }

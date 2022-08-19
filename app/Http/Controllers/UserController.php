@@ -14,6 +14,7 @@ class UserController extends Controller
     private $plural = "users";
     private $view = "user.";
     private $db_key = "id";
+    private $perpage = 100;
     private $user = [];
     private $directory = "user_images";
     private $action = "/admin/users";
@@ -36,7 +37,7 @@ class UserController extends Controller
                 'action' => $this->action,
             ],
         ];
-        $records = User::all();
+        $records = User::paginate($this->perpage);
         $data['records'] = $records;
         // dd($data);
         return view($this->view . 'list', $data);
@@ -81,18 +82,16 @@ class UserController extends Controller
             $Obj = User::find($id);
             $request->validate([
                 'username' => 'required',
-                'email' => 'required|email',
+                'email' => 'required|email|unique:users',
                 'status' => 'required|min:1',
                 'phone' => 'required|numeric',
-                'customer_name' => 'required|min:8|alpha',
+                'customer_name' => 'required|min:8',
             ]);
             $Obj->update($data);
         }
         $action = url($this->action . '/edit/' . $id);
-        $id = $request->all();
         $data = [];
         $data = [
-            'user' => User::all()->toArray(),
             "page_title" => "Edit " . $this->singular,
             "page_heading" => "Edit " . $this->singular,
             "button_text" => "Update ",
@@ -108,7 +107,7 @@ class UserController extends Controller
                 'page' => 'edit',
             ],
         ];
-        $data['row'] = User::find($id)->toArray();
+        $data['user'] = User::find($id)->toArray();
         return view($this->view . 'create_edit', $data);
     }
 
@@ -119,7 +118,7 @@ class UserController extends Controller
         return view($this->view . 'list');
     }
 
-    public function profile()
+    public function profile(Request $request, $id = null)
     {
         $data = [];
         $data = [
@@ -136,7 +135,7 @@ class UserController extends Controller
                 'page' => 'profile',
             ],
         ];
-        $data['records'] = Auth::user();
+        $data['records'] = User::find($id)->toArray();
         return view($this->view . 'profile', $data);
     }
 
@@ -151,6 +150,56 @@ class UserController extends Controller
         }
         User::find(Auth::id())->update($data);
         return back()->with('success', 'Profile successfully updated.');
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $table = "";
+            $page = "";
+            $total = User::all()->toArray();
+            $records = new User;
+            if ($request->search) {
+                $records = $records->where('username', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('email', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('status', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('city', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('state', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('phone', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('customer_name', 'LIKE', '%' . $request->search . "%");
+            }
+            if ($request->pagination) {
+                $this->perpage = $request->pagination;
+                $records = $records->paginate($this->perpage);
+            }
+
+            if ($records) {
+                $i = 1;
+                foreach ($records as $val) {
+                    $url_edit = url($this->action . '/edit/' . $val->id);
+                    $url_delete = url($this->action . '/delete/' . $val->id);
+                    $table .= '<tr>' .
+                    '<td>' . $i . '</td>' .
+                    '<td>' . $val->username . '</td>' .
+                    '<td>' . $val->email . '</td>' .
+                    '<td>' . $val->status . '</td>' .
+                    '<td>' . $val->city . '</td>' .
+                    '<td>' . $val->state . '</td>' .
+                    '<td>' . $val->phone . '</td>' .
+                    '<td>' . $val->customer_name . '</td>' .
+
+                        '<td>' . '<button><a href=' . $url_edit . '><i class=' . '"ti-pencil"' . '></i></a></button>' . '<button><a href=' . $url_delete . '><i class=' . '"ti-trash"' . '></i></a></button>' . '</td>' .
+                        '</tr>';
+                    $i++;
+                }
+                $page .= '<p>' . 'Displaying ' . $records->count() . ' of ' . count($total) . ' user(s)' . '</p>';
+                $output = [
+                    'table' => $table,
+                    'pagination' => $page,
+                ];
+                return Response($output);
+            }
+        }
     }
 
 }

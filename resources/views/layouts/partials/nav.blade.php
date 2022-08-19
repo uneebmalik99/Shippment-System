@@ -129,7 +129,7 @@
                                 </a>
                             </li> --}}
                             <li>
-                                <a href="#">
+                                <a href="{{route('user.profile').'/'.Auth::user()->id}}">
                                     <i class="ti-user"></i> Profile
                                 </a>
                             </li>

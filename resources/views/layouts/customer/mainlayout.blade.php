@@ -13,7 +13,7 @@
         {{-- Sidebar end --}}
         {{-- Project list start --}}
         <div class="col-9 px-2">
-            @include('layouts.customer.consignee')
+            @include('layouts.customer.notification')
         </div>
         <!-- end of row -->
     </div>

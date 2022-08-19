@@ -14,32 +14,46 @@ class Vehicle extends Model
     public $timestamps = true;
     protected $table = "vehicles";
     protected $fillable = [
-        'hat_number',
+        'customer_name',
+        'vin',
         'year',
-        'color',
         'make',
         'model',
-        'vin',
+        'vehicle_type',
+        'color',
         'weight',
-        'pieces',
         'value',
-        'license_number',
-        'towed_from',
-        'lotnumber',
-        'towed_amount',
-        'storage_amount',
-        'status',
-        'check_number',
-        'additional_charges',
-        'location_id',
-        'customer_id',
-        'towing_request_id',
-        'is_export',
-        'title_amount',
-        'container_number',
+        'auction',
+        'buyer_id',
         'key',
+        'note',
+        'hat_number',
+        'title_type',
+        'title',
+        'title_rec_date',
+        'title_state',
+        'title_number',
+        'shipper_name',
+        'status',
+        'sale_date',
+        'paid_date',
+        'days',
+        'posted_date',
+        'pickup_date',
+        'delivered',
+        'pickup_location',
+        'site',
+        'dealer_fee',
+        'late_fee',
+        'auction_storage',
+        'towing_charges',
+        'warehouse_storage',
+        'title_fee',
+        'port_detention_fee',
+        'custom_inspection',
+        'additional_fee',
+        'insurance',
         'vehicle_is_deleted',
-        'note_status',
         'added_by_role',
         'added_by_email',
     ];
@@ -51,7 +65,7 @@ class Vehicle extends Model
 
     public function customer()
     {
-        return $this->belongsTo('App\Models\Customer');
+        return $this->belongsTo('App\Models\Customer', 'buyer_id', 'id');
     }
 
     public function user()
@@ -82,5 +96,10 @@ class Vehicle extends Model
     public function features()
     {
         return $this->belongsToMany('App\Models\Feature');
+    }
+
+    public function sticky_notes()
+    {
+        return $this->hasMany('App\Models\StickyNote');
     }
 }

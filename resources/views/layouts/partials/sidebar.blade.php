@@ -247,7 +247,8 @@
                     <div class="main-menu-content">
                         <ul>
                             <li class="more-details py-2 px-4 " style="background-color: #0b0b0b">
-                                <a href="#"><i class="ti-user"></i>View Profile</a>
+                                <a href="{{ route('user.profile') . '/' . Auth::user()->id }}"><i
+                                        class="ti-user"></i>View Profile</a>
                                 {{-- <a href="#!"><i class="ti-settings"></i>Settings</a> --}}
                                 <a href="{{ route('auth.logout') }}"><i class="ti-shift-right"></i>Logout</a>
                             </li>
@@ -288,7 +289,7 @@
                     </li>
                     <li class="change-loges.html py-2">
                         <a href="{{ route('customer.list') }}">
-                            <span class="pcoded-micon"><i class="ti-calendar"></i></span>
+                            <span class="pcoded-micon"><i class="fa fa-user"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Customers</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
@@ -301,8 +302,8 @@
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
-                        <a href="javascript:void(0)">
-                            <span class="pcoded-micon"><i class="ti-truck"></i></span>
+                        <a href="{{ route('vehicle.list') }}">
+                            <span class="pcoded-micon"><i class="fas fa-car"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.file-upload.main">Vehicles</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
@@ -312,6 +313,13 @@
                             <span class="pcoded-micon"><i class="ti-export"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Exports</span>
 
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="change-loges.html py-2">
+                        <a href="{{ route('sticky.list') }}">
+                            <span class="pcoded-micon"><i class="fas fa-sticky-note"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.change-loges.main">Sticky Notes</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
