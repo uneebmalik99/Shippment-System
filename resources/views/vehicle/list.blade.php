@@ -67,15 +67,14 @@
                 </div>
                 <span><b>Entries</b></span>
             </div>
-            <div class="col-7 d-flex justify-content-end align-items-center">
+            <div class="col-7 d-flex justify-content-end align-items-center ml-4">
                 <div class="col-8 p-0">
                     <input type="text" class="btn border border-info rounded col-12 text-dark text-left"
                         id="search_vehicle" name="search" placeholder="Search by customer name, year, make, model...">
                 </div>
                 <div class="col-3">
-                    <button class="btn btn-info rounded col-12">
-                        <a href="{{ route('vehicle.create') }}" class="text-white">New<i class="fas fa-car pl-2"></i></a>
-                    </button>
+                    <a href="{{ route('vehicle.create') }}" class="text-black btn btn-info rounded col-12">New<i
+                            class="fas fa-car pl-2"></i></a>
                 </div>
             </div>
         </div>

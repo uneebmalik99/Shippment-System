@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\StickyNote;
+use App\Models\Sticky;
+use Auth;
+use Illuminate\Http\Request;
 
-class StickyNoteController extends Controller
+class StickyController extends Controller
 {
     private $type = "sticky";
     private $singular = "sticky";
@@ -34,8 +35,30 @@ class StickyNoteController extends Controller
                 'page' => 'list',
             ],
         ];
-        $data['records'] = StickyNote::with('customer')->paginate($this->perpage);
+        $data['records'] = Sticky::with('customer')->paginate($this->perpage);
         return view($this->view . 'list', $data);
     }
 
+    public function create(Request $request)
+    {
+        $sticky_id = $request->sticky_id;
+        $notes = $request->notes;
+        $customer_id = Auth::user()->id;
+        $Obj = new Sticky;
+        $data = Sticky::where('sticky_id', $sticky_id);
+        if (count($data->get()) > 0) {
+            $data = $data->update(['notes' => $notes]);
+            // $data->notes = $notes;
+            // $data->update();
+            $output = "Note updated.";
+
+        } else {
+            $Obj->notes = $notes;
+            $Obj->sticky_id = $sticky_id;
+            $Obj->customer_id = '2';
+            $Obj->save();
+            $output = "Note created.";
+        }
+        return Response($output);
+    }
 }

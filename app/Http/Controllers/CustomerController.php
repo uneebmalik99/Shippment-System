@@ -200,4 +200,14 @@ class CustomerController extends Controller
             }
         }
     }
+
+    public function profile_tab(Request $request)
+    {
+        if ($request->tab) {
+            $tab = $request->tab;
+            $output = view('layouts.customer.' . $tab)->render();
+        }
+        return Response($output);
+    }
+
 }

@@ -22,8 +22,8 @@ $(document).ready(function(){
 
     //Example 2
     $('#filer_input').filer({
-        limit: 3,
-        maxSize: 3,
+        limit: 4,
+        maxSize: 4,
         extensions: ['jpg', 'jpeg', 'png', 'gif', 'psd'],
         changeInput: true,
         showThumbs: true,

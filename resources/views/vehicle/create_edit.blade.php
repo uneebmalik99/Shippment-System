@@ -31,7 +31,7 @@
                                 <div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="customer_name" class="form-control border border-0"><b>Client
+                                            <label for="customer_name" class="form-control border border-0 px-0"><b>Client
                                                     Name</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="vin" class="form-control border border-0"><b>VIN</b></label>
+                                            <label for="vin" class="form-control border border-0 px-0"><b>VIN</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="year" class="form-control border border-0"><b>Year</b></label>
+                                            <label for="year" class="form-control border border-0 px-0"><b>Year</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="make" class="form-control border border-0"><b>Make</b></label>
+                                            <label for="make" class="form-control border border-0 px-0"><b>Make</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="model" class="form-control border border-0"><b>Model</b></label>
+                                            <label for="model" class="form-control border border-0 px-0"><b>Model</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -117,7 +117,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="vehicle_type" class="form-control border border-0"><b>Vehicle
+                                            <label for="vehicle_type" class="form-control border border-0 px-0"><b>Vehicle
                                                     Type</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -135,7 +135,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="color" class="form-control border border-0"><b>Color</b></label>
+                                            <label for="color" class="form-control border border-0 px-0"><b>Color</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -153,7 +153,7 @@
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
                                             <label for="weight"
-                                                class="form-control border border-0"><b>Weight(Kgs)</b></label>
+                                                class="form-control border border-0 px-0"><b>Weight(Kgs)</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -171,7 +171,7 @@
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
                                             <label for="value"
-                                                class="form-control border border-0"><b>Value($)</b></label>
+                                                class="form-control border border-0 px-0"><b>Value($)</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -189,7 +189,7 @@
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
                                             <label for="auction"
-                                                class="form-control border border-0"><b>Auction</b></label>
+                                                class="form-control border border-0 px-0"><b>Auction</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -206,19 +206,20 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="buyer_id" class="form-control border border-0"><b>Buyer
+                                            <label for="buyer_id" class="form-control border border-0 px-0"><b>Buyer
                                                     ID</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <select name="buyer_id" id="buyer_id"
                                                 class="form-control-sm border border-0 rounded-pill col-12">
                                                 @if (\Request::route()->getName() == 'vehicle.edit')
-                                                    <option disabled selected value="{{ @$vehicle['customer']['id'] }}">
+                                                    <option disabled value="{{ @$vehicle['customer']['id'] }}">
                                                         {{ @$vehicle['customer']['id'] }}</option>
                                                 @endif
 
                                                 @foreach (@$buyers as $buyer)
-                                                    <option value="{{ @$buyer['id'] }}">{{ @$buyer['id'] }}</option>
+                                                    <option @if (@$buyer['id'] == '2') selected @endif
+                                                        value="{{ @$buyer['id'] }}">{{ @$buyer['id'] }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -232,7 +233,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="key" class="form-control border border-0"><b>Keys</b></label>
+                                            <label for="key" class="form-control border border-0 px-0"><b>Keys</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -250,7 +251,7 @@
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
                                             <label for="note"
-                                                class="form-control border border-0"><b>Notes</b></label>
+                                                class="form-control border border-0 px-0"><b>Notes</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <textarea type="text" class="form-control-sm border border-info rounded" name="note" id="note"
@@ -266,7 +267,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="title_type" class="form-control border border-0"><b>Title
+                                            <label for="title_type" class="form-control border border-0 px-0"><b>Title
                                                     Type</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -286,7 +287,7 @@
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
                                             <label for="title"
-                                                class="form-control border border-0"><b>Title</b></label>
+                                                class="form-control border border-0 px-0"><b>Title</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -303,7 +304,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="title_rec_date" class="form-control border border-0"><b>Title Rec
+                                            <label for="title_rec_date" class="form-control border border-0 px-0"><b>Title Rec
                                                     Date</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -322,7 +323,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="title_state" class="form-control border border-0"><b>Title
+                                            <label for="title_state" class="form-control border border-0 px-0"><b>Title
                                                     State</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -340,7 +341,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="title_number" class="form-control border border-0"><b>Title
+                                            <label for="title_number" class="form-control border border-0 px-0"><b>Title
                                                     Number</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -362,7 +363,7 @@
                                 <div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="shipper_name" class="form-control border border-0"><b>Shipper
+                                            <label for="shipper_name" class="form-control border border-0 px-0"><b>Shipper
                                                     Name</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -381,7 +382,7 @@
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
                                             <label for="status"
-                                                class="form-control border border-0"><b>status</b></label>
+                                                class="form-control border border-0 px-0"><b>status</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -398,7 +399,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="sale_date" class="form-control border border-0"><b>Sale
+                                            <label for="sale_date" class="form-control border border-0 px-0"><b>Sale
                                                     Date</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -417,7 +418,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="paid_date" class="form-control border border-0"><b>Paid
+                                            <label for="paid_date" class="form-control border border-0 px-0"><b>Paid
                                                     Date</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -435,7 +436,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="days" class="form-control border border-0"><b>Days</b></label>
+                                            <label for="days" class="form-control border border-0 px-0"><b>Days</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -452,7 +453,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="post_date" class="form-control border border-0"><b>Posted
+                                            <label for="post_date" class="form-control border border-0 px-0"><b>Posted
                                                     Date</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -470,7 +471,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="pickup_date" class="form-control border border-0"><b>Pickup
+                                            <label for="pickup_date" class="form-control border border-0 px-0"><b>Pickup
                                                     Date</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -489,7 +490,7 @@
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
                                             <label for="delivered"
-                                                class="form-control border border-0"><b>Delivered</b></label>
+                                                class="form-control border border-0 px-0"><b>Delivered</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -506,7 +507,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="pickup_location" class="form-control border border-0"><b>Pickup
+                                            <label for="pickup_location" class="form-control border border-0 px-0"><b>Pickup
                                                     Location</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -524,7 +525,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="site" class="form-control border border-0"><b>Site</b></label>
+                                            <label for="site" class="form-control border border-0 px-0"><b>Site</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -541,7 +542,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="hat_no" class="form-control border border-0"><b>Hat
+                                            <label for="hat_no" class="form-control border border-0 px-0"><b>Hat
                                                     Number</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -559,7 +560,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="dealer_fee" class="form-control border border-0"><b>Dealer
+                                            <label for="dealer_fee" class="form-control border border-0 px-0"><b>Dealer
                                                     Fee</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -577,7 +578,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="late_fee" class="form-control border border-0"><b>Late
+                                            <label for="late_fee" class="form-control border border-0 px-0"><b>Late
                                                     Fee</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -595,7 +596,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="auction_storage" class="form-control border border-0"><b>Auction
+                                            <label for="auction_storage" class="form-control border border-0 px-0"><b>Auction
                                                     Storage</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -613,7 +614,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="towing_charges" class="form-control border border-0"><b>Towing
+                                            <label for="towing_charges" class="form-control border border-0 px-0"><b>Towing
                                                     Charges</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -632,7 +633,7 @@
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
                                             <label for="warehouse_storage"
-                                                class="form-control border border-0"><b>Warehouse
+                                                class="form-control border border-0 px-0"><b>Warehouse
                                                     Storage</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -651,7 +652,7 @@
 
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="title_fee" class="form-control border border-0"><b>Title
+                                            <label for="title_fee" class="form-control border border-0 px-0"><b>Title
                                                     Fee</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -670,7 +671,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="port_detention_fee" class="form-control border border-0"><b>Port
+                                            <label for="port_detention_fee" class="form-control border border-0 px-0"><b>Port
                                                     Detention</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -688,7 +689,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="custom_inspection" class="form-control border border-0"><b>Custom
+                                            <label for="custom_inspection" class="form-control border border-0 px-0"><b>Custom
                                                     Inspection</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -706,7 +707,7 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="additional_fee" class="form-control border border-0"><b>Additional
+                                            <label for="additional_fee" class="form-control border border-0 px-0"><b>Additional
                                                     Fee</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -725,7 +726,7 @@
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
                                             <label for="insurance"
-                                                class="form-control border border-0"><b>Insurance</b></label>
+                                                class="form-control border border-0 px-0"><b>Insurance</b></label>
                                         </div>
                                         <div class="col-7 p-0">
                                             <input type="text" class="form-control-sm border border-0 rounded-pill"
@@ -744,15 +745,61 @@
                             </div>
                             <div class="col-4 py-3">
                                 <div class="col-12">
-                                    <!-- File upload card start -->
-                                    <input class="col-6" type="file" name="files[]" id="filer_input1"
-                                        multiple="multiple">
-                                    <!-- File upload card end -->
+                                    <input type="file" name="image[]" class="form-control col-12 w-100"
+                                        id="filer_input" multiple="multiple">
                                 </div>
+                                {{-- <div class="col-12 d-flex justify-content-between">
+                                    <div class="col-6 mr-1 d-flex justify-content-center pt-3"
+                                        style="border: 1px dashed black">
+                                        <svg width="95" height="114" viewBox="0 0 95 114" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M81.9225 59.6932C80.9001 59.6932 79.9076 59.845 78.9575 60.1262C79.1747 58.9952 79.2847 57.8382 79.2853 56.6775C79.2853 48.1892 73.551 41.308 66.4774 41.308C63.8953 41.3037 61.3729 42.2405 59.2442 43.9943C56.8416 32.8858 48.4298 24.6836 38.4212 24.6836C26.5405 24.6836 16.9091 36.2412 16.9091 50.4981C7.97669 50.4981 0.735352 59.1875 0.735352 69.9066C0.735352 80.6255 7.9765 89.3151 16.9091 89.3151H81.9225C88.7391 89.3151 94.2651 82.684 94.2651 74.504C94.2651 66.3243 88.7391 59.6932 81.9225 59.6932V59.6932Z"
+                                                fill="#B0E9FF" />
+                                            <g clip-path="url(#clip0_235_10)">
+                                                <path
+                                                    d="M46.2344 8.26562L61.1515 23.962H31.3174L46.2344 8.26562ZM40.8101 43.1332H51.6588V47.926H40.8101V43.1332ZM40.8101 35.944H51.6588V40.7368H40.8101V35.944Z"
+                                                    fill="#009688" />
+                                                <path
+                                                    d="M40.8105 20.3694H51.6593V33.5496H40.8105V20.3694ZM21.8252 0H70.6446V4.79279H21.8252V0Z"
+                                                    fill="#009688" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_235_10">
+                                                    <rect width="65.0926" height="57.5135" fill="white"
+                                                        transform="translate(21.9912)" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                    <div class="col-6 ml-1 d-flex justify-content-center pt-3"
+                                        style="border: 1px dashed black">
+                                        <svg width="95" height="114" viewBox="0 0 95 114" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M81.9225 59.6932C80.9001 59.6932 79.9076 59.845 78.9575 60.1262C79.1747 58.9952 79.2847 57.8382 79.2853 56.6775C79.2853 48.1892 73.551 41.308 66.4774 41.308C63.8953 41.3037 61.3729 42.2405 59.2442 43.9943C56.8416 32.8858 48.4298 24.6836 38.4212 24.6836C26.5405 24.6836 16.9091 36.2412 16.9091 50.4981C7.97669 50.4981 0.735352 59.1875 0.735352 69.9066C0.735352 80.6255 7.9765 89.3151 16.9091 89.3151H81.9225C88.7391 89.3151 94.2651 82.684 94.2651 74.504C94.2651 66.3243 88.7391 59.6932 81.9225 59.6932V59.6932Z"
+                                                fill="#B0E9FF" />
+                                            <g clip-path="url(#clip0_235_10)">
+                                                <path
+                                                    d="M46.2344 8.26562L61.1515 23.962H31.3174L46.2344 8.26562ZM40.8101 43.1332H51.6588V47.926H40.8101V43.1332ZM40.8101 35.944H51.6588V40.7368H40.8101V35.944Z"
+                                                    fill="#009688" />
+                                                <path
+                                                    d="M40.8105 20.3694H51.6593V33.5496H40.8105V20.3694ZM21.8252 0H70.6446V4.79279H21.8252V0Z"
+                                                    fill="#009688" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_235_10">
+                                                    <rect width="65.0926" height="57.5135" fill="white"
+                                                        transform="translate(21.9912)" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="d-flex justify-content-center p-3">
-                                <input type="submit" class="btn btn-primary rounded" value="{{ $button_text }}">
+                            <input type="submit" class="btn btn-primary rounded" value="{{ $button_text }}">
                         </div>
                     </div>
                 </div>

@@ -42,6 +42,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/customers/edit/{id?}', [App\Http\Controllers\CustomerController::class, 'edit'])->name('customer.edit');
     Route::get('/customers/delete/{id?}', [App\Http\Controllers\CustomerController::class, 'delete'])->name('customer.delete');
     Route::get('/customers/profile/{id?}', [App\Http\Controllers\CustomerController::class, 'profile'])->name('customer.profile');
+    Route::get('/customers/profile_tab', [App\Http\Controllers\CustomerController::class, 'profile_tab'])->name('customer.profile_tab');
     Route::get('/customers/search', [App\Http\Controllers\CustomerController::class, 'search'])->name('customer.search');
     Route::get('/customers/pagination', [App\Http\Controllers\CustomerController::class, 'search'])->name('customer.pagination');
 
@@ -59,8 +60,12 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/vehicles/tabs', [App\Http\Controllers\VehicleController::class, 'search'])->name('vehicle.tabs');
     Route::get('/vehicles/location', [App\Http\Controllers\VehicleController::class, 'search'])->name('vehicle.location');
 
-    //Sticky Notes
-    Route::get('/stickynotes', [App\Http\Controllers\StickyNoteController::class, 'index'])->name('sticky.list');
+    //Sticky Notes Routes
+    Route::get('/stickynotes', [App\Http\Controllers\StickyController::class, 'index'])->name('sticky.list');
+    Route::post('/stickynotes', [App\Http\Controllers\StickyController::class, 'create'])->name('sticky.create');
+
+    // Shipment Routes
+    Route::get('/shipment', [App\Http\Controllers\ShipmentController::class, 'index'])->name('shipment.list');
 });
 
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->middleware('auth')->name('auth.logout');

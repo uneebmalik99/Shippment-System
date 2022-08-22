@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStickyNotesTable extends Migration
+class CreateShipmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateStickyNotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sticky_notes', function (Blueprint $table) {
+        Schema::create('shipments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('notes');
-            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
-            $table->softDeletes();
+            $table->string('company_name');
+            $table->string('customer_email');
+            $table->string('customer_phone');
+            $table->string('company_name');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateStickyNotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stick_notes');
+        Schema::dropIfExists('shipments');
     }
 }

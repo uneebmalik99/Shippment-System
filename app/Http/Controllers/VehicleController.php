@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Vehicle;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class VehicleController extends Controller
@@ -17,7 +18,7 @@ class VehicleController extends Controller
     private $db_key = "id";
     private $user = [];
     private $perpage = 100;
-    private $directory = "vehicle_images";
+    private $directory = "/vehicle_images";
     private $action = "/admin/vehicles";
 
     public function index()
@@ -49,50 +50,69 @@ class VehicleController extends Controller
             $data = $request->all();
             $Obj = new Vehicle;
             $Obj->create($data);
-            $request->validate([
-                'customer_name' => 'required',
-                'vin' => 'required',
-                'year' => 'required',
-                'make' => 'required',
-                'model' => 'required|numeric',
-                'vehicle_type' => 'required',
-                'color' => 'required',
-                'weight' => 'required|numeric',
-                'value' => 'required|numeric',
-                'auction' => 'required',
-                'buyer_id' => 'required',
-                'key' => 'required',
-                'note' => 'required',
-                'hat_number' => 'required',
-                'title_type' => 'required',
-                'title' => 'required',
-                'title_rec_date' => 'required|date',
-                'title_state' => 'required',
-                'title_number' => 'required',
-                'shipper_name' => 'required',
-                'status' => 'required',
-                'sale_date' => 'required|date',
-                'paid_date' => 'required|date',
-                'days' => 'required|numeric',
-                'posted_date' => 'required|date',
-                'pickup_date' => 'required|date',
-                'delivered' => 'required|date',
-                'pickup_location' => 'required',
-                'site' => 'required',
-                'dealer_fee' => 'required|numeric',
-                'late_fee' => 'required|numeric',
-                'auction_storage' => 'required|numeric',
-                'towing_charges' => 'required|numeric',
-                'warehouse_storage' => 'required|numeric',
-                'title_fee' => 'required|numeric',
-                'port_detention_fee' => 'required|numeric',
-                'custom_inspection' => 'required|numeric',
-                'additional_fee' => 'required|numeric',
-                'insurance' => 'required',
-            ]);
+            $vehicle = $Obj->latest()->first();
+
+            if ($request->hasFile('image')) {
+                $data = $request->file('image');
+                foreach ($data as $images) {
+                    $name = $images->getClientOriginalName();
+                    $images->move(public_path() . $this->directory, $name);
+                    $url = $images->getRealPath();
+                    $image = $name;
+                    $Obj_image = new Image;
+                    $Obj_image->name = $name;
+                    $Obj_image->thumbnail = 'thumb-' . $name;
+                    $Obj_image->vehicle_id = $vehicle['id'];
+                    $Obj_image->base_url = $url;
+                    $Obj_image->save();
+                }
+            }
+            // $request->validate([
+            //     'customer_name' => 'required',
+            //     'vin' => 'required',
+            //     'year' => 'required',
+            //     'make' => 'required',
+            //     'model' => 'required|numeric',
+            //     'vehicle_type' => 'required',
+            //     'color' => 'required',
+            //     'weight' => 'required|numeric',
+            //     'value' => 'required|numeric',
+            //     'auction' => 'required',
+            //     'buyer_id' => 'required',
+            //     'key' => 'required',
+            //     'note' => 'required',
+            //     'hat_number' => 'required',
+            //     'title_type' => 'required',
+            //     'title' => 'required',
+            //     'title_rec_date' => 'required|date',
+            //     'title_state' => 'required',
+            //     'title_number' => 'required',
+            //     'shipper_name' => 'required',
+            //     'status' => 'required',
+            //     'sale_date' => 'required|date',
+            //     'paid_date' => 'required|date',
+            //     'days' => 'required|numeric',
+            //     'posted_date' => 'required|date',
+            //     'pickup_date' => 'required|date',
+            //     'delivered' => 'required|date',
+            //     'pickup_location' => 'required',
+            //     'site' => 'required',
+            //     'dealer_fee' => 'required|numeric',
+            //     'late_fee' => 'required|numeric',
+            //     'auction_storage' => 'required|numeric',
+            //     'towing_charges' => 'required|numeric',
+            //     'warehouse_storage' => 'required|numeric',
+            //     'title_fee' => 'required|numeric',
+            //     'port_detention_fee' => 'required|numeric',
+            //     'custom_inspection' => 'required|numeric',
+            //     'additional_fee' => 'required|numeric',
+            //     'insurance' => 'required',
+            //      'image' => 'required',
+            //      'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // ]);
             return redirect($this->action)->with('success', 'Vehicle addedd successfully.');
         }
-        $data = [];
+
         $action = url($this->action . '/create');
         $data = [
             "page_title" => $this->plural . " create",
@@ -229,36 +249,21 @@ class VehicleController extends Controller
                 $records = $records;
             }
 
-            if ($location == "NJ") 
-            {
+            if ($location == "NJ") {
                 $records = $records->where('title_state', $location);
-            } 
-            elseif ($location == "SAV") 
-            {
+            } elseif ($location == "SAV") {
                 $records = $records->where('title_state', $location);
-            } 
-            elseif ($location == "TX") 
-            {
+            } elseif ($location == "TX") {
                 $records = $records->where('title_state', $location);
-            } 
-            elseif ($location == "LA") 
-            {
+            } elseif ($location == "LA") {
                 $records = $records->where('title_state', $location);
-            } 
-            elseif ($location == "SEA") 
-            {
+            } elseif ($location == "SEA") {
                 $records = $records->where('title_state', $location);
-            } 
-            elseif ($location == "BAL") 
-            {
+            } elseif ($location == "BAL") {
                 $records = $records->where('title_state', $location);
-            } 
-            elseif ($location == "NFK") 
-            {
+            } elseif ($location == "NFK") {
                 $records = $records->where('title_state', $location);
-            } 
-            else 
-            {
+            } else {
                 $records = $records;
             }
 
@@ -298,5 +303,4 @@ class VehicleController extends Controller
         }
 
     }
-
 }

@@ -35,7 +35,7 @@ class CreateVehiclesTable extends Migration
             $table->string('title_state')->nullable();
             $table->integer('title_number')->nullable();
             $table->string('shipper_name')->nullable();
-            $table->enum('status', ['0', '1'])->nullable();
+            $table->enum('status', ['0', '1', '2', '3', '4'])->nullable();
             $table->date('sale_date')->nullable();
             $table->date('paid_date')->nullable();
             $table->integer('days')->nullable();

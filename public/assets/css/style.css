@@ -101,7 +101,7 @@ p {
     padding: 15px 20px; }
     .card .card-header .card-header-left {
       display: inline-block; }
-    .card .card-header .card-header-right {
+    /* .card .card-header .card-header-right {
       border-radius: 0 0 0 5px;
       right: 0;
       top: 0;
@@ -109,9 +109,9 @@ p {
       display: inline-block;
       float: right;
       padding: 7px 0;
-      position: absolute; }
+      position: absolute; } */
     .card .card-header .card-header-right i {
-      margin: 0 20px;
+      /* margin: 0 20px; */
       cursor: pointer; }
     .card .card-header span {
       color: #9f9f9f;

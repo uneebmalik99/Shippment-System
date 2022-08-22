@@ -22,16 +22,14 @@
                 </div>
                 <span><b>Entries</b></span>
             </div>
-            <div class="col-7 d-flex justify-content-end align-items-center">
+            <div class="col-7 d-flex justify-content-end align-items-center ml-4">
                 <div class="col-8 p-0">
-                    <input type="text" class="btn border border-info rounded col-12 text-dark text-left" id="search_customer" name="search"
-                        placeholder="Search by name, company, phone, email, state...">
+                    <input type="text" class="btn border border-info rounded col-12 text-dark text-left"
+                        id="search_customer" name="search" placeholder="Search by name, company, phone, email, state...">
                 </div>
                 <div class="col-3">
-                    <button class="btn btn-info rounded col-12">
-                        <a href="{{ url(@$module['action'] . '/create') }}" class="text-white">New<i
-                                class="fa fa-user pl-2"></i></a>
-                    </button>
+                    <a href="{{ url(@$module['action'] . '/create') }}" class="text-white btn btn-info rounded col-12">New<i
+                            class="fa fa-user pl-2"></i></a>
                 </div>
             </div>
         </div>

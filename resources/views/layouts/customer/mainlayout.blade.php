@@ -13,7 +13,10 @@
         {{-- Sidebar end --}}
         {{-- Project list start --}}
         <div class="col-9 px-2">
-            @include('layouts.customer.notification')
+            @include('layouts.customer.navbar')
+            <div id="tab_body">
+                @include('layouts.customer.account')
+            </div>
         </div>
         <!-- end of row -->
     </div>

@@ -31,6 +31,12 @@
 <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.mousewheel.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('assets/pages/sticky/js/sticky.js') }}"></script>
+
+<!--sticky js-->
+<script type="text/javascript" src="{{ asset('assets/pages/sticky/js/trumbowyg.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/pages/sticky/js/jquery.minicolors.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/pages/sticky/js/jquery.postitall.js') }}"></script>
 {{-- Multiple image upload --}}
 <script src="{{ asset('assets/pages/jquery.filer/js/jquery.filer.min.js') }}"></script>
 <script src="{{ asset('assets/pages/filer/custom-filer.js') }}" type="text/javascript"></script>
@@ -72,6 +78,7 @@
         });
     })
 </script>
+{{-- csrf tokens --}}
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
@@ -79,6 +86,15 @@
         }
     });
 </script>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
+{{-- csrf tokens end --}}
+
 {{-- Vehicle pagination and search end --}}
 
 {{-- User pagination and filer --}}
@@ -217,6 +233,27 @@
                 $('#tbody').html(data.table);
                 $('#page').html(data.pagination);
                 // $(this).css('background-color', 'yellow');
+            }
+        });
+    })
+</script>
+
+{{-- Profile page tabs --}}
+<script>
+    $('.profile_tabs').on('click', function() {
+        $('.profile_tabs').removeClass('btn btn-info rounded text-white');
+        $('.profile_tabs').addClass('border-0 form-control text-muted');
+        $tab = $(this).attr('id');
+        $(this).addClass('btn btn-info rounded text-white');
+        $(this).removeClass('border-0 form-control text-muted');
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('admin/customers/profile_tab') }}',
+            data: {
+                'tab': $tab
+            },
+            success: function(data) {
+                $('#tab_body').html(data);
             }
         });
     })
