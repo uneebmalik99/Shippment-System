@@ -6,14 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 class Notification extends Model
 {
     use HasFactory;
     use softDeletes;
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $table = "notifactions";
+    protected $table = "notifications";
     protected $fillable = [
         'subject',
         'message',
@@ -21,11 +20,11 @@ class Notification extends Model
         'status',
         'user_id',
         'expiry_date',
-        'added_by_role'
+        'added_by_role',
     ];
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 }

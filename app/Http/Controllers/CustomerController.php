@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Notification;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -17,6 +19,32 @@ class CustomerController extends Controller
     private $perpage = 100;
     private $directory = "customer_images";
     private $action = "/admin/customers";
+
+    public function Notification()
+    {
+        $data['notification'] = Notification::with('user')->paginate($this->perpage);
+        $current = Carbon::now();
+        $date = $data['notification'][0]['created_at'];
+
+        $diff = $date->diffInSeconds(\Carbon\Carbon::now());
+        $days = $diff / 86400;
+        $hours = $diff / 3600;
+        $minutes = $diff / 60;
+        $seconds = $diff % 60;
+
+        if ($days > 1) {
+            $data['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . $minutes . 'm,' . $seconds . 's ';
+        } elseif ($hours > 1) {
+            $data['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
+        } elseif ($minutes > 1) {
+            $data['date'] = (int) $minutes . 'm,' . $seconds . 's ';
+        } else {
+            $data['date'] = $seconds . 's ';
+        }
+        $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
+        $data['notification_count'] = count($unread);
+        return $data;
+    }
 
     public function index(Request $request)
     {
@@ -35,26 +63,14 @@ class CustomerController extends Controller
                 'page' => 'list',
             ],
         ];
+
+        $notification = $this->Notification();
         $data['records'] = Customer::paginate($this->perpage);
-        return view($this->view . 'list', $data);
+        return view($this->view . 'list', $data, $notification);
     }
 
     public function create(Request $request)
     {
-        if ($request->isMethod('post')) {
-            $data = $request->all();
-            $Obj = new Customer;
-            $request->validate([
-                'customer_name' => 'required|alpha',
-                'company_name' => 'required|alpha',
-                'phone' => 'required|max:11|numeric',
-                'email' => 'required|email',
-                'zip_code' => 'numeric',
-                'tax_id' => 'required|numeric|min:4|max:4',
-                'phone_2' => 'required|max:11|numeric',
-            ]);
-            $Obj->create($data);
-        }
         $data = [];
         $action = url($this->action . '/create');
         $data = [
@@ -73,7 +89,25 @@ class CustomerController extends Controller
                 'button' => 'Create',
             ],
         ];
-        return view($this->view . 'create_edit', $data);
+
+        if ($request->isMethod('post')) {
+            $record = $request->all();
+            $Obj = new Customer;
+            // $request->validate([
+            //     'customer_name' => 'required|alpha',
+            //     'company_name' => 'required|alpha',
+            //     'phone' => 'required|max:12',
+            //     'email' => 'required|email',
+            //     'zip_code' => 'numeric',
+            //     'tax_id' => 'required|numeric|min:0|max:4',
+            //     'phone_2' => 'required|max:12',
+            // ]);
+            $result = $Obj->create($record);
+            return redirect($this->action)->with('success', 'Vehicle addedd successfully.');
+
+        }
+        $notification = $this->Notification();
+        return view($this->view . 'create_edit', $data, $notification);
     }
 
     public function edit(Request $request, $id = null)
@@ -113,8 +147,9 @@ class CustomerController extends Controller
                 'button' => 'Update',
             ],
         ];
+        $notification = $this->Notification();
         $data['user'] = Customer::find($id)->toArray();
-        return view($this->view . 'create_edit', $data);
+        return view($this->view . 'create_edit', $data, $notification   );
     }
 
     public function delete($id = null)
@@ -145,8 +180,8 @@ class CustomerController extends Controller
                 'button' => 'Update',
             ],
         ];
-        // dd($data['user']);
-        return view($this->view . 'profile', $data);
+        $notification = $this->Notification();
+        return view($this->view . 'profile', $data, $notification);
     }
 
     public function search(Request $request)
@@ -191,7 +226,7 @@ class CustomerController extends Controller
                         '</tr>';
                     $i++;
                 }
-                $page .= '<p>' . 'Displaying ' . $records->count() . ' of ' . count($total) . ' customer(s)' . '</p>';
+                $page .= '<div>' . '<div>' . '<p>' . 'Displaying ' . $records->count() . ' of ' . count($total) . ' customers(s)' . '</p>' . '</div>' . '<div>' . $records->links() . '</div>' . '</div>';
                 $output = [
                     'table' => $table,
                     'pagination' => $page,

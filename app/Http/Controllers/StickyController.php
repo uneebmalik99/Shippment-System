@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Models\Sticky;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class StickyController extends Controller
@@ -17,6 +19,32 @@ class StickyController extends Controller
     private $perpage = 100;
     private $directory = "vehicle_images";
     private $action = "/admin/sticky";
+
+    public function Notification()
+    {
+        $data['notification'] = Notification::with('user')->paginate($this->perpage);
+        $current = Carbon::now();
+        $date = $data['notification'][0]['created_at'];
+
+        $diff = $date->diffInSeconds(\Carbon\Carbon::now());
+        $days = $diff / 86400;
+        $hours = $diff / 3600;
+        $minutes = $diff / 60;
+        $seconds = $diff % 60;
+
+        if ($days > 1) {
+            $data['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . $minutes . 'm,' . $seconds . 's ';
+        } elseif ($hours > 1) {
+            $data['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
+        } elseif ($minutes > 1) {
+            $data['date'] = (int) $minutes . 'm,' . $seconds . 's ';
+        } else {
+            $data['date'] = $seconds . 's ';
+        }
+        $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
+        $data['notification_count'] = count($unread);
+        return $data;
+    }
 
     public function index()
     {
@@ -35,8 +63,9 @@ class StickyController extends Controller
                 'page' => 'list',
             ],
         ];
+        $notification = $this->Notification();
         $data['records'] = Sticky::with('customer')->paginate($this->perpage);
-        return view($this->view . 'list', $data);
+        return view($this->view . 'list', $data, $notification);
     }
 
     public function create(Request $request)

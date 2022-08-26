@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use App\Models\User;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -18,6 +20,32 @@ class UserController extends Controller
     private $user = [];
     private $directory = "user_images";
     private $action = "/admin/users";
+
+    public function Notification()
+    {
+        $data['notification'] = Notification::with('user')->paginate($this->perpage);
+        $current = Carbon::now();
+        $date = $data['notification'][0]['created_at'];
+
+        $diff = $date->diffInSeconds(\Carbon\Carbon::now());
+        $days = $diff / 86400;
+        $hours = $diff / 3600;
+        $minutes = $diff / 60;
+        $seconds = $diff % 60;
+
+        if ($days > 1) {
+            $data['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . $minutes . 'm,' . $seconds . 's ';
+        } elseif ($hours > 1) {
+            $data['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
+        } elseif ($minutes > 1) {
+            $data['date'] = (int) $minutes . 'm,' . $seconds . 's ';
+        } else {
+            $data['date'] = $seconds . 's ';
+        }
+        $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
+        $data['notification_count'] = count($unread);
+        return $data;
+    }
 
     public function index()
     {
@@ -39,8 +67,8 @@ class UserController extends Controller
         ];
         $records = User::paginate($this->perpage);
         $data['records'] = $records;
-        // dd($data);
-        return view($this->view . 'list', $data);
+        $notification = $this->Notification();
+        return view($this->view . 'list', $data, $notification);
 
     }
 
@@ -66,7 +94,8 @@ class UserController extends Controller
                 'page' => 'create',
             ],
         ];
-        return view($this->view . "create_edit", $data);
+        $notification = $this->Notification();
+        return view($this->view . "create_edit", $data, $notification);
 
     }
 
@@ -107,8 +136,9 @@ class UserController extends Controller
                 'page' => 'edit',
             ],
         ];
+        $notification = $this->Notification();
         $data['user'] = User::find($id)->toArray();
-        return view($this->view . 'create_edit', $data);
+        return view($this->view . 'create_edit', $data, $notification);
     }
 
     public function delete($id)
@@ -135,8 +165,9 @@ class UserController extends Controller
                 'page' => 'profile',
             ],
         ];
+        $notification = $this->Notification();
         $data['records'] = User::find($id)->toArray();
-        return view($this->view . 'profile', $data);
+        return view($this->view . 'profile', $data, $notification);
     }
 
     public function updateProfile(Request $request)
@@ -148,6 +179,7 @@ class UserController extends Controller
         if (isset($data['password']) && empty($data['password']) || $data['password'] == null) {
             unset($data['password']);
         }
+
         User::find(Auth::id())->update($data);
         return back()->with('success', 'Profile successfully updated.');
     }
@@ -192,7 +224,7 @@ class UserController extends Controller
                         '</tr>';
                     $i++;
                 }
-                $page .= '<p>' . 'Displaying ' . $records->count() . ' of ' . count($total) . ' user(s)' . '</p>';
+                $page .= '<div>' . '<div>' . '<p>' . 'Displaying ' . $records->count() . ' of ' . count($total) . ' user(s)' . '</p>' . '</div>' . '<div>' . $records->links() . '</div>' . '</div>';
                 $output = [
                     'table' => $table,
                     'pagination' => $page,

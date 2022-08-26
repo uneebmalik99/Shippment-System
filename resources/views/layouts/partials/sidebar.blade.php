@@ -68,9 +68,8 @@
                             <div class="f-13 chat-header">Suzen</div>
                         </div>
                     </div>
-                    <div class="media userlist-box" data-id="6" data-status="offline"
-                        data-username="Michael Scofield" data-toggle="tooltip" data-placement="left"
-                        title="Michael Scofield">
+                    <div class="media userlist-box" data-id="6" data-status="offline" data-username="Michael Scofield"
+                        data-toggle="tooltip" data-placement="left" title="Michael Scofield">
                         <a class="media-left" href="#!">
                             <img class="media-object img-circle" src="{{ asset('assets/images/avatar-3.png') }}"
                                 alt="Generic placeholder image">
@@ -91,9 +90,8 @@
                             <div class="f-13 chat-header">Irina Shayk</div>
                         </div>
                     </div>
-                    <div class="media userlist-box" data-id="8" data-status="offline"
-                        data-username="Sara Tancredi" data-toggle="tooltip" data-placement="left"
-                        title="Sara Tancredi">
+                    <div class="media userlist-box" data-id="8" data-status="offline" data-username="Sara Tancredi"
+                        data-toggle="tooltip" data-placement="left" title="Sara Tancredi">
                         <a class="media-left" href="#!">
                             <img class="media-object img-circle" src="{{ asset('assets/images/avatar-5.png') }}"
                                 alt="Generic placeholder image">
@@ -114,9 +112,8 @@
                             <div class="f-13 chat-header">Samon</div>
                         </div>
                     </div>
-                    <div class="media userlist-box" data-id="10" data-status="online"
-                        data-username="Daizy Mendize" data-toggle="tooltip" data-placement="left"
-                        title="Daizy Mendize">
+                    <div class="media userlist-box" data-id="10" data-status="online" data-username="Daizy Mendize"
+                        data-toggle="tooltip" data-placement="left" title="Daizy Mendize">
                         <a class="media-left" href="#!">
                             <img class="media-object img-circle" src="{{ asset('assets/images/task/task-u3.jpg') }}"
                                 alt="Generic placeholder image">
@@ -126,9 +123,8 @@
                             <div class="f-13 chat-header">Daizy Mendize</div>
                         </div>
                     </div>
-                    <div class="media userlist-box" data-id="11" data-status="offline"
-                        data-username="Loren Scofield" data-toggle="tooltip" data-placement="left"
-                        title="Loren Scofield">
+                    <div class="media userlist-box" data-id="11" data-status="offline" data-username="Loren Scofield"
+                        data-toggle="tooltip" data-placement="left" title="Loren Scofield">
                         <a class="media-left" href="#!">
                             <img class="media-object img-circle" src="{{ asset('assets/images/avatar-3.png') }}"
                                 alt="Generic placeholder image">
@@ -308,10 +304,18 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    <li class="change-loges.html py-2">
+                    {{-- <li class="change-loges.html py-2">
                         <a href="javascript:void(0)">
                             <span class="pcoded-micon"><i class="ti-export"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Exports</span>
+
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li> --}}
+                    <li class="change-loges.html py-2">
+                        <a href="{{ route('shipment.list') }}">
+                            <span class="pcoded-micon"><i class="fas fa-shipping-fast"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Shipment</span>
 
                             <span class="pcoded-mcaret"></span>
                         </a>
@@ -324,7 +328,7 @@
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
-                        <a href="javascript:void(0)">
+                        <a href="{{ route('notification.list') }}">
                             <span class="pcoded-micon"><i class="ti-bell"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.change-loges.main">Notifications</span>
                             <span class="pcoded-mcaret"></span>
@@ -351,8 +355,8 @@
                                             <i class="icofont icofont-home"></i>
                                         </a>
                                     </li>
-                                    <li class="breadcrumb-item"><a
-                                            href="{{ url($module['action']) }}">{{ @$module['plural'] }}</a>
+                                    <li class="breadcrumb-item"><a href="{{ url($module['action']) }}">{{
+                                            @$module['plural'] }}</a>
                                     </li>
                                     <li class="breadcrumb-item"><a>{{ @$module['page'] }}</a>
                                     </li>

@@ -35,7 +35,7 @@ class CreateVehiclesTable extends Migration
             $table->string('title_state')->nullable();
             $table->integer('title_number')->nullable();
             $table->string('shipper_name')->nullable();
-            $table->enum('status', ['0', '1', '2', '3', '4'])->nullable();
+            $table->enum('status', ['0', '1', '2', '3', '4', '5'])->nullable();
             $table->date('sale_date')->nullable();
             $table->date('paid_date')->nullable();
             $table->integer('days')->nullable();
@@ -65,6 +65,7 @@ class CreateVehiclesTable extends Migration
             // $table->foreignId('towing_request_id')->constrained('towing_requests')->onDelete('cascade')->onUpdate('cascade')->nullable();
             // $table->foreignId('location')->constrained('locations')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->string('vehicle_is_deleted')->nullable();
+            $table->foreignId('shipment_id')->constrained('shipments')->onDeletE('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('added_by_role')->constrained('users')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('added_by_email')->constrained('users')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->softDeletes();

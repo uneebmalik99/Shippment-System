@@ -2,43 +2,38 @@
 @section('body')
     <div>
         <div class="bg-primary bg-gradient p-3">
-            <h5 class="text-white">Vehicle Page</h5>
+            <h5 class="text-white">Shipment</h5>
         </div>
         <div class="bg-danger">
-            <div class="text-info col-10 d-flex justify-content-between p-3">
+            <div class="text-info col-8 d-flex justify-content-between p-3">
                 <div>
-                    <a class="vehicles" id="all_vehicles" style="cursor:pointer;" value="all_vehicles">All Vehicles</a>
+                    <a class="contianer col-2" id="all_container" style="cursor:pointer;" value="all_container">All
+                        Container</a>
                 </div>
                 <div>
-                    <a class="vehicles" id="new_order" style="cursor:pointer;" value="new_order">New Order</a>
+                    <a class="contianer col-2" id="booked" style="cursor:pointer;" value="booked">Booked</a>
                 </div>
                 <div>
-                    <a class="vehicles" id="posted"style="cursor:pointer;" value="posted">Posted</a>
+                    <a class="contianer col-2" id="shipped"style="cursor:pointer;" value="shipped">Shipped</a>
                 </div>
                 <div>
-                    <a class="vehicles" id="dispatch"style="cursor:pointer;" value="dispatch">Dispatch</a>
+                    <a class="contianer col-2" id="arrived"style="cursor:pointer;" value="arrived">Arrived</a>
                 </div>
                 <div>
-                    <a class="vehicles" id="on_hand"style="cursor:pointer;" value="on_hand">On hand</a>
-                </div>
-                <div>
-                    <a class="vehicles" id="titles"style="cursor:pointer;" value="titles">No Titles</a>
-                </div>
-                <div>
-                    <a class="vehicles" id="towing"style="cursor:pointer;" value="towing">Towing</a>
+                    <a class="contianer col-2" id="completed"style="cursor:pointer;" value="completed">Completed</a>
                 </div>
             </div>
         </div>
         <div class="bg-success">
             <div class="col-10 d-flex justify-content-between p-3">
                 <div>
-                    <a class="locations" id="NJ" style="cursor:pointer;" value="NJ">New Jersey</a>
+                    <a class="locations col-4" id="NJ" style="cursor:pointer;" value="NJ">New Jersey</a>
                 </div>
                 <div>
-                    <a class="locations" id="SAV" style="cursor:pointer;" value="SAV">Savannah</a>
+                    <a class="locations col-2" id="SAV" style="cursor:pointer;" value="SAV">Savannah</a>
                 </div>
                 <div>
-                    <a class="locations" id="TX" style="cursor:pointer;" value="TX">Texas</a>
+                    <a class="locations col-2" id="TX" style="cursor:pointer;" value="TX">Texas</a>
                 </div>
                 <div>
                     <a class="locations" id="LA" style="cursor:pointer;" value="LA">Los Angeles</a>
@@ -73,8 +68,8 @@
                         id="search_vehicle" name="search" placeholder="Search by customer name, year, make, model...">
                 </div>
                 <div class="col-3">
-                    <a href="{{ route('vehicle.create') }}" class="text-black btn btn-info rounded col-12">New<i
-                            class="fas fa-car pl-2"></i></a>
+                    <a href="{{ route('shipment.create') }}" class="text-black btn btn-info rounded col-12">New<i
+                            class="fas fa-shipping-fast pl-2"></i></a>
                 </div>
             </div>
         </div>
@@ -82,15 +77,20 @@
             <table class="table table-hover sortable scroll">
                 <thead class="bg-light">
                     <th class="sorttable_nosort">Sr</th>
-                    <th>CUSTOMER NAME</th>
-                    <th>VIN</th>
-                    <th>YEAR</th>
-                    <th>MAKE</th>
-                    <th>MODEL</th>
-                    <th>VEHICLE_TYPE</th>
-                    <th>VALUE</th>
-                    <th>STATUS</th>
-                    <th>BUYER</th>
+                    <th>COMPANY NAME</th>
+                    <th>COMPANY EMAIL</th>
+                    <th>PHONE</th>
+                    <th>TYPE</th>
+                    <th>LOADING DATE</th>
+                    <th>CUT OFF DATE</th>
+                    <th>SAIL DATE</th>
+                    <th>EST ARRIVAL DATE</th>
+                    <th>CONTAINER NO</th>
+                    <th>CONSIGNEE</th>
+                    <th>LOADING STATE</th>
+                    <th>LOADING COUNTRY</th>
+                    <th>DESTINATION STATE</th>
+                    <th>DESTINATION COUNTRY</th>
                     <th class="sorttable_nosort">Action</th>
                 </thead>
                 <tbody id="tbody">
@@ -102,16 +102,20 @@
                     <?php $i = 1; ?>
                     @foreach ($records as $val)
                         <tr>
-                            <td>{{ @$i }}</td>
-                            <td>{{ @$val['customer_name'] }}</td>
-                            <td>{{ @$val['vin'] }}</td>
-                            <td>{{ @$val['year'] }}</td>
-                            <td>{{ @$val['make'] }}</td>
-                            <td>{{ @$val['model'] }}</td>
-                            <td>{{ @$val['vehicle_type'] }}</td>
-                            <td>{{ @$val['value'] }}</td>
-                            <td>{{ @$val['status'] }}</td>
-                            <td>{{ @$val['customer']['customer_name'] }}</td>
+                            <td>{{ @$val['company_name'] }}</td>
+                            <td>{{ @$val['customer_email'] }}</td>
+                            <td>{{ @$val['customer_phone'] }}</td>
+                            <td>{{ @$val['shipment_type'] }}</td>
+                            <td>{{ @$val['loading_date'] }}</td>
+                            <td>{{ @$val['cut_off_date'] }}</td>
+                            <td>{{ @$val['sail_date'] }}</td>
+                            <td>{{ @$val['est_arrival_date'] }}</td>
+                            <td>{{ @$val['container_no'] }}</td>
+                            <td>{{ @$val['select_consignee '] }}</td>
+                            <td>{{ @$val['loading_state '] }}</td>
+                            <td>{{ @$val['loading_country '] }}</td>
+                            <td>{{ @$val['destination_state'] }}</td>
+                            <td>{{ @$val['destination_country'] }}</td>
                             <td>
                                 <button><a href={{ url($module['action'] . '/edit/' . $val[$module['db_key']]) }}><i
                                             class="ti-pencil"></i></a></button><button><a
@@ -128,7 +132,7 @@
             <div>
                 <div>
                     <p>
-                        Displaying {{ $records->count() }} of {{ $records->total() }} vehicle(s).
+                        Displaying {{ $records->count() }} of {{ $records->total() }} shipment(s).
                     </p>
                 </div>
                 <div>

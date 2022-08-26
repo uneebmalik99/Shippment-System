@@ -49,10 +49,11 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="vin" class="form-control border border-0 px-0"><b>VIN</b></label>
+                                            <label for="vin"
+                                                class="form-control border border-0 px-0"><b>VIN</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="vin" id="vin"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['vin'] == null) value="{{ old('vin') }}" @else value= "{{ @$vehicle['vin'] }}" @endif>
                                         </div>
@@ -66,10 +67,11 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="year" class="form-control border border-0 px-0"><b>Year</b></label>
+                                            <label for="year"
+                                                class="form-control border border-0 px-0"><b>Year</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="year" id="year"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['year'] == null) value="{{ old('year') }}" @else value= "{{ @$vehicle['year'] }}" @endif>
                                         </div>
@@ -83,10 +85,11 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="make" class="form-control border border-0 px-0"><b>Make</b></label>
+                                            <label for="make"
+                                                class="form-control border border-0 px-0"><b>Make</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="make" id="make"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['make'] == null) value="{{ old('make') }}" @else value= "{{ @$vehicle['make'] }}" @endif>
                                         </div>
@@ -100,10 +103,11 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="model" class="form-control border border-0 px-0"><b>Model</b></label>
+                                            <label for="model"
+                                                class="form-control border border-0 px-0"><b>Model</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="model" id="model"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['model'] == null) value="{{ old('model') }}" @else value= "{{ @$vehicle['model'] }}" @endif>
                                         </div>
@@ -121,7 +125,7 @@
                                                     Type</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="vehicle_type" id="vehicle_type"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['vehicle_type'] == null) value="{{ old('vehicle_type') }}" @else value= "{{ @$vehicle['vehicle_type'] }}" @endif>
                                         </div>
@@ -135,10 +139,11 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="color" class="form-control border border-0 px-0"><b>Color</b></label>
+                                            <label for="color"
+                                                class="form-control border border-0 px-0"><b>Color</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="color" id="color"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['color'] == null) value="{{ old('color') }}" @else value= "{{ @$vehicle['color'] }}" @endif>
                                         </div>
@@ -156,7 +161,7 @@
                                                 class="form-control border border-0 px-0"><b>Weight(Kgs)</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="weight" id="weight"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['weight'] == null) value="{{ old('weight') }}" @else value= "{{ @$vehicle['weight'] }}" @endif>
                                         </div>
@@ -174,7 +179,7 @@
                                                 class="form-control border border-0 px-0"><b>Value($)</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="value" id="value"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['value'] == null) value="{{ old('value') }}" @else value= "{{ @$vehicle['value'] }}" @endif>
                                         </div>
@@ -192,7 +197,7 @@
                                                 class="form-control border border-0 px-0"><b>Auction</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="auction" id="auction"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['auction'] == null) value="{{ old('auction') }}" @else value= "{{ @$vehicle['auction'] }}" @endif>
                                         </div>
@@ -233,10 +238,11 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="key" class="form-control border border-0 px-0"><b>Keys</b></label>
+                                            <label for="key"
+                                                class="form-control border border-0 px-0"><b>Keys</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="key" id="key"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['key'] == null) value="{{ old('key') }}" @else value= "{{ @$vehicle['key'] }}" @endif>
                                         </div>
@@ -271,9 +277,8 @@
                                                     Type</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
-                                                name="title_type" id="title_type" <input type="text"
-                                                class="form-control rounded"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
+                                                name="title_type" id="title_type"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['title_type'] == null) value="{{ old('title_type') }}" @else value= "{{ @$vehicle['title_type'] }}" @endif>
                                         </div>
                                     </div>
@@ -290,7 +295,7 @@
                                                 class="form-control border border-0 px-0"><b>Title</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="title" id="title"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['title'] == null) value="{{ old('title') }}" @else value= "{{ @$vehicle['title'] }}" @endif>
                                         </div>
@@ -304,7 +309,8 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="title_rec_date" class="form-control border border-0 px-0"><b>Title Rec
+                                            <label for="title_rec_date" class="form-control border border-0 px-0"><b>Title
+                                                    Rec
                                                     Date</b></label>
                                         </div>
                                         <div class="col-7 p-0">
@@ -327,7 +333,7 @@
                                                     State</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="title_state" id="title_state"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['title_state'] == null) value="{{ old('title_state') }}" @else value= "{{ @$vehicle['title_state'] }}" @endif>
                                         </div>
@@ -345,7 +351,7 @@
                                                     Number</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="title_number" id="title_number"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['title_number'] == null) value="{{ old('title_number') }}" @else value= "{{ @$vehicle['title_number'] }}" @endif>
                                         </div>
@@ -385,7 +391,7 @@
                                                 class="form-control border border-0 px-0"><b>status</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="status" id="status"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['status'] == null) value="{{ old('status') }}" @else value= "{{ @$vehicle['status'] }}" @endif>
                                         </div>
@@ -422,7 +428,7 @@
                                                     Date</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="date" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="paid_date" id="paid_date"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['paid_date'] == null) value="{{ old('paid_date') }}" @else value= "{{ @$vehicle['paid_date'] }}" @endif>
                                         </div>
@@ -436,10 +442,11 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="days" class="form-control border border-0 px-0"><b>Days</b></label>
+                                            <label for="days"
+                                                class="form-control border border-0 px-0"><b>Days</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="days" id="days"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['days'] == null) value="{{ old('days') }}" @else value= "{{ @$vehicle['days'] }}" @endif>
                                         </div>
@@ -457,7 +464,7 @@
                                                     Date</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="date" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="post_date" id="post_date"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['post_date'] == null) value="{{ old('post_date') }}" @else value= "{{ @$vehicle['post_date'] }}" @endif>
                                         </div>
@@ -475,7 +482,7 @@
                                                     Date</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="date" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="pickup_date" id="pickup_date"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['pickup_date'] == null) value="{{ old('pickup_date') }}" @else value= "{{ @$vehicle['pickup_date'] }}" @endif>
                                         </div>
@@ -493,7 +500,7 @@
                                                 class="form-control border border-0 px-0"><b>Delivered</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="date" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="delivered" id="delivered"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['delivered'] == null) value="{{ old('delivered') }}" @else value= "{{ @$vehicle['delivered'] }}" @endif>
                                         </div>
@@ -507,11 +514,12 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="pickup_location" class="form-control border border-0 px-0"><b>Pickup
+                                            <label for="pickup_location"
+                                                class="form-control border border-0 px-0"><b>Pickup
                                                     Location</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="pickup_location" id="pickup_location"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['pickup_location'] == null) value="{{ old('pickup_location') }}" @else value= "{{ @$vehicle['pickup_location'] }}" @endif>
                                         </div>
@@ -525,10 +533,11 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="site" class="form-control border border-0 px-0"><b>Site</b></label>
+                                            <label for="site"
+                                                class="form-control border border-0 px-0"><b>Site</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="site" id="site"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['site'] == null) value="{{ old('site') }}" @else value= "{{ @$vehicle['site'] }}" @endif>
                                         </div>
@@ -546,7 +555,7 @@
                                                     Number</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="hat_no" id="hat_no"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['hat_no'] == null) value="{{ old('hat_no') }}" @else value= "{{ @$vehicle['hat_no'] }}" @endif>
                                         </div>
@@ -564,7 +573,7 @@
                                                     Fee</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="dealer_fee" id="dealer_fee"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['dealer_fee'] == null) value="{{ old('dealer_fee') }}" @else value= "{{ @$vehicle['dealer_fee'] }}" @endif>
                                         </div>
@@ -582,7 +591,7 @@
                                                     Fee</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="late_fee" id="late_fee"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['late_fee'] == null) value="{{ old('late_fee') }}" @else value= "{{ @$vehicle['late_fee'] }}" @endif>
                                         </div>
@@ -596,11 +605,12 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="auction_storage" class="form-control border border-0 px-0"><b>Auction
+                                            <label for="auction_storage"
+                                                class="form-control border border-0 px-0"><b>Auction
                                                     Storage</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="auction_storage" id="auction_storage"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['auction_storage'] == null) value="{{ old('auction_storage') }}" @else value= "{{ @$vehicle['auction_storage'] }}" @endif>
                                         </div>
@@ -614,11 +624,12 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="towing_charges" class="form-control border border-0 px-0"><b>Towing
+                                            <label for="towing_charges"
+                                                class="form-control border border-0 px-0"><b>Towing
                                                     Charges</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="towing_charges" id="towing_charges"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['towing_charges'] == null) value="{{ old('towing_charges') }}" @else value= "{{ @$vehicle['towing_charges'] }}" @endif>
                                         </div>
@@ -637,7 +648,7 @@
                                                     Storage</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="warehouse_storage" id="warehouse_storage"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['warehouse_storage'] == null) value="{{ old('warehouse_storage') }}" @else value= "{{ @$vehicle['warehouse_storage'] }}" @endif>
                                         </div>
@@ -656,7 +667,7 @@
                                                     Fee</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="date"
+                                            <input type="text"
                                                 class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="title_fee" id="title_fee"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['title_fee'] == null) value="{{ old('title_fee') }}" @else value= "{{ @$vehicle['title_fee'] }}" @endif>
@@ -671,11 +682,12 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="port_detention_fee" class="form-control border border-0 px-0"><b>Port
+                                            <label for="port_detention_fee"
+                                                class="form-control border border-0 px-0"><b>Port
                                                     Detention</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="port_detention_fee" id="port_detention_fee"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['port_detention_fee'] == null) value="{{ old('port_detention_fee') }}" @else value= "{{ @$vehicle['port_detention_fee'] }}" @endif>
                                         </div>
@@ -689,11 +701,12 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="custom_inspection" class="form-control border border-0 px-0"><b>Custom
+                                            <label for="custom_inspection"
+                                                class="form-control border border-0 px-0"><b>Custom
                                                     Inspection</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="custom_inspection" id="custom_inspection"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['custom_inspection'] == null) value="{{ old('custom_inspection') }}" @else value= "{{ @$vehicle['custom_inspection'] }}" @endif>
                                         </div>
@@ -707,11 +720,12 @@
                                     </div>
                                     <div class="d-flex py-2">
                                         <div class="col-5 p-0">
-                                            <label for="additional_fee" class="form-control border border-0 px-0"><b>Additional
+                                            <label for="additional_fee"
+                                                class="form-control border border-0 px-0"><b>Additional
                                                     Fee</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="additional_fee" id="additional_fee"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['additional_fee'] == null) value="{{ old('additional_fee') }}" @else value= "{{ @$vehicle['additional_fee'] }}" @endif>
                                         </div>
@@ -729,7 +743,7 @@
                                                 class="form-control border border-0 px-0"><b>Insurance</b></label>
                                         </div>
                                         <div class="col-7 p-0">
-                                            <input type="text" class="form-control-sm border border-0 rounded-pill"
+                                            <input type="text" class="form-control-sm border border-0 rounded-pill col-12"
                                                 name="insurance" id="insurance"
                                                 @if (\Request::route()->getName() == 'vehicle.create' || @$vehicle['insurance'] == null) value="{{ old('insurance') }}" @else value= "{{ @$vehicle['insurance'] }}" @endif>
                                         </div>

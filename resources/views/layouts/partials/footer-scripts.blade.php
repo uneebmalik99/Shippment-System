@@ -258,3 +258,26 @@
         });
     })
 </script>
+
+{{-- Notifications --}}
+<script>
+    $('#notification_body').on('click', function() {
+        $id = $(this).val();
+        $(this).addClass('bg-info border border-light rounded');
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('admin/notifications/status') }}',
+            data: {
+                'id' : $id
+            },
+            success: function(data) {
+                if(data == 0)
+                {
+                    $('.notification-time').removeClass('text-muted');
+                    $('.notification-time').addClass('text-white');
+                }
+
+            }
+        });
+    })
+</script>

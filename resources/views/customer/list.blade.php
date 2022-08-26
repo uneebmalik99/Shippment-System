@@ -76,9 +76,16 @@
             </table>
         </div>
         <div class="d-flex justify-content-end p-2" id="page">
-            <p>
-                Displaying {{ $records->count() }} of {{ $records->total() }} vehicle(s).
-            </p>
+            <div>
+                <div>
+                    <p>
+                        Displaying {{ $records->count() }} of {{ $records->total() }} customer(s).
+                    </p>
+                </div>
+                <div>
+                    {{$records->links()}}
+                </div>
+            </div>
         </div>
     </div>
 @endsection

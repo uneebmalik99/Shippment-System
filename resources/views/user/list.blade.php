@@ -58,8 +58,15 @@
         </table>
     </div>
     <div class="d-flex justify-content-end p-2" id="page">
-        <p>
-            Displaying {{ $records->count() }} of {{ $records->total() }} user(s).
-        </p>
+        <div>
+            <div>
+                <p>
+                    Displaying {{ $records->count() }} of {{ $records->total() }} user(s).
+                </p>
+            </div>
+            <div>
+                {{$records->links()}}
+            </div>
+        </div>
     </div>
 @endsection
