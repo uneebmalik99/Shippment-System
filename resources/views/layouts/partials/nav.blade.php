@@ -15,23 +15,27 @@
                 <i class="ti-more"></i>
             </a>
         </div>
-        <div class="navbar-container container-fluid">
+        <div class="navbar-container container-fluid p-0">
             <div>
                 <ul class="nav-left">
                     <li>
-                        <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a>
+                        <div><a href="javascript:void(0)"><i class="ti-menu"></i></a>
                         </div>
                     </li>
                     <li>
-                        <a class="main-search morphsearch-search" href="#">
-                            <!-- themify icon -->
-                            <i class="ti-search"></i>
-                        </a>
+                        <div class="main-search morphsearch-search p-0">
+                            <a href="#">
+                                <!-- themify icon -->
+                                <i class="ti-search"></i>
+                            </a>
+                        </div>
                     </li>
                     <li>
-                        <a href="#!" onclick="javascript:toggleFullScreen()">
-                            <i class="ti-fullscreen"></i>
-                        </a>
+                        <div>
+                            <a href="#!" class="p-0" onclick="javascript:toggleFullScreen()">
+                                <i class="ti-fullscreen"></i>
+                            </a>
+                        </div>
                     </li>
                 </ul>
                 <ul class="nav-right">

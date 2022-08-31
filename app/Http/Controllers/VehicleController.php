@@ -336,6 +336,10 @@ class VehicleController extends Controller
                 return Response($output);
             }
         }
-
     }
+
+    // public function attachments()
+    // {
+    //     return view($this->view)
+    // }
 }

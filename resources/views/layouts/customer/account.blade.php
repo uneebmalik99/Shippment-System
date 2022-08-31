@@ -1,23 +1,4 @@
-{{-- <div class="d-flex justify-content-between">
-    <div>
-        <button class="btn btn-info form-control rounded"> <i class="ti-user"></i><b> Account</b></button>
-    </div>
-    <div>
-        <button class="border-0 form-control text-muted"><i class="ti-truck"></i> <b>Consignee</b></button>
-    </div>
-    <div>
-        <button class="border-0 form-control text-muted"><i class="ti-clipboard"></i><b> Billing
-                Information</b></button>
-    </div>
-    <div>
-        <button class="border-0 form-control text-muted"><i class="ti-bell"></i><b>
-                Notifications</b></button>
-    </div>
-    <div>
-        <button class="border-0 form-control text-muted"><i class="fa-solid fa-link"></i><b>
-                documents</b></button>
-    </div>
-</div> --}}
+
 <div class="card user-card rounded mt-3">
     <div class="px-3 d-flex justify-cotent center">
         <h6 class="text-muted"><b>User's Projects List</b></h6>

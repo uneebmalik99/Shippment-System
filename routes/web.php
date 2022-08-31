@@ -34,7 +34,10 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     // Customer Routes
     Route::get('/customers',                    [App\Http\Controllers\CustomerController::class, 'index'])->name('customer.list');
     Route::get('/customers/create',             [App\Http\Controllers\CustomerController::class, 'create'])->name('customer.create');
-    Route::post('/customers/create',            [App\Http\Controllers\CustomerController::class, 'create'])->name('customer.create');
+    Route::post('/customers/create/general',    [App\Http\Controllers\CustomerController::class, 'general_create'])->name('customer.general_create');
+    Route::post('/customers/create/billing',    [App\Http\Controllers\CustomerController::class, 'general_create'])->name('customer.billing_create');
+    Route::post('/customers/create/shipper',    [App\Http\Controllers\CustomerController::class, 'general_create'])->name('customer.shipper_create');
+    Route::post('/customers/create/quotation',  [App\Http\Controllers\CustomerController::class, 'general_create'])->name('customer.quotation_create');
     Route::get('/customers/edit/{id?}',         [App\Http\Controllers\CustomerController::class, 'edit'])->name('customer.edit');
     Route::post('/customers/edit/{id?}',        [App\Http\Controllers\CustomerController::class, 'edit'])->name('customer.edit');
     Route::get('/customers/delete/{id?}',       [App\Http\Controllers\CustomerController::class, 'delete'])->name('customer.delete');
@@ -48,6 +51,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/vehicles/create',              [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicle.create');
     Route::post('/vehicles/create',             [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicle.create');
     Route::get('/vehicles/create',              [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicle.create');
+    Route::get('/vehicles/attachments',              [App\Http\Controllers\VehicleController::class, 'attachments'])->name('vehicle.attachments');
     Route::post('/vehicles/create',             [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicle.create');
     Route::get('/vehicles/edit/{id?}',          [App\Http\Controllers\VehicleController::class, 'edit'])->name('vehicle.edit');
     Route::post('/vehicles/edit/{id?}',         [App\Http\Controllers\VehicleController::class, 'edit'])->name('vehicle.edit');

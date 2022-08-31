@@ -33,9 +33,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
     integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+{{-- Photos grid --}}
+
 <!--sticky Css-->
-<link rel="stylesheet" href="{{asset('assets/pages/sticky/css/jquery.postitall.css')}}" type="text/css" media="all">
-<link rel="stylesheet" href="{{asset('assets/pages/sticky/css/trumbowyg.css')}}" type="text/css" media="all">
+<link rel="stylesheet" href="{{ asset('assets/pages/sticky/css/jquery.postitall.css') }}" type="text/css"
+    media="all">
+<link rel="stylesheet" href="{{ asset('assets/pages/sticky/css/trumbowyg.css') }}" type="text/css" media="all">
 <!-- Switch component css -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/switchery/css/switchery.min.css') }}">
 <!-- ico font -->
@@ -47,6 +50,7 @@
 
 <!-- Style.css -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom_style.css') }}">
 <!--color css-->
 <!--Multiple Image Upload -->
 <link href="{{ asset('assets/pages/jquery.filer/css/jquery.filer.css') }}" type="text/css" rel="stylesheet" />

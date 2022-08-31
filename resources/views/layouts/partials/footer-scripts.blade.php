@@ -268,11 +268,10 @@
             type: 'get',
             url: '{{ URL::to('admin/notifications/status') }}',
             data: {
-                'id' : $id
+                'id': $id
             },
             success: function(data) {
-                if(data == 0)
-                {
+                if (data == 0) {
                     $('.notification-time').removeClass('text-muted');
                     $('.notification-time').addClass('text-white');
                 }
@@ -280,4 +279,240 @@
             }
         });
     })
+</script>
+
+{{-- Photos grid js --}}
+<script>
+    $(function() {
+        $i = 1;
+        $("#fileupload").change(function() {
+            alert('asdaad');
+            if (typeof(FileReader) != "undefined") {
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                $($(this)[0].files).each(function() {
+                    var dvPreview = $("#dvPreview" + $i);
+                    dvPreview.html("");
+                    var file = $(this);
+                    if ($i <= 4) {
+                        if (regex.test(file[0].name.toLowerCase())) {
+                            var reader = new FileReader();
+                            reader.onload = function(e) {
+                                var img = $("<img />");
+                                img.attr("style",
+                                    "height:100px;width: 100px; padding:5px;");
+                                img.attr("src", e.target.result);
+                                dvPreview.append(img);
+                                dvPreview.next().children().removeClass('d-none');
+                            }
+                            reader.readAsDataURL(file[0]);
+                            $i++;
+                        } else {
+                            alert(file[0].name + " is not a valid image file.");
+                            dvPreview.html("");
+                            return false;
+                        }
+                    } else {
+                        alert('Only 4 images allowed.');
+                    }
+                });
+            } else {
+                alert("This browser does not support HTML5 FileReader.");
+            }
+        });
+    });
+</script>
+
+{{-- Delete Image --}}
+<script>
+    $('.delete').on('click', function() {
+        // alert('asdas');
+        $image = $(this).parent().prev().children();
+        $image.remove();
+        $(this).addClass('d-none');
+        $i--;
+    });
+</script>
+
+{{-- Attachment Photo Grid --}}
+<script>
+    $(function() {
+        $i = 1;
+        $("#fileupload_attach").change(function() {
+            if (typeof(FileReader) != "undefined") {
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                $($(this)[0].files).each(function() {
+                    var dvPreview = $("#dvPreview" + $i);
+                    dvPreview.html("");
+                    var file = $(this);
+                    if ($i <= 15) {
+                        if (regex.test(file[0].name.toLowerCase())) {
+                            var reader = new FileReader();
+                            reader.onload = function(e) {
+                                var img = $("<img />");
+                                img.attr("style",
+                                    "height:100px;width: 100px; padding:5px; border-radius:15px;"
+                                );
+                                img.attr("src", e.target.result);
+                                dvPreview.append(img);
+                                dvPreview.next().children().removeClass('d-none');
+                            }
+                            reader.readAsDataURL(file[0]);
+                            $i++;
+                        } else {
+                            alert(file[0].name + " is not a valid image file.");
+                            dvPreview.html("");
+                            return false;
+                        }
+                    } else {
+                        alert('Only 4 images allowed.');
+                    }
+                });
+            } else {
+                alert("This browser does not support HTML5 FileReader.");
+            }
+        });
+    });
+</script>
+
+{{-- Exit Modal --}}
+<script>
+    $('.close').on('click', function() {
+        $('#exampleModal').modal('hide');
+    })
+</script>
+
+{{-- Load Modal --}}
+<script>
+    $('.modal_button').on('click', function() {
+        $tab = "general";
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('admin/customers/create') }}',
+            data: {
+                'tab': $tab
+            },
+            success: function(data) {
+                $('.modal-body').html(data);
+                $('#exampleModal').modal('show');
+            }
+        });
+    })
+</script>
+
+{{-- Change Modal --}}
+<script>
+    function changemodal(id) {
+        $tab = id;
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('admin/customers/create') }}',
+            data: {
+                'tab': $tab
+            },
+            success: function(data) {
+                $('.modal-body').html(data);
+                $('#exampleModal').modal('show');
+            }
+        });
+    }
+</script>
+
+{{-- General data insert --}}
+<script>
+    function createForm(id) {
+        $tab = id;
+        alert('asdasdas');
+        if (id == "general")
+            $data = {
+                customer_number                 : $('#customer_number').val(),
+                sales_person                    : $('#sales_person').val(),
+                customer_name                   : $('#customer_name').val(),
+                inside_person                   : $('#inside_person').val(),
+                level                           : $('#level').val(),
+                lead                            : $('#lead').val(),
+                status                          : $('#status').val(),
+                main_phone                      : $('#main_phone').val(),
+                payment_type                    : $('#payment_type').val(),
+                main_fax                        : $('#main_fax').val(),
+                payment_term                    : $('#payment_term').val(),
+                industry                        : $('#industry').val(),
+                price_code                      : $('#price_code').val(),
+                source                          : $('#source').val(),
+                customer_type                   : $('#customer_type').val(),
+                sales_type                      : $('#sales_type').val(),
+                round                           : $('#round').val(),
+                location_number                 : $('#location_number').val(),
+                country                         : $('#country').val(),
+                zip_code                        : $('#zip_code').val(),
+                state                           : $('#state').val(),
+                address_1                       : $('#address_1').val(),
+                address_2                       : $('#address_2').val(),
+                add_by_email                    : $('#add_by_email').val(),
+                added_by_role                   : $('#added_by_role').val(),
+            };
+        else if (id == "billing")
+            $data = {
+                first_name                      : $('#first_name').val(),
+                company_name                    : $('#company_name').val(),
+                country                         : $('#country').val(),
+                last_name                       : $('#last_name').val(),
+                company_email                   : $('#company_email').val(),
+                city                            : $('#city').val(),
+                phone                           : $('#phone').val(),
+                address                         : $('#address').val(),
+                zip_code                        : $('#zip_code').val(),
+                foreign_passport_number         : $('#foreign_passport_number').val(),
+                identification_number           : $('#identification_number').val(),
+                expiry_date                     : $('#expiry_date').val(),
+                shipping                        : $('.shipping:checked').val(),
+                shipment_type                   : $('.shipment_type:checked').val(),
+                purchased_from                  : $('.purchased_from:checked').val(),
+                request_pickup                  : $('.request_pickup:checked').val(),
+                end_use                         : $('.end_use:checked').val(),
+                buyer_number                    : $('#buyer_number').val(),
+            };
+        else if (id == "shipper")
+        $data = {
+                shipper_name                    : $('#shipper_name').val(),
+                contact_person_name             : $('#contact_person_name').val(),
+                phone                           : $('#phone').val(),
+                company_email                   : $('#company_email').val(),
+                country                         : $('#country').val(),
+                city                            : $('#city').val(),
+                zip_code                        : $('#zip_code').val(),
+                address                         : $('#address').val(),
+                consignee                       : $('.consignee:checked').val(),
+                consolidate                     : $('.consolidate:checked').val(),
+                original_shipping_documents     : $('.original_shipping_documents:checked').val(),
+                insurance                       : $('.insurance:checked').val(),
+                destination_port                : $('.destination_port:checked').val(),
+        };
+        else if (id == "quotation")
+        $data = {
+                destination_port                : $('#destination_port').val(),
+                valid_from                      : $('#valid_from').val(),
+                valid_till                      : $('#valid_till').val(),
+                container_size                  : $('#container_size:selected').val(),
+                vehicle                         : $('#vehicle').val(),
+                loading_port                    : $('#loading_port').val(),
+                shipping_line                   : $('#shipping_line').val(),
+                default                         : $('#default').val(),
+                special_rate                    : $('#special_rate').val(),
+        };
+        else
+            alert('no tab');
+
+        $.ajax({
+            type: 'post',
+            url: '{{ URL::to('admin/customers/create') }}/' + $tab,
+            data: {
+                tab: $tab,
+                data: $data,
+            },
+            success: function(data) {
+                // console.log(data);
+                alert(data);
+            }
+        });
+    }
 </script>

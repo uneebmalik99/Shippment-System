@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\BillingParty;
 use App\Models\Customer;
 use App\Models\Notification;
+use App\Models\Quotation;
+use App\Models\Shipper;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -71,6 +74,7 @@ class CustomerController extends Controller
 
     public function create(Request $request)
     {
+
         $data = [];
         $action = url($this->action . '/create');
         $data = [
@@ -89,7 +93,13 @@ class CustomerController extends Controller
                 'button' => 'Create',
             ],
         ];
-
+        if ($request->ajax()) {
+            if ($request->tab) {
+                $tab = $request->tab;
+            }
+            $output = view('layouts.customer_create.' . $tab, $data)->render();
+            return Response($output);
+        }
         if ($request->isMethod('post')) {
             $record = $request->all();
             $Obj = new Customer;
@@ -149,7 +159,7 @@ class CustomerController extends Controller
         ];
         $notification = $this->Notification();
         $data['user'] = Customer::find($id)->toArray();
-        return view($this->view . 'create_edit', $data, $notification   );
+        return view($this->view . 'create_edit', $data, $notification);
     }
 
     public function delete($id = null)
@@ -245,4 +255,27 @@ class CustomerController extends Controller
         return Response($output);
     }
 
+    public function general_create(Request $request)
+    {
+        $tab = $request->tab;
+        $data = $request->data;
+        if ($tab == "general") {
+            $Obj = new Customer;
+            $Obj->create($data);
+            $output = "Success!";
+        } elseif ($tab == "billing") {
+            $Obj = new BillingParty;
+            $Obj->create($data);
+            $output = "Success!";
+        } elseif ($tab == "shipper") {
+            $Obj = new Shipper;
+            $Obj->create($data);
+            $output = "Success!";
+        } else {
+            $Obj = new Quotation;
+            $Obj->create($data);
+            $output = "Success!";
+        }
+        return Response($output);
+    }
 }

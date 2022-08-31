@@ -3,7 +3,7 @@
         <div class="card user-card rounded">
             <div class="card-header-img">
                 <img class="img-fluid w-50" src="{{ asset('assets/images/pattern5.png') }}" alt="card-img" />
-                <h6 class="mx-0 my-2 text-muted"><b>{{ $user['customer_name'] }}</b></h6>
+                <h6 class="mx-0 my-2 text-muted"><b>{{ @$user['customer_name'] }}</b></h6>
             </div>
             {{-- <p>
                 Lorem ipsum dolor sit amet, consectet ur
@@ -20,10 +20,10 @@
                 </div>
                 <div class="d-flex flex-column align-items-start">
                     <span class="text-muted py-1 px-3">
-                        <b>Username:</b> {{ $user['customer_name'] }}
+                        <b>Username:</b> {{ @$user['customer_name'] }}
                     </span>
                     <span class="text-muted py-1 px-3">
-                        <b>Email:</b> {{ $user['email'] }}
+                        <b>Email:</b> {{ @$user['email'] }}
                     </span>
                     <span class="text-muted py-1 px-3">
                         <b>Status:</b> <button class="btn btn-sm text-success"> Active
@@ -33,13 +33,13 @@
                         <b>Role:</b> customer
                     </span>
                     <span class="text-muted py-1 px-3">
-                        <b>Tax id:</b> {{ $user['tax_id'] }}
+                        <b>Tax id:</b> {{ @$user['tax_id'] }}
                     </span>
                     <span class="text-muted py-1 px-3">
-                        <b>Contact:</b> {{ $user['phone'] }}
+                        <b>Contact:</b> {{ @$user['phone'] }}
                     </span>
                     <span class="text-muted py-1 px-3">
-                        <b>Country:</b> {{ $user['country'] }}
+                        <b>Country:</b> {{ @$user['country'] }}
                     </span>
                 </div>
             </div>

@@ -1,23 +1,3 @@
-{{-- <div class="d-flex justify-content-between">
-    <div>
-        <button class="border-0 form-control text-muted"> <i class="ti-user"></i><b> Account</b></button>
-    </div>
-    <div>
-        <button class="border-0 form-control text-muted"><i class="ti-truck"></i> <b>Consignee</b></button>
-    </div>
-    <div>
-        <button class="btn btn-info form-control rounded"><i class="ti-clipboard"></i><b> Billing
-                Information</b></button>
-    </div>
-    <div>
-        <button class="border-0 form-control text-muted"><i class="ti-bell"></i><b>
-                Notifications</b></button>
-    </div>
-    <div>
-        <button class="border-0 form-control text-muted"><i class="fa-solid fa-link"></i><b>
-                documents</b></button>
-    </div>
-</div> --}}
 <div class="card user-card rounded mt-3">
     <div class="px-3 d-flex justify-cotent center">
         <h6 class="text-muted"><b>Billing Information</b></h6>
@@ -27,8 +7,7 @@
         <div class="d-flex justify-content-between">
             <div class="col-4 text-left text-muted">
                 <label for="first_name">First Name</label>
-                <input class="form-control-sm border border-info rounded" type="text" name="first_name"
-                    id="first_name">
+                <input class="form-control-sm border border-info rounded" type="text" name="first_name" id="first_name">
             </div>
             <div class="col-4 text-left text-muted">
                 <label for="company_name">Company Name</label>

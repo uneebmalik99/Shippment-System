@@ -68,8 +68,9 @@
                             <div class="f-13 chat-header">Suzen</div>
                         </div>
                     </div>
-                    <div class="media userlist-box" data-id="6" data-status="offline" data-username="Michael Scofield"
-                        data-toggle="tooltip" data-placement="left" title="Michael Scofield">
+                    <div class="media userlist-box" data-id="6" data-status="offline"
+                        data-username="Michael Scofield" data-toggle="tooltip" data-placement="left"
+                        title="Michael Scofield">
                         <a class="media-left" href="#!">
                             <img class="media-object img-circle" src="{{ asset('assets/images/avatar-3.png') }}"
                                 alt="Generic placeholder image">
@@ -90,8 +91,9 @@
                             <div class="f-13 chat-header">Irina Shayk</div>
                         </div>
                     </div>
-                    <div class="media userlist-box" data-id="8" data-status="offline" data-username="Sara Tancredi"
-                        data-toggle="tooltip" data-placement="left" title="Sara Tancredi">
+                    <div class="media userlist-box" data-id="8" data-status="offline"
+                        data-username="Sara Tancredi" data-toggle="tooltip" data-placement="left"
+                        title="Sara Tancredi">
                         <a class="media-left" href="#!">
                             <img class="media-object img-circle" src="{{ asset('assets/images/avatar-5.png') }}"
                                 alt="Generic placeholder image">
@@ -112,8 +114,9 @@
                             <div class="f-13 chat-header">Samon</div>
                         </div>
                     </div>
-                    <div class="media userlist-box" data-id="10" data-status="online" data-username="Daizy Mendize"
-                        data-toggle="tooltip" data-placement="left" title="Daizy Mendize">
+                    <div class="media userlist-box" data-id="10" data-status="online"
+                        data-username="Daizy Mendize" data-toggle="tooltip" data-placement="left"
+                        title="Daizy Mendize">
                         <a class="media-left" href="#!">
                             <img class="media-object img-circle" src="{{ asset('assets/images/task/task-u3.jpg') }}"
                                 alt="Generic placeholder image">
@@ -123,8 +126,9 @@
                             <div class="f-13 chat-header">Daizy Mendize</div>
                         </div>
                     </div>
-                    <div class="media userlist-box" data-id="11" data-status="offline" data-username="Loren Scofield"
-                        data-toggle="tooltip" data-placement="left" title="Loren Scofield">
+                    <div class="media userlist-box" data-id="11" data-status="offline"
+                        data-username="Loren Scofield" data-toggle="tooltip" data-placement="left"
+                        title="Loren Scofield">
                         <a class="media-left" href="#!">
                             <img class="media-object img-circle" src="{{ asset('assets/images/avatar-3.png') }}"
                                 alt="Generic placeholder image">
@@ -279,6 +283,13 @@
                     <li class="change-loges.html py-2">
                         <a href="{{ route('user.list') }}">
                             <span class="pcoded-micon"><i class="ti-calendar"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Dashboard</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="change-loges.html py-2">
+                        <a href="{{ route('user.list') }}">
+                            <span class="pcoded-micon"><i class="ti-calendar"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Users</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
@@ -290,13 +301,13 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    <li class="change-loges.html py-2">
+                    {{-- <li class="change-loges.html py-2">
                         <a href="javascript:void(0)">
                             <span class="pcoded-micon"><i class="ti-package"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.image-cropper.main">Consignees</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="change-loges.html py-2">
                         <a href="{{ route('vehicle.list') }}">
                             <span class="pcoded-micon"><i class="fas fa-car"></i></span>
@@ -316,6 +327,62 @@
                         <a href="{{ route('shipment.list') }}">
                             <span class="pcoded-micon"><i class="fas fa-shipping-fast"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Shipment</span>
+
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="change-loges.html py-2">
+                        <a href="">
+                            <span class="pcoded-micon"><i class="fas fa-warehouse"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Inventory</span>
+
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="change-loges.html py-2">
+                        <a href="">
+                            <span class="pcoded-micon"><i class="fas fa-receipt"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Invoices</span>
+
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="change-loges.html py-2">
+                        <a href="">
+                            <span class="pcoded-micon"><i class="fas fa-credit-card"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Payment</span>
+
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="change-loges.html py-2">
+                        <a href="">
+                            <span class="pcoded-micon"><i class="fas fa-message"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Chat</span>
+
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="change-loges.html py-2">
+                        <a href="">
+                            <span class="pcoded-micon"><i class="fas fa-brain"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Master</span>
+
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="change-loges.html py-2">
+                        <a href="">
+                            <span class="pcoded-micon"><i class="fas fa-percent"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Rate</span>
+
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="change-loges.html py-2">
+                        <a href="">
+                            <span class="pcoded-micon"><i class="fas fa-calendar"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Calendar</span>
 
                             <span class="pcoded-mcaret"></span>
                         </a>
@@ -355,8 +422,8 @@
                                             <i class="icofont icofont-home"></i>
                                         </a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="{{ url($module['action']) }}">{{
-                                            @$module['plural'] }}</a>
+                                    <li class="breadcrumb-item"><a
+                                            href="{{ url($module['action']) }}">{{ @$module['plural'] }}</a>
                                     </li>
                                     <li class="breadcrumb-item"><a>{{ @$module['page'] }}</a>
                                     </li>
