@@ -13,9 +13,11 @@ class Customer extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     protected $table = "customers";
+    protected $guarded = [];
     protected $fillable = [
         'customer_number',
         'customer_name',
+        'customer_email',
         'level',
         'status',
         'main_phone',
@@ -64,5 +66,20 @@ class Customer extends Model
     public function invoices()
     {
         return $this->hasMAny('App\Models\Invoice');
+    }
+
+    public function billings()
+    {
+        return $this->hasMany('App\Models\BillingParty');
+    }
+
+    public function shippers()
+    {
+        return $this->hasMany('App\Models\Shipper');
+    }
+
+    public function quotations()
+    {
+        return $this->hasMany('App\Models\Quotation');
     }
 }

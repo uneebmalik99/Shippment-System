@@ -241,18 +241,21 @@
 {{-- Profile page tabs --}}
 <script>
     $('.profile_tabs').on('click', function() {
-        $('.profile_tabs').removeClass('btn btn-info rounded text-white');
+        $('.profile_tabs').removeClass('btn btn_custom rounded text-white');
         $('.profile_tabs').addClass('border-0 form-control text-muted');
+        $id = $(this).attr('cust_id');
         $tab = $(this).attr('id');
-        $(this).addClass('btn btn-info rounded text-white');
+        $(this).addClass('btn btn_custom rounded text-white');
         $(this).removeClass('border-0 form-control text-muted');
         $.ajax({
             type: 'get',
             url: '{{ URL::to('admin/customers/profile_tab') }}',
             data: {
-                'tab': $tab
+                'tab': $tab,
+                'id': $id,
             },
             success: function(data) {
+                console.log(data);
                 $('#tab_body').html(data);
             }
         });
@@ -286,7 +289,7 @@
     $(function() {
         $i = 1;
         $("#fileupload").change(function() {
-            alert('asdaad');
+            // alert('asdaad');
             if (typeof(FileReader) != "undefined") {
                 var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
                 $($(this)[0].files).each(function() {
@@ -421,84 +424,88 @@
 <script>
     function createForm(id) {
         $tab = id;
-        alert('asdasdas');
+        // alert($('#added_by_role').val());
         if (id == "general")
             $data = {
-                customer_number                 : $('#customer_number').val(),
-                sales_person                    : $('#sales_person').val(),
-                customer_name                   : $('#customer_name').val(),
-                inside_person                   : $('#inside_person').val(),
-                level                           : $('#level').val(),
-                lead                            : $('#lead').val(),
-                status                          : $('#status').val(),
-                main_phone                      : $('#main_phone').val(),
-                payment_type                    : $('#payment_type').val(),
-                main_fax                        : $('#main_fax').val(),
-                payment_term                    : $('#payment_term').val(),
-                industry                        : $('#industry').val(),
-                price_code                      : $('#price_code').val(),
-                source                          : $('#source').val(),
-                customer_type                   : $('#customer_type').val(),
-                sales_type                      : $('#sales_type').val(),
-                round                           : $('#round').val(),
-                location_number                 : $('#location_number').val(),
-                country                         : $('#country').val(),
-                zip_code                        : $('#zip_code').val(),
-                state                           : $('#state').val(),
-                address_1                       : $('#address_1').val(),
-                address_2                       : $('#address_2').val(),
-                add_by_email                    : $('#add_by_email').val(),
-                added_by_role                   : $('#added_by_role').val(),
+                customer_number: $('#customer_number').val(),
+                sales_person: $('#sales_person').val(),
+                customer_name: $('#customer_name').val(),
+                inside_person: $('#inside_person').val(),
+                level: $('#level').val(),
+                lead: $('#lead').val(),
+                status: $('#status').val(),
+                main_phone: $('#main_phone').val(),
+                payment_type: $('#payment_type').val(),
+                main_fax: $('#main_fax').val(),
+                payment_term: $('#payment_term').val(),
+                customer_email: $('#customer_email').val(),
+                industry: $('#industry').val(),
+                price_code: $('#price_code').val(),
+                source: $('#source').val(),
+                customer_type: $('#customer_type').val(),
+                sales_type: $('#sales_type').val(),
+                round: $('#round').val(),
+                location_number: $('#location_number').val(),
+                country: $('#country').val(),
+                zip_code: $('#zip_code').val(),
+                state: $('#state').val(),
+                address_1: $('#address_1').val(),
+                address_2: $('#address_2').val(),
+                add_by_email: $('#add_by_email').val(),
+                added_by_role: $('#added_by_role').val(),
             };
         else if (id == "billing")
             $data = {
-                first_name                      : $('#first_name').val(),
-                company_name                    : $('#company_name').val(),
-                country                         : $('#country').val(),
-                last_name                       : $('#last_name').val(),
-                company_email                   : $('#company_email').val(),
-                city                            : $('#city').val(),
-                phone                           : $('#phone').val(),
-                address                         : $('#address').val(),
-                zip_code                        : $('#zip_code').val(),
-                foreign_passport_number         : $('#foreign_passport_number').val(),
-                identification_number           : $('#identification_number').val(),
-                expiry_date                     : $('#expiry_date').val(),
-                shipping                        : $('.shipping:checked').val(),
-                shipment_type                   : $('.shipment_type:checked').val(),
-                purchased_from                  : $('.purchased_from:checked').val(),
-                request_pickup                  : $('.request_pickup:checked').val(),
-                end_use                         : $('.end_use:checked').val(),
-                buyer_number                    : $('#buyer_number').val(),
+                first_name: $('#first_name').val(),
+                company_name: $('#company_name').val(),
+                country: $('#country').val(),
+                last_name: $('#last_name').val(),
+                company_email: $('#company_email').val(),
+                city: $('#city').val(),
+                phone: $('#phone').val(),
+                address: $('#address').val(),
+                zip_code: $('#zip_code').val(),
+                foreign_passport_number: $('#foreign_passport_number').val(),
+                identification_number: $('#identification_number').val(),
+                expiry_date: $('#expiry_date').val(),
+                shipping: $('.shipping:checked').val(),
+                shipment_type: $('.shipment_type:checked').val(),
+                purchased_from: $('.purchased_from:checked').val(),
+                request_pickup: $('.request_pickup:checked').val(),
+                end_use: $('.end_use:checked').val(),
+                buyer_number: $('#buyer_number').val(),
+                customer_email: $('#customer_email').val(),
             };
         else if (id == "shipper")
-        $data = {
-                shipper_name                    : $('#shipper_name').val(),
-                contact_person_name             : $('#contact_person_name').val(),
-                phone                           : $('#phone').val(),
-                company_email                   : $('#company_email').val(),
-                country                         : $('#country').val(),
-                city                            : $('#city').val(),
-                zip_code                        : $('#zip_code').val(),
-                address                         : $('#address').val(),
-                consignee                       : $('.consignee:checked').val(),
-                consolidate                     : $('.consolidate:checked').val(),
-                original_shipping_documents     : $('.original_shipping_documents:checked').val(),
-                insurance                       : $('.insurance:checked').val(),
-                destination_port                : $('.destination_port:checked').val(),
-        };
+            $data = {
+                shipper_name: $('#shipper_name').val(),
+                contact_person_name: $('#contact_person_name').val(),
+                phone: $('#phone').val(),
+                company_email: $('#company_email').val(),
+                country: $('#country').val(),
+                city: $('#city').val(),
+                zip_code: $('#zip_code').val(),
+                address: $('#address').val(),
+                consignee: $('.consignee:checked').val(),
+                consolidate: $('.consolidate:checked').val(),
+                original_shipping_documents: $('.original_shipping_documents:checked').val(),
+                insurance: $('.insurance:checked').val(),
+                destination_port: $('.destination_port:checked').val(),
+                customer_email: $('#customer_email').val(),
+            };
         else if (id == "quotation")
-        $data = {
-                destination_port                : $('#destination_port').val(),
-                valid_from                      : $('#valid_from').val(),
-                valid_till                      : $('#valid_till').val(),
-                container_size                  : $('#container_size:selected').val(),
-                vehicle                         : $('#vehicle').val(),
-                loading_port                    : $('#loading_port').val(),
-                shipping_line                   : $('#shipping_line').val(),
-                default                         : $('#default').val(),
-                special_rate                    : $('#special_rate').val(),
-        };
+            $data = {
+                destination_port: $('#destination_port').val(),
+                valid_from: $('#valid_from').val(),
+                valid_till: $('#valid_till').val(),
+                container_size: $('#container_size:selected').val(),
+                vehicle: $('#vehicle').val(),
+                loading_port: $('#loading_port').val(),
+                shipping_line: $('#shipping_line').val(),
+                default: $('#default').val(),
+                special_rate: $('#special_rate').val(),
+                customer_email: $('#customer_email').val(),
+            };
         else
             alert('no tab');
 
@@ -510,8 +517,9 @@
                 data: $data,
             },
             success: function(data) {
-                // console.log(data);
-                alert(data);
+                alert(data.sresult);
+                $('.modal-body').html(data.view);
+                $('#exampleModal').modal('show');
             }
         });
     }

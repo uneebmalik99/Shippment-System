@@ -14,4 +14,9 @@ class BillingParty extends Model
     public $timestamps = true;
     protected $table = "billing_parties";
     protected $guarded = [];
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Models\Customer', 'customer_id', 'id');
+    }
 }

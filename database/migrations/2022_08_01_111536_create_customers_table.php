@@ -17,6 +17,7 @@ class CreateCustomersTable extends Migration
             $table->id();
             $table->string('customer_number')->nullable();
             $table->string('customer_name')->nullable();
+            $table->string('customer_email')->nullable();
             $table->string('level')->nullable();
             $table->string('status')->nullable();
             $table->string('main_phone')->nullable();
@@ -38,7 +39,7 @@ class CreateCustomersTable extends Migration
             $table->string('address_1')->nullable();
             $table->string('address_2')->nullable();
             $table->foreignId('added_by_role')->constrained('users')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->string('add_by_email')->nullable();
+            $table->string('add_by_email')->unique()->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

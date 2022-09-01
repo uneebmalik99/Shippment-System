@@ -1,56 +1,51 @@
-
 <div class="card user-card rounded mt-3">
-    <div class="px-3 d-flex justify-cotent center">
+    <div class="px-3 d-flex">
         <h6 class="text-muted"><b>User's Projects List</b></h6>
     </div>
-    <div class="col-12 mt-5 p-0">
-
-        <table class="table">
-            <thead>
-                <th scope="col" class="py-2 px-3">
-                    <h5>Projects</h5>
-                    <span wire:click="sortBy('name')" class="float-right text-sm" style="cursor: pointer;">
-                        <i class="ti-arrow-up"></i>
-                        <i class="ti-arrow-down text-muted"></i>
-                    </span>
-                </th>
-                <th scope="col" class="py-2 px-3">
-                    <h5>Total</h5>
-                </th>
-                <th scope="col" class="py-2 px-3">
-                    <h5>Progress</h5>
-                    <span class="float-right text-sm" style="cursor: pointer;">
-                        <i class="ti-arrow-up"></i>
-                        <i class="ti-arrow-down text-muted"></i>
-                    </span>
-                </th>
-                <th scope="col" class="py-2 px-3">
-                    <h5>Hours</h5>
-                </th>
-            </thead>
-            <tbody>
-                <td class="text-muted">
-                    <div class="d-flex justify-content-start">
-                        New Vehicles
-                    </div>
-                </td>
-                <td class="text-muted">
-                    <div class="d-flex justify-content-start">
-                        212
-                    </div>
-                </td>
-                <td rowspan="2">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-success" role="progressbar" style="width: 65%"
-                            aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">60%</div>
-                    </div>
-                </td>
-                <td class="text-muted">
-                    <div class="d-flex justify-content-start">
-                        88:19th
-                    </div>
-                </td>
-            </tbody>
-        </table>
-    </div>
+</div>
+<div class="bg-light" style="height: 100%;overflow-x: scroll;">
+    <table class="table table-hover sortable scroll">
+        <thead class="bg-light">
+            <th>CUSTOMER NAME</th>
+            <th>CUSTOMER ID</th>
+            <th>COMAPANY NAME</th>
+            <th>ADDRESS 1</th>
+            <th>ADDRESS 2</th>
+            <th>PHONE</th>
+            <th>CITY</th>
+            <th>STATE</th>
+            <th>COUNTRY</th>
+            <th>ZIP CODE</th>
+        </thead>
+        <tbody>
+            {{-- @if (@$user->count() == 0)
+                <tr>
+                    <td colspan="10" class="h6 text-muted text-center">NO CUSTOMERS TO DISPLAY</td>
+                </tr>
+            @endif --}}
+                <tr>
+                    <td>{{ @$user['customer_name'] }}</td>
+                    <td>{{ @$user['customer_number'] }}</td>
+                    <td>{{ @$user['industry'] }}</td>
+                    <td>{{ @$user['address_1'] }}</td>
+                    <td>{{ @$user['address_2'] }}</td>
+                    <td>{{ @$user['main_phone'] }}</td>
+                    <td>{{ @$user['city'] }}</td>
+                    <td>{{ @$user['state'] }}</td>
+                    <td>{{ @$user['country'] }}</td>
+                    <td>{{ @$user['zip_code '] }}</td>
+                    {{-- <td>
+                        <button>
+                            <a href={{ url($module['action'] . '/edit/' . $val[$module['db_key']]) }}>
+                                <i class="ti-pencil"></i>
+                            </a>
+                        </button>
+                        <button><a href={{ url($module['action'] . '/delete/' . $val[$module['db_key']]) }}>
+                                <i class="ti-trash"></i>
+                            </a>
+                        </button>
+                    </td> --}}
+                </tr>
+        </tbody>
+    </table>
 </div>

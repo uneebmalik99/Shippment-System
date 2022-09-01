@@ -24,6 +24,7 @@ class CreateQuotationsTable extends Migration
             $table->string('shipping_line')->nullable();
             $table->string('default')->nullable();
             $table->string('special_rate')->nullable();
+            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->timestamps();
         });
     }

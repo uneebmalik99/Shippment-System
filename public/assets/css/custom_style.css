@@ -44,3 +44,17 @@
     border: 1px solid rgba(0, 0, 0, 0) !important;
     border-radius: 5px !important;
 }
+.btn_custom {
+    background: #696cff !important;
+}
+.next-style {
+    background: linear-gradient(
+        254.1deg,
+        #10c3ea 4.82%,
+        #337fb8 61.08%
+    ) !important;
+    border: 1px solid #1c71b0 !important;
+    box-shadow: 6px 6px 4px rgba(48, 148, 175, 0.47) !important;
+    transform: skew(-30deg) !important;
+    border-radius: 2px !important;
+}

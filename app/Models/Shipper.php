@@ -14,4 +14,9 @@ class Shipper extends Model
     public $timestamps = true;
     protected $table = "shippers";
     protected $guarded = [];
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Models\Customer', 'customer_id', 'id');
+    }
 }

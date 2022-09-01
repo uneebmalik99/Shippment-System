@@ -112,15 +112,15 @@
 
         <div class="d-flex justify-content-start p-2">
             <div class="text-muted d-flex  align-items-center col-3">
-                <input class="text-muted d-flex px-2 consolidate" type="radio" name="consolidate" value="send back"
-                    id="send_back">
-                <label class="px-2 m-0" for="send_back">Send back to me</label>
+                <input class="text-muted d-flex px-2 consolidate" type="radio" name="consolidate" value="yes"
+                    id="consolidate_yes">
+                <label class="px-2 m-0" for="consolidate_yes">Yes</label>
             </div>
 
             <div class="text-muted d-flex  align-items-center col-3">
-                <input class="text-muted d-flex px-2 consolidate" type="radio" name="consolidate"
-                    value="pick up from office" id="pick_up">
-                <label class="px-2 m-0" for="pick_up">Pick up from office</label>
+                <input class="text-muted d-flex px-2 consolidate" type="radio" name="consolidate" value="no"
+                    id="consolidate_no">
+                <label class="px-2 m-0" for="consolidate_no">No</label>
             </div>
         </div>
     </div>
@@ -135,14 +135,14 @@
         <div class="d-flex justify-content-start p-2">
             <div class="text-muted d-flex align-items-center col-3">
                 <input class="text-muted d-flex px-2 original_shipping_documents" type="radio"
-                    name="original_shipping_documents" value="yes" id="document_yes">
-                <label class="px-2 m-0" for="document_yes">Yes</label>
+                    name="original_shipping_documents" value="send back" id="send_back">
+                <label class="px-2 m-0" for="send_back">Send back</label>
             </div>
 
             <div class="text-muted d-flex align-items-center col-3">
                 <input class="text-muted d-flex px-2 original_shipping_documents" type="radio"
-                    name="original_shipping_documents" value="no" id="document_no">
-                <label class="px-2 m-0" for="document_no">No</label>
+                    name="original_shipping_documents" value="pick up from office" id="pick_up">
+                <label class="px-2 m-0" for="pick_up">Pick up from office</label>
             </div>
         </div>
     </div>
@@ -191,10 +191,12 @@
         </div>
     </div>
 
-    <div class="col-6 py-2">
+    <div class="col-12 py-2 px-5 d-flex justify-content-end">
+        <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="customer_email"
+            id="customer_email" value="{{ @$module['email'] }}"readonly>
         {{-- <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_role"
             id="added_by_email" value="{{ Auth::user()->id }}"readonly value="{{ @$user['added_by_email'] }}"> --}}
-        <input type="button" value="{{ $module['button'] }}" class="btn btn-primary rounded"
-            onclick="createForm(this.id)" id="shipper" name="{{ $module['button'] }}">
+        <input type="button" value="Next" class="btn col-1 next-style text-white" onclick="createForm(this.id)"
+            id="shipper" name="{{ $module['button'] }}">
     </div>
 </form>

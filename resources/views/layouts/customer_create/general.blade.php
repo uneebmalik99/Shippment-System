@@ -171,6 +171,20 @@
             <div class="d-flex py-3">
                 <div class="col-6">
                     <div class=" d-flex align-items-center">
+                        <label for="customer_email" class="col-6 px-0">Email</label>
+                        <input type="email" class="form-control-sm border border-0 rounded-pill bg col-6"
+                            name="customer_email" id="customer_email" value="{{ @$user['customer_email'] }}">
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <span class="text-danger">
+                            @error('email')
+                                {{ $message }}
+                            @enderror
+                        </span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class=" d-flex align-items-center">
                         <label for="industry" class="col-6 px-0">Industry</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="industry" id="industry" value="{{ @$user['industry'] }}">
@@ -383,12 +397,12 @@
             </div>
         </div>
     </div>
-    <div class="col-6 py-2">
+    <div class="col-12 py-2 px-5 d-flex justify-content-end">
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="add_by_email"
-            id="add_by_email" readonly value="{{ @$user['add_by_email'] }}">
+            id="add_by_email" readonly value="{{ Auth::user()->email }}">
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_role"
             id="added_by_role" readonly value="{{ Auth::user()->id }}">
-        <input type="button" value="{{ $module['button'] }}" class="btn btn-primary rounded"
-            onclick="createForm(this.id)" id="general" name="{{ $module['button'] }}">
+        <input type="button" value="Next" class="btn col-1 next-style text-white" onclick="createForm(this.id)"
+            id="general" name="{{ $module['button'] }}">
     </div>
 </form>

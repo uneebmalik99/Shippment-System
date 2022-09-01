@@ -93,13 +93,13 @@ class CustomerController extends Controller
                 'button' => 'Create',
             ],
         ];
+
         if ($request->ajax()) {
-            if ($request->tab) {
-                $tab = $request->tab;
-            }
+            $tab = $request->tab;
             $output = view('layouts.customer_create.' . $tab, $data)->render();
             return Response($output);
         }
+
         if ($request->isMethod('post')) {
             $record = $request->all();
             $Obj = new Customer;
@@ -174,8 +174,8 @@ class CustomerController extends Controller
         $action = url($this->action . '/profile/');
         $data = [
             'user' => Customer::find($id)->toArray(),
-            "page_title" => "Edit " . $this->singular,
-            "page_heading" => "Edit " . $this->singular,
+            "page_title" => "Profile " . $this->singular,
+            "page_heading" => "Profile " . $this->singular,
             "button_text" => "Update ",
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
             'action' => $action,
@@ -186,7 +186,7 @@ class CustomerController extends Controller
                 'view' => $this->view,
                 'db_key' => $this->db_key,
                 'action' => $this->action,
-                'page' => 'edit',
+                'page' => 'profile',
                 'button' => 'Update',
             ],
         ];
@@ -248,34 +248,89 @@ class CustomerController extends Controller
 
     public function profile_tab(Request $request)
     {
+        $id = $request->id;
+        $data = [];
+        $data['user'] = Customer::find($id)->toArray();
+        $data['billing'] = BillingParty::where('id', '6')->get();
+        $data['shipper'] = Shipper::where('id', '1')->get();
         if ($request->tab) {
             $tab = $request->tab;
-            $output = view('layouts.customer.' . $tab)->render();
+            $output = view('layouts.customer.' . $tab, $data)->render();
         }
         return Response($output);
     }
 
     public function general_create(Request $request)
     {
-        $tab = $request->tab;
-        $data = $request->data;
-        if ($tab == "general") {
-            $Obj = new Customer;
-            $Obj->create($data);
-            $output = "Success!";
-        } elseif ($tab == "billing") {
-            $Obj = new BillingParty;
-            $Obj->create($data);
-            $output = "Success!";
-        } elseif ($tab == "shipper") {
-            $Obj = new Shipper;
-            $Obj->create($data);
-            $output = "Success!";
-        } else {
-            $Obj = new Quotation;
-            $Obj->create($data);
-            $output = "Success!";
+        if ($request->ajax()) {
+            $tab = $request->tab;
+            $data = $request->data;
+            $email = $data['customer_email'];
+            $output = [];
+            $view_data = [];
+            $action = url($this->action . '/create');
+            $view_data = [
+                "page_title" => $this->plural . " create",
+                "page_heading" => $this->plural . ' create',
+                "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
+                "action" => $action,
+                "module" => ['type' => $this->type,
+                    'type' => $this->type,
+                    'singular' => $this->singular,
+                    'plural' => $this->plural,
+                    'view' => $this->view,
+                    'db_key' => $this->db_key,
+                    'action' => $this->action,
+                    'page' => 'create',
+                    'button' => 'Create',
+                    'email' => $email,
+                ],
+            ];
+
+            switch ($tab) {
+                case ('general'):
+                    $output['view'] = view('layouts.customer_create.billing', $view_data)->render();
+                    break;
+
+                case ('billing'):
+                    $output['view'] = view('layouts.customer_create.shipper', $view_data)->render();
+                    break;
+
+                case ('shipper'):
+                    $output['view'] = view('layouts.customer_create.quotation', $view_data)->render();
+                    break;
+            }
+
+            if ($tab != "general") {
+                $customer = Customer::where('customer_email', $email)->get();
+                foreach ($customer as $val) {
+                    $id = $val['id'];
+                }
+                $data['customer_id'] = $id;
+                unset($data['customer_email']);
+            }
+
+            if ($tab == "general") {
+                $Obj = new Customer;
+                $Obj->create($data);
+                $output['result'] = "Success!";
+
+            } elseif ($tab == "billing") {
+                $Obj = new BillingParty;
+                $Obj->create($data);
+                $output['result'] = "Success!";
+
+            } elseif ($tab == "shipper") {
+                $Obj = new Shipper;
+                $Obj->create($data);
+                $output['result'] = "Success!";
+
+            } else {
+                $Obj = new Quotation;
+                $Obj->create($data);
+                $output['result'] = "Success!";
+            }
+            return Response($output);
         }
-        return Response($output);
     }
 }

@@ -13,4 +13,9 @@ class Quotation extends Model
     public $timestamps = true;
     protected $table = "quotations";
     protected $guarded = [];
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Models\Customer', 'customer_id', 'id');
+    }
 }

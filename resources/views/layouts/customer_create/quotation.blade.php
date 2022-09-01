@@ -582,10 +582,12 @@
         </div>
     </div> --}}
 
-    <div class="col-6 py-2">
+    <div class="col-12 py-2 px-5 d-flex justify-content-end">
+        <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="customer_email"
+            id="customer_email" value="{{ @$module['email'] }}"readonly>
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_role"
             id="added_by_email" value="{{ Auth::user()->id }}"readonly value="{{ @$user['added_by_email'] }}">
-        <input type="button" value="{{ $module['button'] }}" class="btn btn-primary rounded"
-            onclick="createForm(this.id)" id="quotation" name="{{ $module['button'] }}">
+        <input type="button" value="Create" class="btn col-1 next-style text-white" onclick="createForm(this.id)"
+            id="quotation" name="{{ $module['button'] }}">
     </div>
 </form>
