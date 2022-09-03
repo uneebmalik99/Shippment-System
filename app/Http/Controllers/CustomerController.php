@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CustomersExport;
 use App\Http\Controllers\Controller;
 use App\Models\BillingParty;
 use App\Models\Customer;
@@ -10,6 +11,7 @@ use App\Models\Quotation;
 use App\Models\Shipper;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerController extends Controller
 {
@@ -251,8 +253,8 @@ class CustomerController extends Controller
         $id = $request->id;
         $data = [];
         $data['user'] = Customer::find($id)->toArray();
-        $data['billing'] = BillingParty::where('id', '6')->get();
-        $data['shipper'] = Shipper::where('id', '1')->get();
+        $data['billing'] = BillingParty::where('customer_id', $id)->get();
+        $data['shipper'] = Shipper::where('customer_id', $id)->get();
         if ($request->tab) {
             $tab = $request->tab;
             $output = view('layouts.customer.' . $tab, $data)->render();
@@ -332,5 +334,10 @@ class CustomerController extends Controller
             }
             return Response($output);
         }
+    }
+
+    public function export()
+    {
+        return Excel::download(new CustomersExport, 'users.xlsx');
     }
 }

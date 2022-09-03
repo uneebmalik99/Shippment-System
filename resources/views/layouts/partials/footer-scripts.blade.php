@@ -245,6 +245,7 @@
         $('.profile_tabs').addClass('border-0 form-control text-muted');
         $id = $(this).attr('cust_id');
         $tab = $(this).attr('id');
+        // alert($tab);
         $(this).addClass('btn btn_custom rounded text-white');
         $(this).removeClass('border-0 form-control text-muted');
         $.ajax({

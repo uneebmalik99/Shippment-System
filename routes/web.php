@@ -45,6 +45,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/customers/profile_tab',        [App\Http\Controllers\CustomerController::class, 'profile_tab'])->name('customer.profile_tab');
     Route::get('/customers/search',             [App\Http\Controllers\CustomerController::class, 'search'])->name('customer.search');
     Route::get('/customers/pagination',         [App\Http\Controllers\CustomerController::class, 'search'])->name('customer.pagination');
+    Route::get('/customers/export',             [App\Http\Controllers\CustomerController::class, 'export'])->name('customer.export');
 
     //Vehicle Routes
     Route::get('/vehicles',                     [App\Http\Controllers\VehicleController::class, 'index'])->name('vehicle.list');

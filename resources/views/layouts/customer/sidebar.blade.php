@@ -3,7 +3,11 @@
         <div class="card user-card rounded">
             <div class="card-header-img">
                 <img class="img-fluid w-50" src="{{ asset('assets/images/pattern5.png') }}" alt="card-img" />
-                <h6 class="mx-0 my-2 text-muted"><b>{{ @$user['customer_name'] }}</b></h6>
+                <div>
+                    <h6 class="mx-0 my-2 text-muted"><b>{{ strtoupper(@$user['customer_name']) }}</b></h6>
+                    <span class="font-size">{{ @$user['customer_email'] }}</span>
+                </div>
+
             </div>
             {{-- <p>
                 Lorem ipsum dolor sit amet, consectet ur
@@ -23,11 +27,15 @@
                         <b>Username:</b> {{ @$user['customer_name'] }}
                     </span>
                     <span class="text-muted py-1 px-3">
-                        <b>Email:</b> {{ @$user['email'] }}
+                        <b>Email:</b> {{ @$user['customer_email'] }}
                     </span>
                     <span class="text-muted py-1 px-3">
-                        <b>Status:</b> <button class="btn btn-sm text-success"> Active
-                        </button>
+                        <b>Status:</b>
+                        @if (@$val['status'] == '1')
+                            <div class="badge badge-success py-1 px-2 rounded">Active</div>
+                        @else
+                            <div class="badge badge-danger py-1 px-2 rounded">In Active</div>
+                        @endif
                     </span>
                     <span class="text-muted py-1 px-3">
                         <b>Role:</b> customer
@@ -36,7 +44,7 @@
                         <b>Tax id:</b> {{ @$user['tax_id'] }}
                     </span>
                     <span class="text-muted py-1 px-3">
-                        <b>Contact:</b> {{ @$user['phone'] }}
+                        <b>Contact:</b> {{ @$user['main_phone'] }}
                     </span>
                     <span class="text-muted py-1 px-3">
                         <b>Country:</b> {{ @$user['country'] }}
