@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-// Route::
+
+
 Auth::routes();
 
-Route::prefix('/admin')->middleware(['auth', 'admin.lock'])->group(function () {
+Route::prefix('/admin')->middleware('auth')->group(function () {
     //Home
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
-
+    Route::get('/', [HomeController::class, 'index']);
     // User Routes
     Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('user.list');
     Route::post('/users/create', [App\Http\Controllers\UserController::class, 'create'])->name('user.create');

@@ -67,6 +67,10 @@
         $(document).ready( function () {
     $('#table_id').DataTable();
     } );
+
+    $(document).ready( function () {
+    $('#user_table').DataTable();
+    } );
     </script>
 </body>
 

@@ -1,6 +1,7 @@
 @extends('layouts.partials.mainlayout')
 @section('body')
-    <div class="px-3 pt-4 pb-2 d-flex justify-content-between">
+
+{{-- <div class="px-3 pt-4 pb-2 d-flex justify-content-between">
         <div class="col-6 d-flex align-items-center text-info">
             <span>Show</span>
             <select class="mx-2 form-control border border-info rounded col-2" name="pagination" id="pagination_vehicle">
@@ -14,9 +15,9 @@
             <input type="text" class="form-control border border-info rounded col-10" id="search_user" name="search"
                 placeholder="Search">
         </div>
-    </div>
-    <div class="bg-light" style="height: 100%;overflow-x: scroll;">
-        <table class="table table-hover sortable scroll">
+    </div> --}}
+    <div class="bg-light mt-4" style="height: 100%;overflow-x: scroll;">
+        <table class="table table-hover sortable scroll" id="user_table">
             <thead>
                 <th class="sorttable_nosort">Sr</th>
                 <th>USERNAME</th>
@@ -26,7 +27,9 @@
                 <th>STATE</th>
                 <th>PHONE</th>
                 <th>CUSTOMER NAME</th>
+                @if(@$role == 1)
                 <th class="sorttable_nosort">ACTION</th>
+                @endif
             </thead>
             <tbody id="tbody">
                 @if (@$records->count() == 0)
@@ -45,19 +48,20 @@
                         <td>{{ @$val['state'] }}</td>
                         <td>{{ @$val['phone'] }}</td>
                         <td>{{ @$val['customer_name'] }}</td>
+                        @if($role == 1)
                         <td>
-                            <button><a href={{ url($module['action'] . '/edit/' . $val[$module['db_key']]) }}><i
+                            <button><a href={{ url($module['action'] . '/edit/' . $val[$module['db_key']]) }}><i 
                                         class="ti-pencil"></i></a></button>
-                            <button><a href={{ url($module['action'] . '/delete/' . $val[$module['db_key']]) }}><i
-                                        class="ti-trash"></i></a></button>
+                            <button><a href={{ url($module['action'] . '/delete/' . $val[$module['db_key']]) }}><i class="ti-trash"></i></a></button>
                         </td>
+                        @endif
                     </tr>
                     <?php $i++; ?>
                 @endforeach
             </tbody>
         </table>
     </div>
-    <div class="d-flex justify-content-end p-2" id="page">
+    {{-- <div class="d-flex justify-content-end p-2" id="page">
         <div>
             <div>
                 <p>
@@ -68,5 +72,5 @@
                 {{$records->links()}}
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

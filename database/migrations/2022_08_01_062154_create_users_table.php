@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password_reset_token',255)->nullable();
             $table->string('email')->unique();
             $table->enum('status',['0', '1' ])->default('0');
+            $table->foreignId('role_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('user_is_detected');
             $table->string('address_line1')->nullable();
             $table->string('address_line2')->nullable();
