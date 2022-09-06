@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,9 +78,15 @@ Route::prefix('/admin')->middleware(['auth', 'admin.lock'])->group(function () {
     Route::post('/notifications/create', [App\Http\Controllers\NotificationController::class, 'create'])->name('notification.creates');
     Route::get('/notifications/status', [App\Http\Controllers\NotificationController::class, 'status'])->name('notification.status');
 
+<<<<<<< HEAD
     // Lock screen Routes
     Route::get('/lock', [App\Http\Controllers\LockController::class, 'lockScreen'])->name('lock');
     Route::post('/unlock', [App\Http\Controllers\LockController::class, 'unlock'])->name('unlock');
+=======
+    // Tickets Routes
+    Route::get('/tickets',                        [App\Http\Controllers\TicketController::class, 'index'])->name('ticket.list');
+
+>>>>>>> 094a0b8c4c873964bbd6e1bf4f2512e470179a33
 });
 
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->middleware('auth')->name('auth.logout');

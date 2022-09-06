@@ -364,7 +364,7 @@
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
-                        <a href="">
+                        <a href="{{ route('ticket.list') }}">
                             <span class="pcoded-micon"><i class="fas fa-brain"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Master</span>
 
