@@ -27,7 +27,7 @@
                 <tr>
                     <td>
                         <div class="d-flex">
-                            <div><img src="<?php echo e(asset('assets/images/user.png')); ?>" alt="" style="width: 30px;height:30px;" class="mr-2"></div>
+                            <div><img src="<?php echo e(asset('assets/images/user.png'), false); ?>" alt="" style="width: 30px;height:30px;" class="mr-2"></div>
                             <div>
                                 <b>kashif latef</b>
                                 <p>Porduct designer</p>
@@ -68,7 +68,7 @@
                 <tr>
                     <td>
                         <div class="d-flex">
-                            <div><img src="<?php echo e(asset('assets/images/user.png')); ?>" alt="" style="width: 30px;height:30px;" class="mr-2"></div>
+                            <div><img src="<?php echo e(asset('assets/images/user.png'), false); ?>" alt="" style="width: 30px;height:30px;" class="mr-2"></div>
                             <div>
                                 <b>kashif latef</b>
                                 <p>Porduct designer</p>

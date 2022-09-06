@@ -9,7 +9,7 @@
                 <i class="ti-search"></i>
             </a>
             <a href="index.html">
-                <img class="img-fluid" src="<?php echo e(asset('assets/images/logo.png')); ?>" alt="Theme-Logo" />
+                <img class="img-fluid" src="<?php echo e(asset('assets/images/logo.png'), false); ?>" alt="Theme-Logo" />
             </a>
             <a class="mobile-options">
                 <i class="ti-more"></i>
@@ -69,7 +69,7 @@
                     <li class="header-notification">
                         <a style="cursor: pointer;">
                             <i class="ti-bell"></i>
-                            <span class="badge"><?php echo e(@$notification_count); ?></span>
+                            <span class="badge"><?php echo e(@$notification_count, false); ?></span>
                         </a>
                         <ul class="show-notification">
                             <li>
@@ -77,15 +77,15 @@
                                 <label class="label label-danger">New</label>
                             </li>
                             <?php $__currentLoopData = $notification; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notifications): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <li id="notification_body" value="<?php echo e($notifications['id']); ?>" <?php if($notifications['status']==1): ?> class="bg-info border border-light rounded text-white"
+                            <li id="notification_body" value="<?php echo e(@$notifications['id'], false); ?>" <?php if(@$notifications['status']==1): ?> class="bg-info border border-light rounded text-white"
                                 <?php endif; ?>>
                                 <div class="media">
-                                    <img class="d-flex align-self-center" src="<?php echo e(asset('assets/images/user.png')); ?>"
+                                    <img class="d-flex align-self-center" src="<?php echo e(asset('assets/images/user.png'), false); ?>"
                                         alt="Generic placeholder image">
                                     <div class="media-body">
-                                        <h5 class="notification-user"><?php echo e($notifications['user']['username']); ?></h5>
-                                        <p class="notification-msg"><?php echo e($notifications['message']); ?></p>
-                                        <span class="notification-time text-muted"><b><?php echo e($date); ?></b></span>
+                                        <h5 class="notification-user"><?php echo e(@$notifications['user']['username'], false); ?></h5>
+                                        <p class="notification-msg"><?php echo e(@$notifications['message'], false); ?></p>
+                                        <span class="notification-time text-muted"><b><?php echo e($date, false); ?></b></span>
                                     </div>
                                 </div>
                             </li>
@@ -100,21 +100,25 @@
                     </li>
                     <li class="user-profile header-notification">
                         <a>
-                            <img src="<?php echo e(asset('assets/images/user.png')); ?>" alt="User-Profile-Image">
-                            <span><?php echo e(Auth::user()->username); ?></span>
+                            <img src="<?php echo e(asset('assets/images/user.png'), false); ?>" alt="User-Profile-Image">
+                            <span><?php echo e(Auth::user()->username, false); ?></span>
                             <i class="ti-angle-down"></i>
                         </a>
                         <ul class="show-notification profile-notification">
                             
                             <li>
-                                <a href="<?php echo e(route('user.profile') . '/' . Auth::user()->id); ?>">
+                                <a href="<?php echo e(route('user.profile') . '/' . Auth::user()->id, false); ?>">
                                     <i class="ti-user"></i> Profile
                                 </a>
                             </li>
                             
-                            
                             <li>
-                                <a href="<?php echo e(route('auth.logout')); ?>">
+                                <a href="<?php echo e(route('lock'), false); ?>">
+                                    <i class="ti-lock"></i> Lock Screen
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo e(route('auth.logout'), false); ?>">
                                     <i class="ti-layout-sidebar-left"></i> Logout
                                 </a>
                             </li>
@@ -146,22 +150,22 @@
                         <div class="dummy-column">
                             <h2>Popular</h2>
                             <a class="dummy-media-object" href="#!">
-                                <img src="<?php echo e(asset('assets/images/avatar-1.png')); ?>" alt="PagePreloadingEffect" />
+                                <img src="<?php echo e(asset('assets/images/avatar-1.png'), false); ?>" alt="PagePreloadingEffect" />
                                 <h3>Page Preloading Effect</h3>
                             </a>
                             <a class="dummy-media-object" href="#!">
-                                <img src="<?php echo e(asset('assets/images/avatar-1.png')); ?>" alt="DraggableDualViewSlideshow" />
+                                <img src="<?php echo e(asset('assets/images/avatar-1.png'), false); ?>" alt="DraggableDualViewSlideshow" />
                                 <h3>Draggable Dual-View Slideshow</h3>
                             </a>
                         </div>
                         <div class="dummy-column">
                             <h2>Recent</h2>
                             <a class="dummy-media-object" href="#!">
-                                <img src="<?php echo e(asset('assets/images/avatar-1.png')); ?>" alt="TooltipStylesInspiration" />
+                                <img src="<?php echo e(asset('assets/images/avatar-1.png'), false); ?>" alt="TooltipStylesInspiration" />
                                 <h3>Tooltip Styles Inspiration</h3>
                             </a>
                             <a class="dummy-media-object" href="#!">
-                                <img src="<?php echo e(asset('assets/images/avatar-1.png')); ?>" alt="NotificationStyles" />
+                                <img src="<?php echo e(asset('assets/images/avatar-1.png'), false); ?>" alt="NotificationStyles" />
                                 <h3>Notification Styles Inspiration</h3>
                             </a>
                         </div>

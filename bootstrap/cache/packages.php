@@ -1,4 +1,15 @@
 <?php return array (
+  'encore/laravel-admin' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Encore\\Admin\\AdminServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Admin' => 'Encore\\Admin\\Facades\\Admin',
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 
@@ -29,6 +40,13 @@
     'providers' => 
     array (
       0 => 'Kyslik\\ColumnSortable\\ColumnSortableServiceProvider',
+    ),
+  ),
+  'laravel-admin-ext/lock-screen' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Encore\\Admin\\LockScreen\\LockScreenServiceProvider',
     ),
   ),
   'laravel/tinker' => 

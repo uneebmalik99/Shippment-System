@@ -1,0 +1,87 @@
+.title_style {
+    background: #1f689e !important;
+    box-shadow: inset 10px 14px 28px rgba(0, 0, 0, 0.25) !important;
+}
+.text-color {
+    color: rgba(255, 122, 0, 1) !important;
+    border-bottom: 2px solid rgba(255, 122, 0, 1) !important;
+}
+.input-style {
+    background: rgba(255, 255, 255, 0.13) !important;
+    box-shadow: 5px 5px 16px rgba(92, 174, 235, 0.55) !important;
+}
+.font-style {
+    font-family: "Inter" !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    line-height: 19px !important;
+}
+.text-head {
+    font-family: "Inter" !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 20px !important;
+    line-height: 29px !important;
+}
+.icon-style {
+    background: rgba(28, 172, 217, 0.06) !important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+    border-radius: 5px !important;
+}
+.edit-button {
+    background: rgba(105, 108, 255, 0.2) !important;
+    border: 1px solid rgba(0, 0, 0, 0) !important;
+    border-radius: 5px !important;
+}
+.profile-button {
+    background: rgba(4, 139, 82, 0.24) !important;
+    border: 1px solid rgba(0, 0, 0, 0) !important;
+    border-radius: 5px !important;
+}
+.delete-button {
+    background: rgba(239, 87, 87, 0.24) !important;
+    border: 1px solid rgba(0, 0, 0, 0) !important;
+    border-radius: 5px !important;
+}
+.btn_custom {
+    background: #696cff !important;
+}
+.next-style {
+    background: linear-gradient(
+        254.1deg,
+        #10c3ea 4.82%,
+        #337fb8 61.08%
+    ) !important;
+    border: 1px solid #1c71b0 !important;
+    box-shadow: 6px 6px 4px rgba(48, 148, 175, 0.47) !important;
+    transform: skew(-30deg) !important;
+    border-radius: 2px !important;
+}
+.card-rounded {
+    border-radius: 7px !important;
+}
+.bg-custom {
+    background: rgba(105, 108, 255, 0.84) !important;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25) !important;
+}
+.border-style {
+    border: 1px solid rgba(189, 189, 189, 1) !important;
+}
+.font-bold {
+    font-weight: 600 !important;
+}
+.font-size {
+    font-size: 13px !important;
+}
+.input-border-style {
+    border-radius: 6px !important;
+}
+.lock_style {
+    border-bottom: 2px solid #9d9d9d !important;
+}
+.lock_button {
+    background: rgba(33, 73, 134, 0.85) !important;
+    box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.25) !important;
+    border-radius: 118px !important;
+}

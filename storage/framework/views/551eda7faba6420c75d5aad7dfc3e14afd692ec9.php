@@ -3,7 +3,6 @@
 
 <head>
     <?php echo $__env->make('layouts.partials.head', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 </head>
 
 <body>
@@ -67,6 +66,10 @@
     <script>
         $(document).ready( function () {
     $('#table_id').DataTable();
+    } );
+
+    $(document).ready( function () {
+    $('#user_table').DataTable();
     } );
     </script>
 </body>

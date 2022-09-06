@@ -1,3 +1,0 @@
-<?php echo $__env->make('layouts.vehicle.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php echo $__env->make('layouts.vehicle.attachments', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <?php /**PATH C:\xampp\htdocs\TRT\Shippment-System\resources\views/layouts/vehicle/mainlayout.blade.php ENDPATH**/ ?>

@@ -1,46 +1,46 @@
-<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/jquery/js/jquery.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/jquery-ui/js/jquery-ui.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/popper.js/js/popper.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/bootstrap/js/bootstrap.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/jquery/js/jquery.min.js'), false); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/jquery-ui/js/jquery-ui.min.js'), false); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/popper.js/js/popper.min.js'), false); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/bootstrap/js/bootstrap.min.js'), false); ?>"></script>
 
-<script src="<?php echo e(asset('assets/js/sorttable.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/sorttable.js'), false); ?>"></script>
 <!-- jquery slimscroll js -->
-<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/jquery-slimscroll/js/jquery.slimscroll.js')); ?>">
+<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/jquery-slimscroll/js/jquery.slimscroll.js'), false); ?>">
 </script>
 <!-- Switch component js -->
-<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/switchery/js/switchery.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/switchery/js/switchery.min.js'), false); ?>"></script>
 <!-- modernizr js -->
-<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/modernizr/js/modernizr.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/modernizr/js/css-scrollbars.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/modernizr/js/modernizr.js'), false); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/modernizr/js/css-scrollbars.js'), false); ?>"></script>
 <!-- classie js -->
-<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/classie/js/classie.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/classie/js/classie.js'), false); ?>"></script>
 <!-- i18next.min.js -->
-<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/i18next/js/i18next.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/i18next/js/i18next.min.js'), false); ?>"></script>
 <script type="text/javascript"
-    src="<?php echo e(asset('assets/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js')); ?>"></script>
+    src="<?php echo e(asset('assets/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js'), false); ?>"></script>
 <script type="text/javascript"
-    src="<?php echo e(asset('assets/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js')); ?>">
+    src="<?php echo e(asset('assets/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js'), false); ?>">
 </script>
-<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/jquery-i18next/js/jquery-i18next.min.js')); ?>">
+<script type="text/javascript" src="<?php echo e(asset('assets/bower_components/jquery-i18next/js/jquery-i18next.min.js'), false); ?>">
 </script>
 <!-- Custom js -->
-<script type="text/javascript" src="<?php echo e(asset('assets/js/script.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('assets/pages/advance-elements/navbar-elements.js')); ?>"></script>
-<script src="<?php echo e(asset('assets/js/pcoded.min.js')); ?>"></script>
-<script src="<?php echo e(asset('assets/js/demo-12.js')); ?>"></script>
-<script src="<?php echo e(asset('assets/js/jquery.mCustomScrollbar.concat.min.js')); ?>"></script>
-<script src="<?php echo e(asset('assets/js/jquery.mousewheel.min.js')); ?>"></script>
-<script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
-<script type="text/javascript" src="<?php echo e(asset('assets/pages/sticky/js/sticky.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/js/script.js'), false); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/pages/advance-elements/navbar-elements.js'), false); ?>"></script>
+<script src="<?php echo e(asset('assets/js/pcoded.min.js'), false); ?>"></script>
+<script src="<?php echo e(asset('assets/js/demo-12.js'), false); ?>"></script>
+<script src="<?php echo e(asset('assets/js/jquery.mCustomScrollbar.concat.min.js'), false); ?>"></script>
+<script src="<?php echo e(asset('assets/js/jquery.mousewheel.min.js'), false); ?>"></script>
+<script src="<?php echo e(asset('js/app.js'), false); ?>" defer></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/pages/sticky/js/sticky.js'), false); ?>"></script>
 
 <!--sticky js-->
-<script type="text/javascript" src="<?php echo e(asset('assets/pages/sticky/js/trumbowyg.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('assets/pages/sticky/js/jquery.minicolors.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('assets/pages/sticky/js/jquery.postitall.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/pages/sticky/js/trumbowyg.min.js'), false); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/pages/sticky/js/jquery.minicolors.min.js'), false); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/pages/sticky/js/jquery.postitall.js'), false); ?>"></script>
 
-<script src="<?php echo e(asset('assets/pages/jquery.filer/js/jquery.filer.min.js')); ?>"></script>
-<script src="<?php echo e(asset('assets/pages/filer/custom-filer.js')); ?>" type="text/javascript"></script>
-<script src="<?php echo e(asset('assets/pages/filer/jquery.fileuploads.init.js')); ?>" type="text/javascript"></script>
+<script src="<?php echo e(asset('assets/pages/jquery.filer/js/jquery.filer.min.js'), false); ?>"></script>
+<script src="<?php echo e(asset('assets/pages/filer/custom-filer.js'), false); ?>" type="text/javascript"></script>
+<script src="<?php echo e(asset('assets/pages/filer/jquery.fileuploads.init.js'), false); ?>" type="text/javascript"></script>
 
 <script>
     $('#search_vehicle').on('keyup', function() {
@@ -48,7 +48,7 @@
         $pagination = $('#pagination_vehicle').val();
         $.ajax({
             type: 'get',
-            url: '<?php echo e(URL::to('admin/vehicles/search')); ?>',
+            url: '<?php echo e(URL::to('admin/vehicles/search'), false); ?>',
             data: {
                 'search': $value,
                 'pagination': $pagination
@@ -65,7 +65,7 @@
         $search = $('#search_vehicle').val();
         $.ajax({
             type: 'get',
-            url: '<?php echo e(URL::to('admin/vehicles/pagination')); ?>',
+            url: '<?php echo e(URL::to('admin/vehicles/pagination'), false); ?>',
             data: {
                 'search': $search,
                 'pagination': $value
@@ -82,7 +82,7 @@
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
-            'csrftoken': '<?php echo e(csrf_token()); ?>'
+            'csrftoken': '<?php echo e(csrf_token(), false); ?>'
         }
     });
 </script>
@@ -104,7 +104,7 @@
         $pagination = $('#pagination_user').val();
         $.ajax({
             type: 'get',
-            url: '<?php echo e(URL::to('admin/users/search')); ?>',
+            url: '<?php echo e(URL::to('admin/users/search'), false); ?>',
             data: {
                 'search': $value,
                 'pagination': $pagination
@@ -121,7 +121,7 @@
         $search = $('#search_user').val();
         $.ajax({
             type: 'get',
-            url: '<?php echo e(URL::to('admin/users/pagination')); ?>',
+            url: '<?php echo e(URL::to('admin/users/pagination'), false); ?>',
             data: {
                 'search': $search,
                 'pagination': $value
@@ -137,7 +137,7 @@
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
-            'csrftoken': '<?php echo e(csrf_token()); ?>'
+            'csrftoken': '<?php echo e(csrf_token(), false); ?>'
         }
     });
 </script>
@@ -150,13 +150,14 @@
         $pagination = $('#pagination_customer').val();
         $.ajax({
             type: 'get',
-            url: '<?php echo e(URL::to('admin/customers/search')); ?>',
+            url: '<?php echo e(URL::to('admin/customers/search'), false); ?>',
             data: {
                 'search': $value,
                 'pagination': $pagination
             },
             success: function(data) {
-                console.log($value, $pagination, 'search');
+                alert(data);
+                // console.log($value, $pagination, 'search');
                 $('#tbody').html(data.table);
                 $('#page').html(data.pagination);
             }
@@ -167,7 +168,7 @@
         $search = $('#search_customer').val();
         $.ajax({
             type: 'get',
-            url: '<?php echo e(URL::to('admin/customers/pagination')); ?>',
+            url: '<?php echo e(URL::to('admin/customers/pagination'), false); ?>',
             data: {
                 'search': $search,
                 'pagination': $value
@@ -183,7 +184,7 @@
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
-            'csrftoken': '<?php echo e(csrf_token()); ?>'
+            'csrftoken': '<?php echo e(csrf_token(), false); ?>'
         }
     });
 </script>
@@ -197,7 +198,7 @@
         $check = $(this).attr('id');
         $.ajax({
             type: 'get',
-            url: '<?php echo e(URL::to('admin/vehicles/tabs')); ?>',
+            url: '<?php echo e(URL::to('admin/vehicles/tabs'), false); ?>',
             data: {
                 'check': $check,
                 'pagination': $pagination,
@@ -221,7 +222,7 @@
         $location = $(this).attr('id');
         $.ajax({
             type: 'get',
-            url: '<?php echo e(URL::to('admin/vehicles/location')); ?>',
+            url: '<?php echo e(URL::to('admin/vehicles/location'), false); ?>',
             data: {
                 'search': $search,
                 'pagination': $pagination,
@@ -250,7 +251,7 @@
         $(this).removeClass('border-0 form-control text-muted');
         $.ajax({
             type: 'get',
-            url: '<?php echo e(URL::to('admin/customers/profile_tab')); ?>',
+            url: '<?php echo e(URL::to('admin/customers/profile_tab'), false); ?>',
             data: {
                 'tab': $tab,
                 'id': $id,
@@ -270,7 +271,7 @@
         $(this).addClass('bg-info border border-light rounded');
         $.ajax({
             type: 'get',
-            url: '<?php echo e(URL::to('admin/notifications/status')); ?>',
+            url: '<?php echo e(URL::to('admin/notifications/status'), false); ?>',
             data: {
                 'id': $id
             },
@@ -391,7 +392,7 @@
         $tab = "general";
         $.ajax({
             type: 'get',
-            url: '<?php echo e(URL::to('admin/customers/create')); ?>',
+            url: '<?php echo e(URL::to('admin/customers/create'), false); ?>',
             data: {
                 'tab': $tab
             },
@@ -409,7 +410,7 @@
         $tab = id;
         $.ajax({
             type: 'get',
-            url: '<?php echo e(URL::to('admin/customers/create')); ?>',
+            url: '<?php echo e(URL::to('admin/customers/create'), false); ?>',
             data: {
                 'tab': $tab
             },
@@ -512,7 +513,7 @@
 
         $.ajax({
             type: 'post',
-            url: '<?php echo e(URL::to('admin/customers/create')); ?>/' + $tab,
+            url: '<?php echo e(URL::to('admin/customers/create'), false); ?>/' + $tab,
             data: {
                 tab: $tab,
                 data: $data,

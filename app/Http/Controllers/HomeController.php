@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+// use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
+use App\Models\role;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -23,10 +27,27 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-     public function index()
-     {
-        
-     }
+    //  public function index()
+    //  {
+    //   return view('auth.login');  
+    //  }
+
+    //  function login_page(Request $req){
+    //     $req->validate([
+    //         'email' => 'required',
+    //         'password' => 'required',
+    //     ]);
+   
+    //     $credentials = $req->only('email', 'password');
+    //     if (Auth::attempt($credentials)) {
+
+    //         $user = role::with('user')->first();
+    //         dd($user->toArray());
+
+    //     }
+    //  }
+
+    
 
     public function logout()
     {

@@ -73,7 +73,7 @@
                         id="search_vehicle" name="search" placeholder="Search by customer name, year, make, model...">
                 </div>
                 <div class="col-3">
-                    <a href="<?php echo e(route('vehicle.create')); ?>" class="text-black btn btn-info rounded col-12">New<i
+                    <a href="<?php echo e(route('vehicle.create'), false); ?>" class="text-black btn btn-info rounded col-12">New<i
                             class="fas fa-car pl-2"></i></a>
                 </div>
             </div>
@@ -102,20 +102,20 @@
                     <?php $i = 1; ?>
                     <?php $__currentLoopData = $records; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td><?php echo e(@$i); ?></td>
-                            <td><?php echo e(@$val['customer_name']); ?></td>
-                            <td><?php echo e(@$val['vin']); ?></td>
-                            <td><?php echo e(@$val['year']); ?></td>
-                            <td><?php echo e(@$val['make']); ?></td>
-                            <td><?php echo e(@$val['model']); ?></td>
-                            <td><?php echo e(@$val['vehicle_type']); ?></td>
-                            <td><?php echo e(@$val['value']); ?></td>
-                            <td><?php echo e(@$val['status']); ?></td>
-                            <td><?php echo e(@$val['customer']['customer_name']); ?></td>
+                            <td><?php echo e(@$i, false); ?></td>
+                            <td><?php echo e(@$val['customer_name'], false); ?></td>
+                            <td><?php echo e(@$val['vin'], false); ?></td>
+                            <td><?php echo e(@$val['year'], false); ?></td>
+                            <td><?php echo e(@$val['make'], false); ?></td>
+                            <td><?php echo e(@$val['model'], false); ?></td>
+                            <td><?php echo e(@$val['vehicle_type'], false); ?></td>
+                            <td><?php echo e(@$val['value'], false); ?></td>
+                            <td><?php echo e(@$val['status'], false); ?></td>
+                            <td><?php echo e(@$val['customer']['customer_name'], false); ?></td>
                             <td>
-                                <button><a href=<?php echo e(url($module['action'] . '/edit/' . $val[$module['db_key']])); ?>><i
+                                <button><a href=<?php echo e(url($module['action'] . '/edit/' . $val[$module['db_key']]), false); ?>><i
                                             class="ti-pencil"></i></a></button><button><a
-                                        href=<?php echo e(url($module['action'] . '/delete/' . $val[$module['db_key']])); ?>><i
+                                        href=<?php echo e(url($module['action'] . '/delete/' . $val[$module['db_key']]), false); ?>><i
                                             class="ti-trash"></i></a></button>
                             </td>
                         </tr>
@@ -128,11 +128,11 @@
             <div>
                 <div>
                     <p>
-                        Displaying <?php echo e($records->count()); ?> of <?php echo e($records->total()); ?> vehicle(s).
+                        Displaying <?php echo e($records->count(), false); ?> of <?php echo e($records->total(), false); ?> vehicle(s).
                     </p>
                 </div>
                 <div>
-                    <?php echo e($records->links()); ?>
+                    <?php echo e($records->links(), false); ?>
 
                 </div>
             </div>

@@ -68,7 +68,7 @@
                         id="search_vehicle" name="search" placeholder="Search by customer name, year, make, model...">
                 </div>
                 <div class="col-3">
-                    <a href="<?php echo e(route('shipment.create')); ?>" class="text-black btn btn-info rounded col-12">New<i
+                    <a href="<?php echo e(route('shipment.create'), false); ?>" class="text-black btn btn-info rounded col-12">New<i
                             class="fas fa-shipping-fast pl-2"></i></a>
                 </div>
             </div>
@@ -102,24 +102,24 @@
                     <?php $i = 1; ?>
                     <?php $__currentLoopData = $records; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td><?php echo e(@$val['company_name']); ?></td>
-                            <td><?php echo e(@$val['customer_email']); ?></td>
-                            <td><?php echo e(@$val['customer_phone']); ?></td>
-                            <td><?php echo e(@$val['shipment_type']); ?></td>
-                            <td><?php echo e(@$val['loading_date']); ?></td>
-                            <td><?php echo e(@$val['cut_off_date']); ?></td>
-                            <td><?php echo e(@$val['sail_date']); ?></td>
-                            <td><?php echo e(@$val['est_arrival_date']); ?></td>
-                            <td><?php echo e(@$val['container_no']); ?></td>
-                            <td><?php echo e(@$val['select_consignee ']); ?></td>
-                            <td><?php echo e(@$val['loading_state ']); ?></td>
-                            <td><?php echo e(@$val['loading_country ']); ?></td>
-                            <td><?php echo e(@$val['destination_state']); ?></td>
-                            <td><?php echo e(@$val['destination_country']); ?></td>
+                            <td><?php echo e(@$val['company_name'], false); ?></td>
+                            <td><?php echo e(@$val['customer_email'], false); ?></td>
+                            <td><?php echo e(@$val['customer_phone'], false); ?></td>
+                            <td><?php echo e(@$val['shipment_type'], false); ?></td>
+                            <td><?php echo e(@$val['loading_date'], false); ?></td>
+                            <td><?php echo e(@$val['cut_off_date'], false); ?></td>
+                            <td><?php echo e(@$val['sail_date'], false); ?></td>
+                            <td><?php echo e(@$val['est_arrival_date'], false); ?></td>
+                            <td><?php echo e(@$val['container_no'], false); ?></td>
+                            <td><?php echo e(@$val['select_consignee '], false); ?></td>
+                            <td><?php echo e(@$val['loading_state '], false); ?></td>
+                            <td><?php echo e(@$val['loading_country '], false); ?></td>
+                            <td><?php echo e(@$val['destination_state'], false); ?></td>
+                            <td><?php echo e(@$val['destination_country'], false); ?></td>
                             <td>
-                                <button><a href=<?php echo e(url($module['action'] . '/edit/' . $val[$module['db_key']])); ?>><i
+                                <button><a href=<?php echo e(url($module['action'] . '/edit/' . $val[$module['db_key']]), false); ?>><i
                                             class="ti-pencil"></i></a></button><button><a
-                                        href=<?php echo e(url($module['action'] . '/delete/' . $val[$module['db_key']])); ?>><i
+                                        href=<?php echo e(url($module['action'] . '/delete/' . $val[$module['db_key']]), false); ?>><i
                                             class="ti-trash"></i></a></button>
                             </td>
                         </tr>
@@ -132,11 +132,11 @@
             <div>
                 <div>
                     <p>
-                        Displaying <?php echo e($records->count()); ?> of <?php echo e($records->total()); ?> shipment(s).
+                        Displaying <?php echo e($records->count(), false); ?> of <?php echo e($records->total(), false); ?> shipment(s).
                     </p>
                 </div>
                 <div>
-                    <?php echo e($records->links()); ?>
+                    <?php echo e($records->links(), false); ?>
 
                 </div>
             </div>

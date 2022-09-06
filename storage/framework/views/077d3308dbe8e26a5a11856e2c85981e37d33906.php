@@ -7,7 +7,7 @@
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">
                     <div>
-                        <h5 class="modal-title" id="exampleModalLabel">New <?php echo e($module['singular']); ?></h5>
+                        <h5 class="modal-title" id="exampleModalLabel">New <?php echo e($module['singular'], false); ?></h5>
                     </div>
                     <div>
                         <button type="button" class="close text-white h6" data-dismiss="modal" aria-label="Close">
@@ -142,7 +142,7 @@
                     <div>
                         <?php if(session('success')): ?>
                             <div class="btn alert alert-success m-0">
-                                <span><?php echo e(session('success')); ?></span>
+                                <span><?php echo e(session('success'), false); ?></span>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -200,7 +200,7 @@
                                 id="search_customer" name="search" placeholder="Search">
                         </div>
                         <div class="col-2 px-3 d-flex justify-content-end">
-                            <a href="<?php echo e(route('customer.export')); ?>"
+                            <a href="<?php echo e(route('customer.export'), false); ?>"
                                 class="px-1 text-muted font-size form-contorl-sm border p-1 rounded col-12"
                                 style="background: #DBDBDB; cursor: pointer;">
                                 <div class="d-flex justify-content-center align-items-center px-1">
@@ -246,30 +246,29 @@
                             <tr class="font-size font-bold">
                                 <th class="sorttable_nosort">Customer ID</th>
                                 <th>User</th>
-                                <th>Company Name</th>
+                                <th>Level</th>
                                 <th>Phone</th>
-                                <th>City</th>
                                 <th>Address</th>
                                 <th>Status</th>
+                                <th>Zip Code</th>
                                 <th class="sorttable_nosort">Action</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="tbody">
                             <?php $__currentLoopData = $records; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr style="border-bottom: 1.2px solid rgba(191, 191, 191, 1) !important">
-                                    <td><?php echo e(@$val['id']); ?></td>
+                                    <td><?php echo e(@$val['id'], false); ?></td>
                                     <td class="d-block">
                                         <div>
-                                            <span><b><?php echo e(@$val['customer_name']); ?></b></span>
+                                            <span><b><?php echo e(@$val['customer_name'], false); ?></b></span>
                                         </div>
                                         <div>
-                                            <span style="font-size: 12px !important;"><?php echo e(@$val['lead']); ?></span>
+                                            <span style="font-size: 12px !important;"><?php echo e(@$val['lead'], false); ?></span>
                                         </div>
                                     </td>
-                                    <td><?php echo e(@$val['company_name']); ?></td>
-                                    <td><?php echo e(@$val['phone']); ?></td>
-                                    <td><?php echo e(@$val['city']); ?></td>
-                                    <td><?php echo e(@$val['address']); ?></td>
+                                    <td><?php echo e(@$val['level'], false); ?></td>
+                                    <td><?php echo e(@$val['phone'], false); ?></td>
+                                    <td><?php echo e(@$val['address'], false); ?></td>
                                     <td>
                                         <?php if(@$val['status'] == '1'): ?>
                                             <div class="badge badge-success py-1 px-2 rounded">Active</div>
@@ -277,9 +276,10 @@
                                             <div class="badge badge-danger py-1 px-2 rounded">In Active</div>
                                         <?php endif; ?>
                                     </td>
+                                    <td><?php echo e(@$val['zip_code'], false); ?></td>
                                     <td>
                                         <button class="edit-button">
-                                            <a href=<?php echo e(url(@$module['action'] . '/edit/' . @$val[@$module['db_key']])); ?>>
+                                            <a href=<?php echo e(url(@$module['action'] . '/edit/' . @$val[@$module['db_key']]), false); ?>>
                                                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -290,7 +290,7 @@
                                             </a>
                                         </button>
                                         <button class="profile-button">
-                                            <a href=<?php echo e(route('customer.profile') . '/' . @$val[@$module['db_key']]); ?>>
+                                            <a href=<?php echo e(route('customer.profile') . '/' . @$val[@$module['db_key']], false); ?>>
                                                 <svg width="14" height="14" viewBox="0 0 16 14" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -304,7 +304,7 @@
                                             </a>
                                         </button>
                                         <button class="delete-button">
-                                            <a href=<?php echo e(url(@$module['action'] . '/delete/' . @$val[@$module['db_key']])); ?>>
+                                            <a href=<?php echo e(url(@$module['action'] . '/delete/' . @$val[@$module['db_key']]), false); ?>>
                                                 <svg width="14" height="14" viewBox="0 0 12 12" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -324,11 +324,11 @@
                     <div>
                         <div>
                             <p>
-                                Displaying <?php echo e($records->count()); ?> of <?php echo e($records->total()); ?> customer(s).
+                                Displaying <?php echo e($records->count(), false); ?> of <?php echo e($records->total(), false); ?> customer(s).
                             </p>
                         </div>
                         <div>
-                            <?php echo e($records->links()); ?>
+                            <?php echo e($records->links(), false); ?>
 
                         </div>
                     </div>
