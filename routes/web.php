@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/notifications/create',         [App\Http\Controllers\NotificationController::class, 'create'])->name('notification.create');
     Route::post('/notifications/create',        [App\Http\Controllers\NotificationController::class, 'create'])->name('notification.creates');
     Route::get('/notifications/status',         [App\Http\Controllers\NotificationController::class, 'status'])->name('notification.status');
+
+    // Tickets Routes
+    Route::get('/tickets',                        [App\Http\Controllers\TicketController::class, 'index'])->name('ticket.list');
 
 });
 
