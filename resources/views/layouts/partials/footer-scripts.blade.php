@@ -156,7 +156,8 @@
                 'pagination': $pagination
             },
             success: function(data) {
-                console.log($value, $pagination, 'search');
+                alert(data);
+                // console.log($value, $pagination, 'search');
                 $('#tbody').html(data.table);
                 $('#page').html(data.pagination);
             }

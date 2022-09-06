@@ -205,33 +205,42 @@ class CustomerController extends Controller
             $records = new Customer;
             if ($request->search) {
                 $records = $records->where('customer_name', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('company_name', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('phone', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('email', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('state', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('country', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('tax_id', 'LIKE', '%' . $request->search . "%");
+                    ->orWhere('lead', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('level', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('main_phone', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('address', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('status', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('zip_code', 'LIKE', '%' . $request->search . "%");
             }
+
             if ($request->pagination) {
                 $this->perpage = $request->pagination;
                 $records = $records->paginate($this->perpage);
             }
+            return Response('adasdasdd');
 
             if ($records) {
                 $i = 1;
                 foreach ($records as $val) {
+                    if ($val->status == "1") {
+                        $val->status = '<div class=' . "badge badge-success py-1 px-2 rounded" . '>Active</div>';
+                    } else {
+                        $val->status = '<div class=' . "badge badge-danger py-1 px-2 rounded" . '>In Active</div>';
+                    }
                     $url_edit = url($this->action . '/edit/' . $val->id);
                     $url_delete = url($this->action . '/delete/' . $val->id);
                     $url_profile = url($this->action . '/profile/' . $val->id);
                     $table .= '<tr>' .
-                    '<td>' . $i . '</td>' .
-                    '<td>' . $val->customer_name . '</td>' .
-                    '<td>' . $val->company_name . '</td>' .
-                    '<td>' . $val->phone . '</td>' .
-                    '<td>' . $val->email . '</td>' .
-                    '<td>' . $val->state . '</td>' .
-                    '<td>' . $val->country . '</td>' .
-                    '<td>' . $val->tax_id . '</td>' .
+                    '<td>' . $val->customer_number . '</td>' .
+                    '<td class=' . "d-block" . '>
+                    <div>' . '<span>' . '<b>' . $val->customer_name . '</b>' .
+                    '</span>' . '<span style=' . "font-size: 12px !important;" . '>' . $val->lead . '</span>' .
+                    '</div>' . '</td>' .
+                    '<td>' . $val->level . '</td>' .
+                    '<td>' . $val->main_phone . '</td>' .
+                    '<td>' . $val->address . '</td>' .
+                    '<td>' . $val->status . '</td>' .
+                    '<td>' . $val->zip_code . '</td>' .
                         '<td>' .
                         '<button><a href=' . $url_edit . '><i class=' . "ti-pencil" . '></i></a></button>' . '<button><a href=' . $url_delete . '><i class=' . "ti-trash" . '></i></a></button>' . '<button><a href=' . $url_profile . '><i class=' . "ti-trash" . '></i></a></button>' .
                         '</td>' .

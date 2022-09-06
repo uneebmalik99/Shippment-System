@@ -246,11 +246,11 @@
                             <tr class="font-size font-bold">
                                 <th class="sorttable_nosort">Customer ID</th>
                                 <th>User</th>
-                                <th>Company Name</th>
+                                <th>Level</th>
                                 <th>Phone</th>
-                                <th>City</th>
                                 <th>Address</th>
                                 <th>Status</th>
+                                <th>Zip Code</th>
                                 <th class="sorttable_nosort">Action</th>
                             </tr>
                         </thead>
@@ -266,9 +266,8 @@
                                             <span style="font-size: 12px !important;">{{ @$val['lead'] }}</span>
                                         </div>
                                     </td>
-                                    <td>{{ @$val['company_name'] }}</td>
+                                    <td>{{ @$val['level'] }}</td>
                                     <td>{{ @$val['phone'] }}</td>
-                                    <td>{{ @$val['city'] }}</td>
                                     <td>{{ @$val['address'] }}</td>
                                     <td>
                                         @if (@$val['status'] == '1')
@@ -277,6 +276,7 @@
                                             <div class="badge badge-danger py-1 px-2 rounded">In Active</div>
                                         @endif
                                     </td>
+                                    <td>{{ @$val['zip_code'] }}</td>
                                     <td>
                                         <button class="edit-button">
                                             <a href={{ url(@$module['action'] . '/edit/' . @$val[@$module['db_key']]) }}>

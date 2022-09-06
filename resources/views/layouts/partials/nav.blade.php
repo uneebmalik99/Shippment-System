@@ -120,11 +120,11 @@
                                     <i class="ti-email"></i> My Messages
                                 </a>
                             </li> --}}
-                            {{-- <li>
-                                <a href="auth-lock-screen.html">
+                            <li>
+                                <a href="{{ route('lock')}}">
                                     <i class="ti-lock"></i> Lock Screen
                                 </a>
-                            </li> --}}
+                            </li>
                             <li>
                                 <a href="{{ route('auth.logout') }}">
                                     <i class="ti-layout-sidebar-left"></i> Logout

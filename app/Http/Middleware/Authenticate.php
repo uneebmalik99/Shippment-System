@@ -14,8 +14,12 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
+        if (!$request->expectsJson()) {
             return route('login');
         }
+        if (\Session::get('locked') === true) {
+            return redirect('/lockscreen');
+        }
+
     }
 }
