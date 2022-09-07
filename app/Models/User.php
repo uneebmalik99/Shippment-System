@@ -11,7 +11,7 @@ class User extends Authenticatable
     use HasFactory;
     use softDeletes;
     protected $primaryKey = 'id';
-    public $timestamps = true;
+    public $timestamps = false;
     protected $table = "users";
     protected $fillable = [
         'username',
@@ -20,6 +20,7 @@ class User extends Authenticatable
         'password_reset_token',
         'email',
         'status',
+        'role_id',
         'user_is_detected',
         'address_line1',
         'address_line2',
@@ -64,5 +65,9 @@ class User extends Authenticatable
     public function auth_assignment()
     {
         return $this->hasOne('App\Models\AuthAssignment');
+    }
+
+    public function role(){
+        return $this->belongsTo('App\Models\role');
     }
 }

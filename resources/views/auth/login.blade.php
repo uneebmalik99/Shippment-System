@@ -59,7 +59,7 @@
     <body>
         <div class="container">
             <div class="card vh-100 p-3 image shadow">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{route ('login')}}">
                     @csrf
                     <div class="card-body col-12 d-flex justify-content-center align-items-center rounded">
 

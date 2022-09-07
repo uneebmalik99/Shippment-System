@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -49,6 +50,7 @@ class UserController extends Controller
 
     public function index()
     {
+        
         $data = [];
         $data = [
             "page_title" => $this->plural . " List",
@@ -65,11 +67,14 @@ class UserController extends Controller
                 'action' => $this->action,
             ],
         ];
-        $records = User::paginate($this->perpage);
-        $data['records'] = $records;
-        $notification = $this->Notification();
-        return view($this->view . 'list', $data, $notification);
 
+        $data['role'] = Auth::user()->role_id;
+
+
+        $records = User::all();
+        $data['records'] = $records;
+        $notification = $this->Notification();    
+        return view($this->view . 'list', $data, $notification);
     }
 
     public function create(Request $request)
@@ -77,7 +82,7 @@ class UserController extends Controller
         if ($request->isMethod('post')) {
             $data = $request->all();
             $Obj = new User;
-            $obj->create($data);
+            $Obj->create($data);
         }
         $data = [];
         $data = [

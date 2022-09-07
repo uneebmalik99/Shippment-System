@@ -77,14 +77,14 @@
                                 <label class="label label-danger">New</label>
                             </li>
                             @foreach ($notification as $notifications)
-                            <li id="notification_body" value="{{$notifications['id']}}" @if ($notifications['status']==1) class="bg-info border border-light rounded text-white"
+                            <li id="notification_body" value="{{@$notifications['id']}}" @if (@$notifications['status']==1) class="bg-info border border-light rounded text-white"
                                 @endif>
                                 <div class="media">
                                     <img class="d-flex align-self-center" src="{{ asset('assets/images/user.png') }}"
                                         alt="Generic placeholder image">
                                     <div class="media-body">
-                                        <h5 class="notification-user">{{ $notifications['user']['username'] }}</h5>
-                                        <p class="notification-msg">{{ $notifications['message'] }}</p>
+                                        <h5 class="notification-user">{{ @$notifications['user']['username'] }}</h5>
+                                        <p class="notification-msg">{{ @$notifications['message'] }}</p>
                                         <span class="notification-time text-muted"><b>{{ $date }}</b></span>
                                     </div>
                                 </div>

@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+
 
 class LoginController extends Controller
 {
+    
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -41,9 +45,18 @@ class LoginController extends Controller
             'locked',
             'unlock',
         ]);
+        // dd(Auth::user());
+        // if(Auth::user() == "1"){
+        //     return "success";
+        // }
 
     }
 
+    // function showLoginForm(){
+    //     return view('auth.login');
+    // }
+    
+    
     public function locked()
     {
         if (!session('lock-expires-at')) {
@@ -59,6 +72,7 @@ class LoginController extends Controller
 
     public function unlock(Request $request)
     {
+        
         $check = Hash::check($request->input('password'), $request->user()->password);
 
         if (!$check) {
@@ -66,9 +80,7 @@ class LoginController extends Controller
                 'Your password does not match your profile.',
             ]);
         }
-
         session(['lock-expires-at' => now()->addMinutes($request->user()->getLockoutTime())]);
-
         return redirect('/');
     }
 }

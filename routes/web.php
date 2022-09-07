@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-// Route::
+
+
 Auth::routes();
 
+<<<<<<< HEAD
 Route::prefix('/admin')->middleware(['auth'])->group(function () {
+=======
+Route::prefix('/admin')->middleware('auth')->group(function () {
+>>>>>>> 227763ae0963644573ab81d4c24b003d011f5c9c
     //Home
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
-
+    Route::get('/', [HomeController::class, 'index']);
     // User Routes
     Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('user.list');
     Route::post('/users/create', [App\Http\Controllers\UserController::class, 'create'])->name('user.create');
