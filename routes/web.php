@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 // Route::
 Auth::routes();
 
-Route::prefix('/admin')->middleware(['auth', 'admin.lock'])->group(function () {
+Route::prefix('/admin')->middleware(['auth'])->group(function () {
     //Home
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
@@ -52,7 +52,7 @@ Route::prefix('/admin')->middleware(['auth', 'admin.lock'])->group(function () {
     Route::get('/vehicles', [App\Http\Controllers\VehicleController::class, 'index'])->name('vehicle.list');
     Route::get('/vehicles/create', [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicle.create');
     Route::post('/vehicles/create', [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicle.create');
-    Route::get('/vehicles/create', [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicle.create');
+    Route::get('/vehicles/create_form', [App\Http\Controllers\VehicleController::class, 'create_form'])->name('vehicle.form');
     Route::get('/vehicles/attachments', [App\Http\Controllers\VehicleController::class, 'attachments'])->name('vehicle.attachments');
     Route::post('/vehicles/create', [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicle.create');
     Route::get('/vehicles/edit/{id?}', [App\Http\Controllers\VehicleController::class, 'edit'])->name('vehicle.edit');

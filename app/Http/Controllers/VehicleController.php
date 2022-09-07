@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
-use App\Models\Image;
 use App\Models\Notification;
 use App\Models\Vehicle;
 use Carbon\Carbon;
@@ -90,9 +89,18 @@ class VehicleController extends Controller
                 'db_key' => $this->db_key,
                 'action' => $this->action,
                 'page' => 'create',
+                'button' => 'Create',
             ],
         ];
         $data['buyers'] = Customer::all()->toArray();
+        // dd($data['buyers']);
+
+        if ($request->ajax()) {
+            // return $data;
+            $tab = $request->tab;
+            $output = view('layouts.vehicle_create.' . $tab, $data)->render();
+            return Response($output);
+        }
 
         if ($request->isMethod('post')) {
             $data = $request->all();
@@ -143,22 +151,6 @@ class VehicleController extends Controller
             //     'image' => 'required',
             //     'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             // ]);
-
-            if ($request->hasFile('image')) {
-                $data = $request->file('image');
-                foreach ($data as $images) {
-                    $name = $images->getClientOriginalName();
-                    $images->move(public_path() . $this->directory, $name);
-                    $url = $images->getRealPath();
-                    $image = $name;
-                    $Obj_image = new Image;
-                    $Obj_image->name = $name;
-                    $Obj_image->thumbnail = 'thumb-' . $name;
-                    $Obj_image->vehicle_id = $vehicle['id'];
-                    $Obj_image->base_url = $url;
-                    $Obj_image->save();
-                }
-            }
 
             return redirect($this->action)->with('success', 'Vehicle addedd successfully.');
         }
@@ -338,8 +330,36 @@ class VehicleController extends Controller
         }
     }
 
-    // public function attachments()
-    // {
-    //     return view($this->view)
-    // }
+    public function create_form(Request $request)
+    {
+        $data = $request->all();
+        $tab = $data['tab'];
+        unset($data['tab']);
+        $Obj = new Vehicle;
+        $new = $Obj->create($data);
+
+        switch ($tab) {
+            case ('general'):
+                $data['view'] = view('layouts.vehicle_create.attachments')->render();
+                break;
+        }
+        return Response($data);
+
+        // if ($request->hasFile('image')) {
+        //     $data = $request->file('image');
+        //     foreach ($data as $images) {
+        //         $name = $images->getClientOriginalName();
+        //         $images->move(public_path() . $this->directory, $name);
+        //         $url = $images->getRealPath();
+        //         $image = $name;
+        //         $Obj_image = new Image;
+        //         $Obj_image->name = $name;
+        //         $Obj_image->thumbnail = 'thumb-' . $name;
+        //         $Obj_image->vehicle_id = $vehicle['id'];
+        //         $Obj_image->base_url = $url;
+        //         $Obj_image->save();
+        //     }
+        // }
+
+    }
 }

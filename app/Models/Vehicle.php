@@ -13,6 +13,8 @@ class Vehicle extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     protected $table = "vehicles";
+    protected $guarded = [];
+
     protected $fillable = [
         'customer_name',
         'vin',

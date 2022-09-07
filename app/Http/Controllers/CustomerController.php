@@ -9,6 +9,7 @@ use App\Models\Customer;
 use App\Models\Notification;
 use App\Models\Quotation;
 use App\Models\Shipper;
+use App\Models\Consignee;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -71,6 +72,11 @@ class CustomerController extends Controller
 
         $notification = $this->Notification();
         $data['records'] = Customer::paginate($this->perpage);
+        $Obj = new Customer;
+        $data['inactive'] = $Obj->where('status', '0')->get();
+        $data['active'] = $Obj->where('status', '1')->get();
+        $data['shipper'] = Shipper::all();
+        $data['consignees'] = Consignee::all();
         return view($this->view . 'list', $data, $notification);
     }
 

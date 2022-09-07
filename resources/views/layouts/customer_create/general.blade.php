@@ -28,7 +28,7 @@
             <div class="d-flex py-3">
                 <div class="col-6">
                     <div class="d-flex align-items-center">
-                        <label for="customer_number" class="col-6 px-0">Customer Number</label>
+                        <label for="customer_number" class="col-6 px-0 font-size font-bold">Customer Number</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="customer_number" id="customer_number" value="{{ @$user['customer_number'] }}">
                     </div>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-6">
                     <div class="d-flex align-items-center">
-                        <label for="sales_person" class="col-6 px-0">Sales person</label>
+                        <label for="sales_person" class="col-6 px-0 font-size font-bold">Sales person</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="sales_person" id="sales_person" value="{{ @$user['sales_person'] }}">
                     </div>
@@ -58,7 +58,7 @@
             <div class="d-flex py-3">
                 <div class="col-6">
                     <div class="d-flex align-items-center">
-                        <label for="customer_name" class="col-6 px-0">Customer Name</label>
+                        <label for="customer_name" class="col-6 px-0 font-size font-bold">Customer Name</label>
                         <input type="name" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="customer_name" id="customer_name" value="{{ @$user['customer_name'] }}"
                             placeholder="0000-0000000" pattern="[0-9]{4}-[0-9]{7}">
@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div class="col-6 d-flex align-items-center">
-                    <label for="inside_person" class="col-6 px-0">Inside person</label>
+                    <label for="inside_person" class="col-6 px-0 font-size font-bold">Inside person</label>
                     <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                         name="address_line1" id="inside_person" value="{{ @$user['address_line1'] }}">
                 </div>
@@ -80,14 +80,14 @@
             <div class="d-flex py-3">
                 <div class="col-6">
                     <div class="d-flex align-items-center">
-                        <label for="level" class="col-6 px-0">Level</label>
+                        <label for="level" class="col-6 px-0 font-size font-bold">Level</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="address_line2" id="level" value="{{ @$user['address_line2'] }}">
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="d-flex align-items-center">
-                        <label for="lead" class="col-6 px-0">Lead</label>
+                        <label for="lead" class="col-6 px-0 font-size font-bold">Lead</label>
                         <input type="email" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="lead" id="lead" value="{{ Auth::user()->email }}"readonly
                             value="{{ @$user['lead'] }}">
@@ -97,7 +97,7 @@
             <div class="d-flex py-3">
                 <div class="col-6">
                     <div class=" d-flex align-items-center">
-                        <label for="status" class="col-6 px-0">Status</label>
+                        <label for="status" class="col-6 px-0 font-size font-bold">Status</label>
                         <input type="status" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="status" id="status" value="{{ @$user['status'] }}">
                     </div>
@@ -124,7 +124,7 @@
             <div class="d-flex py-3">
                 <div class="col-6">
                     <div class=" d-flex align-items-center">
-                        <label for="main_phone" class="col-6 px-0">Main phone</label>
+                        <label for="main_phone" class="col-6 px-0 font-size font-bold">Main phone</label>
                         <input type="main_phone" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="main_phone" id="main_phone" value="{{ @$user['main_phone'] }}">
                     </div>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="col-6">
                     <div class="d-flex align-items-center">
-                        <label for="payment_type" class="col-6 px-0">Payment Type</label>
+                        <label for="payment_type" class="col-6 px-0 font-size font-bold">Payment Type</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="payment_type" id="payment_type" value="{{ @$user['payment_type'] }}">
                     </div>
@@ -148,7 +148,7 @@
             <div class="d-flex py-3">
                 <div class="col-6">
                     <div class=" d-flex align-items-center">
-                        <label for="main_fax" class="col-6 px-0">Main fax</label>
+                        <label for="main_fax" class="col-6 px-0 font-size font-bold">Main fax</label>
                         <input type="main_fax" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="main_fax" id="main_fax" value="{{ @$user['main_fax'] }}">
                     </div>
@@ -162,7 +162,7 @@
                 </div>
                 <div class="col-6">
                     <div class="d-flex align-items-center">
-                        <label for="payment_term" class="col-6 px-0">Payment Term</label>
+                        <label for="payment_term" class="col-6 px-0 font-size font-bold">Payment Term</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="payment_term" id="payment_term" value="{{ @$user['payment_term'] }}">
                     </div>
@@ -171,7 +171,7 @@
             <div class="d-flex py-3">
                 <div class="col-6">
                     <div class=" d-flex align-items-center">
-                        <label for="customer_email" class="col-6 px-0">Email</label>
+                        <label for="customer_email" class="col-6 px-0 font-size font-bold">Email</label>
                         <input type="email" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="customer_email" id="customer_email" value="{{ @$user['customer_email'] }}">
                     </div>
@@ -185,7 +185,7 @@
                 </div>
                 <div class="col-6">
                     <div class=" d-flex align-items-center">
-                        <label for="industry" class="col-6 px-0">Industry</label>
+                        <label for="industry" class="col-6 px-0 font-size font-bold">Industry</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="industry" id="industry" value="{{ @$user['industry'] }}">
                     </div>
@@ -199,7 +199,7 @@
                 </div>
                 <div class="col-6">
                     <div class="d-flex align-items-center">
-                        <label for="price_code" class="col-6 px-0">Price code</label>
+                        <label for="price_code" class="col-6 px-0 font-size font-bold">Price code</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="price_code" id="price_code" value="{{ @$user['city'] }}">
                     </div>
@@ -208,7 +208,7 @@
             <div class="d-flex py-3">
                 <div class="col-6">
                     <div class=" d-flex align-items-center">
-                        <label for="source" class="col-6 px-0">Source</label>
+                        <label for="source" class="col-6 px-0 font-size font-bold">Source</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="source" id="source" value="{{ @$user['source'] }}">
                     </div>
@@ -224,7 +224,7 @@
             <div class="d-flex py-3">
                 <div class="col-6">
                     <div class=" d-flex align-items-center">
-                        <label for="customer_type" class="col-6 px-0">Customer Type</label>
+                        <label for="customer_type" class="col-6 px-0 font-size font-bold">Customer Type</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="customer_type" id="customer_type" value="{{ @$user['customer_type'] }}">
                     </div>
@@ -240,7 +240,7 @@
             <div class="d-flex py-3">
                 <div class="col-6">
                     <div class=" d-flex align-items-center">
-                        <label for="sales_type" class="col-6 px-0">Sales Type</label>
+                        <label for="sales_type" class="col-6 px-0 font-size font-bold">Sales Type</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="sales_type" id="sales_type" value="{{ @$user['sales_type'] }}">
                     </div>
@@ -270,7 +270,7 @@
             <div class="d-flex py-3">
                 <div class="col-12">
                     <div class="d-flex align-items-center">
-                        <label for="location_number" class="col-6 px-0">Location Number</label>
+                        <label for="location_number" class="col-6 px-0 font-size font-bold">Location Number</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="location_number" id="location_number" value="{{ @$user['location_number'] }}">
                     </div>
@@ -286,7 +286,7 @@
             <div class="d-flex py-3">
                 <div class="col-12">
                     <div class="d-flex align-items-center">
-                        <label for="country" class="col-6 px-0">Country</label>
+                        <label for="country" class="col-6 px-0 font-size font-bold">Country</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="country" id="country" value="{{ @$user['country'] }}">
                     </div>
@@ -302,7 +302,7 @@
             <div class="d-flex py-3">
                 <div class="col-12">
                     <div class="d-flex align-items-center">
-                        <label for="zip_code" class="col-6 px-0">Zip code</label>
+                        <label for="zip_code" class="col-6 px-0 font-size font-bold">Zip code</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="zip_code" id="zip_code" value="{{ @$user['zip_code'] }}">
                     </div>
@@ -318,7 +318,7 @@
             <div class="d-flex py-3">
                 <div class="col-12">
                     <div class="d-flex align-items-center">
-                        <label for="state" class="col-6 px-0">State</label>
+                        <label for="state" class="col-6 px-0 font-size font-bold">State</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="state" id="state" value="{{ @$user['state'] }}">
                     </div>
@@ -334,7 +334,7 @@
             <div class="d-flex py-3">
                 <div class="col-12">
                     <div class="d-flex align-items-center">
-                        <label for="address_1" class="col-6 px-0">Address (1)</label>
+                        <label for="address_1" class="col-6 px-0 font-size font-bold">Address (1)</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="address_1" id="address_1" value="{{ @$user['address_1'] }}">
                     </div>
@@ -350,7 +350,7 @@
             <div class="d-flex py-3">
                 <div class="col-12">
                     <div class="d-flex align-items-center">
-                        <label for="address_2" class="col-6 px-0">Address (2)</label>
+                        <label for="address_2" class="col-6 px-0 font-size font-bold">Address (2)</label>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                             name="address_2" id="address_2" value="{{ @$user['address_2'] }}">
                     </div>
