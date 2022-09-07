@@ -332,6 +332,13 @@
                     <li class="change-loges.html py-2">
                         <a href="<?php echo e(route('ticket.list'), false); ?>">
                             <span class="pcoded-micon"><i class="fas fa-brain"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Tickets</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="change-loges.html py-2">
+                        <a href="<?php echo e(route('master.list'), false); ?>">
+                            <span class="pcoded-micon"><i class="fas fa-brain"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Master</span>
 
                             <span class="pcoded-mcaret"></span>
@@ -346,7 +353,7 @@
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
-                        <a href="">
+                        <a href="<?php echo e(route('calendar.list'), false); ?>">
                             <span class="pcoded-micon"><i class="fas fa-calendar"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Calendar</span>
 

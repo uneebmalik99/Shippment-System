@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'authkey' => '09dss9daasdzxc',
             'password' => '$2y$10$p2kJCt2lu6VEUIY7Wa61c.vxpB8DDbQp3hQOJHB5u9CeZyY7GAkqC', // 123456789
             'password_reset_token' => Null,
-            'email' => 'kashif@gmail.com',
+            'email' => 'admin@admin.com',
             'status' => '0',
             'role_id' => 1,
             'user_is_detected' => 0,
@@ -32,8 +32,9 @@ class UserSeeder extends Seeder
             'phone' => Null,
             'fax' => Null,
             'customer_name' =>Null,
-            
-
+        
         ]);
+        
     }
+
 }

@@ -1,10 +1,29 @@
 @extends('layouts.partials.mainlayout')
+<style>
+    .vehicle_heading{
+        background: #1F689E;
+        box-shadow: inset 10px 14px 28px rgba(0, 0, 0, 0.25);
+    }
+    .vehicle_link_navbar{
+        background: #99C4E2;
+    }
+    .vedicls_link_navbar2{
+        background: #DFF2FE;
+    }
+    .add_new_vedicls{
+        background: rgba(0, 26, 255, 0.47)!important;
+        border-radius: 5px!important;
+        color:white;
+        padding:8px 15px;
+    }
+    
+</style>
 @section('body')
     <div>
-        <div class="bg-primary bg-gradient p-3">
+        <div class="vehicle_heading p-3">
             <h5 class="text-white">Vehicle Page</h5>
         </div>
-        <div class="bg-danger">
+        <div class="vehicle_link_navbar">
             <div class="text-info col-10 d-flex justify-content-between p-3">
                 <div>
                     <a class="vehicles" id="all_vehicles" style="cursor:pointer;" value="all_vehicles">All Vehicles</a>
@@ -29,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-success">
+        <div class="vedicls_link_navbar2">
             <div class="col-10 d-flex justify-content-between p-3">
                 <div>
                     <a class="locations" id="NJ" style="cursor:pointer;" value="NJ">New Jersey</a>
@@ -54,32 +73,16 @@
                 </div>
             </div>
         </div>
-        <div class="bg-light px-3 pt-4 pb-2 d-flex justify-content-between">
-            <div class="col-5 d-flex align-items-center text-info">
-                <span><b>Show</b></span>
-                <div class="col-3 d-flex justify-content-center px-1">
-                    <select class="form-control border border-info rounded col-10" name="pagination"
-                        id="pagination_vehicle">
-                        <option value="100">100</option>
-                        <option value="200">200</option>
-                        <option value="300">300</option>
-                    </select>
-                </div>
-                <span><b>Entries</b></span>
-            </div>
-            <div class="col-7 d-flex justify-content-end align-items-center ml-4">
-                <div class="col-8 p-0">
-                    <input type="text" class="btn border border-info rounded col-12 text-dark text-left"
-                        id="search_vehicle" name="search" placeholder="Search by customer name, year, make, model...">
-                </div>
-                <div class="col-3">
-                    <a href="{{ route('vehicle.create') }}" class="text-black btn btn-info rounded col-12">New<i
-                            class="fas fa-car pl-2"></i></a>
-                </div>
-            </div>
-        </div>
+        
         <div class="bg-light" style="height: 100%;overflow-x: scroll;">
-            <table class="table table-hover sortable scroll">
+            <br>
+            <div class="col-12 d-flex justify-content-end">
+                <a href="{{ route('vehicle.create') }}" class="add_new_vedicls">New<i
+                        class="fas fa-car pl-2"></i></a>
+            </div>
+            <br>
+
+            <table class="table table-hover table-responsive" id="vedicls_table">
                 <thead class="bg-light">
                     <th class="sorttable_nosort">Sr</th>
                     <th>CUSTOMER NAME</th>
@@ -94,11 +97,7 @@
                     <th class="sorttable_nosort">Action</th>
                 </thead>
                 <tbody id="tbody">
-                    @if (@$records->count() == 0)
-                        <tr>
-                            <td colspan="10" class="h6 text-muted text-center">NO CUSTOMERS TO DISPLAY</td>
-                        </tr>
-                    @endif
+                    
                     <?php $i = 1; ?>
                     @foreach ($records as $val)
                         <tr>
@@ -124,17 +123,6 @@
                 </tbody>
             </table>
         </div>
-        <div class="d-flex justify-content-end p-2" id="page">
-            <div>
-                <div>
-                    <p>
-                        Displaying {{ $records->count() }} of {{ $records->total() }} vehicle(s).
-                    </p>
-                </div>
-                <div>
-                    {{$records->links()}}
-                </div>
-            </div>
-        </div>
+        
     </div>
 @endsection

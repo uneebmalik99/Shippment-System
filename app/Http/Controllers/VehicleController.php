@@ -13,10 +13,10 @@ use Illuminate\Http\Request;
 class VehicleController extends Controller
 {
 
-    private $type = "vehicles";
-    private $singular = "vehicle";
-    private $plural = "vehicles";
-    private $view = "vehicle.";
+    private $type = "Vehicles";
+    private $singular = "Vehicle";
+    private $plural = "Vehicles";
+    private $view = "Vehicle.";
     private $db_key = "id";
     private $user = [];
     private $perpage = 100;
@@ -54,7 +54,7 @@ class VehicleController extends Controller
         $data = [];
         $data = [
             "page_title" => $this->plural . " List",
-            "page_heading" => $this->plural . ' List',
+            // "page_heading" => $this->plural . ' List',
             "breadcrumbs" => array('#' => $this->plural . " List"),
             "module" => [
                 'type' => $this->type,

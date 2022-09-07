@@ -366,6 +366,13 @@
                     <li class="change-loges.html py-2">
                         <a href="{{ route('ticket.list') }}">
                             <span class="pcoded-micon"><i class="fas fa-brain"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Tickets</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="change-loges.html py-2">
+                        <a href="{{ route('master.list') }}">
+                            <span class="pcoded-micon"><i class="fas fa-brain"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Master</span>
 
                             <span class="pcoded-mcaret"></span>
@@ -380,7 +387,7 @@
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
-                        <a href="">
+                        <a href="{{ route('calendar.list') }}">
                             <span class="pcoded-micon"><i class="fas fa-calendar"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Calendar</span>
 

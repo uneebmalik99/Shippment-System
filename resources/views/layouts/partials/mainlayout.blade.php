@@ -71,6 +71,10 @@
     $(document).ready( function () {
     $('#user_table').DataTable();
     } );
+    
+    $(document).ready( function () {
+    $('#vedicls_table').DataTable();
+    } );
     </script>
 </body>
 

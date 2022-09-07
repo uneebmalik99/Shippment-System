@@ -84,6 +84,15 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/unlock', [App\Http\Controllers\LockController::class, 'unlock'])->name('unlock');
     // Tickets Routes
     Route::get('/tickets', [App\Http\Controllers\TicketController::class, 'index'])->name('ticket.list');
+
+    // Master Routes
+    Route::get('/master', [App\Http\Controllers\MasterController::class, 'index'])->name('master.list');
+
+
+      // Calendar Routes
+      Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'index'])->name('calendar.list');
+
+    
 });
 
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->middleware('auth')->name('auth.logout');
