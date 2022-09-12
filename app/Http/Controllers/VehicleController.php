@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Image;
 use App\Models\Notification;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Storage;
 
 class VehicleController extends Controller
 {
@@ -333,33 +335,39 @@ class VehicleController extends Controller
     public function create_form(Request $request)
     {
         $data = $request->all();
-        $tab = $data['tab'];
-        unset($data['tab']);
+        $image = $request->file('images');
+        unset($data['images']);
         $Obj = new Vehicle;
         $new = $Obj->create($data);
-
+        if ($new) {
+            if ($image) {
+                $i = 0;
+                foreach ($image as $images) {
+                    $image_name = time() . '.' . $images->extension();
+                    $filename = Storage::putFile($this->directory, $images);
+                    $Obj_image = new Image;
+                    $Obj_vehicle = $Obj->where('vin', $data['vin'])->get();
+                    // return Response($Obj_vehicle[0]['id']);
+                    $Obj_image->vehicle_id = $Obj_vehicle[0]['id'];
+                    $Obj_image->name = $filename;
+                    $Obj_image->thumbnail = $image_name;
+                    $Obj_image->save();
+                    $output['result'] = "Success" . $i;
+                    $i++;
+                }
+            } else {
+                $output['result'] = "failed.";
+            }
+        }
+        // return Response($output);
+        $tab = $data['tab'];
+        unset($data['tab']);
         switch ($tab) {
             case ('general'):
-                $data['view'] = view('layouts.vehicle_create.attachments')->render();
+                $output['view'] = view('layouts.vehicle_create.attachments')->render();
                 break;
         }
-        return Response($data);
-
-        // if ($request->hasFile('image')) {
-        //     $data = $request->file('image');
-        //     foreach ($data as $images) {
-        //         $name = $images->getClientOriginalName();
-        //         $images->move(public_path() . $this->directory, $name);
-        //         $url = $images->getRealPath();
-        //         $image = $name;
-        //         $Obj_image = new Image;
-        //         $Obj_image->name = $name;
-        //         $Obj_image->thumbnail = 'thumb-' . $name;
-        //         $Obj_image->vehicle_id = $vehicle['id'];
-        //         $Obj_image->base_url = $url;
-        //         $Obj_image->save();
-        //     }
-        // }
+        return Response($output);
 
     }
 }

@@ -1,6 +1,6 @@
 @include('layouts.customer_create.navbar')
 {{-- @dd($buyers) --}}
-<form action={{ $action }} method="POST" id="vehicle_form" enctype="multipart/form-data">
+<form method="POST" id="vehicle_form" enctype="multipart/form-data">
     <div class="d-flex">
         <div class="col-8 d-flex">
             <div class="col-6 p-0">
@@ -12,20 +12,18 @@
                                 stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         <span class="p-2">Client</span>
-                        <input type="file" name="new_image" multiple>
-
                     </div>
                 </div>
                 <div class="col-12 f-flex" id="client_body">
                     <div class="col-12 py-2">
                         <div class="d-flex align-items-center">
-                            <label for="client_name" class="col-6 px-0 font-size font-bold">Client Name</label>
+                            <label for="customer_name" class="col-6 px-0 font-size font-bold">Client Name</label>
                             <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                name="client_name" id="client_name" value="{{ @$user['client_name'] }}">
+                                name="customer_name" id="customer_name" value="{{ @$user['customer_name'] }}">
                         </div>
                         <div class="d-flex justify-content-end">
                             <span class="text-danger">
-                                @error('client_name')
+                                @error('customer_name')
                                     {{ $message }}
                                 @enderror
                             </span>
@@ -624,6 +622,13 @@
             </div>
         </div>
         <div class="col-4 py-3">
+            <div class="col-12">
+                {{-- <input type="file" name="vehicle_image[]" onchange="vehicle_image()"
+                    class="form-control border border-info rounded col-12 w-100" id="vehicle_fileupload"
+                    multiple="multiple"> --}}
+                <div class="input-images-1 rounded" name="vehicle_image[]" style="padding-top: .5rem;">
+                </div>
+            </div>
         </div>
 
     </div>
@@ -633,8 +638,7 @@
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_role"
             id="added_by_role" readonly value="{{ Auth::user()->id }}">
         <input type="hidden" readonly name="tab" value="general">
-        <input type="button" value="Next" class="btn col-1 next-style text-white"
-            onclick="create_vehicle_form(this.id)" id="general_vehicle" name="{{ $module['button'] }}"
-            style="cursor: pointer;">
+        <input type="submit" value="Next" class="btn col-1 next-style text-white" onclick="create_vehicle_form()"
+            id="general_vehicle" name="{{ $module['button'] }}" style="cursor: pointer;">
     </div>
 </form>

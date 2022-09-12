@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +15,9 @@ use App\Http\Controllers\HomeController;
 |
  */
 
-
-
 Auth::routes();
 
-<<<<<<< HEAD
-Route::prefix('/admin')->middleware(['auth'])->group(function () {
-=======
 Route::prefix('/admin')->middleware('auth')->group(function () {
->>>>>>> 227763ae0963644573ab81d4c24b003d011f5c9c
     //Home
     Route::get('/', [HomeController::class, 'index']);
     // User Routes
@@ -56,9 +49,10 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     //Vehicle Routes
     Route::get('/vehicles', [App\Http\Controllers\VehicleController::class, 'index'])->name('vehicle.list');
+    Route::post('/vehicles', [App\Http\Controllers\VehicleController::class, 'createPost'])->name('vehicle.listpost');
     Route::get('/vehicles/create', [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicle.create');
-    Route::post('/vehicles/create', [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicle.create');
-    Route::get('/vehicles/create_form', [App\Http\Controllers\VehicleController::class, 'create_form'])->name('vehicle.form');
+    // Route::post('/vehicles/create', [App\Http\Controllers\VehicleController::class, 'createPost'])->name('vehicle.create');
+    Route::post('/vehicles/create_form', [App\Http\Controllers\VehicleController::class, 'create_form'])->name('vehicle.form');
     Route::get('/vehicles/attachments', [App\Http\Controllers\VehicleController::class, 'attachments'])->name('vehicle.attachments');
     Route::post('/vehicles/create', [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicle.create');
     Route::get('/vehicles/edit/{id?}', [App\Http\Controllers\VehicleController::class, 'edit'])->name('vehicle.edit');
@@ -88,6 +82,12 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/unlock', [App\Http\Controllers\LockController::class, 'unlock'])->name('unlock');
     // Tickets Routes
     Route::get('/tickets', [App\Http\Controllers\TicketController::class, 'index'])->name('ticket.list');
+
+    // Master Routes
+    Route::get('/master', [App\Http\Controllers\MasterController::class, 'index'])->name('master.list');
+
+    // Calendar Routes
+    Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'index'])->name('calendar.list');
 });
 
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->middleware('auth')->name('auth.logout');

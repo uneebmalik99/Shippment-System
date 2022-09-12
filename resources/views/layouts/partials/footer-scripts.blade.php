@@ -37,11 +37,9 @@
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/trumbowyg.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/jquery.minicolors.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/jquery.postitall.js') }}"></script>
-{{-- Multiple image upload --}}
-<script src="{{ asset('assets/pages/jquery.filer/js/jquery.filer.min.js') }}"></script>
-<script src="{{ asset('assets/pages/filer/custom-filer.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/pages/filer/jquery.fileuploads.init.js') }}" type="text/javascript"></script>
 {{-- Vehicles pagination and filter --}}
+{{-- image upload --}}
+<script type="text/javascript" src="{{ asset('assets/js/image-uploader.min.js') }}"></script>
 <script>
     $('#search_vehicle').on('keyup', function() {
         $value = $(this).val();
@@ -414,6 +412,9 @@
                     // console.log(data);
                     $('.modal-body').html(data);
                     $('#exampleModal').modal('show');
+                    $('.input-images-1').imageUploader({
+                        maxFiles: 4
+                    });
                 }
             });
         }
@@ -591,17 +592,23 @@
 </script>
 
 <script>
-    function create_vehicle_form(id) {
-        $tab = id;
-        // $data = $("#vehicle_form").serialize();
-        $.ajax({
-            type: 'get',
-            url: '{{ URL::to('admin/vehicles/create_form') }}',
-            data: $("#vehicle_form").serialize(),
-            // data: $("#vehicle_form").serialize(),
-            success: function(data) {
-                $('.modal-body').html(data.view);
-            }
+    function create_vehicle_form() {
+        $('#vehicle_form').on('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(jQuery('#vehicle_form')[0]);
+            $.ajax({
+                method: 'POST',
+                url: '{{ URL::to('admin/vehicles/create_form') }}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    alert(data.result);
+                    $('.modal-body').html(data.view);
+                    $('#exampleModal').modal('show');
+                    // console.log(data);
+                }
+            });
         });
     }
 </script>

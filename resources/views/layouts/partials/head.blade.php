@@ -19,8 +19,8 @@
 {{-- Datatable for pagination and sorting --}}
 <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 <!-- Favicon icon -->
-<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+{{-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> --}}
+{{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> --}}
 <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
 <!-- Google font-->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -35,7 +35,7 @@
     integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 {{-- Photos grid --}}
-
+<link rel="stylesheet" href="{{ asset('assets/css/image-uploader.min.css') }}">
 <!--sticky Css-->
 <link rel="stylesheet" href="{{ asset('assets/pages/sticky/css/jquery.postitall.css') }}" type="text/css"
     media="all">
@@ -53,10 +53,6 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom_style.css') }}">
 <!--color css-->
-<!--Multiple Image Upload -->
-<link href="{{ asset('assets/pages/jquery.filer/css/jquery.filer.css') }}" type="text/css" rel="stylesheet" />
-<link href="{{ asset('assets/pages/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css') }}" type="text/css"
-    rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/linearicons.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/simple-line-icons.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ionicons.css') }}">
