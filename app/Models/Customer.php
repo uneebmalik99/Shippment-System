@@ -65,7 +65,7 @@ class Customer extends Model
 
     public function invoices()
     {
-        return $this->hasMAny('App\Models\Invoice');
+        return $this->hasMany('App\Models\Invoice');
     }
 
     public function billings()

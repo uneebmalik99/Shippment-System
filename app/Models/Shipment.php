@@ -19,4 +19,8 @@ class Shipment extends Model
     {
         return $this->belongsTo('App\Models\Consignee');
     }
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class, 'shipment_id', 'id');
+    }
 }

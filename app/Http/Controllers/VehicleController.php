@@ -70,7 +70,6 @@ class VehicleController extends Controller
         $notification = $this->Notification();
         $data['records'] = Vehicle::with('customer')->paginate($this->perpage);
         return view($this->view . 'list', $data, $notification);
-
     }
 
     public function create(Request $request)
@@ -82,7 +81,8 @@ class VehicleController extends Controller
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
             "action" => $action,
             "button_text" => "Create",
-            "module" => ['type' => $this->type,
+            "module" => [
+                'type' => $this->type,
                 'type' => $this->type,
                 'singular' => $this->singular,
                 'plural' => $this->plural,
@@ -224,7 +224,8 @@ class VehicleController extends Controller
             "button_text" => "Update ",
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
             'action' => $action,
-            "module" => ['type' => $this->type,
+            "module" => [
+                'type' => $this->type,
                 'type' => $this->type,
                 'singular' => $this->singular,
                 'plural' => $this->plural,
@@ -312,16 +313,16 @@ class VehicleController extends Controller
                     $url_edit = url($this->action . '/edit/' . $val->id);
                     $url_delete = url($this->action . '/delete/' . $val->id);
                     $table .= '<tr>' .
-                    '<td>' . $i . '</td>' .
-                    '<td>' . $val->customer_name . '</td>' .
-                    '<td>' . $val->vin . '</td>' .
-                    '<td>' . $val->year . '</td>' .
-                    '<td>' . $val->make . '</td>' .
-                    '<td>' . $val->model . '</td>' .
-                    '<td>' . $val->vehicle_type . '</td>' .
-                    '<td>' . $val->value . '</td>' .
-                    '<td>' . $val->status . '</td>' .
-                    '<td>' . $val->customer->customer_name . '</td>' .
+                        '<td>' . $i . '</td>' .
+                        '<td>' . $val->customer_name . '</td>' .
+                        '<td>' . $val->vin . '</td>' .
+                        '<td>' . $val->year . '</td>' .
+                        '<td>' . $val->make . '</td>' .
+                        '<td>' . $val->model . '</td>' .
+                        '<td>' . $val->vehicle_type . '</td>' .
+                        '<td>' . $val->value . '</td>' .
+                        '<td>' . $val->status . '</td>' .
+                        '<td>' . $val->customer->customer_name . '</td>' .
                         '<td>' .
                         '<button><a href=' . $url_edit . '><i class=' . '"ti-pencil"' . '></i></a></button>' . '<button><a href=' . $url_delete . '><i class=' . '"ti-trash"' . '></i></a></button>' .
                         '</td>' .

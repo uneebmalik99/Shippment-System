@@ -102,4 +102,8 @@ class Vehicle extends Model
     {
         return $this->hasMany('App\Models\StickyNote');
     }
+    public function shipment()
+    {
+        return $this->belongsTo(Shipment::class, 'shipment_id');
+    }
 }
