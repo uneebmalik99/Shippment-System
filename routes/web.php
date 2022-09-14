@@ -73,10 +73,15 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/shipments/create', [App\Http\Controllers\ShipmentController::class, 'create'])->name('shipment.create');
 
     //Notification Routes
+    //Notification Routes
     Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index'])->name('notification.list');
     Route::get('/notifications/create', [App\Http\Controllers\NotificationController::class, 'create'])->name('notification.create');
     Route::post('/notifications/create', [App\Http\Controllers\NotificationController::class, 'create'])->name('notification.creates');
+    Route::get('/notifications/del/{id}', [App\Http\Controllers\NotificationController::class, 'del'])->name('notification.del');
+    Route::post('/notifications/updaterecord', [App\Http\Controllers\NotificationController::class, 'update_record'])->name('notification_update');
+    Route::post('/notifications/searchrecord', [App\Http\Controllers\NotificationController::class, 'search_record'])->name('notification_search');
     Route::get('/notifications/status', [App\Http\Controllers\NotificationController::class, 'status'])->name('notification.status');
+
     // Lock screen Routes
     Route::get('/lock', [App\Http\Controllers\LockController::class, 'lockScreen'])->name('lock');
     Route::post('/unlock', [App\Http\Controllers\LockController::class, 'unlock'])->name('unlock');

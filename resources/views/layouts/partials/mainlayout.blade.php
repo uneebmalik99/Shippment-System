@@ -75,9 +75,25 @@
         });
 
         $(document).ready(function() {
-            $('#vedicls_table').DataTable();
+            $("#vehicle_table").DataTable({
+                responsive: true,
+            })
+            $('#vehicle_table_length').addClass('form-control-sm border-style rounded col-6');
+
+        });
+
+        $(document).ready(function() {
+            $('#vedicls_table').DataTable({
+                "language": {
+                    search: ""
+                },
+                "lengthChange": false,
+                "searching": false,
+                "ordering": false,
+            });
         });
     </script>
+
 
 </body>
 

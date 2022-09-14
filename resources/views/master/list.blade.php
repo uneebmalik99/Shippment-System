@@ -1,89 +1,194 @@
 @extends('layouts.partials.mainlayout')
 @section('body')
-<style>
-    .heading_icon{
-    display: flex;
-    background: lightgray;
-    width: 121px;
-    justify-content: space-around;
-    height: 28px;
-    margin-right: -15px;
-    }
-    .card_main{
-        border:none!important;
-        
-    }
-    .card_main p{
-    font-size: 13px;
-    position: relative;
-    top: 25px;
-    background: lightgray;
-    width: 60px;
-    text-align: center;
-    }
-    
-</style>
-<div class="container">
-    <div class="row mt-3">
-        <div class="card col-lg-12 col-md-12 col-12 mx-auto">
-            <div class="card_head d-flex justify-content-between">
-                 <div class="heading_text">
-                    <div>Book Now</div>
-                    <div>Lorem ipsum dolor sit amet.</div>
-                 </div>
-                 <div class="heading_icon">
-                    <div><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
-                    <div><i class="fa fa-refresh" aria-hidden="true"></i></div>
-                    <div><i class="fa fa-cog" aria-hidden="true"></i></div>
-                 </div>
-                
-            </div>
-            <div class="row">
-                <div class="card shadow col-sm-6 col-md-6 col-lg-6 mx-auto card_main border">
-                    <div class="">
-                        <p class="mx-auto">Vehicls</p>
-                        <hr style="border-top:1px solid grey;width:inherit">
+    <div class="container-fluid p-0">
+        {{-- <div>
+            <div class="unknow p-5"></div>
+        </div> --}}
+        <div>
+            <div class="p-0">
+                {{-- <div class="row row m-sm-0 m-lg-3 m-0">
+                    <div class="col-8">
+                        <h3><b>MASTER</b></h3>
                     </div>
-                    <div class="text_fields">
-                        <form action="">
-                            <div class="row">
-                                <div class="col-12">
-                                    <label class="" for="user">Make</label>
-                                     <div class="input-group mb-2 mr-sm-2">
-                                    <input type="text" class="form-control" id="user" placeholder="Username">
-                                </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <label class="" for="make">Make</label>
-                                    <div class="input-group mb-2 mr-sm-2">
-                                      <input type="text" class="form-control" id="make">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                      <label class="" for="weight">Weight</label>
-                                        <div class="input-group mb-2 mr-sm-2">
-                                        <input type="text" class="form-control" id="weight" >
-                                </div>
-                                </div>
-                            </div>
+                </div> --}}
+                <div class="row m-sm-0 m-lg-3 m-0">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 boxi boxi-1 d-flex p-3">
+                        <div class="col-1 text-center text">
+                            <span class="master-locations">CITY</span>
+                        </div>
+                        <div class="col-2 text-center text">
+                            <span class="master-locations">AUCTION</span>
+                        </div>
+                        <div class="col-2 text-center text">
+                            <span class="master-locations">NEW JERSERY</span>
+                        </div>
+                        <div class="col-2 text-center text">
+                            <span class="master-locations">GEORGIA</span>
+                        </div>
+                        <div class="col-1 text-center text">
+                            <span class="master-locations">TESES</span>
+                        </div>
+                        <div class="col-2 text-center text">
+                            <span class="master-locations">CALIFORNIA</span>
+                        </div>
+                        <div class="col-2 text-center text">
+                            <span class="master-locations">SEATTLE</span>
+                        </div>
+                    </div>
 
-                            <div class="row" >
-                                <div class="col-11 mx-auto  d-flex justify-content-end" style="border-top:1px solid green;">
-                                    <div class="py-3">
-                                        <button class="px-3 py-1 btn-primary" style="outline:none!impotant;border:none!important;border-radius:8px">Save</button>
-                                </div>
-                                </div>
-                                
-                            </div>
-                            
-                        </form>
+                    <!-- create -->
+                    <div class="d-none d-lg-block col-3 ms-3 gx-5 d-lg-flex align-items-lg-end justify-content-lg-start">
+                        <div>
+                            <h5 class="m-0" style="color: #214986;"><b>Create Towing Rate</b></h5>
+                        </div>
                     </div>
+                </div>
+
+                <div class="row m-0 mt-3 m-sm-0 m-lg-3 d-flex justify-content-between">
+                    <!-- sheet -->
+
+                    <div class="b_pic mt-sm-3 mt-lg-0 col-12 col-sm-12 col-md-12 col-lg-8 col border sheet p-2">
+                        <div class="d-flex text-center p-2">
+                            <div class="col-2 text-lg-start">
+                                <h6 class="tr_head">ABILENE-TX</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6 class="tr_head">AUCTION</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6 class="tr_head">$250</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6 class="tr_head">$2500</h6>
+                            </div>
+                            <div class="col-1">
+                                <h6 class="tr_head">$500</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6 class="tr_head">$300</h6>
+                            </div>
+                            <div class="col-1">
+                                <h6 class="tr_head">$350</h6>
+                            </div>
+                        </div>
+                        <hr class="m-0" />
+
+                        {{-- <div class="d-flex text-center p-2">
+                            <div class="col-2 text-lg-start">
+                                <h6>ABILENE-TX</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6>AUCTION</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6>$250</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6>$2500</h6>
+                            </div>
+                            <div class="col-1">
+                                <h6>$500</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6>$300</h6>
+                            </div>
+                            <div class="col-1">
+                                <h6>$350</h6>
+                            </div>
+                        </div>
+                        <hr class="m-0" /> --}}
+
+                        {{-- <div class="d-flex text-center p-2">
+                            <div class="col-2 text-lg-start">
+                                <h6>ABILENE-TX</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6>AUCTION</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6>$250</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6>$2500</h6>
+                            </div>
+                            <div class="col-1">
+                                <h6>$500</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6>$300</h6>
+                            </div>
+                            <div class="col-1">
+                                <h6>$350</h6>
+                            </div>
+                        </div>
+                        <hr class="m-0" /> --}}
+
+                        {{-- <div class="d-flex text-center p-2">
+                            <div class="col-2 text-lg-start">
+                                <h6>ABILENE-TX</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6>AUCTION</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6>$250</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6>$2500</h6>
+                            </div>
+                            <div class="col-1">
+                                <h6>$500</h6>
+                            </div>
+                            <div class="col-2">
+                                <h6>$300</h6>
+                            </div>
+                            <div class="col-1">
+                                <h6>$350</h6>
+                            </div>
+                        </div>
+                        <hr class="m-0" /> --}}
+                    </div>
+
+                    <div class="col-12 col-lg-4 mt-4 mt-lg-0">
+                        {{-- <div class="text-center d-lg-none d-block">
+                            <h4><b>Create</b></h4>
+                        </div> --}}
+                        <div class="col-12 mt-4 mt-lg-0 ms-lg-3">
+                            <div class="f-b border p-4">
+                                <form action="" method="">
+                                    <div class="form-group">
+                                        <input type="text" name="container_size" class="form-control mb-3"
+                                            placeholder="Enter City name" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" name="Vehicle" class="form-control mb-3"
+                                            placeholder="Enter Auction" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" name="Landing_Port" class="form-control mb-3"
+                                            placeholder="Enter Rate" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" name="Destination" class="form-control mb-3"
+                                            placeholder="Enter port of Loading" />
+                                    </div>
+                                    <div class="d-flex justify-content-between pt-3">
+                                        <button type="" class="btn btn_button text-white">
+                                            <b>Reset</b>
+                                        </button>
+                                        <button type="" class="btn btn_button text-white">
+                                            <b>Save</b>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-            
         </div>
     </div>
-</div>
 @endsection

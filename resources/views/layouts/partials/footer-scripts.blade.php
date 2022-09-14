@@ -23,6 +23,11 @@
 </script>
 <script type="text/javascript" src="{{ asset('assets/bower_components/jquery-i18next/js/jquery-i18next.min.js') }}">
 </script>
+{{-- Calendar js --}}
+<script type="text/javascript" src="{{ asset('assets/pages/full-calender/calendar.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/bower_components/moment/js/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/bower_components/fullcalendar/js/fullcalendar.min.js') }}">
+</script>
 <!-- Custom js -->
 <script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/pages/advance-elements/navbar-elements.js') }}"></script>
@@ -37,6 +42,8 @@
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/trumbowyg.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/jquery.minicolors.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/jquery.postitall.js') }}"></script>
+{{-- Custom JS for views --}}
+<script type="text/javascript" src="{{ asset('js/vehicle.js') }}"></script>
 {{-- Vehicles pagination and filter --}}
 {{-- image upload --}}
 <script type="text/javascript" src="{{ asset('assets/js/image-uploader.min.js') }}"></script>
@@ -264,8 +271,9 @@
 
 {{-- Notifications --}}
 <script>
-    $('#notification_body').on('click', function() {
+    $('.notification_body').on('click', function() {
         $id = $(this).val();
+        // alert('adasdasd');
         $(this).addClass('bg-info border border-light rounded');
         $.ajax({
             type: 'get',
@@ -612,3 +620,4 @@
         });
     }
 </script>
+

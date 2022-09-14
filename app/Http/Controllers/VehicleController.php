@@ -14,9 +14,9 @@ use Storage;
 class VehicleController extends Controller
 {
 
-    private $type = "vehicles";
+    private $type = "Vehicles";
     private $singular = "vehicle";
-    private $plural = "vehicles";
+    private $plural = "Vehicles";
     private $view = "vehicle.";
     private $db_key = "id";
     private $user = [];
@@ -26,27 +26,35 @@ class VehicleController extends Controller
 
     public function Notification()
     {
-        $data['notification'] = Notification::with('user')->paginate($this->perpage);
-        $current = Carbon::now();
-        $date = $data['notification'][0]['created_at'];
+        $data['notification'] = Notification::with('customer')->paginate($this->perpage);
+        // dd();
+        if ($data['notification']->toArray()) {
+            $current = Carbon::now();
+            foreach ($data['notification'] as $key => $date_notification) {
 
-        $diff = $date->diffInSeconds(\Carbon\Carbon::now());
-        $days = $diff / 86400;
-        $hours = $diff / 3600;
-        $minutes = $diff / 60;
-        $seconds = $diff % 60;
+                $date = $date_notification->created_at;
+                $diff = $date->diffInSeconds(\Carbon\Carbon::now());
+                $days = $diff / 86400;
+                $hours = $diff / 3600;
+                $minutes = $diff / 3600;
+                $seconds = $diff % 60;
 
-        if ($days > 1) {
-            $data['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . $minutes . 'm,' . $seconds . 's ';
-        } elseif ($hours > 1) {
-            $data['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
-        } elseif ($minutes > 1) {
-            $data['date'] = (int) $minutes . 'm,' . $seconds . 's ';
+                if ($days > 1) {
+                    $data['notification'][$key]['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
+                } elseif ($hours > 1) {
+                    $data['notification'][$key]['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . (int) $seconds . 's ';
+                } elseif ($minutes > 1) {
+                    $data['notification'][$key]['date'] = (int) $minutes . 'm,' . (int) $seconds . 's ';
+                } else {
+                    $data['notification'][$key]['date'] = (int) $seconds . 's ';
+                }
+            }
+            $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
+            $data['notification_count'] = count($unread);
         } else {
-            $data['date'] = $seconds . 's ';
+            $data['notification'] = "asda";
         }
-        $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
-        $data['notification_count'] = count($unread);
+        // dd($data);
         return $data;
     }
 
@@ -69,7 +77,13 @@ class VehicleController extends Controller
         ];
 
         $notification = $this->Notification();
+        $data['new_orders'] = Vehicle::where('status', '0')->get();
         $data['records'] = Vehicle::with('customer')->paginate($this->perpage);
+        $data['posted'] = Vehicle::where('status', '1')->get();
+        $data['dispatched'] = Vehicle::where('status', '2')->get();
+        $data['on_hand'] = Vehicle::where('status', '3')->get();
+        $data['no_titles'] = Vehicle::where('status', '4')->get();
+        $data['towing'] = Vehicle::where('status', '5')->get();
         return view($this->view . 'list', $data, $notification);
 
     }
@@ -95,8 +109,6 @@ class VehicleController extends Controller
             ],
         ];
         $data['buyers'] = Customer::all()->toArray();
-        // dd($data['buyers']);
-
         if ($request->ajax()) {
             // return $data;
             $tab = $request->tab;

@@ -24,10 +24,19 @@
 <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
 <!-- Google font-->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+{{-- CK Editor --}}
+<script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+<!-- Calender css -->
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/fullcalendar/css/fullcalendar.css') }}">
+<link rel="stylesheet" type="text/css"
+    href="{{ asset('assets/bower_components/fullcalendar/css/fullcalendar.print.css') }}" media='print'>
 {{-- Google API --}}
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> --}}
 <!-- Required Fremwork -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/bootstrap/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/vehicle.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/notification.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/master.css') }}">
 <!-- themify-icons line icon -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/themify-icons/themify-icons.css') }}">
 {{-- Fontawesome icons --}}
@@ -36,6 +45,8 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 {{-- Photos grid --}}
 <link rel="stylesheet" href="{{ asset('assets/css/image-uploader.min.css') }}">
+{{-- DataTable Css --}}
+<link rel="stylesheet" href="{{ asset('assets/css/datatable.min.css') }}">
 <!--sticky Css-->
 <link rel="stylesheet" href="{{ asset('assets/pages/sticky/css/jquery.postitall.css') }}" type="text/css"
     media="all">

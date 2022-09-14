@@ -68,8 +68,15 @@
 .border-style {
     border: 1px solid rgba(189, 189, 189, 1) !important;
 }
+.border-style-search {
+    border-top: 1px solid rgba(189, 189, 189, 1) !important;
+    border-bottom: 1px solid rgba(189, 189, 189, 1) !important;
+}
 .font-bold {
     font-weight: 600 !important;
+}
+.font-bold-tr {
+    font-weight: 500 !important;
 }
 .font-size {
     font-size: 13px !important;
@@ -88,19 +95,28 @@
 .percent_size {
     font-size: 11px !important;
 }
+.icon-circle {
+    width: fit-content !important;
+    background: rgba(78, 152, 66, 0.14) !important;
+    border-radius: 50% !important;
+}
 
 /* vehicle attachments css */
 .head {
-    background: #1F689E;
+    background: #1f689e;
     box-shadow: inset 10px 14px 28px rgba(0, 0, 0, 0.25);
 }
 
 .shape {
-    color: #1F689E;
+    color: #1f689e;
 }
 
 .attach {
-    background: linear-gradient(254.26deg, rgba(28, 113, 176, 0.9) 45.03%, #10C2EA 72.6%);
+    background: linear-gradient(
+        254.26deg,
+        rgba(28, 113, 176, 0.9) 45.03%,
+        #10c2ea 72.6%
+    );
 }
 
 .image {
@@ -110,34 +126,33 @@
 .icon {
     width: 30.33px;
     height: 35px;
-    background: #E93F78;
+    background: #e93f78;
     /* box-shadow: 3px 17px 14px rgba(0, 0, 0, 0.37); */
 }
 
 .icon-2 {
     width: 30.33px;
     height: 35px;
-    background: #1F689E;
+    background: #1f689e;
     /* box-shadow: 3px 17px 14px rgba(0, 0, 0, 0.37); */
 }
 
 .icon-3 {
     width: 30.33px;
     height: 35px;
-    background: #FFA003;
+    background: #ffa003;
     /* box-shadow: 3px 17px 14px rgba(0, 0, 0, 0.37); */
 }
 
 .icon-4 {
     width: 30.33px;
     height: 35px;
-    background: #FF7A00;
+    background: #ff7a00;
     /* box-shadow: 3px 17px 14px rgba(0, 0, 0, 0.37); */
 }
 
 h6 {
-    color: #1F689E;
-    ;
+    color: #1f689e;
 }
 /* 
 .btn {

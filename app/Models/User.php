@@ -42,10 +42,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Export');
     }
 
-    public function notifications()
-    {
-        return $this->hasMany('App\Models\Notification');
-    }
 
     public function locations()
     {

@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\role;
 use Illuminate\Database\Seeder;
 
@@ -14,13 +15,16 @@ class roleSeeder extends Seeder
     public function run()
     {
         role::create([
-            'name'=>'SuperAdmin',
+            'name' => 'Super Admin',
         ]);
         role::create([
-            'name'=>'SubAdmin',
+            'name' => 'Sub Admin',
         ]);
         role::create([
-            'name'=>'Customer',
+            'name' => 'Location Admin',
+        ]);
+        role::create([
+            'name' => 'Customer',
         ]);
     }
 }

@@ -418,11 +418,11 @@
                     <div class="page-wrapper">
                         <!-- Page header start -->
                         <div class="page-header">
-                            <div class="page-header-title">
+                            <div class="page-header-title mb-3">
                                 <h4>{{ @$page_title }}</h4>
-                                <span>{{ @$page_heading }}</span>
+                                {{-- <span>{{ @$page_heading }}</span> --}}
                             </div>
-                            <div class="page-header-breadcrumb">
+                            {{-- <div class="page-header-breadcrumb">
                                 <ul class="breadcrumb-title">
                                     <li class="breadcrumb-item">
                                         <a href="index.html">
@@ -435,7 +435,7 @@
                                     <li class="breadcrumb-item"><a>{{ @$module['page'] }}</a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> --}}
                             <div class="page-body">
                                 @yield('body')
                             </div>
