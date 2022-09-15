@@ -32,7 +32,7 @@ class CreateVehiclesTable extends Migration
             $table->string('title_type')->nullable();
             $table->string('title')->nullable();
             $table->date('title_rec_date')->nullable();
-            $table->string('title_state')->nullable();
+            $table->foreignId('title_state')->constrained('locations')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->integer('title_number')->nullable();
             $table->string('shipper_name')->nullable();
             $table->enum('status', ['0', '1', '2', '3', '4', '5'])->nullable();

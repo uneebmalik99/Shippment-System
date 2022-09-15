@@ -256,8 +256,14 @@
                     <div class="col-12 py-2">
                         <div class="d-flex align-items-center">
                             <label for="title_state" class="col-6 px-0 font-size font-bold">Title State</label>
-                            <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                name="title_state" id="title_state" value="{{ @$user['title_state'] }}">
+                            <select class="form-control-sm border border-0 rounded-pill bg col-6" name="title_state"
+                                id="title_state">
+                                @foreach ($location as $locations)
+                                    <option value="{{ $locations['id'] }}">{{ $locations['name'] }}</option>
+                                @endforeach
+                            </select>
+                            {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                name="title_state" id="title_state" value="{{ @$user['title_state'] }}"> --}}
                         </div>
                         <div class="d-flex justify-content-end">
                             <span class="text-danger">

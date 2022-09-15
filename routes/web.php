@@ -51,17 +51,17 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/vehicles', [App\Http\Controllers\VehicleController::class, 'index'])->name('vehicle.list');
     Route::post('/vehicles', [App\Http\Controllers\VehicleController::class, 'createPost'])->name('vehicle.listpost');
     Route::get('/vehicles/create', [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicle.create');
-    // Route::post('/vehicles/create', [App\Http\Controllers\VehicleController::class, 'createPost'])->name('vehicle.create');
     Route::post('/vehicles/create_form', [App\Http\Controllers\VehicleController::class, 'create_form'])->name('vehicle.form');
     Route::get('/vehicles/attachments', [App\Http\Controllers\VehicleController::class, 'attachments'])->name('vehicle.attachments');
     Route::post('/vehicles/create', [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicle.create');
     Route::get('/vehicles/edit/{id?}', [App\Http\Controllers\VehicleController::class, 'edit'])->name('vehicle.edit');
     Route::post('/vehicles/edit/{id?}', [App\Http\Controllers\VehicleController::class, 'edit'])->name('vehicle.edit');
     Route::get('/vehicles/delete/{id?}', [App\Http\Controllers\VehicleController::class, 'delete'])->name('vehicle.delete');
-    Route::get('/vehicles/search', [App\Http\Controllers\VehicleController::class, 'search'])->name('vehicle.search');
-    Route::get('/vehicles/pagination', [App\Http\Controllers\VehicleController::class, 'search'])->name('vehicle.pagination');
-    Route::get('/vehicles/tabs', [App\Http\Controllers\VehicleController::class, 'search'])->name('vehicle.tabs');
-    Route::get('/vehicles/location', [App\Http\Controllers\VehicleController::class, 'search'])->name('vehicle.location');
+    Route::get('/vehicles/search', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.search');
+    Route::get('/vehicles/pagination', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.pagination');
+    Route::get('/vehicles/warehouse', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.pagination');
+    Route::get('/vehicles/tabs', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.tabs');
+    Route::get('/vehicles/location', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.location');
 
     //Sticky Notes Routes
     Route::get('/stickynotes', [App\Http\Controllers\StickyController::class, 'index'])->name('sticky.list');

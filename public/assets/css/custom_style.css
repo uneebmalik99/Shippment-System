@@ -101,6 +101,14 @@
     border-radius: 50% !important;
 }
 
+.customer_image {
+    width: 22px !important;
+    height: 22px !important;
+    vertical-align: middle !important;
+    margin-right: 8px !important;
+    margin-top: 6px !important;
+}
+
 /* vehicle attachments css */
 .head {
     background: #1f689e;

@@ -54,6 +54,7 @@ class Vehicle extends Model
         'port_detention_fee',
         'custom_inspection',
         'additional_fee',
+        'shipment_id',
         'insurance',
         'vehicle_is_deleted',
         'added_by_role',

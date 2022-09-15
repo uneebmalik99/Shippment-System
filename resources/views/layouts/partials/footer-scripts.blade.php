@@ -47,42 +47,7 @@
 {{-- Vehicles pagination and filter --}}
 {{-- image upload --}}
 <script type="text/javascript" src="{{ asset('assets/js/image-uploader.min.js') }}"></script>
-<script>
-    $('#search_vehicle').on('keyup', function() {
-        $value = $(this).val();
-        $pagination = $('#pagination_vehicle').val();
-        $.ajax({
-            type: 'get',
-            url: '{{ URL::to('admin/vehicles/search') }}',
-            data: {
-                'search': $value,
-                'pagination': $pagination
-            },
-            success: function(data) {
-                console.log('search working');
-                $('#tbody').html(data.table);
-                $('#page').html(data.pagination);
-            }
-        });
-    })
-    $('#pagination_vehicle').on('change', function() {
-        $value = $(this).val();
-        $search = $('#search_vehicle').val();
-        $.ajax({
-            type: 'get',
-            url: '{{ URL::to('admin/vehicles/pagination') }}',
-            data: {
-                'search': $search,
-                'pagination': $value
-            },
-            success: function(data) {
-                console.log('pagination working')
-                $('#tbody').html(data.table);
-                $('#page').html(data.pagination);
-            }
-        });
-    })
-</script>
+
 {{-- csrf tokens --}}
 <script type="text/javascript">
     $.ajaxSetup({
@@ -611,7 +576,8 @@
                 processData: false,
                 contentType: false,
                 success: function(data) {
-                    alert(data.result);
+                    // console.log(data);
+                    // alert(data.result);
                     $('.modal-body').html(data.view);
                     $('#exampleModal').modal('show');
                     // console.log(data);
@@ -620,4 +586,3 @@
         });
     }
 </script>
-
