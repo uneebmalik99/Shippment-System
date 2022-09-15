@@ -69,18 +69,6 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/stickynotes', [App\Http\Controllers\StickyController::class, 'create'])->name('sticky.create');
 
     // Shipment Routes
-<<<<<<< HEAD
-    Route::get('/shipment',                     [App\Http\Controllers\ShipmentController::class, 'index'])->name('shipment.list');
-    Route::get('/shipments/create',             [App\Http\Controllers\ShipmentController::class, 'create'])->name('shipment.create');
-    Route::post('/shipments/create',            [App\Http\Controllers\ShipmentController::class, 'create'])->name('shipment.create');
-    Route::get('/shipments/attachments', [ShipmentController::class, 'attachmentsIndex'])->name('shipment.attachments');
-
-    //Notification Routes
-    Route::get('/notifications',                [App\Http\Controllers\NotificationController::class, 'index'])->name('notification.list');
-    Route::get('/notifications/create',         [App\Http\Controllers\NotificationController::class, 'create'])->name('notification.create');
-    Route::post('/notifications/create',        [App\Http\Controllers\NotificationController::class, 'create'])->name('notification.creates');
-    Route::get('/notifications/status',         [App\Http\Controllers\NotificationController::class, 'status'])->name('notification.status');
-=======
     Route::get('/shipment', [App\Http\Controllers\ShipmentController::class, 'index'])->name('shipment.list');
     Route::get('/shipments/create', [App\Http\Controllers\ShipmentController::class, 'create'])->name('shipment.create');
     Route::post('/shipments/create', [App\Http\Controllers\ShipmentController::class, 'create'])->name('shipment.create');
@@ -106,7 +94,6 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     // Calendar Routes
     Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'index'])->name('calendar.list');
->>>>>>> f1a9f207f332166764839bfc332a07f937731a94
 });
 
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->middleware('auth')->name('auth.logout');
