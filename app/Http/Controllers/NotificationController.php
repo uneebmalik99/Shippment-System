@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -9,10 +10,10 @@ use Illuminate\Http\Request;
 class NotificationController extends Controller
 {
 
-    private $type = "notifications";
-    private $singular = "notification";
-    private $plural = "notifications";
-    private $view = "notification.";
+    private $type = "Notifications";
+    private $singular = "Notification";
+    private $plural = "Notifications";
+    private $view = "Notification.";
     private $db_key = "id";
     private $user = [];
     private $perpage = 100;
@@ -21,27 +22,35 @@ class NotificationController extends Controller
 
     public function Notification()
     {
-        $data['notification'] = Notification::with('user')->paginate($this->perpage);
-        $current = Carbon::now();
-        $date = $data['notification'][0]['created_at'];
+        $data['notification'] = Notification::with('customer')->paginate($this->perpage);
+        // dd();
+        if ($data['notification']->toArray()) {
+            $current = Carbon::now();
+            foreach ($data['notification'] as $key => $date_notification) {
 
-        $diff = $date->diffInSeconds(\Carbon\Carbon::now());
-        $days = $diff / 86400;
-        $hours = $diff / 3600;
-        $minutes = $diff / 60;
-        $seconds = $diff % 60;
+                $date = $date_notification->created_at;
+                $diff = $date->diffInSeconds(\Carbon\Carbon::now());
+                $days = $diff / 86400;
+                $hours = $diff / 3600;
+                $minutes = $diff / 3600;
+                $seconds = $diff % 60;
 
-        if ($days > 1) {
-            $data['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . $minutes . 'm,' . $seconds . 's ';
-        } elseif ($hours > 1) {
-            $data['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
-        } elseif ($minutes > 1) {
-            $data['date'] = (int) $minutes . 'm,' . $seconds . 's ';
+                if ($days > 1) {
+                    $data['notification'][$key]['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
+                } elseif ($hours > 1) {
+                    $data['notification'][$key]['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . (int) $seconds . 's ';
+                } elseif ($minutes > 1) {
+                    $data['notification'][$key]['date'] = (int) $minutes . 'm,' . (int) $seconds . 's ';
+                } else {
+                    $data['notification'][$key]['date'] = (int) $seconds . 's ';
+                }
+            }
+            $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
+            $data['notification_count'] = count($unread);
         } else {
-            $data['date'] = $seconds . 's ';
+            $data['notification'] = "asda";
         }
-        $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
-        $data['notification_count'] = count($unread);
+        // dd($data);
         return $data;
     }
 
@@ -65,39 +74,73 @@ class NotificationController extends Controller
         ];
 
         $notification = $this->Notification();
+        $data['user'] = Customer::all()->toArray();
+        // dd($data['user']);
+        // return $notification;
         return view($this->view . 'list', $data, $notification);
     }
 
     public function create(Request $request)
     {
-        $action = url($this->action . '/create');
-        $data = [
-            "page_title" => $this->plural . " create",
-            "page_heading" => $this->plural . ' create',
-            "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
-            "action" => $action,
-            "button_text" => "Create",
-            "module" => ['type' => $this->type,
-                'type' => $this->type,
-                'singular' => $this->singular,
-                'plural' => $this->plural,
-                'view' => $this->view,
-                'db_key' => $this->db_key,
-                'action' => $this->action,
-                'page' => 'create',
-            ],
-        ];
-        if ($request->isMethod('post')) {
-            $data = $request->all();
-            $Obj = new Notification;
-            $Obj->create($data);
-            return redirect($this->action)->with('success', 'Vehicle addedd successfully.');
+        $data = $request->session()->all();
 
-        }
-        $notification = $this->Notification();
-        return view($this->view . 'create_edit', $data, $notification);
+        $request->validate([
+            'subject' => 'required',
+            'editor1' => 'required',
+            'expirydate' => 'required',
+        ]);
+        //    $notification = new Notification();
+        //    $notification->subject = $request->subject;
+        //    $notification->message = $request->editor1;
+        //    $notification->expiry_date = $request->expirydate;
+        //    $notification->user_id = Auth::user()->id;
+        //    $notification->save($request->all());
+
+        $flight = Notification::updateOrCreate(
+            ['id' => $request->id],
+            [
+                'subject' => $request->subject,
+                'message' => $request->editor1,
+                'expiry_date' => $request->expirydate,
+                'user_id' => $request->user_id,
+                'is_read' => $request->is_read,
+                'status' => '0',
+
+            ]
+        );
+
+        return back()->with('success', 'Notification Submitted Successfully');
     }
 
+    public function del($id)
+    {
+
+        $res = Notification::find($id);
+        $res->delete();
+        if ($res) {
+            return back()->with('success', 'Notification Deleted Successfully!');
+        }
+
+    }
+
+    public function update_record(Request $req)
+    {
+        $id = $req->id;
+        $data = Notification::find($id);
+        return response($data);
+    }
+
+    public function search_record(Request $request)
+    {
+        $search = $request->search;
+
+        $notifications = Notification::where('subject', 'LIKE', '%' . $search . '%')
+            ->orWhere('message', 'LIKE', '%' . $search . '%')
+            ->get();
+
+        return response($notifications);
+
+    }
     public function status(Request $request)
     {
         $Obj = new Notification;

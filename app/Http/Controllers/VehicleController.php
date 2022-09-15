@@ -5,17 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Image;
+use App\Models\Location;
 use App\Models\Notification;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Storage;
 
 class VehicleController extends Controller
 {
 
-    private $type = "vehicles";
+    private $type = "Vehicles";
     private $singular = "vehicle";
-    private $plural = "vehicles";
+    private $plural = "Vehicles";
     private $view = "vehicle.";
     private $db_key = "id";
     private $user = [];
@@ -25,27 +27,35 @@ class VehicleController extends Controller
 
     public function Notification()
     {
-        $data['notification'] = Notification::with('user')->paginate($this->perpage);
-        $current = Carbon::now();
-        $date = $data['notification'][0]['created_at'];
+        $data['notification'] = Notification::with('customer')->paginate($this->perpage);
+        // dd();
+        if ($data['notification']->toArray()) {
+            $current = Carbon::now();
+            foreach ($data['notification'] as $key => $date_notification) {
 
-        $diff = $date->diffInSeconds(\Carbon\Carbon::now());
-        $days = $diff / 86400;
-        $hours = $diff / 3600;
-        $minutes = $diff / 60;
-        $seconds = $diff % 60;
+                $date = $date_notification->created_at;
+                $diff = $date->diffInSeconds(\Carbon\Carbon::now());
+                $days = $diff / 86400;
+                $hours = $diff / 3600;
+                $minutes = $diff / 3600;
+                $seconds = $diff % 60;
 
-        if ($days > 1) {
-            $data['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . $minutes . 'm,' . $seconds . 's ';
-        } elseif ($hours > 1) {
-            $data['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
-        } elseif ($minutes > 1) {
-            $data['date'] = (int) $minutes . 'm,' . $seconds . 's ';
+                if ($days > 1) {
+                    $data['notification'][$key]['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
+                } elseif ($hours > 1) {
+                    $data['notification'][$key]['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . (int) $seconds . 's ';
+                } elseif ($minutes > 1) {
+                    $data['notification'][$key]['date'] = (int) $minutes . 'm,' . (int) $seconds . 's ';
+                } else {
+                    $data['notification'][$key]['date'] = (int) $seconds . 's ';
+                }
+            }
+            $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
+            $data['notification_count'] = count($unread);
         } else {
-            $data['date'] = $seconds . 's ';
+            $data['notification'] = "asda";
         }
-        $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
-        $data['notification_count'] = count($unread);
+        // dd($data);
         return $data;
     }
 
@@ -69,6 +79,13 @@ class VehicleController extends Controller
 
         $notification = $this->Notification();
         $data['records'] = Vehicle::with('customer')->paginate($this->perpage);
+        $data['new_orders'] = Vehicle::where('status', '0')->get();
+        $data['posted'] = Vehicle::where('status', '1')->get();
+        $data['dispatched'] = Vehicle::where('status', '2')->get();
+        $data['on_hand'] = Vehicle::where('status', '3')->get();
+        $data['no_titles'] = Vehicle::where('status', '4')->get();
+        $data['towing'] = Vehicle::where('status', '5')->get();
+        $data['location'] = Location::all();
         return view($this->view . 'list', $data, $notification);
     }
 
@@ -90,9 +107,16 @@ class VehicleController extends Controller
                 'db_key' => $this->db_key,
                 'action' => $this->action,
                 'page' => 'create',
+                'button' => 'Create',
             ],
         ];
         $data['buyers'] = Customer::all()->toArray();
+        $data['location'] = Location::all();
+        if ($request->ajax()) {
+            $tab = $request->tab;
+            $output = view('layouts.vehicle_create.' . $tab, $data)->render();
+            return Response($output);
+        }
 
         if ($request->isMethod('post')) {
             $data = $request->all();
@@ -143,22 +167,6 @@ class VehicleController extends Controller
             //     'image' => 'required',
             //     'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             // ]);
-
-            if ($request->hasFile('image')) {
-                $data = $request->file('image');
-                foreach ($data as $images) {
-                    $name = $images->getClientOriginalName();
-                    $images->move(public_path() . $this->directory, $name);
-                    $url = $images->getRealPath();
-                    $image = $name;
-                    $Obj_image = new Image;
-                    $Obj_image->name = $name;
-                    $Obj_image->thumbnail = 'thumb-' . $name;
-                    $Obj_image->vehicle_id = $vehicle['id'];
-                    $Obj_image->base_url = $url;
-                    $Obj_image->save();
-                }
-            }
 
             return redirect($this->action)->with('success', 'Vehicle addedd successfully.');
         }
@@ -249,65 +257,48 @@ class VehicleController extends Controller
         return redirect($this->action);
     }
 
-    public function search(Request $request)
+    public function filtering(Request $request)
     {
         if ($request->ajax()) {
+            $output = [];
             $table = "";
             $page = "";
             $total = Vehicle::all()->toArray();
             $records = Vehicle::with('customer');
-            $check = $request->check;
-            $location = $request->location;
-            if ($request->search != "") {
-                $records = $records->where('customer_name', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('vin', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('year', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('make', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('model', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('vehicle_type', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('value', 'LIKE', '%' . $request->search . "%");
+            $search = $request->search;
+            $pagination = $request->pagination;
+            $warehouse = $request->warehouse;
+            $output['check'] = $request->check;
+            if ($search) {
+                if ($search == "") {
+                    // return "search empty";
+                    $records = $records->paginate($this->perpage);
+                }
+
+                if ($search != "") {
+                    // return "search not empty";
+                    $records = $records->where('customer_name', 'LIKE', '%' . $search . "%")
+                        ->orWhere('vin', 'LIKE', '%' . $search . "%")
+                        ->orWhere('year', 'LIKE', '%' . $search . "%")
+                        ->orWhere('make', 'LIKE', '%' . $search . "%")
+                        ->orWhere('model', 'LIKE', '%' . $search . "%")
+                        ->orWhere('vehicle_type', 'LIKE', '%' . $search . "%")
+                        ->orWhere('value', 'LIKE', '%' . $search . "%")
+                        ->orWhere('status', 'LIKE', '%' . $search . "%");
+                }
             }
 
-            if ($check == 'all_vehicles') {
-                $records = $records;
-            } elseif ($check == "new_order") {
-                $records = $records->where('status', '0');
-            } elseif ($check == "posted") {
-                $records = $records->where('status', '1');
-            } elseif ($check == "dispatch") {
-                $records = $records->where('status', '2');
-            } elseif ($check == "on_hand") {
-                $records = $records->where('status', '3');
-            } elseif ($check == "titles") {
-                $records = $records->where('status', '4');
-            } else {
-                $records = $records->where('status', '5');
+            if ($warehouse != "") {
+                $records = $records->where('title_state', $warehouse)->paginate($this->perpage);
+                // return count($records);
             }
 
-            if ($location == "NJ") {
-                $records = $records->where('title_state', $location);
-            } elseif ($location == "SAV") {
-                $records = $records->where('title_state', $location);
-            } elseif ($location == "TX") {
-                $records = $records->where('title_state', $location);
-            } elseif ($location == "LA") {
-                $records = $records->where('title_state', $location);
-            } elseif ($location == "SEA") {
-                $records = $records->where('title_state', $location);
-            } elseif ($location == "BAL") {
-                $records = $records->where('title_state', $location);
-            } elseif ($location == "NFK") {
-                $records = $records->where('title_state', $location);
-            } else {
-                $records = $records;
-            }
-
-            if ($request->pagination) {
-                $this->perpage = $request->pagination;
+            if ($pagination && $search != "") {
+                $this->perpage = $pagination;
                 $records = $records->paginate($this->perpage);
             }
 
-            if ($records) {
+            if (count($records) > 0) {
                 $i = 1;
                 foreach ($records as $val) {
                     $url_edit = url($this->action . '/edit/' . $val->id);
@@ -329,18 +320,60 @@ class VehicleController extends Controller
                         '</tr>';
                     $i++;
                 }
-                $page .= '<div>' . '<div>' . '<p>' . 'Displaying ' . $records->count() . ' of ' . count($total) . ' vehicle(s)' . '</p>' . '</div>' . '<div>' . $records->links() . '</div>' . '</div>';
+                $page .= '<div>' . '<div class=' . '"d-flex justify-content-center"' . '>' . $records->links() . '</div>' . '<div>' . '<p>' . 'Displaying ' . $records->count() . ' of ' . count($total) . ' vehicle(s)' . '</p>' . '</div>' . '</div>';
                 $output = [
                     'table' => $table,
                     'pagination' => $page,
+                ];
+                return Response($output);
+            } else {
+                $table = '<tr class=' . '"font-size"' . '>' .
+                    '<td colspan=' . '"11"' . 'class=' . '"h5 text-muted text-center"' . '>' . 'NO VEHICL TO DISPLAY' . '</td>' . '</tr>';
+                $output = [
+                    'table' => $table,
                 ];
                 return Response($output);
             }
         }
     }
 
-    // public function attachments()
-    // {
-    //     return view($this->view)
-    // }
+    public function create_form(Request $request)
+    {
+        $data = $request->all();
+        // return $data;
+        $image = $request->file('images');
+        unset($data['images']);
+        $Obj = new Vehicle;
+        $new = $Obj->create($data);
+        if ($new) {
+            if ($image) {
+                $i = 0;
+                foreach ($image as $images) {
+                    $image_name = time() . '.' . $images->extension();
+                    $filename = Storage::putFile($this->directory, $images);
+                    $Obj_image = new Image;
+                    $Obj_vehicle = $Obj->where('vin', $data['vin'])->get();
+                    // return Response($Obj_vehicle[0]['id']);
+                    $Obj_image->vehicle_id = $Obj_vehicle[0]['id'];
+                    $Obj_image->name = $filename;
+                    $Obj_image->thumbnail = $image_name;
+                    $Obj_image->save();
+                    $output['result'] = "Success" . $i;
+                    $i++;
+                }
+            } else {
+                $output['result'] = "failed.";
+            }
+        }
+        // return Response($output);
+        $tab = $data['tab'];
+        unset($data['tab']);
+        switch ($tab) {
+            case ('general'):
+                $output['view'] = view('layouts.vehicle_create.attachments')->render();
+                break;
+        }
+        return Response($output);
+
+    }
 }

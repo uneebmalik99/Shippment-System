@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\CustomersExport;
 use App\Http\Controllers\Controller;
 use App\Models\BillingParty;
+use App\Models\Consignee;
 use App\Models\Customer;
 use App\Models\Notification;
 use App\Models\Quotation;
@@ -15,9 +16,9 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerController extends Controller
 {
-    private $type = "customers";
+    private $type = "Customers";
     private $singular = "customer";
-    private $plural = "customers";
+    private $plural = "Customers";
     private $view = "customer.";
     private $db_key = "id";
     private $user = [];
@@ -27,27 +28,35 @@ class CustomerController extends Controller
 
     public function Notification()
     {
-        $data['notification'] = Notification::with('user')->paginate($this->perpage);
-        $current = Carbon::now();
-        $date = $data['notification'][0]['created_at'];
+        $data['notification'] = Notification::with('customer')->paginate($this->perpage);
+        // dd();
+        if ($data['notification']->toArray()) {
+            $current = Carbon::now();
+            foreach ($data['notification'] as $key => $date_notification) {
 
-        $diff = $date->diffInSeconds(\Carbon\Carbon::now());
-        $days = $diff / 86400;
-        $hours = $diff / 3600;
-        $minutes = $diff / 60;
-        $seconds = $diff % 60;
+                $date = $date_notification->created_at;
+                $diff = $date->diffInSeconds(\Carbon\Carbon::now());
+                $days = $diff / 86400;
+                $hours = $diff / 3600;
+                $minutes = $diff / 3600;
+                $seconds = $diff % 60;
 
-        if ($days > 1) {
-            $data['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . $minutes . 'm,' . $seconds . 's ';
-        } elseif ($hours > 1) {
-            $data['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
-        } elseif ($minutes > 1) {
-            $data['date'] = (int) $minutes . 'm,' . $seconds . 's ';
+                if ($days > 1) {
+                    $data['notification'][$key]['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
+                } elseif ($hours > 1) {
+                    $data['notification'][$key]['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . (int) $seconds . 's ';
+                } elseif ($minutes > 1) {
+                    $data['notification'][$key]['date'] = (int) $minutes . 'm,' . (int) $seconds . 's ';
+                } else {
+                    $data['notification'][$key]['date'] = (int) $seconds . 's ';
+                }
+            }
+            $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
+            $data['notification_count'] = count($unread);
         } else {
-            $data['date'] = $seconds . 's ';
+            $data['notification'] = "asda";
         }
-        $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
-        $data['notification_count'] = count($unread);
+        // dd($data);
         return $data;
     }
 
@@ -71,6 +80,11 @@ class CustomerController extends Controller
 
         $notification = $this->Notification();
         $data['records'] = Customer::paginate($this->perpage);
+        $Obj = new Customer;
+        $data['inactive'] = $Obj->where('status', '0')->get();
+        $data['active'] = $Obj->where('status', '1')->get();
+        $data['shipper'] = Shipper::all();
+        $data['consignees'] = Consignee::all();
         return view($this->view . 'list', $data, $notification);
     }
 
@@ -205,33 +219,42 @@ class CustomerController extends Controller
             $records = new Customer;
             if ($request->search) {
                 $records = $records->where('customer_name', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('company_name', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('phone', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('email', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('state', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('country', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('tax_id', 'LIKE', '%' . $request->search . "%");
+                    ->orWhere('lead', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('level', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('main_phone', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('address', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('status', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('zip_code', 'LIKE', '%' . $request->search . "%");
             }
+
             if ($request->pagination) {
                 $this->perpage = $request->pagination;
                 $records = $records->paginate($this->perpage);
             }
+            return Response('adasdasdd');
 
             if ($records) {
                 $i = 1;
                 foreach ($records as $val) {
+                    if ($val->status == "1") {
+                        $val->status = '<div class=' . "badge badge-success py-1 px-2 rounded" . '>Active</div>';
+                    } else {
+                        $val->status = '<div class=' . "badge badge-danger py-1 px-2 rounded" . '>In Active</div>';
+                    }
                     $url_edit = url($this->action . '/edit/' . $val->id);
                     $url_delete = url($this->action . '/delete/' . $val->id);
                     $url_profile = url($this->action . '/profile/' . $val->id);
                     $table .= '<tr>' .
-                    '<td>' . $i . '</td>' .
-                    '<td>' . $val->customer_name . '</td>' .
-                    '<td>' . $val->company_name . '</td>' .
-                    '<td>' . $val->phone . '</td>' .
-                    '<td>' . $val->email . '</td>' .
-                    '<td>' . $val->state . '</td>' .
-                    '<td>' . $val->country . '</td>' .
-                    '<td>' . $val->tax_id . '</td>' .
+                    '<td>' . $val->customer_number . '</td>' .
+                    '<td class=' . "d-block" . '>
+                    <div>' . '<span>' . '<b>' . $val->customer_name . '</b>' .
+                    '</span>' . '<span style=' . "font-size: 12px !important;" . '>' . $val->lead . '</span>' .
+                    '</div>' . '</td>' .
+                    '<td>' . $val->level . '</td>' .
+                    '<td>' . $val->main_phone . '</td>' .
+                    '<td>' . $val->address . '</td>' .
+                    '<td>' . $val->status . '</td>' .
+                    '<td>' . $val->zip_code . '</td>' .
                         '<td>' .
                         '<button><a href=' . $url_edit . '><i class=' . "ti-pencil" . '></i></a></button>' . '<button><a href=' . $url_delete . '><i class=' . "ti-trash" . '></i></a></button>' . '<button><a href=' . $url_profile . '><i class=' . "ti-trash" . '></i></a></button>' .
                         '</td>' .
@@ -255,9 +278,12 @@ class CustomerController extends Controller
         $data['user'] = Customer::find($id)->toArray();
         $data['billing'] = BillingParty::where('customer_id', $id)->get();
         $data['shipper'] = Shipper::where('customer_id', $id)->get();
+        $data['notification'] = Notification::where('user_id', $id)->get();
+        // return Response($data);
         if ($request->tab) {
             $tab = $request->tab;
             $output = view('layouts.customer.' . $tab, $data)->render();
+            // dd($data);
         }
         return Response($output);
     }

@@ -46,22 +46,22 @@
                         <ul class="show-notification">
                             <li>
                                 <a href="#" data-lng="en">
-                                    <i class="flag-icon flag-icon-gb m-r-5"></i> English
+                                    <i class="flag-icon flag-icon-gb m-r-5"></i> New Jersey
                                 </a>
                             </li>
                             <li>
                                 <a href="#" data-lng="es">
-                                    <i class="flag-icon flag-icon-es m-r-5"></i> Spanish
+                                    <i class="flag-icon flag-icon-es m-r-5"></i> Savannah
                                 </a>
                             </li>
                             <li>
                                 <a href="#" data-lng="pt">
-                                    <i class="flag-icon flag-icon-pt m-r-5"></i> Portuguese
+                                    <i class="flag-icon flag-icon-pt m-r-5"></i> Texas
                                 </a>
                             </li>
                             <li>
                                 <a href="#" data-lng="fr">
-                                    <i class="flag-icon flag-icon-fr m-r-5"></i> French
+                                    <i class="flag-icon flag-icon-fr m-r-5"></i> Los Angeles
                                 </a>
                             </li>
                         </ul>
@@ -76,20 +76,34 @@
                                 <h6>Notifications</h6>
                                 <label class="label label-danger">New</label>
                             </li>
-                            @foreach ($notification as $notifications)
-                            <li id="notification_body" value="{{$notifications['id']}}" @if ($notifications['status']==1) class="bg-info border border-light rounded text-white"
-                                @endif>
-                                <div class="media">
-                                    <img class="d-flex align-self-center" src="{{ asset('assets/images/user.png') }}"
-                                        alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <h5 class="notification-user">{{ $notifications['user']['username'] }}</h5>
-                                        <p class="notification-msg">{{ $notifications['message'] }}</p>
-                                        <span class="notification-time text-muted"><b>{{ $date }}</b></span>
-                                    </div>
+                            @if ($notification)
+                                {{-- @dd($notification) --}}
+                                @foreach ($notification as $notifications)
+                                    <li class="notification_body" value="{{ @$notifications['id'] }}"
+                                        style="cursor: pointer;"
+                                        @if ($notifications['is_read'] == 0) 
+                                        class="notification_body bg-info border border-light rounded text-white" 
+                                        @endif>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center"
+                                                src="{{ asset('assets/images/user.png') }}"
+                                                alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">{{ @$notifications['user']['username'] }}
+                                                </h5>
+                                                <p class="notification-msg">{{ strip_tags(@$notifications['message']) }}
+                                                </p>
+                                                <span
+                                                    class="notification-time text-muted"><b>{{ @$notifications['date'] }}</b></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @else
+                                <div>
+                                    Nothing to display
                                 </div>
-                            </li>
-                            @endforeach
+                            @endif
                         </ul>
                     </li>
                     <li class="header-notification">
@@ -120,11 +134,11 @@
                                     <i class="ti-email"></i> My Messages
                                 </a>
                             </li> --}}
-                            {{-- <li>
-                                <a href="auth-lock-screen.html">
+                            <li>
+                                <a href="{{ route('lock') }}">
                                     <i class="ti-lock"></i> Lock Screen
                                 </a>
-                            </li> --}}
+                            </li>
                             <li>
                                 <a href="{{ route('auth.logout') }}">
                                     <i class="ti-layout-sidebar-left"></i> Logout
@@ -162,14 +176,16 @@
                                 <h3>Page Preloading Effect</h3>
                             </a>
                             <a class="dummy-media-object" href="#!">
-                                <img src="{{ asset('assets/images/avatar-1.png') }}" alt="DraggableDualViewSlideshow" />
+                                <img src="{{ asset('assets/images/avatar-1.png') }}"
+                                    alt="DraggableDualViewSlideshow" />
                                 <h3>Draggable Dual-View Slideshow</h3>
                             </a>
                         </div>
                         <div class="dummy-column">
                             <h2>Recent</h2>
                             <a class="dummy-media-object" href="#!">
-                                <img src="{{ asset('assets/images/avatar-1.png') }}" alt="TooltipStylesInspiration" />
+                                <img src="{{ asset('assets/images/avatar-1.png') }}"
+                                    alt="TooltipStylesInspiration" />
                                 <h3>Tooltip Styles Inspiration</h3>
                             </a>
                             <a class="dummy-media-object" href="#!">

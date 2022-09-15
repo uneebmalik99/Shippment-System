@@ -82,4 +82,9 @@ class Customer extends Model
     {
         return $this->hasMany('App\Models\Quotation');
     }
+
+    public function notifications()
+    {
+        return $this->hasMany('App\Models\Notification');
+    }
 }

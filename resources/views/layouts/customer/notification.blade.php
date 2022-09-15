@@ -27,29 +27,32 @@
             <div class="card user-card border border-info rounded p-3 h-100">
                 <div class="d-flex">
                     <input class="form-control border border-info rounded" type="text">
-                    {{-- <span><i class="fa-solid fa-clock-rotate-left"></i></span> --}}
                 </div>
-                <div class="card-body border border-info rounded d-flex mt-3 p-2">
-                    <div class="d-block">
-                        <div class="row col-12 d-flex justify-content-around">
-                            <div class="text-left p-0">
-                                <span>
-                                    <i class="fa-solid fa-clock-rotate-left px-1"></i><b class=" text-dark">Rate
-                                        Update</small></b>
-                                </span>
-                            </div>
-                            <div class="col-3" style="background-color:#E7E7FF; border-radius:px;">
-                                1
+                {{-- @dd($notification) --}}
+                @if ($notification)
+                    @foreach ($notification as $notifications)
+                        <div class="card-body border border-info rounded d-flex mt-3 p-2">
+                            <div>
+                                <div class="row col-12 d-flex justify-content-around">
+                                    <div class="text-left p-0">
+                                        <span>
+                                            <i class="fa-solid fa-clock-rotate-left px-1"></i><b class=" text-dark">{{@$notifications['subject']}}</small></b>
+                                        </span>
+                                    </div>
+                                    <div class="col-3" style="background-color:#E7E7FF; border-radius:px;">
+                                        1
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="text-muted">
+                                        {{strip_tags(@$notifications['message'])}}
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <span class="text-muted">
-                                Hey jon, do you remember....
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body-sm border border-info rounded d-flex mt-3 p-2">
+                    @endforeach
+                @endif
+                {{-- <div class="card-body-sm border border-info rounded d-flex mt-3 p-2">
                     <div class="d-block">
                         <div class="text-left p-0">
                             <span>
@@ -97,8 +100,8 @@
                             </span>
                         </div>
                     </div>
-                </div>
-                <div class="card-body-sm border border-info rounded d-flex mt-3 p-2">
+                </div> --}}
+                {{-- <div class="card-body-sm border border-info rounded d-flex mt-3 p-2">
                     <div class="d-block">
                         <div class="text-left p-0">
                             <span>
@@ -117,7 +120,7 @@
                             </span>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="col-7 px-0">

@@ -19,9 +19,9 @@ class CreateNotificationsTable extends Migration
             $table->text('message');
             $table->boolean('is_read');
             $table->integer('status');
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('customers')->onUpdate('cascade')->onDelete('cascade');
             $table->date('expiry_date');
-            $table->foreignId('added_by_role')->constrained('users')->onDelete('cascade')->onUpdate('cascade');            $table->softDeletes();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

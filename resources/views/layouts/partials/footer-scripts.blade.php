@@ -23,6 +23,11 @@
 </script>
 <script type="text/javascript" src="{{ asset('assets/bower_components/jquery-i18next/js/jquery-i18next.min.js') }}">
 </script>
+{{-- Calendar js --}}
+<script type="text/javascript" src="{{ asset('assets/pages/full-calender/calendar.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/bower_components/moment/js/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/bower_components/fullcalendar/js/fullcalendar.min.js') }}">
+</script>
 <!-- Custom js -->
 <script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/pages/advance-elements/navbar-elements.js') }}"></script>
@@ -37,47 +42,12 @@
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/trumbowyg.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/jquery.minicolors.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/jquery.postitall.js') }}"></script>
-{{-- Multiple image upload --}}
-<script src="{{ asset('assets/pages/jquery.filer/js/jquery.filer.min.js') }}"></script>
-<script src="{{ asset('assets/pages/filer/custom-filer.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/pages/filer/jquery.fileuploads.init.js') }}" type="text/javascript"></script>
+{{-- Custom JS for views --}}
+<script type="text/javascript" src="{{ asset('js/vehicle.js') }}"></script>
 {{-- Vehicles pagination and filter --}}
-<script>
-    $('#search_vehicle').on('keyup', function() {
-        $value = $(this).val();
-        $pagination = $('#pagination_vehicle').val();
-        $.ajax({
-            type: 'get',
-            url: '{{ URL::to('admin/vehicles/search') }}',
-            data: {
-                'search': $value,
-                'pagination': $pagination
-            },
-            success: function(data) {
-                console.log('search working');
-                $('#tbody').html(data.table);
-                $('#page').html(data.pagination);
-            }
-        });
-    })
-    $('#pagination_vehicle').on('change', function() {
-        $value = $(this).val();
-        $search = $('#search_vehicle').val();
-        $.ajax({
-            type: 'get',
-            url: '{{ URL::to('admin/vehicles/pagination') }}',
-            data: {
-                'search': $search,
-                'pagination': $value
-            },
-            success: function(data) {
-                console.log('pagination working')
-                $('#tbody').html(data.table);
-                $('#page').html(data.pagination);
-            }
-        });
-    })
-</script>
+{{-- image upload --}}
+<script type="text/javascript" src="{{ asset('assets/js/image-uploader.min.js') }}"></script>
+
 {{-- csrf tokens --}}
 <script type="text/javascript">
     $.ajaxSetup({
@@ -156,7 +126,8 @@
                 'pagination': $pagination
             },
             success: function(data) {
-                console.log($value, $pagination, 'search');
+                alert(data);
+                // console.log($value, $pagination, 'search');
                 $('#tbody').html(data.table);
                 $('#page').html(data.pagination);
             }
@@ -265,8 +236,9 @@
 
 {{-- Notifications --}}
 <script>
-    $('#notification_body').on('click', function() {
+    $('.notification_body').on('click', function() {
         $id = $(this).val();
+        // alert('adasdasd');
         $(this).addClass('bg-info border border-light rounded');
         $.ajax({
             type: 'get',
@@ -287,43 +259,43 @@
 
 {{-- Photos grid js --}}
 <script>
-    $(function() {
-        $i = 1;
-        $("#fileupload").change(function() {
-            // alert('asdaad');
-            if (typeof(FileReader) != "undefined") {
-                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
-                $($(this)[0].files).each(function() {
-                    var dvPreview = $("#dvPreview" + $i);
-                    dvPreview.html("");
-                    var file = $(this);
-                    if ($i <= 4) {
-                        if (regex.test(file[0].name.toLowerCase())) {
-                            var reader = new FileReader();
-                            reader.onload = function(e) {
-                                var img = $("<img />");
-                                img.attr("style",
-                                    "height:100px;width: 100px; padding:5px;");
-                                img.attr("src", e.target.result);
-                                dvPreview.append(img);
-                                dvPreview.next().children().removeClass('d-none');
-                            }
-                            reader.readAsDataURL(file[0]);
-                            $i++;
-                        } else {
-                            alert(file[0].name + " is not a valid image file.");
-                            dvPreview.html("");
-                            return false;
-                        }
-                    } else {
-                        alert('Only 4 images allowed.');
-                    }
-                });
-            } else {
-                alert("This browser does not support HTML5 FileReader.");
-            }
-        });
-    });
+    // $(function() {
+    //     $i = 1;
+    //     $("#fileupload_vehicle").change(function() {
+    //         alert('asdaad');
+    //         if (typeof(FileReader) != "undefined") {
+    //             var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+    //             $($(this)[0].files).each(function() {
+    //                 var dvPreview = $("#dvPreview" + $i);
+    //                 dvPreview.html("");
+    //                 var file = $(this);
+    //                 if ($i <= 4) {
+    //                     if (regex.test(file[0].name.toLowerCase())) {
+    //                         var reader = new FileReader();
+    //                         reader.onload = function(e) {
+    //                             var img = $("<img />");
+    //                             img.attr("style",
+    //                                 "height:100px;width: 100px; padding:5px;");
+    //                             img.attr("src", e.target.result);
+    //                             dvPreview.append(img);
+    //                             dvPreview.next().children().removeClass('d-none');
+    //                         }
+    //                         reader.readAsDataURL(file[0]);
+    //                         $i++;
+    //                     } else {
+    //                         alert(file[0].name + " is not a valid image file.");
+    //                         dvPreview.html("");
+    //                         return false;
+    //                     }
+    //                 } else {
+    //                     alert('Only 4 images allowed.');
+    //                 }
+    //             });
+    //         } else {
+    //             alert("This browser does not support HTML5 FileReader.");
+    //         }
+    //     });
+    // });
 </script>
 
 {{-- Delete Image --}}
@@ -338,7 +310,7 @@
 </script>
 
 {{-- Attachment Photo Grid --}}
-<script>
+{{-- <script>
     $(function() {
         $i = 1;
         $("#fileupload_attach").change(function() {
@@ -376,7 +348,7 @@
             }
         });
     });
-</script>
+</script> --}}
 
 {{-- Exit Modal --}}
 <script>
@@ -388,18 +360,37 @@
 {{-- Load Modal --}}
 <script>
     $('.modal_button').on('click', function() {
+        $id = $(this).attr('id');
         $tab = "general";
-        $.ajax({
-            type: 'get',
-            url: '{{ URL::to('admin/customers/create') }}',
-            data: {
-                'tab': $tab
-            },
-            success: function(data) {
-                $('.modal-body').html(data);
-                $('#exampleModal').modal('show');
-            }
-        });
+        if ($id == "customer") {
+            $.ajax({
+                type: 'get',
+                url: '{{ URL::to('admin/customers/create') }}',
+                data: {
+                    'tab': $tab
+                },
+                success: function(data) {
+                    $('.modal-body').html(data);
+                    $('#exampleModal').modal('show');
+                }
+            });
+        } else if ($id == "vehicle") {
+            $.ajax({
+                type: 'get',
+                url: '{{ URL::to('admin/vehicles/create') }}',
+                data: {
+                    'tab': $tab
+                },
+                success: function(data) {
+                    // console.log(data);
+                    $('.modal-body').html(data);
+                    $('#exampleModal').modal('show');
+                    $('.input-images-1').imageUploader({
+                        maxFiles: 4
+                    });
+                }
+            });
+        }
     })
 </script>
 
@@ -518,10 +509,80 @@
                 data: $data,
             },
             success: function(data) {
-                alert(data.sresult);
                 $('.modal-body').html(data.view);
                 $('#exampleModal').modal('show');
             }
+        });
+    }
+</script>
+
+<script>
+    function slide(id) {
+        if (id == "client") {
+            $("#client_body").slideToggle();
+        } else {
+            $("#shipper_body").slideToggle();
+        }
+
+    }
+</script>
+
+<script>
+    function change() {
+        if (typeof(FileReader) != "undefined") {
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+            $($(this)[0].files).each(function() {
+                var images = $("#images" + $i);
+                images.html("");
+                var file = $(this);
+                alert('asdas');
+                if ($i <= 4) {
+                    if (regex.test(file[0].name.toLowerCase())) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            var img = $("<img />");
+                            img.attr("style",
+                                "height:100px;width: 100px; padding:5px;");
+                            img.attr("src", e.target.result);
+                            images.append(img);
+                            images.next().children().removeClass('d-none');
+                        }
+                        reader.readAsDataURL(file[0]);
+                        $i++;
+                    } else {
+                        alert(file[0].name + " is not a valid image file.");
+                        images.html("");
+                        return false;
+                    }
+                } else {
+                    alert('Only 4 images allowed.');
+                }
+            });
+        } else {
+            alert("This browser does not support HTML5 FileReader.");
+        }
+    }
+</script>
+
+<script>
+    function create_vehicle_form() {
+        $('#vehicle_form').on('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(jQuery('#vehicle_form')[0]);
+            $.ajax({
+                method: 'POST',
+                url: '{{ URL::to('admin/vehicles/create_form') }}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    // console.log(data);
+                    // alert(data.result);
+                    $('.modal-body').html(data.view);
+                    $('#exampleModal').modal('show');
+                    // console.log(data);
+                }
+            });
         });
     }
 </script>
