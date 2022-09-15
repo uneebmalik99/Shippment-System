@@ -22,7 +22,7 @@ class ShipmentController extends Controller
     private $directory = "/shipment_images";
     private $action = "/admin/shipments";
 
-    public function Notification()
+    private function Notification()
     {
         $data['notification'] = Notification::with('customer')->paginate($this->perpage);
         // dd();
@@ -88,7 +88,8 @@ class ShipmentController extends Controller
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
             "action" => $action,
             "button_text" => "Create",
-            "module" => ['type' => $this->type,
+            "module" => [
+                'type' => $this->type,
                 'type' => $this->type,
                 'singular' => $this->singular,
                 'plural' => $this->plural,
@@ -100,18 +101,7 @@ class ShipmentController extends Controller
         ];
 
         if ($request->isMethod('post')) {
-            $id = $request->vehicle;
-            $request->request->remove('vehicle');
-            // dd($request->all());
-            $data = $request->all();
-            $Obj = new Shipment;
-            $Obj->create($data);
-            $shipment = $Obj->latest()->first();
-            $vehicle = Vehicle::find($id);
-            $vehicle->shipment_id = $shipment['id'];
-            // dd($request->all());
-            $vehicle->save();
-            return redirect($this->action)->with('success', 'Vehicle addedd successfully.');
+            $this->store($request);
         }
         $notification = $this->Notification();
         $data['vehicles'] = Vehicle::all()->toArray();
@@ -119,5 +109,43 @@ class ShipmentController extends Controller
         $data['records'] = Shipment::all()->toArray();
         return view($this->view . 'create_edit', $data, $notification);
     }
+    private function store($request)
+    {
 
+        // $request->request->remove('vehicle');
+        $data = $request->all();
+        $Obj = new Shipment;
+        $Obj->create($data);
+        $shipment = $Obj->latest()->first();
+
+        $vehicle = Vehicle::find($id);
+
+        $vehicle->shipment_id = $shipment->id;
+        // dd($request->all());
+        $vehicle->save();
+        return redirect($this->action)->with('success', 'Vehicle added successfully.');
+    }
+    public function attachmentsIndex()
+    {
+        $action = url($this->action . '/attachments');
+        $data = [
+            "page_title" => $this->plural . " attachments",
+            "page_heading" => $this->plural . ' attachments',
+            "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " attachments"),
+            "action" => $action,
+            "button_text" => "Upload Image",
+            "module" => [
+                'type' => $this->type,
+                'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'attachment',
+            ],
+        ];
+        $notification = $this->Notification();
+        return view('shipment.attachments', $notification, $data);
+    }
 }

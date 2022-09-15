@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "*",
         "livewire/livewire": "^2.10",
-        "maatwebsite/excel": "^3.1"
+        "maatwebsite/excel": "^3.1",
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

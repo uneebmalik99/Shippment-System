@@ -212,7 +212,8 @@
                     {{-- @dd($location) --}}
                     <div class="d-flex py-3 px-0">
                         <div class="col-3 p-0">
-                            <select class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2"
+                            <select
+                                class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2 vehicle_filtering"
                                 name="warehouse" id="vehicle_warehouse">
                                 <option value="" disabled selected>WAREHOUSE</option>
                                 @foreach ($location as $locations)
@@ -228,23 +229,26 @@
                             </select>
                         </div>
                         <div class="col-2 p-0">
-                            <select class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2"
-                                name="year" id="year">
+                            <select
+                                class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2 vehicle_filtering"
+                                name="year" id="vehicle_year">
                                 <option value="" disabled selected>YEAR</option>
                                 <option value="2019">2019</option>
                                 <option value="2020">2020</option>
                             </select>
                         </div>
                         <div class="col-2 p-0">
-                            <select class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2"
-                                name="make" id="make">
+                            <select
+                                class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2 vehicle_filtering"
+                                name="make" id="vehicle_make">
                                 <option value="" disabled selected>MAKE</option>
                                 <option value="honda">Honda</option>
                                 <option value="toyota">Toyota</option>
                             </select>
                         </div>
                         <div class="col-2 p-0">
-                            <select class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2"
+                            <select
+                                class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2 vehicle_filtering"
                                 name="model" id="model">
                                 <option value="" disabled selected>MODEL</option>
                                 <option value="civic">Civic</option>
@@ -252,7 +256,8 @@
                             </select>
                         </div>
                         <div class="col-3 p-0">
-                            <select class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2"
+                            <select
+                                class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2 vehicle_filtering"
                                 name="status" id="status_veicle">
                                 <option value="" disabled selected>STATUS</option>
                                 <option value="new_order">New Order</option>

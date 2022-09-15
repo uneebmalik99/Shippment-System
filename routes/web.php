@@ -57,9 +57,13 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/vehicles/edit/{id?}', [App\Http\Controllers\VehicleController::class, 'edit'])->name('vehicle.edit');
     Route::post('/vehicles/edit/{id?}', [App\Http\Controllers\VehicleController::class, 'edit'])->name('vehicle.edit');
     Route::get('/vehicles/delete/{id?}', [App\Http\Controllers\VehicleController::class, 'delete'])->name('vehicle.delete');
+    Route::get('/vehicles/datatable', [App\Http\Controllers\VehicleController::class, 'yajra'])->name('vehicle.datatable');
     Route::get('/vehicles/search', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.search');
     Route::get('/vehicles/pagination', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.pagination');
+    Route::get('/vehicles/filtering', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.pagination');
     Route::get('/vehicles/warehouse', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.pagination');
+    Route::get('/vehicles/year', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.pagination');
+    Route::get('/vehicles/make', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.pagination');
     Route::get('/vehicles/tabs', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.tabs');
     Route::get('/vehicles/location', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.location');
 
@@ -71,6 +75,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/shipment', [App\Http\Controllers\ShipmentController::class, 'index'])->name('shipment.list');
     Route::get('/shipments/create', [App\Http\Controllers\ShipmentController::class, 'create'])->name('shipment.create');
     Route::post('/shipments/create', [App\Http\Controllers\ShipmentController::class, 'create'])->name('shipment.create');
+    Route::post('/shipments/attachments', [App\Http\Controllers\ShipmentController::class, 'attachmentsIndex'])->name('shipment.attachments');
 
     //Notification Routes
     //Notification Routes
@@ -93,6 +98,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     // Calendar Routes
     Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'index'])->name('calendar.list');
+
+    //  Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.list');
 });
 
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->middleware('auth')->name('auth.logout');

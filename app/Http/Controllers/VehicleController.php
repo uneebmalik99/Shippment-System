@@ -256,6 +256,22 @@ class VehicleController extends Controller
         return redirect($this->action);
     }
 
+    public function yajra(Request $request){
+       if($request->ajax()){
+           $data = User::select('*');
+               return Datatables::of($data)
+                       ->addIndexColumn()
+                       ->addColumn('action', function($row){
+        
+                              $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+       
+                               return $btn;
+                       })
+                       ->rawColumns(['action'])
+                       ->make(true);
+           }
+       }
+
     public function filtering(Request $request)
     {
         if ($request->ajax()) {
@@ -267,11 +283,13 @@ class VehicleController extends Controller
             $search = $request->search;
             $pagination = $request->pagination;
             $warehouse = $request->warehouse;
+            $year = $request->year;
+            $make = $request->make;
             $output['check'] = $request->check;
+
             if ($search) {
                 if ($search == "") {
-                    // return "search empty";
-                    $records = $records->paginate($this->perpage);
+                    $records = $records;
                 }
 
                 if ($search != "") {
@@ -287,14 +305,29 @@ class VehicleController extends Controller
                 }
             }
 
-            if ($warehouse != "") {
-                $records = $records->where('title_state', $warehouse)->paginate($this->perpage);
-                // return count($records);
+            if ($warehouse) {
+                if ($warehouse != "") {
+                    $records = $records->where('title_state', $warehouse)->paginate($this->perpage);
+                    // return $records;
+                }
             }
 
-            if ($pagination && $search != "") {
-                $this->perpage = $pagination;
-                $records = $records->paginate($this->perpage);
+            if ($year) {
+                if ($year != "") {
+                    $records = $records->where('year', $year)->paginate($this->perpage);
+                    // return $records;
+                }
+            }
+
+            if ($make) {
+                if ($make != "") {
+                    $records = $records->where('make', $make)->paginate($this->perpage);
+                    // return count($records);
+                }
+            }
+
+            if ($pagination) {
+                $records = $records->paginate($pagination);
             }
 
             if (count($records) > 0) {
