@@ -72,7 +72,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/shipment', [App\Http\Controllers\ShipmentController::class, 'index'])->name('shipment.list');
     Route::get('/shipments/create', [App\Http\Controllers\ShipmentController::class, 'create'])->name('shipment.create');
     Route::post('/shipments/create', [App\Http\Controllers\ShipmentController::class, 'create'])->name('shipment.create');
-
+    Route::get('/shipments/attachments', [App\Http\Controllers\ShipmentController::class, 'attachmentsIndex'])->name('shipment.attachments');
     //Notification Routes
     //Notification Routes
     Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index'])->name('notification.list');
