@@ -221,6 +221,10 @@
 .card_footer p{
     font-size: 8px!important;
 }
+progress{
+    width: 118px;
+    height: 11px;
+}
 
 @media (max-width: 780px) {
   .boxes{
@@ -231,8 +235,8 @@
     margin-bottom:20px!important;
   }
 }
-</style>
 
+</style>
 
 
 <div class="container-fluid">
@@ -256,6 +260,9 @@
     {{-- dashboard heading end --}}
 
 
+                 
+
+
   
 
     
@@ -270,8 +277,8 @@
                         <div class="vehicle_card">
                             <div class="card_body">
                                 <h4>All Vehicles</h4>
-                                <b>8410</b>
-                                <p>Inventory Value:$ 435433</p>
+                                <b>{{count(@$all_vehicles)}}</b>
+                                <p>Inventory Value:$ {{@$allVehicles_value}}</p>
                                 
                                 <button class="">View Report</button>
                                 
@@ -285,9 +292,9 @@
                     <div class="col-sm-12 col-md-4 col-lg-4">
                         <div class="dispatch_card">
                             <div class="card_body">
-                                <h4>All Vehicles</h4>
-                                <b>8410</b>
-                                <p>Inventory Value:$ 435433</p>
+                                <h4>Dispatched</h4>
+                                <b>{{@$dispatch_count}}</b>
+                                <p>Inventory Value:$ {{@$dispatch_value}}</p>
                                 
                                 <button class="">View Report</button>
                                 
@@ -301,9 +308,9 @@
                     <div class="col-sm-12 col-md-4 col-lg-4">
                         <div class="onhand_card">
                             <div class="card_body">
-                                <h4>All Vehicles</h4>
-                                <b>8410</b>
-                                <p>Inventory Value:$ 435433</p>
+                                <h4>On Hand</h4>
+                                <b>{{@$onhand_count}}</b>
+                                <p>Inventory Value:$ {{@$onhand_value}}</p>
                                 
                                 <button class="">View Report</button>
                                 
@@ -348,9 +355,9 @@
                     <div class="col-sm-12 col-md-4 col-lg-4">
                         <div class="manifest_card">
                             <div class="card_body">
-                                <h4>All Vehicles</h4>
-                                <b>8410</b>
-                                <p>Inventory Value:$ 435433</p>
+                                <h4>Manifest</h4>
+                                <b>{{@$manifest_count}}</b>
+                                <p>Inventory Value:$ {{@$manifest_value}}</p>
                                 
                                 <button class="">View Report</button>
                                 
@@ -364,9 +371,9 @@
                     <div class="col-sm-12 col-md-4 col-lg-4">
                         <div class="shipped_card">
                             <div class="card_body">
-                                <h4>All Vehicles</h4>
-                                <b>8410</b>
-                                <p>Inventory Value:$ 435433</p>
+                                <h4>Shipped</h4>
+                                <b>{{@$shipped_count}}</b>
+                                <p>Inventory Value:$ {{@$shipped_value}}</p>
                                 
                                 <button class="">View Report</button>
                                 
@@ -380,9 +387,9 @@
                     <div class="col-sm-12 col-md-4 col-lg-4">
                         <div class="arrived_card">
                             <div class="card_body">
-                                <h4>All Vehicles</h4>
-                                <b>8410</b>
-                                <p>Inventory Value:$ 435433</p>
+                                <h4>Arrived</h4>
+                                <b>{{@$arrived_count}}</b>
+                                <p>Inventory Value:$ {{@$arrived_value}}</p>
                                 
                                 <button class="">View Report</button>
                                 
@@ -404,7 +411,7 @@
         <div class="col-12 col-sm-12 col-md-3 col-lg-3 mx-auto">
             <div class="row mx-auto">
                 <div class="col-12 mx-auto">
-                    <div class="dashboard_card">
+                    <div class="dashboard_card mx-auto">
                         <div class="car_header d-flex justify-content-between">
                             <h6>Shippement</h6>
                             <a href="">...</a>
@@ -486,71 +493,37 @@
             <table class="table">
                 <thead style="border-top:1px solid red;">
                     <tr>
-                        <th>Company</th>
-                        <th>Two date</th>
-                        <th>Deliver date</th>
-                        <th>Year</th>
-                        <th>Make</th>
-                        <th>Model</th>
-                        <th>Vin</th>
-                        <th>Lot No</th>
-                        <th>Two From</th>
-                        <th>Two Amount</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Level</th>
+                        <th>Phone</th>
+                        <th>State</th>
+                        <th>Country</th>
+                        <th>Status</th>
+                        <th>Address</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach(@$customers as $item)
                     <tr>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
+                        <td>{{$item['customer_name']}}</td>
+                        <td>{{$item['customer_email']}}</td>
+                        <td>{{$item['level']}}</td>
+                        <td>{{$item['main_phone']}}</td>
+                        <td>{{$item['state']}}</td>
+                        <td>{{$item['country']}}</td>
+                        <td>{{$item['status']}}</td>
+                        <td>{{$item['address_1']}}</td>
                     </tr>
 
-                    <tr>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                    </tr>
+                @endforeach
 
-                    <tr>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                    </tr>
+                   
+
+                    
 
 
-                    <tr>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                        <td>abc</td>
-                    </tr>
+                    
                 </tbody>
 
             </table>
@@ -560,11 +533,13 @@
 </div>
 <br>
 
+
+
 {{-- google map --}}
-<div class="container" style="background:white">
+<div class="container-fluid" >
     <div class="row my-4 shadow">
 
-        <div class="col-sm-12 col-md-7 col-lg-5 mx-auto">
+        <div class="col-sm-12 col-md-7 col-lg-6 mx-auto mb-2" style="background:#ffff">
     
             <div class="map_heading car_header d-flex justify-content-between">
                 <h6>Recent Order</h6>
@@ -573,7 +548,7 @@
             </div>
     
             <div class="row">
-                <div class="col-8 d-flex justify-content-center align-items-center" style="border-right:1px solid blue">
+                <div class="col-8 d-flex justify-content-center align-items-center mx-auto" style="border-right:1px solid blue;">
 
                     <img src="{{asset('images/map.png')}}" alt="" width="185px" height="200px">
 
@@ -581,33 +556,36 @@
                 <div class="col-4">
 
                     <label for="file"  style="color:green">New Jersey</label><br>	
-                    <progress id="file" value="32" max="100" style="color:green"> 32% </progress>
+                    <progress id="file" value="32" max="100" style="background:green;"> 32% </progress>
         
-                    <label for="file">Savannah</label><br>	
-                    <progress id="file" value="32" max="100"> 32% </progress>
+                    <label for="file" style="color:#EF5757">Savannah</label><br>	
+                    <progress id="file" value="32" max="100" style="background:#EF5757;"> 32% </progress>
 
-                    <label for="file">Savannah</label><br>	
-                    <progress id="file" value="32" max="100"> 32% </progress>
+                    <label for="file" style="color:#47D000">Savannah</label><br>	
+                    <progress id="file" value="32" max="100" style="background:#47D000"> 32% </progress>
 
-                    <label for="file">Savannah</label><br>	
-                    <progress id="file" value="32" max="100"> 32% </progress>
+                    <label for="file" style="color:#696CFF">Savannah</label><br>	
+                    <progress id="file" value="32" max="100" style="background:#696CFF"> 32% </progress>
 
-                    <label for="file">Savannah</label><br>	
-                    <progress id="file" value="32" max="100"> 32% </progress>
+                    <label for="file" style="color:#ECB800">Savannah</label><br>	
+                    <progress id="file" value="32" max="100" style="background:#ECB800"> 32% </progress>
 
-                    <label for="file">Savannah</label><br>	
-                    <progress id="file" value="32" max="100"> 32% </progress>
+                    <label for="file" style="color:#FF8514">Savannah</label><br>	
+                    <progress id="file" value="32" max="100" style="background:#FF8514"> 32% </progress>
 
-                    <label for="file">Savannah</label><br>	
-                    <progress id="file" value="32" max="100"> 32% </progress>
+                    <label for="file" style="color:#1CACD9">Savannah</label><br>	
+                    <progress id="file" value="32" max="100" style="background:#1CACD9"> 32% </progress>
 
                     
                 </div>
             </div>
             
         </div>
+        <div class="col-1">
+
+        </div>
     
-        <div class="col-sm-12 col-md-5 col-lg-5 mx-auto">
+        <div class="col-sm-12 col-md-5 col-lg-5 mx-auto" style="background:#fff">
 
             <div class="map_heading car_header d-flex justify-content-between">
                 <h6>Chat</h6>
@@ -617,7 +595,8 @@
            
         </div>
     
-       </div></div>
+       </div>
+    </div>
 
 {{-- google chart --}}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -630,11 +609,10 @@
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
       ['Task', 'Hours per Day'],
-      ['Work', 8],
-      ['Eat', 2],
-      ['TV', 4],
-      ['Gym', 2],
-      ['Sleep', 8]
+      ['Booked', 10],
+      ['Shipped', 2],
+      ['Arrived', 4],
+      ['Completed', 2],
     ]);
     
       // Optional; add a title and set the width and height of the chart

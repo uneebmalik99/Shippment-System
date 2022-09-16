@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\User;
+use App\Models\Vehicle;
+use App\Models\Customer;
 use Carbon\Carbon;
+
 
 class DashboardController extends Controller
 {
@@ -18,6 +22,7 @@ class DashboardController extends Controller
     private $user = [];
     private $directory = "user_images";
     private $action = "/admin/dashboard";
+
 
     public function Notification()
     {
@@ -53,8 +58,8 @@ class DashboardController extends Controller
         return $data;
     }
 
-    public function dashboard()
-    {
+
+    public function dashboard(){
         $data = [];
         $data = [
             // "page_title" => $this->plural . " List",
@@ -71,9 +76,53 @@ class DashboardController extends Controller
                 'action' => $this->action,
             ],
         ];
-        $records = User::paginate($this->perpage);
-        $data['records'] = $records;
+
+        $customer = Customer::all();
+        $data['customers'] = $customer->toArray();
+
+        $all_vehicles = Vehicle::all();
+        $allVehicles_value = Vehicle::get()->sum('value');
+        $data['all_vehicles'] = $all_vehicles;
+        $data['allVehicles_value'] = $allVehicles_value;
+
+
+        $onhand = Vehicle::where('status', '0');
+        $onhand_count = $onhand->count();
+        $onhand_value = $onhand->sum('value');
+        $data['onhand_count'] = $onhand_count;
+        $data['onhand_value'] = $onhand_value;
+
+        $dispatch =  Vehicle::where('status', '1');
+        $dispatch_count = $dispatch->count();
+        $dispatch_value = $dispatch->sum('value'); 
+        $data['dispatch_count'] = $dispatch_count;
+        $data['dispatch_value'] = $dispatch_value;
+
+
+        $manifest = Vehicle::where('status', '2');
+        $manifest_count = $manifest->count();
+        $manifest_value = $manifest->sum('value');
+        $data['manifest_count'] = $manifest_count;
+        $data['manifest_value'] = $manifest_value;
+
+
+        $shipped = Vehicle::where('status', '3');
+        $shipped_count = $shipped->count();
+        $shipped_value = $shipped->sum('value');
+        $data['shipped_count'] = $shipped_count;
+        $data['shipped_value'] = $shipped_value;
+
+     
+        $arrived = Vehicle::where('status', '4');
+        $arrived_count = $arrived->count();
+        $arrived_value = $arrived->sum('value');
+        $data['arrived_count'] = $arrived_count;
+        $data['arrived_value'] = $arrived_value;
+        
+
+
         $notification = $this->Notification();
         return view($this->view . 'list', $data, $notification);
     }
 }
+

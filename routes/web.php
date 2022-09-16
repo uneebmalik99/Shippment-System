@@ -57,7 +57,6 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/vehicles/edit/{id?}', [App\Http\Controllers\VehicleController::class, 'edit'])->name('vehicle.edit');
     Route::post('/vehicles/edit/{id?}', [App\Http\Controllers\VehicleController::class, 'edit'])->name('vehicle.edit');
     Route::get('/vehicles/delete/{id?}', [App\Http\Controllers\VehicleController::class, 'delete'])->name('vehicle.delete');
-    Route::get('/vehicles/datatable', [App\Http\Controllers\VehicleController::class, 'yajra'])->name('vehicle.datatable');
     Route::get('/vehicles/search', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.search');
     Route::get('/vehicles/pagination', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.pagination');
     Route::get('/vehicles/filtering', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.pagination');

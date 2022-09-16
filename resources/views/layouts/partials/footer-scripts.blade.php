@@ -43,10 +43,11 @@
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/jquery.minicolors.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/jquery.postitall.js') }}"></script>
 {{-- Custom JS for views --}}
-<script type="text/javascript" src="{{ asset('js/vehicle.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/ddtf.js') }}"></script>
 {{-- Vehicles pagination and filter --}}
 {{-- image upload --}}
 <script type="text/javascript" src="{{ asset('assets/js/image-uploader.min.js') }}"></script>
+<script src=""></script>
 
 {{-- csrf tokens --}}
 <script type="text/javascript">

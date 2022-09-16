@@ -204,33 +204,61 @@
                 {{-- alert end --}}
                 {{-- search filter start --}}
                 <div class="px-4 pt-2 mt-4">
-                    <div>
-                        <span class="h5 text-muted">
-                            <b>Search Filter</b>
-                        </span>
+                    <div class="d-flex justify-content-between">
+                        <div class="col-6 p-0">
+                            <span class="h5 text-muted">
+                                <b>Search Filter</b>
+                            </span>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <div class="col-4 d-flex justify-content-end p-0">
+                                <a href="{{ route('customer.export') }}"
+                                    class="px-1 text-muted font-size form-contorl-sm border p-1 rounded col-12"
+                                    style="background: #DBDBDB; cursor: pointer;">
+                                    <div class="d-flex justify-content-center align-items-center px-1">
+                                        <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11 16H13V7H16L12 2L8 7H11V16Z" fill="#8F8F8F" />
+                                            <path
+                                                d="M5 22H19C20.103 22 21 21.103 21 20V11C21 9.897 20.103 9 19 9H15V11H19V20H5V11H9V9H5C3.897 9 3 9.897 3 11V20C3 21.103 3.897 22 5 22Z"
+                                                fill="#8F8F8F" />
+                                        </svg>
+                                        <span class="pl-1 font-size">Export</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-5 px-0 d-flex justify-content-center">
+                                <button type="button"
+                                    class="text-white form-control-sm border py-1 btn-info rounded modal_button px-2 col-11"
+                                    style="background: #696CFF;" data-target="#exampleModal" id="vehicle">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a class="text-white d-flex align-items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24"
+                                                fill="white" viewBox="0 0 512 512">
+                                                <path
+                                                    d="M135.2 117.4L109.1 192H402.9l-26.1-74.6C372.3 104.6 360.2 96 346.6 96H165.4c-13.6 0-25.7 8.6-30.2 21.4zM39.6 196.8L74.8 96.3C88.3 57.8 124.6 32 165.4 32H346.6c40.8 0 77.1 25.8 90.6 64.3l35.2 100.5c23.2 9.6 39.6 32.5 39.6 59.2V400v48c0 17.7-14.3 32-32 32H448c-17.7 0-32-14.3-32-32V400H96v48c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V400 256c0-26.7 16.4-49.6 39.6-59.2zM128 288c0-17.7-14.3-32-32-32s-32 14.3-32 32s14.3 32 32 32s32-14.3 32-32zm288 32c17.7 0 32-14.3 32-32s-14.3-32-32-32s-32 14.3-32 32s14.3 32 32 32z" />
+                                            </svg>
+                                            <span class="pl-2 font-size">Add New Vehicle</span></a>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     {{-- @dd($location) --}}
                     <div class="d-flex py-3 px-0">
                         <div class="col-3 p-0">
                             <select
-                                class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2 vehicle_filtering"
+                                class="form-control-sm border-style input-border-style rounded vehicle_filtering col-11 text-muted px-2"
                                 name="warehouse" id="vehicle_warehouse">
                                 <option value="" disabled selected>WAREHOUSE</option>
                                 @foreach ($location as $locations)
                                     <option value="{{ $locations['id'] }}">{{ $locations['name'] }}</option>
                                 @endforeach
-                                {{-- <option value="new_jersey">New Jersey</option>
-                                <option value="savannah">Savannah</option>
-                                <option value="texas">Texas</option>
-                                <option value="los_angeles">Los Angeles</option>
-                                <option value="seattle">Seattle</option>
-                                <option value="baltimore">Baltimore</option>
-                                <option value="norfolk">Norfolk</option> --}}
                             </select>
                         </div>
                         <div class="col-2 p-0">
                             <select
-                                class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2 vehicle_filtering"
+                                class="form-control-sm border-style input-border-style rounded vehicle_filtering col-11 text-muted px-2"
                                 name="year" id="vehicle_year">
                                 <option value="" disabled selected>YEAR</option>
                                 <option value="2019">2019</option>
@@ -239,7 +267,7 @@
                         </div>
                         <div class="col-2 p-0">
                             <select
-                                class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2 vehicle_filtering"
+                                class="form-control-sm border-style input-border-style rounded vehicle_filtering col-11 text-muted px-2"
                                 name="make" id="vehicle_make">
                                 <option value="" disabled selected>MAKE</option>
                                 <option value="honda">Honda</option>
@@ -248,8 +276,8 @@
                         </div>
                         <div class="col-2 p-0">
                             <select
-                                class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2 vehicle_filtering"
-                                name="model" id="model">
+                                class="form-control-sm border-style input-border-style rounded vehicle_filtering col-11 text-muted px-2"
+                                name="model" id="vehicle_model">
                                 <option value="" disabled selected>MODEL</option>
                                 <option value="civic">Civic</option>
                                 <option value="corolla">Corolla</option>
@@ -257,8 +285,8 @@
                         </div>
                         <div class="col-3 p-0">
                             <select
-                                class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2 vehicle_filtering"
-                                name="status" id="status_veicle">
+                                class="form-control-sm border-style input-border-style rounded vehicle_filtering col-11 text-muted px-2"
+                                name="status" id="vehicle_status">
                                 <option value="" disabled selected>STATUS</option>
                                 <option value="new_order">New Order</option>
                                 <option value="posted">Posted</option>
@@ -269,7 +297,7 @@
                             </select>
                         </div>
                         {{-- <div class="col-4 p-0">
-                            <select class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2"
+                            <select class="form-control-sm border-style input-border-style rounded vehicle_filtering col-11 text-muted px-2"
                                 name="model" id="model">
                                 <option value="" disabled selected>MODEL</option>
                                 <option value="civic">Civic</option>
@@ -278,11 +306,10 @@
                         </div> --}}
                     </div>
                 </div>
-                <div class="border-style-search px-3 pt-4 pb-2 d-flex justify-content-between">
+                {{-- <div class="border-style-search px-3 pt-4 pb-2 d-flex justify-content-between">
                     <div class="col-1 p-0 d-flex align-items-center text-muted">
-                        <div class="col-12 d-flex justify-content-center px-1">
-                            <select class="form-control-sm border-style rounded col-12" name="pagination"
-                                id="vehicle_pagination">
+                        <div class="col-12 d-flex justify-content-center px-1" id="pagination_body">
+                            <select class="form-control-sm border-style rounded col-12" id="vehicle_pagination" name="pagination">
                                 <option value="1">1</option>
                                 <option value="200">200</option>
                                 <option value="300">300</option>
@@ -293,7 +320,7 @@
                         <div class="col-7 p-0 d-flex justify-content-end">
                             <input type="text"
                                 class="form-control-sm border-style border-info rounded col-7 text-dark text-left"
-                                name="search" placeholder="Search" id="vehicle_search">
+                                name="search" placeholder="Search">
                         </div>
                         <div class="col-2 px-3 d-flex justify-content-end">
                             <a href="{{ route('customer.export') }}"
@@ -327,10 +354,11 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 {{-- search filter end --}}
                 <div class="mt-2 bg-light" style="height: 100%;overflow-x: scroll;">
-                    <table id="vehicle_table" class="table scroll">
+
+                    <table id="vehicle_table" class="table scroll row-border">
                         <thead class="bg-custom text-dark">
                             <tr class="font-size">
                                 <th class="font-bold-tr">Sr</th>
@@ -343,7 +371,7 @@
                                 <th class="font-bold-tr">VALUE</th>
                                 <th class="font-bold-tr">STATUS</th>
                                 <th class="font-bold-tr">BUYER</th>
-                                <th class="sorttable_nosort font-bold-tr">Action</th>
+                                <th class="font-bold-tr">Action</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="vehicle_tbody">
@@ -412,22 +440,11 @@
                     </table>
                 </div>
                 <div class="d-flex justify-content-end p-2" id="page">
-                    <div>
-                        <div class="d-flex justify-content-center">
-                            {{ $records->links('vendor.pagination.default') }}
-                        </div>
-                        <div>
-                            <p>
-                                Displaying {{ $records->count() }} of {{ $records->total() }} customer(s).
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
         {{-- listing end --}}
     </div>
-
     {{-- New Design --}}
 
     <script>

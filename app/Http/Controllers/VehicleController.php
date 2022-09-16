@@ -27,7 +27,7 @@ class VehicleController extends Controller
 
     public function Notification()
     {
-        $data['notification'] = Notification::with('customer')->paginate($this->perpage);
+        $data['notification'] = Notification::with('customer')->get();
         // dd();
         if ($data['notification']->toArray()) {
             $current = Carbon::now();
@@ -50,7 +50,7 @@ class VehicleController extends Controller
                     $data['notification'][$key]['date'] = (int) $seconds . 's ';
                 }
             }
-            $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
+            $unread = Notification::with('customer')->where('status', '0')->get();
             $data['notification_count'] = count($unread);
         } else {
             $data['notification'] = "asda";
@@ -78,7 +78,7 @@ class VehicleController extends Controller
         ];
 
         $notification = $this->Notification();
-        $data['records'] = Vehicle::with('customer')->paginate($this->perpage);
+        $data['records'] = Vehicle::with('customer')->get();
         $data['new_orders'] = Vehicle::where('status', '0')->get();
         $data['posted'] = Vehicle::where('status', '1')->get();
         $data['dispatched'] = Vehicle::where('status', '2')->get();
@@ -256,22 +256,6 @@ class VehicleController extends Controller
         return redirect($this->action);
     }
 
-    public function yajra(Request $request){
-       if($request->ajax()){
-           $data = User::select('*');
-               return Datatables::of($data)
-                       ->addIndexColumn()
-                       ->addColumn('action', function($row){
-        
-                              $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-       
-                               return $btn;
-                       })
-                       ->rawColumns(['action'])
-                       ->make(true);
-           }
-       }
-
     public function filtering(Request $request)
     {
         if ($request->ajax()) {
@@ -280,30 +264,11 @@ class VehicleController extends Controller
             $page = "";
             $total = Vehicle::all()->toArray();
             $records = Vehicle::with('customer');
-            $search = $request->search;
-            $pagination = $request->pagination;
             $warehouse = $request->warehouse;
             $year = $request->year;
             $make = $request->make;
-            $output['check'] = $request->check;
-
-            if ($search) {
-                if ($search == "") {
-                    $records = $records;
-                }
-
-                if ($search != "") {
-                    // return "search not empty";
-                    $records = $records->where('customer_name', 'LIKE', '%' . $search . "%")
-                        ->orWhere('vin', 'LIKE', '%' . $search . "%")
-                        ->orWhere('year', 'LIKE', '%' . $search . "%")
-                        ->orWhere('make', 'LIKE', '%' . $search . "%")
-                        ->orWhere('model', 'LIKE', '%' . $search . "%")
-                        ->orWhere('vehicle_type', 'LIKE', '%' . $search . "%")
-                        ->orWhere('value', 'LIKE', '%' . $search . "%")
-                        ->orWhere('status', 'LIKE', '%' . $search . "%");
-                }
-            }
+            $model = $request->model;
+            $status = $request->status;
 
             if ($warehouse) {
                 if ($warehouse != "") {
@@ -326,10 +291,20 @@ class VehicleController extends Controller
                 }
             }
 
-            if ($pagination) {
-                $records = $records->paginate($pagination);
+            if ($model) {
+                if ($model != "") {
+                    $records = $records->where('model', $model)->paginate($this->perpage);
+                    // return count($records);
+                }
             }
 
+            if ($status) {
+                if ($status != "") {
+                    $records = $records->where('status', $status)->paginate($this->perpage);
+                    // return count($records);
+                }
+            }
+            // return count($records);
             if (count($records) > 0) {
                 $i = 1;
                 foreach ($records as $val) {
@@ -346,12 +321,13 @@ class VehicleController extends Controller
                     '<td>' . $val->value . '</td>' .
                     '<td>' . $val->status . '</td>' .
                     '<td>' . $val->customer->customer_name . '</td>' .
-                        '<td>' .
-                        '<button><a href=' . $url_edit . '><i class=' . '"ti-pencil"' . '></i></a></button>' . '<button><a href=' . $url_delete . '><i class=' . '"ti-trash"' . '></i></a></button>' .
+                    '<td>' .
+                    '<button><a href=' . $url_edit . '><i class=' . '"ti-pencil"' . '></i></a></button>' . '<button><a href=' . $url_delete . '><i class=' . '"ti-trash"' . '></i></a></button>' .
                         '</td>' .
                         '</tr>';
-                    $i++;
-                }
+                        $i++;
+                    }
+                    // return $table;
                 $page .= '<div>' . '<div class=' . '"d-flex justify-content-center"' . '>' . $records->links() . '</div>' . '<div>' . '<p>' . 'Displaying ' . $records->count() . ' of ' . count($total) . ' vehicle(s)' . '</p>' . '</div>' . '</div>';
                 $output = [
                     'table' => $table,
@@ -360,7 +336,7 @@ class VehicleController extends Controller
                 return Response($output);
             } else {
                 $table = '<tr class=' . '"font-size"' . '>' .
-                    '<td colspan=' . '"11"' . 'class=' . '"h5 text-muted text-center"' . '>' . 'NO VEHICL TO DISPLAY' . '</td>' . '</tr>';
+                    '<td colspan=' . '"11"' . 'class=' . '"h5 text-muted text-center"' . '>' . 'NO VEHICLES TO DISPLAY' . '</td>' . '</tr>';
                 $output = [
                     'table' => $table,
                 ];

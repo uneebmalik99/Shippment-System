@@ -76,18 +76,18 @@
             $('#user_table').DataTable();
         });
 
-
         $(document).ready(function() {
-            $('#vedicls_table').DataTable({
-                "language": {
-                    search: ""
+            $('#vehicle_table').DataTable({
+                language: {
+                    search: "",
+                    sLengthMenu: "_MENU_",
+                    searchPlaceholder: "Search"
                 },
-                "lengthChange": false,
-                "searching": false,
-                "ordering": false,
+
             });
         });
     </script>
+
 
 
 </body>
