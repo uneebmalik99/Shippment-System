@@ -35,6 +35,7 @@
 <!-- Required Fremwork -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/bootstrap/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/vehicle.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/admin_profile.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/notification.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/master.css') }}">
 <!-- themify-icons line icon -->

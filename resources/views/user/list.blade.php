@@ -198,8 +198,6 @@
                                     border-radius: 5px;width: 60px;border:none!important;outline:none">In
                                                 Active</button>
                                         @endif
-
-
                                     </td>
                                     <td>
                                         <div>
@@ -209,11 +207,6 @@
                                             </b>
 
                                         </div>
-                                        {{-- <div class="d-flex">
-                                        <div><i class="fa fa-lock text-danger"></i></div>
-                                        <div class="text-danger ml-2">Private</div>
-                                    </div> --}}
-
                                     </td>
                                     <td>
                                         <div>
@@ -240,7 +233,7 @@
 
                                         @if (@$role['name'] == 'Super Admin' || @$role['name'] == 'Sub Admin')
                                             <button class="profile-button">
-                                                <a href="">
+                                                <a href="{{ route('user.profile') . '/' .  @$val['id']}}">
                                                     <svg width="14" height="14" viewBox="0 0 16 14" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path

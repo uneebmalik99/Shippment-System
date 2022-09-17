@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    private $type = "users";
-    private $singular = "user";
-    private $plural = "users";
+    private $type = "Users";
+    private $singular = "User";
+    private $plural = "Users";
     private $view = "user.";
     private $db_key = "id";
     private $perpage = 100;
@@ -172,8 +172,8 @@ class UserController extends Controller
     {
         $data = [];
         $data = [
-            "page_title" => $this->singular . 'Profile',
-            "page_heading" => $this->singular . 'Profile',
+            "page_title" => $this->singular . ' Profile',
+            "page_heading" => $this->singular . ' Profile',
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
             "module" => ['type' => $this->type,
                 'type' => $this->type,

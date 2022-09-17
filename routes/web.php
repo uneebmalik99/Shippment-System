@@ -99,7 +99,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'index'])->name('calendar.list');
 
     //  Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.list');
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard.list');
 });
 
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->middleware('auth')->name('auth.logout');

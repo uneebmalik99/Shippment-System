@@ -81,9 +81,7 @@
                                 @foreach ($notification as $notifications)
                                     <li class="notification_body" value="{{ @$notifications['id'] }}"
                                         style="cursor: pointer;"
-                                        @if ($notifications['is_read'] == 0) 
-                                        class="notification_body bg-info border border-light rounded text-white" 
-                                        @endif>
+                                        @if ($notifications['is_read'] == 0) class="notification_body bg-info border border-light rounded text-white" @endif>
                                         <div class="media">
                                             <img class="d-flex align-self-center"
                                                 src="{{ asset('assets/images/user.png') }}"
@@ -125,9 +123,15 @@
                                 </a>
                             </li> --}}
                             <li>
-                                <a href="{{ route('user.profile') . '/' . Auth::user()->id }}">
-                                    <i class="ti-user"></i> Profile
-                                </a>
+                                @if (Auth::user()->role->name == 'Customer')
+                                    <a href="{{ route('customer.profile') . '/' . Auth::user()->id }}">
+                                        <i class="ti-user"></i> Profile
+                                    </a>
+                                @else
+                                    <a href="{{ route('user.profile') . '/' . Auth::user()->id }}">
+                                        <i class="ti-user"></i> Profile
+                                    </a>
+                                @endif
                             </li>
                             {{-- <li>
                                 <a href="email-inbox.html">

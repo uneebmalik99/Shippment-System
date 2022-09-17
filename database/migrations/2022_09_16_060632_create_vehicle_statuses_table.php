@@ -15,7 +15,6 @@ class CreateVehicleStatusesTable extends Migration
     {
         Schema::create('vehicle_statuses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('status_id')->constrained()->onDelete('cascade');
             $table->string('Status_name');
             $table->timestamps();
         });
