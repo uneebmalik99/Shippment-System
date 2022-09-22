@@ -11,37 +11,18 @@ class User extends Authenticatable
     use HasFactory;
     use softDeletes;
     protected $primaryKey = 'id';
-    public $timestamps = false;
-    protected $table = "users";
-    protected $fillable = [
-        'username',
-        'authkey',
-        'password',
-        'password_reset_token',
-        'email',
-        'status',
-        'role_id',
-        'user_is_detected',
-        'address_line1',
-        'address_line2',
-        'city',
-        'state',
-        'zip_code',
-        'phone',
-        'fax',
-        'customer_name',
-    ];
+    protected $table = "user";
+    protected $guarded = [];
 
-    public function customers()
+    public function vehicles()
     {
-        return $this->hasMany('App\Models\Customer');
+        return $this->hasMany('App\Models\Vehicle');
     }
 
     public function exports()
     {
         return $this->hasMany('App\Models\Export');
     }
-
 
     public function locations()
     {
@@ -63,7 +44,8 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\AuthAssignment');
     }
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo('App\Models\role');
     }
 }

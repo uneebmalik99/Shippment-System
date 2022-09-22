@@ -26,8 +26,8 @@ class DashboardController extends Controller
 
     public function Notification()
     {
-        $data['notification'] = Notification::with('customer')->paginate($this->perpage);
-        // dd();
+    
+        $data['notification'] = Notification::with('user')->paginate($this->perpage);
         if ($data['notification']->toArray()) {
             $current = Carbon::now();
             foreach ($data['notification'] as $key => $date_notification) {
@@ -49,7 +49,7 @@ class DashboardController extends Controller
                     $data['notification'][$key]['date'] = (int) $seconds . 's ';
                 }
             }
-            $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
+            $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
             $data['notification_count'] = count($unread);
         } else {
             $data['notification'] = "asda";
@@ -77,7 +77,7 @@ class DashboardController extends Controller
             ],
         ];
 
-        $customer = Customer::all();
+        $customer = User::where('role_id', 4)->get();
         $data['customers'] = $customer->toArray();
 
         $all_vehicles = Vehicle::all();
@@ -86,38 +86,51 @@ class DashboardController extends Controller
         $data['allVehicles_value'] = $allVehicles_value;
 
 
-        $onhand = Vehicle::where('status', '0');
+        $onhand = Vehicle::where('status', '1');
         $onhand_count = $onhand->count();
         $onhand_value = $onhand->sum('value');
         $data['onhand_count'] = $onhand_count;
         $data['onhand_value'] = $onhand_value;
 
-        $dispatch =  Vehicle::where('status', '1');
+        $dispatch =  Vehicle::where('status', '2');
         $dispatch_count = $dispatch->count();
         $dispatch_value = $dispatch->sum('value'); 
         $data['dispatch_count'] = $dispatch_count;
         $data['dispatch_value'] = $dispatch_value;
 
 
-        $manifest = Vehicle::where('status', '2');
+        $manifest = Vehicle::where('status', '3');
         $manifest_count = $manifest->count();
         $manifest_value = $manifest->sum('value');
         $data['manifest_count'] = $manifest_count;
         $data['manifest_value'] = $manifest_value;
 
 
-        $shipped = Vehicle::where('status', '3');
+        $shipped = Vehicle::where('status', '4');
         $shipped_count = $shipped->count();
         $shipped_value = $shipped->sum('value');
         $data['shipped_count'] = $shipped_count;
         $data['shipped_value'] = $shipped_value;
 
      
-        $arrived = Vehicle::where('status', '4');
+        $arrived = Vehicle::where('status', '5');
         $arrived_count = $arrived->count();
         $arrived_value = $arrived->sum('value');
         $data['arrived_count'] = $arrived_count;
         $data['arrived_value'] = $arrived_value;
+
+        $posted = Vehicle::where('status', '6');
+        $posted_count = $posted->count();
+        $posted_value = $posted->sum('value');
+        $data['posted_count'] = $posted_count;
+        $data['posted_value'] = $posted_value;
+
+
+        $booked = Vehicle::where('status', '7');
+        $booked_count = $booked->count();
+        $booked_value = $booked->sum('value');
+        $data['booked_count'] = $booked_count;
+        $data['booked_value'] = $booked_value;
         
 
 

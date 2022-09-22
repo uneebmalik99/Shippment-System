@@ -1,5 +1,5 @@
 @include('layouts.customer_create.navbar')
-<form action={{ $action }} method="POST" class="mt-3">
+<form method="POST" id="customer_billing_form" enctype="multipart/form-data">
     @csrf
     <div class="d-flex justify-content-around p-2">
         <div class="col-4 d-block">
@@ -282,13 +282,15 @@
 
     <div class="col-12 py-2 px-5 d-flex justify-content-end">
 
-        <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="customer_email"
-            id="customer_email" value="{{ @$module['email'] }}"readonly>
+        <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="email"
+            id="email" value="{{ @$module['email'] }}"readonly>
         {{-- <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_role"
             id="added_by_email" value="{{ Auth::user()->id }}"readonly value="{{ @$user['added_by_email'] }}">
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_role"
             id="added_by_email" value="{{ Auth::user()->id }}"readonly value="{{ @$user['added_by_email'] }}"> --}}
-        <input type="button" value="Next" class="btn col-1 next-style text-white" onclick="createForm(this.id)"
-            id="billing" name="{{ $module['button'] }}">
+            <button type="button" class="btn col-1 next-style text-white " onclick="createForm(this.id)"
+            id="billing_customer" name="{{ $module['button'] }}" style="padding: 4px;" data-next="shipper_customer_tab">
+        <div class="unskew">Next</div>
+    </button>
     </div>
 </form>

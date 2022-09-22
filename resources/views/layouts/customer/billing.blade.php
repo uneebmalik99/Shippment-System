@@ -6,7 +6,7 @@
 
         <div class="d-flex justify-content-between">
             <div class="col-4 text-left text-muted">
-                <label for="first_name">First Name</label>
+                <label for="first_name">Name</label>
                 <input class="form-control-sm border border-info rounded" type="text" name="first_name" id="first_name"
                     value="{{ @$billing[0]['first_name'] }}">
             </div>

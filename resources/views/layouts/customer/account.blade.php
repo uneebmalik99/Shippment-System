@@ -44,7 +44,6 @@
                     <th class="col-3 pl-5">PROJECT</th>
                     <th class="col-3 pl-5">TOTAL</th>
                     <th class="col-3 pl-5">PROGREE</th>
-                    <th class="col-3 pl-5">HOURS</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,16 +62,15 @@
                             New Vehicles
                         </span>
                     </td>
-                    <td>212</td>
+                    <td>{{@$customer_vehicles}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:70%">
-                                70%
+                                aria-valuemax="100" style="width:{{@$customer_vehicles_percentage}}">
+                                {{@$customer_vehicles_percentage}}
                             </div>
                         </div>
                     </td>
-                    <td>89:00</td>
                 </tr>
                 <tr>
                     <td class="col-3 pl-5 d-flex align-items-center">
@@ -96,16 +94,15 @@
                             Posted Vehicle
                         </span>
                     </td>
-                    <td>212</td>
+                    <td>{{@$posted_count}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:70%">
-                                70%
+                                aria-valuemax="100" style="width:{{@$posted_count_percentage}}">
+                                {{@$posted_count_percentage}}
                             </div>
                         </div>
                     </td>
-                    <td>89:00</td>
 
                 </tr>
                 <tr>
@@ -131,16 +128,15 @@
                             Dispatched Vehicle
                         </span>
                     </td>
-                    <td>212</td>
+                    <td>{{@$dispatch_count}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:70%">
-                                70%
+                                aria-valuemax="100" style="width:{{@$dispatch_count_percentage}}">
+                                {{@$dispatch_count_percentage}}
                             </div>
                         </div>
                     </td>
-                    <td>89:00</td>
                 </tr>
                 <tr>
                     <td class="col-3 pl-5 d-flex align-items-center">
@@ -162,16 +158,15 @@
                         <span class="px-2">
                             On Hand
                         </span>
-                    <td>212</td>
+                    <td>{{@$onhand_count}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:70%">
-                                70%
+                                aria-valuemax="100" style="width:{{@$onhand_count_percentage}}">
+                                {{@$onhand_count_percentage}}
                             </div>
                         </div>
                     </td>
-                    <td>89:00</td>
                     </td>
                 </tr>
                 <tr>
@@ -199,16 +194,15 @@
                             Booked
                         </span>
                     </td>
-                    <td>212</td>
+                    <td>{{@$booked_count}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:70%">
-                                70%
+                                aria-valuemax="100" style="width:{{@$booked_count_percentage}}">
+                                {{@$booked_count_percentage}}
                             </div>
                         </div>
                     </td>
-                    <td>89:00</td>
                 </tr>
                 <tr>
                     <td class="col-3 pl-5 d-flex align-items-center">
@@ -224,16 +218,15 @@
                             Shipped
                         </span>
                     </td>
-                    <td>212</td>
+                    <td>{{@$shipped_count}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:70%">
-                                70%
+                                aria-valuemax="100" style="width:{{@$shipped_count_percentage}}">
+                                {{@$shipped_count_percentage}}
                             </div>
                         </div>
                     </td>
-                    <td>89:00</td>
                 </tr>
                 <tr>
                     <td class="col-3 pl-5 d-flex align-items-center">
@@ -249,16 +242,15 @@
                             Arrived
                         </span>
                     </td>
-                    <td>212</td>
+                    <td>{{@$arrived_count}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:70%">
-                                70%
+                                aria-valuemax="100" style="width:{{@$arrived_count_percentage}}">
+                                {{@$arrived_count_percentage}}
                             </div>
                         </div>
                     </td>
-                    <td>89:00</td>
                 </tr>
             </tbody>
         </table>

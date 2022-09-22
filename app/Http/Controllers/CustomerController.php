@@ -6,12 +6,16 @@ use App\Exports\CustomersExport;
 use App\Http\Controllers\Controller;
 use App\Models\BillingParty;
 use App\Models\Consignee;
-use App\Models\Customer;
+use App\Models\CustomerDocument;
 use App\Models\Notification;
 use App\Models\Quotation;
 use App\Models\Shipper;
+use App\Models\User;
+use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerController extends Controller
@@ -28,9 +32,11 @@ class CustomerController extends Controller
 
     public function Notification()
     {
-        $data['notification'] = Notification::with('customer')->paginate($this->perpage);
-        // dd();
-        if ($data['notification']->toArray()) {
+
+        $data['notification'] = Notification::with('user')->paginate($this->perpage);
+        // return $data['notification'];
+        // dd(\Carbon\Carbon::now());
+        if ($data['notification']) {
             $current = Carbon::now();
             foreach ($data['notification'] as $key => $date_notification) {
 
@@ -56,6 +62,7 @@ class CustomerController extends Controller
         } else {
             $data['notification'] = "asda";
         }
+
         // dd($data);
         return $data;
     }
@@ -79,10 +86,56 @@ class CustomerController extends Controller
         ];
 
         $notification = $this->Notification();
-        $data['records'] = Customer::paginate($this->perpage);
-        $Obj = new Customer;
+        $data['records'] = User::where('role_id', 4)->paginate($this->perpage);
+
+        $data['active_customer'] = User::where('role_id', 4)->where('status', '1')->get()->count();
+
+        $data['Inactive_customer'] = User::where('role_id', 4)->where('status', '0')->get()->count();
+
+        $Obj = new User;
         $data['inactive'] = $Obj->where('status', '0')->get();
         $data['active'] = $Obj->where('status', '1')->get();
+
+        $lastweekshipper = Shipper::select('*')
+            ->whereBetween('created_at',
+                [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]
+            )->get()->count();
+
+        $currentweekshipper = Shipper::select("*")
+            ->whereBetween('created_at',
+                [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]
+            )
+            ->get();
+        if ($lastweekshipper > 0) {
+
+            $diff = $currentweekshipper - $lastweekshipper;
+            $data['lastweekanalysis'] = ($diff / $lastweekshipper) * 100;
+
+        } else {
+            $data['lastweekanalysis'] = 100;
+
+        }
+
+        $lastweekconsignee = Consignee::select('*')
+            ->whereBetween('created_at',
+                [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]
+            )->get()->count();
+
+        $currentweekconsignee = Consignee::select("*")
+            ->whereBetween('created_at',
+                [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]
+            )
+            ->get()->count();
+        // dd($lastweekconsignee);
+
+        if ($lastweekconsignee > 0) {
+
+            $differ = $currentweekconsignee - $lastweekconsignee;
+            $data['lastweekconsigneeanalysis'] = ($differ / $lastweekconsignee) * 100;
+        } else {
+            $data['lastweekconsigneeanalysis'] = 100;
+        }
+
         $data['shipper'] = Shipper::all();
         $data['consignees'] = Consignee::all();
         return view($this->view . 'list', $data, $notification);
@@ -118,7 +171,7 @@ class CustomerController extends Controller
 
         if ($request->isMethod('post')) {
             $record = $request->all();
-            $Obj = new Customer;
+            $Obj = new User;
             // $request->validate([
             //     'customer_name' => 'required|alpha',
             //     'company_name' => 'required|alpha',
@@ -138,58 +191,73 @@ class CustomerController extends Controller
 
     public function edit(Request $request, $id = null)
     {
-        if ($request->isMethod('post')) {
-            $data = $request->all();
-            $Obj = Customer::find($id);
-            // $request->validate([
-            //     'customer_name' => 'required',
-            //     'company_name' => 'required',
-            //     'phone' => 'required|max:12|alpha_dash',
-            //     'email' => 'required|email',
-            //     'zip_code' => 'numeric',
-            //     'tax_id' => 'required|numeric|max:4',
-            //     'phone_2' => 'required|max:12|alpha_dash',
-            // ]);
-            $Obj->update($data);
-            return redirect($this->action)->with('success', 'Edited successfully.');
-        }
-        $action = url($this->action . '/edit/' . $id);
-        $data = [];
-        $data = [
-            // 'user' => Customer::all()->toArray(),
-            "page_title" => "Edit " . $this->singular,
-            "page_heading" => "Edit " . $this->singular,
-            "button_text" => "Update ",
-            "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
-            'action' => $action,
-            "module" => ['type' => $this->type,
-                'type' => $this->type,
-                'singular' => $this->singular,
-                'plural' => $this->plural,
-                'view' => $this->view,
-                'db_key' => $this->db_key,
-                'action' => $this->action,
-                'page' => 'edit',
-                'button' => 'Update',
-            ],
-        ];
-        $notification = $this->Notification();
-        $data['user'] = Customer::find($id)->toArray();
-        return view($this->view . 'create_edit', $data, $notification);
+
+        // if ($request->isMethod('post')) {
+        //     $data = $request->all();
+        //     $Obj = User::find($id);
+        //     $Obj->update($data);
+        //     return redirect($this->action)->with('success', 'Edited successfully.');
+        // }
+        // $action = url($this->action . '/edit/' . $id);
+        // $data = [];
+        // $data = [
+        //     // 'user' => Customer::all()->toArray(),
+        //     "page_title" => "Edit " . $this->singular,
+        //     "page_heading" => "Edit " . $this->singular,
+        //     "button_text" => "Update ",
+        //     "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
+        //     'action' => $action,
+        //     "module" => ['type' => $this->type,
+        //         'type' => $this->type,
+        //         'singular' => $this->singular,
+        //         'plural' => $this->plural,
+        //         'view' => $this->view,
+        //         'db_key' => $this->db_key,
+        //         'action' => $this->action,
+        //         'page' => 'edit',
+        //         'button' => 'Update',
+        //     ],
+        // ];
+        // $notification = $this->Notification();
+        $data['doc'] = CustomerDocument::where('customer_user_id', $id)->get();
+
+        $data['user'] = User::find($id)->toArray();
+
+        return $data;
+        // return $data['user'];
+        // return view($this->view . 'create_edit', $data, $notification);
     }
 
     public function delete($id = null)
     {
-        $customer = Customer::find($id);
+        $customer = User::find($id);
         $customer->delete();
         return redirect($this->action);
+    }
+
+    public function ChangeStatus($id)
+    {
+
+        $customer = User::find($id);
+        if ($customer->status == '1') {
+
+            $customer->status = '0';
+            $customer->save();
+        } else {
+
+            $customer->status = '1';
+            $customer->save();
+
+        }
+        $message = "Status Updated Successfully";
+        return $message;
     }
 
     public function profile($id)
     {
         $action = url($this->action . '/profile/');
         $data = [
-            'user' => Customer::find($id)->toArray(),
+            'user' => User::find($id)->toArray(),
             "page_title" => "Profile " . $this->singular,
             "page_heading" => "Profile " . $this->singular,
             "button_text" => "Update ",
@@ -206,6 +274,106 @@ class CustomerController extends Controller
                 'button' => 'Update',
             ],
         ];
+
+        $all_vehicles = Vehicle::all()->count();
+
+        $customer_vehicles = Vehicle::where('added_by_user', $id)->count();
+        $CustomerVehicles_value = Vehicle::get()->sum('value');
+        if ($all_vehicles != 0) {
+            $customer_vehicles_percentage = ($customer_vehicles / $all_vehicles) * 100;
+            $data['customer_vehicles_percentage'] = $customer_vehicles_percentage;
+        } else {
+            $data['customer_vehicles_percentage'] = 0;
+        }
+        $data['customer_vehicles'] = $customer_vehicles;
+        $data['allVehicles_value'] = $CustomerVehicles_value;
+
+        $onhand = Vehicle::where('status', '1')->orwhere('added_by_user', $id);
+        $onhand_count = $onhand->count();
+        $onhand_value = $onhand->sum('value');
+        $data['onhand_count'] = $onhand_count;
+        $data['onhand_value'] = $onhand_value;
+        if ($all_vehicles != 0) {
+            $onhand_count_percentage = ($onhand_count / $all_vehicles) * 100;
+            $data['onhand_count_percentage'] = $onhand_count_percentage;
+        } else {
+            $data['onhand_count_percentage'] = 0;
+        }
+
+        $dispatch = Vehicle::where('status', '2')->orwhere('added_by_user', $id);
+        $dispatch_count = $dispatch->count();
+        $dispatch_value = $dispatch->sum('value');
+        $data['dispatch_count'] = $dispatch_count;
+        $data['dispatch_value'] = $dispatch_value;
+        if ($all_vehicles != 0) {
+            $dispatch_count_percentage = ($dispatch_count / $all_vehicles) * 100;
+            $data['dispatch_count_percentage'] = $dispatch_count_percentage;
+        } else {
+            $data['dispatch_count_percentage'] = 0;
+        }
+
+        $manifest = Vehicle::where('status', '3')->orwhere('added_by_user', $id);
+        $manifest_count = $manifest->count();
+        $manifest_value = $manifest->sum('value');
+        $data['manifest_count'] = $manifest_count;
+        $data['manifest_value'] = $manifest_value;
+        if ($all_vehicles != 0) {
+            $manifest_count_percentage = ($manifest_count / $all_vehicles) * 100;
+            $data['manifest_count_percentage'] = $manifest_count_percentage;
+        } else {
+            $data['manifest_count_percentage'] = 0;
+        }
+
+        $shipped = Vehicle::where('status', '4')->orwhere('added_by_user', $id);
+        $shipped_count = $shipped->count();
+        $shipped_value = $shipped->sum('value');
+        $data['shipped_count'] = $shipped_count;
+        $data['shipped_value'] = $shipped_value;
+        if ($all_vehicles != 0) {
+            $shipped_count_percentage = ($shipped_count / $all_vehicles) * 100;
+            $data['shipped_count_percentage'] = $shipped_count_percentage;
+        } else {
+            $data['shipped_count_percentage'] = 0;
+        }
+
+        $arrived = Vehicle::where('status', '5')->orwhere('added_by_user', $id);
+        $arrived_count = $arrived->count();
+        $arrived_value = $arrived->sum('value');
+        $data['arrived_count'] = $arrived_count;
+        $data['arrived_value'] = $arrived_value;
+        if ($all_vehicles != 0) {
+            $arrived_count_percentage = ($arrived_count / $all_vehicles) * 100;
+            $data['arrived_count_percentage'] = $arrived_count_percentage;
+        } else {
+            $data['arrived_count_percentage'] = 0;
+        }
+
+        $posted = Vehicle::where('status', '6')->orwhere('added_by_user', $id);
+        $posted_count = $posted->count();
+        $posted_value = $posted->sum('value');
+        $data['posted_count'] = $posted_count;
+        $data['posted_value'] = $posted_value;
+        if ($all_vehicles != 0) {
+            $posted_count_percentage = ($posted_count / $all_vehicles) * 100;
+            $data['posted_count_percentage'] = $posted_count_percentage;
+        } else {
+            $data['posted_count_percentage'] = 0;
+        }
+
+        $booked = Vehicle::where('status', '7')->orwhere('added_by_user', $id);
+        $booked_count = $booked->count();
+        $booked_value = $booked->sum('value');
+        $data['booked_count'] = $booked_count;
+        $data['booked_value'] = $booked_value;
+        if ($all_vehicles != 0) {
+            $booked_count_percentage = ($booked_count / $all_vehicles) * 100;
+            $data['booked_count_percentage'] = $booked_count_percentage;
+        } else {
+            $data['booked_count_percentage'] = 0;
+        }
+
+        // return $data['records'];
+
         $notification = $this->Notification();
         return view($this->view . 'profile', $data, $notification);
     }
@@ -215,8 +383,8 @@ class CustomerController extends Controller
         if ($request->ajax()) {
             $table = "";
             $page = "";
-            $total = Customer::all()->toArray();
-            $records = new Customer;
+            $total = User::where('role_id', 4)->toArray();
+            $records = new User;
             if ($request->search) {
                 $records = $records->where('customer_name', 'LIKE', '%' . $request->search . "%")
                     ->orWhere('lead', 'LIKE', '%' . $request->search . "%")
@@ -273,13 +441,15 @@ class CustomerController extends Controller
 
     public function profile_tab(Request $request)
     {
+
         $id = $request->id;
         $data = [];
-        $data['user'] = Customer::find($id)->toArray();
+        $data['user'] = User::find($id)->toArray();
         $data['billing'] = BillingParty::where('customer_id', $id)->get();
         $data['shipper'] = Shipper::where('customer_id', $id)->get();
         $data['notification'] = Notification::where('user_id', $id)->get();
-        // return Response($data);
+        $data['documents'] = CustomerDocument::where('customer_user_id', $id)->get()->toArray();
+
         if ($request->tab) {
             $tab = $request->tab;
             $output = view('layouts.customer.' . $tab, $data)->render();
@@ -290,11 +460,21 @@ class CustomerController extends Controller
 
     public function general_create(Request $request)
     {
+
         if ($request->ajax()) {
+            // $data = [];
+            $data = $request->all();
+
             $tab = $request->tab;
-            $data = $request->data;
-            $email = $data['customer_email'];
+            $image = $request->file('images');
+            $file = $request->file('user_file');
+            unset($data['user_file']);
+            unset($data['tab']);
+
+            // $tab = $request->tab;
+            $email = $data['email'];
             $output = [];
+            $documents = [];
             $view_data = [];
             $action = url($this->action . '/create');
             $view_data = [
@@ -316,47 +496,98 @@ class CustomerController extends Controller
             ];
 
             switch ($tab) {
-                case ('general'):
-                    $output['view'] = view('layouts.customer_create.billing', $view_data)->render();
+                case ('general_customer'):
+                    $view = view('layouts.customer_create.billing', $view_data)->render();
+
                     break;
 
-                case ('billing'):
-                    $output['view'] = view('layouts.customer_create.shipper', $view_data)->render();
+                case ('billing_customer'):
+                    $view = view('layouts.customer_create.shipper', $view_data)->render();
+
                     break;
 
-                case ('shipper'):
-                    $output['view'] = view('layouts.customer_create.quotation', $view_data)->render();
+                case ('shipper_customer'):
+                    $view = view('layouts.customer_create.quotation', $view_data)->render();
+
                     break;
             }
 
-            if ($tab != "general") {
-                $customer = Customer::where('customer_email', $email)->get();
+            if ($tab != "general_customer") {
+                $customer = User::where('email', $email)->get();
                 foreach ($customer as $val) {
                     $id = $val['id'];
                 }
                 $data['customer_id'] = $id;
-                unset($data['customer_email']);
+
+                unset($data['email']);
             }
 
-            if ($tab == "general") {
-                $Obj = new Customer;
-                $Obj->create($data);
-                $output['result'] = "Success!";
+            if ($tab == "general_customer") {
+                // dd($file);
+                // dd($documents['customer_user_id']);
+                foreach ($image as $images) {
+                    $filename = Storage::putFile($this->directory, $images);
 
-            } elseif ($tab == "billing") {
+                    $images->move(public_path($this->directory), $filename);
+
+                    $data['user_image'] = $filename;
+                    $data['password'] = Hash::make($request->password);
+                    unset($data['images']);
+                    $Obj = new User;
+                    $Obj->create($data);
+                }
+                // $email = $data['email'];
+                $user = User::where('email', $email)->get();
+
+                $user_id = $user[0]['id'];
+
+                foreach ($file as $files) {
+                    $docname = Storage::putFile($this->directory, $files);
+                    $documents['file'] = $docname;
+
+                    $files->move(public_path($this->directory), $docname);
+
+                    $documents['customer_user_id'] = $user_id;
+                    $Obj = new CustomerDocument;
+                    $Obj->create($documents);
+                }
+                $output =
+                    [
+                    'result' => 'success',
+                    'tab' => 'Customer created successfully!',
+                    'view' => $view,
+                ];
+
+            } elseif ($tab == "billing_customer") {
                 $Obj = new BillingParty;
                 $Obj->create($data);
-                $output['result'] = "Success!";
+                $output =
+                    [
+                    'result' => 'success',
+                    'tab' => 'Billing data inserted!',
+                    'view' => $view,
+                ];
 
-            } elseif ($tab == "shipper") {
+            } elseif ($tab == "shipper_customer") {
                 $Obj = new Shipper;
                 $Obj->create($data);
-                $output['result'] = "Success!";
+                $output =
+                    [
+                    'result' => 'success',
+                    'tab' => 'Shipper data inserted!',
+                    'view' => $view,
+                ];
 
             } else {
                 $Obj = new Quotation;
                 $Obj->create($data);
-                $output['result'] = "Success!";
+                $output =
+                    [
+                    'result' => 'success',
+                    'tab' => 'Quotation data inserted!',
+                    // 'view' => $view,
+                    'quotation' => 'fade',
+                ];
             }
             return Response($output);
         }

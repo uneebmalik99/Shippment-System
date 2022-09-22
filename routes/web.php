@@ -46,6 +46,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/customers/search', [App\Http\Controllers\CustomerController::class, 'search'])->name('customer.search');
     Route::get('/customers/pagination', [App\Http\Controllers\CustomerController::class, 'search'])->name('customer.pagination');
     Route::get('/customers/export', [App\Http\Controllers\CustomerController::class, 'export'])->name('customer.export');
+    Route::get('/customer/changeStatus/{id?}', [App\Http\Controllers\CustomerController::class, 'ChangeStatus'])->name('customer.changeStatus');
 
     //Vehicle Routes
     Route::get('/vehicles', [App\Http\Controllers\VehicleController::class, 'index'])->name('vehicle.list');
@@ -65,6 +66,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/vehicles/make', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.pagination');
     Route::get('/vehicles/tabs', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.tabs');
     Route::get('/vehicles/location', [App\Http\Controllers\VehicleController::class, 'filtering'])->name('vehicle.location');
+    Route::post('/vehicles/attachments', [App\Http\Controllers\VehicleController::class, 'store_image'])->name('vehicle.images');
 
     //Sticky Notes Routes
     Route::get('/stickynotes', [App\Http\Controllers\StickyController::class, 'index'])->name('sticky.list');

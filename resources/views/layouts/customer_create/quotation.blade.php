@@ -1,5 +1,5 @@
 @include('layouts.customer_create.navbar')
-<form action={{ $action }} method="POST" class="mt-3">
+<form method="POST" id="customer_quotation_form" enctype="multipart/form-data">
     @csrf
     <div class="d-flex justify-content-around p-2">
         <div class="col-4 d-block">
@@ -583,11 +583,10 @@
     </div> --}}
 
     <div class="col-12 py-2 px-5 d-flex justify-content-end">
-        <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="customer_email"
-            id="customer_email" value="{{ @$module['email'] }}"readonly>
-        <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_role"
-            id="added_by_email" value="{{ Auth::user()->id }}"readonly value="{{ @$user['added_by_email'] }}">
+        <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="email" id="email" value="{{ @$module['email'] }}"readonly>
+        {{-- <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_user"
+            id="added_by_user" value="{{ Auth::user()->id }}"readonly> --}}
         <input type="button" value="Create" class="btn col-1 next-style text-white" onclick="createForm(this.id)"
-            id="quotation" name="{{ $module['button'] }}">
+            id="quotation_customer" name="{{ $module['button'] }}">
     </div>
 </form>

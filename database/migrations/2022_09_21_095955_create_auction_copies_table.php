@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomerDocumentsTable extends Migration
+class CreateAuctionCopiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCustomerDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer__documents', function (Blueprint $table) {
+        Schema::create('auction_copies', function (Blueprint $table) {
             $table->id();
-            $table->string('file');
-            $table->string('description');
-            $table->foreignId('customer_user_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('thumbnail');
+            $table->string('name');
+            $table->string('type');
+            $table->string('size');
+            $table->foreignId('vehicle_id')->constrained('vehicles')->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class CreateCustomerDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer__documents');
+        Schema::dropIfExists('auction_copies');
     }
 }

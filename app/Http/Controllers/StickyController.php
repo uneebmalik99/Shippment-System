@@ -64,7 +64,7 @@ class StickyController extends Controller
             ],
         ];
         $notification = $this->Notification();
-        $data['records'] = Sticky::with('customer')->paginate($this->perpage);
+        $data['records'] = Sticky::with('user')->paginate($this->perpage);
         return view($this->view . 'list', $data, $notification);
     }
 

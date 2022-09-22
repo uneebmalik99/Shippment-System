@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function Notification()
     {
-        $data['notification'] = Notification::with('customer')->paginate($this->perpage);
+        $data['notification'] = Notification::with('user')->paginate($this->perpage);
         // dd();
         if ($data['notification']->toArray()) {
             $current = Carbon::now();
@@ -47,7 +47,7 @@ class UserController extends Controller
                     $data['notification'][$key]['date'] = (int) $seconds . 's ';
                 }
             }
-            $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
+            $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
             $data['notification_count'] = count($unread);
         } else {
             $data['notification'] = "asda";
@@ -82,7 +82,7 @@ class UserController extends Controller
             $records = User::where('email', Auth::user()->email)->get();
             $data['records'] = $records;
         } else {
-            $records = User::all();
+            $records = User::where('role_id', 1)->orwhere('role_id', 2)->orwhere('role_id', 3)->get();
             $data['records'] = $records;
         }
 

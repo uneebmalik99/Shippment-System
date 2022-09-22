@@ -23,7 +23,7 @@ class Notification extends Model
         'added_by_role',
     ];
 
-    public function customer()
+    public function user()
     {
         return $this->belongsTo('App\Models\Customer', 'user_id', 'id');
     }

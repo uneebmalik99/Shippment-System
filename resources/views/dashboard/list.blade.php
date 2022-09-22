@@ -498,7 +498,7 @@
                                     <p>Booked</p>
                                 </div>
                                 <div>
-                                    <p>25</p>
+                                    <p>{{ @$booked_count }}</p>
                                 </div>
                             </div>
 
@@ -509,7 +509,7 @@
                                     <p>Shipped</p>
                                 </div>
                                 <div>
-                                    <p>25</p>
+                                    <p>{{ @$shipped_count }}</p>
                                 </div>
                             </div>
 
@@ -519,7 +519,7 @@
                                     <p>Arrived</p>
                                 </div>
                                 <div>
-                                    <p>10</p>
+                                    <p>{{ @$arrived_count }}</p>
                                 </div>
                             </div>
 
@@ -529,7 +529,7 @@
                                     <p>Completed</p>
                                 </div>
                                 <div>
-                                    <p>10</p>
+                                    <p>{{ @$arrived_count }}</p>
                                 </div>
                             </div>
 
@@ -587,14 +587,14 @@
                     <tbody>
                         @foreach (@$customers as $item)
                             <tr>
-                                <td>{{ $item['customer_name'] }}</td>
-                                <td>{{ $item['customer_email'] }}</td>
+                                <td>{{ $item['name'] }}</td>
+                                <td>{{ $item['email'] }}</td>
                                 <td>{{ $item['level'] }}</td>
-                                <td>{{ $item['main_phone'] }}</td>
+                                <td>{{ $item['phone'] }}</td>
                                 <td>{{ $item['state'] }}</td>
                                 <td>{{ $item['country'] }}</td>
                                 <td>{{ $item['status'] }}</td>
-                                <td>{{ $item['address_1'] }}</td>
+                                <td>{{ $item['address_line1'] }}</td>
                             </tr>
                         @endforeach
 

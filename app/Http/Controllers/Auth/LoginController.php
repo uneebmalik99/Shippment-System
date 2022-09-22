@@ -1,17 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    
+
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -55,8 +54,7 @@ class LoginController extends Controller
     // function showLoginForm(){
     //     return view('auth.login');
     // }
-    
-    
+
     public function locked()
     {
         if (!session('lock-expires-at')) {
@@ -72,7 +70,7 @@ class LoginController extends Controller
 
     public function unlock(Request $request)
     {
-        
+
         $check = Hash::check($request->input('password'), $request->user()->password);
 
         if (!$check) {

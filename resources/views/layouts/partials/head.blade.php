@@ -69,6 +69,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/simple-line-icons.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ionicons.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.mCustomScrollbar.css') }}">
+{{-- File uploader --}}
+<script src="https://js.upload.io/upload-js/v1"></script>
 
 {{-- Datatable --}}
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>

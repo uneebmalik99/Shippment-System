@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class role extends Model
 {
     use HasFactory;
-    public function user(){
-        return $this->hasOne(User::class);
+    public function user()
+    {
+        return $this->hasMany('App\Models\User');
     }
 }

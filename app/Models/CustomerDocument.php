@@ -4,15 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Customer_Document extends Model
+class CustomerDocument extends Model
 {
     use HasFactory;
-    use softDeletes;
+    
     protected $primaryKey = "id";
     public $timestamps = true;
-    protected $table = "customer__documents";
+    protected $table = "customer_documents";
     protected $fillable = [
         'file',
         'description',
@@ -20,8 +19,8 @@ class Customer_Document extends Model
         'thumbnail',
     ];
 
-    public function customer()
+    public function user()
     {
-        return $this->belongsTo('App\Models\Customer');
+        return $this->belongsTo('App\Models\User');
     }
 }

@@ -7,10 +7,12 @@
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">
                     <div>
-                        <h5 class="modal-title" id="exampleModalLabel">New {{ $module['singular'] }}</h5>
+                        <h5 class="modal-title text-white" id="exampleModalLabel">New {{ $module['singular'] }}</h5>
                     </div>
                     <div>
-                        <button type="button" class="close text-white h6" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close text-white h6" data-dismiss="modal" aria-label="Close"
+                            style="margin-top: -11px;
+                        font-size: 26px;">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -31,7 +33,8 @@
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
                             <div class="col-10 text-muted p-0 d-flex align-items-center">
-                                <div class="font-size"><span>Active User</span></div>
+                                
+                                <div class="font-size"><span>Active Customers</span></div>
                             </div>
                             <div class="col-2 p-2 d-flex justify-content-center align-items-center rounded"
                                 style="background: rgba(105, 108, 255, 0.16); !important">
@@ -46,7 +49,7 @@
                             </div>
                         </div>
                         <div>
-                            <div class="font-bold"><span>{{ @$active->count() }}</span> </div>
+                            <div class="font-bold"><span>{{ @$active_customer }}</span> </div>
                             <div class="py-1 col-12 text-muted p-0 font-size"><span>Total User</span></div>
                         </div>
                     </div>
@@ -57,7 +60,7 @@
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
                             <div class="col-10 text-muted p-0 d-flex align-items-center">
-                                <div class="font-size"><span>In Active User</span></div>
+                                <div class="font-size"><span>In Active Customers</span></div>
                             </div>
                             <div class="col-2 p-2 d-flex justify-content-center align-items-center rounded"
                                 style="background: rgba(239, 87, 87, 0.13);!important">
@@ -71,7 +74,7 @@
                             </div>
                         </div>
                         <div>
-                            <div class="font-bold"><span>{{ @$inactive->count() }}</span> </div>
+                            <div class="font-bold"><span>{{ @$Inactive_customer }}</span> </div>
                             <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
                         </div>
                     </div>
@@ -97,7 +100,7 @@
                         </div>
                         <div>
                             <div class="font-bold"><span class="px-1">{{ @$shipper->count() }}</span><span
-                                    class="percent_size">(-14%)</span> </div>
+                                    class="percent_size">({{ @$lastweekanalysis }}%)</span> </div>
                             <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
                         </div>
                     </div>
@@ -123,7 +126,7 @@
                         </div>
                         <div>
                             <div class="font-bold"><span class="px-1">{{ @$consignees->count() }}</span><span
-                                    class="percent_size">(+42%)</span>
+                                    class="percent_size">({{ @$lastweekconsigneeanalysis }}%)</span>
                             </div>
                             <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
                         </div>
@@ -243,31 +246,31 @@
                                 </tr>
                             @endif
                             <tr class="font-size">
-                                <th class="sorttable_nosort font-bold-tr">Customer ID</th>
-                                <th class="font-bold-tr">User</th>
-                                <th class="font-bold-tr">Level</th>
+                                <th class="sorttable_nosort font-bold-tr">Cust ID</th>
+                                <th class="font-bold-tr">Customer Name</th>
+                                <th class="font-bold-tr">Company Name</th>
                                 <th class="font-bold-tr">Phone</th>
-                                <th class="font-bold-tr">Address</th>
                                 <th class="font-bold-tr">Status</th>
-                                <th class="font-bold-tr">Zip Code</th>
+                                <th class="font-bold-tr">Created Date</th>
                                 <th class="sorttable_nosort font-bold-tr">Action</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="tbody">
+                            
                             @foreach ($records as $val)
                                 <tr style="border-bottom: 1.2px solid rgba(191, 191, 191, 1) !important">
                                     <td>{{ @$val['id'] }}</td>
                                     <td class="d-block">
+                                        
                                         <div>
-                                            <span><b>{{ @$val['customer_name'] }}</b></span>
+                                            <span><b>{{ @$val['name'] }}</b></span>
                                         </div>
                                         <div>
-                                            <span style="font-size: 12px !important;">{{ @$val['lead'] }}</span>
+                                            <span style="font-size: 12px !important;">{{ @$val['email'] }}</span>
                                         </div>
                                     </td>
-                                    <td>{{ @$val['level'] }}</td>
+                                    <td>{{ @$val['company_name'] }}</td>
                                     <td>{{ @$val['phone'] }}</td>
-                                    <td>{{ @$val['address'] }}</td>
                                     <td>
                                         @if (@$val['status'] == '1')
                                             <div class="font-size badge badge-success py-1 px-2 rounded"
@@ -277,10 +280,24 @@
                                                 style="font-weight:500;">In Active</div>
                                         @endif
                                     </td>
-                                    <td>{{ @$val['zip_code'] }}</td>
+                                    <td>{{ @$val['created_at'] }}</td>
                                     <td>
+                                        @if (@$val['status'] == '1')
+                                            <button class="active_button">
+                                                <a id="{{ @$val['id'] }}" onclick="change_status(this.id)">
+                                                    <i class="fa fa-check"></i>
+                                                </a>
+                                            </button>
+                                        @else
+                                            <button class="inactive_button">
+                                                <a id="{{ @$val['id'] }}" onclick="change_status(this.id)">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            </button>
+                                        @endif
+
                                         <button class="edit-button">
-                                            <a href={{ url(@$module['action'] . '/edit/' . @$val[@$module['db_key']]) }}>
+                                            <a id="{{ @$val['id'] }}" onclick="updatecustomer(this.id)">
                                                 <svg width="14" height="13" viewBox="0 0 16 16" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -336,5 +353,556 @@
             </div>
         </div>
         {{-- listing end --}}
+
+
+        <!-- Modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen scrollable mw-100 m-2 px-3 py-2" role="document">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between title_style">
+                        <div>
+                            <h5 class="modal-title text-white" id="exampleModalLabel">Update Customer</h5>
+                        </div>
+                        <div>
+                            <button type="button" class="close text-white h6" data-dismiss="modal" aria-label="Close"
+                                style="margin-top: -11px;
+                        font-size: 26px;"
+                                onclick="closemodal()">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-body1">
+                        <form method="POST" id="customer_general_form" enctype="multipart/form-data">
+                            <div class="container">
+                                <div class="row my-3">
+                                    <div class="col-sm-6 col-md-3 col-lg-3">
+                                        <div class="tab_card px-2">
+                                            {{-- general information heading --}}
+                                            <div class="py-2">
+                                                <div class="text-color" id="general" onclick="slide(this.id)">
+                                                    <svg width="8" height="6" viewBox="0 0 8 6" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M1 1.36328L4 4.82148L7 1.36328" stroke="#FF8514"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                    <span class="p-2" style="cursor: pointer">General
+                                                        Information</span>
+                                                </div>
+                                            </div>
+                                            {{-- general information heading End --}}
+
+                                            {{-- general information body --}}
+                                            <div id="general_body">
+
+                                                <div class="pb-3 px-2">
+                                                    <div class="d-flex py-2">
+                                                        <label for="name"
+                                                            class="col-6 px-0 font-size font-bold">Name</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="name" id="name" value="">
+                                                    </div>
+                                                    <div class="d-flex py-2">
+                                                        <label for="username"
+                                                            class="col-6 px-0 font-size font-bold">Username</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill col-6"
+                                                            name="username" id="username" value="">
+                                                    </div>
+
+                                                    {{-- status start --}}
+                                                    <input type="hidden" name="status" id="status" value="1">
+                                                    {{-- status end --}}
+
+                                                    <div class="d-flex py-2">
+                                                        <label for="phone" class="px-0 col-6 font-size font-bold">Main
+                                                            phone</label>
+                                                        <input type="phone"
+                                                            class="form-control-sm border border-0 rounded-pill col-6"
+                                                            name="phone" id="phone" value="">
+                                                    </div>
+
+                                                    <div class=" d-flex py-2">
+                                                        <label for="fax" class="col-6 px-0 font-size font-bold">Main
+                                                            fax</label>
+                                                        <input type="fax"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="fax" id="fax" value="">
+                                                    </div>
+                                                    <div class=" d-flex py-2">
+                                                        <label for="email"
+                                                            class="col-6 px-0 font-size font-bold">Email</label>
+                                                        <input type="email"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="email" id="email" value="">
+                                                    </div>
+
+
+                                                    <div class=" d-flex py-2">
+                                                        <label for="source"
+                                                            class="col-6 px-0 font-size font-bold">Source</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="source" id="source" value="">
+                                                    </div>
+
+                                                    <div class=" d-flex py-2">
+                                                        <label for="company_name"
+                                                            class="col-6 px-0 font-size font-bold">Company Name</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="company_name" id="company_name" value="">
+                                                    </div>
+
+                                                    <div class=" d-flex py-2">
+                                                        <label for="company_email"
+                                                            class="col-6 px-0 font-size font-bold">Company Email</label>
+                                                        <input type="email"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="company_email" id="company_email" value="">
+                                                    </div>
+
+
+                                                    <div class=" d-flex  py-2">
+                                                        <label for="customer_type"
+                                                            class="col-6 px-0 font-size font-bold">Customer Type</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="customer_type" id="customer_type" value="">
+                                                    </div>
+
+
+                                                    <div class=" d-flex py-2">
+                                                        <label for="sales_type"
+                                                            class="col-6 px-0 font-size font-bold">Sales Type</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="sales_type" id="sales_type" value="">
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </div>
+                                            {{-- general information body End --}}
+                                        </div>
+                                    </div>
+                                    {{-- general information End --}}
+
+                                    <div class="col-sm-6 col-md-3 col-lg-3">
+                                        <div class="tab_card px-2">
+                                            {{-- sales information heading --}}
+                                            <div class="py-2 px-3">
+                                                <div class="text-color px-3" id="sales_application"
+                                                    onclick="slide(this.id)">
+                                                    <svg width="8" height="6" viewBox="0 0 8 6" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M1 1.36328L4 4.82148L7 1.36328" stroke="#FF8514"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                    <span class="p-2" style="cursor:pointer">Sales Application</span>
+                                                </div>
+                                            </div>
+                                            {{-- sales information heading End --}}
+
+
+
+                                            {{-- sales information body start --}}
+                                            <div id="sales_application_body" class="">
+                                                <div class="px-2">
+                                                    <div class="d-flex py-2">
+                                                        <label for="sales_person"
+                                                            class="col-6 px-0 font-size font-bold">Sales person</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="sales_person" id="sales_person" value="">
+                                                    </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <span class="text-danger">
+                                                            @error('sales_person')
+                                                                {{ $message }}
+                                                            @enderror
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="d-flex py-2">
+                                                        <label for="inside_person"
+                                                            class="col-6 px-0 font-size font-bold">Inside person</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="inside_person" id="inside_person" value="">
+                                                    </div>
+
+                                                    <div class="d-flex py-2">
+                                                        <label for="level"
+                                                            class="col-6 px-0 font-size font-bold">Level</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="level" id="level" value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {{-- sales information body end --}}
+
+                                        </div>
+                                        <div class="tab_card px-2">
+                                            {{-- Financial Inforamtion heading Start --}}
+                                            <div class="py-2">
+                                                <div class="text-color" id="financial" onclick="slide(this.id)">
+                                                    <svg width="8" height="6" viewBox="0 0 8 6" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M1 1.36328L4 4.82148L7 1.36328" stroke="#FF8514"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                    <span class="p-2" style="cursor:pointer">Financial
+                                                        Information</span>
+                                                </div>
+                                            </div>
+                                            {{-- Financial Inforamtion heading End --}}
+                                            {{-- Financial Information body start --}}
+                                            <div id="financial_body">
+
+                                                <div class="pb-3 px-2">
+                                                    <div class="d-flex py-2">
+                                                        <label for="payment_type"
+                                                            class="col-6 px-0 font-size font-bold">Payment Type</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="payment_type" id="payment_type" value="">
+                                                    </div>
+
+                                                    <div class="d-flex py-2">
+                                                        <label for="payment_term"
+                                                            class="col-6 px-0 font-size font-bold">Payment Term</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="payment_term" id="payment_term" value="">
+                                                    </div>
+
+                                                    <div class=" d-flex py-2">
+                                                        <label for="industry"
+                                                            class="col-6 px-0 font-size font-bold">Industry</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="industry" id="industry" value="">
+                                                    </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <span class="text-danger">
+                                                            @error('email')
+                                                                {{ $message }}
+                                                            @enderror
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+                                            {{-- Financial Information body End --}}
+                                        </div>
+                                    </div>
+                                    {{-- financial end --}}
+
+                                    <div class="col-sm-6 col-md-3 col-lg-3 px-3">
+                                        <div class="tab_card px-2">
+                                            {{-- sales association heading start --}}
+                                            <div class="py-2">
+                                                <div class="text-color" id="sale_association" onclick="slide(this.id)">
+                                                    <svg width="8" height="6" viewBox="0 0 8 6" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M1 1.36328L4 4.82148L7 1.36328" stroke="#FF8514"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                    <span class="p-2 ">Sales Association</span>
+                                                </div>
+                                            </div>
+                                            {{-- sales association heading end --}}
+
+
+                                            {{-- sales association body start --}}
+
+                                            <div id="sale_association_body">
+                                                <div class="pb-3 px-2">
+
+                                                    <div class="d-flex align-items-center py-2">
+                                                        <label for="location_number"
+                                                            class="col-6 px-0 font-size font-bold">Location
+                                                            Number</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="location_number" id="location_number" value="">
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center py-2">
+                                                        <label for="country"
+                                                            class="col-6 px-0 font-size font-bold">Country</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="country" id="country" value="">
+                                                    </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <span class="text-danger">
+                                                            @error('country')
+                                                                {{ $message }}
+                                                            @enderror
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center py-2">
+                                                        <label for="zip_code" class="col-6 px-0 font-size font-bold">Zip
+                                                            code</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="zip_code" id="zip_code" value="">
+                                                    </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <span class="text-danger">
+                                                            @error('zip_code')
+                                                                {{ $message }}
+                                                            @enderror
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center py-2">
+                                                        <label for="state"
+                                                            class="col-6 px-0 font-size font-bold">State</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="state" id="state" value="">
+                                                    </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <span class="text-danger">
+                                                            @error('state')
+                                                                {{ $message }}
+                                                            @enderror
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center py-2">
+                                                        <label for="address_line1"
+                                                            class="col-6 px-0 font-size font-bold">Address (1)</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="address_line1" id="address_line1" value="">
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center py-2">
+                                                        <label for="address_line2"
+                                                            class="col-6 px-0 font-size font-bold">Address (2)</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="address_line2" id="address_line2"
+                                                            value="{{ @$user['address_line2'] }}">
+                                                    </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <span class="text-danger">
+                                                            @error('address_line2')
+                                                                {{ $message }}
+                                                            @enderror
+                                                        </span>
+                                                    </div>
+                                                    <div class="d-flex align-items-center py-2">
+                                                        <label for="price_code"
+                                                            class="col-6 px-0 font-size font-bold">Price code</label>
+                                                        <input type="text"
+                                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                            name="price_code" id="price_code" value="">
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                            {{-- sales association body end --}}
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-3 col-lg-3 px-3">
+                                        <br>
+                                        <div class="col-12 d-flex justify-content-center" id="customer_image">
+                                            <img id="customer_img" alt="" width="98px" style="border:1px solid black">
+                                        </div>
+                                        <br>
+<div class="col-12 d-flex justify-content-center text-center" style="">
+    <div class="col-12 w-75 p-3" id="customer_file" style="border-radius: 1.5rem!important;border:1px solid black!important;">
+        <a id="customer_file1" alt="" download="document_download" style="text-decoration: underline;">Documents.pdf</a>
     </div>
-@endsection
+</div>
+                                        
+                                        <br>
+                                        <div class="col-12">
+
+                                            <div class="user_image"
+                                                style="padding-top: .5rem; border-radius: 15px!important;">
+                                                <img id="customer_img" alt="">
+                                            </div>
+                                        </div>
+                                        <br><br>
+                                        <div class="col-12">
+                                            <label for="user_file">Document Upload</label>
+                                            <input type="file" name="user_file[]"
+                                                class="form-control rounded col-12 w-100"
+                                                id="user_file" style="border:1px solid #f3f3f">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 py-2 px-5 d-flex justify-content-end">
+                                        {{-- <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="add_by_email"
+                                    id="add_by_email" readonly value="{{ Auth::user()->email }}"> --}}
+                                        <input type="hidden"
+                                            class="form-control-sm border border-0 rounded-pill bg col-6"
+                                            name="added_by_user" id="added_by_user" readonly
+                                            value="{{ Auth::user()->id }}">
+
+                                        <input type="hidden"
+                                            class="form-control-sm border border-0 rounded-pill bg col-6" name="role_id"
+                                            id="role_id" readonly value="4">
+
+                                        <button type="button" class="btn col-1 next-style text-white"
+                                            onclick="Update_Customer(this.id)" id="update" name=""
+                                            style="padding: 0px;" data-next="">
+                                            <div class="unskew">Update</div>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script>
+            function updatecustomer(id) {
+                $('#exampleModal1').modal('show');
+                $('.btn').attr('id', id);
+
+                $.ajax({
+                    type: 'get',
+                    url: '{{ URL::to('admin/customers/update') }}/' + id,
+                    processData: false,
+                    contentType: false,
+
+
+                    success: function(data) {
+                        console.log(data.user.id);
+
+                        $('#name').val(data.user.name);
+                        $('#username').val(data.user.username);
+                        $('#phone').val(data.user.phone);
+                        $('#fax').val(data.user.fax);
+                        $('#email').val(data.user.email);
+                        $('#source').val(data.user.source);
+                        $('#company_name').val(data.user.company_name);
+                        $('#company_email').val(data.user.company_email);
+                        $('#customer_type').val(data.user.customer_type);
+                        $('#sales_type').val(data.user.sales_type);
+                        $('#sales_person').val(data.user.sales_person);
+                        $('#inside_person').val(data.user.inside_person);
+                        $('#level').val(data.user.level);
+                        $('#payment_type').val(data.user.payment_type);
+                        $('#payment_term').val(data.user.payment_term);
+                        $('#industry').val(data.user.industry);
+                        $('#location_number').val(data.user.location_number);
+                        $('#country').val(data.user.country);
+                        $('#zip_code').val(data.user.zip_code);
+                        $('#state').val(data.user.state);
+                        $('#address_line1').val(data.user.address_line1);
+                        $('#address_line2').val(data.user.address_line2);
+                        $('#price_code').val(data.user.price_code);
+                        var img = data.user.user_image;
+                        var doc = data.doc[0].file;
+
+                        $("#customer_file1").attr("href", "../public/"+doc+"");
+                        $("#customer_img").attr("src","../public/"+img+"");
+                        // console.log('{'+'{asset('+'"'+ d +'"'+ ')}'+'}' );
+                        // $url = '{'+'{asset('+'\''+ d +'\''+ ')}'+'}';
+                        // img = '<img src=' + '"' + $url + '"' + '/>' ;// 
+                        // $('#customer_image').html(img);
+                        $('.user_image').imageUploader({
+                            maxFiles: 1
+                        });
+
+
+                    }
+                });
+
+
+
+            }
+
+            function Update_Customer(id) {
+                alert(id);
+
+            }
+
+            function closemodal() {
+                $('#exampleModal1').modal('hide');
+            }
+
+            function change_status(id) {
+
+                iziToast.question({
+                    timeout: 20000,
+                    close: false,
+                    overlay: true,
+                    displayMode: 'once',
+                    id: 'question',
+                    zindex: 999,
+                    title: 'Hey',
+                    message: 'Are you sure to change Status ?',
+                    position: 'center',
+                    buttons: [
+                        ['<button><b>YES</b></button>', function(instance, toast) {
+
+                            $.ajax({
+                                type: 'get',
+                                url: "{{ route('customer.changeStatus') }}" + '/' + id,
+                                success: function(data) {
+                                    alert(data);
+                                    location.reload();
+                                }
+                            });
+
+                            instance.hide({
+                                transitionOut: 'fadeOut'
+                            }, toast, 'button');
+
+                        }, true],
+                        ['<button>NO</button>', function(instance, toast) {
+
+                            instance.hide({
+                                transitionOut: 'fadeOut'
+                            }, toast, 'button');
+
+                        }],
+                    ],
+                    onClosing: function(instance, toast, closedBy) {
+                        console.info('Closing | closedBy: ' + closedBy);
+                    },
+                    onClosed: function(instance, toast, closedBy) {
+                        console.info('Closed | closedBy: ' + closedBy);
+                    }
+                });
+
+            }
+        </script>
+    @endsection

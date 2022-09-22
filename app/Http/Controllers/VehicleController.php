@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Customer;
+use App\Models\AuctionCopy;
+use App\Models\AuctionImage;
+use App\Models\AuctionInvoice;
 use App\Models\Image;
 use App\Models\Location;
 use App\Models\Notification;
+use App\Models\User;
 use App\Models\Vehicle;
+use App\Models\VehicleStatus;
+use App\Models\WarehouseImage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Storage;
@@ -27,7 +32,7 @@ class VehicleController extends Controller
 
     public function Notification()
     {
-        $data['notification'] = Notification::with('customer')->get();
+        $data['notification'] = Notification::with('user')->get();
         // dd();
         if ($data['notification']->toArray()) {
             $current = Carbon::now();
@@ -50,7 +55,7 @@ class VehicleController extends Controller
                     $data['notification'][$key]['date'] = (int) $seconds . 's ';
                 }
             }
-            $unread = Notification::with('customer')->where('status', '0')->get();
+            $unread = Notification::with('user')->where('status', '0')->get();
             $data['notification_count'] = count($unread);
         } else {
             $data['notification'] = "asda";
@@ -61,6 +66,7 @@ class VehicleController extends Controller
 
     public function index()
     {
+
         $data = [];
         $data = [
             "page_title" => $this->plural . " List",
@@ -76,16 +82,17 @@ class VehicleController extends Controller
                 'page' => 'list',
             ],
         ];
-
         $notification = $this->Notification();
-        $data['records'] = Vehicle::with('customer')->get();
-        $data['new_orders'] = Vehicle::where('status', '0')->get();
-        $data['posted'] = Vehicle::where('status', '1')->get();
-        $data['dispatched'] = Vehicle::where('status', '2')->get();
-        $data['on_hand'] = Vehicle::where('status', '3')->get();
-        $data['no_titles'] = Vehicle::where('status', '4')->get();
-        $data['towing'] = Vehicle::where('status', '5')->get();
+        $data['records'] = Vehicle::with('user')->get()->toArray();
+        $data['new_orders'] = Vehicle::where('status', '1')->get();
+        $data['posted'] = Vehicle::where('status', '2')->get();
+        $data['dispatched'] = Vehicle::where('status', '3')->get();
+        $data['on_hand'] = Vehicle::where('status', '4')->get();
+        $data['no_titles'] = Vehicle::where('status', '5')->get();
+        $data['towing'] = Vehicle::where('status', '6')->get();
         $data['location'] = Location::all();
+        $data['status'] = VehicleStatus::all();
+        // dd($data['status']);
         return view($this->view . 'list', $data, $notification);
 
     }
@@ -110,7 +117,7 @@ class VehicleController extends Controller
                 'button' => 'Create',
             ],
         ];
-        $data['buyers'] = Customer::all()->toArray();
+        $data['buyers'] = User::where('role_id', '4')->get();
         $data['location'] = Location::all();
         if ($request->ajax()) {
             $tab = $request->tab;
@@ -244,8 +251,8 @@ class VehicleController extends Controller
         ];
 
         $notification = $this->Notification();
-        $data['buyers'] = Customer::all()->toArray();
-        $data['vehicle'] = Vehicle::with('customer')->find($id)->toArray();
+        $data['buyers'] = User::where('role_id', '4')->toArray();
+        $data['vehicle'] = Vehicle::with('user')->find($id)->toArray();
         return view($this->view . 'create_edit', $data, $notification);
     }
 
@@ -259,60 +266,75 @@ class VehicleController extends Controller
     public function filtering(Request $request)
     {
         if ($request->ajax()) {
+            // dd($request->all());
             $output = [];
             $table = "";
             $page = "";
             $total = Vehicle::all()->toArray();
-            $records = Vehicle::with('customer');
+            $records = Vehicle::with('user');
             $warehouse = $request->warehouse;
             $year = $request->year;
             $make = $request->make;
             $model = $request->model;
             $status = $request->status;
+            $status_name = $request->status_name;
 
             if ($warehouse) {
                 if ($warehouse != "") {
-                    $records = $records->where('title_state', $warehouse)->paginate($this->perpage);
+                    $records = $records->where('title_state', $warehouse);
                     // return $records;
                 }
             }
 
             if ($year) {
                 if ($year != "") {
-                    $records = $records->where('year', $year)->paginate($this->perpage);
+                    $records = $records->where('year', $year);
                     // return $records;
                 }
             }
 
             if ($make) {
                 if ($make != "") {
-                    $records = $records->where('make', $make)->paginate($this->perpage);
+                    $records = $records->where('make', $make);
                     // return count($records);
                 }
             }
 
             if ($model) {
                 if ($model != "") {
-                    $records = $records->where('model', $model)->paginate($this->perpage);
+                    $records = $records->where('model', $model);
                     // return count($records);
                 }
             }
 
             if ($status) {
                 if ($status != "") {
-                    $records = $records->where('status', $status)->paginate($this->perpage);
+                    $records = $records->with('images')->where('status', $status)->paginate($this->perpage);
+                    $data['records'] = $records;
+                    $output['view'] = view('vehicle.' . $status_name, $data)->render();
+                    return Response($output);
+
                     // return count($records);
                 }
             }
+            $records = $records->paginate($this->perpage);
             // return count($records);
             if (count($records) > 0) {
                 $i = 1;
                 foreach ($records as $val) {
+                    // return $val;
                     $url_edit = url($this->action . '/edit/' . $val->id);
                     $url_delete = url($this->action . '/delete/' . $val->id);
                     $table .= '<tr>' .
                     '<td>' . $i . '</td>' .
-                    '<td>' . $val->customer_name . '</td>' .
+                    '<td>' .
+                    '<div class=' . '"d-flex align-items-center"' . '>' .
+                    '<div style=' . '"vertical-align: middle"' . '>' . '<img src=' .
+                    'http://localhost/Shippment-System/public/images/user.png' . ' alt="" ' . 'class=' .
+                    '"customer_image"' . '>' . '</div>' .
+                    '<div>' . $val->customer_name . '<br>' . '<span style=' .
+                    '"font-size: 12px!important;"' . '>' . $val->user->email .
+                    '</span>' . '</div>' . '</div>' . '</td>' .
                     '<td>' . $val->vin . '</td>' .
                     '<td>' . $val->year . '</td>' .
                     '<td>' . $val->make . '</td>' .
@@ -320,15 +342,15 @@ class VehicleController extends Controller
                     '<td>' . $val->vehicle_type . '</td>' .
                     '<td>' . $val->value . '</td>' .
                     '<td>' . $val->status . '</td>' .
-                    '<td>' . $val->customer->customer_name . '</td>' .
-                    '<td>' .
-                    '<button><a href=' . $url_edit . '><i class=' . '"ti-pencil"' . '></i></a></button>' . '<button><a href=' . $url_delete . '><i class=' . '"ti-trash"' . '></i></a></button>' .
+                    '<td>' . $val->user->name . '</td>' .
+                        '<td>' .
+                        '<button><a href=' . $url_edit . '><i class=' . '"ti-pencil"' . '></i></a></button>' . '<button><a href=' . $url_delete . '><i class=' . '"ti-trash"' . '></i></a></button>' .
                         '</td>' .
                         '</tr>';
-                        $i++;
-                    }
-                    // return $table;
-                $page .= '<div>' . '<div class=' . '"d-flex justify-content-center"' . '>' . $records->links() . '</div>' . '<div>' . '<p>' . 'Displaying ' . $records->count() . ' of ' . count($total) . ' vehicle(s)' . '</p>' . '</div>' . '</div>';
+                    $i++;
+                }
+                // return $table;
+                $page .= '<div>' . '<div class=' . '"d-flex justify-content-center"' . '>' . $records->links() . '</div>' . '<div>' . '<p>' . 'Displaying ' . count($records) . ' of ' . count($total) . ' vehicle(s)' . '</p>' . '</div>' . '</div>';
                 $output = [
                     'table' => $table,
                     'pagination' => $page,
@@ -348,8 +370,9 @@ class VehicleController extends Controller
     public function create_form(Request $request)
     {
         $data = $request->all();
-        // return $data;
+        $tab = $data['tab'];
         $image = $request->file('images');
+        unset($data['tab']);
         unset($data['images']);
         $Obj = new Vehicle;
         $new = $Obj->create($data);
@@ -359,6 +382,7 @@ class VehicleController extends Controller
                 foreach ($image as $images) {
                     $image_name = time() . '.' . $images->extension();
                     $filename = Storage::putFile($this->directory, $images);
+                    $images->move(public_path($this->directory), $filename);
                     $Obj_image = new Image;
                     $Obj_vehicle = $Obj->where('vin', $data['vin'])->get();
                     // return Response($Obj_vehicle[0]['id']);
@@ -373,15 +397,76 @@ class VehicleController extends Controller
                 $output['result'] = "failed.";
             }
         }
-        // return Response($output);
-        $tab = $data['tab'];
-        unset($data['tab']);
+
         switch ($tab) {
             case ('general'):
                 $output['view'] = view('layouts.vehicle_create.attachments')->render();
                 break;
         }
         return Response($output);
+    }
 
+    public function store_image(Request $request)
+    {
+        $data = $request->all();
+        $tab = $data['tab'];
+        unset($data['tab']);
+        $images = $request->file('images');
+        $documents = $request->file('name');
+        // dd($documents);
+        $Obj = new Vehicle;
+        $Obj_vehicle = $Obj->where('vin', '7411')->get();
+        $i = 0;
+        if ($request->hasFile('images')) {
+            foreach ($images as $image) {
+                switch ($tab) {
+                    case ('auction'):
+                        $Obj_image = new AuctionImage;
+                        $this->directory = "/auction_images";
+                        break;
+                    case ('warehouse'):
+                        $Obj_image = new WarehouseImage;
+                        $this->directory = "/warehouse_images";
+                        break;
+                }
+                $image_name = time() . '.' . $image->extension();
+                $filename = Storage::putFile($this->directory, $image);
+                $image->move(public_path($this->directory), $filename);
+                $Obj_image->vehicle_id = $Obj_vehicle[0]['id'];
+                $Obj_image->name = $filename;
+                $Obj_image->thumbnail = $image_name;
+                $Obj_image->save();
+                $output['result'] = "Success" . $i;
+                $i++;
+                // return $image_name;
+            }
+        }
+
+        if ($request->hasFile('name')) {
+            // dd($tab);
+            switch ($tab) {
+                case ('invoice'):
+                    $Obj_file = new AuctionInvoice;
+                    $this->directory = "/auction_invoices";
+
+                    break;
+                case ('auction_copy'):
+                    $Obj_file = new AuctionCopy;
+                    $this->directory = "/auction_copies";
+
+                    break;
+            }
+            $filename = Storage::putFile($this->directory, $documents);
+            $documents->move(public_path($this->directory), $filename);
+            $size = $documents->getSize() / 1000;
+            $Obj_file->vehicle_id = $Obj_vehicle[0]['id'];
+            $Obj_file->name = $filename;
+            $Obj_file->type = $documents->extension();
+            $Obj_file->size = $size . ' kb';
+            $Obj_file->save();
+            $output['result'] = "Success";
+
+        }
+        return Response($output);
     }
 }

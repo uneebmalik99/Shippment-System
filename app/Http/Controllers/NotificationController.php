@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
 use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -22,7 +21,7 @@ class NotificationController extends Controller
 
     public function Notification()
     {
-        $data['notification'] = Notification::with('customer')->paginate($this->perpage);
+        $data['notification'] = Notification::with('user')->paginate($this->perpage);
         // dd();
         if ($data['notification']->toArray()) {
             $current = Carbon::now();
@@ -45,7 +44,7 @@ class NotificationController extends Controller
                     $data['notification'][$key]['date'] = (int) $seconds . 's ';
                 }
             }
-            $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
+            $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
             $data['notification_count'] = count($unread);
         } else {
             $data['notification'] = "asda";
@@ -74,7 +73,7 @@ class NotificationController extends Controller
         ];
 
         $notification = $this->Notification();
-        $data['user'] = Customer::all()->toArray();
+        $data['user'] = User::where('role_id', '4')->toArray();
         // dd($data['user']);
         // return $notification;
         return view($this->view . 'list', $data, $notification);

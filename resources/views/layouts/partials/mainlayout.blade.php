@@ -86,6 +86,16 @@
 
             });
         });
+        // $(document).ready(function() {
+        //     $('#new_order_table').DataTable({
+        //         language: {
+        //             search: "",
+        //             sLengthMenu: "_MENU_",
+        //             searchPlaceholder: "Search"
+        //         },
+
+        //     });
+        // });
     </script>
 
 
