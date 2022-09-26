@@ -17,7 +17,7 @@ class CreateCustomerDocumentsTable extends Migration
             $table->id();
             $table->string('file');
             $table->string('description')->nullable();
-            $table->foreignId('customer_user_id')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
             $table->string('thumbnail')->nullable();
             $table->softDeletes();
             $table->timestamps();

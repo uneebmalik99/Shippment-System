@@ -81,7 +81,13 @@
                         position: 'topCenter',
                         zindex: '9999999999999',
                     });
-                    console.log(data);
+                },
+                error: function() {
+                    iziToast.warning({
+                        message: 'Failed to insert data!',
+                        position: 'topCenter',
+                        zindex: '9999999999999'
+                    });
                 }
             });
         });

@@ -8,13 +8,14 @@ use App\Models\Shipment;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Storage;
 
 class ShipmentController extends Controller
 {
 
-    private $type = "shipments";
-    private $singular = "shipment";
-    private $plural = "shipments";
+    private $type = "Shipments";
+    private $singular = "Shipment";
+    private $plural = "Shipments";
     private $view = "shipment.";
     private $db_key = "id";
     private $user = [];
@@ -76,6 +77,12 @@ class ShipmentController extends Controller
 
         $notification = $this->Notification();
         $data['records'] = Shipment::with('consignee')->paginate($this->perpage);
+        $data['booked'] = Shipment::with('consignee')->where('status', '1')->paginate($this->perpage);
+        $data['shipped'] = Shipment::with('consignee')->where('status', '2')->paginate($this->perpage);
+        $data['arrived'] = Shipment::with('consignee')->where('status', '3')->paginate($this->perpage);
+        $data['completed'] = Shipment::with('consignee')->where('status', '4')->paginate($this->perpage);
+        // dd($data);
+
         return view($this->view . 'list', $data, $notification);
     }
 
@@ -100,14 +107,16 @@ class ShipmentController extends Controller
             ],
         ];
 
-        if ($request->isMethod('post')) {
-            $this->store($request);
-        }
         $notification = $this->Notification();
         $data['vehicles'] = Vehicle::all()->toArray();
         $data['consignees'] = Consignee::all()->toArray();
         $data['records'] = Shipment::all()->toArray();
-        return view($this->view . 'create_edit', $data, $notification);
+
+        if ($request->ajax()) {
+            $tab = $request->tab;
+            $output = view('shipment.' . $tab, $data)->render();
+            return Response($output);
+        }
     }
     private function store($request)
     {
@@ -125,27 +134,45 @@ class ShipmentController extends Controller
         $vehicle->save();
         return redirect($this->action)->with('success', 'Vehicle added successfully.');
     }
-    public function attachmentsIndex()
+    // public function attachmentsIndex()
+    // {
+    //     $action = url($this->action . '/attachments');
+    //     $data = [
+    //         "page_title" => $this->plural . " attachments",
+    //         "page_heading" => $this->plural . ' attachments',
+    //         "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " attachments"),
+    //         "action" => $action,
+    //         "button_text" => "Upload Image",
+    //         "module" => [
+    //             'type' => $this->type,
+    //             'type' => $this->type,
+    //             'singular' => $this->singular,
+    //             'plural' => $this->plural,
+    //             'view' => $this->view,
+    //             'db_key' => $this->db_key,
+    //             'action' => $this->action,
+    //             'page' => 'attachment',
+    //         ],
+    //     ];
+    //     $notification = $this->Notification();
+    //     return view('shipment.attachments', $notification, $data);
+    // }
+    public function create_form(Request $request)
     {
-        $action = url($this->action . '/attachments');
-        $data = [
-            "page_title" => $this->plural . " attachments",
-            "page_heading" => $this->plural . ' attachments',
-            "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " attachments"),
-            "action" => $action,
-            "button_text" => "Upload Image",
-            "module" => [
-                'type' => $this->type,
-                'type' => $this->type,
-                'singular' => $this->singular,
-                'plural' => $this->plural,
-                'view' => $this->view,
-                'db_key' => $this->db_key,
-                'action' => $this->action,
-                'page' => 'attachment',
-            ],
-        ];
-        $notification = $this->Notification();
-        return view('shipment.attachments', $notification, $data);
+        if ($request->ajax()) {
+            $data = $request->all();
+            $image = $request->file('images');
+            $Obj = new Shipment;
+            foreach ($image as $images) {
+                $image_name = time() . '.' . $images->extension();
+                $filename = Storage::putFile($this->directory, $images);
+                $images->move(public_path($this->directory), $filename);
+                $data['images'] = $image_name;
+            }
+            $Obj->create($data);
+            if ($Obj) {
+                return "Success";
+            }
+        }
     }
 }

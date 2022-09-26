@@ -19464,6 +19464,10 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   background-color: rgba(170, 219, 255) !important;
   box-shadow: 0px 4px 4px rgba(71, 147, 204, 0.75) !important;
 }
+.nonrounded-pill{
+  background-color: rgba(170, 219, 255) !important;
+  box-shadow: 0px 4px 4px rgba(71, 147, 204, 0.75) !important;
+}
 .attachment-button{
   border: 3px solid rgba(31, 104, 158, 1) !important; 
   border-radius: 50rem !important;

@@ -319,6 +319,7 @@
 <script>
     $('.modal_button').on('click', function() {
         $id = $(this).attr('id');
+        // alert('adsaasd');
         $tab = "general";
         if ($id == "customer") {
             $.ajax({
@@ -356,6 +357,30 @@
                         maxFiles: 4
                     });
 
+                }
+            });
+        } else if ($id == "shipment") {
+            $.ajax({
+                type: 'get',
+                url: '{{ URL::to('admin/shipments/create') }}',
+                data: {
+                    'tab': $tab
+                },
+                success: function(data) {
+                    // console.log(data);
+                    $('.modal-body').html(data);
+                    $('#exampleModal').modal('show');
+                    $('#shipment_vehicle_table').DataTable({
+                        language: {
+                            search: "",
+                            sLengthMenu: "_MENU_",
+                            searchPlaceholder: "Search"
+                        },
+
+                    });
+                    $('.shipment-images-1').imageUploader({
+                        maxFiles: 4
+                    });
                 }
             });
         }
@@ -443,9 +468,26 @@
             $("#title_body").slideToggle();
         } else if (id == "shipper") {
             $("#shipper_body").slideToggle();
-        } else {
-            $("#charges_body").slideToggle();
+        } else if (id == "shipment_customer") {
+            $("#shipment_customer_body").slideToggle();
+        } else if (id == "shipment_calendar") {
+            $("#shipment_calendar_body").slideToggle();
+        } else if (id == "shipment_container") {
+            $("#shipment_container_body").slideToggle();
+        } else if (id == "shipment_reference") {
+            $("#shipment_reference_body").slideToggle();
+        } else if (id == "shipment_users") {
+            $("#shipment_users_body").slideToggle();
+        } else if (id == "shipment_loading") {
+            $("#shipment_loading_body").slideToggle();
+        } else if (id == "shipment_destination") {
+            $("#shipment_destination_body").slideToggle();
+        } else if (id == "shipment_shipping") {
+            $("#shipment_shipping_body").slideToggle();
+        } else if (id == "shipment_units") {
+            $("#shipment_units_body").slideToggle();
         }
+
     }
 </script>
 

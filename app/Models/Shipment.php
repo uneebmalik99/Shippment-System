@@ -19,4 +19,14 @@ class Shipment extends Model
     {
         return $this->belongsTo('App\Models\Consignee');
     }
+
+    public function status()
+    {
+        return $this->belongsTo('App\Models\ShipmentStatus', 'status', 'id');
+    }
+
+    public function images()
+    {
+        return $this->hasMany('App\Models\ShipmentImage');
+    }
 }

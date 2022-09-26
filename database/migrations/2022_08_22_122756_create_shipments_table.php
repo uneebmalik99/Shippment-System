@@ -21,7 +21,9 @@ class CreateShipmentsTable extends Migration
             $table->string('shipment_type')->nullable();
             $table->date('loading_date')->nullable();
             $table->date('cut_off_date')->nullable();
-            $table->date('sail_date')->nullable();
+            $table->date('export_date')->nullable();
+            $table->date('ship_date')->nullable();
+            $table->date('sale_date')->nullable();
             $table->date('est_arrival_date')->nullable();
             $table->string('booking_number')->nullable();
             $table->string('container_no')->nullable();
@@ -36,11 +38,14 @@ class CreateShipmentsTable extends Migration
             $table->string('loading_terminal')->nullable();
             $table->string('loading_port')->nullable();
             $table->string('loading_state')->nullable();
+            $table->string('discharge_port')->nullable();
             $table->string('loading_country')->nullable();
             $table->string('destination_terminal')->nullable();
             $table->string('destination_port')->nullable();
             $table->string('destination_state')->nullable();
             $table->string('destination_country')->nullable();
+            $table->string('hand_over_to')->nullable();
+            $table->string('hand_over_date')->nullable();
             $table->string('shipping_line')->nullable();
             $table->string('vessel')->nullable();
             $table->string('seal_number')->nullable();
@@ -50,6 +55,7 @@ class CreateShipmentsTable extends Migration
             $table->string('insurance')->nullable();
             $table->string('fmc_license_number')->nullable();
             $table->string('select_notify_party')->nullable();
+            $table->foreignId('status')->constrained('shipment_statuses')->onDelete('cascade')->onUpdate('cascade');
             $table->string('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -40,6 +40,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/customers/create/quotation', [App\Http\Controllers\CustomerController::class, 'general_create'])->name('customer.quotation_create');
     Route::get('/customers/edit/{id?}', [App\Http\Controllers\CustomerController::class, 'edit'])->name('customer.edit');
     Route::post('/customers/edit/{id?}', [App\Http\Controllers\CustomerController::class, 'edit'])->name('customer.edit');
+    Route::get('/customers/update/{id?}', [App\Http\Controllers\CustomerController::class, 'edit'])->name('customer.edit');
     Route::get('/customers/delete/{id?}', [App\Http\Controllers\CustomerController::class, 'delete'])->name('customer.delete');
     Route::get('/customers/profile/{id?}', [App\Http\Controllers\CustomerController::class, 'profile'])->name('customer.profile');
     Route::get('/customers/profile_tab', [App\Http\Controllers\CustomerController::class, 'profile_tab'])->name('customer.profile_tab');
@@ -76,7 +77,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/shipment', [App\Http\Controllers\ShipmentController::class, 'index'])->name('shipment.list');
     Route::get('/shipments/create', [App\Http\Controllers\ShipmentController::class, 'create'])->name('shipment.create');
     Route::post('/shipments/create', [App\Http\Controllers\ShipmentController::class, 'create'])->name('shipment.create');
-    Route::post('/shipments/attachments', [App\Http\Controllers\ShipmentController::class, 'attachmentsIndex'])->name('shipment.attachments');
+    Route::post('/shipments/general', [App\Http\Controllers\ShipmentController::class, 'create_form'])->name('shipment.createform');
 
     //Notification Routes
     //Notification Routes

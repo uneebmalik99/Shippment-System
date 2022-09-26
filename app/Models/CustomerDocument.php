@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CustomerDocument extends Model
 {
     use HasFactory;
-    
+
     protected $primaryKey = "id";
     public $timestamps = true;
     protected $table = "customer_documents";
@@ -21,6 +21,6 @@ class CustomerDocument extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 }

@@ -7,10 +7,12 @@
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">
                     <div>
-                        <h5 class="modal-title" id="exampleModalLabel">New {{ $module['singular'] }}</h5>
+                        <h5 class="modal-title text-white" id="exampleModalLabel">New {{ $module['singular'] }}</h5>
                     </div>
                     <div>
-                        <button type="button" class="close text-white h6" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close text-white h6" data-dismiss="modal" aria-label="Close"
+                            style="margin-top: -11px;
+                        font-size: 26px;">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -230,8 +232,8 @@
                                 <b>Search Filter</b>
                             </span>
                         </div>
-                        <div class="col-6 d-flex justify-content-end">
-                            <div class="col-4 d-flex justify-content-end p-0">
+                        <div class="col-6 d-flex justify-content-end p-0">
+                            <div class="col-4 d-flex justify-content-end px-2">
                                 <a href="{{ route('customer.export') }}"
                                     class="px-1 text-muted font-size form-contorl-sm border p-1 rounded col-12"
                                     style="background: #DBDBDB; cursor: pointer;">
@@ -249,7 +251,7 @@
                             </div>
                             <div class="col-5 px-0 d-flex justify-content-center">
                                 <button type="button"
-                                    class="text-white form-control-sm border py-1 btn-info rounded modal_button px-2 col-11"
+                                    class="text-white form-control-sm border py-1 btn-info rounded modal_button px-2 col-12"
                                     style="background: #696CFF;" data-target="#exampleModal" id="vehicle">
                                     <div class="d-flex justify-content-center align-items-center">
                                         <a class="text-white d-flex align-items-center">
@@ -305,7 +307,7 @@
                         </div>
                         <div class="col-3 p-0">
                             <select
-                                class="form-control-sm border-style input-border-style rounded vehicle_filtering col-11 px-2 text-muted"
+                                class="form-control-sm border-style input-border-style rounded vehicle_filtering col-12 text-muted"
                                 name="status" id="vehicle_status">
                                 <option value="" disabled selected>STATUS</option>
                                 @foreach ($status as $stat)

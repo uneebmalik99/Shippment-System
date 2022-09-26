@@ -62,6 +62,8 @@
     <!-- Required Jquery -->
     @include('layouts.partials.footer-scripts')
     @include('layouts.js.vehiclejs')
+    @include('layouts.js.shipmentjs')
+    {{-- @include('layouts.js.vehiclejs') --}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
         integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
@@ -78,6 +80,26 @@
 
         $(document).ready(function() {
             $('#vehicle_table').DataTable({
+                language: {
+                    search: "",
+                    sLengthMenu: "_MENU_",
+                    searchPlaceholder: "Search"
+                },
+
+            });
+        });
+        $(document).ready(function() {
+            $('#customer_table').DataTable({
+                language: {
+                    search: "",
+                    sLengthMenu: "_MENU_",
+                    searchPlaceholder: "Search"
+                },
+
+            });
+        });
+        $(document).ready(function() {
+            $('#shipment_table').DataTable({
                 language: {
                     search: "",
                     sLengthMenu: "_MENU_",

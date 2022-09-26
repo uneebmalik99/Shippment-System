@@ -48,4 +48,29 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\role');
     }
+
+    public function documents()
+    {
+        return $this->hasOne('App\Models\CustomerDocument');
+    }
+
+    public function billings()
+    {
+        return $this->hasMany('App\Models\BillingParty');
+    }
+
+    public function shippers()
+    {
+        return $this->hasMany('App\Models\Shipper');
+    }
+
+    public function quotations()
+    {
+        return $this->hasMany('App\Models\Quotation');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany('App\Models\Notification');
+    }
 }

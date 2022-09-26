@@ -282,6 +282,7 @@ class VehicleController extends Controller
             if ($warehouse) {
                 if ($warehouse != "") {
                     $records = $records->where('title_state', $warehouse);
+                    // dd($records);
                     // return $records;
                 }
             }
@@ -332,17 +333,17 @@ class VehicleController extends Controller
                     '<div style=' . '"vertical-align: middle"' . '>' . '<img src=' .
                     'http://localhost/Shippment-System/public/images/user.png' . ' alt="" ' . 'class=' .
                     '"customer_image"' . '>' . '</div>' .
-                    '<div>' . $val->customer_name . '<br>' . '<span style=' .
-                    '"font-size: 12px!important;"' . '>' . $val->user->email .
+                    '<div>' . @$val->customer_name . '<br>' . '<span style=' .
+                    '"font-size: 12px!important;"' . '>' . @$val->user->email .
                     '</span>' . '</div>' . '</div>' . '</td>' .
-                    '<td>' . $val->vin . '</td>' .
-                    '<td>' . $val->year . '</td>' .
-                    '<td>' . $val->make . '</td>' .
-                    '<td>' . $val->model . '</td>' .
-                    '<td>' . $val->vehicle_type . '</td>' .
-                    '<td>' . $val->value . '</td>' .
-                    '<td>' . $val->status . '</td>' .
-                    '<td>' . $val->user->name . '</td>' .
+                    '<td>' . @$val->vin . '</td>' .
+                    '<td>' . @$val->year . '</td>' .
+                    '<td>' . @$val->make . '</td>' .
+                    '<td>' . @$val->model . '</td>' .
+                    '<td>' . @$val->vehicle_type . '</td>' .
+                    '<td>' . @$val->value . '</td>' .
+                    '<td>' . @$val->status . '</td>' .
+                    '<td>' . @$val->user->name . '</td>' .
                         '<td>' .
                         '<button><a href=' . $url_edit . '><i class=' . '"ti-pencil"' . '></i></a></button>' . '<button><a href=' . $url_delete . '><i class=' . '"ti-trash"' . '></i></a></button>' .
                         '</td>' .

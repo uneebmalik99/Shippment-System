@@ -219,11 +219,9 @@ class CustomerController extends Controller
         //     ],
         // ];
         // $notification = $this->Notification();
-        $data['doc'] = CustomerDocument::where('customer_user_id', $id)->get();
-
-        $data['user'] = User::find($id)->toArray();
-
-        return $data;
+        $data['documents'] = CustomerDocument::with('user')->where('user_id', $id)->get();
+        $output = view('layouts.customer.customer_edit', $data)->render();
+        return Response($output);
         // return $data['user'];
         // return view($this->view . 'create_edit', $data, $notification);
     }
@@ -453,7 +451,7 @@ class CustomerController extends Controller
         if ($request->tab) {
             $tab = $request->tab;
             $output = view('layouts.customer.' . $tab, $data)->render();
-            // dd($data);
+            // ddd($data);
         }
         return Response($output);
     }

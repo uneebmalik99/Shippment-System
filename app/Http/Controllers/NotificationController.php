@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -73,7 +74,7 @@ class NotificationController extends Controller
         ];
 
         $notification = $this->Notification();
-        $data['user'] = User::where('role_id', '4')->toArray();
+        $data['user'] = User::where('role_id', '4')->get();
         // dd($data['user']);
         // return $notification;
         return view($this->view . 'list', $data, $notification);
