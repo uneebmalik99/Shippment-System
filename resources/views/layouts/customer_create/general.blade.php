@@ -6,9 +6,9 @@
     <div>
         <div class="row my-3">
             <div class="col-sm-6 col-md-3 col-lg-3">
-                <div class="tab_card px-2">
+                <div class="tab_card my-3">
                     {{-- general information heading --}}
-                    <div class="py-2">
+                    <div class="col-10 py-3">
                         <div class="text-color" id="general" onclick="slide(this.id)">
                             <svg width="8" height="6" viewBox="0 0 8 6" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -22,102 +22,99 @@
 
                     {{-- general information body --}}
                     <div id="general_body">
+                        <div class="d-flex align-items-center py-2">
+                            <label for="name" class="col-6 px-0 font-size font-bold">Name</label>
+                            <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                name="name" id="name" value="{{ @$user['name'] }}">
+                        </div>
+                        <div class="d-flex align-items-center py-2">
+                            <label for="username" class="col-6 px-0 font-size font-bold">Username</label>
+                            <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                name="username" id="username" value="{{ @$user['name'] }}">
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <label for="username" class="col-6 px-0 font-size font-bold">Password</label>
+                            <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                name="password" id="password" value="{{ @$user['name'] }}">
+                        </div>
+                        <div class=" d-flex align-items-center">
+                            <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                name="status" id="status" value="1">
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <label for="phone" class="px-0 col-6 font-size font-bold">Main phone</label>
+                            <input type="phone" class="form-control-sm border border-0 rounded-pill col-6"
+                                name="phone" id="phone" value="{{ @$user['phone'] }}">
+                        </div>
 
-                        <div class="pb-3 px-2">
-                            <div class="d-flex align-items-center py-2">
-                                <label for="name" class="col-6 px-0 font-size font-bold">Name</label>
-                                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                    name="name" id="name" value="{{ @$user['name'] }}">
-                            </div>
-                            <div class="d-flex align-items-center py-2">
-                                <label for="username" class="col-6 px-0 font-size font-bold">Username</label>
-                                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                    name="username" id="username" value="{{ @$user['name'] }}">
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <label for="username" class="col-6 px-0 font-size font-bold">Password</label>
-                                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                    name="password" id="password" value="{{ @$user['name'] }}">
-                            </div>
-                            <div class=" d-flex align-items-center">
-                                <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                    name="status" id="status" value="1">
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <label for="phone" class="px-0 col-6 font-size font-bold">Main phone</label>
-                                <input type="phone" class="form-control-sm border border-0 rounded-pill col-6"
-                                    name="phone" id="phone" value="{{ @$user['phone'] }}">
-                            </div>
+                        <div class=" d-flex align-items-center my-4">
+                            <label for="fax" class="col-6 px-0 font-size font-bold">Main fax</label>
+                            <input type="fax" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                name="fax" id="fax" value="{{ @$user['fax'] }}">
+                        </div>
+                        <div class=" d-flex align-items-center">
+                            <label for="email" class="col-6 px-0 font-size font-bold">Email</label>
+                            <input type="email" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                name="email" id="email" value="{{ @$user['email'] }}">
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <span class="text-danger">
+                                @error('email')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
 
-                            <div class=" d-flex align-items-center my-4">
-                                <label for="fax" class="col-6 px-0 font-size font-bold">Main fax</label>
-                                <input type="fax" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                    name="fax" id="fax" value="{{ @$user['fax'] }}">
-                            </div>
-                            <div class=" d-flex align-items-center">
-                                <label for="email" class="col-6 px-0 font-size font-bold">Email</label>
-                                <input type="email" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                    name="email" id="email" value="{{ @$user['email'] }}">
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <span class="text-danger">
-                                    @error('email')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
+                        <div class=" d-flex align-items-center">
+                            <label for="source" class="col-6 px-0 font-size font-bold">Source</label>
+                            <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                name="source" id="source" value="{{ @$user['source'] }}">
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <span class="text-danger">
+                                @error('source')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
+                        <div class=" d-flex align-items-center">
+                            <label for="company_name" class="col-6 px-0 font-size font-bold">Company Name</label>
+                            <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                name="company_name" id="company_name" value="{{ @$user['company_name'] }}">
+                        </div>
 
-                            <div class=" d-flex align-items-center">
-                                <label for="source" class="col-6 px-0 font-size font-bold">Source</label>
-                                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                    name="source" id="source" value="{{ @$user['source'] }}">
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <span class="text-danger">
-                                    @error('source')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
-                            <div class=" d-flex align-items-center">
-                                <label for="company_name" class="col-6 px-0 font-size font-bold">Company Name</label>
-                                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                    name="company_name" id="company_name" value="{{ @$user['company_name'] }}">
-                            </div>
-
-                            <div class=" d-flex align-items-center my-3">
-                                <label for="company_email" class="col-6 px-0 font-size font-bold">Company Email</label>
-                                <input type="email" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                    name="company_email" id="company_email" value="{{ @$user['company_email'] }}">
-                            </div>
+                        <div class=" d-flex align-items-center my-3">
+                            <label for="company_email" class="col-6 px-0 font-size font-bold">Company Email</label>
+                            <input type="email" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                name="company_email" id="company_email" value="{{ @$user['company_email'] }}">
+                        </div>
 
 
-                            <div class=" d-flex align-items-center">
-                                <label for="customer_type" class="col-6 px-0 font-size font-bold">Customer
-                                    Type</label>
-                                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                    name="customer_type" id="customer_type" value="{{ @$user['customer_type'] }}">
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <span class="text-danger">
-                                    @error('customer_type')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
+                        <div class=" d-flex align-items-center">
+                            <label for="customer_type" class="col-6 px-0 font-size font-bold">Customer
+                                Type</label>
+                            <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                name="customer_type" id="customer_type" value="{{ @$user['customer_type'] }}">
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <span class="text-danger">
+                                @error('customer_type')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
 
-                            <div class=" d-flex align-items-center">
-                                <label for="sales_type" class="col-6 px-0 font-size font-bold">Sales Type</label>
-                                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                    name="sales_type" id="sales_type" value="{{ @$user['sales_type'] }}">
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <span class="text-danger">
-                                    @error('sales_type')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
+                        <div class=" d-flex align-items-center">
+                            <label for="sales_type" class="col-6 px-0 font-size font-bold">Sales Type</label>
+                            <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                name="sales_type" id="sales_type" value="{{ @$user['sales_type'] }}">
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <span class="text-danger">
+                                @error('sales_type')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
 
 

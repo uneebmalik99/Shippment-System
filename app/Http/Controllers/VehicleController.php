@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\VehicleExport;
 use App\Http\Controllers\Controller;
 use App\Models\AuctionCopy;
 use App\Models\AuctionImage;
@@ -15,6 +16,7 @@ use App\Models\VehicleStatus;
 use App\Models\WarehouseImage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Storage;
 
 class VehicleController extends Controller
@@ -282,6 +284,7 @@ class VehicleController extends Controller
             if ($warehouse) {
                 if ($warehouse != "") {
                     $records = $records->where('title_state', $warehouse);
+
                     // dd($records);
                     // return $records;
                 }
@@ -416,7 +419,7 @@ class VehicleController extends Controller
         $documents = $request->file('name');
         // dd($documents);
         $Obj = new Vehicle;
-        $Obj_vehicle = $Obj->where('vin', '7411')->get();
+        $Obj_vehicle = $Obj->where('vin', $request->vin)->get();
         $i = 0;
         if ($request->hasFile('images')) {
             foreach ($images as $image) {
@@ -468,6 +471,81 @@ class VehicleController extends Controller
             $output['result'] = "Success";
 
         }
+        return Response($output);
+    }
+
+    public function export()
+    {
+        return Excel::download(new VehicleExport, 'vehicles.xlsx');
+    }
+
+    public function profile($id)
+    {
+        $action = url($this->action . '/profile/');
+        $data = [
+            'vehicle' => Vehicle::with('images')->find($id)->toArray(),
+            "page_title" => "Profile " . $this->singular,
+            "page_heading" => "Profile " . $this->singular,
+            "button_text" => "Update ",
+            "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
+            'action' => $action,
+            "module" => ['type' => $this->type,
+                'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'profile',
+                'button' => 'Update',
+            ],
+        ];
+
+        $notification = $this->Notification();
+        return view($this->view . 'profile', $data, $notification);
+
+    }
+
+    public function profile_tab(Request $request)
+    {
+
+        $id = $request->id;
+        $tab = $request->tab;
+
+        $data = [];
+
+        $data['vehicle'] = Vehicle::with('images')->find($id)->toArray();
+
+        $output = view('layouts.vehicle_information.' . $tab, $data)->render();
+
+        return Response($output);
+
+    }
+    public function changesImages(Request $request)
+    {
+
+        $data = [];
+        $output = [];
+        $id = $request->id;
+        // return $id;
+
+        if ($request->tab == 'auction_images') {
+            $data['images'] = AuctionImage::where('vehicle_id', $request->id)->get()->toArray();
+            $url = url('public/auction_images');
+        } else if ($request->tab == 'warehouse_images') {
+            $data['images'] = WarehouseImage::where('vehicle_id', $request->id)->get()->toArray();
+            $url = url('public/warehouse_images');
+        } else {
+            $data['images'] = Image::where('vehicle_id', $request->id)->get()->toArray();
+            $url = url('public/vehicle_images');
+        }
+
+        foreach ($data['images'] as $img) {
+            $output[] = '<div class="img">
+         <img src=' . $url . '/' . $img['name'] . ' alt=" " style="width: 60px; height: 55px; ">
+        </div>';
+        }
+
         return Response($output);
     }
 }

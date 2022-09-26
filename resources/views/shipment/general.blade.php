@@ -12,41 +12,43 @@
             </div>
 
             <div class="mt-3">
-                <div class="mt-2 bg-light" id="shipment_body" style="height: 100%;overflow-x: scroll;">
-                    <table id="shipment_vehicle_table" class="table scroll">
-                        <thead class="bg-white text-info">
-                            <th>YEAR</th>
-                            <th>MAKE</th>
-                            <th>MODEL</th>
-                            <th>VIN</th>
-                            <th>TITLE</th>
-                            <th>TITLE_STATE</th>
-                            <th>TITLE_NUMBER</th>
-                            <th>CUSTOMER</th>
-                            <th>ACTION</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                @foreach ($vehicles as $vehicle)
-                                    <td>{{ @$vehicle['year'] }}</td>
-                                    <td>{{ @$vehicle['make'] }}</td>
-                                    <td>{{ @$vehicle['model'] }}</td>
-                                    <td>{{ @$vehicle['vin'] }}</td>
-                                    <td>{{ @$vehicle['title'] }}</td>
-                                    <td>{{ @$vehicle['title_state'] }}</td>
-                                    <td>{{ @$vehicle['title_number'] }}</td>
-                                    <td>{{ @$vehicle['customer_name'] }}</td>
-                                    <td class="text-center"><input type="checkbox" value="{{ @$vehicle['id'] }}"
-                                            id="vehicle" name="vehicle"></td>
-                                    {{-- <input type="hidden" value="{{ @$vehicle['id'] }}"> --}}
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+
                 <form method="POST" class="col-12" id="shipment_form">
                     @csrf
 
+                    <div class="mt-2 bg-light" id="shipment_body" style="height: 100%;overflow-x: scroll;">
+                        <table id="shipment_vehicle_table" class="table scroll">
+                            <thead class="bg-white text-info">
+                                <th>YEAR</th>
+                                <th>MAKE</th>
+                                <th>MODEL</th>
+                                <th>VIN</th>
+                                <th>TITLE</th>
+                                <th>TITLE_STATE</th>
+                                <th>TITLE_NUMBER</th>
+                                <th>CUSTOMER</th>
+                                <th>ACTION</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach ($vehicles as $vehicle)
+                                        <td>{{ @$vehicle['year'] }}</td>
+                                        <td>{{ @$vehicle['make'] }}</td>
+                                        <td>{{ @$vehicle['model'] }}</td>
+                                        <td>{{ @$vehicle['vin'] }}</td>
+                                        <td>{{ @$vehicle['title'] }}</td>
+                                        <td>{{ @$vehicle['title_state'] }}</td>
+                                        <td>{{ @$vehicle['title_number'] }}</td>
+                                        <td>{{ @$vehicle['customer_name'] }}</td>
+                                        <td class="text-center"><input type="checkbox" value="{{ @$vehicle['id'] }}"
+                                                id="vehicle" name="vehicle[]"></td>
+                                        {{-- <input type="hidden" value="{{ @$vehicle['id'] }}"> --}}
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    
                     <div class="d-xl-flex border-shipment">
                         <div class="col-xl-8 col-12 d-lg-flex p-0">
                             <div class="col-lg-6 col-12 p-0">
@@ -193,12 +195,11 @@
                                             </div>
                                             <div class="col-12 py-2">
                                                 <div class="d-flex align-items-center">
-                                                    <label for="booking_number"
-                                                        class="col-6 px-0 font-size font-bold">Booking
-                                                        Number</label>
+                                                    <label for="container_number"
+                                                        class="col-6 px-0 font-size font-bold">Container Number</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="booking_number" id="booking_number">
+                                                        name="container_number" id="container_number">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -326,7 +327,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="tab_card my-3">
+                                    {{-- <div class="tab_card my-3">
                                         <div class="col-7 py-3">
                                             <div class="text-color" style="cursor: pointer;" id="shipment_container"
                                                 onclick="slide(this.id)">
@@ -382,7 +383,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
 
@@ -611,7 +612,7 @@
 
                                     <div class="tab_card my-3">
                                         <div class="col-7 py-3">
-                                            <div class="text-color" style="cursor: pointer;" id="shipment_units"
+                                            <div class="text-color" style="cursor: pointer;" id="note"
                                                 onclick="slide(this.id)">
                                                 <svg width="8" height="6" viewBox="0 0 8 6" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -619,10 +620,10 @@
                                                         stroke-width="2" stroke-linecap="round"
                                                         stroke-linejoin="round" />
                                                 </svg>
-                                                <span class="p-2">Units Information</span>
+                                                <span class="p-2">Note</span>
                                             </div>
                                         </div>
-                                        <div id="shipment_units_body">
+                                        <div id="note_body">
                                             <div class="col-12 py-2">
                                                 <div class="d-flex align-items-center">
                                                     <label for="notes"

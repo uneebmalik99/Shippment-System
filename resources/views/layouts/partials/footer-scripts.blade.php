@@ -257,48 +257,7 @@
     })
 </script>
 
-{{-- Photos grid js --}}
-<script>
-    // $(function() {
-    //     $i = 1;
-    //     $("#fileupload_vehicle").change(function() {
-    //         alert('asdaad');
-    //         if (typeof(FileReader) != "undefined") {
-    //             var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
-    //             $($(this)[0].files).each(function() {
-    //                 var dvPreview = $("#dvPreview" + $i);
-    //                 dvPreview.html("");
-    //                 var file = $(this);
-    //                 if ($i <= 4) {
-    //                     if (regex.test(file[0].name.toLowerCase())) {
-    //                         var reader = new FileReader();
-    //                         reader.onload = function(e) {
-    //                             var img = $("<img />");
-    //                             img.attr("style",
-    //                                 "height:100px;width: 100px; padding:5px;");
-    //                             img.attr("src", e.target.result);
-    //                             dvPreview.append(img);
-    //                             dvPreview.next().children().removeClass('d-none');
-    //                         }
-    //                         reader.readAsDataURL(file[0]);
-    //                         $i++;
-    //                     } else {
-    //                         alert(file[0].name + " is not a valid image file.");
-    //                         dvPreview.html("");
-    //                         return false;
-    //                     }
-    //                 } else {
-    //                     alert('Only 4 images allowed.');
-    //                 }
-    //             });
-    //         } else {
-    //             alert("This browser does not support HTML5 FileReader.");
-    //         }
-    //     });
-    // });
-</script>
-
-{{-- Delete Image --}}
+{{-- Delete Image
 <script>
     $('.delete').on('click', function() {
         // alert('asdas');
@@ -307,7 +266,7 @@
         $(this).addClass('d-none');
         $i--;
     });
-</script>
+</script> --}}
 
 <script>
     $('.close').on('click', function() {
@@ -347,16 +306,6 @@
                     // console.log(data);
                     $('.modal-body').html(data);
                     $('#exampleModal').modal('show');
-                    $('.vehicle_auction_image').imageUploader({
-                        maxFiles: 15
-                    });
-                    $('.vehicle_warehouse_image').imageUploader({
-                        maxFiles: 15
-                    });
-                    $('.input-images-1').imageUploader({
-                        maxFiles: 4
-                    });
-
                 }
             });
         } else if ($id == "shipment") {
@@ -460,34 +409,65 @@
 
 <script>
     function slide(id) {
-        if (id == "client") {
-            $("#client_body").slideToggle();
-        } else if (id == "buyer") {
-            $("#buyer_body").slideToggle();
-        } else if (id == "title") {
-            $("#title_body").slideToggle();
-        } else if (id == "shipper") {
-            $("#shipper_body").slideToggle();
-        } else if (id == "shipment_customer") {
-            $("#shipment_customer_body").slideToggle();
-        } else if (id == "shipment_calendar") {
-            $("#shipment_calendar_body").slideToggle();
-        } else if (id == "shipment_container") {
-            $("#shipment_container_body").slideToggle();
-        } else if (id == "shipment_reference") {
-            $("#shipment_reference_body").slideToggle();
-        } else if (id == "shipment_users") {
-            $("#shipment_users_body").slideToggle();
-        } else if (id == "shipment_loading") {
-            $("#shipment_loading_body").slideToggle();
-        } else if (id == "shipment_destination") {
-            $("#shipment_destination_body").slideToggle();
-        } else if (id == "shipment_shipping") {
-            $("#shipment_shipping_body").slideToggle();
-        } else if (id == "shipment_units") {
-            $("#shipment_units_body").slideToggle();
+        switch (id) {
+            case ('client'):
+                $("#client_body").slideToggle();
+                break;
+            case ('buyer'):
+                $("#buyer_body").slideToggle();
+                break;
+            case ('title'):
+                $("#title_body").slideToggle();
+                break;
+            case ('shipper'):
+                $("#shipper_body").slideToggle();
+                break;
+            case ('charges'):
+                $("#charges_body").slideToggle();
+                break;
+            case ('general'):
+                $("#general_body").slideToggle();
+                break;
+            case ('sales_application'):
+                $("#sales_application_body").slideToggle();
+                break;
+            case ('financial'):
+                $("#financial_body").slideToggle();
+                break;
+            case ('sale_association'):
+                $("#sale_association_body").slideToggle();
+                break;
+            case ('shipment_customer'):
+                $("#shipment_customer_body").slideToggle();
+                break;
+            case ('shipment_calendar'):
+                $("#shipment_calendar_body").slideToggle();
+                break;
+            case ('shipment_container'):
+                $("#shipment_container_body").slideToggle();
+                break;
+            case ('shipment_reference'):
+                $("#shipment_reference_body").slideToggle();
+                break;
+            case ('shipment_users'):
+                $("#shipment_users_body").slideToggle();
+                break;
+            case ('shipment_loading'):
+                $("#shipment_loading_body").slideToggle();
+                break;
+            case ('shipment_destination'):
+                $("#shipment_destination_body").slideToggle();
+                break;
+            case ('shipment_shipping'):
+                $("#shipment_shipping_body").slideToggle();
+                break;
+            case ('shipment_units'):
+                $("#shipment_units_body").slideToggle();
+                break;
+            case ('note'):
+                $("#note_body").slideToggle();
+                break;
         }
-
     }
 </script>
 
@@ -551,6 +531,12 @@
                     });
                     $('.modal-body').html(data.view);
                     $('#exampleModal').modal('show');
+                    $('.vehicle_auction_image').imageUploader({
+                        maxFiles: 15
+                    });
+                    $('.vehicle_warehouse_image').imageUploader({
+                        maxFiles: 15
+                    });
                     $('#' + $tab_id + '_tab').removeClass('next-style');
                     $('#' + $tab_id + '_tab').addClass('tab_style');
                     $('#' + $next_tab).addClass('next-style');

@@ -189,3 +189,49 @@
         $('#exampleModal').modal('hide');
     }
 </script>
+
+<script>
+    $('.vehicle_information_tab').on('click', function() {
+        $id = $(this).attr('id');
+        $tab = $(this).attr('tab');
+
+        $('.vehicle_information_tab').removeClass('active_information_button col-3');
+        $('.vehicle_information_tab').addClass('col-2');
+        $(this).removeClass('col-2');
+        $(this).addClass('active_information_button col-3');
+
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('admin/vehicle/vehicle_informationTab') }}',
+            data: {
+                'tab': $tab,
+                'id': $id,
+            },
+            success: function(data) {
+                $('#vehicle_information_main').html(data);
+                // $('.vehicle_information_tab')
+            }
+        });
+    });
+
+    function changeImages(id) {
+        // alert(tab);
+        $id = $('#' + id).attr('tab');
+        $tab = id;
+
+
+        $.ajax({
+            type: 'post',
+            url: '{{ URL::to('admin/vehicle/vehicle_changeImages') }}',
+            data: {
+                'tab': $tab,
+                'id': $id,
+            },
+            success: function(data) {
+                // alert(data);
+                console.log(data);
+                $('.changeImages').html(data);
+            }
+        });
+    }
+</script>

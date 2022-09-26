@@ -108,7 +108,8 @@ class ShipmentController extends Controller
         ];
 
         $notification = $this->Notification();
-        $data['vehicles'] = Vehicle::all()->toArray();
+        $data['vehicles'] = Vehicle::where('shipment_id', null)->get();
+        // dd($data['vehicles']);
         $data['consignees'] = Consignee::all()->toArray();
         $data['records'] = Shipment::all()->toArray();
 
@@ -161,17 +162,35 @@ class ShipmentController extends Controller
     {
         if ($request->ajax()) {
             $data = $request->all();
+            $vehicles = $request->vehicle;
             $image = $request->file('images');
+            unset($data['vehicle']);
+            unset($data['shipment_vehicle_table_length']);
+            $Obj_vehicle = new Vehicle;
             $Obj = new Shipment;
-            foreach ($image as $images) {
-                $image_name = time() . '.' . $images->extension();
-                $filename = Storage::putFile($this->directory, $images);
-                $images->move(public_path($this->directory), $filename);
-                $data['images'] = $image_name;
+            if ($image) {
+                foreach ($image as $images) {
+                    $image_name = time() . '.' . $images->extension();
+                    $filename = Storage::putFile($this->directory, $images);
+                    $images->move(public_path($this->directory), $filename);
+                    $data['images'] = $image_name;
+                }
             }
+            // dd($data);
+            $data['status'] = "2";
             $Obj->create($data);
-            if ($Obj) {
-                return "Success";
+
+            // $Obj_vehicle = new Vehicle;
+            foreach ($vehicles as $vehicle_id) {
+                $shipment = $Obj->where('container_number', $request->container_number)->get();
+                $get_vehicle = $Obj_vehicle->find($vehicle_id);
+                $get_vehicle->shipment_id = $shipment[0]['id'];
+                $get_vehicle->save();
+            }
+            if ($get_vehicle) {
+                return "Success!";
+            } else {
+                return "Failed!";
             }
         }
     }

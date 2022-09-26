@@ -235,11 +235,6 @@
                 <div class="mt-2 bg-light" style="height: 100%;overflow-x: scroll;">
                     <table id="shipment_table" class="table scroll row-border">
                         <thead class="bg-custom text-dark">
-                            {{-- @if (@$records->count() == 0)
-                                <tr>
-                                    <td colspan="9" class="h6 text-muted text-center">NO CUSTOMERS TO DISPLAY</td>
-                                </tr>
-                            @endif --}}
                             <tr class="font-size font-bold">
                                 <th class="font-bold-tr">Sr</th>
                                 <th class="font-bold-tr">COMPANY NAME</th>

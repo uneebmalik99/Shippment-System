@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\CustomersExport;
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Models\BillingParty;
 use App\Models\Consignee;
@@ -593,6 +593,6 @@ class CustomerController extends Controller
 
     public function export()
     {
-        return Excel::download(new CustomersExport, 'users.xlsx');
+        return Excel::download(new UsersExport, 'customers.xlsx');
     }
 }

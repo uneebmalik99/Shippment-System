@@ -109,6 +109,14 @@
             });
         });
         // $(document).ready(function() {
+        //     $('.vehicle_auction_image').imageUploader({
+        //         maxFiles: 15
+        //     });
+        //     $('.vehicle_warehouse_image').imageUploader({
+        //         maxFiles: 15
+        //     });
+        // })
+        // $(document).ready(function() {
         //     $('#new_order_table').DataTable({
         //         language: {
         //             search: "",

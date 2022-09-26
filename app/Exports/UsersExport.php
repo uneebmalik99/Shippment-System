@@ -2,16 +2,16 @@
 
 namespace App\Exports;
 
-use App\Models\Customer;
+use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class CustomersExport implements FromCollection
+class UsersExport implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Customer::all();
+        return User::where('role_id', '4')->get();
     }
 }
