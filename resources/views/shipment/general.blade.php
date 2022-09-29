@@ -16,18 +16,20 @@
                 <form method="POST" class="col-12" id="shipment_form">
                     @csrf
 
-                    <div class="mt-2 bg-light" id="shipment_body" style="height: 100%;overflow-x: scroll;">
-                        <table id="shipment_vehicle_table" class="table scroll">
-                            <thead class="bg-white text-info">
-                                <th>YEAR</th>
-                                <th>MAKE</th>
-                                <th>MODEL</th>
-                                <th>VIN</th>
-                                <th>TITLE</th>
-                                <th>TITLE_STATE</th>
-                                <th>TITLE_NUMBER</th>
-                                <th>CUSTOMER</th>
-                                <th>ACTION</th>
+                    <div class="mt-2 bg-light" id="shipment_body">
+                        <table id="shipment_vehicle_table" class="table ">
+                            <thead class="bg-custom text-dark">
+                                <tr style="font-size: 11px!important">
+                                    <th>YEAR</th>
+                                    <th>MAKE</th>
+                                    <th>MODEL</th>
+                                    <th>VIN</th>
+                                    <th>TITLE</th>
+                                    <th>TITLE STATE</th>
+                                    <th>TITLE NUMBER</th>
+                                    <th>CUSTOMER</th>
+                                    <th>ACTION</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -48,7 +50,7 @@
                             </tbody>
                         </table>
                     </div>
-                    
+
                     <div class="d-xl-flex border-shipment">
                         <div class="col-xl-8 col-12 d-lg-flex p-0">
                             <div class="col-lg-6 col-12 p-0">

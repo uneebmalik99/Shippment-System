@@ -2,47 +2,15 @@
     <div class="px-3 d-flex">
         <h6 class="text-muted"><b>User's Projects List</b></h6>
     </div>
-    <div class="px-3 pt-4 pb-2 d-flex justify-content-between">
-        <div class="col-3 p-0 d-flex align-items-center text-muted">
-            <div class="col-12 d-flex justify-content-start align-items-center p-0">
-                <label for="pagination_account" class="pr-3">Show</label>
-                <select class="form-control-sm border-style rounded col-5" name="pagination" id="pagination_account">
-                    <option value="100">100</option>
-                    <option value="200">200</option>
-                    <option value="300">300</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-9 d-flex justify-content-end align-items-center">
-            <div class="col-10 p-0 d-flex justify-content-end">
-                <input type="text" class="form-control-sm border-style border-info rounded col-8 text-dark text-left"
-                    id="search_customer" name="search" placeholder="Search Project">
-            </div>
-
-            {{-- <div class="col-2 px-3 d-flex justify-content-end">
-                <a href="{{ route('customer.export') }}"
-                    class="px-1 text-muted font-size form-contorl-sm border p-1 rounded col-12"
-                    style="background: #DBDBDB; cursor: pointer;">
-                    <div class="d-flex justify-content-center align-items-center px-1">
-                        <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 16H13V7H16L12 2L8 7H11V16Z" fill="#8F8F8F" />
-                            <path
-                                d="M5 22H19C20.103 22 21 21.103 21 20V11C21 9.897 20.103 9 19 9H15V11H19V20H5V11H9V9H5C3.897 9 3 9.897 3 11V20C3 21.103 3.897 22 5 22Z"
-                                fill="#8F8F8F" />
-                        </svg>
-                        <span class="pl-1 font-size">Export</span>
-                    </div>
-                </a>
-            </div> --}}
-        </div>
+    <div>
+        <br>
     </div>
     <div>
         <table class="table font-size sortable">
             <thead class="text-muted bg-white">
                 <tr>
                     <th class="col-3 pl-5">PROJECT</th>
-                    <th class="col-3 pl-5">TOTAL</th>
+                    <th class="col-3 pl-4" style="text-align: start!important;">TOTAL</th>
                     <th class="col-3 pl-5">PROGREE</th>
                 </tr>
             </thead>
@@ -62,11 +30,11 @@
                             New Vehicles
                         </span>
                     </td>
-                    <td>{{@$customer_vehicles}}</td>
+                    <td style="text-align: start!important;" class="pl-5">{{@$customer_vehicles}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:{{@$customer_vehicles_percentage}}">
+                                aria-valuemax="100" style="width:{{@$customer_vehicles_percentage}}%">
                                 {{@$customer_vehicles_percentage}}
                             </div>
                         </div>
@@ -94,11 +62,11 @@
                             Posted Vehicle
                         </span>
                     </td>
-                    <td>{{@$posted_count}}</td>
+                    <td style="text-align: start!important;" class="pl-5">{{@$posted_count}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:{{@$posted_count_percentage}}">
+                                aria-valuemax="100" style="width:{{@$posted_count_percentage}}%">
                                 {{@$posted_count_percentage}}
                             </div>
                         </div>
@@ -128,11 +96,11 @@
                             Dispatched Vehicle
                         </span>
                     </td>
-                    <td>{{@$dispatch_count}}</td>
+                    <td style="text-align: start!important;" class="pl-5">{{@$dispatch_count}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:{{@$dispatch_count_percentage}}">
+                                aria-valuemax="100" style="width:{{@$dispatch_count_percentage}}%">
                                 {{@$dispatch_count_percentage}}
                             </div>
                         </div>
@@ -158,11 +126,11 @@
                         <span class="px-2">
                             On Hand
                         </span>
-                    <td>{{@$onhand_count}}</td>
+                    <td style="text-align: start!important;" class="pl-5">{{@$onhand_count}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:{{@$onhand_count_percentage}}">
+                                aria-valuemax="100" style="width:{{@$onhand_count_percentage}}%">
                                 {{@$onhand_count_percentage}}
                             </div>
                         </div>
@@ -194,11 +162,11 @@
                             Booked
                         </span>
                     </td>
-                    <td>{{@$booked_count}}</td>
+                    <td style="text-align: start!important;" class="pl-5">{{@$booked_count}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:{{@$booked_count_percentage}}">
+                                aria-valuemax="100" style="width:{{@$booked_count_percentage}}%">
                                 {{@$booked_count_percentage}}
                             </div>
                         </div>
@@ -218,11 +186,11 @@
                             Shipped
                         </span>
                     </td>
-                    <td>{{@$shipped_count}}</td>
+                    <td style="text-align: start!important;" class="pl-5">{{@$shipped_count}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:{{@$shipped_count_percentage}}">
+                                aria-valuemax="100" style="width:{{@$shipped_count_percentage}}%">
                                 {{@$shipped_count_percentage}}
                             </div>
                         </div>
@@ -242,11 +210,11 @@
                             Arrived
                         </span>
                     </td>
-                    <td>{{@$arrived_count}}</td>
+                    <td style="text-align: start!important;" class="pl-5">{{@$arrived_count}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                aria-valuemax="100" style="width:{{@$arrived_count_percentage}}">
+                                aria-valuemax="100" style="width:{{@$arrived_count_percentage}}%">
                                 {{@$arrived_count_percentage}}
                             </div>
                         </div>

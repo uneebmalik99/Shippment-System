@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\VehicleExport;
+use App\Imports\VehicleImport;
 use App\Http\Controllers\Controller;
 use App\Models\AuctionCopy;
 use App\Models\AuctionImage;
@@ -10,6 +11,7 @@ use App\Models\AuctionInvoice;
 use App\Models\Image;
 use App\Models\Location;
 use App\Models\Notification;
+use App\Models\Shipment;
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\VehicleStatus;
@@ -35,6 +37,7 @@ class VehicleController extends Controller
     public function Notification()
     {
         $data['notification'] = Notification::with('user')->get();
+        $data['location'] = Location::all()->toArray();
         // dd();
         if ($data['notification']->toArray()) {
             $current = Carbon::now();
@@ -121,6 +124,7 @@ class VehicleController extends Controller
         ];
         $data['buyers'] = User::where('role_id', '4')->get();
         $data['location'] = Location::all();
+        $data['shipment'] = Shipment::all();
         if ($request->ajax()) {
             $tab = $request->tab;
             $output = view('layouts.vehicle_create.' . $tab, $data)->render();
@@ -477,6 +481,16 @@ class VehicleController extends Controller
     public function export()
     {
         return Excel::download(new VehicleExport, 'vehicles.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        if ($request->ajax()) {
+            $output = view('layouts.vehicle.import_vehicles')->render();
+            return Response($output);
+        }
+        Excel::import(new VehicleImport, request()->file('import_document'));
+        return redirect()->route('vehicle.list')->with('success', "Vehicles imported successfully!");
     }
 
     public function profile($id)

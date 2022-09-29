@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BillingParty;
 use App\Models\Consignee;
 use App\Models\CustomerDocument;
+use App\Models\Location;
 use App\Models\Notification;
 use App\Models\Quotation;
 use App\Models\Shipper;
@@ -34,6 +35,7 @@ class CustomerController extends Controller
     {
 
         $data['notification'] = Notification::with('user')->paginate($this->perpage);
+        $data['location'] = Location::all()->toArray();
         // return $data['notification'];
         // dd(\Carbon\Carbon::now());
         if ($data['notification']) {
@@ -172,15 +174,6 @@ class CustomerController extends Controller
         if ($request->isMethod('post')) {
             $record = $request->all();
             $Obj = new User;
-            // $request->validate([
-            //     'customer_name' => 'required|alpha',
-            //     'company_name' => 'required|alpha',
-            //     'phone' => 'required|max:12',
-            //     'email' => 'required|email',
-            //     'zip_code' => 'numeric',
-            //     'tax_id' => 'required|numeric|min:0|max:4',
-            //     'phone_2' => 'required|max:12',
-            // ]);
             $result = $Obj->create($record);
             return redirect($this->action)->with('success', 'Vehicle addedd successfully.');
 
@@ -191,39 +184,56 @@ class CustomerController extends Controller
 
     public function edit(Request $request, $id = null)
     {
-
-        // if ($request->isMethod('post')) {
-        //     $data = $request->all();
-        //     $Obj = User::find($id);
-        //     $Obj->update($data);
-        //     return redirect($this->action)->with('success', 'Edited successfully.');
-        // }
-        // $action = url($this->action . '/edit/' . $id);
-        // $data = [];
-        // $data = [
-        //     // 'user' => Customer::all()->toArray(),
-        //     "page_title" => "Edit " . $this->singular,
-        //     "page_heading" => "Edit " . $this->singular,
-        //     "button_text" => "Update ",
-        //     "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
-        //     'action' => $action,
-        //     "module" => ['type' => $this->type,
-        //         'type' => $this->type,
-        //         'singular' => $this->singular,
-        //         'plural' => $this->plural,
-        //         'view' => $this->view,
-        //         'db_key' => $this->db_key,
-        //         'action' => $this->action,
-        //         'page' => 'edit',
-        //         'button' => 'Update',
-        //     ],
-        // ];
-        // $notification = $this->Notification();
         $data['documents'] = CustomerDocument::with('user')->where('user_id', $id)->get();
         $output = view('layouts.customer.customer_edit', $data)->render();
         return Response($output);
-        // return $data['user'];
-        // return view($this->view . 'create_edit', $data, $notification);
+    }
+
+    public function customerUpdate(Request $req)
+    {
+
+        $image = $req->file('images');
+        // return $image[0]['name'];
+        $file = $req->file('user_file');
+        $file_id = $req->file_id;
+        $data = $req->all();
+        unset($data['file_id']);
+        unset($data['user_file']);
+
+        if ($image) {
+            foreach ($image as $images) {
+                $filename = Storage::putFile($this->directory, $images);
+                $images->move(public_path($this->directory), $filename);
+                $data['user_image'] = $filename;
+
+                unset($data['images']);
+            }
+
+            $Obj = User::find($req->id);
+            $Obj->update($data);
+        } else {
+            unset($data['images']);
+            $Obj = User::find($req->id);
+            $Obj->update($data);
+
+        }
+
+        if ($file) {
+            foreach ($file as $files) {
+                $file_name = time() . '.' . $files->extension();
+                $docname = Storage::putFile($this->directory, $files);
+                $documents['file'] = $docname;
+                $documents['thumbnail'] = $file_name;
+                $files->move(public_path($this->directory), $docname);
+            }
+            $Obj = CustomerDocument::find($file_id);
+            $Obj->update($documents);
+            // return '0';
+
+        }
+        $success = 'Customer Updated Successfully!';
+        return $success;
+
     }
 
     public function delete($id = null)
@@ -279,7 +289,7 @@ class CustomerController extends Controller
         $CustomerVehicles_value = Vehicle::get()->sum('value');
         if ($all_vehicles != 0) {
             $customer_vehicles_percentage = ($customer_vehicles / $all_vehicles) * 100;
-            $data['customer_vehicles_percentage'] = $customer_vehicles_percentage;
+            $data['customer_vehicles_percentage'] = round($customer_vehicles_percentage);
         } else {
             $data['customer_vehicles_percentage'] = 0;
         }
@@ -293,7 +303,7 @@ class CustomerController extends Controller
         $data['onhand_value'] = $onhand_value;
         if ($all_vehicles != 0) {
             $onhand_count_percentage = ($onhand_count / $all_vehicles) * 100;
-            $data['onhand_count_percentage'] = $onhand_count_percentage;
+            $data['onhand_count_percentage'] = round($onhand_count_percentage);
         } else {
             $data['onhand_count_percentage'] = 0;
         }
@@ -305,7 +315,7 @@ class CustomerController extends Controller
         $data['dispatch_value'] = $dispatch_value;
         if ($all_vehicles != 0) {
             $dispatch_count_percentage = ($dispatch_count / $all_vehicles) * 100;
-            $data['dispatch_count_percentage'] = $dispatch_count_percentage;
+            $data['dispatch_count_percentage'] = round($dispatch_count_percentage);
         } else {
             $data['dispatch_count_percentage'] = 0;
         }
@@ -317,7 +327,7 @@ class CustomerController extends Controller
         $data['manifest_value'] = $manifest_value;
         if ($all_vehicles != 0) {
             $manifest_count_percentage = ($manifest_count / $all_vehicles) * 100;
-            $data['manifest_count_percentage'] = $manifest_count_percentage;
+            $data['manifest_count_percentage'] = round($manifest_count_percentage);
         } else {
             $data['manifest_count_percentage'] = 0;
         }
@@ -329,7 +339,7 @@ class CustomerController extends Controller
         $data['shipped_value'] = $shipped_value;
         if ($all_vehicles != 0) {
             $shipped_count_percentage = ($shipped_count / $all_vehicles) * 100;
-            $data['shipped_count_percentage'] = $shipped_count_percentage;
+            $data['shipped_count_percentage'] = round($shipped_count_percentage);
         } else {
             $data['shipped_count_percentage'] = 0;
         }
@@ -341,7 +351,7 @@ class CustomerController extends Controller
         $data['arrived_value'] = $arrived_value;
         if ($all_vehicles != 0) {
             $arrived_count_percentage = ($arrived_count / $all_vehicles) * 100;
-            $data['arrived_count_percentage'] = $arrived_count_percentage;
+            $data['arrived_count_percentage'] = round($arrived_count_percentage);
         } else {
             $data['arrived_count_percentage'] = 0;
         }
@@ -353,7 +363,7 @@ class CustomerController extends Controller
         $data['posted_value'] = $posted_value;
         if ($all_vehicles != 0) {
             $posted_count_percentage = ($posted_count / $all_vehicles) * 100;
-            $data['posted_count_percentage'] = $posted_count_percentage;
+            $data['posted_count_percentage'] = round($posted_count_percentage);
         } else {
             $data['posted_count_percentage'] = 0;
         }
@@ -365,7 +375,7 @@ class CustomerController extends Controller
         $data['booked_value'] = $booked_value;
         if ($all_vehicles != 0) {
             $booked_count_percentage = ($booked_count / $all_vehicles) * 100;
-            $data['booked_count_percentage'] = $booked_count_percentage;
+            $data['booked_count_percentage'] = round($booked_count_percentage);
         } else {
             $data['booked_count_percentage'] = 0;
         }
@@ -446,7 +456,7 @@ class CustomerController extends Controller
         $data['billing'] = BillingParty::where('customer_id', $id)->get();
         $data['shipper'] = Shipper::where('customer_id', $id)->get();
         $data['notification'] = Notification::where('user_id', $id)->get();
-        $data['documents'] = CustomerDocument::where('customer_user_id', $id)->get()->toArray();
+        $data['documents'] = CustomerDocument::where('user_id', $id)->get()->toArray();
 
         if ($request->tab) {
             $tab = $request->tab;
@@ -462,14 +472,11 @@ class CustomerController extends Controller
         if ($request->ajax()) {
             // $data = [];
             $data = $request->all();
-
             $tab = $request->tab;
             $image = $request->file('images');
             $file = $request->file('user_file');
             unset($data['user_file']);
             unset($data['tab']);
-
-            // $tab = $request->tab;
             $email = $data['email'];
             $output = [];
             $documents = [];
@@ -521,33 +528,32 @@ class CustomerController extends Controller
             }
 
             if ($tab == "general_customer") {
-                // dd($file);
-                // dd($documents['customer_user_id']);
-                foreach ($image as $images) {
-                    $filename = Storage::putFile($this->directory, $images);
-
-                    $images->move(public_path($this->directory), $filename);
-
-                    $data['user_image'] = $filename;
-                    $data['password'] = Hash::make($request->password);
-                    unset($data['images']);
-                    $Obj = new User;
-                    $Obj->create($data);
+                if ($image) {
+                    foreach ($image as $images) {
+                        $filename = Storage::putFile($this->directory, $images);
+                        $images->move(public_path($this->directory), $filename);
+                        $data['user_image'] = $filename;
+                        $data['password'] = Hash::make($request->password);
+                        unset($data['images']);
+                    }
                 }
+                $Obj = new User;
+                $Obj->create($data);
                 // $email = $data['email'];
                 $user = User::where('email', $email)->get();
-
                 $user_id = $user[0]['id'];
 
-                foreach ($file as $files) {
-                    $docname = Storage::putFile($this->directory, $files);
-                    $documents['file'] = $docname;
-
-                    $files->move(public_path($this->directory), $docname);
-
-                    $documents['customer_user_id'] = $user_id;
-                    $Obj = new CustomerDocument;
-                    $Obj->create($documents);
+                if ($file) {
+                    foreach ($file as $files) {
+                        $file_name = time() . '.' . $files->extension();
+                        $docname = Storage::putFile($this->directory, $files);
+                        $documents['file'] = $docname;
+                        $documents['thumbnail'] = $file_name;
+                        $files->move(public_path($this->directory), $docname);
+                        $documents['user_id'] = $user_id;
+                        $Obj = new CustomerDocument;
+                        $Obj->create($documents);
+                    }
                 }
                 $output =
                     [
@@ -591,8 +597,54 @@ class CustomerController extends Controller
         }
     }
 
+    public function FilterTable(Request $req, $tab = null)
+    {
+        $filterText = $req->id;
+
+        $data = [];
+        $data = [
+            "page_title" => $this->plural . " List",
+            "page_heading" => $this->plural . ' List',
+            "breadcrumbs" => array('#' => $this->plural . " List"),
+            "module" => [
+                'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'list',
+            ],
+        ];
+
+        $data['user'] = User::where('role_id', 4)->where('status', $filterText)->orwhere('city', $filterText)->orwhere('state', $filterText)->get()->toArray();
+
+        $output = view('customer.FilterTable', $data)->render();
+
+        return Response($output);
+
+    }
+
+    public function changeNotification(Request $req)
+    {
+        $id = $req->id;
+
+        $notification = Notification::where('id', $id)->get();
+        return Response($notification);
+
+    }
+
     public function export()
     {
         return Excel::download(new UsersExport, 'customers.xlsx');
     }
+
+    // public function import(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $output = view('layouts.customer.import_customer')->render();
+    //         return Response($output);
+    //     }
+    //     Excel::import(new CustomersImport, request()->file('import_document'));
+    // }
 }

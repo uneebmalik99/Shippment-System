@@ -142,7 +142,7 @@
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="values" class="col-6 px-0 font-size font-bold">Values</label>
+                                    <label for="values" class="col-6 px-0 font-size font-bold">Value ($)</label>
                                     <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="value"
                                         id="value" value="{{ @$user['values'] }}">
@@ -159,9 +159,12 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="auction" class="col-6 px-0 font-size font-bold">Auction</label>
-                                    <input type="text"
-                                        class="form-control-sm border border-0 rounded-pill bg col-6" name="auction"
-                                        id="auction" value="{{ @$user['auction'] }}">
+                                    <div
+                                        class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
+                                        <span class="prefix text-dark">$</span>
+                                        <input type="text" class="general_input col-11" name="auction"
+                                            id="auction" value="{{ @$user['auction'] }}">
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -229,8 +232,7 @@
                                         id="note" value="{{ @$user['notes'] }}"></textarea>
                                 </div>
                             </div>
-
-                            <div class="col-12 py-2">
+                            {{-- <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="title_type" class="col-6 px-0 font-size font-bold">Title Type</label>
                                     <input type="text"
@@ -244,7 +246,7 @@
                                         @enderror
                                     </span>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="hat_number" class="col-6 px-0 font-size font-bold">Hat No</label>
@@ -294,9 +296,25 @@
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
+                                    <label for="title_type" class="col-6 px-0 font-size font-bold">Title Type</label>
+                                    <input type="text"
+                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                        name="title_type" id="title_type" value="{{ @$user['title_type'] }}">
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <span class="text-danger">
+                                        @error('title_type')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-12 py-2">
+                                <div class="d-flex align-items-center">
                                     <label for="title_rec_date" class="col-6 px-0 font-size font-bold">Title Rec
                                         Date</label>
-                                    <input type="text"
+                                    <input type="date"
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="title_rec_date" id="title_rec_date"
                                         value="{{ @$user['title_rec_date'] }}">
@@ -368,22 +386,25 @@
                             </div>
                         </div>
                         <div id="shipper_body">
-                            <div class="col-12 py-2">
-                                <div class="d-flex align-items-center">
-                                    <label for="shipment_id" class="col-6 px-0 font-size font-bold">Shipment
-                                        ID</label>
-                                    <input type="text"
-                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="shipment_id" id="shipment_id" value="{{ @$user['shipment_id'] }}">
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('shipment_id')
-                                            {{ $message }}
-                                        @enderror
-                                    </span>
-                                </div>
-                            </div>
+                                    {{-- <div class="col-12 py-2">
+                                        <div class="d-flex align-items-center">
+                                            <label for="shipment_id" class="col-6 px-0 font-size font-bold">Shipment
+                                                ID</label>
+                                            <select class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                name="port" id="port">
+                                                @foreach ($shipment as $shipments)
+                                                    <option value="{{ $shipments['id'] }}">{{ $shipments['name'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <span class="text-danger">
+                                                @error('shipment_id')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                    </div> --}}
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
@@ -421,7 +442,7 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="sale_date" class="col-6 px-0 font-size font-bold">Sale Date</label>
-                                    <input type="text"
+                                    <input type="date"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="sale_date"
                                         id="sale_date" value="{{ @$user['sale_date'] }}">
                                 </div>
@@ -437,7 +458,7 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="paid_date" class="col-6 px-0 font-size font-bold">Paid Date</label>
-                                    <input type="text"
+                                    <input type="date"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="paid_date"
                                         id="paid_date" value="{{ @$user['paid_date'] }}">
                                 </div>
@@ -469,7 +490,7 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="post_date" class="col-6 px-0 font-size font-bold">Post Date</label>
-                                    <input type="text"
+                                    <input type="date"
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="posted_date" id="posted_date" value="{{ @$user['post_date'] }}">
                                 </div>
@@ -486,7 +507,7 @@
                                 <div class="d-flex align-items-center">
                                     <label for="pickup_date" class="col-6 px-0 font-size font-bold">Pickup
                                         Date</label>
-                                    <input type="text"
+                                    <input type="date"
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="pickup_date" id="pickup_date" value="{{ @$user['pickup_date'] }}">
                                 </div>
@@ -502,7 +523,7 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="delivered" class="col-6 px-0 font-size font-bold">Delivered</label>
-                                    <input type="text"
+                                    <input type="date"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="delivered"
                                         id="delivered" value="{{ @$user['delivered'] }}">
                                 </div>
@@ -550,8 +571,7 @@
                             </div>
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="port" class="col-6 px-0 font-size font-bold">Title
-                                        State</label>
+                                    <label for="port" class="col-6 px-0 font-size font-bold">Warehouse</label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="port" id="port">
                                         @foreach ($location as $locations)
@@ -589,9 +609,12 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="dealer_fee" class="col-6 px-0 font-size font-bold">Dealer Fee</label>
-                                    <input type="text"
-                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="dealer_fee" id="dealer_fee" value="{{ @$user['dealer_fee'] }}">
+                                    <div
+                                        class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
+                                        <span class="prefix text-dark">$</span>
+                                        <input type="text" class="col-11 general_input" name="dealer_fee"
+                                            id="dealer_fee" value="{{ @$user['dealer_fee'] }}">
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -604,10 +627,14 @@
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
+
                                     <label for="late_fee" class="col-6 px-0 font-size font-bold">Late Fee</label>
-                                    <input type="text"
-                                        class="form-control-sm border border-0 rounded-pill bg col-6" name="late_fee"
-                                        id="late_fee" value="{{ @$user['late_fee'] }}">
+                                    <div
+                                        class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
+                                        <span class="prefix text-dark">$</span>
+                                        <input type="text" class="col-11 general_input" name="late_fee"
+                                            id="late_fee" value="{{ @$user['late_fee'] }}">
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -622,10 +649,12 @@
                                 <div class="d-flex align-items-center">
                                     <label for="auction_storage" class="col-6 px-0 font-size font-bold">Auction
                                         Storage</label>
-                                    <input type="text"
-                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="auction_storage" id="auction_storage"
-                                        value="{{ @$user['auction_storage'] }}">
+                                    <div
+                                        class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
+                                        <span class="prefix text-dark">$</span>
+                                        <input type="text" class="general_input col-11" name="auction_storage"
+                                            id="auction_storage" value="{{ @$user['auction_storage'] }}">
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -640,10 +669,12 @@
                                 <div class="d-flex align-items-center">
                                     <label for="towing_charges" class="col-6 px-0 font-size font-bold">Towing
                                         Charges</label>
-                                    <input type="text"
-                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="towing_charges" id="towing_charges"
-                                        value="{{ @$user['towing_charges'] }}">
+                                    <div
+                                        class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
+                                        <span class="prefix text-dark">$</span>
+                                        <input type="text" class="general_input col-11" name="towing_charges"
+                                            id="towing_charges" value="{{ @$user['towing_charges'] }}">
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -657,9 +688,12 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="title_fee" class="col-6 px-0 font-size font-bold">Title Fee</label>
-                                    <input type="text"
-                                        class="form-control-sm border border-0 rounded-pill bg col-6" name="title_fee"
-                                        id="title_fee" value="{{ @$user['title_fee'] }}">
+                                    <div
+                                        class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
+                                        <span class="prefix text-dark">$</span>
+                                        <input type="text" class="col-11 general_input" name="title_fee"
+                                            id="title_fee" value="{{ @$user['title_fee'] }}">
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -672,12 +706,14 @@
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="post_detention" class="col-6 px-0 font-size font-bold">Post
-                                        Detention</label>
-                                    <input type="text"
-                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="port_detention_fee" id="port_detention_fee"
-                                        value="{{ @$user['post_detention'] }}">
+                                    <label for="post_detention" class="col-6 px-0 font-size font-bold">Yard
+                                        Storage</label>
+                                    <div
+                                        class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
+                                        <span class="prefix text-dark">$</span>
+                                        <input type="text" class="general_input col-11" name="port_detention_fee"
+                                            id="port_detention_fee" value="{{ @$user['post_detention'] }}">
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -692,10 +728,12 @@
                                 <div class="d-flex align-items-center">
                                     <label for="custom_inspection" class="col-6 px-0 font-size font-bold">Custom
                                         Inspection</label>
-                                    <input type="text"
-                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="custom_inspection" id="custom_inspection"
-                                        value="{{ @$user['custom_inspection'] }}">
+                                    <div
+                                        class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
+                                        <span class="prefix text-dark">$</span>
+                                        <input type="text" class="general_input col-11" name="custom_inspection"
+                                            id="custom_inspection" value="{{ @$user['custom_inspection'] }}">
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -710,10 +748,12 @@
                                 <div class="d-flex align-items-center">
                                     <label for="additional_fee" class="col-6 px-0 font-size font-bold">Additional
                                         Fee</label>
-                                    <input type="text"
-                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="additional_fee" id="additional_fee"
-                                        value="{{ @$user['additional_fee'] }}">
+                                    <div
+                                        class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
+                                        <span class="prefix text-dark">$</span>
+                                        <input type="text" class="col-11 general_input" name="additional_fee"
+                                            id="additional_fee" value="{{ @$user['additional_fee'] }}">
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -727,9 +767,12 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="insurance" class="col-6 px-0 font-size font-bold">Insurance</label>
-                                    <input type="text"
-                                        class="form-control-sm border border-0 rounded-pill bg col-6" name="insurance"
-                                        id="insurance" value="{{ @$user['insurance'] }}">
+                                    <div
+                                        class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
+                                        <span class="prefix text-dark">$</span>
+                                        <input type="text" class="general_input col-11" name="insurance"
+                                            id="insurance" value="{{ @$user['insurance'] }}">
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">

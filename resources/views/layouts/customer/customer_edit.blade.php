@@ -1,4 +1,7 @@
-<form method="POST" id="customer_general_form" enctype="multipart/form-data">
+<form method="POST" id="updateCustomers" enctype="multipart/form-data">
+    <input type="hidden" id="id" name="id" value="{{ @$documents[0]['user']['id'] }}">
+    <input type="hidden" id="id" name="file_id" value="{{ @$documents[0]['id'] }}">
+
     <div>
         <div class="row my-3">
             <div class="col-sm-6 col-md-3 col-lg-3">
@@ -78,7 +81,8 @@
 
 
                             <div class=" d-flex  py-2">
-                                <label for="customer_type" class="col-6 px-0 font-size font-bold">Customer Type</label>
+                                <label for="customer_type" class="col-6 px-0 font-size font-bold">Customer
+                                    Type</label>
                                 <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                                     name="customer_type" id="customer_type"
                                     value="{{ @$documents[0]['user']['customer_type'] }}">
@@ -297,16 +301,11 @@
                                     name="price_code" id="price_code"
                                     value="{{ @$documents[0]['user']['price_code'] }}">
                             </div>
-
                         </div>
-
-
                     </div>
                     {{-- sales association body end --}}
                 </div>
-
             </div>
-
             <div class="col-sm-6 col-md-3 col-lg-3 px-0">
                 <br>
                 <div class="col-12 d-flex justify-content-center" id="customer_image">
@@ -318,7 +317,8 @@
                     <div class="col-12 w-75 p-3" id="customer_file"
                         style="border-radius: 1.5rem!important;border:1px solid black!important;">
                         <a id="customer_file1" alt="" href="{{ asset($documents[0]['file']) }}"
-                            download="document_download" style="text-decoration: underline;">Documents.pdf</a>
+                            download="document_download"
+                            style="text-decoration: underline;">{{ $documents[0]['thumbnail'] }}</a>
                     </div>
                 </div>
 
@@ -326,7 +326,7 @@
                 <div class="col-12">
 
                     <div class="user_image" style="padding-top: .5rem; border-radius: 15px!important;">
-                        <img id="customer_img" alt="">
+                        {{-- <img id="customer_img" alt=""> --}}
                     </div>
                 </div>
                 <br><br>
@@ -335,7 +335,6 @@
                     <input type="file" name="user_file[]" class="form-control rounded col-12 w-100"
                         id="user_file" style="border:1px solid #f3f3f">
                 </div>
-
             </div>
         </div>
 
@@ -350,7 +349,7 @@
                     id="role_id" readonly value="4">
 
                 <button type="button" class="btn col-1 next-style text-white" onclick="Update_Customer(this.id)"
-                    id="update" name="" style="padding: 0px;" data-next="">
+                    id="update" name="" style="padding: 0px;">
                     <div class="unskew">Update</div>
                 </button>
             </div>

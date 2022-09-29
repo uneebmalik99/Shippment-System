@@ -636,32 +636,32 @@
                     </div>
                     <div class="col-4">
 
-                        <label for="file" style="color:green">New Jersey</label><br>
-                        <progress id="file" value="32" max="100" style="background:green;"> 32%
+                        <label for="file">New Jersey</label><br>
+                        <progress id="file" value="32" max="100"> 32%
                         </progress>
 
-                        <label for="file" style="color:#EF5757">Savannah</label><br>
-                        <progress id="file" value="32" max="100" style="background:#EF5757;"> 32%
+                        <label for="file">Savannah</label><br>
+                        <progress id="file" value="32" max="100"> 32%
                         </progress>
 
-                        <label for="file" style="color:#47D000">Savannah</label><br>
-                        <progress id="file" value="32" max="100" style="background:#47D000"> 32%
+                        <label for="file">Savannah</label><br>
+                        <progress id="file" value="32" max="100"> 32%
                         </progress>
 
-                        <label for="file" style="color:#696CFF">Savannah</label><br>
-                        <progress id="file" value="32" max="100" style="background:#696CFF"> 32%
+                        <label for="file">Savannah</label><br>
+                        <progress id="file" value="32" max="100"> 32%
                         </progress>
 
-                        <label for="file" style="color:#ECB800">Savannah</label><br>
-                        <progress id="file" value="32" max="100" style="background:#ECB800"> 32%
+                        <label for="file">Savannah</label><br>
+                        <progress id="file" value="32" max="100"> 32%
                         </progress>
 
-                        <label for="file" style="color:#FF8514">Savannah</label><br>
-                        <progress id="file" value="32" max="100" style="background:#FF8514"> 32%
+                        <label for="file">Savannah</label><br>
+                        <progress id="file" value="32" max="100"> 32%
                         </progress>
 
-                        <label for="file" style="color:#1CACD9">Savannah</label><br>
-                        <progress id="file" value="32" max="100" style="background:#1CACD9"> 32%
+                        <label for="file">Savannah</label><br>
+                        <progress id="file" value="32" max="100"> 32%
                         </progress>
 
 

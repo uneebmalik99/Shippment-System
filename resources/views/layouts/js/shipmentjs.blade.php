@@ -31,3 +31,26 @@
         });
     }
 </script>
+
+<script>
+    $('.shipment_filtering').on('change', function() {
+        $port_of_loading = $('#port_of_loading').val();
+        $loading_date = $('#loading_date').val();
+        $arrival_date = $('#arrival_date').val();
+        $destination_port = $('#destination_port').val();
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('admin/shipments/filtering') }}',
+            data: {
+                'port_of_loading': $port_of_loading,
+                'loading_date': $loading_date,
+                'arrival_date': $arrival_date,
+                'destination_port': $destination_port,
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        });
+
+    });
+</script>

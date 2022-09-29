@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consignee;
+use App\Models\Location;
 use App\Models\Notification;
 use App\Models\Shipment;
 use App\Models\Vehicle;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Storage;
 
@@ -26,6 +28,7 @@ class ShipmentController extends Controller
     private function Notification()
     {
         $data['notification'] = Notification::with('user')->paginate($this->perpage);
+        $data['location'] = Location::all()->toArray();
         // dd();
         if ($data['notification']->toArray()) {
             $current = Carbon::now();
@@ -82,7 +85,15 @@ class ShipmentController extends Controller
         $data['arrived'] = Shipment::with('consignee')->where('status', '3')->paginate($this->perpage);
         $data['completed'] = Shipment::with('consignee')->where('status', '4')->paginate($this->perpage);
         // dd($data);
-
+        // years
+        $current_date = Carbon::now();
+        $period = CarbonPeriod::create('2022-09-09', $current_date);
+        // dd($period->toArray());
+        foreach ($period as $date) {
+            // dd($date);
+            $data['date'][] = $date->format('Y-m-d');
+        }
+        // dd($data['date']);
         return view($this->view . 'list', $data, $notification);
     }
 
@@ -193,5 +204,36 @@ class ShipmentController extends Controller
                 return "Failed!";
             }
         }
+    }
+
+    public function profile(Request $request)
+    {
+        $data = [];
+        $data = [
+            "page_title" => $this->plural . " List",
+            "page_heading" => $this->plural . ' List',
+            "breadcrumbs" => array('#' => $this->plural . " List"),
+            "module" => [
+                'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'list',
+            ],
+        ];
+        $notification = $this->Notification();
+        if ($request->ajax()) {
+            $tab = $request->tab;
+            $output = view('layouts.shipment_detail.' . $tab, $data)->render();
+            return Response($output);
+        }
+        return view($this->view . 'profile', $data, $notification);
+    }
+
+    public function filtering(Request $request)
+    {
+        return $request->all();
     }
 }

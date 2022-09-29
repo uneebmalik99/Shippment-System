@@ -1,4 +1,38 @@
 @extends('layouts.partials.mainlayout')
+<style>
+    .all_roles{
+        background: rgba(255, 255, 255, 0.76);
+        box-shadow: 3px 5px 3px rgba(92, 174, 235, 0.65);
+        border-radius: 10px;
+        padding-bottom: 16px;   
+        height: 154px;   
+    }
+    .all_roles h5{
+        color: #2C77E7;
+        padding: 15px 14px;
+        font-weight: bold;
+    }
+    .roles a{
+        color: #214986!important;
+        padding: 1px 14px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+    .role_buttons{
+    justify-content: center;
+    align-items: center;
+    margin-top: 22px;
+    }
+    .role_buttons button{
+    width: 56px;
+    border-radius: 12px;
+    height: 38px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    }
+</style>
 @section('body')
     {{-- <div class="row unknow p-5">
             <div class="col-12 ms-5 mb-4">
@@ -121,8 +155,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <!-- <div class="col-6 col-lg-1 d-flex justify-content-end"></div> -->
+        {{-- <div class="row">
             <div class="d-flex permisson-color mb-2 p-0">
                 <i class="p-1"><svg width="22" height="24" viewBox="0 0 22 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -133,8 +166,8 @@
                 </i>
                 <h3>Permission</h3>
             </div>
-        </div>
-        <div class="row">
+        </div> --}}
+        {{-- <div class="row">
             <table class="table">
                 <thead class="thead text-white" style="color:#fff!important;">
                     <td class="p-3 col-4" style="color:#fff">Role</td>
@@ -159,45 +192,145 @@
                     </tr>
                 </tbody>
             </table>
-            {{-- <table class="my-3">
-                <tr>
-                    <td class="p-3 SPY col-4">AUTHOR</td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                </tr>
-            </table>
-            <table class="my-3">
-                <tr>
-                    <td class="p-3 SPY col-4">STAFF</td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                </tr>
-            </table>
-            <table class="my-3">
-                <tr>
-                    <td class="p-3 SPY col-4">CONTRIBUTOR</td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                </tr>
-            </table>
-            <table class="my-3">
-                <tr>
-                    <td class="p-3 SPY col-4">USER</td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                    <td class="p-3 text-center col-2"><input class="check-box" type="checkbox" value=""></td>
-                </tr>
-            </table> --}}
+           
 
 
+        </div> --}}
+
+        <div class="row mb-3">
+            <div class="col-5">
+                <div class="all_roles">
+                    <h5>Roles</h5>
+                    <div class="roles d-flex flex-column">
+                        <a>Super Admin</a>
+                        <a>Sub Admin</a>
+                        <a>Location Admin</a>
+                        <a>Customer</a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="role_buttons d-flex flex-column">
+                    <button class="btn btn-success">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 10L12 1V5.99L1 6V14H12V19L19 10Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        </button><br>
+                        <button class="btn btn-danger">
+                            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.85785 10.2105L9.02204 19.0592L8.93012 14.0702L19.9274 13.8252L19.7801 5.82678L8.78258 6.06177L8.69047 1.06275L1.85785 10.2105Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                
+                        </button>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="all_roles">
+                    <h5>Roles</h5>
+                    <div class="roles d-flex flex-column">
+                       @can('super_admin', Auth::user()->role)
+                       <a>Super Admin</a>
+                       @elsecan('sub_admin', Auth::user()->role)
+                       <a>Sub Admin</a>
+                       @elsecan('location_admin', Auth::user()->role)
+                       <a>Location Admin</a>
+
+                       @endcan
+                    </div>
+
+                </div>
+            </div>
         </div>
+
+
+        <div class="row mb-3">
+            <div class="col-5">
+                <div class="all_roles">
+                    <h5>Permissions</h5>
+                    <div class="roles d-flex flex-column">
+                        <a>Create</a>
+                        <a>Read</a>
+                        <a>Update</a>
+                        <a>Delete</a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="role_buttons d-flex flex-column">
+                    <button class="btn btn-success">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 10L12 1V5.99L1 6V14H12V19L19 10Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        </button><br>
+                        <button class="btn btn-danger">
+                            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.85785 10.2105L9.02204 19.0592L8.93012 14.0702L19.9274 13.8252L19.7801 5.82678L8.78258 6.06177L8.69047 1.06275L1.85785 10.2105Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                
+                        </button>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="all_roles">
+                    <h5>Permissions</h5>
+                    <div class="roles d-flex flex-column">
+                        @can('super_admin', Auth::user()->role)
+                        <a>Create</a>
+                        <a>Read</a>
+                        <a>Update</a>
+                        <a>Delete</a>
+                        @elsecan('sub_admin', Auth::user()->role)
+                        <a>Read</a>
+                        @elsecan('location_admin', Auth::user()->role)
+                        <a>Read</a>
+                        @endcan
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mb-3">
+            <div class="col-5">
+                <div class="all_roles">
+                    <h5>Routes</h5>
+                    <div class="roles d-flex flex-column">
+                       
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="role_buttons d-flex flex-column">
+                    <button class="btn btn-success">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 10L12 1V5.99L1 6V14H12V19L19 10Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        </button><br>
+                        <button class="btn btn-danger">
+                            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.85785 10.2105L9.02204 19.0592L8.93012 14.0702L19.9274 13.8252L19.7801 5.82678L8.78258 6.06177L8.69047 1.06275L1.85785 10.2105Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                
+                        </button>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="all_roles">
+                    <h5>Routes</h5>
+                    <div class="roles d-flex flex-column">
+                      
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">

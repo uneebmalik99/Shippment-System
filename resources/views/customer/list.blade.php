@@ -143,10 +143,13 @@
                 {{-- new customer alert start --}}
                 <div class="row d-flex justify-content-between">
                     <div>
-                        @if (session('success'))
-                            <div class="btn alert alert-success m-0">
-                                <span>{{ session('success') }}</span>
-                            </div>
+                        @if (Session::has('success'))
+                            <script>
+                                iziToast.success({
+                                    position: 'topRight',
+                                    message: '{{ Session::get('success') }}',
+                                });
+                            </script>
                         @endif
                     </div>
                 </div>
@@ -196,26 +199,28 @@
                     <div class="d-flex py-3 px-0">
                         <div class="col-4 p-0">
                             <select class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2"
-                                name="author" id="author">
-                                <option value="" disabled selected>Author</option>
-                                <option value="1">Charlie</option>
-                                <option value="2">Swiss</option>
+                                name="city" id="city" onchange="filterTable(this.value)">
+                                <option value="" disabled selected>City</option>
+                                @foreach ($location as $locations)
+                                    <option value="{{ @$locations['name'] }}">{{ @$locations['name'] }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-4 p-0">
                             <select class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2"
-                                name="company" id="company">
-                                <option value="" disabled selected>Company</option>
-                                <option value="1">Honda</option>
-                                <option value="2">Corolla</option>
+                                name="state" id="state" onchange="filterTable(this.value)">
+                                <option value="" disabled selected>State</option>
+                                @foreach ($location as $locations)
+                                    <option value="{{ @$locations['name'] }}">{{ @$locations['name'] }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-4 p-0">
                             <select class="form-control-sm border-style input-border-style rounded col-12 text-muted"
-                                name="status" id="status">
+                                name="status" id="status" onchange="filterTable(this.value)">
                                 <option value="" disabled selected>Status</option>
                                 <option value="1">Active</option>
-                                <option value="2">In Active</option>
+                                <option value="0">In Active</option>
                             </select>
                         </div>
                     </div>
@@ -275,18 +280,36 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="tbody">
+                            @php
+                                $custid = 1000100;
+                            @endphp
+
 
                             @foreach ($records as $val)
                                 <tr style="border-bottom: 1.2px solid rgba(191, 191, 191, 1) !important">
-                                    <td>{{ @$val['id'] }}</td>
-                                    <td class="d-block">
+                                    <td>{{ $custid }}</td>
+                                    <td class="d-block d-flex">
+                                        @if (@$user['user_image'])
+                                            <div class="mt-2 mr-2">
+                                                <img class="img-fluid" src="{{ asset(@$user['user_image']) }}"
+                                                    alt="card-img" />
+                                            </div>
+                                        @else
+                                            <div class="mt-2 mr-2">
+                                                <img class="img-fluid" src="{{ asset('assets/images/user.png') }}"
+                                                    alt="card-img" style="width:20px;height:20px" />
+                                            </div>
+                                        @endif
+                                        <div>
+                                            <div>
+                                                <span><b>{{ @$val['name'] }}</b></span>
+                                            </div>
+                                            <div>
+                                                <span style="font-size: 12px !important;">{{ @$val['email'] }}</span>
+                                            </div>
+                                        </div>
 
-                                        <div>
-                                            <span><b>{{ @$val['name'] }}</b></span>
-                                        </div>
-                                        <div>
-                                            <span style="font-size: 12px !important;">{{ @$val['email'] }}</span>
-                                        </div>
+
                                     </td>
                                     <td>{{ @$val['company_name'] }}</td>
                                     <td>{{ @$val['phone'] }}</td>
@@ -302,32 +325,37 @@
                                     <td>{{ @$val['created_at'] }}</td>
                                     <td>
                                         @if (@$val['status'] == '1')
-                                            <button class="active_button">
-                                                <a id="{{ @$val['id'] }}" onclick="change_status(this.id)">
-                                                    <i class="fa fa-check"></i>
-                                                </a>
+                                            {{-- <a > --}}
+                                            <button class="active_button" id="{{ @$val['id'] }}"
+                                                onclick="change_status(this.id)" style="cursor: pointer !important;">
+                                                <i class="fa fa-check" style="color:green!important;"></i>
                                             </button>
+                                            {{-- </a> --}}
                                         @else
-                                            <button class="inactive_button">
-                                                <a id="{{ @$val['id'] }}" onclick="change_status(this.id)">
-                                                    <i class="fa fa-times"></i>
-                                                </a>
+                                            {{-- <a > --}}
+                                            <button class="inactive_button" id="{{ @$val['id'] }}"
+                                                onclick="change_status(this.id)" style="cursor: pointer !important;">
+                                                <i class="fa fa-times"></i>
                                             </button>
+                                            {{-- </a> --}}
                                         @endif
 
-                                        <button class="edit-button">
-                                            <a id="{{ @$val['id'] }}" onclick="updatecustomer(this.id)">
-                                                <svg width="14" height="13" viewBox="0 0 16 16" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M2.66708 14.0004C2.72022 14.0068 2.77394 14.0068 2.82708 14.0004L5.49375 13.3338C5.61205 13.3056 5.7204 13.2457 5.80708 13.1604L14.0004 4.94042C14.2488 4.69061 14.3881 4.35267 14.3881 4.00042C14.3881 3.64818 14.2488 3.31024 14.0004 3.06042L12.9471 2.00042C12.8233 1.87646 12.6762 1.77811 12.5143 1.71101C12.3525 1.64391 12.179 1.60938 12.0037 1.60938C11.8285 1.60938 11.655 1.64391 11.4932 1.71101C11.3313 1.77811 11.1842 1.87646 11.0604 2.00042L2.86708 10.1938C2.78094 10.2808 2.71891 10.3888 2.68708 10.5071L2.02042 13.1738C1.99645 13.26 1.99011 13.3502 2.00177 13.439C2.01342 13.5277 2.04284 13.6133 2.08826 13.6904C2.13368 13.7676 2.19417 13.8348 2.26613 13.888C2.33808 13.9413 2.42003 13.9795 2.50708 14.0004C2.56022 14.0068 2.61394 14.0068 2.66708 14.0004ZM12.0004 2.94042L13.0604 4.00042L12.0004 5.06042L10.9471 4.00042L12.0004 2.94042ZM3.94042 11.0071L10.0004 4.94042L11.0604 6.00042L4.99375 12.0671L3.58708 12.4138L3.94042 11.0071Z"
-                                                        fill="#2C77E7" />
-                                                </svg>
 
-                                            </a>
+                                        {{-- <a> --}}
+                                        <button class="edit-button" id="{{ @$val['id'] }}"
+                                            onclick="updatecustomer(this.id)"style="cursor: pointer !important;">
+                                            <svg width="14" height="13" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M2.66708 14.0004C2.72022 14.0068 2.77394 14.0068 2.82708 14.0004L5.49375 13.3338C5.61205 13.3056 5.7204 13.2457 5.80708 13.1604L14.0004 4.94042C14.2488 4.69061 14.3881 4.35267 14.3881 4.00042C14.3881 3.64818 14.2488 3.31024 14.0004 3.06042L12.9471 2.00042C12.8233 1.87646 12.6762 1.77811 12.5143 1.71101C12.3525 1.64391 12.179 1.60938 12.0037 1.60938C11.8285 1.60938 11.655 1.64391 11.4932 1.71101C11.3313 1.77811 11.1842 1.87646 11.0604 2.00042L2.86708 10.1938C2.78094 10.2808 2.71891 10.3888 2.68708 10.5071L2.02042 13.1738C1.99645 13.26 1.99011 13.3502 2.00177 13.439C2.01342 13.5277 2.04284 13.6133 2.08826 13.6904C2.13368 13.7676 2.19417 13.8348 2.26613 13.888C2.33808 13.9413 2.42003 13.9795 2.50708 14.0004C2.56022 14.0068 2.61394 14.0068 2.66708 14.0004ZM12.0004 2.94042L13.0604 4.00042L12.0004 5.06042L10.9471 4.00042L12.0004 2.94042ZM3.94042 11.0071L10.0004 4.94042L11.0604 6.00042L4.99375 12.0671L3.58708 12.4138L3.94042 11.0071Z"
+                                                    fill="#2C77E7" />
+                                            </svg>
                                         </button>
-                                        <button class="profile-button">
-                                            <a href={{ route('customer.profile') . '/' . @$val[@$module['db_key']] }}>
+                                        {{-- </a> --}}
+
+
+                                        <a href={{ route('customer.profile') . '/' . @$val[@$module['db_key']] }}>
+                                            <button class="profile-button" style="cursor: pointer !important;">
                                                 <svg width="14" height="13" viewBox="0 0 16 14" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -338,10 +366,13 @@
                                                         fill="#048B52" />
                                                 </svg>
 
-                                            </a>
-                                        </button>
-                                        <button class="delete-button">
-                                            <a href={{ url(@$module['action'] . '/delete/' . @$val[@$module['db_key']]) }}>
+                                            </button>
+                                        </a>
+
+
+                                        <a href={{ url(@$module['action'] . '/delete/' . @$val[@$module['db_key']]) }}>
+                                            <button class="delete-button" style="cursor: pointer !important;">
+
                                                 <svg width="14" height="13" viewBox="0 0 12 12" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -349,10 +380,15 @@
                                                         fill="#EF5757" />
                                                 </svg>
 
-                                            </a>
-                                        </button>
+                                            </button>
+                                        </a>
+
                                     </td>
                                 </tr>
+
+                                @php
+                                    $custid++;
+                                @endphp
                             @endforeach
                         </tbody>
                     </table>
@@ -433,62 +469,6 @@
                 });
 
 
-
-            }
-
-            function Update_Customer(id) {
-                alert(id);
-
-            }
-
-            function closemodal() {
-                $('#exampleModal1').modal('hide');
-            }
-
-            function change_status(id) {
-
-                iziToast.question({
-                    timeout: 20000,
-                    close: false,
-                    overlay: true,
-                    displayMode: 'once',
-                    id: 'question',
-                    zindex: 999,
-                    title: 'Hey',
-                    message: 'Are you sure to change Status ?',
-                    position: 'center',
-                    buttons: [
-                        ['<button><b>YES</b></button>', function(instance, toast) {
-
-                            $.ajax({
-                                type: 'get',
-                                url: "{{ route('customer.changeStatus') }}" + '/' + id,
-                                success: function(data) {
-                                    alert(data);
-                                    location.reload();
-                                }
-                            });
-
-                            instance.hide({
-                                transitionOut: 'fadeOut'
-                            }, toast, 'button');
-
-                        }, true],
-                        ['<button>NO</button>', function(instance, toast) {
-
-                            instance.hide({
-                                transitionOut: 'fadeOut'
-                            }, toast, 'button');
-
-                        }],
-                    ],
-                    onClosing: function(instance, toast, closedBy) {
-                        console.info('Closing | closedBy: ' + closedBy);
-                    },
-                    onClosed: function(instance, toast, closedBy) {
-                        console.info('Closed | closedBy: ' + closedBy);
-                    }
-                });
 
             }
         </script>

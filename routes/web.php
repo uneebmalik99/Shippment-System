@@ -8,22 +8,12 @@ use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\LockController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\StickyController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
- */
 
 Auth::routes();
 
@@ -40,14 +30,23 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/users/updateprofile',                 [UserController::class, 'updateprofile'])->name('user.updateprofile');
     Route::get('/users/search',                         [UserController::class, 'search'])->name('user.search');
     Route::get('/users/pagination',                     [UserController::class, 'search'])->name('user.pagination');
+    Route::get('/users/createRole',                     [App\Http\Controllers\UserController::class, 'createRole'])->name('user.createRole');
+
+    Route::get('/users/createroles',                    [App\Http\Controllers\UserController::class, 'createroles'])->name('user.createroles');
+
+    Route::post('/users/addRoles',                      [App\Http\Controllers\UserController::class, 'addRoles'])->name('user.addRole');
+
+    Route::get('/users/deleteRole/{id?}',               [App\Http\Controllers\UserController::class, 'deleteRole'])->name('delete.role');
+
+    Route::post('/users/showupdatemodel}',              [App\Http\Controllers\UserController::class, 'showUpdateRole'])->name('user.updatemodelshow');
 
     // Customer Routes
     Route::get('/customers',                            [CustomerController::class, 'index'])->name('customer.list');
     Route::get('/customers/create',                     [CustomerController::class, 'create'])->name('customer.create');
-    Route::post('/customers/create/general',            [CustomerController::class, 'general_create'])->name('customer.general_create');
-    Route::post('/customers/create/billing',            [CustomerController::class, 'general_create'])->name('customer.billing_create');
-    Route::post('/customers/create/shipper',            [CustomerController::class, 'general_create'])->name('customer.shipper_create');
-    Route::post('/customers/create/quotation',          [CustomerController::class, 'general_create'])->name('customer.quotation_create');
+    Route::post('/customers/create/general_customer',   [CustomerController::class, 'general_create'])->name('customer.general_create');
+    Route::post('/customers/create/billing_customer',   [CustomerController::class, 'general_create'])->name('customer.billing_create');
+    Route::post('/customers/create/shipper_customer',   [CustomerController::class, 'general_create'])->name('customer.shipper_create');
+    Route::post('/customers/create/quotation_customer', [CustomerController::class, 'general_create'])->name('customer.quotation_create');
     Route::get('/customers/edit/{id?}',                 [CustomerController::class, 'edit'])->name('customer.edit');
     Route::post('/customers/edit/{id?}',                [CustomerController::class, 'edit'])->name('customer.edit');
     Route::get('/customers/update/{id?}',               [CustomerController::class, 'edit'])->name('customer.edit');
@@ -58,6 +57,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/customers/pagination',                 [CustomerController::class, 'search'])->name('customer.pagination');
     Route::get('/customers/export',                     [CustomerController::class, 'export'])->name('customer.export');
     Route::get('/customer/changeStatus/{id?}',          [CustomerController::class, 'ChangeStatus'])->name('customer.changeStatus');
+    Route::post('/customer/filterTable',                [App\Http\Controllers\CustomerController::class, 'FilterTable'])->name('customer.FilterTable');
+
+    Route::post('/customer/changeNotification',         [App\Http\Controllers\CustomerController::class, 'changeNotification'])->name('customer.changeNotification');
+
+    Route::post('/customer/update',                     [App\Http\Controllers\CustomerController::class, 'customerUpdate'])->name('customers.update');
 
     //Vehicle Routes
     Route::get('/vehicles',                             [VehicleController::class, 'index'])->name('vehicle.list');
@@ -79,6 +83,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/vehicles/location',                    [VehicleController::class, 'filtering'])->name('vehicle.location');
     Route::post('/vehicles/attachments',                [VehicleController::class, 'store_image'])->name('vehicle.images');
     Route::get('/vehicles/export',                      [VehicleController::class, 'export'])->name('vehicle.export');
+    Route::get('/vehicles/import',                      [VehicleController::class, 'import']);
+    Route::post('/vehicles/imports',                    [VehicleController::class, 'import'])->name('vehicle.import');
+    Route::post('/vehicle/vehicle_changeImages',        [VehicleController::class, 'changesImages'])->name('vehicle.changeImages');
     Route::post('/vehicle/vehicle_changeImages',        [VehicleController::class, 'changesImages'])->name('vehicle.changeImages');
     
     Route::get('/vehicle/profile/{id?}',                [VehicleController::class, 'profile'])->name('vehicle.profile');
@@ -93,6 +100,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/shipments/create',                     [ShipmentController::class, 'create'])->name('shipment.create');
     Route::post('/shipments/create',                    [ShipmentController::class, 'create'])->name('shipment.create');
     Route::post('/shipments/general',                   [ShipmentController::class, 'create_form'])->name('shipment.createform');
+    Route::get('/shipments/profile/{id?}',              [ShipmentController::class, 'profile'])->name('shipment.profile');
+    Route::get('/shipments/filtering',                  [ShipmentController::class, 'filtering'])->name('shipment.profile');
 
     //Notification Routes
     Route::get('/notifications',                        [NotificationController::class, 'index'])->name('notification.list');
@@ -117,6 +126,16 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     //  Dashboard
     Route::get('/dashboard',                            [DashboardController::class, 'dashboard'])->name('dashboard.list');
+
+    //Inventory
+    Route::get('/inventory',                            function(){
+        return "Coming Soon!";
+    });
+    //Inventory
+    Route::get('/invoice',                            function(){
+        return "Coming Soon!";
+    });
+
 });
 
 Route::get('/logout',                                   [HomeController::class, 'logout'])->middleware('auth')->name('auth.logout');

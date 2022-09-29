@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\User;
+use App\Models\role;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -252,6 +253,76 @@ class UserController extends Controller
                 return Response($output);
             }
         }
+    }
+
+    public function createRole()
+    {
+
+        $data = [];
+        $data = [
+            "page_title" => $this->plural . " Create Role",
+            "page_heading" => $this->plural . ' CreateRole',
+            "breadcrumbs" => array('#' => $this->plural . " List"),
+            "module" => [
+                'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'CreateRole',
+                'action' => $this->action,
+            ],
+        ];
+        $data['roles'] = role::all()->toArray();
+
+        $notification = $this->Notification();
+        return view($this->view . 'showRole', $data, $notification);
+
+    }
+
+    public function createroles()
+    {
+
+        $output = view('user.createRole')->render();
+        return Response($output);
+
+    }
+
+    public function addRoles(Request $req)
+    {
+
+        // return
+
+        $data = role::updateOrCreate(
+            ['id' => $req->id],
+            [
+                'name' => $req['role_name'],
+            ]
+        );
+
+        return Response($data);
+
+    }
+
+    public function deleteRole($id)
+    {
+        $role = role::find($id);
+        $role->delete();
+        if ($role) {
+            return back()->with('delete', 'Role Deleted Successfully!');
+
+        }
+    }
+
+    public function showUpdateRole(Request $req)
+    {
+        $id = $req->id;
+        $data['roles'] = role::find($id)->toArray();
+
+        $output = view('user.createRole', $data)->render();
+        return Response($output);
+
     }
 
 }

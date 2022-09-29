@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Location;
 use App\Models\Notification;
 use App\Models\User;
 use Carbon\Carbon;
@@ -23,6 +24,8 @@ class NotificationController extends Controller
     public function Notification()
     {
         $data['notification'] = Notification::with('user')->paginate($this->perpage);
+        $data['location'] = Location::all()->toArray();
+
         // dd();
         if ($data['notification']->toArray()) {
             $current = Carbon::now();

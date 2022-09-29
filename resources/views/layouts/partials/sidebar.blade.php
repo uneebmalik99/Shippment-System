@@ -332,7 +332,7 @@
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
-                        <a href="">
+                        <a href="{{url('/admin/inventory')}}">
                             <span class="pcoded-micon"><i class="fas fa-warehouse"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Inventory</span>
 
@@ -340,7 +340,7 @@
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
-                        <a href="">
+                        <a href="{{url('/admin/invoice')}}">
                             <span class="pcoded-micon"><i class="fas fa-receipt"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Invoices</span>
 

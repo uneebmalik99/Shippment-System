@@ -211,8 +211,51 @@
 
 {{-- Profile page tabs --}}
 <script>
+    $('.vehicle_information_tab').on('click', function() {
+        $id = $(this).attr('id');
+        $tab = $(this).attr('tab');
+
+        $('.vehicle_information_tab').removeClass('active_information_button');
+        $(this).addClass('active_information_button');
+
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('admin/vehicle/vehicle_informationTab') }}',
+            data: {
+                'tab': $tab,
+                'id': $id,
+            },
+            success: function(data) {
+                console.log(data);
+                $('#vehicle_information_main').html(data);
+            }
+        });
+    });
+
+    function changeImages(id) {
+        // alert(tab);
+        $id = $('#' + id).attr('tab');
+        $tab = id;
+
+
+        $.ajax({
+            type: 'post',
+            url: '{{ URL::to('admin/vehicle/vehicle_changeImages') }}',
+            data: {
+                'tab': $tab,
+                'id': $id,
+            },
+            success: function(data) {
+                // alert(data);
+                console.log(data);
+                $('.changeImages').html(data);
+            }
+        });
+
+    }
+
     $('.profile_tabs').on('click', function() {
-        $('.profile_tabs').removeClass('btn btn_custom rounded text-white');
+        $('.profile_tabs').removeClass('btn_custom rounded text-white');
         $('.profile_tabs').addClass('border-0 form-control text-muted');
         $id = $(this).attr('cust_id');
         $tab = $(this).attr('id');
@@ -306,6 +349,9 @@
                     // console.log(data);
                     $('.modal-body').html(data);
                     $('#exampleModal').modal('show');
+                    $('.input-images-1').imageUploader({
+                        maxFiles: 4
+                    });
                 }
             });
         } else if ($id == "shipment") {
@@ -357,11 +403,9 @@
 {{-- General data insert --}}
 <script>
     function createForm(id) {
+
         $tab = id;
-
-
         $next_tab = $('#' + $tab).data('next');
-
         if (id == "general_customer") {
             var formData = new FormData(jQuery('#customer_general_form')[0]);
         } else if (id == "billing_customer") {
@@ -375,7 +419,6 @@
         }
 
         formData.append('tab', $tab);
-
         $.ajax({
             type: 'post',
             url: '{{ URL::to('admin/customers/create') }}/' + $tab,
@@ -549,6 +592,184 @@
                     });
                 }
             });
+        });
+    }
+</script>
+
+<script>
+    function import_docs() {
+        $tab = "general";
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('admin/vehicles/import') }}',
+            data: {
+                'tab': $tab,
+            },
+            success: function(data) {
+                console.log(data);
+                $('.import-body').html(data);
+                $('#exampleModal2').modal('show');
+            }
+        });
+    }
+</script>
+
+<script>
+    function viewnotification(id) {
+        $id = id;
+        $.ajax({
+            type: 'post',
+            url: '{{ route('customer.changeNotification') }}',
+            data: {
+                'id': $id
+            },
+            success: function(data) {
+                console.log(data[0].id);
+
+                $('#subject').html(data[0].subject);
+                $('#expiry_date').html(data[0].expiry_date);
+                $('#message').html(data[0].message);
+            }
+        });
+    }
+</script>
+
+<script>
+    function closemodal() {
+        $('#exampleModal1').modal('hide');
+    }
+
+    function change_status(id) {
+
+        iziToast.question({
+            timeout: 20000,
+            close: false,
+            overlay: true,
+            displayMode: 'once',
+            id: 'question',
+            zindex: 999,
+            title: 'Hey',
+            message: 'Are you sure to change Status ?',
+            position: 'center',
+            buttons: [
+                ['<button><b>YES</b></button>', function(instance, toast) {
+
+                    $.ajax({
+                        type: 'get',
+                        url: "{{ route('customer.changeStatus') }}" + '/' + id,
+                        success: function(data) {
+                            alert(data);
+                            location.reload();
+                        }
+                    });
+
+                    instance.hide({
+                        transitionOut: 'fadeOut'
+                    }, toast, 'button');
+
+                }, true],
+                ['<button>NO</button>', function(instance, toast) {
+
+                    instance.hide({
+                        transitionOut: 'fadeOut'
+                    }, toast, 'button');
+
+                }],
+            ],
+            onClosing: function(instance, toast, closedBy) {
+                console.info('Closing | closedBy: ' + closedBy);
+            },
+            onClosed: function(instance, toast, closedBy) {
+                console.info('Closed | closedBy: ' + closedBy);
+            }
+        });
+
+    }
+
+    function createRole() {
+        $.ajax({
+            type: 'get',
+            url: '{{ route('user.createroles') }}',
+            success: function(data) {
+                $('.modal-body').html(data);
+                $('#exampleModal').modal('show');
+            }
+        });
+
+    }
+
+
+    function addRole() {
+
+        $.ajax({
+            type: 'post',
+            url: '{{ route('user.addRole') }}',
+            data: $('form').serialize(),
+            success: function(data) {
+                //    alert(data);
+
+                iziToast.success({
+                    title: 'Vehicle',
+                    message: data.name + " Added Successfully!",
+                    position: 'topCenter',
+                    zindex: '9999999999999',
+
+                });
+
+                $('#exampleModal').modal('hide');
+                location.reload();
+
+            }
+        });
+
+    }
+
+    function updateRole(id) {
+        $id = id;
+
+
+        $.ajax({
+            type: "post",
+            url: "{{ route('user.updatemodelshow') }}",
+            data: {
+                id: $id
+            },
+            success: function(data) {
+                // alert(data);
+                $('.modal-body').html(data);
+                $('#exampleModal').modal('show');
+            }
+        });
+
+    }
+</script>
+
+<script>
+    function Update_Customer(id) {
+        var data = document.querySelector('#updateCustomers');
+        var formData = new FormData(data);
+        $.ajax({
+            type: 'post',
+            url: '{{ route('customers.update') }}',
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function(data) {
+
+                iziToast.success({
+                    title: 'Customer',
+                    message: data,
+                    position: 'topCenter',
+                    zindex: '9999999999999',
+
+                });
+
+                $('#exampleModal').modal('hide');
+                location.reload();
+
+
+
+            }
         });
     }
 </script>
