@@ -74,4 +74,24 @@ class Vehicle extends Model
     {
         return $this->hasOne('App\Models\AuctionInvoice');
     }
+
+    public function shipment()
+    {
+        return $this->belongsTo('App\Models\Shipment');
+    }
+
+    public function billofsales()
+    {
+        return $this->hasMany('App\Models\BillOfSale');
+    }
+
+    public function originaltitles()
+    {
+        return $this->hasMany('App\Models\OriginalTitle');
+    }
+
+    public function pickupimages()
+    {
+        return $this->hasMany('App\Models\PickupImage');
+    }
 }

@@ -5,7 +5,8 @@
 #towing_table_length,
 #customer_table_length,
 #shipment_table_length,
-#shipment_vehicle_table_length {
+#shipment_vehicle_table_length,
+#shipment_filtering_table_length {
     padding: 2% 0% 1% 2% !important;
 }
 
@@ -16,7 +17,8 @@
 #towing_table_length select,
 #customer_table_length select,
 #shipment_table_length select,
-#shipment_vehicle_table_length select {
+#shipment_vehicle_table_length select,
+#shipment_filtering_table_length select {
     height: calc(1.8125rem + 2px) !important;
     border: 1px solid rgba(189, 189, 189, 1) !important;
     border-radius: 0.25rem !important;
@@ -37,7 +39,8 @@
 #towing_table_filter,
 #customer_table_filter,
 #shipment_table_filter,
-#shipment_vehicle_table_filter {
+#shipment_vehicle_table_filter,
+#shipment_filtering_table_filter {
     padding: 2% 2% 1% 0% !important;
 }
 
@@ -48,7 +51,8 @@
 #towing_table_filter input,
 #customer_table_filter input,
 #shipment_table_filter input,
-#shipment_vehicle_table_filter input {
+#shipment_vehicle_table_filter input,
+#shipment_filtering_table_filter input {
     border: 1px solid rgba(189, 189, 189, 1) !important;
     color: #2b3d51 !important;
     border-radius: 0.25rem !important;
@@ -64,7 +68,8 @@
 #towing_table_wrapper,
 #customer_table_wrapper,
 #shipment_table_wrapper,
-#shipment_vehicle_table_wrapper {
+#shipment_vehicle_table_wrapper,
+#shipment_filtering_table_wrapper {
     background-color: white !important;
 }
 .title_style {
@@ -287,5 +292,16 @@
     background-color: rgb(129 132 255) !important;
 }
 .modal-dialog {
-    padding: 4% 5% !important;
+    margin: 4% 5% !important;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+/* Handle  */
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(129 132 255) !important;
+    border-radius: 50rem !important;
 }

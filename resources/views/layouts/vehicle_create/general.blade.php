@@ -1,6 +1,7 @@
 @include('layouts.vehicle_create.navbar')
 {{-- @dd($buyers) --}}
 <form method="POST" id="vehicle_form" enctype="multipart/form-data">
+    @csrf
     <div class="d-lg-flex">
         <div class="col-xl-8 col-12 d-lg-flex p-0">
             <div class="col-lg-6 col-12 p-0">
@@ -790,8 +791,29 @@
         </div>
         <div class="col-lg-4 py-3">
             <div class="col-12">
-                <div class="input-images-1 rounded" name="vehicle_image[]" style="padding-top: .5rem;">
-                </div>
+                
+
+            <div class="billofsales rounded text-center" name="billofsales[]"
+                style="padding-top: .5rem;">
+            <small>Bill of Sales</small>
+            </div>
+            <br>
+
+            <div class="originaltitle rounded text-center" name="originaltitle[]"
+                style="padding-top: .5rem;">
+            <small>Original Title</small>
+            </div>
+            <br>
+
+            <div class="pickup rounded text-center" name="pickup[]"
+                style="padding-top: .5rem;">
+            <small>Pickup Images</small>
+            </div>
+            <br>
+
+        
+
+
             </div>
         </div>
 

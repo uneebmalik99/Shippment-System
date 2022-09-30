@@ -49,6 +49,15 @@
             },
             success: function(data) {
                 console.log(data);
+                $('#shipment_tbody').html(data);
+                // $('#shipment_filtering_table').DataTable({
+                //     scrollX: true,
+                //     language: {
+                //         search: "",
+                //         sLengthMenu: "_MENU_",
+                //         searchPlaceholder: "Search"
+                //     },
+                // });
             }
         });
 

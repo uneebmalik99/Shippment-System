@@ -29,4 +29,9 @@ class Shipment extends Model
     {
         return $this->hasMany('App\Models\ShipmentImage');
     }
+
+    public function vehicle()
+    {
+        return $this->hasMany('App\Models\Vehicle');
+    }
 }

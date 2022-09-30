@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Exports\VehicleExport;
-use App\Imports\VehicleImport;
 use App\Http\Controllers\Controller;
+use App\Imports\VehicleImport;
 use App\Models\AuctionCopy;
 use App\Models\AuctionImage;
 use App\Models\AuctionInvoice;
+use App\Models\BillOfSale;
 use App\Models\Image;
 use App\Models\Location;
 use App\Models\Notification;
+use App\Models\OriginalTitle;
+use App\Models\PickupImage;
 use App\Models\Shipment;
 use App\Models\User;
 use App\Models\Vehicle;
@@ -380,30 +383,58 @@ class VehicleController extends Controller
         $data = $request->all();
         $tab = $data['tab'];
         $image = $request->file('images');
+        $billofsales = $request->file('billofsales');
+        $originaltitle = $request->file('originaltitle');
+        $pickup = $request->file('pickup');
         unset($data['tab']);
-        unset($data['images']);
+        // unset($data['images']);
+        unset($data['billofsales']);
+        unset($data['originaltitle']);
+        unset($data['pickup']);
         $Obj = new Vehicle;
+        $Obj_bill = new BillOfSale;
+        $Obj_title = new OriginalTitle;
+        $Obj_pikcup = new PickupImage;
         $new = $Obj->create($data);
+        $Obj_vehicle = $Obj->where('vin', $data['vin'])->get();
         if ($new) {
-            if ($image) {
-                $i = 0;
-                foreach ($image as $images) {
-                    $image_name = time() . '.' . $images->extension();
-                    $filename = Storage::putFile($this->directory, $images);
-                    $images->move(public_path($this->directory), $filename);
-                    $Obj_image = new Image;
-                    $Obj_vehicle = $Obj->where('vin', $data['vin'])->get();
-                    // return Response($Obj_vehicle[0]['id']);
-                    $Obj_image->vehicle_id = $Obj_vehicle[0]['id'];
-                    $Obj_image->name = $filename;
-                    $Obj_image->thumbnail = $image_name;
-                    $Obj_image->save();
-                    $output['result'] = "Success" . $i;
-                    $i++;
+            if ($billofsales) {
+                foreach ($billofsales as $billofsale) {
+                    $image_name = time() . '.' . $billofsale->extension();
+                    $filename = Storage::putFile($this->directory, $billofsale);
+                    $billofsale->move(public_path($this->directory), $filename);
+                    $Obj_bill->vehicle_id = $Obj_vehicle[0]['id'];
+                    $Obj_bill->name = $filename;
+                    $Obj_bill->thumbnail = $image_name;
+                    $Obj_bill->save();
                 }
-            } else {
-                $output['result'] = "failed.";
             }
+
+            if ($originaltitle) {
+                foreach ($originaltitle as $originaltitles) {
+                    $image_name = time() . '.' . $originaltitles->extension();
+                    $filename = Storage::putFile($this->directory, $originaltitles);
+                    $originaltitles->move(public_path($this->directory), $filename);
+                    $Obj_title->vehicle_id = $Obj_vehicle[0]['id'];
+                    $Obj_title->name = $filename;
+                    $Obj_title->thumbnail = $image_name;
+                    $Obj_title->save();
+                }
+            }
+
+            if ($pickup) {
+                foreach ($pickup as $pickups) {
+                    $image_name = time() . '.' . $pickups->extension();
+                    $filename = Storage::putFile($this->directory, $pickups);
+                    $pickups->move(public_path($this->directory), $filename);
+                    $Obj_pikcup->vehicle_id = $Obj_vehicle[0]['id'];
+                    $Obj_pikcup->name = $filename;
+                    $Obj_pikcup->thumbnail = $image_name;
+                    $Obj_pikcup->save();
+                }
+            }
+        } else {
+            return "Vehicle not created.";
         }
 
         switch ($tab) {
@@ -446,7 +477,6 @@ class VehicleController extends Controller
                 $Obj_image->save();
                 $output['result'] = "Success" . $i;
                 $i++;
-                // return $image_name;
             }
         }
 

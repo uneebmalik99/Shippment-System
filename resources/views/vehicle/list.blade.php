@@ -74,7 +74,9 @@
                         </div>
                         <div>
                             <div class="font-bold"><span>{{ @$new_orders->count() }}</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Total User</span></div>
+                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Total Vehicles
+                                    <b>{{ count($records) }}</b>
+                                </span></div>
                         </div>
                     </div>
                 </div>

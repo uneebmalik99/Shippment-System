@@ -657,9 +657,29 @@
                         </div>
                         <div class="col-xl-4 py-3">
                             <div class="col-12">
-                                <div class="shipment-images-1 rounded" name="shipment_image[]"
+                                <div class="shipment-inovice rounded text-center" name="shipment_inovice[]"
                                     style="padding-top: .5rem;">
+                                    <small>Shipment Inovices</small>
                                 </div>
+                                <br>
+
+                                <div class="stamp_title rounded text-center" name="stamp_title[]"
+                                    style="padding-top: .5rem;">
+                                    <small>Stamp Titles</small>
+                                </div>
+                                <br>
+
+                                <div class="loading_image rounded text-center" name="loading_image[]"
+                                    style="padding-top: .5rem;">
+                                    <small>Loading Images</small>
+                                </div>
+                                <br>
+
+                                <div class="other-document rounded text-center" name="other_document[]"
+                                    style="padding-top: .5rem;">
+                                    <small>Other Documents</small>
+                                </div>
+                                <br>
                             </div>
                         </div>
                     </div>

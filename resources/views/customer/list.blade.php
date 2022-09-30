@@ -50,7 +50,11 @@
                         </div>
                         <div>
                             <div class="font-bold"><span>{{ @$active_customer }}</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Total User</span></div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                <span>Total Customers
+                                    <b>{{ $records->count() }}</b>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
