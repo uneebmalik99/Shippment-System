@@ -6,6 +6,7 @@ use App\Models\Consignee;
 use App\Models\Location;
 use App\Models\Notification;
 use App\Models\Shipment;
+use App\Models\ShipmentImage;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -120,9 +121,9 @@ class ShipmentController extends Controller
 
         $notification = $this->Notification();
         $data['vehicles'] = Vehicle::where('shipment_id', null)->get();
-        // dd($data['vehicles']);
         $data['consignees'] = Consignee::all()->toArray();
         $data['records'] = Shipment::all()->toArray();
+        $data['location'] = Location::all()->toArray();
 
         if ($request->ajax()) {
             $tab = $request->tab;
@@ -175,25 +176,29 @@ class ShipmentController extends Controller
             $data = $request->all();
             $vehicles = $request->vehicle;
             $image = $request->file('images');
+            dd($image);
             unset($data['vehicle']);
             unset($data['shipment_vehicle_table_length']);
+            unset($data['images']);
             $Obj_vehicle = new Vehicle;
+            $Obj_image = new ShipmentImage;
             $Obj = new Shipment;
+            $data['status'] = "2";
+            $Obj->create($data);
+            $shipment = $Obj->where('container_no', $request->container_no)->get();
             if ($image) {
+                
                 foreach ($image as $images) {
                     $image_name = time() . '.' . $images->extension();
                     $filename = Storage::putFile($this->directory, $images);
                     $images->move(public_path($this->directory), $filename);
-                    $data['images'] = $image_name;
+                    $Obj_image->name = $filename;
+                    $Obj_image->thumbnail = $image_name;
+                    $Obj_image->shipment_id = $shipment[0]['id'];
+                    $Obj_image->save();
                 }
             }
-            // dd($data);
-            $data['status'] = "2";
-            $Obj->create($data);
-
-            // $Obj_vehicle = new Vehicle;
             foreach ($vehicles as $vehicle_id) {
-                $shipment = $Obj->where('container_number', $request->container_number)->get();
                 $get_vehicle = $Obj_vehicle->find($vehicle_id);
                 $get_vehicle->shipment_id = $shipment[0]['id'];
                 $get_vehicle->save();
@@ -234,6 +239,39 @@ class ShipmentController extends Controller
 
     public function filtering(Request $request)
     {
-        return $request->all();
+        if ($request->ajax()) {
+            $port_of_loading = $request->port_of_loading;
+            $loading_date = $request->loading_date;
+            $arrival_date = $request->arrival_date;
+            $destination_port = $request->destination_port;
+
+            $records = new Shipment;
+            if ($port_of_loading) {
+                if ($port_of_loading != "") {
+                    $records = $records->where('loading_port', $port_of_loading);
+                }
+            }
+
+            if ($loading_date) {
+                if ($loading_date != "") {
+                    $records = $records->where('loading_date', $loading_date);
+                }
+            }
+
+            if ($arrival_date) {
+                if ($arrival_date != "") {
+                    $records = $records->where('est_arrival_date', $arrival_date);
+                }
+            }
+
+            if ($destination_port) {
+                if ($destination_port != "") {
+                    $records = $records->where('destination_port', $destination_port);
+                }
+            }
+
+            $records = $records->get();
+            return $records;
+        }
     }
 }

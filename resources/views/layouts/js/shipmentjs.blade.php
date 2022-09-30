@@ -13,7 +13,7 @@
                     console.log(data);
                     iziToast.success({
                         title: 'Success',
-                        message: 'Auction Images inserted !',
+                        message: 'Data inserted successfully!',
                         timeout: 1500,
                         position: 'topCenter',
                         zindex: '9999999999999',

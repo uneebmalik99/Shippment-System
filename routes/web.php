@@ -101,7 +101,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/shipments/create',                    [ShipmentController::class, 'create'])->name('shipment.create');
     Route::post('/shipments/general',                   [ShipmentController::class, 'create_form'])->name('shipment.createform');
     Route::get('/shipments/profile/{id?}',              [ShipmentController::class, 'profile'])->name('shipment.profile');
-    Route::get('/shipments/filtering',                  [ShipmentController::class, 'filtering'])->name('shipment.profile');
+    Route::get('/shipments/filtering',                  [ShipmentController::class, 'filtering'])->name('shipment.filter');
 
     //Notification Routes
     Route::get('/notifications',                        [NotificationController::class, 'index'])->name('notification.list');

@@ -773,3 +773,23 @@
         });
     }
 </script>
+
+<script>
+    function filterTable(val) {
+        $tab = val;
+
+        $.ajax({
+            type: 'post',
+            url: '{{ route('customer.FilterTable') }}',
+            data: {
+                'id': $tab,
+            },
+            success: function(data) {
+
+                console.log(data);
+                $('#tbody').html(data);
+            }
+        });
+
+    }
+</script>
