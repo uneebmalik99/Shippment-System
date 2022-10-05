@@ -18,14 +18,14 @@ $( document ).ready(function() {
 		ItemBorderStyle: 'none',
 		SubItemBorder: true,
 		DropDownIconStyle: 'style3', // Value should be style1,style2,style3
-		FixedNavbarPosition: false,
+		FixedNavbarPosition: true,
 		FixedHeaderPosition: false,
 		collapseVerticalLeftHeader: true,
 		VerticalSubMenuItemIconStyle: 'style6',  // value should be style1,style2,style3,style4,style5,style6
 		VerticalNavigationView: 'view1',
 		verticalMenueffect:{
 			desktop : "shrink",
-			tablet : "overlay",
+			tablet : "push",
 			phone : "overlay",
 		},
 		defaultVerticalMenu: {

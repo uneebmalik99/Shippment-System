@@ -3,7 +3,7 @@ $( document ).ready(function() {
 	$( "#pcoded" ).pcodedmenu({
 		themelayout: 'vertical',
 		verticalMenuplacement: 'left',		// value should be left/right
-		verticalMenulayout: 'wide',   		// value should be wide/box/widebox
+		verticalMenulayout: 'box',   		// value should be wide/box/widebox
 		MenuTrigger: 'click',
 		SubMenuTrigger: 'click',
 		activeMenuClass: 'active',
@@ -25,7 +25,7 @@ $( document ).ready(function() {
 		VerticalNavigationView: 'view1',
 		verticalMenueffect:{
 			desktop : "shrink",
-			tablet : "overlay",
+			tablet : "push",
 			phone : "overlay",
 		},
 		defaultVerticalMenu: {

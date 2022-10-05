@@ -4,7 +4,7 @@ $( document ).ready(function() {
 		themelayout: 'vertical',
 		verticalMenuplacement: 'left',		// value should be left/right
 		verticalMenulayout: 'wide',   		// value should be wide/box/widebox
-		MenuTrigger: 'click',
+		MenuTrigger: 'hover',
 		SubMenuTrigger: 'click',
 		activeMenuClass: 'active',
 		ThemeBackgroundPattern: 'pattern2',
@@ -15,7 +15,7 @@ $( document ).ready(function() {
 		SubItemBackground: 'theme2',
 		ActiveItemStyle: 'style0',
 		ItemBorder: true,
-		ItemBorderStyle: 'none',
+		ItemBorderStyle: 'solid',
 		SubItemBorder: true,
 		DropDownIconStyle: 'style3', // Value should be style1,style2,style3
 		FixedNavbarPosition: false,
@@ -25,11 +25,11 @@ $( document ).ready(function() {
 		VerticalNavigationView: 'view1',
 		verticalMenueffect:{
 			desktop : "shrink",
-			tablet : "overlay",
+			tablet : "push",
 			phone : "overlay",
 		},
 		defaultVerticalMenu: {
-			desktop : "expanded",	// value should be offcanvas/collapsed/expanded/compact/compact-acc/fullpage/ex-popover/sub-expanded
+			desktop : "compact",	// value should be offcanvas/collapsed/expanded/compact/compact-acc/fullpage/ex-popover/sub-expanded
 			tablet : "collapsed",		// value should be offcanvas/collapsed/expanded/compact/fullpage/ex-popover/sub-expanded
 			phone : "offcanvas",		// value should be offcanvas/collapsed/expanded/compact/fullpage/ex-popover/sub-expanded
 		},

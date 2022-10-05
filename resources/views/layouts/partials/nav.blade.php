@@ -26,8 +26,7 @@
             <div>
                 <ul class="nav-left">
                     <li>
-                        <div><a href="javascript:void(0)"><i class="ti-menu"></i></a>
-                        </div>
+                        <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                     </li>
                     <li>
                         <div class="main-search morphsearch-search p-0">

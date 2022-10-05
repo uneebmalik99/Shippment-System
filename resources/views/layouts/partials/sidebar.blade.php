@@ -257,29 +257,6 @@
                 </div>
 
                 <ul class="pcoded-item pcoded-left-item">
-                    {{-- <li class="change-loges.html">
-                        <a href="javascript:void(0)">
-                            <span class="pcoded-micon"><i class="ti-user"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.main">My Profile</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class="change-loges.html">
-                        <a href="javascript:void(0)">
-                            <span class="pcoded-micon"><i class="ti-settings"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Settings</span>
-
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class="change-loges.html">
-                        <a href="javascript:void(0)">
-                            <span class="pcoded-micon"><i class="ti-shift-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.navigate.main">Logout</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li> --}}
-
                     <li class="change-loges.html py-2">
                         <a href="{{ route('dashboard.list') }}">
                             <span class="pcoded-micon"><i class="ti-calendar"></i></span>
@@ -287,7 +264,7 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    
+
                     <li class="change-loges.html py-2">
                         <a href="{{ route('customer.list') }}">
                             <span class="pcoded-micon"><i class="fa fa-user"></i></span>
@@ -326,7 +303,7 @@
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
-                        <a href="{{url('/admin/inventory')}}">
+                        <a href="{{ url('/admin/inventory') }}">
                             <span class="pcoded-micon"><i class="fas fa-warehouse"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Inventory</span>
 
@@ -334,7 +311,7 @@
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
-                        <a href="{{url('/admin/invoice')}}">
+                        <a href="{{ url('/admin/invoice') }}">
                             <span class="pcoded-micon"><i class="fas fa-receipt"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Invoices</span>
 
@@ -397,7 +374,7 @@
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
-                            
+
                             <li class=" ">
                                 <a href="">
                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
