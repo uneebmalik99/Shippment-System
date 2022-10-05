@@ -6,7 +6,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<title>login</title>
+	<title>SignIn</title>
+  <link rel="icon" href="{{ asset('images/blueocean.png') }}" type="image/x-icon">
+
 </head>
 <style>
 	*{
@@ -23,19 +25,19 @@
 	#first_img{
         background: url({{'public/images/login_l.png'}});
         background-repeat: no-repeat;
-        background-size:cover;
-         background-position:center;
-		width: inherit;
-		height: 100vh!important;
+        background-size:center;
+        background-position:center;
+		    width: inherit;
+		    height: 100vh!important;
 
 	}
 	#second_img{
-		background: url({{'public/images/login_r.png'}});
+		    background: url({{'public/images/login_page.png'}});
         background-repeat: no-repeat;
-         background-size:cover;
-         background-position:center;
-		width: inherit;
-		height: 100vh!important;
+        background-size:cover;
+        background-position:center;
+		    width: inherit;
+		    height: 100vh!important;
 
 	}
 	.login{
@@ -62,6 +64,16 @@
 		left: 5%;
 		
 	}
+  .login_text:after{
+    content: ' ';
+    position: absolute;
+    top:30px;
+    left:2px;
+    width: 100px;
+    height: 2px;
+    background:white;
+    z-index: 999999999;
+  }
 	.login_text b{
 		font-size: 22px;
         color: white;
@@ -74,7 +86,7 @@
     .copyright p{
         text-transform: capitalize;
         font-size:10px;
-    color: #EE281F;
+        color: #1F689E;
 
     }
     .logo{
@@ -92,9 +104,18 @@
         outline: none!important;
         box-shadow: none!important;
     }
+    .login_logo{
+      position: absolute;
+      left:20%;
+      top:5%;
+    }
+    .login_logo img{
+      width:150px;
+    }
 @media screen and (max-width: 768px) {
   .login_text b{
-    color: #EE281F;
+    color: #1F689E;
+    /* padding-top:10px!important; */
   }
 
 }
@@ -102,33 +123,31 @@
 <body>
 	
 	<div class="container-fluid" >
-        <div class="logo">
-            <img src="{{asset('images/logo.png')}}" alt="" width="85px" height="85px">
-
-        </div>
+        
 		<div class="row">
 			
 			<div class="d-none d-sm-none d-md-block col-md-6 col-lg-6" id="first_img">
 				
 			</div>
 			<div class=" col-12 col-sm-12 col-md-6 col-lg-6" id="second_img">
+
+        {{-- <div class="login_logo">
+          <img src="{{asset('images/login_logo.png')}}" alt="">
+        </div> --}}
+           
                 <div class="copyright">
                     <p>copyright@ 2022 all right reserved <br>
-                        Developed by Blue Ocean Shipping</p>
+                        Developed by <a href="https://revolutiontechnologies.com/" target="__blank">The Revolution Technologies</a></p>
                 </div>
-
-                
             </div>
-
 		</div>
-
 		<div class="login shadow" style="box-shadow:
         inset 0 -3em 3em rgba(0,0,0,0.1),
               0 0  0 2px rgb(255,255,255),
               0.3em 0.3em 1em rgba(0,0,0,0.3);">
             <form method="POST" action="{{route ('login')}}">
                 @csrf
-			<h2>Login</h2>
+			<h2><img src="{{asset('images/login_logo.png')}}" alt="" style="width: 178px!important;"></h2>
 
   <div class="form-group">
     <label for="exampleInputEmail1">Email</label>
@@ -149,7 +168,7 @@
   </div>
   
   <div class="form-group">
-  <button type="submit" class="btn btn-primary form-control" style="background:#EE281F;outline:none;border:none">Login</button>
+  <button type="submit" class="btn btn-primary form-control" style="background:#1F689E;outline:none;border:none">Login</button>
   </div>
   <div class="form-group form-check text-center">
     <input type="checkbox" class="form-check-input" name="remember"
@@ -159,11 +178,10 @@
     </label>
   </div>
   <div class="form-group form-check text-center">
-    <a href="" style="color:#EE281F">Forgot Password</a>
+    <a href="" style="color:#1F689E">Forgot Password</a>
   </div>
 </form>
 		</div>
-
 
 		<div class="login_text">
 		<b>Welcome to Blue Ocean Shipping</b>

@@ -90,6 +90,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     
     Route::get('/vehicle/profile/{id?}',                [VehicleController::class, 'profile'])->name('vehicle.profile');
     Route::get('/vehicle/vehicle_informationTab',       [VehicleController::class, 'profile_tab'])->name('customer.profile_tab');
+    
+    Route::get('/vehicle/records',       [VehicleController::class, 'serverside'])->name('vehicle.records');
+
 
     //Sticky Notes Routes
     Route::get('/stickynotes',                          [StickyController::class, 'index'])->name('sticky.list');

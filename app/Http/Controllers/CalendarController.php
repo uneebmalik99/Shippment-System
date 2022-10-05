@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\User;
+use App\Models\Location;
 use Carbon\Carbon;
 
 class CalendarController extends Controller
@@ -22,6 +23,7 @@ class CalendarController extends Controller
     public function Notification()
     {
         $data['notification'] = Notification::with('user')->paginate($this->perpage);
+        $data['location'] = Location::all();
         // dd();
         if ($data['notification']->toArray()) {
             $current = Carbon::now();

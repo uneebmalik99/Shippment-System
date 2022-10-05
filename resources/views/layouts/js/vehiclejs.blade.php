@@ -18,15 +18,16 @@
                 'status_name': $status_name,
             },
             success: function(data) {
+
+
                 if (data.view) {
-                    console.log(data);
                     $('#status_body').html(data.view);
                 } else {
                     console.log(data);
-                    $('#vehicle_tbody').html(data.table);
-                    $('#page').html(data.pagination);
+                    $('#status_body').html(data);
                 }
                 $('#new_order_table').DataTable({
+                    scrollX: true,
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -34,6 +35,7 @@
                     },
                 });
                 $('#dispatched_table').DataTable({
+                    scrollX: true,
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -41,6 +43,7 @@
                     },
                 });
                 $('#on_hand_table').DataTable({
+                    scrollX: true,
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -48,6 +51,15 @@
                     },
                 });
                 $('#towing_table').DataTable({
+                    scrollX: true,
+                    language: {
+                        search: "",
+                        sLengthMenu: "_MENU_",
+                        searchPlaceholder: "Search"
+                    },
+                });
+                $('#vehicle_filter_table').DataTable({
+                   scrollX: true,
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",

@@ -287,13 +287,7 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    <li class="change-loges.html py-2">
-                        <a href="{{ route('user.list') }}">
-                            <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Users</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
+                    
                     <li class="change-loges.html py-2">
                         <a href="{{ route('customer.list') }}">
                             <span class="pcoded-micon"><i class="fa fa-user"></i></span>
@@ -370,14 +364,53 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li> --}}
-                    <li class="change-loges.html py-2">
+                    {{-- <li class="change-loges.html py-2">
                         <a href="{{ route('master.list') }}">
                             <span class="pcoded-micon"><i class="fas fa-brain"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Master</span>
 
                             <span class="pcoded-mcaret"></span>
                         </a>
+                    </li> --}}
+
+
+                    <li class="pcoded-hasmenu">
+                        <a href="javascript:void(0)">
+                            <span class="pcoded-micon"><i class="fas fa-brain"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Master</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                        <ul class="pcoded-submenu">
+
+                            <li class="change-loges.html py-2">
+                                <a href="{{ route('user.list') }}">
+                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Users</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+
+                            <li class=" ">
+                                <a href="">
+                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.project">Shipment Rate</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            
+                            <li class=" ">
+                                <a href="">
+                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.project">Towing Rate</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+
+
+
+
                     <li class="change-loges.html py-2">
                         <a href="">
                             <span class="pcoded-micon"><i class="fas fa-percent"></i></span>

@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\User;
+use App\Models\Location;
 use App\Models\Vehicle;
+use App\Models\Shipment;
 use App\Models\Customer;
 use Carbon\Carbon;
 
@@ -28,6 +30,7 @@ class DashboardController extends Controller
     {
     
         $data['notification'] = Notification::with('user')->paginate($this->perpage);
+        $data['location'] = Location::all()->toArray();
         if ($data['notification']->toArray()) {
             $current = Carbon::now();
             foreach ($data['notification'] as $key => $date_notification) {
@@ -76,14 +79,27 @@ class DashboardController extends Controller
                 'action' => $this->action,
             ],
         ];
+        $data['shipments'] = Shipment::all();
 
-        $customer = User::where('role_id', 4)->get();
-        $data['customers'] = $customer->toArray();
+        $data['TotalCustomers'] = User::where('role_id', 4)->count();
+        $data['ActiveCustomers'] = User::where('role_id', 4)->where('status', '1')->count();
+        $data['InActiveCustomers'] = User::where('role_id', 4)->where('status', '0')->count();
+        $data['NewOrders'] = Vehicle::where('status', 1)->count();
+        $data['Posted'] = Vehicle::where('status', 2)->count();
+        $data['OnHand'] = Vehicle::where('status', 3)->count();
+        $data['Towing'] = Vehicle::where('status', 4)->count();
+        $data['TotalVehicles'] = Vehicle::all()->count();
+
+
+        
+        
+
 
         $all_vehicles = Vehicle::all();
         $allVehicles_value = Vehicle::get()->sum('value');
         $data['all_vehicles'] = $all_vehicles;
         $data['allVehicles_value'] = $allVehicles_value;
+
 
 
         $onhand = Vehicle::where('status', '1');
@@ -131,6 +147,7 @@ class DashboardController extends Controller
         $booked_value = $booked->sum('value');
         $data['booked_count'] = $booked_count;
         $data['booked_value'] = $booked_value;
+
         
 
 

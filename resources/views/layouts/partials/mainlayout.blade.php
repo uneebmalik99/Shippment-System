@@ -79,15 +79,15 @@
         });
 
         $(document).ready(function() {
-            $('#vehicle_table').DataTable({
-                scrollX: true,
-                language: {
-                    search: "",
-                    sLengthMenu: "_MENU_",
-                    searchPlaceholder: "Search"
-                },
+            // $('#vehicle_table').DataTable({
+            //     scrollX: true,
+            //     language: {
+            //         search: "",
+            //         sLengthMenu: "_MENU_",
+            //         searchPlaceholder: "Search"
+            //     },
 
-            });
+            // });
         });
         $(document).ready(function() {
             $('#customer_table').DataTable({
