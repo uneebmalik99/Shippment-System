@@ -23,6 +23,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Storage;
+// use Yajra\Datatables\Facades\Datatables;
 use DataTables;
 
 class VehicleController extends Controller
@@ -214,7 +215,6 @@ class VehicleController extends Controller
                 'page' => 'edit',
             ],
         ];
-
         $notification = $this->Notification();
         $data['buyers'] = User::where('role_id', '4')->get();
         $data['vehicle'] = Vehicle::with('user')->find($id)->toArray();
@@ -423,6 +423,18 @@ class VehicleController extends Controller
                         $Obj_image = new WarehouseImage;
                         $this->directory = "/warehouse_images";
                         break;
+                    case ('billofsales'):
+                        $Obj_image = new BillOfSale;
+                        $this->directory = "/billofsales_images";
+                        break;
+                    case ('originalTitle'):
+                        $Obj_image = new OriginalTitle;
+                        $this->directory = "/OriginalTitle_images";
+                        break;
+                    case ('pickup'):
+                        $Obj_image = new PickupImage;
+                        $this->directory = "/pickup_images";
+                        break;
                 }
                 $image_name = time() . '.' . $image->extension();
                 $filename = Storage::putFile($this->directory, $image);
@@ -451,14 +463,17 @@ class VehicleController extends Controller
                     break;
             }
             $filename = Storage::putFile($this->directory, $documents);
-            $documents->move(public_path($this->directory), $filename);
-            $size = $documents->getSize() / 1000;
+            $type = $documents->extension();
+            $doc = $documents->move(public_path($this->directory), $filename);
+            // dd($doc->getSize() / 1000);/
+            $size = $doc->getSize() / 1000;
+            // dd($size);
             $Obj_file->vehicle_id = $Obj_vehicle[0]['id'];
             $Obj_file->name = $filename;
-            $Obj_file->type = $documents->extension();
+            $Obj_file->type = $type;
             $Obj_file->size = $size . ' kb';
             $Obj_file->save();
-            $output['result'] = "Success";
+            $output['result'] =  "Success";
 
         }
         return Response($output);

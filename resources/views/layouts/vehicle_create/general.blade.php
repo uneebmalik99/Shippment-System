@@ -3,7 +3,7 @@
 <form method="POST" id="vehicle_form" enctype="multipart/form-data">
     @csrf
     <div class="d-lg-flex">
-        <div class="col-xl-8 col-12 d-lg-flex p-0">
+        <div class="col-xl-12 col-12 d-lg-flex p-0">
             <div class="col-lg-6 col-12 p-0">
                 <div class="col-12">
                     <div class="tab_card my-3">
@@ -789,7 +789,7 @@
 
             </div>
         </div>
-        <div class="col-lg-4 py-3">
+        {{-- <div class="col-lg-4 py-3">
             <div class="col-12">
                 
 
@@ -815,7 +815,7 @@
 
 
             </div>
-        </div>
+        </div> --}}
 
     </div>
     <div class="col-12 py-2 px-5 d-flex justify-content-end">
@@ -823,7 +823,7 @@
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_user"
             id="added_by_user" readonly value="{{ Auth::user()->id }}">
         <input type="hidden" readonly name="tab" value="general">
-        <button type="submit" class="btn col-1 next-style text-white" onclick="create_vehicle_form(this.id)"
+        <button type="submit" class="btn next-style text-white col-1 py-1" onclick="create_vehicle_form(this.id)"
             id="general_vehicle" data-next='attachments_vehicle_tab' name="{{ $module['button'] }}"
             style="cursor: pointer;">
             <div class="unskew">Next</div>

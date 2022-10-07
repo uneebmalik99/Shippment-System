@@ -1,20 +1,24 @@
 .vehicle_heading {
     background: #1f689e;
-
     box-shadow: inset 10px 14px 28px rgba(0, 0, 0, 0.25);
 }
+
 .vehicle_heading h5 {
     font-size: 16px !important;
 }
+
 .vehicle_link_navbar {
     background: #99c4e2;
 }
+
 .vehicle_link_navbar a {
     font-size: 16px !important;
 }
+
 .vedicls_link_navbar2 {
     background: #dff2fe;
 }
+
 .vedicls_link_navbar2 a {
     font-size: 15px !important;
 }
@@ -44,20 +48,23 @@
     color: #8c8e91;
     vertical-align: middle !important;
 }
+
 .table td i,
 .table button {
     color: #ff7a00;
 }
 
-.dataTable > thead > tr > th[class*="sort"]:before,
-.dataTable > thead > tr > th[class*="sort"]:after {
+.dataTable>thead>tr>th[class*="sort"]:before,
+.dataTable>thead>tr>th[class*="sort"]:after {
     content: "" !important;
 }
+
 .vehicl_navbar_img img {
     width: 20px !important;
     margin-bottom: 6px !important;
     margin-right: 2px !important;
 }
+
 .vehicl_navbar_img a {
     font-family: "Inter";
     font-style: normal;
@@ -67,11 +74,13 @@
     /* identical to box height */
     color: #578db6;
 }
+
 .active {
     color: #1f689e;
     border-bottom: 2px solid #1f689e;
     /* box-shadow: 0px 2px 4px #2C77E7; */
 }
+
 .vehicles_3navbar a {
     font-family: "Inter";
     font-style: normal;
@@ -80,6 +89,7 @@
     line-height: 22px;
     color: #1cacd9 !important;
 }
+
 .activee {
     width: 110px;
     text-align: center;
@@ -88,15 +98,19 @@
     border-radius: 15px;
     color: #696cff !important;
 }
+
 div.dataTables_length select {
-    color: #1cacd9 !important;
+    color: #3e5871 !important;
     font-family: "Inter";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 27px;
 }
+
+
 /* .dataTables_info, */
+
 .dataTables_length {
     font-family: "Inter";
     font-style: normal;
@@ -105,6 +119,7 @@ div.dataTables_length select {
     line-height: 27px;
     color: #1cacd9 !important;
 }
+
 .dataTables_info {
     font-family: "Inter";
     font-style: normal;
@@ -113,6 +128,7 @@ div.dataTables_length select {
     line-height: 22px;
     color: #8c8e91 !important;
 }
+
 #vedicls_table_filter input {
     border: 2px solid #0066ff !important;
     border-radius: 5px !important;
@@ -120,6 +136,7 @@ div.dataTables_length select {
     width: 334px;
     height: 30px;
 }
+
 .dataTables_paginate .paginate_button {
     background: rgba(152, 153, 202, 0.22) !important;
     color: #f0f3f5 !important;
@@ -132,6 +149,7 @@ div.dataTables_length select {
     /* color: #8C8E91; */
     margin-right: 3px !important;
 }
+
 .dataTables_paginate .current {
     background: rgba(103, 106, 255, 0.99) !important;
     border-radius: 5px !important;
@@ -152,24 +170,23 @@ table.dataTable.no-footer {
     /* overflow-x: scroll !important; */
     border-top: 1px solid #b3b3b3 !important;
 }
+
 div.dataTables_wrapper div.dataTables_info {
     display: inline-block;
     margin-left: 10px !important;
 }
 
 .main_page {
-    background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.72),
-        rgba(189, 226, 252, 0.48)
-    ) !important;
+    background: linear-gradient( to bottom, rgba(255, 255, 255, 0.72), rgba(189, 226, 252, 0.48)) !important;
 }
 
 .paginate_button.current {
     color: #ffffff !important;
 }
 
+
 /* Vehicle attachments style */
+
 .head {
     background: #1f689e !important;
     box-shadow: inset 10px 14px 28px rgba(0, 0, 0, 0.25) !important;
@@ -180,11 +197,7 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .attach {
-    background: linear-gradient(
-        254.26deg,
-        rgba(28, 113, 176, 0.9) 45.03%,
-        #10c2ea 72.6%
-    ) !important;
+    background: linear-gradient( 254.26deg, rgba(28, 113, 176, 0.9) 45.03%, #10c2ea 72.6%) !important;
 }
 
 .image {
@@ -245,35 +258,19 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .box-bg-1 {
-    background: linear-gradient(
-        14.48deg,
-        #e93f78 -244.13%,
-        #ffffff 61.62%
-    ) !important;
+    background: linear-gradient( 14.48deg, #e93f78 -244.13%, #ffffff 61.62%) !important;
 }
 
 .box-bg-2 {
-    background: linear-gradient(
-        41.21deg,
-        #b0e9ff -14.28%,
-        #ffffff 55.03%
-    ) !important;
+    background: linear-gradient( 41.21deg, #b0e9ff -14.28%, #ffffff 55.03%) !important;
 }
 
 .box-bg-3 {
-    background: linear-gradient(
-        20.8deg,
-        #ffa003 -199.34%,
-        #ffffff 63.93%
-    ) !important;
+    background: linear-gradient( 20.8deg, #ffa003 -199.34%, #ffffff 63.93%) !important;
 }
 
 .box-bg-4 {
-    background: linear-gradient(
-        29.98deg,
-        #ff7a00 -113.42%,
-        #ffffff 59.04%
-    ) !important;
+    background: linear-gradient( 29.98deg, #ff7a00 -113.42%, #ffffff 59.04%) !important;
 }
 
 .parallelogram {
@@ -327,11 +324,7 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .active_information_button {
-    background: linear-gradient(
-        254.1deg,
-        #10c3ea 4.82%,
-        #337fb8 61.08%
-    ) !important;
+    background: linear-gradient( 254.1deg, #10c3ea 4.82%, #337fb8 61.08%) !important;
     border: 1px solid #1c71b0 !important;
     box-shadow: 6px 6px 4px rgba(48, 148, 175, 0.47) !important;
     transform: skew(-30deg) !important;
@@ -436,11 +429,13 @@ div.dataTables_wrapper div.dataTables_info {
 textarea:focus {
     outline: none;
 }
+
 .inspection_heading h6 {
     color: #6d8da6;
     padding: 10px 50px;
     font-size: 18px;
 }
+
 .Notes {
     /* width: 732px; */
     /* width: 100%; */

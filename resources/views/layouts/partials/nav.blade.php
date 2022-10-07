@@ -26,7 +26,8 @@
             <div>
                 <ul class="nav-left">
                     <li>
-                        <div><a href="javascript:void(0)"><i class="ti-menu"></i></a>
+                        <div class="sidebar_toggle">
+                            <a href="javascript:void(0)"><i class="ti-menu"></i></a>
                         </div>
                     </li>
                     <li>

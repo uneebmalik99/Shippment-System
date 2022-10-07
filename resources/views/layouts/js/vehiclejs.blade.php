@@ -108,6 +108,93 @@
 
 {{-- Warehouse Images --}}
 <script>
+    function billofsales(){
+        $('#billofsales').on('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(jQuery('#billofsales')[0]);
+                formData.append('tab', 'billofsales');
+                $.ajax({
+                method: 'POST',
+                url: '{{ URL::to('admin/vehicles/attachments') }}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log(data);
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Warehouse Images inserted!',
+                        timeout: 1500,
+                        position: 'topCenter',
+                        zindex: '9999999999999',
+                    });
+                    console.log(data);
+                }
+            });
+
+        });
+
+    }
+
+    function originalTitle(){
+        alert('originalTitle');
+        $('#originalTitle').on('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(jQuery('#originalTitle')[0]);
+                formData.append('tab', 'originalTitle');
+                $.ajax({
+                method: 'POST',
+                url: '{{ URL::to('admin/vehicles/attachments') }}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log(data);
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Warehouse Images inserted!',
+                        timeout: 1500,
+                        position: 'topCenter',
+                        zindex: '9999999999999',
+                    });
+                    console.log(data);
+                }
+            });
+
+        });
+
+    }
+
+    function pickup(){
+        alert('pickup');
+        $('#pickup').on('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(jQuery('#pickup')[0]);
+                formData.append('tab', 'pickup');
+                $.ajax({
+                method: 'POST',
+                url: '{{ URL::to('admin/vehicles/attachments') }}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log(data);
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Warehouse Images inserted!',
+                        timeout: 1500,
+                        position: 'topCenter',
+                        zindex: '9999999999999',
+                    });
+                    console.log(data);
+                }
+            });
+
+        });
+
+    }
+
+
     function warehouse_images() {
         $('#vehicle_warehouse_form').on('submit', function(event) {
             event.preventDefault();

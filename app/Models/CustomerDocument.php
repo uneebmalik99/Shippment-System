@@ -17,6 +17,7 @@ class CustomerDocument extends Model
         'description',
         'customer_user_id',
         'thumbnail',
+        'user_id',
     ];
 
     public function user()

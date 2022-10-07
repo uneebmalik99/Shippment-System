@@ -385,91 +385,101 @@
 {{-- Load Modal --}}
 <script>
     $('.modal_button').on('click', function() {
-        $id = $(this).attr('id');
-        // alert('adsaasd');
-        $tab = "general";
-        if ($id == "customer") {
-            $.ajax({
-                type: 'get',
-                url: '{{ URL::to('admin/customers/create') }}',
-                data: {
-                    'tab': $tab
-                },
-                success: function(data) {
-                    $('.modal-body').html(data);
-                    $('#exampleModal').modal('show');
-                    $('.user_image').imageUploader({
-                        maxFiles: 1
-                    });
-                }
-            });
-        } else if ($id == "vehicle") {
-            $.ajax({
-                type: 'get',
-                url: '{{ URL::to('admin/vehicles/create') }}',
-                data: {
-                    'tab': $tab
-                },
-                success: function(data) {
-                    // console.log(data);
-                    $('.modal-body').html(data);
-                    $('#exampleModal').modal('show');
-                    $('.billofsales').imageUploader({
-                        maxFiles: 4,
-                        imagesInputName: 'billofsales',
-                    });
-                    $('.originaltitle').imageUploader({
-                        maxFiles: 4,
-                        imagesInputName: 'originaltitle',
-                    });
-                    $('.pickup').imageUploader({
-                        maxFiles: 4,
-                        imagesInputName: 'pickup',
-                    });
-                }
-            });
-        } else if ($id == "shipment") {
-            $.ajax({
-                type: 'get',
-                url: '{{ URL::to('admin/shipments/create') }}',
-                data: {
-                    'tab': $tab
-                },
-                success: function(data) {
-                    // console.log(data);
-                    $('.modal-body').html(data);
-                    $('#exampleModal').modal('show');
-                    $('#shipment_vehicle_table').DataTable({
-                        language: {
-                            search: "",
-                            sLengthMenu: "_MENU_",
-                            searchPlaceholder: "Search"
-                        },
+                $id = $(this).attr('id');
+                // alert('adsaasd');
+                $tab = "general";
+                if ($id == "customer") {
+                    $.ajax({
+                            type: 'get',
+                            url: '{{ URL::to('admin/customers/create') }}',
+                            data: {
+                                'tab': $tab
+                            },
+                            success: function(data) {
+                                $('.modal-body').html(data);
+                                $('#exampleModal').modal('show');
+                                $('.user_image').imageUploader({
+                                    maxFiles: 1
+                                });
+                                $('.user_file').imageUploader({
+                                    maxFiles: 1,
+                                    imagesInputName: 'user_file',
+                                });
+                            }
+                            });
+                    }
+                    else if ($id == "vehicle") {
+                        $.ajax({
+                            type: 'get',
+                            url: '{{ URL::to('admin/vehicles/create') }}',
+                            data: {
+                                'tab': $tab
+                            },
+                            success: function(data) {
+                                // console.log(data);
+                                $('.modal-body').html(data);
+                                $('#exampleModal').modal('show');
+                                $('.billofsales').imageUploader({
+                                    maxFiles: 15,
+                                });
+                               
+                                $('.originaltitle').imageUploader({
+                                    maxFiles: 15,
+                                });
+                                $('.pickup').imageUploader({
+                                    maxFiles: 15,
+                                });
 
-                    });
-                    $('.shipment-inovice').imageUploader({
-                        maxFiles: 4,
-                        imagesInputName: 'shipment_inovice',
-                    });
-                    $('.stamp_title').imageUploader({
-                        maxFiles: 4,
-                        imagesInputName: 'stamp_title',
+                                $('.vehicle_auction_image').imageUploader({
+                                    maxFiles: 1,
+                                });
+                                $('.vehicle_warehouse_image').imageUploader({
+                                    maxFiles: 1,
+                                });
+                            }
+                        });
+                    } else if ($id == "shipment") {
+                        $.ajax({
+                            type: 'get',
+                            url: '{{ URL::to('admin/shipments/create') }}',
+                            data: {
+                                'tab': $tab
+                            },
+                            success: function(data) {
+                                // console.log(data);
+                                $('.modal-body').html(data);
+                                $('#exampleModal').modal('show');
+                                $('#shipment_vehicle_table').DataTable({
+                                    language: {
+                                        search: "",
+                                        sLengthMenu: "_MENU_",
+                                        searchPlaceholder: "Search"
+                                    },
 
-                    });
-                    $('.loading_image').imageUploader({
-                        maxFiles: 4,
-                        imagesInputName: 'loading_image',
+                                });
+                                $('.shipment-inovice').imageUploader({
+                                    maxFiles: 4,
+                                    imagesInputName: 'shipment_inovice',
+                                });
+                                $('.stamp_title').imageUploader({
+                                    maxFiles: 4,
+                                    imagesInputName: 'stamp_title',
 
-                    });
-                    $('.other-document').imageUploader({
-                        maxFiles: 4,
-                        imagesInputName: 'other_document',
+                                });
+                                $('.loading_image').imageUploader({
+                                    maxFiles: 4,
+                                    imagesInputName: 'loading_image',
 
-                    });
-                }
-            });
-        }
-    })
+                                });
+                                $('.other-document').imageUploader({
+                                    maxFiles: 4,
+                                    imagesInputName: 'other_document',
+
+                                });
+                            }
+                        });
+                    }
+                })
 </script>
 
 {{-- Change Modal --}}
@@ -666,6 +676,19 @@
                     $('#exampleModal').modal('show');
                     $('.vehicle_auction_image').imageUploader({
                         maxFiles: 15
+
+                    });
+                    $('.billofsales').imageUploader({
+                        maxFiles: 15
+
+                    });
+                    $('.pickup').imageUploader({
+                        maxFiles: 15
+
+                    });
+                    $('.originaltitle').imageUploader({
+                        maxFiles: 15
+
                     });
                     $('.vehicle_warehouse_image').imageUploader({
                         maxFiles: 15

@@ -4,7 +4,7 @@
     </div>
     <div class="col-12 mt-2">
 
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between billing_input_style">
             <div class="col-4 text-left text-muted">
                 <label for="first_name">Name</label>
                 <input class="form-control-sm border border-info rounded" type="text" name="first_name" id="first_name"
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-between mt-4">
+        <div class="d-flex justify-content-between mt-4 billing_input_style" >
             <div class="col-4 text-left text-muted">
                 <label for="last_name">Last Name</label>
                 <input class="form-control-sm border border-info rounded" type="text" name="last_name" id="last_name"
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-between mt-4">
+        <div class="d-flex justify-content-between mt-4 billing_input_style">
             <div class="col-4 text-left text-muted">
                 <label for="phone">Phone</label>
                 <input class="form-control-sm border border-info rounded" type="text" name="phone" id="phone"
@@ -70,7 +70,7 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-between mt-4">
+        <div class="d-flex justify-content-between mt-4 billing_input_style">
             <div class="col-4 text-left text-muted">
                 <label for="passport">Foreign Passport Number</label>
                 <input class="form-control-sm border border-info rounded" type="text" name="passport" id="passport"
