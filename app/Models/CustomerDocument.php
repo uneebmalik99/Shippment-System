@@ -12,12 +12,7 @@ class CustomerDocument extends Model
     protected $primaryKey = "id";
     public $timestamps = true;
     protected $table = "customer_documents";
-    protected $fillable = [
-        'file',
-        'description',
-        'customer_user_id',
-        'thumbnail',
-    ];
+    protected $guarded = [];
 
     public function user()
     {

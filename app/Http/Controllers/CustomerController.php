@@ -551,6 +551,7 @@ class CustomerController extends Controller
                         $documents['thumbnail'] = $file_name;
                         $files->move(public_path($this->directory), $docname);
                         $documents['user_id'] = $user_id;
+                        // dd($documents);
                         $Obj = new CustomerDocument;
                         $Obj->create($documents);
                     }

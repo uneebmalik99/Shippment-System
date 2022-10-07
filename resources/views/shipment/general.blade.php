@@ -1,21 +1,10 @@
 <div>
     <div>
         <div class="bg-white">
-            <div>
-                <div class="col-5 d-flex">
-                    <div class="col-md-6 col-6 px-0 py-0 pl-1 billing px-1">
-                        <button class="text-center form-control border next-style" id="general_shipment_tab">
-                            <div class="unskew">General</div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
+            @include('shipment.navbar')
             <div class="mt-3">
-
                 <form method="POST" class="col-12" id="shipment_form">
                     @csrf
-
                     <div class="mt-2 bg-light" id="shipment_body">
                         <table id="shipment_vehicle_table" class="table ">
                             <thead class="bg-custom text-dark">
@@ -52,7 +41,7 @@
                     </div>
 
                     <div class="d-xl-flex border-shipment">
-                        <div class="col-xl-8 col-12 d-lg-flex p-0">
+                        <div class="col-12 d-lg-flex p-0">
                             <div class="col-lg-6 col-12 p-0">
                                 <div class="col-12">
                                     <div class="tab_card my-3">
@@ -138,8 +127,7 @@
                                             </div>
                                             <div class="col-12 py-2">
                                                 <div class="d-flex align-items-center">
-                                                    <label for="cut_off_date"
-                                                        class="col-6 px-0 font-size font-bold">Cut
+                                                    <label for="cut_off_date" class="col-6 px-0 font-size font-bold">Cut
                                                         off
                                                         Date</label>
                                                     <input type="date"
@@ -329,63 +317,6 @@
                                         </div>
                                     </div>
 
-                                    {{-- <div class="tab_card my-3">
-                                        <div class="col-7 py-3">
-                                            <div class="text-color" style="cursor: pointer;" id="shipment_container"
-                                                onclick="slide(this.id)">
-                                                <svg width="8" height="6" viewBox="0 0 8 6" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 1.36328L4 4.82148L7 1.36328" stroke="#FF8514"
-                                                        stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                                <span class="p-2">Container Information</span>
-                                            </div>
-                                        </div>
-                                        <div id="shipment_container_body">
-                                            <div class="col-12 py-2">
-                                                <div class="d-flex align-items-center">
-                                                    <label for="booking_number"
-                                                        class="col-6 px-0 font-size font-bold">Booking
-                                                        Number</label>
-                                                    <input type="text"
-                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="booking_number" id="booking_number">
-
-                                                </div>
-                                            </div>
-                                            <div class="col-12 py-2">
-                                                <div class="d-flex align-items-center">
-                                                    <label for="booking_number"
-                                                        class="col-6 px-0 font-size font-bold">Booking
-                                                        Number</label>
-                                                    <input type="text"
-                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="booking_number" id="booking_number">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 py-2">
-                                                <div class="d-flex align-items-center">
-                                                    <label for="container_size"
-                                                        class="col-6 px-0 font-size font-bold">Container
-                                                        Size</label>
-                                                    <input type="text"
-                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="container_size" id="container_size">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 py-2">
-                                                <div class="d-flex align-items-center">
-                                                    <label for="container_type"
-                                                        class="col-6 px-0 font-size font-bold">Container
-                                                        Type</label>
-                                                    <input type="text"
-                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="container_type" id="container_type">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
 
@@ -646,8 +577,7 @@
                                                 <div class="d-flex align-items-center">
                                                     <label for="notes"
                                                         class="col-6 px-0 font-size font-bold">Note</label>
-                                                    <textarea type="text" class="form-control-sm border border-0 nonrounded-pill bg col-6" name="notes"
-                                                        id="notes"></textarea>
+                                                    <textarea type="text" class="form-control-sm border border-0 col-6 card-pill" name="notes" id="notes"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -655,51 +585,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 py-3">
-                            <div class="col-12">
-                                <div class="shipment-inovice rounded text-center" name="shipment_inovice[]"
-                                    style="padding-top: .5rem;">
-                                    <small>Shipment Inovices</small>
-                                </div>
-                                <br>
-
-                                <div class="stamp_title rounded text-center" name="stamp_title[]"
-                                    style="padding-top: .5rem;">
-                                    <small>Stamp Titles</small>
-                                </div>
-                                <br>
-
-                                <div class="loading_image rounded text-center" name="loading_image[]"
-                                    style="padding-top: .5rem;">
-                                    <small>Loading Images</small>
-                                </div>
-                                <br>
-
-                                <div class="other-document rounded text-center" name="other_document[]"
-                                    style="padding-top: .5rem;">
-                                    <small>Other Documents</small>
-                                </div>
-                                <br>
-                            </div>
-                        </div>
                     </div>
-                    <div class="d-flex justify-content-end">
-                        <div class="d-flex col-6">
-                            <div class="col-4">
-                                <button type="reset" class="btn col-1 next-style text-white col-12"
+                    <div class="d-flex justify-content-end mt-3">
+                        <div class="d-flex justify-content-end col-6">
+                            <div class="col-3">
+                                <button type="reset" class="btn next-style text-white col-12 py-1"
                                     id="general_vehicle" value="Reset" style="cursor: pointer;">
                                     <div class="unskew">Clear</div>
                                 </button>
                             </div>
-                            <div class="col-4">
-                                <button type="submit" class="btn col-1 next-style text-white col-12"
+                            <div class="col-3">
+                                <button type="submit" class="btn next-style text-white col-12 py-1"
                                     onclick="create_shipment_form(this.id)" id="general_shipment"
                                     style="cursor: pointer;">
                                     <div class="unskew">Save</div>
                                 </button>
                             </div>
-                            <div class="col-4">
-                                <button type="button" class="btn col-1 next-style text-white col-12"
+                            <div class="col-3">
+                                <button type="button" class="btn next-style text-white col-12 py-1"
                                     id="shipment_general_finish" onclick="display_model()" style="cursor: pointer;">
                                     <div class="unskew">Finish</div>
                                 </button>

@@ -10,6 +10,7 @@ use App\Http\Controllers\LockController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\StickyController;
 use App\Http\Controllers\MasterController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
@@ -131,13 +132,10 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/dashboard',                            [DashboardController::class, 'dashboard'])->name('dashboard.list');
 
     //Inventory
-    Route::get('/inventory',                            function(){
-        return "Coming Soon!";
-    });
+    Route::get('/inventory',                            function(){return "Coming Soon!";});
     //Inventory
-    Route::get('/invoice',                            function(){
-        return "Coming Soon!";
-    });
+    Route::get('/invoice',                              [InvoiceController::class, 'index'])->name('invoice.index');
+    Route::get('/invoices/create',                      [InvoiceController::class, 'create'])->name('invoice.create');
 
 });
 

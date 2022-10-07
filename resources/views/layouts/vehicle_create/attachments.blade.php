@@ -141,8 +141,8 @@
         </div>
     </div>
     <div class="d-lg-flex d-block justify-content-end py-lg-2 px-lg-5">
-        <button type="button" class="btn col-1 next-style text-white" id="vehicle_attachment_finish" onclick="display_model()"
-            style="cursor: pointer;">
+        <button type="button" class="btn col-1 next-style text-white" id="vehicle_attachment_finish"
+            onclick="display_model()" style="cursor: pointer;">
             <div class="unskew">Finish</div>
         </button>
     </div>

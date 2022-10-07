@@ -38,6 +38,8 @@
 <link rel="stylesheet" href="{{ asset('/assets/css/admin_profile.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/notification.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/master.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/createinvoice.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/invoice.css') }}">
 <!-- themify-icons line icon -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/themify-icons/themify-icons.css') }}">
 {{-- Fontawesome icons --}}

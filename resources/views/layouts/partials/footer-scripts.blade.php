@@ -2,18 +2,24 @@
 <script type="text/javascript" src="{{ asset('assets/bower_components/jquery-ui/js/jquery-ui.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/bower_components/popper.js/js/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/bower_components/bootstrap/js/bootstrap.min.js') }}"></script>
+
 {{-- sortTable --}}
 <script src="{{ asset('assets/js/sorttable.js') }}"></script>
+
 <!-- jquery slimscroll js -->
 <script type="text/javascript" src="{{ asset('assets/bower_components/jquery-slimscroll/js/jquery.slimscroll.js') }}">
 </script>
+
 <!-- Switch component js -->
 <script type="text/javascript" src="{{ asset('assets/bower_components/switchery/js/switchery.min.js') }}"></script>
+
 <!-- modernizr js -->
 <script type="text/javascript" src="{{ asset('assets/bower_components/modernizr/js/modernizr.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/bower_components/modernizr/js/css-scrollbars.js') }}"></script>
+
 <!-- classie js -->
 <script type="text/javascript" src="{{ asset('assets/bower_components/classie/js/classie.js') }}"></script>
+
 <!-- i18next.min.js -->
 <script type="text/javascript" src="{{ asset('assets/bower_components/i18next/js/i18next.min.js') }}"></script>
 <script type="text/javascript"
@@ -23,11 +29,13 @@
 </script>
 <script type="text/javascript" src="{{ asset('assets/bower_components/jquery-i18next/js/jquery-i18next.min.js') }}">
 </script>
+
 {{-- Calendar js --}}
 <script type="text/javascript" src="{{ asset('assets/pages/full-calender/calendar.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/bower_components/moment/js/moment.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/bower_components/fullcalendar/js/fullcalendar.min.js') }}">
 </script>
+
 <!-- Custom js -->
 <script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/pages/advance-elements/navbar-elements.js') }}"></script>
@@ -42,9 +50,10 @@
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/trumbowyg.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/jquery.minicolors.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/pages/sticky/js/jquery.postitall.js') }}"></script>
+
 {{-- Custom JS for views --}}
 <script type="text/javascript" src="{{ asset('js/ddtf.js') }}"></script>
-{{-- Vehicles pagination and filter --}}
+
 {{-- image upload --}}
 <script type="text/javascript" src="{{ asset('assets/js/image-uploader.min.js') }}"></script>
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
@@ -115,7 +124,7 @@
 {{-- User pagination and user end --}}
 
 {{-- Customer pagination and filer --}}
-<script>
+{{-- <script>
     $('#search_customer').on('keyup', function() {
         $value = $(this).val();
         $pagination = $('#pagination_customer').val();
@@ -151,14 +160,14 @@
             }
         });
     })
-</script>
-<script type="text/javascript">
+</script> --}}
+{{-- <script type="text/javascript">
     $.ajaxSetup({
         headers: {
             'csrftoken': '{{ csrf_token() }}'
         }
     });
-</script>
+</script> --}}
 {{-- Customer pagination and user end --}}
 
 {{-- Vehicle tabs --}}
@@ -212,48 +221,27 @@
 
 {{-- Profile page tabs --}}
 <script>
-    $('.vehicle_information_tab').on('click', function() {
-        $id = $(this).attr('id');
-        $tab = $(this).attr('tab');
+    // $('.vehicle_information_tab').on('click', function() {
+    //     $id = $(this).attr('id');
+    //     $tab = $(this).attr('tab');
 
-        $('.vehicle_information_tab').removeClass('active_information_button');
-        $(this).addClass('active_information_button');
+    //     $('.vehicle_information_tab').removeClass('active_information_button');
+    //     $(this).addClass('active_information_button');
 
-        $.ajax({
-            type: 'get',
-            url: '{{ URL::to('admin/vehicle/vehicle_informationTab') }}',
-            data: {
-                'tab': $tab,
-                'id': $id,
-            },
-            success: function(data) {
-                console.log(data);
-                $('#vehicle_information_main').html(data);
-            }
-        });
-    });
+    //     $.ajax({
+    //         type: 'get',
+    //         url: '{{ URL::to('admin/vehicle/vehicle_informationTab') }}',
+    //         data: {
+    //             'tab': $tab,
+    //             'id': $id,
+    //         },
+    //         success: function(data) {
+    //             console.log(data);
+    //             $('#vehicle_information_main').html(data);
+    //         }
+    //     });
+    // });
 
-    function changeImages(id) {
-        // alert(tab);
-        $id = $('#' + id).attr('tab');
-        $tab = id;
-
-
-        $.ajax({
-            type: 'post',
-            url: '{{ URL::to('admin/vehicle/vehicle_changeImages') }}',
-            data: {
-                'tab': $tab,
-                'id': $id,
-            },
-            success: function(data) {
-                // alert(data);
-                console.log(data);
-                $('.changeImages').html(data);
-            }
-        });
-
-    }
 
     $('.profile_tabs').on('click', function() {
         $('.profile_tabs').removeClass('btn_custom rounded text-white');
@@ -318,8 +306,8 @@
     })
 </script>
 
-{{-- Load Modal --}}
-{{-- <script>
+{{-- Load Modal
+<script>
     $('.modal_button').on('click', function() {
         $id = $(this).attr('id');
         // alert('adsaasd');
@@ -381,13 +369,13 @@
             });
         }
     })
-</script> --}}
-{{-- Load Modal --}}
+</script>
+Load Modal --}}
 <script>
     $('.modal_button').on('click', function() {
         $id = $(this).attr('id');
         // alert('adsaasd');
-        $tab = "general";
+        $tab = "attachments";
         if ($id == "customer") {
             $.ajax({
                 type: 'get',
@@ -436,7 +424,7 @@
                     'tab': $tab
                 },
                 success: function(data) {
-                    // console.log(data);
+                    console.log(data);
                     $('.modal-body').html(data);
                     $('#exampleModal').modal('show');
                     $('#shipment_vehicle_table').DataTable({
@@ -451,6 +439,8 @@
                         maxFiles: 4,
                         imagesInputName: 'shipment_inovice',
                     });
+
+                    // alert($('input[name$="shipment_inovice[]"]').attr('id'))
                     $('.stamp_title').imageUploader({
                         maxFiles: 4,
                         imagesInputName: 'stamp_title',
@@ -472,28 +462,22 @@
     })
 </script>
 
-{{-- Change Modal --}}
 <script>
-    function changemodal(id) {
-        $tab = id;
-        $.ajax({
-            type: 'get',
-            url: '{{ URL::to('admin/customers/create') }}',
-            data: {
-                'tab': $tab
-            },
-            success: function(data) {
-                $('.modal-body').html(data);
-                $('#exampleModal').modal('show');
-            }
+    $('.comingsoon').click(function(event) {
+        event.preventDefault();
+        iziToast.success({
+            zindex: '9999999999999',
+            position: 'topCenter',
+            message: "Coming Soon!",
         });
-    }
+
+    });
 </script>
 
-{{-- General data insert --}}
-<script>
-    function createForm(id) {
 
+{{-- General data insert --}}
+{{-- <script>
+    function createForm(id) {
         $tab = id;
         $next_tab = $('#' + $tab).data('next');
         if (id == "general_customer") {
@@ -538,7 +522,7 @@
             }
         });
     }
-</script>
+</script> --}}
 
 <script>
     function slide(id) {
@@ -729,53 +713,52 @@
         $('#exampleModal1').modal('hide');
     }
 
-    function change_status(id) {
+    // function change_status(id) {
 
-        iziToast.question({
-            timeout: 20000,
-            close: false,
-            overlay: true,
-            displayMode: 'once',
-            id: 'question',
-            zindex: 999,
-            title: 'Hey',
-            message: 'Are you sure to change Status ?',
-            position: 'center',
-            buttons: [
-                ['<button><b>YES</b></button>', function(instance, toast) {
+    //     iziToast.question({
+    //         timeout: 20000,
+    //         close: false,
+    //         overlay: true,
+    //         displayMode: 'once',
+    //         id: 'question',
+    //         zindex: 999,
+    //         title: 'Hey',
+    //         message: 'Are you sure to change Status ?',
+    //         position: 'center',
+    //         buttons: [
+    //             ['<button><b>YES</b></button>', function(instance, toast) {
 
-                    $.ajax({
-                        type: 'get',
-                        url: "{{ route('customer.changeStatus') }}" + '/' + id,
-                        success: function(data) {
-                            alert(data);
-                            location.reload();
-                        }
-                    });
+    //                 $.ajax({
+    //                     type: 'get',
+    //                     url: "{{ route('customer.changeStatus') }}" + '/' + id,
+    //                     success: function(data) {
+    //                         alert(data);
+    //                         location.reload();
+    //                     }
+    //                 });
 
-                    instance.hide({
-                        transitionOut: 'fadeOut'
-                    }, toast, 'button');
+    //                 instance.hide({
+    //                     transitionOut: 'fadeOut'
+    //                 }, toast, 'button');
 
-                }, true],
-                ['<button>NO</button>', function(instance, toast) {
+    //             }, true],
+    //             ['<button>NO</button>', function(instance, toast) {
 
-                    instance.hide({
-                        transitionOut: 'fadeOut'
-                    }, toast, 'button');
+    //                 instance.hide({
+    //                     transitionOut: 'fadeOut'
+    //                 }, toast, 'button');
 
-                }],
-            ],
-            onClosing: function(instance, toast, closedBy) {
-                console.info('Closing | closedBy: ' + closedBy);
-            },
-            onClosed: function(instance, toast, closedBy) {
-                console.info('Closed | closedBy: ' + closedBy);
-            }
-        });
+    //             }],
+    //         ],
+    //         onClosing: function(instance, toast, closedBy) {
+    //             console.info('Closing | closedBy: ' + closedBy);
+    //         },
+    //         onClosed: function(instance, toast, closedBy) {
+    //             console.info('Closed | closedBy: ' + closedBy);
+    //         }
+    //     });
 
-    }
-
+    // }
     function createRole() {
         $.ajax({
             type: 'get',
@@ -834,7 +817,7 @@
     }
 </script>
 
-<script>
+{{-- <script>
     function Update_Customer(id) {
         var data = document.querySelector('#updateCustomers');
         var formData = new FormData(data);
@@ -862,9 +845,9 @@
             }
         });
     }
-</script>
+</script> --}}
 
-<script>
+{{-- <script>
     function filterTable(val) {
         $tab = val;
 
@@ -882,4 +865,4 @@
         });
 
     }
-</script>
+</script> --}}

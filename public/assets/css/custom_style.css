@@ -315,7 +315,7 @@
 }
 
 .modal-dialog {
-    margin: 4% 5% !important;
+    margin: 5% 10% !important;
 }
 
 ::-webkit-scrollbar {
@@ -352,4 +352,56 @@ li {
 .pcoded-left-item {
     max-height: calc(100vh - 9rem) !important;
     overflow-y: auto !important;
+}
+
+table.sortable thead {
+    background-color: #eee;
+    color: #666666;
+    font-weight: bold;
+    cursor: default;
+}
+table.sortable
+    th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
+    content: " \25B4\25BE";
+}
+.scroll {
+    max-width: 100%;
+    overflow-x: scroll;
+}
+.rounded-pill {
+    border-radius: 50rem !important;
+    background-color: rgba(170, 219, 255) !important;
+    box-shadow: 0px 4px 4px rgba(71, 147, 204, 0.75) !important;
+}
+
+.card-pill {
+    /* border-radius: 50rem !important; */
+    background-color: rgba(170, 219, 255) !important;
+    box-shadow: 0px 4px 4px rgba(71, 147, 204, 0.75) !important;
+}
+.attachment-button {
+    border: 3px solid rgba(31, 104, 158, 1) !important;
+    border-radius: 50rem !important;
+    color: rgba(31, 104, 158, 1) !important;
+}
+.icon-bg {
+    background-color: rgba(233, 63, 120, 1) !important;
+    border-radius: 50% !important;
+    box-shadow: 3px 17px 14px rgba(0, 0, 0, 0.37) !important;
+}
+
+.text-div {
+    border: none !important;
+    background: linear-gradient(
+        201.25deg,
+        rgba(252, 252, 252, 0.72) 44.54%,
+        rgba(223, 236, 245, 0.72) 66.39%,
+        rgba(236, 243, 248, 0.72) 69.87%,
+        rgba(236, 243, 248, 0.72) 69.88%
+    ) !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    line-height: 17px !important;
+
+    color: #a4a4a4 !important;
 }

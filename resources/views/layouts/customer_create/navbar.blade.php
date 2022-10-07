@@ -1,50 +1,52 @@
 <style>
-    .text-color{
+    .text-color {
         margin-bottom: 24px;
     }
-    .row div{
-        margin:10px 0px;
+
+    .row div {
+        margin: 10px 0px;
     }
-    .unskew{
+
+    .unskew {
         transform: skew(30deg);
     }
-    .tab_style {
-    border: 1px solid #1c71b0 !important;
-    box-shadow: 6px 6px 4px rgba(48, 148, 175, 0.47) !important;
-    transform: skew(-30deg) !important;
+
+
+    .tab_card {
+        background: rgba(213, 213, 213, 0.17) !important;
+        box-shadow: 2px 5px 3px rgba(31, 104, 158, 0.08) !important;
+        border-radius: 32px !important;
     }
-    .tab_card{
-        background: rgba(213, 213, 213, 0.17)!important;
-        box-shadow: 2px 5px 3px rgba(31, 104, 158, 0.08)!important;
-        border-radius: 32px!important;
-    }
-   
 </style>
 
 <div>
     <div class="col-5 d-flex">
         <div class="col-6 px-0 py-0 pl-1 billing">
-            <button class="text-center form-control border navbar_tab next-style" style="cursor: pointer;" id="general_customer_tab">
+            <button class="text-center form-control border navbar_tab next-style" style="cursor: pointer;"
+                id="general_customer_tab">
                 <div class="unskew">
                     General
                 </div>
             </button>
         </div>
         <div class="col-6 px-0 py-0 pl-1 billing">
-            <button class="text-center form-control border navbar_tab tab_style" style="cursor: pointer;" id="billing_customer_tab">
-            <div class="unskew">Billing
-                Party</div>    
+            <button class="text-center form-control border navbar_tab tab_style" style="cursor: pointer;"
+                id="billing_customer_tab">
+                <div class="unskew">Billing
+                    Party</div>
             </button>
         </div>
         <div class="col-6 px-0 py-0 pl-1">
-            <button class="text-center form-control border navbar_tab  tab_style" style="cursor: pointer;" id="shipper_customer_tab">
+            <button class="text-center form-control border navbar_tab  tab_style" style="cursor: pointer;"
+                id="shipper_customer_tab">
                 <div class="unskew">
                     Shipper
                 </div>
             </button>
         </div>
         <div class="col-6 px-0 py-0 pl-1">
-            <button class="text-center form-control border navbar_tab  tab_style" style="cursor: pointer;" id="quotation_customer_tab" >
+            <button class="text-center form-control border navbar_tab  tab_style" style="cursor: pointer;"
+                id="quotation_customer_tab">
                 <div class="unskew">
                     Quotation
 

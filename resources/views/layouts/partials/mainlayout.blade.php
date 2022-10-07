@@ -61,8 +61,9 @@
     <!-- Warning Section Ends -->
     <!-- Required Jquery -->
     @include('layouts.partials.footer-scripts')
-    @include('layouts.js.vehiclejs')
-    @include('layouts.js.shipmentjs')
+    @include('layouts.js.vehicle')
+    @include('layouts.js.shipment')
+    @include('layouts.js.customer')
     {{-- @include('layouts.js.vehiclejs') --}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"

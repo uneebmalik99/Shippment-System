@@ -303,7 +303,7 @@
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
-                        <a href="{{ url('/admin/inventory') }}">
+                        <a href="{{ url('/admin/inventory') }}" class="comingsoon">
                             <span class="pcoded-micon"><i class="fas fa-warehouse"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Inventory</span>
 
@@ -311,7 +311,7 @@
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
-                        <a href="{{ url('/admin/invoice') }}">
+                        <a href="{{ url('/admin/invoice') }}" >
                             <span class="pcoded-micon"><i class="fas fa-receipt"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Invoices</span>
 
@@ -319,7 +319,7 @@
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
-                        <a href="">
+                        <a href="" class="comingsoon">
                             <span class="pcoded-micon"><i class="fas fa-credit-card"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Payment</span>
 
@@ -327,7 +327,7 @@
                         </a>
                     </li>
                     <li class="change-loges.html py-2">
-                        <a href="">
+                        <a href="" class="comingsoon">
                             <span class="pcoded-micon"><i class="fas fa-message"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Chat</span>
 
@@ -389,7 +389,7 @@
 
 
                     <li class="change-loges.html py-2">
-                        <a href="">
+                        <a href="" class="comingsoon">
                             <span class="pcoded-micon"><i class="fas fa-percent"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Rate</span>
 
