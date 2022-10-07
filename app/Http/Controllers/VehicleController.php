@@ -24,6 +24,7 @@ use DataTables;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Storage;
+use DataTables;
 
 class VehicleController extends Controller
 {
@@ -214,7 +215,6 @@ class VehicleController extends Controller
                 'page' => 'edit',
             ],
         ];
-
         $notification = $this->Notification();
         $data['buyers'] = User::where('role_id', '4')->get();
         $data['vehicle'] = Vehicle::with('user')->find($id)->toArray();
@@ -423,6 +423,18 @@ class VehicleController extends Controller
                         $Obj_image = new WarehouseImage;
                         $this->directory = "/warehouse_images";
                         break;
+                    case ('billofsales'):
+                        $Obj_image = new BillOfSale;
+                        $this->directory = "/billofsales_images";
+                        break;
+                    case ('originalTitle'):
+                        $Obj_image = new OriginalTitle;
+                        $this->directory = "/OriginalTitle_images";
+                        break;
+                    case ('pickup'):
+                        $Obj_image = new PickupImage;
+                        $this->directory = "/pickup_images";
+                        break;
                 }
                 $image_name = time() . '.' . $image->extension();
                 $filename = Storage::putFile($this->directory, $image);
@@ -451,14 +463,18 @@ class VehicleController extends Controller
                     break;
             }
             $filename = Storage::putFile($this->directory, $documents);
-            $documents->move(public_path($this->directory), $filename);
-            $size = $documents->getSize() / 1000;
+            $type = $documents->extension();
+            $doc = $documents->move(public_path($this->directory), $filename);
+            // dd($doc->getSize() / 1000);/
+            $size = $doc->getSize() / 1000;
+            // dd($size);
             $Obj_file->vehicle_id = $Obj_vehicle[0]['id'];
             $Obj_file->name = $filename;
-            $Obj_file->type = $documents->extension();
+            $Obj_file->type = $type;
             $Obj_file->size = $size . ' kb';
             $Obj_file->save();
-            $output['result'] = "Success";
+   
+            $output['result'] =  "Success";
 
         }
         return Response($output);
@@ -552,6 +568,7 @@ class VehicleController extends Controller
     public function serverside(Request $request)
     {
 
+        
         if ($request->ajax()) {
             $data = Vehicle::select('*');
             return Datatables::of($data)
@@ -560,6 +577,7 @@ class VehicleController extends Controller
                     $url_view = url('admin/vehicle/profile/' . $row->id);
                     $url_delete = url('admin/vehicles/delete/' . $row->id);
                     $url_edit = url('admin/vehicles/edit/' . $row->id);
+
 
                     $btn = "<button class='profile-button'><a href=$url_view>
                                <svg width='14' height='13' viewBox='0 0 16 14' fill='none'
@@ -571,6 +589,7 @@ class VehicleController extends Controller
                                        d='M8 4.8125C7.33696 4.8125 6.70107 5.04297 6.23223 5.4532C5.76339 5.86344 5.5 6.41984 5.5 7C5.5 7.58016 5.76339 8.13656 6.23223 8.5468C6.70107 8.95703 7.33696 9.1875 8 9.1875C8.66304 9.1875 9.29893 8.95703 9.76777 8.5468C10.2366 8.13656 10.5 7.58016 10.5 7C10.5 6.41984 10.2366 5.86344 9.76777 5.4532C9.29893 5.04297 8.66304 4.8125 8 4.8125ZM4.5 7C4.5 6.18777 4.86875 5.40882 5.52513 4.83449C6.1815 4.26016 7.07174 3.9375 8 3.9375C8.92826 3.9375 9.8185 4.26016 10.4749 4.83449C11.1313 5.40882 11.5 6.18777 11.5 7C11.5 7.81223 11.1313 8.59118 10.4749 9.16551C9.8185 9.73984 8.92826 10.0625 8 10.0625C7.07174 10.0625 6.1815 9.73984 5.52513 9.16551C4.86875 8.59118 4.5 7.81223 4.5 7Z'
                                        fill='#048B52' />
                                </svg>
+
                                </a>
                        </button>
                        <button class='edit-button'>

@@ -1,5 +1,13 @@
 @extends('layouts.partials.mainlayout')
 @section('body')
+<style>
+    .dataTables_scrollHead{
+        width:100%!important;
+    }
+    .dataTables_scrollHeadInner{
+        width:100%!important;
+    }
+</style>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">

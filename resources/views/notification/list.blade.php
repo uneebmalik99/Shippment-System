@@ -146,6 +146,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <input type="hidden" name="is_read" id="is_read" value="0">
                                 <br>
                                 <div class="row save_notificatio_button">
                                     <div class="col-8"></div>
@@ -155,6 +156,7 @@
                                             class="px-3 py-1">Save</button>
                                     </div>
                                 </div>
+
                             </form>
 
                         </div>

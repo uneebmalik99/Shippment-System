@@ -24779,7 +24779,7 @@ body.menu-sidebar .navbar-wrapper {
     border-radius: 2px;
     text-transform: capitalize;
     font-size: 15px;
-    padding: 10px 19px;
+    /* padding: 10px 19px; */
     font-family: "Open Sans";
 }
 

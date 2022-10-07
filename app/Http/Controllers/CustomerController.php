@@ -59,7 +59,7 @@ class CustomerController extends Controller
                     $data['notification'][$key]['date'] = (int) $seconds . 's ';
                 }
             }
-            $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
+            $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
             $data['notification_count'] = count($unread);
         } else {
             $data['notification'] = "asda";
@@ -450,6 +450,7 @@ class CustomerController extends Controller
     public function profile_tab(Request $request)
     {
 
+
         $id = $request->id;
         $data = [];
         $data['user'] = User::find($id)->toArray();
@@ -457,6 +458,107 @@ class CustomerController extends Controller
         $data['shipper'] = Shipper::where('customer_id', $id)->get();
         $data['notification'] = Notification::where('user_id', $id)->get();
         $data['documents'] = CustomerDocument::where('user_id', $id)->get()->toArray();
+
+       
+
+        $all_vehicles = Vehicle::all()->count();
+
+        $customer_vehicles = Vehicle::where('added_by_user', $id)->count();
+        $CustomerVehicles_value = Vehicle::get()->sum('value');
+        if ($all_vehicles != 0) {
+            $customer_vehicles_percentage = ($customer_vehicles / $all_vehicles) * 100;
+            $data['customer_vehicles_percentage'] = round($customer_vehicles_percentage);
+        } else {
+            $data['customer_vehicles_percentage'] = 0;
+        }
+        $data['customer_vehicles'] = $customer_vehicles;
+        $data['allVehicles_value'] = $CustomerVehicles_value;
+
+        $onhand = Vehicle::where('status', '1')->orwhere('added_by_user', $id);
+        $onhand_count = $onhand->count();
+        $onhand_value = $onhand->sum('value');
+        $data['onhand_count'] = $onhand_count;
+        $data['onhand_value'] = $onhand_value;
+        if ($all_vehicles != 0) {
+            $onhand_count_percentage = ($onhand_count / $all_vehicles) * 100;
+            $data['onhand_count_percentage'] = round($onhand_count_percentage);
+        } else {
+            $data['onhand_count_percentage'] = 0;
+        }
+
+        $dispatch = Vehicle::where('status', '2')->orwhere('added_by_user', $id);
+        $dispatch_count = $dispatch->count();
+        $dispatch_value = $dispatch->sum('value');
+        $data['dispatch_count'] = $dispatch_count;
+        $data['dispatch_value'] = $dispatch_value;
+        if ($all_vehicles != 0) {
+            $dispatch_count_percentage = ($dispatch_count / $all_vehicles) * 100;
+            $data['dispatch_count_percentage'] = round($dispatch_count_percentage);
+        } else {
+            $data['dispatch_count_percentage'] = 0;
+        }
+
+        $manifest = Vehicle::where('status', '3')->orwhere('added_by_user', $id);
+        $manifest_count = $manifest->count();
+        $manifest_value = $manifest->sum('value');
+        $data['manifest_count'] = $manifest_count;
+        $data['manifest_value'] = $manifest_value;
+        if ($all_vehicles != 0) {
+            $manifest_count_percentage = ($manifest_count / $all_vehicles) * 100;
+            $data['manifest_count_percentage'] = round($manifest_count_percentage);
+        } else {
+            $data['manifest_count_percentage'] = 0;
+        }
+
+        $shipped = Vehicle::where('status', '4')->orwhere('added_by_user', $id);
+        $shipped_count = $shipped->count();
+        $shipped_value = $shipped->sum('value');
+        $data['shipped_count'] = $shipped_count;
+        $data['shipped_value'] = $shipped_value;
+        if ($all_vehicles != 0) {
+            $shipped_count_percentage = ($shipped_count / $all_vehicles) * 100;
+            $data['shipped_count_percentage'] = round($shipped_count_percentage);
+        } else {
+            $data['shipped_count_percentage'] = 0;
+        }
+
+        $arrived = Vehicle::where('status', '5')->orwhere('added_by_user', $id);
+        $arrived_count = $arrived->count();
+        $arrived_value = $arrived->sum('value');
+        $data['arrived_count'] = $arrived_count;
+        $data['arrived_value'] = $arrived_value;
+        if ($all_vehicles != 0) {
+            $arrived_count_percentage = ($arrived_count / $all_vehicles) * 100;
+            $data['arrived_count_percentage'] = round($arrived_count_percentage);
+        } else {
+            $data['arrived_count_percentage'] = 0;
+        }
+
+        $posted = Vehicle::where('status', '6')->orwhere('added_by_user', $id);
+        $posted_count = $posted->count();
+        $posted_value = $posted->sum('value');
+        $data['posted_count'] = $posted_count;
+        $data['posted_value'] = $posted_value;
+        if ($all_vehicles != 0) {
+            $posted_count_percentage = ($posted_count / $all_vehicles) * 100;
+            $data['posted_count_percentage'] = round($posted_count_percentage);
+        } else {
+            $data['posted_count_percentage'] = 0;
+        }
+
+        $booked = Vehicle::where('status', '7')->orwhere('added_by_user', $id);
+        $booked_count = $booked->count();
+        $booked_value = $booked->sum('value');
+        $data['booked_count'] = $booked_count;
+        $data['booked_value'] = $booked_value;
+        if ($all_vehicles != 0) {
+            $booked_count_percentage = ($booked_count / $all_vehicles) * 100;
+            $data['booked_count_percentage'] = round($booked_count_percentage);
+        } else {
+            $data['booked_count_percentage'] = 0;
+        }
+
+
 
         if ($request->tab) {
             $tab = $request->tab;
@@ -543,6 +645,7 @@ class CustomerController extends Controller
                 $user = User::where('email', $email)->get();
                 $user_id = $user[0]['id'];
 
+
                 if ($file) {
                     foreach ($file as $files) {
                         $file_name = time() . '.' . $files->extension();
@@ -551,7 +654,6 @@ class CustomerController extends Controller
                         $documents['thumbnail'] = $file_name;
                         $files->move(public_path($this->directory), $docname);
                         $documents['user_id'] = $user_id;
-                        // dd($documents);
                         $Obj = new CustomerDocument;
                         $Obj->create($documents);
                     }

@@ -8,7 +8,7 @@
             <div class="my-2">
                 @if (@$documents)
                 {{-- <img src="{{ asset('/'.@$documents[0]['file']) }}" alt=""> --}}
-                <a href="{{ asset('/'.@$documents[0]['file']) }}" class="text-muted" style="font-size:15px" download="Customer_Documents">Download Documents</a>
+                <a href="{{ asset('/'.@$documents[0]['file']) }}" class="text-muted" style="font-size:15px" download="Customer_Documents">{{@$documents[0]['thumbnail']}}</a>
                 @else
                 <a class="text-muted" style="font-size:15px">Documents Not Found</a>
                 @endif

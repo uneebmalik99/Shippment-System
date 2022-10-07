@@ -121,54 +121,6 @@
         }
     });
 </script>
-{{-- User pagination and user end --}}
-
-{{-- Customer pagination and filer --}}
-{{-- <script>
-    $('#search_customer').on('keyup', function() {
-        $value = $(this).val();
-        $pagination = $('#pagination_customer').val();
-        $.ajax({
-            type: 'get',
-            url: '{{ URL::to('admin/customers/search') }}',
-            data: {
-                'search': $value,
-                'pagination': $pagination
-            },
-            success: function(data) {
-                alert(data);
-                // console.log($value, $pagination, 'search');
-                $('#tbody').html(data.table);
-                $('#page').html(data.pagination);
-            }
-        });
-    })
-    $('#pagination_customer').on('change', function() {
-        $value = $(this).val();
-        $search = $('#search_customer').val();
-        $.ajax({
-            type: 'get',
-            url: '{{ URL::to('admin/customers/pagination') }}',
-            data: {
-                'search': $search,
-                'pagination': $value
-            },
-            success: function(data, page) {
-                console.log($value, $search, 'pagination')
-                $('#tbody').html(data.table);
-                $('#page').html(data.pagination);
-            }
-        });
-    })
-</script> --}}
-{{-- <script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-            'csrftoken': '{{ csrf_token() }}'
-        }
-    });
-</script> --}}
-{{-- Customer pagination and user end --}}
 
 {{-- Vehicle tabs --}}
 <script>
@@ -221,28 +173,6 @@
 
 {{-- Profile page tabs --}}
 <script>
-    // $('.vehicle_information_tab').on('click', function() {
-    //     $id = $(this).attr('id');
-    //     $tab = $(this).attr('tab');
-
-    //     $('.vehicle_information_tab').removeClass('active_information_button');
-    //     $(this).addClass('active_information_button');
-
-    //     $.ajax({
-    //         type: 'get',
-    //         url: '{{ URL::to('admin/vehicle/vehicle_informationTab') }}',
-    //         data: {
-    //             'tab': $tab,
-    //             'id': $id,
-    //         },
-    //         success: function(data) {
-    //             console.log(data);
-    //             $('#vehicle_information_main').html(data);
-    //         }
-    //     });
-    // });
-
-
     $('.profile_tabs').on('click', function() {
         $('.profile_tabs').removeClass('btn_custom rounded text-white');
         $('.profile_tabs').addClass('border-0 form-control text-muted');
@@ -289,92 +219,16 @@
     })
 </script>
 
-{{-- Delete Image
-<script>
-    $('.delete').on('click', function() {
-        // alert('asdas');
-        $image = $(this).parent().prev().children();
-        $image.remove();
-        $(this).addClass('d-none');
-        $i--;
-    });
-</script> --}}
-
 <script>
     $('.close').on('click', function() {
         $('#exampleModal').modal('hide');
     })
 </script>
 
-{{-- Load Modal
+{{-- Load Modal --}}
 <script>
     $('.modal_button').on('click', function() {
         $id = $(this).attr('id');
-        // alert('adsaasd');
-        $tab = "general";
-        if ($id == "customer") {
-            $.ajax({
-                type: 'get',
-                url: '{{ URL::to('admin/customers/create') }}',
-                data: {
-                    'tab': $tab
-                },
-                success: function(data) {
-                    $('.modal-body').html(data);
-                    $('#exampleModal').modal('show');
-                    $('.user_image').imageUploader({
-                        maxFiles: 1
-                    });
-                }
-            });
-        } else if ($id == "vehicle") {
-            $.ajax({
-                type: 'get',
-                url: '{{ URL::to('admin/vehicles/create') }}',
-                data: {
-                    'tab': $tab
-                },
-                success: function(data) {
-                    // console.log(data);
-                    $('.modal-body').html(data);
-                    $('#exampleModal').modal('show');
-                    $('.input-images-1').imageUploader({
-                        maxFiles: 4
-                    });
-                }
-            });
-        } else if ($id == "shipment") {
-            $.ajax({
-                type: 'get',
-                url: '{{ URL::to('admin/shipments/create') }}',
-                data: {
-                    'tab': $tab
-                },
-                success: function(data) {
-                    // console.log(data);
-                    $('.modal-body').html(data);
-                    $('#exampleModal').modal('show');
-                    $('#shipment_vehicle_table').DataTable({
-                        language: {
-                            search: "",
-                            sLengthMenu: "_MENU_",
-                            searchPlaceholder: "Search"
-                        },
-
-                    });
-                    $('.shipment-images-1').imageUploader({
-                        maxFiles: 4
-                    });
-                }
-            });
-        }
-    })
-</script>
-Load Modal --}}
-<script>
-    $('.modal_button').on('click', function() {
-        $id = $(this).attr('id');
-        // alert('adsaasd');
         $tab = "attachments";
         if ($id == "customer") {
             $.ajax({
@@ -424,7 +278,6 @@ Load Modal --}}
                     'tab': $tab
                 },
                 success: function(data) {
-                    console.log(data);
                     $('.modal-body').html(data);
                     $('#exampleModal').modal('show');
                     $('#shipment_vehicle_table').DataTable({
@@ -433,14 +286,11 @@ Load Modal --}}
                             sLengthMenu: "_MENU_",
                             searchPlaceholder: "Search"
                         },
-
                     });
                     $('.shipment-inovice').imageUploader({
                         maxFiles: 4,
                         imagesInputName: 'shipment_inovice',
                     });
-
-                    // alert($('input[name$="shipment_inovice[]"]').attr('id'))
                     $('.stamp_title').imageUploader({
                         maxFiles: 4,
                         imagesInputName: 'stamp_title',
@@ -473,56 +323,6 @@ Load Modal --}}
 
     });
 </script>
-
-
-{{-- General data insert --}}
-{{-- <script>
-    function createForm(id) {
-        $tab = id;
-        $next_tab = $('#' + $tab).data('next');
-        if (id == "general_customer") {
-            var formData = new FormData(jQuery('#customer_general_form')[0]);
-        } else if (id == "billing_customer") {
-            var formData = new FormData(jQuery('#customer_billing_form')[0]);
-        } else if (id == "shipper_customer") {
-            var formData = new FormData(jQuery('#customer_shipper_form')[0]);
-        } else if (id == "quotation_customer") {
-            var formData = new FormData(jQuery('#customer_quotation_form')[0]);
-        } else {
-            alert('no tab');
-        }
-
-        formData.append('tab', $tab);
-        $.ajax({
-            type: 'post',
-            url: '{{ URL::to('admin/customers/create') }}/' + $tab,
-            processData: false,
-            contentType: false,
-            data: formData,
-
-            success: function(data) {
-                iziToast.success({
-                    zindex: '9999999999999',
-                    position: 'topCenter',
-                    title: data.result,
-                    message: data.tab,
-                });
-                console.log(data);
-                $('.modal-body').html(data.view);
-                $('#exampleModal').modal('show');
-                $('.navbar_tab').removeClass('next-style');
-                $('.navbar_tab').addClass('tab_style');
-                $('#' + $next_tab).addClass('next-style');
-                if (data.quotation == 'fade') {
-                    // alert('asdassd');
-                    $('#exampleModal').modal('hide');
-                    location.reload();
-                }
-
-            }
-        });
-    }
-</script> --}}
 
 <script>
     function slide(id) {
@@ -589,43 +389,6 @@ Load Modal --}}
 </script>
 
 <script>
-    function change() {
-        if (typeof(FileReader) != "undefined") {
-            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
-            $($(this)[0].files).each(function() {
-                var images = $("#images" + $i);
-                images.html("");
-                var file = $(this);
-                alert('asdas');
-                if ($i <= 4) {
-                    if (regex.test(file[0].name.toLowerCase())) {
-                        var reader = new FileReader();
-                        reader.onload = function(e) {
-                            var img = $("<img />");
-                            img.attr("style",
-                                "height:100px;width: 100px; padding:5px;");
-                            img.attr("src", e.target.result);
-                            images.append(img);
-                            images.next().children().removeClass('d-none');
-                        }
-                        reader.readAsDataURL(file[0]);
-                        $i++;
-                    } else {
-                        alert(file[0].name + " is not a valid image file.");
-                        images.html("");
-                        return false;
-                    }
-                } else {
-                    alert('Only 4 images allowed.');
-                }
-            });
-        } else {
-            alert("This browser does not support HTML5 FileReader.");
-        }
-    }
-</script>
-
-<script>
     function create_vehicle_form(id) {
         $('#vehicle_form').on('submit', function(event) {
             event.preventDefault();
@@ -650,6 +413,19 @@ Load Modal --}}
                     $('#exampleModal').modal('show');
                     $('.vehicle_auction_image').imageUploader({
                         maxFiles: 15
+
+                    });
+                    $('.billofsales').imageUploader({
+                        maxFiles: 15
+
+                    });
+                    $('.pickup').imageUploader({
+                        maxFiles: 15
+
+                    });
+                    $('.originaltitle').imageUploader({
+                        maxFiles: 15
+
                     });
                     $('.vehicle_warehouse_image').imageUploader({
                         maxFiles: 15
@@ -713,52 +489,6 @@ Load Modal --}}
         $('#exampleModal1').modal('hide');
     }
 
-    // function change_status(id) {
-
-    //     iziToast.question({
-    //         timeout: 20000,
-    //         close: false,
-    //         overlay: true,
-    //         displayMode: 'once',
-    //         id: 'question',
-    //         zindex: 999,
-    //         title: 'Hey',
-    //         message: 'Are you sure to change Status ?',
-    //         position: 'center',
-    //         buttons: [
-    //             ['<button><b>YES</b></button>', function(instance, toast) {
-
-    //                 $.ajax({
-    //                     type: 'get',
-    //                     url: "{{ route('customer.changeStatus') }}" + '/' + id,
-    //                     success: function(data) {
-    //                         alert(data);
-    //                         location.reload();
-    //                     }
-    //                 });
-
-    //                 instance.hide({
-    //                     transitionOut: 'fadeOut'
-    //                 }, toast, 'button');
-
-    //             }, true],
-    //             ['<button>NO</button>', function(instance, toast) {
-
-    //                 instance.hide({
-    //                     transitionOut: 'fadeOut'
-    //                 }, toast, 'button');
-
-    //             }],
-    //         ],
-    //         onClosing: function(instance, toast, closedBy) {
-    //             console.info('Closing | closedBy: ' + closedBy);
-    //         },
-    //         onClosed: function(instance, toast, closedBy) {
-    //             console.info('Closed | closedBy: ' + closedBy);
-    //         }
-    //     });
-
-    // }
     function createRole() {
         $.ajax({
             type: 'get',
@@ -770,7 +500,6 @@ Load Modal --}}
         });
 
     }
-
 
     function addRole() {
 
@@ -794,7 +523,6 @@ Load Modal --}}
 
             }
         });
-
     }
 
     function updateRole(id) {
@@ -813,56 +541,5 @@ Load Modal --}}
                 $('#exampleModal').modal('show');
             }
         });
-
     }
 </script>
-
-{{-- <script>
-    function Update_Customer(id) {
-        var data = document.querySelector('#updateCustomers');
-        var formData = new FormData(data);
-        $.ajax({
-            type: 'post',
-            url: '{{ route('customers.update') }}',
-            processData: false,
-            contentType: false,
-            data: formData,
-            success: function(data) {
-
-                iziToast.success({
-                    title: 'Customer',
-                    message: data,
-                    position: 'topCenter',
-                    zindex: '9999999999999',
-
-                });
-
-                $('#exampleModal').modal('hide');
-                location.reload();
-
-
-
-            }
-        });
-    }
-</script> --}}
-
-{{-- <script>
-    function filterTable(val) {
-        $tab = val;
-
-        $.ajax({
-            type: 'post',
-            url: '{{ route('customer.FilterTable') }}',
-            data: {
-                'id': $tab,
-            },
-            success: function(data) {
-
-                console.log(data);
-                $('#tbody').html(data);
-            }
-        });
-
-    }
-</script> --}}

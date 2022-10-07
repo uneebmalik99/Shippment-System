@@ -12,7 +12,8 @@ class CustomerDocument extends Model
     protected $primaryKey = "id";
     public $timestamps = true;
     protected $table = "customer_documents";
-    protected $guarded = [];
+	protected $guarded = [];
+   
 
     public function user()
     {
