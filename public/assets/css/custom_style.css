@@ -165,8 +165,11 @@
 }
 
 .bg-custom {
-    background: rgba(105, 108, 255, 0.84) !important;
+    /* background: rgba(105, 108, 255, 0.84) !important; */
+    background: rgb(62 88 113) !important;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25) !important;
+    color: white !important;
+    font-size: 12px !important;
 }
 
 .border-style {
@@ -351,12 +354,6 @@ li {
     padding: 10px !important;
 }
 
-.current {
-    padding: 0.5em 1rem !important;
-
-    color: white !important;
-}
-
 .pcoded-left-item {
     max-height: calc(100vh - 9rem) !important;
     overflow-y: auto !important;
@@ -441,4 +438,27 @@ table.sortable thead {
     line-height: 17px !important;
 
     color: #a4a4a4 !important;
+}
+
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:before {
+    right: 1em !important;
+    content: "\02C6" !important;
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:after {
+    right: 0.5em !important;
+    content: "\02C7" !important;
+}
+
+td {
+    font-weight: normal !important;
+    color: black !important;
 }

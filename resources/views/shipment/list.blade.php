@@ -259,7 +259,7 @@
                                 <th class="font-bold-tr">TYPE</th>
                                 <th class="font-bold-tr">LOADING DATE</th>
                                 <th class="font-bold-tr">CUT OFF DATE</th>
-                                <th class="font-bold-tr">SAIL DATE</th>
+                                <th class="font-bold-tr">SALE DATE</th>
                                 <th class="font-bold-tr">EST ARRIVAL DATE</th>
                                 <th class="font-bold-tr">CONTAINER NO</th>
                                 <th class="font-bold-tr">CONSIGNEE</th>

@@ -229,41 +229,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="border-style-search px-3 pt-4 pb-2 d-flex justify-content-between">
-                    <div class="col-1 p-0 d-flex align-items-center text-muted">
-                        <div class="col-12 d-flex justify-content-center px-1">
-                            <select class="form-control-sm border-style rounded col-12" name="pagination"
-                                id="pagination_customer">
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="300">300</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-11 d-flex justify-content-end align-items-center">
-                        <div class="col-8 p-0 d-flex justify-content-end">
-                            <input type="text"
-                                class="form-control-sm border-style border-info rounded col-6 text-dark text-left"
-                                id="search_customer" name="search" placeholder="Search">
-                        </div>
-                        <div class="col-2 px-3 d-flex justify-content-end">
-                            <a href="{{ route('customer.export') }}"
-                                class="px-1 text-muted font-size form-contorl-sm border p-1 rounded col-12"
-                                style="background: #DBDBDB; cursor: pointer;">
-                                <div class="d-flex justify-content-center align-items-center px-1">
-                                    <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11 16H13V7H16L12 2L8 7H11V16Z" fill="#8F8F8F" />
-                                        <path
-                                            d="M5 22H19C20.103 22 21 21.103 21 20V11C21 9.897 20.103 9 19 9H15V11H19V20H5V11H9V9H5C3.897 9 3 9.897 3 11V20C3 21.103 3.897 22 5 22Z"
-                                            fill="#8F8F8F" />
-                                    </svg>
-                                    <span class="pl-1 font-size">Export</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div> --}}
                 {{-- search filter end --}}
                 <div class="mt-2 bg-light" style="height: 100%;overflow-x: scroll;">
                     <table id="customer_table" class="table scroll row-border">
@@ -290,7 +255,7 @@
 
 
                             @foreach ($records as $val)
-                                <tr style="border-bottom: 1.2px solid rgba(191, 191, 191, 1) !important">
+                                <tr>
                                     <td>{{ $custid }}</td>
                                     <td class="d-block d-flex">
                                         @if (@$user['user_image'])

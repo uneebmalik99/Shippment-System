@@ -20,11 +20,10 @@ use App\Models\Vehicle;
 use App\Models\VehicleStatus;
 use App\Models\WarehouseImage;
 use Carbon\Carbon;
-use DataTables;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Storage;
-use DataTables;
+use Yajra\Datatables\Datatables;
 
 class VehicleController extends Controller
 {
@@ -473,8 +472,8 @@ class VehicleController extends Controller
             $Obj_file->type = $type;
             $Obj_file->size = $size . ' kb';
             $Obj_file->save();
-   
-            $output['result'] =  "Success";
+
+            $output['result'] = "Success";
 
         }
         return Response($output);
@@ -568,7 +567,6 @@ class VehicleController extends Controller
     public function serverside(Request $request)
     {
 
-        
         if ($request->ajax()) {
             $data = Vehicle::select('*');
             return Datatables::of($data)
@@ -577,7 +575,6 @@ class VehicleController extends Controller
                     $url_view = url('admin/vehicle/profile/' . $row->id);
                     $url_delete = url('admin/vehicles/delete/' . $row->id);
                     $url_edit = url('admin/vehicles/edit/' . $row->id);
-
 
                     $btn = "<button class='profile-button'><a href=$url_view>
                                <svg width='14' height='13' viewBox='0 0 16 14' fill='none'

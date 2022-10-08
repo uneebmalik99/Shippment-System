@@ -229,7 +229,7 @@
 <script>
     $('.modal_button').on('click', function() {
         $id = $(this).attr('id');
-        $tab = "attachments";
+        $tab = "general";
         if ($id == "customer") {
             $.ajax({
                 type: 'get',

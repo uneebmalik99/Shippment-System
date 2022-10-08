@@ -5,9 +5,9 @@
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="ti-menu"></i>
             </a>
-            <a class="mobile-search morphsearch-search" href="#">
+            {{-- <a class="mobile-search morphsearch-search" href="#">
                 <i class="ti-search"></i>
-            </a>
+            </a> --}}
             <a href="index.html">
                 <div class="d-flex align-items-end">
                     <img class="img-fluid" src="{{ asset('images/blueocean.png') }}" alt="Theme-Logo"
@@ -18,6 +18,7 @@
                 </div>
 
             </a>
+
             <a class="mobile-options">
                 <i class="ti-more"></i>
             </a>
@@ -30,14 +31,13 @@
                             <a href="javascript:void(0)"><i class="ti-menu"></i></a>
                         </div>
                     </li>
-                    <li>
+                    {{-- <li>
                         <div class="main-search morphsearch-search p-0">
                             <a href="#">
-                                <!-- themify icon -->
                                 <i class="ti-search"></i>
                             </a>
                         </div>
-                    </li>
+                    </li> --}}
                     <li>
                         <div>
                             <a href="#!" class="p-0" onclick="javascript:toggleFullScreen()">
@@ -177,7 +177,7 @@
                     </li>
                 </ul>
                 <!-- search -->
-                <div id="morphsearch" class="morphsearch">
+                {{-- <div id="morphsearch" class="morphsearch">
                     <form class="morphsearch-form">
                         <input class="morphsearch-input" type="search" placeholder="Search..." />
                         <button class="morphsearch-submit" type="submit">Search</button>
@@ -225,7 +225,7 @@
                     </div>
                     <!-- /morphsearch-content -->
                     <span class="morphsearch-close"><i class="icofont icofont-search-alt-1"></i></span>
-                </div>
+                </div> --}}
                 <!-- search end -->
             </div>
         </div>

@@ -1,13 +1,14 @@
 @extends('layouts.partials.mainlayout')
 @section('body')
-<style>
-    .dataTables_scrollHead{
-        width:100%!important;
-    }
-    .dataTables_scrollHeadInner{
-        width:100%!important;
-    }
-</style>
+    <style>
+        .dataTables_scrollHead {
+            width: 100% !important;
+        }
+
+        .dataTables_scrollHeadInner {
+            width: 100% !important;
+        }
+    </style>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -89,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4 p-1">
+            {{-- <div class="col-4 p-1">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -107,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-4 p-1">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
@@ -130,8 +131,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="d-flex m-2">
             <div class="col-4 p-1">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
@@ -153,6 +152,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="d-flex m-2">
             <div class="col-4 p-1">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
@@ -257,7 +258,8 @@
                             <div class="col-5 px-0 d-flex justify-content-center">
                                 <button type="button"
                                     class="text-white form-control-sm border py-1 btn-info rounded modal_button px-2 col-12"
-                                    style="background: #696CFF;" data-target="#exampleModal" id="vehicle">
+                                    style="background: rgb(62 88 113) !important;" data-target="#exampleModal"
+                                    id="vehicle">
                                     <div class="d-flex justify-content-center align-items-center">
                                         <a class="text-white d-flex align-items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24"
@@ -328,8 +330,8 @@
                 {{-- search filter end --}}
                 <div id="status_body">
                     <table id="vehicle_table" class="table row-border vehicle_table">
-                        <thead class="bg-custom text-dark">
-                            <tr class="font-size">
+                        <thead class="bg-custom">
+                            <tr>
                                 <th class="font-bold-tr">Sr</th>
                                 <th class="font-bold-tr">Customer Name</th>
                                 <th class="font-bold-tr">VIN</th>
@@ -344,11 +346,11 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="vehicle_tbody">
-    
+
                         </tbody>
                     </table>
                 </div>
-                
+
                 {{-- <div class="d-flex justify-content-end p-2" id="page">
                 </div> --}}
             </div>
@@ -369,32 +371,66 @@
         });
     </script>
 
-<script type="text/javascript">
-    $(function () {
-      var table = $('.vehicle_table').DataTable({
-          processing: true,
-          serverSide: true,
-          scrollX: true,
+    <script type="text/javascript">
+        $(function() {
+            var table = $('.vehicle_table').DataTable({
+                processing: true,
+                serverSide: true,
+                scrollX: true,
                 language: {
                     search: "",
                     sLengthMenu: "_MENU_",
                     searchPlaceholder: "Search"
                 },
-          ajax: "{{ route('vehicle.records') }}",
-          columns: [
-              {data: 'id', name: 'id'},
-              {data: 'customer_name', name: 'customer_name'},
-              {data: 'vin', name: 'vin'},
-              {data: 'year', name: 'year'},
-              {data: 'make', name: 'make'},
-              {data: 'model', name: 'model'},
-              {data: 'vehicle_type', name: 'vehicle_type'},
-              {data: 'value', name: 'value'},
-              {data: 'status', name: 'status'},
-              {data: 'buyer_id', name: 'buyer_id'},
-              {data: 'action', name: 'action', orderable: false, searchable: false},
-          ]
-      });
-    });
-  </script>
+                ajax: "{{ route('vehicle.records') }}",
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'customer_name',
+                        name: 'customer_name'
+                    },
+                    {
+                        data: 'vin',
+                        name: 'vin'
+                    },
+                    {
+                        data: 'year',
+                        name: 'year'
+                    },
+                    {
+                        data: 'make',
+                        name: 'make'
+                    },
+                    {
+                        data: 'model',
+                        name: 'model'
+                    },
+                    {
+                        data: 'vehicle_type',
+                        name: 'vehicle_type'
+                    },
+                    {
+                        data: 'value',
+                        name: 'value'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'buyer_id',
+                        name: 'buyer_id'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
+        });
+    </script>
 @endsection
