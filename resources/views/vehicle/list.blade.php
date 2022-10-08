@@ -328,8 +328,8 @@
                     </div>
                 </div>
                 {{-- search filter end --}}
-                <div id="status_body">
-                    <table id="vehicle_table" class="table row-border vehicle_table">
+                <div id="status_body" class="mt-2 bg-light" style="height: 100%;overflow-x: scroll;">
+                    <table id="vehicle_table" class="table row-border vehicle_table" style="width:100%!important">
                         <thead class="bg-custom">
                             <tr>
                                 <th class="font-bold-tr">Sr</th>
@@ -376,7 +376,7 @@
             var table = $('.vehicle_table').DataTable({
                 processing: true,
                 serverSide: true,
-                scrollX: true,
+                // scrollX: true,
                 language: {
                     search: "",
                     sLengthMenu: "_MENU_",
