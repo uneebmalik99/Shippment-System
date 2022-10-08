@@ -77,7 +77,7 @@
                             </div>
                             <div class="col-2 p-2 d-flex justify-content-center align-items-center rounded"
                                 style="background: rgba(96, 43, 33, 0.2); !important">
-                                <img src="{{ asset('images/new_order.png') }}" alt="new order.png   ">
+                                <img src="{{ asset('images/new_order.png') }}" alt="new order.png" height="22">
 
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                             </div>
                             <div class="col-2 p-2 d-flex justify-content-center align-items-center rounded"
                                 style="background: rgba(86, 138, 75, 0.2); !important">
-                                <img src="{{ asset('images/dispatched.png') }}" alt="dispatched.png">
+                                <img src="{{ asset('images/dispatched.png') }}" alt="dispatched.png" height="22">
 
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                             </div>
                             <div class="col-2 p-2 d-flex justify-content-center align-items-center rounded"
                                 style="background: rgba(0, 150, 136, 0.2); !important">
-                                <img src="{{ asset('images/on_hand.png') }}" alt="on hand.png">
+                                <img src="{{ asset('images/on_hand.png') }}" alt="on hand.png" height="22">
 
 
                             </div>
@@ -163,7 +163,7 @@
                             </div>
                             <div class="col-2 p-2 d-flex justify-content-center align-items-center rounded"
                                 style="background: rgba(36, 40, 219, 0.2);!important">
-                                <img src="{{ asset('images/no_titles.png') }}" alt="no titles.png">
+                                <img src="{{ asset('images/no_titles.png') }}" alt="no titles.png" height="18">
 
                             </div>
                         </div>
