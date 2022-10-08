@@ -2,10 +2,6 @@
 @section('body')
     {{-- @dd(Auth::user()->role->name) --}}
     <style>
-        /* .pcoded-inner-content {
-                                            background: linear-gradient(184.57deg, rgba(255, 255, 255, 0.89) 3.7%, rgba(198, 230, 255, 0.89) 111.45%);
-                                        } */
-
         .dashboard_heading {
             font-weight: bold;
         }
