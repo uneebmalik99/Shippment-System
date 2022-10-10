@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Yajra\Datatables\Datatables;
+
 
 class CustomerController extends Controller
 {
@@ -107,17 +109,14 @@ class CustomerController extends Controller
             ->whereBetween('created_at',
                 [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]
             )
-            ->get();
+            ->get()->count();
         if ($lastweekshipper > 0) {
-
             $diff = $currentweekshipper - $lastweekshipper;
             $data['lastweekanalysis'] = ($diff / $lastweekshipper) * 100;
 
         } else {
             $data['lastweekanalysis'] = 100;
-
         }
-
         $lastweekconsignee = Consignee::select('*')
             ->whereBetween('created_at',
                 [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]
@@ -184,6 +183,7 @@ class CustomerController extends Controller
 
     public function edit(Request $request, $id = null)
     {
+        
         $data['documents'] = CustomerDocument::with('user')->where('user_id', $id)->get();
         $output = view('layouts.customer.customer_edit', $data)->render();
         return Response($output);
@@ -240,7 +240,7 @@ class CustomerController extends Controller
     {
         $customer = User::find($id);
         $customer->delete();
-        return redirect($this->action);
+        return back()->with('deleted', 'Customer Deleted Successfully!');
     }
 
     public function ChangeStatus($id)
@@ -750,4 +750,24 @@ class CustomerController extends Controller
     //     }
     //     Excel::import(new CustomersImport, request()->file('import_document'));
     // }
+
+    public function serverside(Request $request){
+        if ($request->ajax()) {
+            $data = User::where('role_id',4);
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $data['row'] = $row;
+                    $url_view = url('admin/shipments/profile/' . $row->id);
+                    $url_delete = url('admin/shipments/delete/' . $row->id);
+                    $url_edit = url('admin/shipments/edit/' . $row->id);
+                    $output = view('layouts.customer.action_buttons', $data)->render();
+                    return $output;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return back();
+    }
 }

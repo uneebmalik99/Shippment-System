@@ -229,7 +229,7 @@
         }
 
         .dispatched_vehicles {
-            background: linear-gradient(0deg, #1F689E, #1F689E), rgba(255, 255, 255, 0.13);
+            background: #3e5871;
             box-shadow: 3px 5px 16px rgba(31, 104, 158, 0.86);
             /* border-radius: 10px; */
             color: #fff;
@@ -243,7 +243,7 @@
 
         .dispatch_search input {
             width: 190px;
-            border: 2px solid #1F689E;
+            border: 2px solid #3e5871;
             border-radius: 10px;
             padding: 6px 10px;
             outline: none;
@@ -258,13 +258,14 @@
             width: 88px;
             /* height: 50px; */
             margin-left: 20px;
-            background: #1F689E;
+            background: #3e5871;
             border-radius: 5px;
             padding: 7px 10px;
             outline: none;
             border: none;
             font-size: 12px;
             color: #fff;
+            cursor:pointer;
         }
 
         .table {

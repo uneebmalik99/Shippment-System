@@ -243,13 +243,24 @@ class VehicleController extends Controller
             $status = $request->status;
             $status_name = $request->status_name;
 
+
+           
+
+
             if ($warehouse) {
                 if ($warehouse != "") {
-                    $records = $records->where('title_state', $warehouse);
+                    if($warehouse == "all"){
+                        $records = $records;
+                    }
+                    else{
+                        $records = $records->where('title_state', $warehouse);
+
+                    }
 
                     // dd($records);
                     // return $records;
                 }
+               
             }
 
             if ($year) {
@@ -275,10 +286,15 @@ class VehicleController extends Controller
 
             if ($status) {
                 if ($status != "") {
-                    $records = $records->with('images')->where('status', $status)->paginate($this->perpage);
-                    $data['records'] = $records;
-                    $output['view'] = view('vehicle.' . $status_name, $data)->render();
-                    return Response($output);
+                    if($status == 'all'){
+                        $records = $records;
+                        
+                    }else{
+                        $records = $records->with('images')->where('status', $status)->paginate($this->perpage);
+                        $data['records'] = $records;
+                        $output['view'] = view('vehicle.' . $status_name, $data)->render();
+                        return Response($output);
+                    }
 
                     // return count($records);
                 }

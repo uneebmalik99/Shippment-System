@@ -64,6 +64,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::post('/customer/update',                     [App\Http\Controllers\CustomerController::class, 'customerUpdate'])->name('customers.update');
 
+    Route::get('/customers/records',       [CustomerController::class, 'serverside'])->name('customer.records');
+
     //Vehicle Routes
     Route::get('/vehicles',                             [VehicleController::class, 'index'])->name('vehicle.list');
     Route::post('/vehicles',                            [VehicleController::class, 'createPost'])->name('vehicle.listpost');
@@ -105,7 +107,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/shipments/create',                    [ShipmentController::class, 'create'])->name('shipment.create');
     Route::post('/shipments/general',                   [ShipmentController::class, 'create_form'])->name('shipment.createform');
     Route::get('/shipments/profile/{id?}',              [ShipmentController::class, 'profile'])->name('shipment.profile');
+    Route::get('/shipments/delete/{id?}',              [ShipmentController::class, 'delete'])->name('shipment.delete');
     Route::get('/shipments/filtering',                  [ShipmentController::class, 'filtering'])->name('shipment.filter');
+    Route::get('/shipments/records',                      [ShipmentController::class, 'serverside'])->name('shipments.records');
 
     //Notification Routes
     Route::get('/notifications',                        [NotificationController::class, 'index'])->name('notification.list');
