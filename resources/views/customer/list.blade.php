@@ -225,6 +225,7 @@
                             <select class="form-control-sm border-style input-border-style rounded col-12 text-muted"
                                 name="status" id="status" onchange="filterTable(this.value)">
                                 <option value="" disabled selected>Status</option>
+                                <option value="all">All</option>
                                 <option value="1">Active</option>
                                 <option value="0">In Active</option>
                             </select>
@@ -330,8 +331,11 @@
                 var table = $('#customer_table').DataTable({
                     processing: true,
                     serverSide: true,
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
-            // scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
+                    // scrollX: true,
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",

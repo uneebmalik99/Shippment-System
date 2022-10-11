@@ -216,10 +216,14 @@
 
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                  <span class="input-group-text" id="loading_date" style="height: 31px!important;font-size:12px!important;background:white!important;">Loading</span>
+                                    <span class="input-group-text" id="loading_date"
+                                        style="height: 31px!important;font-size:12px!important;background:white!important;">Loading</span>
                                 </div>
-                                <input type="date" class="form-control-sm border-style shipment_filtering col-7 text-muted px-2" id="loading_date" aria-describedby="loading_date" style="height: 31px!important;" required>
-                              </div>
+                                <input type="date"
+                                    class="form-control-sm border-style shipment_filtering col-7 text-muted px-2"
+                                    id="loading_date" aria-describedby="loading_date" style="height: 31px!important;"
+                                    required>
+                            </div>
 
                             {{-- <input placeholder="Loading Date"
                                 class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
@@ -236,12 +240,16 @@
                             </select> --}}
                         </div>
                         <div class="col-3 p-0">
-                                <div class="input-group">
-                                  <div class="input-group-prepend">
-                                    <span class="input-group-text" id="arrival_date" style="height: 31px!important;font-size:12px!important;background:white!important">Arrival</span>
-                                  </div>
-                                  <input type="date" class="form-control-sm border-style shipment_filtering col-7 text-muted px-2" id="arrival_date" aria-describedby="arrival_date" style="height: 31px!important;" required>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="arrival_date"
+                                        style="height: 31px!important;font-size:12px!important;background:white!important">Arrival</span>
                                 </div>
+                                <input type="date"
+                                    class="form-control-sm border-style shipment_filtering col-7 text-muted px-2"
+                                    id="arrival_date" aria-describedby="arrival_date" style="height: 31px!important;"
+                                    required>
+                            </div>
                             {{-- <input placeholder="Arrival Date"
                                 class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
                                 name="arrival_date" id="arrival_date" type="date"> --}}
@@ -310,7 +318,10 @@
                 processing: true,
                 serverSide: true,
                 scrollX: true,
-                "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                "lengthMenu": [
+                    [50, 100, 500],
+                    [50, 100, 500]
+                ],
                 language: {
                     search: "",
                     sLengthMenu: "_MENU_",

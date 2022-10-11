@@ -539,28 +539,22 @@ class VehicleController extends Controller
 
     public function serverside(Request $request)
     {
-
         if ($request->ajax()) {
             $data = Vehicle::with('vehicle_status')->select('*');
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('status', function($row){
-                    if($row['status'] == 1){
+                ->addColumn('status', function ($row) {
+                    if ($row['status'] == 1) {
                         $status = "<div>New Order</div>";
-                    }
-                    else if($row['status'] == 2){
+                    } else if ($row['status'] == 2) {
                         $status = "<div>Dispatched</div>";
-                    }
-                    else if($row['status'] == 3){
+                    } else if ($row['status'] == 3) {
                         $status = "<div>On Hand</div>";
-                    }
-                    else if($row['status'] == 4){
+                    } else if ($row['status'] == 4) {
                         $status = "<div>No Title</div>";
-                    }
-                    else if($row['status'] == 5){
+                    } else if ($row['status'] == 5) {
                         $status = "<div>Towing</div>";
-                    }
-                    else{
+                    } else {
                         $status = "<div>Error</div>";
                     }
                     return $status;
@@ -606,11 +600,11 @@ class VehicleController extends Controller
                 ->rawColumns(['action', 'status'])
                 ->make(true);
         }
-
         return back();
     }
 
-    public function fetchVehicles(Request $req){
+    public function fetchVehicles(Request $req)
+    {
         if ($req->ajax()) {
 
             $output = [];
@@ -621,14 +615,12 @@ class VehicleController extends Controller
             $status = $req->id;
             $status_name = $req->tab;
 
-            if($status)
-            {
+            if ($status) {
                 $records = $records->with('images')->where('status', $status)->paginate($this->perpage);
                 $data['records'] = $records;
                 $output['view'] = view('vehicle.' . $status_name, $data)->render();
                 return Response($output);
             }
-            
 
         }
     }

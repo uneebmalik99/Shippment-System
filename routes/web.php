@@ -64,7 +64,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::post('/customer/update',                     [App\Http\Controllers\CustomerController::class, 'customerUpdate'])->name('customers.update');
 
-    Route::get('/customers/records',       [CustomerController::class, 'serverside'])->name('customer.records');
+    Route::get('/customers/records',                    [CustomerController::class, 'serverside'])->name('customer.records');
 
     
 
@@ -98,9 +98,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/vehicle/profile/{id?}',                [VehicleController::class, 'profile'])->name('vehicle.profile');
     Route::get('/vehicle/vehicle_informationTab',       [VehicleController::class, 'profile_tab'])->name('customer.profile_tab');
     
-    Route::get('/vehicle/records',       [VehicleController::class, 'serverside'])->name('vehicle.records');
+    Route::get('/vehicle/records',                      [VehicleController::class, 'serverside'])->name('vehicle.records');
 
-    Route::post('/vehicle/fetchVehciles',       [VehicleController::class, 'fetchVehicles'])->name('vehicle.fetchVehicles');
+    Route::post('/vehicle/fetchVehciles',               [VehicleController::class, 'fetchVehicles'])->name('vehicle.fetchVehicles');
 
 
     //Sticky Notes Routes
@@ -113,11 +113,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/shipments/create',                    [ShipmentController::class, 'create'])->name('shipment.create');
     Route::post('/shipments/general',                   [ShipmentController::class, 'create_form'])->name('shipment.createform');
     Route::get('/shipments/profile/{id?}',              [ShipmentController::class, 'profile'])->name('shipment.profile');
-    Route::get('/shipments/delete/{id?}',              [ShipmentController::class, 'delete'])->name('shipment.delete');
+    Route::get('/shipments/delete/{id?}',               [ShipmentController::class, 'delete'])->name('shipment.delete');
     Route::get('/shipments/filtering',                  [ShipmentController::class, 'filtering'])->name('shipment.filter');
-    Route::get('/shipments/records',                      [ShipmentController::class, 'serverside'])->name('shipments.records');
+    Route::get('/shipments/records',                    [ShipmentController::class, 'serverside'])->name('shipments.records');
 
-    Route::post('/shipments/filterShipment',                      [ShipmentController::class, 'filterShipmentt'])->name('shipments.filter');
+    Route::post('/shipments/filterShipment',            [ShipmentController::class, 'filterShipmentt'])->name('shipments.filter');
 
     //Notification Routes
     Route::get('/notifications',                        [NotificationController::class, 'index'])->name('notification.list');

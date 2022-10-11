@@ -750,19 +750,24 @@ class CustomerController extends Controller
                 'page' => 'list',
             ],
         ];
+        $user = User::where('role_id', '4');
+        if ($filterText == "all") {
+            $data['user'] = $user->get();
+            // dd('all');
+        } else {
+            $data['user'] = $user->where('status', $filterText)
+                ->orWhere('city', $filterText)
+                ->orWhere('state', $filterText)->get();
+            // $data['user'] = $user->where('status', $filterText)->orwhere('city', $filterText)->orwhere('state', $filterText)->get()->toArray();
 
-        $data['user'] = User::where('role_id', 4)->where('status', $filterText)->orwhere('city', $filterText)->orwhere('state', $filterText)->get()->toArray();
-
+        }
         $output = view('customer.FilterTable', $data)->render();
-
         return Response($output);
-
     }
 
     public function changeNotification(Request $req)
     {
         $id = $req->id;
-
         $notification = Notification::where('id', $id)->get();
         return Response($notification);
 
@@ -796,12 +801,20 @@ class CustomerController extends Controller
                     $output = view('layouts.customer.action_buttons', $data)->render();
                     return $output;
                 })
-                ->rawColumns(['action'])
+                ->addColumn('created_at', function ($row) {
+                    $data['row'] = $row;
+                    $output = view('layouts.customer.created_at', $data)->render();
+                    return $output;
+                })
+                ->addColumn('status', function ($row) {
+                    $data['row'] = $row;
+                    $output = view('layouts.customer.status', $data)->render();
+                    return $output;
+                })
+                ->rawColumns(['action', 'created_at', 'status'])
                 ->make(true);
         }
-
         return back();
     }
 
-   
 }
