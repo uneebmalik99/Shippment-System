@@ -66,6 +66,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::get('/customers/records',       [CustomerController::class, 'serverside'])->name('customer.records');
 
+    
+
     //Vehicle Routes
     Route::get('/vehicles',                             [VehicleController::class, 'index'])->name('vehicle.list');
     Route::post('/vehicles',                            [VehicleController::class, 'createPost'])->name('vehicle.listpost');
@@ -96,6 +98,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     
     Route::get('/vehicle/records',       [VehicleController::class, 'serverside'])->name('vehicle.records');
 
+    Route::post('/vehicle/fetchVehciles',       [VehicleController::class, 'fetchVehicles'])->name('vehicle.fetchVehicles');
+
 
     //Sticky Notes Routes
     Route::get('/stickynotes',                          [StickyController::class, 'index'])->name('sticky.list');
@@ -110,6 +114,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/shipments/delete/{id?}',              [ShipmentController::class, 'delete'])->name('shipment.delete');
     Route::get('/shipments/filtering',                  [ShipmentController::class, 'filtering'])->name('shipment.filter');
     Route::get('/shipments/records',                      [ShipmentController::class, 'serverside'])->name('shipments.records');
+
+    Route::post('/shipments/filterShipment',                      [ShipmentController::class, 'filterShipmentt'])->name('shipments.filter');
 
     //Notification Routes
     Route::get('/notifications',                        [NotificationController::class, 'index'])->name('notification.list');

@@ -28,7 +28,7 @@
     <div class="bg-white rounded p-2">
         {{-- badges start --}}
         <div class="d-flex m-2">
-            <div class="col-3 p-1">
+            <div class="col-3 p-1" id="1" tab="Booked" onclick="fetchCustomers(this.id)" style="cursor: pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3 p-1">
+            <div class="col-3 p-1" id="2" tab="Shipped" onclick="fetchCustomers(this.id)" style="cursor: pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3 p-1">
+            <div class="col-3 p-1" id="3" tab="Arrived" onclick="fetchCustomers(this.id)" style="cursor: pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -107,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3 p-1">
+            <div class="col-3 p-1" id="4" tab="Completed" onclick="fetchCustomers(this.id)" style="cursor: pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -212,8 +212,16 @@
                             </select>
                         </div>
                         <div class="col-3 p-0">
-                            <input placeholder="Loading Date" class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
-                            name="arrival_date" id="arrival_date" type="text" onfocus="(this.type='date')">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="loading_date" style="height: 31px!important;font-size:12px!important;background:white!important;">Loading</span>
+                                </div>
+                                <input type="date" class="form-control-sm border-style shipment_filtering col-7 text-muted px-2" id="loading_date" aria-describedby="loading_date" style="height: 31px!important;" required>
+                              </div>
+
+                            {{-- <input placeholder="Loading Date" class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
+                            name="arrival_date" id="loading_date" type="text" onfocus="(this.type='date')"> --}}
                             {{-- <select
                                 class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
                                 name="loading_date" id="loading_date">
@@ -226,8 +234,14 @@
                             </select> --}}
                         </div>
                         <div class="col-3 p-0">
-                            <input placeholder="Arrival Date" class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
-                            name="arrival_date" id="arrival_date" type="text" onfocus="(this.type='date')">
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="arrival_date" style="height: 31px!important;font-size:12px!important;background:white!important">Arrival</span>
+                                  </div>
+                                  <input type="date" class="form-control-sm border-style shipment_filtering col-7 text-muted px-2" id="arrival_date" aria-describedby="arrival_date" style="height: 31px!important;" required>
+                                </div>
+                            {{-- <input placeholder="Arrival Date" class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
+                            name="arrival_date" id="arrival_date" type="date"> --}}
                             {{-- <select
                                 class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
                                 name="arrival_date" id="arrival_date">
@@ -254,7 +268,7 @@
                 {{-- search filter end --}}
                 <div class="shipment_table_body">
                     <table id="shipment_table" class="table row-border">
-                        <thead class="bg-custom text-dark">
+                        <thead class="bg-custom">
                             <tr class="font-size">
                                 <th class="font-bold-tr">Sr</th>
                                 <th class="font-bold-tr">COMPANY NAME</th>
@@ -293,6 +307,7 @@
                 processing: true,
                 serverSide: true,
                 scrollX: true,
+                "lengthMenu": [[50, 100, 500], [50, 100, 500]],
                 language: { 
                     search: "",
                     sLengthMenu: "_MENU_",
@@ -365,6 +380,25 @@
                 ]
             });
         });
+
+        function fetchCustomers(id){
+        $tab = $('#' + id).attr('tab');
+        $id = id;
+        
+        $.ajax({
+            type: 'post',
+            url: '{{ URL::to('admin/shipments/filterShipment') }}',
+            data: {
+                'tab': $tab,
+                'id': $id,
+            },
+            success: function(data) {
+                $('#shipment_tbody').html(data);
+
+                
+            }
+        });
+    }
     </script>
 
 @if (Session::has('success'))

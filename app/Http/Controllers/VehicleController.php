@@ -635,4 +635,27 @@ class VehicleController extends Controller
 
         return back();
     }
+
+    public function fetchVehicles(Request $req){
+        if ($req->ajax()) {
+
+            $output = [];
+            $table = "";
+            $page = "";
+            $total = Vehicle::all()->toArray();
+            $records = Vehicle::with('user');
+            $status = $req->id;
+            $status_name = $req->tab;
+
+            if($status)
+            {
+                $records = $records->with('images')->where('status', $status)->paginate($this->perpage);
+                $data['records'] = $records;
+                $output['view'] = view('vehicle.' . $status_name, $data)->render();
+                return Response($output);
+            }
+            
+
+        }
+    }
 }

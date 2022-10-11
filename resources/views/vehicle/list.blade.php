@@ -8,10 +8,16 @@
         .dataTables_scrollHeadInner {
             width: 100% !important;
         }
+        .modal-content {
+ 
+  width: 80%!important;
+  margin:0 auto!important;
+  z-index: 99999999;
+}
     </style>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+        aria-hidden="true" style="z-index: 9999999999;">
         <div class="modal-dialog modal-fullscreen scrollable mw-100 m-2 px-3 py-2" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">
@@ -68,7 +74,7 @@
     <div class="bg-white rounded p-2">
         {{-- badges start --}}
         <div class="d-flex m-2">
-            <div class="col-4 p-1">
+            <div class="col-4 p-1" id="1" tab="New Order" onclick="fetchVehicles(this.id)" style="cursor: pointer">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -90,26 +96,8 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-4 p-1">
-                <div class="col-12 py-0 px-1">
-                    <div class="col-12 border-style card-rounded py-2 px-3">
-                        <div class="d-flex">
-                            <div class="col-10 text-muted p-0 d-flex align-items-center">
-                                <div class="font-size"><span>Posted</span></div>
-                            </div>
-                            <div class="col-2 p-2 d-flex justify-content-center align-items-center rounded"
-                                style="background: rgba(169, 154, 75, 0.2);!important">
-                                <img src="{{ asset('images/posted.png') }}" alt="posted.png">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="font-bold"><span>{{ @$posted->count() }}</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-            <div class="col-4 p-1">
+            
+            <div class="col-4 p-1" id="2" tab="dispatched" onclick="fetchVehicles(this.id)" style="cursor:pointer">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -131,7 +119,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4 p-1">
+            <div class="col-4 p-1" id="3" tab="On Hand" onclick="fetchVehicles(this.id)" style="cursor: pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -154,7 +142,7 @@
             </div>
         </div>
         <div class="d-flex m-2">
-            <div class="col-4 p-1">
+            <div class="col-4 p-1" id="4" tab="No Title" onclick="fetchVehicles(this.id)" style="cursor:pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -174,7 +162,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4 p-1">
+            <div class="col-4 p-1" id="5" tab="towing" onclick="fetchVehicles(this.id)" style="cursor:pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -196,19 +184,36 @@
                     </div>
                 </div>
             </div>
+            <div class="col-4 p-1" id="6" tab="Inventory Value" onclick="fetchVehicles(this.id)" style="cursor:pointer;">
+                <div class="col-12 py-0 px-1">
+                    <div class="col-12 border-style card-rounded py-2 px-3">
+                        <div class="d-flex">
+                            <div class="col-10 text-muted p-0 d-flex align-items-center">
+                                <div class="font-size"><span>Inventory Value</span></div>
+                            </div>
+                            <div class="col-2 p-2 d-flex justify-content-center align-items-center rounded"
+                                style="background: rgba(236, 184, 0, 0.2); !important">
+                                <img src="{{ asset('images/towing.png') }}" alt="towing.png">
+
+                            </div>
+                        </div>
+                        <div>
+                            <div class="font-bold"><span class="px-1">$40,0000</span>
+                            </div>
+                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
         </div>
         {{-- badges end --}}
 
         {{-- listing start --}}
         <div class="px-3 mt-3">
             <div class="border-style card-rounded">
-                {{-- <div>
-                    @if (session('success'))
-                        <div class="btn alert alert-success m-0">
-                            <span>{{ session('success') }}</span>
-                        </div>
-                    @endif
-                </div> --}}
+               
                 {{-- new customer alert start --}}
                 <div class="row d-flex justify-content-between">
                 </div>
@@ -332,7 +337,7 @@
                 {{-- search filter end --}}
                 <div id="status_body" class="mt-2 bg-light" style="height: 100%;overflow-x: scroll;">
                     <table id="vehicle_table" class="table row-border vehicle_table" style="width:100%!important">
-                        <thead class="bg-custom">
+                        <thead class="bg-custom" style="color:white!important;">
                             <tr>
                                 <th class="font-bold-tr">Sr</th>
                                 <th class="font-bold-tr">Customer Name</th>
@@ -379,6 +384,7 @@
                 processing: true,
                 serverSide: true,
                 // scrollX: true,
+                "lengthMenu": [[50, 100, 500], [50, 100, 500]],
                 language: {
                     search: "",
                     sLengthMenu: "_MENU_",

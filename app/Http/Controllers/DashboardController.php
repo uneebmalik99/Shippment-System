@@ -84,16 +84,20 @@ class DashboardController extends Controller
         $data['TotalCustomers'] = User::where('role_id', 4)->count();
         $data['ActiveCustomers'] = User::where('role_id', 4)->where('status', '1')->count();
         $data['InActiveCustomers'] = User::where('role_id', 4)->where('status', '0')->count();
-        $data['NewOrders'] = Vehicle::where('status', 1)->count();
-        $data['Posted'] = Vehicle::where('status', 2)->count();
-        $data['OnHand'] = Vehicle::where('status', 3)->count();
-        $data['Towing'] = Vehicle::where('status', 4)->count();
+
+
+        
+        
+    // ===========================  vehicle status ================
+
         $data['TotalVehicles'] = Vehicle::all()->count();
 
 
-        
-        
-
+        $data['NewOrders'] = Vehicle::where('status', 1)->count();
+        $data['Dispatched'] = Vehicle::where('status', 2)->count();
+        $data['onHand'] = Vehicle::where('status', 3)->count();
+        $data['noTitle'] = Vehicle::where('status', 4)->count();
+    
 
         $all_vehicles = Vehicle::all();
         $allVehicles_value = Vehicle::get()->sum('value');
@@ -115,38 +119,34 @@ class DashboardController extends Controller
         $data['dispatch_value'] = $dispatch_value;
 
 
-        $manifest = Vehicle::where('status', '3');
-        $manifest_count = $manifest->count();
-        $manifest_value = $manifest->sum('value');
-        $data['manifest_count'] = $manifest_count;
-        $data['manifest_value'] = $manifest_value;
 
 
-        $shipped = Vehicle::where('status', '4');
-        $shipped_count = $shipped->count();
-        $shipped_value = $shipped->sum('value');
-        $data['shipped_count'] = $shipped_count;
-        $data['shipped_value'] = $shipped_value;
-
-     
-        $arrived = Vehicle::where('status', '5');
-        $arrived_count = $arrived->count();
-        $arrived_value = $arrived->sum('value');
-        $data['arrived_count'] = $arrived_count;
-        $data['arrived_value'] = $arrived_value;
-
-        $posted = Vehicle::where('status', '6');
-        $posted_count = $posted->count();
-        $posted_value = $posted->sum('value');
-        $data['posted_count'] = $posted_count;
-        $data['posted_value'] = $posted_value;
+        // ======= shipments statuses  ====== 
 
 
-        $booked = Vehicle::where('status', '7');
+        $booked = Shipment::where('status', '1');
         $booked_count = $booked->count();
-        $booked_value = $booked->sum('value');
+        $booked_value = Shipment::all()->count();
         $data['booked_count'] = $booked_count;
-        $data['booked_value'] = $booked_value;
+        $data['booked_total'] = $booked_value;
+
+        $shipped = Shipment::where('status', '2');
+        $shipped_count = $shipped->count();
+        $shipped_value = Shipment::all()->count();
+        $data['shipped_count'] = $shipped_count;
+        $data['shipped_total'] = $shipped_value;
+
+        $arrived = Shipment::where('status', '3');
+        $arrived_count = $arrived->count();
+        $arrived_value = Shipment::all()->count();
+        $data['arrived_count'] = $arrived_count;
+        $data['arrived_total'] = $arrived_value;
+
+        $completed = Shipment::where('status', '4');
+        $completed_count = $completed->count();
+        $completed_value = Shipment::all()->count();
+        $data['completed_count'] = $completed_count;
+        $data['completed_total'] = $completed_value;
 
         
 
