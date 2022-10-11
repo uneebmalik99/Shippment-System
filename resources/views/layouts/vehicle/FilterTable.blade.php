@@ -1,5 +1,5 @@
-<table id="vehicle_filter_table" class="table row-border vehicle_table">
-    <thead class="bg-custom text-dark">
+<table id="vehicle_filter_table" class="table row-border vehicle_table" style="width:100%!important;">
+    <thead class="bg-custom">
         <tr class="font-size">
             <th class="font-bold-tr">Sr</th>
             <th class="font-bold-tr">Customer Name</th>

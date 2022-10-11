@@ -450,4 +450,14 @@ class ShipmentController extends Controller
 
         return back();
     }
+
+
+    public function filterShipmentt(Request $req){
+        if ($req->ajax()) {
+            $data = [];
+            $data['records'] = Shipment::where('status', $req->id)->get();
+            $output = view('layouts.shipment_filter.filtering', $data)->render();
+            return Response($output);
+        }
+    }
 }

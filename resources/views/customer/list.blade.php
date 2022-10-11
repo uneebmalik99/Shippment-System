@@ -1,8 +1,8 @@
 @extends('layouts.partials.mainlayout')
 @section('body')
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        style="z-index: 99999999999999;width: 80%!important;margin: 0 auto!important;">
         <div class="modal-dialog modal-fullscreen scrollable mw-100 m-2 px-3 py-2" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">
@@ -188,7 +188,7 @@
                             <div class="col-5 px-0 d-flex justify-content-center">
                                 <button type="button"
                                     class="text-white form-control-sm border py-1 btn-info rounded modal_button col-12"
-                                    id="customer" style="background: #696CFF;" data-target="#exampleModal">
+                                    id="customer" style="background: #3e5871;" data-target="#exampleModal">
                                     <div class="d-flex justify-content-center align-items-center">
                                         <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -233,9 +233,8 @@
                 </div>
                 {{-- search filter end --}}
                 <div class="mt-2 bg-light" style="height: 100%;overflow-x: scroll;">
-
-                    <table id="customer_table" class="table row-border" style="width:100%!important">
-                        <thead class="bg-custom text-dark">
+                    <table id="customer_table" class="table row-border" style="width:100%!important;">
+                        <thead class="bg-custom">
                             <tr class="font-size">
                                 <th class="font-bold-tr">Cust ID</th>
                                 <th class="font-bold-tr">Customer Name</th>
@@ -331,7 +330,8 @@
                 var table = $('#customer_table').DataTable({
                     processing: true,
                     serverSide: true,
-                    // scrollX: true,
+                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+            // scrollX: true,
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",

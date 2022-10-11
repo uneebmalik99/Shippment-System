@@ -268,6 +268,13 @@
                         maxFiles: 4,
                         imagesInputName: 'pickup',
                     });
+                    $('.vehicle_auction_image').imageUploader({
+                        maxFiles: 15
+
+                    });
+                    $('.vehicle_warehouse_image').imageUploader({
+                        maxFiles: 15
+                    });
                 }
             });
         } else if ($id == "shipment") {
@@ -281,6 +288,10 @@
                     $('.modal-body').html(data);
                     $('#exampleModal').modal('show');
                     $('#shipment_vehicle_table').DataTable({
+                        "lengthChange": false,
+                        "info": false,
+                        "bPaginate": false,
+                        "lengthMenu": [[50, 100, 500], [50, 100, 500]],
                         language: {
                             search: "",
                             sLengthMenu: "_MENU_",

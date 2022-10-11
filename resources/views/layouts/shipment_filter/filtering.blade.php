@@ -30,7 +30,7 @@
         <td>{{ @$val['destination_country'] }}</td>
         <td>
             <button class="profile-button">
-                <a href={{ route('shipment.profile') . '/' . @$val[@$module['db_key']] }}>
+                <a href={{ route('shipment.profile') . '/' . @$val['id'] }}>
                     <svg width="14" height="13" viewBox="0 0 16 14" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -44,7 +44,7 @@
                 </a>
             </button>
             <button class="edit-button">
-                <a href={{ url(@$module['action'] . '/edit/' . @$val[@$module['db_key']]) }}>
+                <a href=''>
                     <svg width="14" height="13" viewBox="0 0 16 16" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -55,7 +55,7 @@
                 </a>
             </button>
             <button class="delete-button">
-                <a href={{ url(@$module['action'] . '/delete/' . @$val[@$module['db_key']]) }}>
+                <a href={{ route('shipment.delete') . '/' . @$val['id'] }}>
                     <svg width="14" height="13" viewBox="0 0 12 12" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path

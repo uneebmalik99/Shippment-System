@@ -336,16 +336,28 @@
                                             </div>
                                         </div>
                                         <div id="shipment_loading_body">
+                                            
+                                            
+                                            
                                             <div class="col-12 py-2">
                                                 <div class="d-flex align-items-center">
-                                                    <label for="loading_terminal"
-                                                        class="col-6 px-0 font-size font-bold">Loading
-                                                        Terminal</label>
+                                                    <label for="loading_country"
+                                                        class="col-6 px-0 font-size font-bold">Country</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="loading_terminal" id="loading_terminal">
+                                                        name="loading_country" id="loading_country">
                                                 </div>
                                             </div>
+                                            <div class="col-12 py-2">
+                                                <div class="d-flex align-items-center">
+                                                    <label for="loading_state"
+                                                        class="col-6 px-0 font-size font-bold">State</label>
+                                                    <input type="text"
+                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        name="loading_state" id="loading_state">
+                                                </div>
+                                            </div>
+
                                             <div class="col-12 py-2">
                                                 <div class="d-flex align-items-center">
                                                     <label for="loading_port"
@@ -365,22 +377,17 @@
                                             </div>
                                             <div class="col-12 py-2">
                                                 <div class="d-flex align-items-center">
-                                                    <label for="loading_state"
-                                                        class="col-6 px-0 font-size font-bold">State</label>
+                                                    <label for="loading_terminal"
+                                                        class="col-6 px-0 font-size font-bold">Loading
+                                                        Terminal</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="loading_state" id="loading_state">
+                                                        name="loading_terminal" id="loading_terminal">
                                                 </div>
                                             </div>
-                                            <div class="col-12 py-2">
-                                                <div class="d-flex align-items-center">
-                                                    <label for="loading_country"
-                                                        class="col-6 px-0 font-size font-bold">Country</label>
-                                                    <input type="text"
-                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="loading_country" id="loading_country">
-                                                </div>
-                                            </div>
+
+
+
                                         </div>
                                     </div>
 
@@ -398,31 +405,17 @@
                                             </div>
                                         </div>
                                         <div id="shipment_destination_body">
+                                            
+                                            
+                                            
                                             <div class="col-12 py-2">
                                                 <div class="d-flex align-items-center">
-                                                    <label for="destination_terminal"
-                                                        class="col-6 px-0 font-size font-bold px-1">Destination
-                                                        Terminal</label>
+                                                    <label for="destination_country"
+                                                        class="col-6 px-0 font-size font-bold">Country
+                                                        Line</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="destination_terminal" id="destination_terminal">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 py-2">
-                                                <div class="d-flex align-items-center">
-                                                    <label for="destination_port"
-                                                        class="col-6 px-0 font-size font-bold">Port</label>
-                                                    {{-- <input type="date"
-                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="destination_port" id="destination_port"> --}}
-                                                    <select
-                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="destination_port" id="destination_port">
-                                                        @foreach ($location as $locations)
-                                                            <option value="{{ $locations['id'] }}">
-                                                                {{ $locations['name'] }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                        name="destination_country" id="destination_country">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -436,14 +429,34 @@
                                             </div>
                                             <div class="col-12 py-2">
                                                 <div class="d-flex align-items-center">
-                                                    <label for="destination_country"
-                                                        class="col-6 px-0 font-size font-bold">Country
-                                                        Line</label>
-                                                    <input type="text"
+                                                    <label for="destination_port"
+                                                        class="col-6 px-0 font-size font-bold">Port</label>
+                                                   
+                                                    <select
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="destination_country" id="destination_country">
+                                                        name="destination_port" id="destination_port">
+                                                        @foreach ($location as $locations)
+                                                            <option value="{{ $locations['id'] }}">
+                                                                {{ $locations['name'] }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
+                                            <div class="col-12 py-2">
+                                                <div class="d-flex align-items-center">
+                                                    <label for="destination_terminal"
+                                                        class="col-6 px-0 font-size font-bold px-1">Destination
+                                                        Terminal</label>
+                                                    <input type="text"
+                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        name="destination_terminal" id="destination_terminal">
+                                                </div>
+                                            </div>
+
+
+
+
+
                                         </div>
                                     </div>
 

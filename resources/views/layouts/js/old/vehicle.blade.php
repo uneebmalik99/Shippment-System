@@ -1,4 +1,4 @@
-
+<script>
     $('.vehicle_filtering').on('change', function() {
         $warehouse = $('#vehicle_warehouse').val();
         $year = $('#vehicle_year').val();
@@ -27,7 +27,7 @@
                     $('#status_body').html(data);
                 }
                 $('#new_order_table').DataTable({
-                    scrollX: true,
+                    // {{-- scrollX: true, --}}
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -35,7 +35,7 @@
                     },
                 });
                 $('#dispatched_table').DataTable({
-                    scrollX: true,
+                    // {{-- scrollX: true, --}}
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -43,7 +43,7 @@
                     },
                 });
                 $('#on_hand_table').DataTable({
-                    scrollX: true,
+                    // {{-- scrollX: true, --}}
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -51,7 +51,15 @@
                     },
                 });
                 $('#towing_table').DataTable({
-                    scrollX: true,
+                    // {{-- scrollX: true, --}}
+                    language: {
+                        search: "",
+                        sLengthMenu: "_MENU_",
+                        searchPlaceholder: "Search"
+                    },
+                });
+                $('#no_title').DataTable({
+                    // {{-- scrollX: true, --}}
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -59,7 +67,7 @@
                     },
                 });
                 $('#vehicle_filter_table').DataTable({
-                   scrollX: true,
+                //    {{-- scrollX: true, --}}
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",

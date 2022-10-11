@@ -84,7 +84,7 @@
     <div>
         <div class="d-flex justify-content-between p-2">
             <div class="col-4 text-left text-info">
-                <label><b>Consignee</b></label>
+                <label><div style="font-size:14px!important;font-weight:bold;">Consignee</div></label>
             </div>
         </div>
 
@@ -92,13 +92,13 @@
             <div class="text-muted d-flex align-items-center col-3">
                 <input class="text-muted d-flex px-2 consignee" type="radio" name="consignee"
                     value="same as billing party" id="billing_party">
-                <label class="px-2 m-0" for="billing_party">Same as Billing Party</label>
+                <label class="px-2 m-0" for="billing_party" style="font-size:13px!important;">Same as Billing Party</label>
             </div>
 
             <div class="text-muted d-flex align-items-center col-3">
                 <input class="text-muted d-flex px-2 consignee" type="radio" name="consignee" value="new consignee"
                     id="new_consignee">
-                <label class="px-2 m-0" for="new_consignee">Add New Consignee</label>
+                <label class="px-2 m-0" for="new_consignee" style="font-size:13px!important;">Add New Consignee</label>
             </div>
         </div>
     </div>
@@ -106,7 +106,7 @@
     <div>
         <div class="d-flex justify-content-between p-2">
             <div class="col-4 text-left text-info">
-                <label><b>Consolidate</b></label>
+                <label><div style="font-size:14px!important;font-weight:bold;">Consolidate</div></label>
             </div>
         </div>
 
@@ -114,13 +114,13 @@
             <div class="text-muted d-flex  align-items-center col-3">
                 <input class="text-muted d-flex px-2 consolidate" type="radio" name="consolidate" value="yes"
                     id="consolidate_yes">
-                <label class="px-2 m-0" for="consolidate_yes">Yes</label>
+                <label class="px-2 m-0" for="consolidate_yes" style="font-size:13px!important;">Yes</label>
             </div>
 
             <div class="text-muted d-flex  align-items-center col-3">
                 <input class="text-muted d-flex px-2 consolidate" type="radio" name="consolidate" value="no"
                     id="consolidate_no">
-                <label class="px-2 m-0" for="consolidate_no">No</label>
+                <label class="px-2 m-0" for="consolidate_no" style="font-size:13px!important;">No</label>
             </div>
         </div>
     </div>
@@ -128,7 +128,7 @@
     <div>
         <div class="d-flex justify-content-between p-2">
             <div class="col-4 text-left text-info">
-                <label><b>Return the original shipping documents to</b></label>
+                <label><div style="font-size:14px!important;font-weight:bold;">Return the original shipping documents to</div></label>
             </div>
         </div>
 
@@ -136,13 +136,13 @@
             <div class="text-muted d-flex align-items-center col-3">
                 <input class="text-muted d-flex px-2 original_shipping_documents" type="radio"
                     name="original_shipping_documents" value="send back" id="send_back">
-                <label class="px-2 m-0" for="send_back">Send back</label>
+                <label class="px-2 m-0" for="send_back" style="font-size:13px!important;">Send back</label>
             </div>
 
             <div class="text-muted d-flex align-items-center col-3">
                 <input class="text-muted d-flex px-2 original_shipping_documents" type="radio"
                     name="original_shipping_documents" value="pick up from office" id="pick_up">
-                <label class="px-2 m-0" for="pick_up">Pick up from office</label>
+                <label class="px-2 m-0" for="pick_up" style="font-size:13px!important;">Pick up from office</label>
             </div>
         </div>
     </div>
@@ -150,7 +150,7 @@
     <div>
         <div class="d-flex justify-content-between p-2">
             <div class="col-4 text-left text-info">
-                <label><b>Insurance</b></label>
+                <label><div style="font-size:14px!important;font-weight:bold;">Insurance</div></label>
             </div>
         </div>
 
@@ -158,13 +158,13 @@
             <div class="text-muted d-flex align-items-center col-3">
                 <input class="text-muted d-flex px-2 insurance" type="radio" name="insurance" value="yes"
                     id="insurance_yes">
-                <label for="insurance_yes" class="px-2 m-0">Yes</label>
+                <label for="insurance_yes" class="px-2 m-0" style="font-size:13px!important;">Yes</label>
             </div>
 
             <div class="text-muted d-flex align-items-center col-3">
                 <input class="text-muted d-flex px-2 insurance" type="radio" name="insurance" value="no"
                     id="insurance_no">
-                <label for="insurance_no" class="px-2 m-0">No</label>
+                <label for="insurance_no" class="px-2 m-0" style="font-size:13px!important;">No</label>
             </div>
         </div>
     </div>
@@ -172,7 +172,7 @@
     <div>
         <div class="d-flex justify-content-between p-2">
             <div class="col-4 text-left text-info">
-                <label><b>Destination Port</b></label>
+                <label><div style="font-size:14px!important;font-weight:bold;">Destination Port</div></label>
             </div>
         </div>
 
@@ -180,13 +180,13 @@
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 destination_port" type="radio" name="destination_port"
                     value="single" id="single">
-                <label class="px-2 m-0" for="single">Single</label>
+                <label class="px-2 m-0" for="single" style="font-size:13px!important;">Single</label>
             </div>
 
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 destination_port" type="radio" name="destination_port"
                     value="multiple" id="multiple">
-                <label class="px-2 m-0" for="multiple">Multiple</label>
+                <label class="px-2 m-0" for="multiple" style="font-size:13px!important;">Multiple</label>
             </div>
         </div>
     </div>
