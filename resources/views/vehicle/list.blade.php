@@ -352,9 +352,6 @@
                         </tbody>
                     </table>
                 </div>
-
-                {{-- <div class="d-flex justify-content-end p-2" id="page">
-                </div> --}}
             </div>
         </div>
         {{-- listing end --}}

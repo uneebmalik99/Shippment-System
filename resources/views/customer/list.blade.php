@@ -174,14 +174,13 @@
                                     <div class="d-flex justify-content-center align-items-center px-1">
                                         <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
-                                         
+
                                             <path d="M11 16H13V7H16L12 2L8 7H11V16Z" fill="#2c3e50" />
                                             <path
                                                 d="M5 22H19C20.103 22 21 21.103 21 20V11C21 9.897 20.103 9 19 9H15V11H19V20H5V11H9V9H5C3.897 9 3 9.897 3 11V20C3 21.103 3.897 22 5 22Z"
-                                           
                                                 fill="#2c3e50" />
                                         </svg>
-                                
+
                                         <span class="pl-1 font-size" style="color:#2c3e50">Export</span>
                                     </div>
                                 </a>
@@ -234,7 +233,7 @@
                 </div>
                 {{-- search filter end --}}
                 <div class="mt-2 bg-light" style="height: 100%;overflow-x: scroll;">
-                    
+
                     <table id="customer_table" class="table row-border" style="width:100%!important">
                         <thead class="bg-custom text-dark">
                             <tr class="font-size">
@@ -248,7 +247,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="tbody">
-        
+
                         </tbody>
                     </table>
                 </div>
@@ -307,81 +306,80 @@
                     contentType: false,
                     data: formData,
                     success: function(data) {
-        
+
                         iziToast.success({
                             title: 'Customer',
                             message: data,
                             position: 'topCenter',
                             zindex: '9999999999999',
-        
+
                         });
-        
+
                         $('#exampleModal').modal('hide');
                         location.reload();
-        
-        
-        
+
+
+
                     }
                 });
             }
         </script>
 
 
-<script type="text/javascript">
-    $(function() {
-        var table = $('#customer_table').DataTable({
-            processing: true,
-            serverSide: true,
-            // scrollX: true,
-            language: {
-                search: "",
-                sLengthMenu: "_MENU_",
-                searchPlaceholder: "Search",
-                processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
-            },
-            ajax: "{{ route('customer.records') }}",
-            columns: [{
-                    data: 'id',
-                    name: 'id'
-                },
-                {
-                    data: 'username',
-                    name: 'username'
-                },
-                {
-                    data: 'company_name',
-                    name: 'company_name'
-                },
-                {
-                    data: 'phone',
-                    name: 'phone'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'created_at',
-                    name: 'created_at'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        });
-    });
-</script>
+        <script type="text/javascript">
+            $(function() {
+                var table = $('#customer_table').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    // scrollX: true,
+                    language: {
+                        search: "",
+                        sLengthMenu: "_MENU_",
+                        searchPlaceholder: "Search",
+                        processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+                    },
+                    ajax: "{{ route('customer.records') }}",
+                    columns: [{
+                            data: 'id',
+                            name: 'id'
+                        },
+                        {
+                            data: 'username',
+                            name: 'username'
+                        },
+                        {
+                            data: 'company_name',
+                            name: 'company_name'
+                        },
+                        {
+                            data: 'phone',
+                            name: 'phone'
+                        },
+                        {
+                            data: 'status',
+                            name: 'status'
+                        },
+                        {
+                            data: 'created_at',
+                            name: 'created_at'
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false,
+                            searchable: false
+                        },
+                    ]
+                });
+            });
+        </script>
 
-@if (Session::has('deleted'))
-<script>
-iziToast.warning({
-    position: 'topRight',
-    message: '{{ Session::get('deleted') }}',
-});
-</script>
-@endif
-
+        @if (Session::has('deleted'))
+            <script>
+                iziToast.warning({
+                    position: 'topRight',
+                    message: '{{ Session::get('deleted') }}',
+                });
+            </script>
+        @endif
     @endsection

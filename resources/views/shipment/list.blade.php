@@ -212,8 +212,9 @@
                             </select>
                         </div>
                         <div class="col-3 p-0">
-                            <input placeholder="Loading Date" class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
-                            name="arrival_date" id="arrival_date" type="text" onfocus="(this.type='date')">
+                            <input placeholder="Loading Date"
+                                class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
+                                name="arrival_date" id="arrival_date" type="text" onfocus="(this.type='date')">
                             {{-- <select
                                 class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
                                 name="loading_date" id="loading_date">
@@ -226,8 +227,9 @@
                             </select> --}}
                         </div>
                         <div class="col-3 p-0">
-                            <input placeholder="Arrival Date" class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
-                            name="arrival_date" id="arrival_date" type="text" onfocus="(this.type='date')">
+                            <input placeholder="Arrival Date"
+                                class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
+                                name="arrival_date" id="arrival_date" type="text" onfocus="(this.type='date')">
                             {{-- <select
                                 class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
                                 name="arrival_date" id="arrival_date">
@@ -274,7 +276,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="shipment_tbody">
-                         
+
                         </tbody>
                     </table>
                 </div>
@@ -293,7 +295,7 @@
                 processing: true,
                 serverSide: true,
                 scrollX: true,
-                language: { 
+                language: {
                     search: "",
                     sLengthMenu: "_MENU_",
                     searchPlaceholder: "Search",
@@ -367,12 +369,12 @@
         });
     </script>
 
-@if (Session::has('success'))
-<script>
-    iziToast.warning({
-        position: 'topRight',
-        message: '{{ Session::get('success') }}',
-    });
-</script>
-@endif
+    @if (Session::has('success'))
+        <script>
+            iziToast.warning({
+                position: 'topRight',
+                message: '{{ Session::get('success') }}',
+            });
+        </script>
+    @endif
 @endsection

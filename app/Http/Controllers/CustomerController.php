@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\Datatables\Datatables;
 
-
 class CustomerController extends Controller
 {
     private $type = "Customers";
@@ -91,6 +90,17 @@ class CustomerController extends Controller
 
         $notification = $this->Notification();
         $data['records'] = User::where('role_id', 4)->paginate($this->perpage);
+        // $records = User::where('role_id', 4)->paginate($this->perpage);
+        // foreach ($records as $record) {
+        //     $date = $record['created_at']->toDateString();
+        //     $dates[] = $date;
+        // }
+        // $i = 0;
+        // foreach ($dates as $date) {
+        //     $records[$i]['created_at'] = $date;
+        //     $data['records'][] = $records;
+        //     $i++;
+        // }
 
         $data['active_customer'] = User::where('role_id', 4)->where('status', '1')->get()->count();
 
@@ -184,7 +194,7 @@ class CustomerController extends Controller
 
     public function edit(Request $request, $id = null)
     {
-        
+
         $data['documents'] = CustomerDocument::with('user')->where('user_id', $id)->get();
         $output = view('layouts.customer.customer_edit', $data)->render();
         return Response($output);
@@ -772,9 +782,10 @@ class CustomerController extends Controller
     //     Excel::import(new CustomersImport, request()->file('import_document'));
     // }
 
-    public function serverside(Request $request){
+    public function serverside(Request $request)
+    {
         if ($request->ajax()) {
-            $data = User::where('role_id',4);
+            $data = User::where('role_id', 4);
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

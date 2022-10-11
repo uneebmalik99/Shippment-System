@@ -564,7 +564,6 @@ class VehicleController extends Controller
 
                     </a>
             </button>
-
                        <button class='edit-button' onclick='updatevehicle(this.id)' id=$id
                        style='cursor: pointer !important;'>
                                             <svg width='14' height='13' viewBox='0 0 16 16' fill='none'
