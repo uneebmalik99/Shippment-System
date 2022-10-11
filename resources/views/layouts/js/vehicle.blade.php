@@ -28,7 +28,6 @@
                     $('#status_body').html(data);
                 }
                 $('#new_order_table').DataTable({
-                    scrollX: true,
                     "lengthMenu": [[50, 100, 500], [50, 100, 500]],
                     language: {
                         search: "",
@@ -37,7 +36,6 @@
                     },
                 });
                 $('#dispatched_table').DataTable({
-                    scrollX: true,
                     "lengthMenu": [[50, 100, 500], [50, 100, 500]],
                     language: {
                         search: "",
@@ -46,7 +44,6 @@
                     },
                 });
                 $('#on_hand_table').DataTable({
-                    scrollX: true,
                     "lengthMenu": [[50, 100, 500], [50, 100, 500]],
                     language: {
                         search: "",
@@ -55,7 +52,6 @@
                     },
                 });
                 $('#towing_table').DataTable({
-                    scrollX: true,
                     "lengthMenu": [[50, 100, 500], [50, 100, 500]],
                     language: {
                         search: "",
@@ -64,7 +60,15 @@
                     },
                 });
                 $('#vehicle_filter_table').DataTable({
-                   scrollX: true,
+                   "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    language: {
+                        search: "",
+                        sLengthMenu: "_MENU_",
+                        searchPlaceholder: "Search"
+                    },
+                });
+
+                $('#no_title_table').DataTable({
                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
                     language: {
                         search: "",
@@ -255,8 +259,9 @@
                 console.log(data);
 
                 $('#status_body').html(data.view);
+                
                 $('#new_order_table').DataTable({
-                    scrollX: true,
+                    // scrollX: true,
                     "lengthMenu": [[50, 100, 500], [50, 100, 500]],
                     language: {
                         search: "",
@@ -265,7 +270,7 @@
                     },
                 });
                 $('#dispatched_table').DataTable({
-                    scrollX: true,
+                    // scrollX: true,
                     "lengthMenu": [[50, 100, 500], [50, 100, 500]],
                     language: {
                         search: "",
@@ -274,7 +279,16 @@
                     },
                 });
                 $('#on_hand_table').DataTable({
-                    scrollX: true,
+                    // scrollX: true,
+                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    language: {
+                        search: "",
+                        sLengthMenu: "_MENU_",
+                        searchPlaceholder: "Search"
+                    },
+                });
+                $('#no_title_table').DataTable({
+                    // scrollX: true,
                     "lengthMenu": [[50, 100, 500], [50, 100, 500]],
                     language: {
                         search: "",
@@ -283,7 +297,7 @@
                     },
                 });
                 $('#towing_table').DataTable({
-                    scrollX: true,
+                    // scrollX: true,
                     "lengthMenu": [[50, 100, 500], [50, 100, 500]],
                     language: {
                         search: "",
@@ -292,7 +306,7 @@
                     },
                 });
                 $('#vehicle_filter_table').DataTable({
-                   scrollX: true,
+                //    scrollX: true,
                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
                     language: {
                         search: "",

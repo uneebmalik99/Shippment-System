@@ -331,7 +331,6 @@
                                 @endforeach
                             </select>
                         </div>
-
                     </div>
                 </div>
                 {{-- search filter end --}}
@@ -441,7 +440,14 @@
                     },
                 ]
             });
+
+
+
+
+            
         });
+
+        
     </script>
 
     @if (Session::has('success'))
