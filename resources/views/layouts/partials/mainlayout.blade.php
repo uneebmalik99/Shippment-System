@@ -78,7 +78,7 @@
         $(document).ready(function() {
             $('#user_table').DataTable();
         });
-        $(document).ready(function() {
+$(document).ready(function() {
             $('#customer_table').DataTable({
                 language: {
                     search: "",
@@ -98,10 +98,7 @@
                 },
 
             });
-        });
-    </script>
-
-
+        });    </script>
 
 </body>
 

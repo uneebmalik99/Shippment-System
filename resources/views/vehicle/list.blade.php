@@ -202,13 +202,13 @@
         {{-- listing start --}}
         <div class="px-3 mt-3">
             <div class="border-style card-rounded">
-                <div>
+                {{-- <div>
                     @if (session('success'))
                         <div class="btn alert alert-success m-0">
                             <span>{{ session('success') }}</span>
                         </div>
                     @endif
-                </div>
+                </div> --}}
                 {{-- new customer alert start --}}
                 <div class="row d-flex justify-content-between">
                 </div>
@@ -229,13 +229,13 @@
                                     <div class="d-flex justify-content-center align-items-center px-1">
                                         <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M13 8H11L11 17H8L12 22L16 17H13L13 8Z" fill="#8F8F8F" />
+                                            <path d="M13 8H11L11 17H8L12 22L16 17H13L13 8Z" fill="#2c3e50" />
                                             <path
                                                 d="M19 2L5 2C3.897 2 3 2.897 3 4V13C3 14.103 3.897 15 5 15H9V13H5L5 4L19 4V13H15V15H19C20.103 15 21 14.103 21 13V4C21 2.897 20.103 2 19 2Z"
-                                                fill="#8F8F8F" />
+                                                fill="#2c3e50" />
                                         </svg>
 
-                                        <span class="pl-1 font-size">Import</span>
+                                        <span class="pl-1 font-size" style="color:#2c3e50">Import</span>
                                     </div>
                                 </a>
                             </div>
@@ -246,12 +246,12 @@
                                     <div class="d-flex justify-content-center align-items-center px-1">
                                         <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M11 16H13V7H16L12 2L8 7H11V16Z" fill="#8F8F8F" />
+                                            <path d="M11 16H13V7H16L12 2L8 7H11V16Z" fill="#2c3e50" />
                                             <path
                                                 d="M5 22H19C20.103 22 21 21.103 21 20V11C21 9.897 20.103 9 19 9H15V11H19V20H5V11H9V9H5C3.897 9 3 9.897 3 11V20C3 21.103 3.897 22 5 22Z"
-                                                fill="#8F8F8F" />
+                                                fill="#2c3e50" />
                                         </svg>
-                                        <span class="pl-1 font-size">Export</span>
+                                        <span class="pl-1 font-size" style="color:#2c3e50">Export</span>
                                     </div>
                                 </a>
                             </div>
@@ -279,6 +279,7 @@
                             <select
                                 class="form-control-sm border-style input-border-style rounded vehicle_filtering col-11 text-muted px-2"
                                 name="warehouse" id="vehicle_warehouse">
+                                <option value="all">All</option>
                                 <option value="" disabled selected>WAREHOUSE</option>
                                 @foreach ($location as $locations)
                                     <option value="{{ $locations['id'] }}">{{ $locations['name'] }}</option>
@@ -316,6 +317,7 @@
                             <select
                                 class="form-control-sm border-style input-border-style rounded vehicle_filtering col-12 text-muted"
                                 name="status" id="vehicle_status">
+                                <option value="all">All</option>
                                 <option value="" disabled selected>STATUS</option>
                                 @foreach ($status as $stat)
                                     {{-- @dd($stat) --}}
@@ -328,8 +330,8 @@
                     </div>
                 </div>
                 {{-- search filter end --}}
-                <div id="status_body">
-                    <table id="vehicle_table" class="table row-border vehicle_table">
+                <div id="status_body" class="mt-2 bg-light" style="height: 100%;overflow-x: scroll;">
+                    <table id="vehicle_table" class="table row-border vehicle_table" style="width:100%!important">
                         <thead class="bg-custom">
                             <tr>
                                 <th class="font-bold-tr">Sr</th>
@@ -380,7 +382,9 @@
                 language: {
                     search: "",
                     sLengthMenu: "_MENU_",
-                    searchPlaceholder: "Search"
+                    searchPlaceholder: "Search",
+                    
+                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
                 },
                 ajax: "{{ route('vehicle.records') }}",
                 columns: [{
@@ -433,4 +437,13 @@
             });
         });
     </script>
+
+    @if (Session::has('success'))
+        <script>
+            iziToast.success({
+                position: 'topRight',
+                message: '{{ Session::get('success') }}',
+            });
+        </script>
+    @endif
 @endsection

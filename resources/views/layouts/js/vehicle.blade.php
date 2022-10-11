@@ -6,6 +6,7 @@
         $model = $('#vehicle_model').val();
         $status = $('#vehicle_status').val();
         $status_name = $('#vehicle_status').find(":selected").text();
+        // alert($status_name);
         $.ajax({
             type: 'get',
             url: '{{ URL::to('admin/vehicles/filtering') }}',
@@ -194,17 +195,14 @@
         $('#exampleModal').modal('hide');
     }
 </script>
-
 <script>
     $('.vehicle_information_tab').on('click', function() {
         $id = $(this).attr('id');
         $tab = $(this).attr('tab');
-
         $('.vehicle_information_tab').removeClass('active_information_button col-3');
         $('.vehicle_information_tab').addClass('col-2');
         $(this).removeClass('col-2');
         $(this).addClass('active_information_button col-3');
-
         $.ajax({
             type: 'get',
             url: '{{ URL::to('admin/vehicle/vehicle_informationTab') }}',
@@ -214,7 +212,6 @@
             },
             success: function(data) {
                 $('#vehicle_information_main').html(data);
-                // $('.vehicle_information_tab')
             }
         });
     });
@@ -223,8 +220,6 @@
         // alert(tab);
         $id = $('#' + id).attr('tab');
         $tab = id;
-
-
         $.ajax({
             type: 'post',
             url: '{{ URL::to('admin/vehicle/vehicle_changeImages') }}',
