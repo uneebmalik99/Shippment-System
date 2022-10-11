@@ -78,27 +78,28 @@
         $(document).ready(function() {
             $('#user_table').DataTable();
         });
-$(document).ready(function() {
-            $('#customer_table').DataTable({
-                language: {
-                    search: "",
-                    sLengthMenu: "_MENU_",
-                    searchPlaceholder: "Search"
-                },
+        // $(document).ready(function() {
+        //     $('#customer_table').DataTable({
+        //         language: {
+        //             search: "",
+        //             sLengthMenu: "_MENU_",
+        //             searchPlaceholder: "Search"
+        //         },
 
-            });
-        });
-        $(document).ready(function() {
-            $('#shipment_table').DataTable({
-                scrollX: true,
-                language: {
-                    search: "",
-                    sLengthMenu: "_MENU_",
-                    searchPlaceholder: "Search"
-                },
+        //     });
+        // });
+        // $(document).ready(function() {
+        //     $('#shipment_table').DataTable({
+        //         scrollX: true,
+        //         language: {
+        //             search: "",
+        //             sLengthMenu: "_MENU_",
+        //             searchPlaceholder: "Search"
+        //         },
 
-            });
-        });    </script>
+        //     });
+        // });
+    </script>
 
 </body>
 
