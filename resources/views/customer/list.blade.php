@@ -386,59 +386,20 @@
         <script>
             function updatecustomer(id) {
                 $('.btn').attr('id', id);
-
                 $.ajax({
                     type: 'get',
                     url: '{{ URL::to('admin/customers/update') }}/' + id,
                     processData: false,
                     contentType: false,
-
-
                     success: function(data) {
                         console.log(data);
                         $('.modal-body').html(data);
                         $('#exampleModal').modal('show');
-                        // $('#name').val(data.user.name);
-                        // $('#username').val(data.user.username);
-                        // $('#phone').val(data.user.phone);
-                        // $('#fax').val(data.user.fax);
-                        // $('#email').val(data.user.email);
-                        // $('#source').val(data.user.source);
-                        // $('#company_name').val(data.user.company_name);
-                        // $('#company_email').val(data.user.company_email);
-                        // $('#customer_type').val(data.user.customer_type);
-                        // $('#sales_type').val(data.user.sales_type);
-                        // $('#sales_person').val(data.user.sales_person);
-                        // $('#inside_person').val(data.user.inside_person);
-                        // $('#level').val(data.user.level);
-                        // $('#payment_type').val(data.user.payment_type);
-                        // $('#payment_term').val(data.user.payment_term);
-                        // $('#industry').val(data.user.industry);
-                        // $('#location_number').val(data.user.location_number);
-                        // $('#country').val(data.user.country);
-                        // $('#zip_code').val(data.user.zip_code);
-                        // $('#state').val(data.user.state);
-                        // $('#address_line1').val(data.user.address_line1);
-                        // $('#address_line2').val(data.user.address_line2);
-                        // $('#price_code').val(data.user.price_code);
-                        // var img = data.user.user_image;
-                        // var doc = data.doc[0].file;
-                        // $("#customer_file1").attr("href", "../public/" + doc + "");
-                        // $("#customer_img").attr("src", "../public/" + img + "");
-                        // console.log('{'+'{asset('+'"'+ d +'"'+ ')}'+'}' );
-                        // $url = '{'+'{asset('+'\''+ d +'\''+ ')}'+'}';
-                        // img = '<img src=' + '"' + $url + '"' + '/>' ;// 
-                        // $('#customer_image').html(img);
                         $('.user_image').imageUploader({
                             maxFiles: 1
                         });
-
-
                     }
                 });
-
-
-
             }
         </script>
     @endsection

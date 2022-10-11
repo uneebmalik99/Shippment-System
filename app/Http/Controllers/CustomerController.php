@@ -167,6 +167,7 @@ class CustomerController extends Controller
 
         if ($request->ajax()) {
             $tab = $request->tab;
+            $data['location'] = Location::all()->toArray();
             $output = view('layouts.customer_create.' . $tab, $data)->render();
             return Response($output);
         }
@@ -450,7 +451,6 @@ class CustomerController extends Controller
     public function profile_tab(Request $request)
     {
 
-
         $id = $request->id;
         $data = [];
         $data['user'] = User::find($id)->toArray();
@@ -458,8 +458,6 @@ class CustomerController extends Controller
         $data['shipper'] = Shipper::where('customer_id', $id)->get();
         $data['notification'] = Notification::where('user_id', $id)->get();
         $data['documents'] = CustomerDocument::where('user_id', $id)->get()->toArray();
-
-       
 
         $all_vehicles = Vehicle::all()->count();
 
@@ -558,8 +556,6 @@ class CustomerController extends Controller
             $data['booked_count_percentage'] = 0;
         }
 
-
-
         if ($request->tab) {
             $tab = $request->tab;
             $output = view('layouts.customer.' . $tab, $data)->render();
@@ -639,12 +635,37 @@ class CustomerController extends Controller
                         unset($data['images']);
                     }
                 }
+                $request->validate([
+                    'name' => 'required',
+                    'username' => 'required',
+                    'password' => 'required',
+                    'phone' => 'required',
+                    'fax' => 'required',
+                    'email' => 'required',
+                    'source' => 'required',
+                    'company_name' => 'required',
+                    'company_email' => 'required',
+                    'customer_type' => 'required',
+                    'sales_type' => 'required',
+                    'payment_type' => 'required',
+                    'payment_term' => 'required',
+                    'industry' => 'required',
+                    'sales_person' => 'required',
+                    'inside_person' => 'required',
+                    'level' => 'required',
+                    'location_number' => 'required',
+                    'country' => 'required',
+                    'zip_code' => 'required',
+                    'state' => 'required',
+                    'address_line1' => 'required',
+                    'address_line2' => 'required',
+                    'price_code' => 'required',
+                ]);
                 $Obj = new User;
                 $Obj->create($data);
                 // $email = $data['email'];
                 $user = User::where('email', $email)->get();
                 $user_id = $user[0]['id'];
-
 
                 if ($file) {
                     foreach ($file as $files) {

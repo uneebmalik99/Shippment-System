@@ -376,7 +376,7 @@
             var table = $('.vehicle_table').DataTable({
                 processing: true,
                 serverSide: true,
-                scrollX: true,
+                // scrollX: true,
                 language: {
                     search: "",
                     sLengthMenu: "_MENU_",

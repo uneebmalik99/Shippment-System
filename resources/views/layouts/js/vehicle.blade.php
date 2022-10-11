@@ -59,7 +59,7 @@
                     },
                 });
                 $('#vehicle_filter_table').DataTable({
-                   scrollX: true,
+                    scrollX: true,
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -218,7 +218,7 @@
             }
         });
     });
-    
+
     function changeImages(id) {
         // alert(tab);
         $id = $('#' + id).attr('tab');
@@ -236,6 +236,31 @@
                 // alert(data);
                 console.log(data);
                 $('.changeImages').html(data);
+            }
+        });
+    }
+</script>
+{{-- edit vehicle info --}}
+<script>
+    function updatevehicle(id) {
+        $id = id;
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('admin/vehicles/update') }}/' + $id,
+            data: {
+                'id': $id
+            },
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                console.log(data);
+                $('.modal-body').html(data);
+                $('#exampleModal').modal('show');
+                $('.user_image').imageUploader({
+                    maxFiles: 1
+                });
+
+
             }
         });
     }
