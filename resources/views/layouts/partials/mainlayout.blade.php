@@ -72,6 +72,7 @@
 
     <script>
         $(document).ready(function() {
+           
             $('#table_id').DataTable({
                 "lengthMenu": [[50, 100, 500], [50, 100, 500]],
             });
@@ -79,11 +80,21 @@
         });
 
         $(document).ready(function() {
+            
             $('#user_table').DataTable({
                 "lengthMenu": [[50, 100, 500], [50, 100, 500]],
             });
         });
-
+    //     $(document).ready(function() {
+    //         $('#customer_table').DataTable({
+    //             "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+    //             language: {
+    //                 search: "",
+    //                 sLengthMenu: "_MENU_",
+    //                 searchPlaceholder: "Search"
+    //             },
+    //     });
+    // }
         $('#dashboard_shipment').DataTable({
                 //    scrollX: true,
                     "lengthChange": false,
@@ -96,12 +107,7 @@
                         searchPlaceholder: "Search"
                     },
                 });
-
-       
-      
     </script>
-
-
 
 </body>
 

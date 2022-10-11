@@ -220,7 +220,7 @@
             }
         });
     });
-    
+
     function changeImages(id) {
         // alert(tab);
         $id = $('#' + id).attr('tab');
@@ -300,6 +300,31 @@
                         searchPlaceholder: "Search"
                     },
                 });
+            }
+        });
+    }
+</script>
+{{-- edit vehicle info --}}
+<script>
+    function updatevehicle(id) {
+        $id = id;
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('admin/vehicles/update') }}/' + $id,
+            data: {
+                'id': $id
+            },
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                console.log(data);
+                $('.modal-body').html(data);
+                $('#exampleModal').modal('show');
+                $('.user_image').imageUploader({
+                    maxFiles: 1
+                });
+
+
             }
         });
     }

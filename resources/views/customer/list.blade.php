@@ -174,19 +174,21 @@
                                     <div class="d-flex justify-content-center align-items-center px-1">
                                         <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
+                                         
                                             <path d="M11 16H13V7H16L12 2L8 7H11V16Z" fill="#2c3e50" />
                                             <path
                                                 d="M5 22H19C20.103 22 21 21.103 21 20V11C21 9.897 20.103 9 19 9H15V11H19V20H5V11H9V9H5C3.897 9 3 9.897 3 11V20C3 21.103 3.897 22 5 22Z"
+                                           
                                                 fill="#2c3e50" />
                                         </svg>
+                                
                                         <span class="pl-1 font-size" style="color:#2c3e50">Export</span>
                                     </div>
                                 </a>
                             </div>
                             <div class="col-5 px-0 d-flex justify-content-center">
                                 <button type="button"
-                                    class="text-white form-control-sm border py-1 btn-info rounded modal_button col-12"
-                                    id="customer" style="background: #3e5871;" data-target="#exampleModal">
+                                    class="text-white form-control-sm border py-1 btn-info rounded modal_button col-12" id="customer" style="background: #3e5871;" data-target="#exampleModal">
                                     <div class="d-flex justify-content-center align-items-center">
                                         <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -244,7 +246,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="tbody">
-                          
+        
                         </tbody>
                     </table>
                 </div>
@@ -272,28 +274,23 @@
         <script>
             function updatecustomer(id) {
                 $('.btn').attr('id', id);
-
                 $.ajax({
                     type: 'get',
                     url: '{{ URL::to('admin/customers/update') }}/' + id,
                     processData: false,
                     contentType: false,
 
-
                     success: function(data) {
                         console.log(data);
                         $('.modal-body').html(data);
                         $('#exampleModal').modal('show');
-                        
+
                         $('.user_image').imageUploader({
                             maxFiles: 1
                         });
 
-
                     }
                 });
-
-
 
             }
         </script>

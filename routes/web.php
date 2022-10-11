@@ -75,9 +75,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/vehicles/create_form',                [VehicleController::class, 'create_form'])->name('vehicle.form');
     Route::get('/vehicles/attachments',                 [VehicleController::class, 'attachments'])->name('vehicle.attachments');
     Route::post('/vehicles/create',                     [VehicleController::class, 'create'])->name('vehicle.create');
-    Route::get('/vehicles/edit/{id?}',                  [VehicleController::class, 'edit'])->name('vehicle.edit');
-    Route::post('/vehicles/edit/{id?}',                 [VehicleController::class, 'edit'])->name('vehicle.edit');
+    // Route::get('/vehicles/edit/{id?}',                  [VehicleController::class, 'edit'])->name('vehicle.edit');
+    // Route::post('/vehicles/edit/{id?}',                 [VehicleController::class, 'edit'])->name('vehicle.edit');
     Route::get('/vehicles/delete/{id?}',                [VehicleController::class, 'delete'])->name('vehicle.delete');
+    Route::get('/vehicles/update/{id?}',                [VehicleController::class, 'edit'])->name('vehicle.edit');
+
     Route::get('/vehicles/search',                      [VehicleController::class, 'filtering'])->name('vehicle.search');
     Route::get('/vehicles/pagination',                  [VehicleController::class, 'filtering'])->name('vehicle.pagination');
     Route::get('/vehicles/filtering',                   [VehicleController::class, 'filtering'])->name('vehicle.pagination');

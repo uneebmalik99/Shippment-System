@@ -1,5 +1,4 @@
 @include('layouts.vehicle_create.navbar')
-{{-- @dd($buyers) --}}
 <form method="POST" id="vehicle_form" enctype="multipart/form-data">
     @csrf
     <div class="d-lg-flex">
@@ -387,7 +386,7 @@
                             </div>
                         </div>
                         <div id="shipper_body">
-                                    {{-- <div class="col-12 py-2">
+                            {{-- <div class="col-12 py-2">
                                         <div class="d-flex align-items-center">
                                             <label for="shipment_id" class="col-6 px-0 font-size font-bold">Shipment
                                                 ID</label>
@@ -789,34 +788,6 @@
 
             </div>
         </div>
-        {{-- <div class="col-lg-4 py-3">
-            <div class="col-12">
-                
-
-            <div class="billofsales rounded text-center" name="billofsales[]"
-                style="padding-top: .5rem;">
-            <small>Bill of Sales</small>
-            </div>
-            <br>
-
-            <div class="originaltitle rounded text-center" name="originaltitle[]"
-                style="padding-top: .5rem;">
-            <small>Original Title</small>
-            </div>
-            <br>
-
-            <div class="pickup rounded text-center" name="pickup[]"
-                style="padding-top: .5rem;">
-            <small>Pickup Images</small>
-            </div>
-            <br>
-
-        
-
-
-            </div>
-        </div> --}}
-
     </div>
     <div class="col-12 py-2 px-5 d-flex justify-content-end">
 

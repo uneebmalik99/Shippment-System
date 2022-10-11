@@ -212,8 +212,19 @@ class VehicleController extends Controller
                 'db_key' => $this->db_key,
                 'action' => $this->action,
                 'page' => 'edit',
+                'button' => 'Next',
             ],
         ];
+        if ($request->ajax()) {
+            $id = $request->id;
+            $Obj_vehicle = new Vehicle;
+            $data['user'] = $Obj_vehicle->find($id)->toArray();
+            $data['buyers'] = User::where('role_id', '4')->get();
+            $data['location'] = Location::all();
+            $data['shipment'] = Shipment::all();
+            $output = view('layouts.vehicle_create.general', $data)->render();
+            return Response($output);
+        }
         $notification = $this->Notification();
         $data['buyers'] = User::where('role_id', '4')->get();
         $data['vehicle'] = Vehicle::with('user')->find($id)->toArray();
@@ -230,8 +241,12 @@ class VehicleController extends Controller
     public function filtering(Request $request)
     {
         if ($request->ajax()) {
-            // dd($request->all());
             $output = [];
+            $output = [
+                'module' => [
+                    'db_key' => $this->db_key,
+                ],
+            ];
             $table = "";
             $page = "";
             $total = Vehicle::all()->toArray();
@@ -243,24 +258,14 @@ class VehicleController extends Controller
             $status = $request->status;
             $status_name = $request->status_name;
 
-
-           
-
-
             if ($warehouse) {
                 if ($warehouse != "") {
-                    if($warehouse == "all"){
+                    if ($warehouse == "all") {
                         $records = $records;
-                    }
-                    else{
+                    } else {
                         $records = $records->where('title_state', $warehouse);
-
                     }
-
-                    // dd($records);
-                    // return $records;
                 }
-               
             }
 
             if ($year) {
@@ -286,65 +291,18 @@ class VehicleController extends Controller
 
             if ($status) {
                 if ($status != "") {
-                    if($status == 'all'){
+                    if ($status == 'all') {
                         $records = $records;
-                        
-                    }else{
+
+                    } else {
                         $records = $records->with('images')->where('status', $status)->paginate($this->perpage);
                         $data['records'] = $records;
                         $output['view'] = view('vehicle.' . $status_name, $data)->render();
                         return Response($output);
                     }
-
-                    // return count($records);
                 }
             }
             $output['records'] = $records->paginate($this->perpage);
-            // return count($records);
-            // if (count($records) > 0) {
-            //     $i = 1;
-            //     foreach ($records as $val) {
-            //         // return $val;
-            //         $url_edit = url($this->action . '/edit/' . $val->id);
-            //         $url_delete = url($this->action . '/delete/' . $val->id);
-            //         $table .= '<tr>' .
-            //         '<td>' . $i . '</td>' .
-            //         '<td>' .
-            //         '<div class=' . '"d-flex align-items-center"' . '>' .
-            //         '<div style=' . '"vertical-align: middle"' . '>' . '<img src=' .
-            //         'http://localhost/Shippment-System/public/images/user.png' . ' alt="" ' . 'class=' .
-            //         '"customer_image"' . '>' . '</div>' .
-            //         '<div>' . $val->customer_name . '<br>' . '<span style=' .
-            //         '"font-size: 12px!important;"' . '>' . @$val->user->email .
-            //         '</span>' . '</div>' . '</div>' . '</td>' .
-            //         '<td>' . @$val->vin . '</td>' .
-            //         '<td>' . @$val->year . '</td>' .
-            //         '<td>' . @$val->make . '</td>' .
-            //         '<td>' . @$val->model . '</td>' .
-            //         '<td>' . @$val->vehicle_type . '</td>' .
-            //         '<td>' . @$val->value . '</td>' .
-            //         '<td>' . @$val->status . '</td>' .
-            //         '<td>' . @$val->user->name . '</td>' .
-            //             '<td>' .
-            //             '<button><a href=' . $url_edit . '><i class=' . '"ti-pencil"' . '></i></a></button>' . '<button><a href=' . $url_delete . '><i class=' . '"ti-trash"' . '></i></a></button>' .
-            //             '</td>' .
-            //             '</tr>';
-            //         $i++;
-            //     }
-            //     // return $table;
-            //     $page .= '<div>' . '<div class=' . '"d-flex justify-content-center"' . '>' . $records->links() . '</div>' . '<div>' . '<p>' . 'Displaying ' . count($records) . ' of ' . count($total) . ' vehicle(s)' . '</p>' . '</div>' . '</div>';
-            //     $output = [
-            //         'table' => $table,
-            //         'pagination' => $page,
-            //     ];
-            //     return Response($output);
-            // } else {
-            //     $table = '<tr class=' . '"font-size"' . '>' .
-            //         '<td colspan=' . '"11"' . 'class=' . '"h5 text-muted text-center"' . '>' . 'NO VEHICLES TO DISPLAY' . '</td>' . '</tr>';
-            //     $output = [
-            //         'table' => $table,
-            //     ];
-            // }
             return view('layouts.vehicle.FilterTable', $output)->render();
         }
     }
@@ -591,32 +549,34 @@ class VehicleController extends Controller
                     $url_view = url('admin/vehicle/profile/' . $row->id);
                     $url_delete = url('admin/vehicles/delete/' . $row->id);
                     $url_edit = url('admin/vehicles/edit/' . $row->id);
+                    $id = $row->id;
 
                     $btn = "<button class='profile-button'><a href=$url_view>
-                               <svg width='14' height='13' viewBox='0 0 16 14' fill='none'
-                                   xmlns='http://www.w3.org/2000/svg'>
-                                   <path
-                                       d='M16 7C16 7 13 2.1875 8 2.1875C3 2.1875 0 7 0 7C0 7 3 11.8125 8 11.8125C13 11.8125 16 7 16 7ZM1.173 7C1.65651 6.35698 2.21264 5.7581 2.833 5.21237C4.12 4.0845 5.88 3.0625 8 3.0625C10.12 3.0625 11.879 4.0845 13.168 5.21237C13.7884 5.7581 14.3445 6.35698 14.828 7C14.77 7.07613 14.706 7.16013 14.633 7.252C14.298 7.672 13.803 8.232 13.168 8.78763C11.879 9.9155 10.119 10.9375 8 10.9375C5.88 10.9375 4.121 9.9155 2.832 8.78763C2.21165 8.2419 1.65552 7.64301 1.172 7H1.173Z'
-                                       fill='#048B52' />
-                                   <path
-                                       d='M8 4.8125C7.33696 4.8125 6.70107 5.04297 6.23223 5.4532C5.76339 5.86344 5.5 6.41984 5.5 7C5.5 7.58016 5.76339 8.13656 6.23223 8.5468C6.70107 8.95703 7.33696 9.1875 8 9.1875C8.66304 9.1875 9.29893 8.95703 9.76777 8.5468C10.2366 8.13656 10.5 7.58016 10.5 7C10.5 6.41984 10.2366 5.86344 9.76777 5.4532C9.29893 5.04297 8.66304 4.8125 8 4.8125ZM4.5 7C4.5 6.18777 4.86875 5.40882 5.52513 4.83449C6.1815 4.26016 7.07174 3.9375 8 3.9375C8.92826 3.9375 9.8185 4.26016 10.4749 4.83449C11.1313 5.40882 11.5 6.18777 11.5 7C11.5 7.81223 11.1313 8.59118 10.4749 9.16551C9.8185 9.73984 8.92826 10.0625 8 10.0625C7.07174 10.0625 6.1815 9.73984 5.52513 9.16551C4.86875 8.59118 4.5 7.81223 4.5 7Z'
-                                       fill='#048B52' />
-                               </svg>
+                    <svg width='14' height='13' viewBox='0 0 16 14' fill='none'
+                        xmlns='http://www.w3.org/2000/svg'>
+                        <path
+                            d='M16 7C16 7 13 2.1875 8 2.1875C3 2.1875 0 7 0 7C0 7 3 11.8125 8 11.8125C13 11.8125 16 7 16 7ZM1.173 7C1.65651 6.35698 2.21264 5.7581 2.833 5.21237C4.12 4.0845 5.88 3.0625 8 3.0625C10.12 3.0625 11.879 4.0845 13.168 5.21237C13.7884 5.7581 14.3445 6.35698 14.828 7C14.77 7.07613 14.706 7.16013 14.633 7.252C14.298 7.672 13.803 8.232 13.168 8.78763C11.879 9.9155 10.119 10.9375 8 10.9375C5.88 10.9375 4.121 9.9155 2.832 8.78763C2.21165 8.2419 1.65552 7.64301 1.172 7H1.173Z'
+                            fill='#048B52' />
+                        <path
+                            d='M8 4.8125C7.33696 4.8125 6.70107 5.04297 6.23223 5.4532C5.76339 5.86344 5.5 6.41984 5.5 7C5.5 7.58016 5.76339 8.13656 6.23223 8.5468C6.70107 8.95703 7.33696 9.1875 8 9.1875C8.66304 9.1875 9.29893 8.95703 9.76777 8.5468C10.2366 8.13656 10.5 7.58016 10.5 7C10.5 6.41984 10.2366 5.86344 9.76777 5.4532C9.29893 5.04297 8.66304 4.8125 8 4.8125ZM4.5 7C4.5 6.18777 4.86875 5.40882 5.52513 4.83449C6.1815 4.26016 7.07174 3.9375 8 3.9375C8.92826 3.9375 9.8185 4.26016 10.4749 4.83449C11.1313 5.40882 11.5 6.18777 11.5 7C11.5 7.81223 11.1313 8.59118 10.4749 9.16551C9.8185 9.73984 8.92826 10.0625 8 10.0625C7.07174 10.0625 6.1815 9.73984 5.52513 9.16551C4.86875 8.59118 4.5 7.81223 4.5 7Z'
+                            fill='#048B52' />
+                    </svg>
 
-                               </a>
-                       </button>
-                       <button class='edit-button'>
-                                        <a href=$url_edit>
+                    </a>
+            </button>
+
+                       <button class='edit-button' onclick='updatevehicle(this.id)' id=$id
+                       style='cursor: pointer !important;'>
                                             <svg width='14' height='13' viewBox='0 0 16 16' fill='none'
                                                 xmlns='http://www.w3.org/2000/svg'>
                                                 <path
                                                     d='M2.66708 14.0004C2.72022 14.0068 2.77394 14.0068 2.82708 14.0004L5.49375 13.3338C5.61205 13.3056 5.7204 13.2457 5.80708 13.1604L14.0004 4.94042C14.2488 4.69061 14.3881 4.35267 14.3881 4.00042C14.3881 3.64818 14.2488 3.31024 14.0004 3.06042L12.9471 2.00042C12.8233 1.87646 12.6762 1.77811 12.5143 1.71101C12.3525 1.64391 12.179 1.60938 12.0037 1.60938C11.8285 1.60938 11.655 1.64391 11.4932 1.71101C11.3313 1.77811 11.1842 1.87646 11.0604 2.00042L2.86708 10.1938C2.78094 10.2808 2.71891 10.3888 2.68708 10.5071L2.02042 13.1738C1.99645 13.26 1.99011 13.3502 2.00177 13.439C2.01342 13.5277 2.04284 13.6133 2.08826 13.6904C2.13368 13.7676 2.19417 13.8348 2.26613 13.888C2.33808 13.9413 2.42003 13.9795 2.50708 14.0004C2.56022 14.0068 2.61394 14.0068 2.66708 14.0004ZM12.0004 2.94042L13.0604 4.00042L12.0004 5.06042L10.9471 4.00042L12.0004 2.94042ZM3.94042 11.0071L10.0004 4.94042L11.0604 6.00042L4.99375 12.0671L3.58708 12.4138L3.94042 11.0071Z'
                                                     fill='#2C77E7'/>
                                             </svg>
-                                        </a>
+
                                     </button>
                        <button class='delete-button'>
-                       <a href=$url_delete)>
+                       <a href=$url_delete>
                            <svg width='14' height='13' viewBox='0 0 12 12' fill='none'
                                xmlns='http://www.w3.org/2000/svg'>
                                <path
