@@ -199,4 +199,21 @@
         });
 
     }
+
+    function skip_view(id) {
+        $id = id;
+        $tab = $('#' + $id).attr('nexttab');
+        // alert($tab);
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('admin/customers/create') }}',
+            data: {
+                'tab': $tab
+            },
+            success: function(data) {
+                $('.modal-body').html(data);
+                $('#exampleModal').modal('show');
+            }
+        });
+    }
 </script>

@@ -2,7 +2,7 @@
 @section('body')
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-        style="z-index: 99999999999999;width: 80%!important;margin: 0 auto!important;">
+        style="z-index: 99999999999999;">
         <div class="modal-dialog modal-fullscreen scrollable mw-100 m-2 px-3 py-2" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">
@@ -12,7 +12,7 @@
                     <div>
                         <button type="button" class="close text-white h6" data-dismiss="modal" aria-label="Close"
                             style="margin-top: -11px;
-                        font-size: 26px;">
+                        font-size: F26px;">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -251,26 +251,9 @@
                         </tbody>
                     </table>
                 </div>
-                {{-- <div class="d-flex justify-content-end p-2" id="page">
-                    <div>
-                        <div>
-                            <p>
-                                Displaying {{ $records->count() }} of {{ $records->total() }} customer(s).
-                            </p>
-                        </div>
-                        <div>
-                            {{ $records->links() }}
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
         {{-- listing end --}}
-
-
-        <!-- Modal -->
-        <!-- Modal -->
-
 
         <script>
             function updatecustomer(id) {

@@ -28,7 +28,10 @@
                     $('#status_body').html(data);
                 }
                 $('#new_order_table').DataTable({
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -36,7 +39,10 @@
                     },
                 });
                 $('#dispatched_table').DataTable({
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -44,7 +50,10 @@
                     },
                 });
                 $('#on_hand_table').DataTable({
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -52,7 +61,10 @@
                     },
                 });
                 $('#towing_table').DataTable({
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -60,7 +72,10 @@
                     },
                 });
                 $('#vehicle_filter_table').DataTable({
-                   "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -69,7 +84,10 @@
                 });
 
                 $('#no_title_table').DataTable({
-                   "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -244,8 +262,7 @@
         });
     }
 
-
-    function fetchVehicles(id){
+    function fetchVehicles(id) {
         $tab = $('#' + id).attr('tab');
         $id = id;
         $.ajax({
@@ -259,10 +276,13 @@
                 console.log(data);
 
                 $('#status_body').html(data.view);
-                
+
                 $('#new_order_table').DataTable({
                     // scrollX: true,
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -271,7 +291,10 @@
                 });
                 $('#dispatched_table').DataTable({
                     // scrollX: true,
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -280,7 +303,10 @@
                 });
                 $('#on_hand_table').DataTable({
                     // scrollX: true,
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -289,7 +315,10 @@
                 });
                 $('#no_title_table').DataTable({
                     // scrollX: true,
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -298,7 +327,10 @@
                 });
                 $('#towing_table').DataTable({
                     // scrollX: true,
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -306,8 +338,11 @@
                     },
                 });
                 $('#vehicle_filter_table').DataTable({
-                //    scrollX: true,
-                   "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    //    scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",

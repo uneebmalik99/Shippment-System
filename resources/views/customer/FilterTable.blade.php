@@ -1,33 +1,31 @@
 @if (@$user){
 
-    @php
+    {{-- @php
         $custid = 1000100;
-    @endphp
-
-
+    @endphp  --}}
 
     @foreach ($user as $val)
         <tr style="border-bottom: 1.2px solid rgba(191, 191, 191, 1) !important">
-            <td>{{ $custid }}</td>
+            <td>{{ @$val['id'] }}</td>
             <td class="d-block d-flex">
-                @if (@$val[0]['user_image'])
-                    <div class="mt-2 mr-2">
-                        <img class="img-fluid" src="{{ asset(@$val['user_image']) }}" alt="card-img" />
-                    </div>
-                @else
-                    <div class="mt-2 mr-2">
-                        <img class="img-fluid" src="{{ asset('assets/images/user.png') }}" alt="card-img"
-                            style="width:20px;height:20px" />
-                    </div>
-                @endif
-                <div>
-                    <div>
-                        <span><b>{{ @$val['name'] }}</b></span>
-                    </div>
-                    <div>
-                        <span style="font-size: 12px !important;">{{ @$val['email'] }}</span>
-                    </div>
+                {{-- @if (@$val[0]['user_image'])
+                <div class="mt-2 mr-2">
+                    <img class="img-fluid" src="{{ asset(@$val['user_image']) }}" alt="card-img" />
                 </div>
+            @else
+                <div class="mt-2 mr-2">
+                    <img class="img-fluid" src="{{ asset('assets/images/user.png') }}" alt="card-img"
+                        style="width:20px;height:20px" />
+                </div>
+            @endif --}}
+                <span>{{ @$val['name'] }}</span>
+                {{-- <div>
+                <div>
+                </div>
+                <div>
+                    <span style="font-size: 12px !important;">{{ @$val['email'] }}</span>
+                </div>
+            </div> --}}
 
 
             </td>
@@ -101,9 +99,9 @@
             </td>
         </tr>
 
-        @php
+        {{-- @php
             $custid++;
-        @endphp
+        @endphp --}}
     @endforeach
 @else
     <tr>
