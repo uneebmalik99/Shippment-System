@@ -43,7 +43,7 @@
                     <div class="d-xl-flex border-shipment">
                         <div class="col-12 d-lg-flex p-0">
                             <div class="col-lg-6 col-12 p-0">
-                                <div class="col-12">
+                                <div class="col-12 p-0">
                                     <div class="tab_card my-3">
                                         <div class="col-7 py-3">
                                             <div class="text-color" style="cursor: pointer;" id="shipment_customer"
@@ -321,7 +321,7 @@
                             </div>
 
                             <div class="col-lg-6 col-12 p-0">
-                                <div class="col-12">
+                                <div class="col-12 p-0">
                                     <div class="tab_card my-3">
                                         <div class="col-7 py-3">
                                             <div class="text-color" style="cursor: pointer;" id="shipment_loading"

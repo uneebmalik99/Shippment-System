@@ -1,12 +1,9 @@
 @include('layouts.customer_create.navbar')
 
-
-
 <form method="POST" id="customer_general_form" enctype="multipart/form-data">
     <div>
         <div class="row my-1">
-            <div class="col-11 mx-auto">
-
+            <div class="col-12">
                 <div class="row">
                     <div class="col-sm-6 col-md-5 col-lg-6">
                         <div class="tab_card px-2">
@@ -365,22 +362,23 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 px-5 d-flex justify-content-end">
+        <div class="col-12 py-2 px-5 d-flex justify-content-end">
 
-                <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6"
-                    name="added_by_user" id="added_by_user" readonly value="{{ Auth::user()->id }}">
+            <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_user"
+                id="added_by_user" readonly value="{{ Auth::user()->id }}">
 
-                <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="role_id"
-                    id="role_id" readonly value="4">
+            <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="role_id"
+                id="role_id" readonly value="4">
 
-                <button type="button" class="btn col-2 next-style text-white p-0" style="cursor:pointer;"
-                    onclick="createForm(this.id)" id="general_customer" name="{{ $module['button'] }}"
-                    data-next="billing_customer_tab">
-                    <div class="unskew my-1 px-0">Next</div>
-                </button>
-            </div>
-
+            <button type="button" class="btn next-style text-white col-1 py-1 mx-2" style="cursor:pointer;"
+                onclick="skip_view(this.id)" id="skip" nexttab="billing">
+                <div class="unskew">skip</div>
+            </button>
+            <button type="button" class="btn next-style text-white col-1 py-1 mx-2" style="cursor:pointer;"
+                onclick="createForm(this.id)" id="general_customer" name="{{ $module['button'] }}"
+                data-next="billing_customer_tab">
+                <div class="unskew">Next</div>
+            </button>
         </div>
     </div>
 

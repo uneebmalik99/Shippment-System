@@ -821,7 +821,6 @@
         </div>
     </div>
     <div class="col-12 py-2 px-5 d-flex justify-content-end">
-
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_user"
             id="added_by_user" readonly value="{{ Auth::user()->id }}">
         <input type="hidden" readonly name="tab" value="general">

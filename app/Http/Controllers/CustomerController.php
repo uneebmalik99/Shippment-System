@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\Datatables\Datatables;
 
-
 class CustomerController extends Controller
 {
     private $type = "Customers";
@@ -91,6 +90,17 @@ class CustomerController extends Controller
 
         $notification = $this->Notification();
         $data['records'] = User::where('role_id', 4)->paginate($this->perpage);
+        // $records = User::where('role_id', 4)->paginate($this->perpage);
+        // foreach ($records as $record) {
+        //     $date = $record['created_at']->toDateString();
+        //     $dates[] = $date;
+        // }
+        // $i = 0;
+        // foreach ($dates as $date) {
+        //     $records[$i]['created_at'] = $date;
+        //     $data['records'][] = $records;
+        //     $i++;
+        // }
 
         $data['active_customer'] = User::where('role_id', 4)->where('status', '1')->get()->count();
 
@@ -166,6 +176,7 @@ class CustomerController extends Controller
 
         if ($request->ajax()) {
             $tab = $request->tab;
+            // dd($tab);
             $data['location'] = Location::all()->toArray();
             $output = view('layouts.customer_create.' . $tab, $data)->render();
             return Response($output);
@@ -184,8 +195,10 @@ class CustomerController extends Controller
 
     public function edit(Request $request, $id = null)
     {
-        
+
         $data['documents'] = CustomerDocument::with('user')->where('user_id', $id)->get();
+        $data['location'] = Location::all();
+        // dd($data);
         $output = view('layouts.customer.customer_edit', $data)->render();
         return Response($output);
     }
@@ -285,7 +298,6 @@ class CustomerController extends Controller
         ];
 
         $all_vehicles = Vehicle::all()->count();
-
         $customer_vehicles = Vehicle::where('added_by_user', $id)->count();
         $CustomerVehicles_value = Vehicle::get()->sum('value');
         if ($all_vehicles != 0) {
@@ -297,7 +309,7 @@ class CustomerController extends Controller
         $data['customer_vehicles'] = $customer_vehicles;
         $data['allVehicles_value'] = $CustomerVehicles_value;
 
-        $onhand = Vehicle::where('status', '1')->orwhere('added_by_user', $id);
+        $onhand = Vehicle::where('status', '1')->where('added_by_user', $id)->get();
         $onhand_count = $onhand->count();
         $onhand_value = $onhand->sum('value');
         $data['onhand_count'] = $onhand_count;
@@ -309,7 +321,7 @@ class CustomerController extends Controller
             $data['onhand_count_percentage'] = 0;
         }
 
-        $dispatch = Vehicle::where('status', '2')->orwhere('added_by_user', $id);
+        $dispatch = Vehicle::where('status', '2')->where('added_by_user', $id)->get();
         $dispatch_count = $dispatch->count();
         $dispatch_value = $dispatch->sum('value');
         $data['dispatch_count'] = $dispatch_count;
@@ -321,19 +333,19 @@ class CustomerController extends Controller
             $data['dispatch_count_percentage'] = 0;
         }
 
-        $manifest = Vehicle::where('status', '3')->orwhere('added_by_user', $id);
-        $manifest_count = $manifest->count();
-        $manifest_value = $manifest->sum('value');
-        $data['manifest_count'] = $manifest_count;
-        $data['manifest_value'] = $manifest_value;
-        if ($all_vehicles != 0) {
-            $manifest_count_percentage = ($manifest_count / $all_vehicles) * 100;
-            $data['manifest_count_percentage'] = round($manifest_count_percentage);
-        } else {
-            $data['manifest_count_percentage'] = 0;
-        }
+        // $manifest = Vehicle::where('status', '3')->where('added_by_user', $id)->get();
+        // $manifest_count = $manifest->count();
+        // $manifest_value = $manifest->sum('value');
+        // $data['manifest_count'] = $manifest_count;
+        // $data['manifest_value'] = $manifest_value;
+        // if ($all_vehicles != 0) {
+        //     $manifest_count_percentage = ($manifest_count / $all_vehicles) * 100;
+        //     $data['manifest_count_percentage'] = round($manifest_count_percentage);
+        // } else {
+        //     $data['manifest_count_percentage'] = 0;
+        // }
 
-        $shipped = Vehicle::where('status', '4')->orwhere('added_by_user', $id);
+        $shipped = Vehicle::where('status', '4')->where('added_by_user', $id)->get();
         $shipped_count = $shipped->count();
         $shipped_value = $shipped->sum('value');
         $data['shipped_count'] = $shipped_count;
@@ -345,7 +357,7 @@ class CustomerController extends Controller
             $data['shipped_count_percentage'] = 0;
         }
 
-        $arrived = Vehicle::where('status', '5')->orwhere('added_by_user', $id);
+        $arrived = Vehicle::where('status', '5')->where('added_by_user', $id)->get();
         $arrived_count = $arrived->count();
         $arrived_value = $arrived->sum('value');
         $data['arrived_count'] = $arrived_count;
@@ -357,7 +369,8 @@ class CustomerController extends Controller
             $data['arrived_count_percentage'] = 0;
         }
 
-        $posted = Vehicle::where('status', '6')->orwhere('added_by_user', $id);
+        $posted = Vehicle::where('status', '6')->where('added_by_user', $id)->get();
+        // dd($posted);
         $posted_count = $posted->count();
         $posted_value = $posted->sum('value');
         $data['posted_count'] = $posted_count;
@@ -369,7 +382,7 @@ class CustomerController extends Controller
             $data['posted_count_percentage'] = 0;
         }
 
-        $booked = Vehicle::where('status', '7')->orwhere('added_by_user', $id);
+        $booked = Vehicle::where('status', '7')->where('added_by_user', $id)->get();
         $booked_count = $booked->count();
         $booked_value = $booked->sum('value');
         $data['booked_count'] = $booked_count;
@@ -472,7 +485,7 @@ class CustomerController extends Controller
         $data['customer_vehicles'] = $customer_vehicles;
         $data['allVehicles_value'] = $CustomerVehicles_value;
 
-        $onhand = Vehicle::where('status', '1')->orwhere('added_by_user', $id);
+        $onhand = Vehicle::where('status', '1')->orwhere('added_by_user', $id)->get();
         $onhand_count = $onhand->count();
         $onhand_value = $onhand->sum('value');
         $data['onhand_count'] = $onhand_count;
@@ -484,7 +497,7 @@ class CustomerController extends Controller
             $data['onhand_count_percentage'] = 0;
         }
 
-        $dispatch = Vehicle::where('status', '2')->orwhere('added_by_user', $id);
+        $dispatch = Vehicle::where('status', '2')->orwhere('added_by_user', $id)->get();
         $dispatch_count = $dispatch->count();
         $dispatch_value = $dispatch->sum('value');
         $data['dispatch_count'] = $dispatch_count;
@@ -496,7 +509,7 @@ class CustomerController extends Controller
             $data['dispatch_count_percentage'] = 0;
         }
 
-        $manifest = Vehicle::where('status', '3')->orwhere('added_by_user', $id);
+        $manifest = Vehicle::where('status', '3')->orwhere('added_by_user', $id)->get();
         $manifest_count = $manifest->count();
         $manifest_value = $manifest->sum('value');
         $data['manifest_count'] = $manifest_count;
@@ -508,7 +521,7 @@ class CustomerController extends Controller
             $data['manifest_count_percentage'] = 0;
         }
 
-        $shipped = Vehicle::where('status', '4')->orwhere('added_by_user', $id);
+        $shipped = Vehicle::where('status', '4')->orwhere('added_by_user', $id)->get();
         $shipped_count = $shipped->count();
         $shipped_value = $shipped->sum('value');
         $data['shipped_count'] = $shipped_count;
@@ -520,7 +533,7 @@ class CustomerController extends Controller
             $data['shipped_count_percentage'] = 0;
         }
 
-        $arrived = Vehicle::where('status', '5')->orwhere('added_by_user', $id);
+        $arrived = Vehicle::where('status', '5')->orwhere('added_by_user', $id)->get();
         $arrived_count = $arrived->count();
         $arrived_value = $arrived->sum('value');
         $data['arrived_count'] = $arrived_count;
@@ -532,7 +545,7 @@ class CustomerController extends Controller
             $data['arrived_count_percentage'] = 0;
         }
 
-        $posted = Vehicle::where('status', '6')->orwhere('added_by_user', $id);
+        $posted = Vehicle::where('status', '6')->orwhere('added_by_user', $id)->get();
         $posted_count = $posted->count();
         $posted_value = $posted->sum('value');
         $data['posted_count'] = $posted_count;
@@ -544,7 +557,7 @@ class CustomerController extends Controller
             $data['posted_count_percentage'] = 0;
         }
 
-        $booked = Vehicle::where('status', '7')->orwhere('added_by_user', $id);
+        $booked = Vehicle::where('status', '7')->orwhere('added_by_user', $id)->get();
         $booked_count = $booked->count();
         $booked_value = $booked->sum('value');
         $data['booked_count'] = $booked_count;
@@ -740,19 +753,24 @@ class CustomerController extends Controller
                 'page' => 'list',
             ],
         ];
+        $user = User::where('role_id', '4');
+        if ($filterText == "all") {
+            $data['user'] = $user->get();
+            // dd('all');
+        } else {
+            $data['user'] = $user->where('status', $filterText)
+                ->orWhere('city', $filterText)
+                ->orWhere('state', $filterText)->get();
+            // $data['user'] = $user->where('status', $filterText)->orwhere('city', $filterText)->orwhere('state', $filterText)->get()->toArray();
 
-        $data['user'] = User::where('role_id', 4)->where('status', $filterText)->orwhere('city', $filterText)->orwhere('state', $filterText)->get()->toArray();
-
+        }
         $output = view('customer.FilterTable', $data)->render();
-
         return Response($output);
-
     }
 
     public function changeNotification(Request $req)
     {
         $id = $req->id;
-
         $notification = Notification::where('id', $id)->get();
         return Response($notification);
 
@@ -772,9 +790,10 @@ class CustomerController extends Controller
     //     Excel::import(new CustomersImport, request()->file('import_document'));
     // }
 
-    public function serverside(Request $request){
+    public function serverside(Request $request)
+    {
         if ($request->ajax()) {
-            $data = User::where('role_id',4);
+            $data = User::where('role_id', 4);
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -785,12 +804,20 @@ class CustomerController extends Controller
                     $output = view('layouts.customer.action_buttons', $data)->render();
                     return $output;
                 })
-                ->rawColumns(['action'])
+                ->addColumn('created_at', function ($row) {
+                    $data['row'] = $row;
+                    $output = view('layouts.customer.created_at', $data)->render();
+                    return $output;
+                })
+                ->addColumn('status', function ($row) {
+                    $data['row'] = $row;
+                    $output = view('layouts.customer.status', $data)->render();
+                    return $output;
+                })
+                ->rawColumns(['action', 'created_at', 'status'])
                 ->make(true);
         }
-
         return back();
     }
 
-   
 }

@@ -545,7 +545,6 @@ class VehicleController extends Controller
 
     public function serverside(Request $request)
     {
-
         if ($request->ajax()) {
             $data = Vehicle::with('vehicle_status')->get()->toArray();
             return Datatables::of($data)
@@ -572,7 +571,6 @@ class VehicleController extends Controller
                     </svg>
                     </a>
             </button>
-
                        <button class='edit-button' onclick='updatevehicle(this.id)' id=$id
                        style='cursor: pointer !important;'>
                                             <svg width='14' height='13' viewBox='0 0 16 16' fill='none'
@@ -597,11 +595,11 @@ class VehicleController extends Controller
                 ->rawColumns(['action', 'status'])
                 ->make(true);
         }
-
         return back();
     }
 
-    public function fetchVehicles(Request $req){
+    public function fetchVehicles(Request $req)
+    {
         if ($req->ajax()) {
 
             $output = [];
@@ -612,14 +610,12 @@ class VehicleController extends Controller
             $status = $req->id;
             $status_name = $req->tab;
 
-            if($status)
-            {
+            if ($status) {
                 $records = $records->with('images')->where('status', $status)->paginate($this->perpage);
                 $data['records'] = $records;
                 $output['view'] = view('vehicle.' . $status_name, $data)->render();
                 return Response($output);
             }
-            
 
         }
     }

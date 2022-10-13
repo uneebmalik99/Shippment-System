@@ -4,29 +4,29 @@
     <div class="d-flex px-2 ml-5 mt-4" style="width: 90%!important;">
         <div class="d-block w-100">
             <div>
-                <label for="first_name" class="text-info font-style">First Name</label>
+                <label for="first_name" class="font-style">First Name</label>
             </div>
             <div>
-                <input type="text" class="form-control rounded btn col-8 input-style text-left" style="font-size:12px!important;" name="first_name"
-                    id="first_name">
-            </div>
-        </div>
-        <div class="d-block w-100">
-            <div>
-                <label for="company_name" class="text-info font-style">Company Name</label>
-            </div>
-            <div>
-                <input type="text" class="form-control rounded btn col-8 input-style text-left" style="font-size:12px!important;" name="company_name"
-                    id="company_name">
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                    style="font-size:12px!important;" name="first_name" id="first_name">
             </div>
         </div>
         <div class="d-block w-100">
             <div>
-                <label for="country" class="text-info font-style">Country</label>
+                <label for="company_name" class="font-style">Company Name</label>
             </div>
             <div>
-                <input type="text" class="form-control rounded btn col-8 input-style text-left" style="font-size:12px!important;" name="country"
-                    id="country">
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                    style="font-size:12px!important;" name="company_name" id="company_name">
+            </div>
+        </div>
+        <div class="d-block w-100">
+            <div>
+                <label for="country" class="font-style">Country</label>
+            </div>
+            <div>
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                    style="font-size:12px!important;" name="country" id="country">
             </div>
         </div>
     </div>
@@ -34,29 +34,29 @@
     <div class="d-flex px-2 ml-5 my-3" style="width: 90%!important;">
         <div class="d-block w-100">
             <div>
-                <label for="last_name" class="text-info font-style">Last Name</label>
+                <label for="last_name" class="font-style">Last Name</label>
             </div>
             <div>
-                <input type="text" class="form-control rounded btn col-8 input-style text-left" style="font-size:12px!important;" name="last_name"
-                    id="last_name">
-            </div>
-        </div>
-        <div class="d-block w-100">
-            <div>
-                <label for="company_email" class="text-info font-style">Company Email</label>
-            </div>
-            <div>
-                <input type="text" class="form-control rounded btn col-8 input-style text-left" style="font-size:12px!important;" name="company_email"
-                    id="company_email">
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                    style="font-size:12px!important;" name="last_name" id="last_name">
             </div>
         </div>
         <div class="d-block w-100">
             <div>
-                <label for="city" class="text-info font-style">City</label>
+                <label for="company_email" class="font-style">Company Email</label>
             </div>
             <div>
-                <input type="text" class="form-control rounded btn col-8 input-style text-left" style="font-size:12px!important;" name="city"
-                    id="city">
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                    style="font-size:12px!important;" name="company_email" id="company_email">
+            </div>
+        </div>
+        <div class="d-block w-100">
+            <div>
+                <label for="city" class="font-style">City</label>
+            </div>
+            <div>
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                    style="font-size:12px!important;" name="city" id="city">
             </div>
         </div>
     </div>
@@ -64,29 +64,29 @@
     <div class="d-flex px-2 ml-5" style="width: 90%!important;">
         <div class="d-block w-100">
             <div>
-                <label class="text-info font-style" for="phone">Phone</label>
+                <label class="font-style" for="phone">Phone</label>
             </div>
             <div>
-                <input class="form-control rounded btn col-8 input-style text-left" style="font-size:12px!important;" type="text" name="phone"
-                    id="phone">
+                <input class="form-control-sm border border-0 rounded-pill bg col-10" style="font-size:12px!important;"
+                    type="text" name="phone" id="phone">
             </div>
         </div>
         <div class="d-block w-100 p-2">
             <div>
-                <label class="text-info font-style" for="address">Address</label>
+                <label class="font-style" for="address">Address</label>
             </div>
             <div>
-                <input class="form-control rounded btn col-8 input-style text-left" style="font-size:12px!important;" type="text" name="address"
-                    id="address">
+                <input class="form-control-sm border border-0 rounded-pill bg col-10" style="font-size:12px!important;"
+                    type="text" name="address" id="address">
             </div>
         </div>
         <div class="d-block w-100">
             <div>
-                <label class="text-info font-style" for="zip_code">Zip Code</label>
+                <label class="font-style" for="zip_code">Zip Code</label>
             </div>
             <div>
-                <input class="form-control rounded btn col-8 input-style text-left" style="font-size:12px!important;" type="text" name="zip_code"
-                    id="zip_code">
+                <input class="form-control-sm border border-0 rounded-pill bg col-10" style="font-size:12px!important;"
+                    type="text" name="zip_code" id="zip_code">
             </div>
         </div>
     </div>
@@ -95,7 +95,7 @@
         <div class="text-muted text-left col-4 text-head">
             <div style="font-weight:bold;font-size:14px!important">Identification Type</div>
         </div>
-        <div class="text-muted text-left col-4 text-head" >
+        <div class="text-muted text-left col-4 text-head">
             <div style="font-weight:bold;font-size:14px!important">Identification Number</div>
         </div>
         <div class="text-muted text-left col-4 text-head">
@@ -106,29 +106,30 @@
     <div class="d-flex ml-5 p-2" style="width: 90%!important;">
         <div class="d-block w-100">
             <div>
-                <label class="text-info font-style" for="foreign_passport_number">Foreign Passport No</label>
+                <label class="font-style" for="foreign_passport_number">Foreign Passport No</label>
             </div>
             <div>
-                <input class="form-control rounded btn col-8 input-style text-left" style="font-size:12px!important;" type="text"
-                    name="foreign_passport_number" id="foreign_passport_number">
+                <input class="form-control-sm border border-0 rounded-pill bg col-10" style="font-size:12px!important;"
+                    type="text" name="foreign_passport_number" id="foreign_passport_number">
             </div>
         </div>
         <div class="d-block w-100">
             <div style="font-weight:bold;font-size:14px!important;">
-                <label class="text-info font-style" for="identification_number">Identification Number</label>
+                <label class="font-style" for="identification_number">Identification Number</label>
             </div>
             <div>
-                <input class="form-control rounded btn col-8 input-style text-left" style="font-size:12px!important;" type="text"
-                    name="identification_number" id="identification_number">
+                <input class="form-control-sm border border-0 rounded-pill bg col-10"
+                    style="font-size:12px!important;" type="text" name="identification_number"
+                    id="identification_number">
             </div>
         </div>
         <div class="d-block w-100">
             <div>
-                <label class="text-info font-style" for="expiry_date">Expiry Date</label>
+                <label class="font-style" for="expiry_date">Expiry Date</label>
             </div>
             <div>
-                <input class="form-control rounded btn col-8 input-style text-left" style="font-size:12px!important;" type="text" name="expiry_date"
-                    id="expiry_date">
+                <input class="form-control-sm border border-0 rounded-pill bg col-10"
+                    style="font-size:12px!important;" type="text" name="expiry_date" id="expiry_date">
             </div>
         </div>
     </div>
@@ -136,7 +137,9 @@
     <div>
         <div class="d-flex justify-content-between p-2 ml-5">
             <div class="col-4 text-left text-info">
-                <span><div style="font-size:14px!important">Shipping</div></span>
+                <span>
+                    <div style="font-size:14px!important">Shipping</div>
+                </span>
             </div>
         </div>
 
@@ -156,7 +159,9 @@
     <div>
         <div class="d-flex justify-content-between p-2 ml-5">
             <div class="col-4 text-left text-info">
-                <span><div style="font-size:14px!important">Shipment Type</div></span>
+                <span>
+                    <div style="font-size:14px!important">Shipment Type</div>
+                </span>
             </div>
         </div>
 
@@ -190,7 +195,9 @@
     <div>
         <div class="d-flex justify-content-between p-2 ml-5">
             <div class="col-4 text-left text-info">
-                <span><div style="font-size:14px!important">Purchased From</div></span>
+                <span>
+                    <div style="font-size:14px!important">Purchased From</div>
+                </span>
             </div>
         </div>
         <div class="d-flex justify-content-start p-2 ml-5">
@@ -221,7 +228,9 @@
     <div>
         <div class="d-flex justify-content-between p-2 ml-5">
             <div class="col-4 text-left text-info">
-                <span><div style="font-size:14px!important">Request Pickup</div></span>
+                <span>
+                    <div style="font-size:14px!important">Request Pickup</div>
+                </span>
             </div>
         </div>
 
@@ -243,7 +252,9 @@
     <div>
         <div class="d-flex justify-content-between p-2 ml-5">
             <div class="col-4 text-left text-info">
-                <span><div style="font-size:14px!important">End Use</div></span>
+                <span>
+                    <div style="font-size:14px!important">End Use</div>
+                </span>
             </div>
         </div>
 
@@ -265,14 +276,16 @@
     <div>
         <div class="d-flex justify-content-between p-2 ml-5">
             <div class="col-4 text-left text-info">
-                <span><div style="font-size:14px!important">Buyer Number</div></span>
+                <span>
+                    <div style="font-size:14px!important">Buyer Number</div>
+                </span>
             </div>
         </div>
 
         <div class="d-flex justify-content-start p-2 ml-5">
             <div class="d-flex col-4">
-                <input class="form-control rounded btn col-8 input-style text-left" type="text" style="font-size:12px!important;"
-                    name="buyer_number" id="buyer_number">
+                <input class="form-control-sm border border-0 rounded-pill bg col-10" type="text"
+                    style="font-size:12px!important;" name="buyer_number" id="buyer_number">
             </div>
         </div>
     </div>
@@ -281,13 +294,14 @@
 
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="email"
             id="email" value="{{ @$module['email'] }}"readonly>
-        {{-- <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_role"
-            id="added_by_email" value="{{ Auth::user()->id }}"readonly value="{{ @$user['added_by_email'] }}">
-        <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_role"
-            id="added_by_email" value="{{ Auth::user()->id }}"readonly value="{{ @$user['added_by_email'] }}"> --}}
-            <button type="button" class="btn col-1 next-style text-white " onclick="createForm(this.id)"
-            id="billing_customer" name="{{ $module['button'] }}" style="padding: 4px;" data-next="shipper_customer_tab">
-        <div class="unskew">Next</div>
-    </button>
+        <button type="button" class="btn next-style text-white col-1 py-1 mx-2" style="cursor:pointer;"
+            onclick="skip_view(this.id)" id="skip" nexttab="shipper">
+            <div class="unskew">skip</div>
+        </button>
+        <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="createForm(this.id)"
+            id="billing_customer" name="{{ $module['button'] }}" style="padding: 4px;"
+            data-next="shipper_customer_tab">
+            <div class="unskew">Next</div>
+        </button>
     </div>
 </form>

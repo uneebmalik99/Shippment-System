@@ -1,8 +1,8 @@
 @extends('layouts.partials.mainlayout')
 @section('body')
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true" style="z-index: 99999999999999;width: 80%!important;margin: 0 auto!important;">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        style="z-index: 99999999999999;">
         <div class="modal-dialog modal-fullscreen scrollable mw-100 m-2 px-3 py-2" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">
@@ -12,7 +12,7 @@
                     <div>
                         <button type="button" class="close text-white h6" data-dismiss="modal" aria-label="Close"
                             style="margin-top: -11px;
-                        font-size: 26px;">
+                        font-size: F26px;">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -174,21 +174,21 @@
                                     <div class="d-flex justify-content-center align-items-center px-1">
                                         <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
-                                         
+
                                             <path d="M11 16H13V7H16L12 2L8 7H11V16Z" fill="#2c3e50" />
                                             <path
                                                 d="M5 22H19C20.103 22 21 21.103 21 20V11C21 9.897 20.103 9 19 9H15V11H19V20H5V11H9V9H5C3.897 9 3 9.897 3 11V20C3 21.103 3.897 22 5 22Z"
-                                           
                                                 fill="#2c3e50" />
                                         </svg>
-                                
+
                                         <span class="pl-1 font-size" style="color:#2c3e50">Export</span>
                                     </div>
                                 </a>
                             </div>
                             <div class="col-5 px-0 d-flex justify-content-center">
                                 <button type="button"
-                                    class="text-white form-control-sm border py-1 btn-info rounded modal_button col-12" id="customer" style="background: #3e5871;" data-target="#exampleModal">
+                                    class="text-white form-control-sm border py-1 btn-info rounded modal_button col-12"
+                                    id="customer" style="background: #3e5871;" data-target="#exampleModal">
                                     <div class="d-flex justify-content-center align-items-center">
                                         <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -225,6 +225,7 @@
                             <select class="form-control-sm border-style input-border-style rounded col-12 text-muted"
                                 name="status" id="status" onchange="filterTable(this.value)">
                                 <option value="" disabled selected>Status</option>
+                                <option value="all">All</option>
                                 <option value="1">Active</option>
                                 <option value="0">In Active</option>
                             </select>
@@ -246,30 +247,13 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="tbody">
-        
+
                         </tbody>
                     </table>
                 </div>
-                {{-- <div class="d-flex justify-content-end p-2" id="page">
-                    <div>
-                        <div>
-                            <p>
-                                Displaying {{ $records->count() }} of {{ $records->total() }} customer(s).
-                            </p>
-                        </div>
-                        <div>
-                            {{ $records->links() }}
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
         {{-- listing end --}}
-
-
-        <!-- Modal -->
-        <!-- Modal -->
-
 
         <script>
             function updatecustomer(id) {
@@ -305,82 +289,84 @@
                     contentType: false,
                     data: formData,
                     success: function(data) {
-        
+
                         iziToast.success({
                             title: 'Customer',
                             message: data,
                             position: 'topCenter',
                             zindex: '9999999999999',
-        
+
                         });
-        
+
                         $('#exampleModal').modal('hide');
                         location.reload();
-        
-        
-        
+
+
+
                     }
                 });
             }
         </script>
 
 
-<script type="text/javascript">
-    $(function() {
-        var table = $('#customer_table').DataTable({
-            processing: true,
-            serverSide: true,
-            "lengthMenu": [[50, 100, 500], [50, 100, 500]],
-            // scrollX: true,
-            language: {
-                search: "",
-                sLengthMenu: "_MENU_",
-                searchPlaceholder: "Search",
-                processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
-            },
-            ajax: "{{ route('customer.records') }}",
-            columns: [{
-                    data: 'id',
-                    name: 'id'
-                },
-                {
-                    data: 'username',
-                    name: 'username'
-                },
-                {
-                    data: 'company_name',
-                    name: 'company_name'
-                },
-                {
-                    data: 'phone',
-                    name: 'phone'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'created_at',
-                    name: 'created_at'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        });
-    });
-</script>
+        <script type="text/javascript">
+            $(function() {
+                var table = $('#customer_table').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
+                    // scrollX: true,
+                    language: {
+                        search: "",
+                        sLengthMenu: "_MENU_",
+                        searchPlaceholder: "Search",
+                        processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+                    },
+                    ajax: "{{ route('customer.records') }}",
+                    columns: [{
+                            data: 'id',
+                            name: 'id'
+                        },
+                        {
+                            data: 'username',
+                            name: 'username'
+                        },
+                        {
+                            data: 'company_name',
+                            name: 'company_name'
+                        },
+                        {
+                            data: 'phone',
+                            name: 'phone'
+                        },
+                        {
+                            data: 'status',
+                            name: 'status'
+                        },
+                        {
+                            data: 'created_at',
+                            name: 'created_at'
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false,
+                            searchable: false
+                        },
+                    ]
+                });
+            });
+        </script>
 
-@if (Session::has('deleted'))
-<script>
-iziToast.warning({
-    position: 'topRight',
-    message: '{{ Session::get('deleted') }}',
-});
-</script>
-@endif
-
+        @if (Session::has('deleted'))
+            <script>
+                iziToast.warning({
+                    position: 'topRight',
+                    message: '{{ Session::get('deleted') }}',
+                });
+            </script>
+        @endif
     @endsection

@@ -1,5 +1,5 @@
 {{-- Navbar started --}}
-<nav class="navbar header-navbar pcoded-header" header-theme="theme4">
+<nav class="navbar header-navbar pcoded-header p-0" header-theme="theme4">
     <div class="navbar-wrapper">
         <div class="navbar-logo">
             <a class="mobile-menu" id="mobile-collapse" href="#!">
@@ -27,7 +27,7 @@
             <div>
                 <ul class="nav-left">
                     <li>
-                        <div class="sidebar_toggle">
+                        <div class="sidebar_toggle mt-1">
                             <a href="javascript:void(0)"><i class="ti-menu"></i></a>
                         </div>
                     </li>

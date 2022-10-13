@@ -223,6 +223,11 @@
     $('.close').on('click', function() {
         $('#exampleModal').modal('hide');
     })
+
+    function hidemodal() {
+        $('#exampleModal').modal('hide');
+
+    }
 </script>
 
 {{-- Load Modal --}}
@@ -291,7 +296,10 @@
                         "lengthChange": false,
                         "info": false,
                         "bPaginate": false,
-                        "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                        "lengthMenu": [
+                            [50, 100, 500],
+                            [50, 100, 500]
+                        ],
                         language: {
                             search: "",
                             sLengthMenu: "_MENU_",
@@ -538,8 +546,6 @@
 
     function updateRole(id) {
         $id = id;
-
-
         $.ajax({
             type: "post",
             url: "{{ route('user.updatemodelshow') }}",

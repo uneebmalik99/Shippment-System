@@ -1,6 +1,6 @@
 @extends('layouts.partials.mainlayout')
 @section('body')
-    <style>
+    {{-- <style>
         .dataTables_scrollHead {
             width: 100% !important;
         }
@@ -15,14 +15,7 @@
             margin: 0 auto !important;
             z-index: 99999999;
         }
-
-
-        div.dataTables_wrapper div.dataTables_info {
-
-            margin: 4px 0 !important;
-            /* padding: 10px!important; */
-        }
-    </style>
+    </style> --}}
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
         style="z-index: 9999999999;">
@@ -366,9 +359,6 @@
                         </tbody>
                     </table>
                 </div>
-
-                {{-- <div class="d-flex justify-content-end p-2" id="page">
-                </div> --}}
             </div>
         </div>
         {{-- listing end --}}
@@ -402,7 +392,6 @@
                     search: "",
                     sLengthMenu: "_MENU_",
                     searchPlaceholder: "Search",
-                    
                     
                     processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
                 },
@@ -461,6 +450,8 @@
               
             })
         });
+
+        
     </script>
 
     @if (Session::has('success'))
