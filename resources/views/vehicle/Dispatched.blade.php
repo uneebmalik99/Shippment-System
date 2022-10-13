@@ -1,13 +1,15 @@
-<table id="dispatched_table" class="table scroll row-border">
+<table id="dispatched_table" class="table row-border" >
     <thead class="bg-custom">
         <tr class="font-size">
             <th class="font-bold-tr">Sr</th>
-            <th class="font-bold-tr">ASSIGN DATE</th>
+            <th class="font-bold-tr">Dispatch DATE</th>
             <th class="font-bold-tr">CLIENT</th>
-            <th class="font-bold-tr">DESCRIPTION</th>
+            <th class="font-bold-tr">Year</th>
+            <th class="font-bold-tr">Make</th>
+            <th class="font-bold-tr">Model</th>
             <th class="font-bold-tr">VIN</th>
             <th class="font-bold-tr">LOT</th>
-            <th class="font-bold-tr">BIDDER</th>
+            <th class="font-bold-tr">Buyer Id</th>
             <th class="font-bold-tr">AUCTION</th>
             <th class="font-bold-tr">PICK UP LOCATION</th>
             <th class="font-bold-tr">DISPATCH</th>
@@ -18,7 +20,6 @@
             <th class="font-bold-tr">TITLE</th>
             <th class="font-bold-tr">KEYS</th>
             <th class="font-bold-tr">SHIPPER</th>
-            <th class="font-bold-tr">PORT</th>
             <th class="font-bold-tr">ACTION</th>
         </tr>
     </thead>
@@ -34,12 +35,14 @@
             {{-- @dd( $val) --}}
             <tr>
                 <td>{{ @$i }}</td>
-                <td>{{ $val['assign_date'] }}</td>
+                <td>{{ $val['dispatch_date'] }}</td>
                 <td>{{ @$val['customer_name'] }}</td>
-                <td>{{ $val['description'] }}</td>
+                <td>{{ $val['year'] }}</td>
+                <td>{{ $val['make'] }}</td>
+                <td>{{ $val['model'] }}</td>
                 <td>{{ $val['vin'] }}</td>
                 <td>{{ $val['lot'] }}</td>
-                <td>{{ $val['bidder'] }}</td>
+                <td>{{ $val['buyer_id'] }}</td>
                 <td>{{ $val['auction'] }}</td>
                 <td>{{ $val['pickup_location'] }}</td>
                 <td>{{ $val['dispatch_date'] }}</td>
@@ -50,7 +53,6 @@
                 <td>{{ $val['title'] }}</td>
                 <td>{{ $val['keys'] }}</td>
                 <td>{{ $val['shipper'] }}</td>
-                <td>{{ $val['port'] }}</td>
                 <td>
                     <button class='profile-button'><a href={{route('vehicle.profile', @$val['id'])}}>
                         <svg width='14' height='13' viewBox='0 0 16 14' fill='none'

@@ -93,7 +93,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/vehicles/import',                      [VehicleController::class, 'import']);
     Route::post('/vehicles/imports',                    [VehicleController::class, 'import'])->name('vehicle.import');
     Route::post('/vehicle/vehicle_changeImages',        [VehicleController::class, 'changesImages'])->name('vehicle.changeImages');
-    Route::post('/vehicle/vehicle_changeImages',        [VehicleController::class, 'changesImages'])->name('vehicle.changeImages');
+    // Route::post('/vehicle/vehicle_changeImages',        [VehicleController::class, 'changesImages'])->name('vehicle.changeImages');
     
     Route::get('/vehicle/profile/{id?}',                [VehicleController::class, 'profile'])->name('vehicle.profile');
     Route::get('/vehicle/vehicle_informationTab',       [VehicleController::class, 'profile_tab'])->name('customer.profile_tab');
@@ -101,6 +101,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/vehicle/records',       [VehicleController::class, 'serverside'])->name('vehicle.records');
 
     Route::post('/vehicle/fetchVehciles',       [VehicleController::class, 'fetchVehicles'])->name('vehicle.fetchVehicles');
+
+    Route::post('/vehicle/SelectedDelete',       [VehicleController::class, 'SelectedDelete'])->name('Vehicle.SelectedDelete');
 
 
     //Sticky Notes Routes

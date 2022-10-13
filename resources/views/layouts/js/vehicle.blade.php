@@ -6,7 +6,7 @@
         $model = $('#vehicle_model').val();
         $status = $('#vehicle_status').val();
         $status_name = $('#vehicle_status').find(":selected").text();
-        // alert($status_name);
+        // alert($make);
         $.ajax({
             type: 'get',
             url: '{{ URL::to('admin/vehicles/filtering') }}',
@@ -28,15 +28,27 @@
                     $('#status_body').html(data);
                 }
                 $('#new_order_table').DataTable({
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
                         searchPlaceholder: "Search"
                     },
+
                 });
                 $('#dispatched_table').DataTable({
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    scrollX: true,
+                    "columnDefs": [{
+                        "width": "20%",
+                    }],
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -44,7 +56,11 @@
                     },
                 });
                 $('#on_hand_table').DataTable({
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -52,7 +68,11 @@
                     },
                 });
                 $('#towing_table').DataTable({
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -60,7 +80,11 @@
                     },
                 });
                 $('#vehicle_filter_table').DataTable({
-                   "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -68,8 +92,12 @@
                     },
                 });
 
-                $('#no_title_table').DataTable({
-                   "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                $('#no_title').DataTable({
+                    scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -200,8 +228,16 @@
 </script>
 <script>
     function display_model() {
-        // alert('asdasd');
+        iziToast.success({
+            title: 'Success',
+            message: 'Vehicle Created Successfully!',
+            position: 'topCenter',
+            zindex: '9999999999999',
+        });
         $('#exampleModal').modal('hide');
+        setTimeout(function() {
+            window.location.reload(true);
+        }, 3000);
     }
 </script>
 <script>
@@ -245,7 +281,7 @@
     }
 
 
-    function fetchVehicles(id){
+    function fetchVehicles(id) {
         $tab = $('#' + id).attr('tab');
         $id = id;
         $.ajax({
@@ -259,19 +295,30 @@
                 console.log(data);
 
                 $('#status_body').html(data.view);
-                
+
                 $('#new_order_table').DataTable({
-                    // scrollX: true,
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
                         searchPlaceholder: "Search"
                     },
+
                 });
                 $('#dispatched_table').DataTable({
-                    // scrollX: true,
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    "columnDefs": [{
+                        "width": "20%",
+
+                    }],
+                    scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -279,17 +326,23 @@
                     },
                 });
                 $('#on_hand_table').DataTable({
-                    // scrollX: true,
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
                         searchPlaceholder: "Search"
                     },
                 });
-                $('#no_title_table').DataTable({
-                    // scrollX: true,
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                $('#no_title').DataTable({
+                    scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -297,8 +350,11 @@
                     },
                 });
                 $('#towing_table').DataTable({
-                    // scrollX: true,
-                    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -306,8 +362,11 @@
                     },
                 });
                 $('#vehicle_filter_table').DataTable({
-                //    scrollX: true,
-                   "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -342,4 +401,71 @@
             }
         });
     }
+
+    $(document).on('click', 'input[name="main_checkbox"]', function() {
+        if (this.checked) {
+            $('input[name="checkboxes"]').each(function() {
+                this.checked = true;
+            })
+        } else {
+            $('input[name="checkboxes"]').each(function() {
+                this.checked = false;
+            })
+
+        }
+        toggleDeleteAllBtn();
+    })
+
+    $(document).on('change', 'input[name="checkboxes"]', function() {
+        if ($('input[name="checkboxes"]').length == $('input[name="checkboxes"]:checked').length) {
+            $('input[name="main_checkbox"]').prop('checked', true);
+        } else {
+            $('input[name="main_checkbox"]').prop('checked', false);
+
+        }
+        toggleDeleteAllBtn();
+    })
+
+
+    function toggleDeleteAllBtn() {
+        if ($('input[name="checkboxes"]:checked').length > 0) {
+            $('button#deleteAllbtn').text('Delete (' + $('input[name="checkboxes"]:checked').length + ')').removeClass(
+                'd-none');
+        } else {
+            $('#deleteAllbtn').addClass('d-none');
+        }
+    }
+
+
+    $(document).on('click', '#deleteAllbtn', function() {
+        var deleteAllid = [];
+        $('input[name="checkboxes"]:checked').each(function() {
+            deleteAllid.push($(this).data('id'));
+        });
+        $.ajax({
+            type: 'post',
+            url: '{{ route('Vehicle.SelectedDelete') }}',
+            data: {
+                ids: deleteAllid
+            },
+            success: function(data) {
+                iziToast.warning({
+                    title: 'Vehicle',
+                    message: data.success,
+                    position: 'topCenter',
+                    zindex: '9999999999999',
+                });
+
+
+                setTimeout(function() {
+                    window.location.reload(true);
+                }, 3000);
+
+
+            }
+        });
+
+
+
+    });
 </script>

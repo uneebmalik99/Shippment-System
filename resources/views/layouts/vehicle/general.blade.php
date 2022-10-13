@@ -103,8 +103,7 @@
                                 </div>
                                 <div class="d-flex py-2">
                                     <div class="col-5 p-0">
-                                        <label for="vehicle_type" class="form-control border border-0 px-0"><b>Vehicle
-                                                Type</b></label>
+                                        <label for="vehicle_type" class="form-control border border-0 px-0"><b>Vehicle Type</b></label>
                                     </div>
                                     <div class="col-7 p-0">
                                         <input type="text"

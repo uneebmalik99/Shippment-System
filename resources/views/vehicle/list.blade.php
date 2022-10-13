@@ -8,16 +8,24 @@
         .dataTables_scrollHeadInner {
             width: 100% !important;
         }
+
         .modal-content {
- 
-  width: 80%!important;
-  margin:0 auto!important;
-  z-index: 99999999;
-}
+
+            width: 80% !important;
+            margin: 0 auto !important;
+            z-index: 99999999;
+        }
+
+
+        div.dataTables_wrapper div.dataTables_info {
+
+            margin: 4px 0 !important;
+            /* padding: 10px!important; */
+        }
     </style>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true" style="z-index: 9999999999;">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        style="z-index: 9999999999;">
         <div class="modal-dialog modal-fullscreen scrollable mw-100 m-2 px-3 py-2" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">
@@ -96,7 +104,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-4 p-1" id="2" tab="dispatched" onclick="fetchVehicles(this.id)" style="cursor:pointer">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
@@ -162,7 +170,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4 p-1" id="5" tab="towing" onclick="fetchVehicles(this.id)" style="cursor:pointer;">
+            <div class="col-4 p-1" id="5" tab="towing" onclick="fetchVehicles(this.id)"
+                style="cursor:pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -184,7 +193,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4 p-1" id="6" tab="Inventory Value" onclick="fetchVehicles(this.id)" style="cursor:pointer;">
+            <div class="col-4 p-1" id="6" tab="Inventory Value" onclick="fetchVehicles(this.id)"
+                style="cursor:pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -206,14 +216,14 @@
                 </div>
             </div>
 
-            
+
         </div>
         {{-- badges end --}}
 
         {{-- listing start --}}
         <div class="px-3 mt-3">
             <div class="border-style card-rounded">
-               
+
                 {{-- new customer alert start --}}
                 <div class="row d-flex justify-content-between">
                 </div>
@@ -334,13 +344,13 @@
                     </div>
                 </div>
                 {{-- search filter end --}}
-                <div id="status_body" class="mt-2 bg-light" style="height: 100%;overflow-x: scroll;">
-                    <table id="vehicle_table" class="table row-border vehicle_table" style="width:100%!important">
+                <div id="status_body" class="mt-2 bg-light">
+                    <table id="vehicle_table" class="table row-border vehicle_table">
                         <thead class="bg-custom" style="color:white!important;">
                             <tr>
                                 <th class="font-bold-tr">Sr</th>
                                 <th class="font-bold-tr">Customer Name</th>
-                                <th class="font-bold-tr">VIN</th>
+                                <th class="font-bold-tr w-100"> VIN </th>
                                 <th class="font-bold-tr">YEAR</th>
                                 <th class="font-bold-tr">MAKE</th>
                                 <th class="font-bold-tr">MODEL</th>
@@ -382,21 +392,29 @@
             var table = $('.vehicle_table').DataTable({
                 processing: true,
                 serverSide: true,
-                // scrollX: true,
-                "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                scrollX: true,
+                autoWidth:false,
+                "lengthMenu": [
+                    [50, 100, 500],
+                    [50, 100, 500]
+                ],
                 language: {
                     search: "",
                     sLengthMenu: "_MENU_",
                     searchPlaceholder: "Search",
                     
+                    
                     processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
                 },
                 ajax: "{{ route('vehicle.records') }}",
-                columns: [{
-                        data: 'id',
-                        name: 'id'
-                    },
+                columns: [
                     {
+                    data: 'id',
+                    name: 'id',
+                    autoWidth:false,
+                    width:"100%",
+                },
+                {
                         data: 'customer_name',
                         name: 'customer_name'
                     },
@@ -438,16 +456,11 @@
                         orderable: false,
                         searchable: false
                     },
-                ]
-            });
-
-
-
-
-            
+                    
+                ],
+              
+            })
         });
-
-        
     </script>
 
     @if (Session::has('success'))

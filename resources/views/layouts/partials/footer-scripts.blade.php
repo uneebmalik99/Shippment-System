@@ -413,13 +413,13 @@
                 processData: false,
                 contentType: false,
                 success: function(data) {
-                    iziToast.success({
-                        title: 'Vehicle',
-                        message: 'Successfully inserted record!',
-                        position: 'topCenter',
-                        zindex: '9999999999999',
+                    // iziToast.success({
+                    //     title: 'Vehicle',
+                    //     message: 'Successfully inserted record!',
+                    //     position: 'topCenter',
+                    //     zindex: '9999999999999',
 
-                    });
+                    // });
                     $('.modal-body').html(data.view);
                     $('#exampleModal').modal('show');
                     $('.vehicle_auction_image').imageUploader({
@@ -553,4 +553,136 @@
             }
         });
     }
+
+
+     function billofsales() {
+        
+            var formData = new FormData(jQuery('#billofsales')[0]);
+            formData.append('tab', 'billofsales');
+
+            $.ajax({
+                method: 'POST',
+                url: '{{ URL::to('admin/vehicles/attachments') }}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log(data);
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Auction Images inserted !',
+                        timeout: 1500,
+                        position: 'topCenter',
+                        zindex: '9999999999999',
+                    });
+                },
+                error: function() {
+                    iziToast.warning({
+                        message: 'Failed to insert data!',
+                        position: 'topCenter',
+                        zindex: '9999999999999'
+                    });
+                }
+            });
+        
+ }
+
+  function originalTitle() {
+        
+            var formData = new FormData(jQuery('#billofsales')[0]);
+            formData.append('tab', 'originalTitle');
+
+            $.ajax({
+                method: 'POST',
+                url: '{{ URL::to('admin/vehicles/attachments') }}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log(data);
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Auction Images inserted !',
+                        timeout: 1500,
+                        position: 'topCenter',
+                        zindex: '9999999999999',
+                    });
+                },
+                error: function() {
+                    iziToast.warning({
+                        message: 'Failed to insert data!',
+                        position: 'topCenter',
+                        zindex: '9999999999999'
+                    });
+                }
+            });
+        
+ }
+
+
+  function pickup() {
+        
+            var formData = new FormData(jQuery('#billofsales')[0]);
+            formData.append('tab', 'pickup');
+
+            $.ajax({
+                method: 'POST',
+                url: '{{ URL::to('admin/vehicles/attachments') }}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log(data);
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Auction Images inserted !',
+                        timeout: 1500,
+                        position: 'topCenter',
+                        zindex: '9999999999999',
+                    });
+                },
+                error: function() {
+                    iziToast.warning({
+                        message: 'Failed to insert data!',
+                        position: 'topCenter',
+                        zindex: '9999999999999'
+                    });
+                }
+            });
+        
+ }
+
+
+</script>
+
+<script>
+
+
+
+
+function getInfo(){
+    // vin = KM8JUCAC4DU604504;
+    vin = $('#vin').val();
+    var url = 'https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/'+vin+'?format=json';
+    if(vin == ''){
+        alert('Please Enter Vin Number');
+    }
+    else{
+         $.ajax({
+                type: 'GET',
+                url: url,
+                success: function(data) {
+                    console.log(data.Results[0]);
+                    vehicle = data.Results[0];
+                    $('#model').val(vehicle.Model);
+                    $('#make').val(vehicle.Make);
+                    $('#year').val(vehicle.ModelYear);
+                    $('#vehicle_type').val(vehicle.VehicleType);
+                    $('#weight').val(vehicle.CurbWeightLB);
+                    $('#value').val(vehicle.BasePrice);
+                    
+                }
+            });
+    }
+}
 </script>

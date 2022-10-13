@@ -57,7 +57,7 @@ class Vehicle extends Model
 
     public function vehicle_status()
     {
-        return $this->belongsTo('App\Models\VehicleStatus');
+        return $this->belongsTo('App\Models\VehicleStatus', 'status', 'id');
     }
 
     public function auction_image()
