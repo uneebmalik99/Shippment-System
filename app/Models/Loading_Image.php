@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Loading_Image extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
-
-    public function shipment(){
+    public function shipment()
+    {
         return $this->belongsTo('App\Models\Shipment');
     }
 }
