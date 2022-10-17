@@ -133,8 +133,8 @@
     </div>
 
 
-    <div class="d-lg-flex d-block justify-content-around py-lg-2">
-        <div class="px-lg-3 col-lg-6 py-lg-0">
+    <div class="d-lg-flex d-block justify-content-center py-lg-2">
+        <div class="px-lg-3 col-lg-5 py-lg-0">
             <div class="box box-bg-2 col-12">
                 {{-- <form method="POST" id="billofsales" enctype="multipart/form-data"> --}}
                     {{-- @csrf --}}
