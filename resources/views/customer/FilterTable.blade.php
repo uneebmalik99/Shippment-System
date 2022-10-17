@@ -1,12 +1,13 @@
-@if (@$user){
+{{-- {{dd(@$user)}} --}}
+@if(count(@$user) > 0)
 
-    {{-- @php
-        $custid = 1000100;
+{{-- @php
+    $custid = 1000100;
     @endphp  --}}
-
+    
     @foreach ($user as $val)
-        <tr style="border-bottom: 1.2px solid rgba(191, 191, 191, 1) !important">
-            <td>{{ @$val['id'] }}</td>
+    <tr style="border-bottom: 1.2px solid rgba(191, 191, 191, 1) !important">
+        <td>{{ @$val['id'] }}</td>
             <td class="d-block d-flex">
                 {{-- @if (@$val[0]['user_image'])
                 <div class="mt-2 mr-2">
@@ -104,7 +105,10 @@
         @endphp --}}
     @endforeach
 @else
-    <tr>
+{{-- {{dd(@$user)}} --}}
+
+<tr>
+        <td></td>
         <td></td>
         <td></td>
         <td>Customer Not Found</td>

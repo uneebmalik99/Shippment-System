@@ -222,7 +222,7 @@
                                         padding: 0 6px;">
                                             <button class="img_active_button img_btn" onclick="changeImages(this.id)"
                                                 tab="">
-                                                <div class="imdiv>
+                                                <div class="imdiv">
                                             </button>
 
                                             <button class="image_buttonmx-1

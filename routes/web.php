@@ -75,7 +75,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     // Route::post('/vehicles',                            [VehicleController::class, 'createPost'])->name('vehicle.listpost');
     Route::get('/vehicles/create', [VehicleController::class, 'create'])->name('vehicle.create');
     Route::post('/vehicles/create_form', [VehicleController::class, 'create_form'])->name('vehicle.form');
-    Route::get('/vehicles/attachments', [VehicleController::class, 'attachments'])->name('vehicle.attachments');
+    // Route::get('/vehicles/attachments', [VehicleController::class, 'attachments'])->name('vehicle.attachments');
     Route::post('/vehicles/create', [VehicleController::class, 'create'])->name('vehicle.create');
     // Route::get('/vehicles/edit/{id?}',                  [VehicleController::class, 'edit'])->name('vehicle.edit');
     // Route::post('/vehicles/edit/{id?}',                 [VehicleController::class, 'edit'])->name('vehicle.edit');

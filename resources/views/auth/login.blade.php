@@ -137,7 +137,7 @@
            
                 <div class="copyright">
                     <p>copyright@ 2022 all right reserved <br>
-                        Developed by <a href="https://revolutiontechnologies.com/" target="__blank">The Revolution Technologies</a></p>
+                        Developed by <a href="https://therevolutiontechnologies.com/" target="__blank">The Revolution Technologies</a></p>
                 </div>
             </div>
 		</div>

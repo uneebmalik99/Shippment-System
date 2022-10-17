@@ -379,83 +379,226 @@ class VehicleController extends Controller
 
     public function store_image(Request $request)
     {
-        $data = $request->all();
-        $tab = $data['tab'];
-        unset($data['tab']);
-        $images = $request->file('images');
-        $documents = $request->file('name');
+
+        // $data = $request->all();
+        // dd($request->file());
+        $output = [];
+        $auction_invoice = $request->file("auction_invoice");
+        $auction_copy = $request->file("auction_copy");
+        $auction_images = $request->file("auction_images");
+        $warehouse_images = $request->file("warehouse_images");
+        $billofsales = $request->file("billofsales");
+        $originaltitle = $request->file("originaltitle");
+        $pickup = $request->file("pickup");
+        // dd($billofsales);
+
         $Obj = new Vehicle;
         $Obj_vehicle = $Obj->where('vin', $request->vin)->get();
-        // dd($request->vin);
-        $i = 0;
-        if ($request->hasFile('images')) {
-            foreach ($images as $image) {
-                switch ($tab) {
-                    case ('auction'):
-                        $Obj_image = new AuctionImage;
-                        $this->directory = "/auction_images";
-                        break;
-                    case ('warehouse'):
-                        $Obj_image = new WarehouseImage;
-                        $this->directory = "/warehouse_images";
-                        break;
-                    case ('billofsales'):
-                        $Obj_image = new BillOfSale;
-                        $this->directory = "/billofsales_images";
-                        break;
-                    case ('originalTitle'):
-                        $Obj_image = new OriginalTitle;
-                        $this->directory = "/OriginalTitle_images";
-                        break;
-                    case ('pickup'):
-                        $Obj_image = new PickupImage;
-                        $this->directory = "/pickup_images";
-                        break;
-                }
-                $image_name = time() . '.' . $image->extension();
-                $filename = Storage::putFile($this->directory, $image);
-                $image->move(public_path($this->directory), $filename);
-                $Obj_image->vehicle_id = $Obj_vehicle[0]['id'];
-                $Obj_image->name = $filename;
-                $Obj_image->thumbnail = $image_name;
-                $Obj_image->save();
-                $output['result'] = "Success" . $i;
-                $i++;
+        // dd($Obj_vehicle[0]['id']);
+        
+
+        if($auction_invoice){
+            $Obj_auctionInvoice = new AuctionInvoice;
+            foreach ($auction_invoice as $auctiofile) {
+                $file_name = time() . '.' . $auctiofile->extension();
+                $filename = Storage::putFile($this->directory, $auctiofile);
+                $type = $auctiofile->extension();
+                $doc = $auctiofile->move(public_path($this->directory), $filename);
+                $size = $doc->getSize() / 1000;
+                $Obj_auctionInvoice->vehicle_id = $Obj_vehicle[0]['id'];
+                $Obj_auctionInvoice->name = $filename;
+                $Obj_auctionInvoice->type = $type;
+                $Obj_auctionInvoice->size = $size . ' kb';
+                $Obj_auctionInvoice->save();
+                $output['result'] = "Success";
             }
+            
         }
 
-        if ($request->hasFile('name')) {
-            // dd($tab);
-            switch ($tab) {
-                case ('invoice'):
-                    $Obj_file = new AuctionInvoice;
-                    $this->directory = "/auction_invoices";
-
-                    break;
-                case ('auction_copy'):
-                    $Obj_file = new AuctionCopy;
-                    $this->directory = "/auction_copies";
-                    break;
+        if($auction_copy){
+            $Obj_auctionCopy = new AuctionCopy;
+            foreach ($auction_copy as $auctiocopy) {
+                $file_name = time() . '.' . $auctiocopy->extension();
+                $filename = Storage::putFile($this->directory, $auctiocopy);
+                $type = $auctiocopy->extension();
+                $doc = $auctiocopy->move(public_path($this->directory), $filename);
+                $size = $doc->getSize() / 1000;
+                $Obj_auctionCopy->vehicle_id =$Obj_vehicle[0]['id'];
+                $Obj_auctionCopy->name = $filename;
+                $Obj_auctionCopy->type = $type;
+                $Obj_auctionCopy->size = $size . ' kb';
+                $Obj_auctionCopy->save();
+                $output['result'] = "Success";
             }
-            $filename = Storage::putFile($this->directory, $documents);
-            $type = $documents->extension();
-            $doc = $documents->move(public_path($this->directory), $filename);
-            // dd($doc->getSize() / 1000);/
-            $size = $doc->getSize() / 1000;
             
-            $Obj_file->vehicle_id = $Obj_vehicle[0]['id'];
-            $Obj_file->name = $filename;
-            $Obj_file->type = $type;
-            $Obj_file->size = $size . ' kb';
-            
-            $Obj_file->save();
-
-            $output['result'] = "Success";
-
         }
+
+
+        if($auction_images){
+            $Obj_auctionImages = new AuctionImage;
+            foreach ($auction_images as $auctionImages) {
+                $file_name = time() . '.' . $auctionImages->extension();
+                $filename = Storage::putFile($this->directory, $auctionImages);
+                $type = $auctionImages->extension();
+                $doc = $auctionImages->move(public_path($this->directory), $filename);
+                $data = [
+                    'name' => $filename,
+                    'thumbnail' => $file_name,
+                    'vehicle_id' => $Obj_vehicle[0]['id'],
+                ];
+                dd($data);
+                $Obj_auctionImages->create($data);
+                $output['result'] = "Success";
+            }
+            
+        }
+
+
+        if($billofsales){
+            // dd($billofsales);
+            $Obj_billofsales = new BillOfSale;
+            foreach ($billofsales as $billofsales) {
+                $file_name = time() . '.' . $billofsales->extension();
+                $filename = Storage::putFile($this->directory, $billofsales);
+                $type = $billofsales->extension();
+                $doc = $billofsales->move(public_path($this->directory), $filename);
+                $data = [
+                    'name' => $filename,
+                    'thumbnail' => $file_name,
+                    'vehicle_id' => $Obj_vehicle[0]['id'],
+                ];
+                $Obj_billofsales->create($data);
+                $output['result'] = "Success";
+            }
+            
+        }
+
+
+        if($warehouse_images){
+            $Obj_warehouseImages = new WarehouseImage;
+            foreach ($warehouse_images as $warehouseImages) {
+                $file_name = time() . '.' . $warehouseImages->extension();
+                $filename = Storage::putFile($this->directory, $warehouseImages);
+                $type = $warehouseImages->extension();
+                $doc = $warehouseImages->move(public_path($this->directory), $filename);
+                $data = [
+                    'name' => $filename,
+                    'thumbnail' => $file_name,
+                    'vehicle_id' => $Obj_vehicle[0]['id'],
+                ];
+                $Obj_warehouseImages->create($data);
+                $output['result'] = "Success";
+            }
+            
+        }
+
+        if($originaltitle){
+            $Obj_originaltitle = new OriginalTitle;
+            foreach ($originaltitle as $originaltitle) {
+                $file_name = time() . '.' . $originaltitle->extension();
+                $filename = Storage::putFile($this->directory, $originaltitle);
+                $type = $originaltitle->extension();
+                $doc = $originaltitle->move(public_path($this->directory), $filename);
+                $data = [
+                    'name' => $filename,
+                    'thumbnail' => $file_name,
+                    'vehicle_id' => $Obj_vehicle[0]['id'],
+                ];
+                $Obj_originaltitle->create($data);
+                $output['result'] = "Success";
+            }
+            
+        }
+
+
+        if($pickup){
+            $Obj_pickup = new PickupImage;
+            foreach ($pickup as $pickup) {
+                $file_name = time() . '.' . $pickup->extension();
+                $filename = Storage::putFile($this->directory, $pickup);
+                $type = $pickup->extension();
+                $doc = $pickup->move(public_path($this->directory), $filename);
+                $data = [
+                    'name' => $filename,
+                    'thumbnail' => $file_name,
+                    'vehicle_id' => $Obj_vehicle[0]['id'],
+                ];
+                $Obj_pickup->create($data);
+                $output['result'] = "Success";
+            }
+            
+        }
+
+        // $i = 0;
+        // if ($request->hasFile('images')) {
+            //     foreach ($images as $image) {
+                //         switch ($tab) {
+                    //             case ('auction'):
+                        //                 $Obj_image = new AuctionImage;
+                        //                 $this->directory = "/auction_images";
+        //                 break;
+        //             case ('warehouse'):
+        //                 $Obj_image = new WarehouseImage;
+        //                 $this->directory = "/warehouse_images";
+        //                 break;
+        //             case ('billofsales'):
+        //                 $Obj_image = new BillOfSale;
+        //                 $this->directory = "/billofsales_images";
+        //                 break;
+        //             case ('originalTitle'):
+        //                 $Obj_image = new OriginalTitle;
+        //                 $this->directory = "/OriginalTitle_images";
+        //                 break;
+        //             case ('pickup'):
+        //                 $Obj_image = new PickupImage;
+        //                 $this->directory = "/pickup_images";
+        //                 break;
+        //         }
+        //         $image_name = time() . '.' . $image->extension();
+        //         $filename = Storage::putFile($this->directory, $image);
+        //         $image->move(public_path($this->directory), $filename);
+        //         $Obj_image->vehicle_id = $Obj_vehicle[0]['id'];
+        //         $Obj_image->name = $filename;
+        //         $Obj_image->thumbnail = $image_name;
+        //         $Obj_image->save();
+        //         $output['result'] = "Success" . $i;
+        //         $i++;
+        //     }
+        // }
+
+        // if ($request->hasFile('name')) {
+        //     // dd($tab);
+        //     switch ($tab) {
+        //         case ('invoice'):
+        //             $Obj_file = new AuctionInvoice;
+        //             $this->directory = "/auction_invoices";
+
+        //             break;
+        //         case ('auction_copy'):
+        //             $Obj_file = new AuctionCopy;
+        //             $this->directory = "/auction_copies";
+        //             break;
+        //     }
+        //     $filename = Storage::putFile($this->directory, $documents);
+        //     $type = $documents->extension();
+        //     $doc = $documents->move(public_path($this->directory), $filename);
+        //     // dd($doc->getSize() / 1000);/
+        //     $size = $doc->getSize() / 1000;
+            
+        //     $Obj_file->vehicle_id = $Obj_vehicle[0]['id'];
+        //     $Obj_file->name = $filename;
+        //     $Obj_file->type = $type;
+        //     $Obj_file->size = $size . ' kb';
+            
+        //     $Obj_file->save();
+
+        //     $output['result'] = "Success";
+
+        // }
         return Response($output);
+        // return Response($output);
     }
-
+    
     public function export()
     {
         return Excel::download(new VehicleExport, 'vehicles.xlsx');

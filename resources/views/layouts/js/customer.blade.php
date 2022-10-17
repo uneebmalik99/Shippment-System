@@ -14,27 +14,27 @@
         });
     }
 
-    function changeImages(id) {
-        // alert(tab);
-        $id = $('#' + id).attr('tab');
-        $tab = id;
+    // function changeImages(id) {
+    //     // alert(tab);
+    //     $id = $('#' + id).attr('tab');
+    //     $tab = id;
 
 
-        $.ajax({
-            type: 'post',
-            url: '{{ URL::to('admin/vehicle/vehicle_changeImages') }}',
-            data: {
-                'tab': $tab,
-                'id': $id,
-            },
-            success: function(data) {
-                // alert(data);
-                console.log(data);
-                $('.changeImages').html(data);
-            }
-        });
+    //     $.ajax({
+    //         type: 'post',
+    //         url: '{{ URL::to('admin/vehicle/vehicle_changeImages') }}',
+    //         data: {
+    //             'tab': $tab,
+    //             'id': $id,
+    //         },
+    //         success: function(data) {
+    //             // alert(data);
+    //             console.log(data);
+    //             $('.changeImages').html(data);
+    //         }
+    //     });
 
-    }
+    // }
 
 
     function createForm(id) {
@@ -126,8 +126,15 @@
                         type: 'get',
                         url: "{{ route('customer.changeStatus') }}" + '/' + id,
                         success: function(data) {
-                            alert(data);
-                            location.reload();
+                            iziToast.success({
+                            zindex: '9999999999999',
+                            position: 'topCenter',
+                            title: 'Deleted',
+                            message: data,
+                });
+                setTimeout(function() {
+            window.location.reload(true);
+        }, 2000);
                         }
                     });
 

@@ -50,7 +50,7 @@
                         @endif
                     </span>
                     <span class="text-muted py-1 px-3">
-                        <b>Role:</b> customer
+                        <b>Role:</b> Customer
                     </span>
                     <span class="text-muted py-1 px-3">
                         <b>Tax id:</b> {{ @$user['tax_id'] }} 12
@@ -60,6 +60,9 @@
                     </span>
                     <span class="text-muted py-1 px-3">
                         <b>Country:</b> {{ @$user['country'] }}
+                    </span>
+                    <span class="text-muted py-1 px-3">
+                        <b>State:</b> {{ @$user['state'] }}
                     </span>
                 </div>
             </div>

@@ -185,8 +185,9 @@
                                             </div>
                                         </button>
 
-                                        <button class="image_button img_btn">
-                                            <div class="img_button" onclick="changeImages(this.id)" tab=" {{@$vehicle['id']}}" id="warehouse_images">Ware House Image</div>
+                                        <button class="image_button img_btn" onclick="changeImages(this.id)" tab=" {{@$vehicle['id']}}" id="warehouse_images" style="color:#4d89b5!important;    font-family:Inter;
+                                        font-style:normal;
+                                        font-weight:600;">Ware House Image
                                         </button>
 
                                         </div>

@@ -6,18 +6,21 @@
     </div>
 </div> --}}
 <div class="py-4">
-    <div class="d-lg-flex d-block justify-content-around py-lg-2">
-        <div class="px-lg-3 col-lg-6 py-lg-0 py-3">
-            <div class="box box-bg-3 col-12">
-                <form method="POST" id="vehicle_invoice_form" enctype="multipart/form-data">
-                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
-                    <div class="col-4 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
+    <form method="POST" id="vehicle_attacments" enctype="multipart/form-data" form-data>
+        @csrf
+        <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
+        <div class="d-lg-flex d-block justify-content-center py-lg-2">
+        <div class="px-lg-3 col-lg-5 py-lg-0">
+            <div class="box box-bg-2 col-12">
+                {{-- <form method="POST" id="vehicle_invoice_form" enctype="multipart/form-data"> --}}
+                    <div class="col-5 my-3 p-0 d-flex justify-content-center"
+                    style="border-bottom:2px solid #3181B9;">
                         <b>Auction Invoice</b>
                     </div>
-                    <input type="file" name="name"
+                    <input type="file" name="auction_invoice[]"
                         accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
-                    text/plain, application/pdf">
-                    <div class="d-flex justify-content-center">
+                    text/plain, application/pdf" class="p-5">
+                    {{-- <div class="d-flex justify-content-center">
                         <div class="p-3 col-6">
                             <button type="submit" onclick="auction_invoice()" class="btn btn_image col-12 d-flex"
                                 style="cursor: pointer;">
@@ -37,59 +40,40 @@
                                 </div>
                             </button>
                         </div>
-                    </div>
-                </form>
+                    </div> --}}
+                {{-- </form> --}}
             </div>
         </div>
-        <div class="px-lg-3 col-lg-6 py-lg-0">
-            <div class="box box-bg-4 col-12">
-                <form method="POST" id="vehicle_copy_form" enctype="multipart/form-data">
-                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
+        <div class="px-lg-3 col-lg-5 py-lg-0">
+            <div class="box box-bg-2 col-12">
+                {{-- <form method="POST" id="vehicle_copy_form" enctype="multipart/form-data"> --}}
+                {{-- <input type="hidden" name="vin" id="vin" value="{{$vin}}" /> --}}
 
-                    <div class="col-3 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
+                    <div class="col-5 my-3 p-0 d-flex justify-content-center"
+                    style="border-bottom:2px solid #3181B9;">
                         <b>Auction Copy</b>
                     </div>
-                    <input type="file" name="name"
+                    <input type="file" name="auction_copy[]"
                         accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
-                text/plain, application/pdf">
-                    <div class="d-flex justify-content-center">
-                        <div class="p-3 col-6">
-                            <button type="submit" onclick="action_copy()" class="btn btn_image col-12 d-flex"
-                                style="cursor: pointer;">
-                                <div class="d-flex">
-                                    <div class="icon rounded-circle d-flex justify-content-center align-items-center">
-                                        <svg width="10" height="10" viewBox="0 0 20 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M17.5 6.25V17.5H6.25V6.25H17.5ZM17.5 5H6.25C5.91848 5 5.60054 5.1317 5.36612 5.36612C5.1317 5.60054 5 5.91848 5 6.25V17.5C5 17.8315 5.1317 18.1495 5.36612 18.3839C5.60054 18.6183 5.91848 18.75 6.25 18.75H17.5C17.8315 18.75 18.1495 18.6183 18.3839 18.3839C18.6183 18.1495 18.75 17.8315 18.75 17.5V6.25C18.75 5.91848 18.6183 5.60054 18.3839 5.36612C18.1495 5.1317 17.8315 5 17.5 5V5Z"
-                                                fill="white" />
-                                            <path
-                                                d="M2.5 11.25H1.25V2.5C1.25 2.16848 1.3817 1.85054 1.61612 1.61612C1.85054 1.3817 2.16848 1.25 2.5 1.25H11.25V2.5H2.5V11.25Z"
-                                                fill="white" />
-                                        </svg>
-                                    </div>
-                                    <div class="px-2" style="font-size: 16px">Upload Copy</div>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                text/plain, application/pdf" class="p-5">
+                   
+                {{-- </form> --}}
             </div>
         </div>
     </div>
+    <div class="d-lg-flex d-block justify-content-center py-lg-2">
+        <div class="px-lg-3 col-lg-5 py-lg-0">
+            <div class="box box-bg-2 col-12">
+                {{-- <form method="POST" id="vehicle_auction_form" enctype="multipart/form-data"> --}}
+                {{-- <input type="hidden" name="vin" id="vin" value="{{$vin}}" /> --}}
 
-    <div class="d-lg-flex d-block justify-content-around py-lg-2">
-        <div class="px-lg-3 col-lg-6 py-lg-0 py-3">
-            <div class="box box-bg-1 col-12">
-                <form method="POST" id="vehicle_auction_form" enctype="multipart/form-data">
-                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
-
-                    <div class="col-4 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
+                    <div  class="col-5 my-3 p-0 d-flex justify-content-center"
+                    style="border-bottom:2px solid #3181B9;">
                         <b>Auction Images</b>
                     </div>
-                    <div class="vehicle_auction_image" name="vehicle_auction_image[]" style="padding-top: .5rem;">
+                    <div class="vehicle_auction_image" name="vehicle_auction_image[]" style="padding:.5rem .5rem;">
                     </div>
-                    <div class="d-flex justify-content-center">
+                    {{-- <div class="d-flex justify-content-center">
                         <div class="p-3 col-6">
                             <button type="submit" onclick="auction_images()" class="btn btn_image col-12 d-flex"
                                 style="cursor: pointer;">
@@ -102,29 +86,28 @@
                                                 fill="white" />
                                         </svg>
                                     </div>
-                                    {{-- <i class="">
-
-                                </i> --}}
+                                    
                                     <div class="px-2" style="font-size:16px">Upload Images</div>
                                 </div>
                             </button>
                         </div>
-                    </div>
-                </form>
+                    </div> --}}
+                {{-- </form> --}}
             </div>
         </div>
 
-        <div class="px-lg-3 col-lg-6 py-lg-0">
+        <div class="px-lg-3 col-lg-5 py-lg-0">
             <div class="box box-bg-2 col-12">
-                <form method="POST" id="vehicle_warehouse_form" enctype="multipart/form-data">
-                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
+                {{-- <form method="POST" id="vehicle_warehouse_form" enctype="multipart/form-data"> --}}
+                {{-- <input type="hidden" name="vin" id="vin" value="{{$vin}}" /> --}}
 
-                    <div class="col-4 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
+                    <div class="col-6 my-3 p-0 d-flex justify-content-center"
+                    style="border-bottom:2px solid #3181B9;">
                         <b>Warehouse Images</b>
                     </div>
-                    <div class="vehicle_warehouse_image" name="vehicle_warehouse_image[]" style="padding-top: .5rem;">
+                    <div class="vehicle_warehouse_image" name="vehicle_warehouse_image[]" style="padding:.5rem .5rem;">
                     </div>
-                    <div class="d-flex justify-content-center">
+                    {{-- <div class="d-flex justify-content-center">
                         <div class="p-3 col-6">
                             <button type="submit" onclick="warehouse_images()" class="btn btn_image col-12 d-flex"
                                 style="cursor: pointer;">
@@ -142,26 +125,25 @@
                                 </div>
                             </button>
                         </div>
-                    </div>
-                </form>
+                    </div> --}}
+                {{-- </form> --}}
             </div>
         </div>
     </div>
-
-    
-    <div class="d-lg-flex d-block justify-content-around py-lg-2">
-        <div class="px-lg-3 col-lg-6 py-lg-0">
+    <div class="d-lg-flex d-block justify-content-center py-lg-2">
+        <div class="px-lg-3 col-lg-5 py-lg-0">
             <div class="box box-bg-2 col-12">
-                <form method="POST" id="billofsales" enctype="multipart/form-data">
-                    @csrf
-                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
+                {{-- <form method="POST" id="billofsales" enctype="multipart/form-data"> --}}
+                    {{-- @csrf --}}
+                {{-- <input type="hidden" name="vin" id="vin" value="{{$vin}}" /> --}}
 
-                    <div class="col-3 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
+                    <div class="col-5 my-3 p-0 d-flex justify-content-center"
+                    style="border-bottom:2px solid #3181B9;">
                         <b>Bill Of Sales</b>
                     </div>
-                    <div class="billofsales" name="billofsales[]" style="padding-top: .5rem;">
+                    <div class="billofsales" name="billofsales[]" style="padding: .5rem .5rem;">
                     </div>
-                    <div class="d-flex justify-content-center">
+                    {{-- <div class="d-flex justify-content-center">
                         <div class="p-3 col-6">
                             <button type="button" onclick="billofsales()" class="btn btn_image col-12 d-flex"
                                 style="cursor: pointer;">
@@ -179,23 +161,24 @@
                                 </div>
                             </button>
                         </div>
-                    </div>
-                </form>
+                    </div> --}}
+                {{-- </form> --}}
             </div>
         </div>
 
-        <div class="px-lg-3 col-lg-6 py-lg-0">
+        <div class="px-lg-3 col-lg-5 py-lg-0">
             <div class="box box-bg-2 col-12">
-                <form method="POST" id="originalTitle" enctype="multipart/form-data">
-                    @csrf
-                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
+                {{-- <form method="POST" id="originalTitle" enctype="multipart/form-data"> --}}
+                    {{-- @csrf --}}
+                {{-- <input type="hidden" name="vin" id="vin" value="{{$vin}}" /> --}}
 
-                    <div class="col-3 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
+                    <div  class="col-5 my-3 p-0 d-flex justify-content-center"
+                    style="border-bottom:2px solid #3181B9;">
                         <b>Original Title</b>
                     </div>
-                    <div class="originaltitle" name="originaltitle[]" style="padding-top: .5rem;">
+                    <div class="originaltitle" name="originaltitle[]" style="padding: .5rem .5rem;">
                     </div>
-                    <div class="d-flex justify-content-center">
+                    {{-- <div class="d-flex justify-content-center">
                         <div class="p-3 col-6">
                             <button type="button" onclick="originalTitle()" class="btn btn_image col-12 d-flex"
                                 style="cursor: pointer;">
@@ -213,52 +196,38 @@
                                 </div>
                             </button>
                         </div>
-                    </div>
-                </form>
+                    </div> --}}
+                {{-- </form> --}}
             </div>
         </div>
 
         
     </div>
-    <div class="d-lg-flex d-block py-lg-2">
-<div class="col-lg-12 py-lg-0">
+    <div class="d-lg-flex justify-content-center d-block py-lg-2">
+<div class="px-lg-3 col-lg-5 py-lg-0">
             <div class="box box-bg-2 col-12">
-                <form method="POST" id="pickup" enctype="multipart/form-data">
-                    @csrf
-                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
+                {{-- <form method="POST" id="pickup" enctype="multipart/form-data"> --}}
+                    {{-- @csrf --}}
+                {{-- <input type="hidden" name="vin" id="vin" value="{{$vin}}" /> --}}
 
-                    <div class="col-3 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
+                    <div class="col-5 my-3 p-0 d-flex justify-content-center"
+                    style="border-bottom:2px solid #3181B9;">
                         <b>Pickup Images</b>
                     </div>
-                    <div class="pickup" name="pickup[]" style="padding-top: .5rem;">
+                    <div class="pickup" name="pickup[]" style="padding: .5rem .5rem;">
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <div class="p-3 col-3">
-                            <button type="button" onclick="pickup()" class="btn btn_image col-12 d-flex"
-                                style="cursor: pointer;">
-                                <div class="d-flex">
-                                    <div class="icon-2 rounded-circle d-flex justify-content-center align-items-center">
-                                        <svg width="10" height="10" viewBox="0 0 24 27" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M20.7199 10.851H22.8378C23.4109 10.851 23.6849 10.1409 23.2489 9.76717L12.8337 0.386047C12.3603 -0.0375365 11.6377 -0.0375365 11.1643 0.386047L0.749155 9.76717C0.325571 10.1409 0.587196 10.851 1.16028 10.851H3.2782V19.5719C3.2782 20.2571 3.83882 20.8177 4.52403 20.8177C5.20924 20.8177 5.76986 20.2571 5.76986 19.5719V18.326H18.2282V19.5719C18.2282 20.2571 18.7888 20.8177 19.474 20.8177C20.1592 20.8177 20.7199 20.2571 20.7199 19.5719V10.851ZM6.03149 8.35938H17.9666L18.2282 8.59609V10.851H5.76986V8.59609L6.03149 8.35938ZM15.2008 5.86771H8.79724L11.999 2.98984L15.2008 5.86771ZM5.76986 15.8344V13.3427H18.2282V15.8344H5.76986Z"
-                                                fill="white" />
-                                        </svg>
-                                        </i>
-                                    </div>
-                                    <div class="px-2" style="font-size:16px">Upload Images</div>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                    
+                {{-- </form> --}}
             </div>
         </div>
     </div>
     <div class="d-lg-flex d-block justify-content-end py-lg-2 px-lg-5">
         <button type="button" class="btn col-1 next-style text-white" id="vehicle_attachment_finish"
-            onclick="display_model()" style="cursor: pointer;">
+            onclick="vehicle_attachments()" style="cursor: pointer;">
             <div class="unskew">Finish</div>
         </button>
     </div>
+
+
+</form>
 </div>

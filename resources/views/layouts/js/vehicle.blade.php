@@ -237,7 +237,7 @@
         $('#exampleModal').modal('hide');
         setTimeout(function() {
             window.location.reload(true);
-        }, 3000);
+        }, 2000);
     }
 </script>
 <script>
@@ -262,9 +262,15 @@
     });
 
     function changeImages(id) {
-        // alert(tab);
         $id = $('#' + id).attr('tab');
         $tab = id;
+        // alert(id);
+
+        $('.img_btn').removeClass('img_active_button');
+        $('.img_btn').addClass('image_button');
+        $('#' + id).addClass('img_active_button');
+        $('#' + id).removeClass('image_button');
+
         $.ajax({
             type: 'post',
             url: '{{ URL::to('admin/vehicle/vehicle_changeImages') }}',
@@ -459,7 +465,7 @@
 
                 setTimeout(function() {
                     window.location.reload(true);
-                }, 3000);
+                }, 2000);
 
 
             }
@@ -468,4 +474,35 @@
 
 
     });
+
+
+    function vehicle_attachments(){
+        var formData = new FormData(jQuery('#vehicle_attacments')[0]);
+
+        $.ajax({
+                method: 'POST',
+                url: '{{ URL::to('admin/vehicles/attachments') }}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log(data);
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Auction Images inserted !',
+                        timeout: 1500,
+                        position: 'topCenter',
+                        zindex: '9999999999999',
+                    });
+                },
+                error: function() {
+                    iziToast.warning({
+                        message: 'Failed to insert data!',
+                        position: 'topCenter',
+                        zindex: '9999999999999'
+                    });
+                }
+            });
+        
+    }
 </script>

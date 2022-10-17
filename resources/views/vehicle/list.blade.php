@@ -337,13 +337,13 @@
                     </div>
                 </div>
                 {{-- search filter end --}}
-                <div id="status_body" class="mt-2 bg-light">
+                <div id="status_body" class="mt-2 bg-light" style="height: 100%;overflow-x: scroll;">
                     <table id="vehicle_table" class="table row-border vehicle_table">
                         <thead class="bg-custom" style="color:white!important;">
                             <tr>
                                 <th class="font-bold-tr">Sr</th>
                                 <th class="font-bold-tr">Customer Name</th>
-                                <th class="font-bold-tr w-100"> VIN </th>
+                                <th class="font-bold-tr w-50"> VIN </th>
                                 <th class="font-bold-tr">YEAR</th>
                                 <th class="font-bold-tr">MAKE</th>
                                 <th class="font-bold-tr">MODEL</th>
@@ -382,7 +382,7 @@
             var table = $('.vehicle_table').DataTable({
                 processing: true,
                 serverSide: true,
-                scrollX: true,
+                //scrollX: true,
                 autoWidth:false,
                 "lengthMenu": [
                     [50, 100, 500],
@@ -400,8 +400,7 @@
                     {
                     data: 'id',
                     name: 'id',
-                    autoWidth:false,
-                    width:"100%",
+                    
                 },
                 {
                         data: 'customer_name',
@@ -409,7 +408,9 @@
                     },
                     {
                         data: 'vin',
-                        name: 'vin'
+                        name: 'vin',
+                        autoWidth:false,
+                        width:"50%",
                     },
                     {
                         data: 'year',
