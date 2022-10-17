@@ -113,10 +113,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/shipments/delete/{id?}', [ShipmentController::class, 'delete'])->name('shipment.delete');
     Route::get('/shipments/filtering', [ShipmentController::class, 'filtering'])->name('shipment.filter');
     Route::get('/shipments/records', [ShipmentController::class, 'serverside'])->name('shipments.records');
+    Route::post('/shipment/create_images', [ShipmentController::class, 'create_images'])->name('shipments.create_images');
 
     Route::post('/shipments/filterShipment', [ShipmentController::class, 'filterShipmentt'])->name('shipments.filter');
 
-    //Notification Routes
+    //Notification Routes`
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.list');
     Route::get('/notifications/create', [NotificationController::class, 'create'])->name('notification.create');
     Route::post('/notifications/create', [NotificationController::class, 'create'])->name('notification.creates');

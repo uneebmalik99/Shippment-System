@@ -121,7 +121,8 @@
                             <button type="submit" onclick="warehouse_images()" class="btn btn_image col-12 d-flex"
                                 style="cursor: pointer;">
                                 <div class="d-flex">
-                                    <div class="icon-2 rounded-circle d-flex justify-content-center align-items-center">
+                                    <div
+                                        class="icon-2 rounded-circle d-flex justify-content-center align-items-center">
                                         <svg width="10" height="10" viewBox="0 0 24 27" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -140,13 +141,14 @@
         </div>
     </div>
 
-    
+
     <div class="d-lg-flex d-block justify-content-around py-lg-2">
         <div class="px-lg-3 col-lg-6 py-lg-0">
             <div class="box box-bg-2 col-12">
                 <form method="POST" id="billofsales" enctype="multipart/form-data">
                     @csrf
-                    <div class="col-3 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
+                    <div class="col-3 my-3 p-0 d-flex justify-content-center"
+                        style="border-bottom:2px solid #3181b9;">
                         <b>Bill Of Sales</b>
                     </div>
                     <div class="billofsales" name="billofsales[]" style="padding-top: .5rem;">
@@ -156,7 +158,8 @@
                             <button type="submit" onclick="billofsales()" class="btn btn_image col-12 d-flex"
                                 style="cursor: pointer;">
                                 <div class="d-flex">
-                                    <div class="icon-2 rounded-circle d-flex justify-content-center align-items-center">
+                                    <div
+                                        class="icon-2 rounded-circle d-flex justify-content-center align-items-center">
                                         <svg width="10" height="10" viewBox="0 0 24 27" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -178,7 +181,8 @@
             <div class="box box-bg-2 col-12">
                 <form method="POST" id="originalTitle" enctype="multipart/form-data">
                     @csrf
-                    <div class="col-3 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
+                    <div class="col-3 my-3 p-0 d-flex justify-content-center"
+                        style="border-bottom:2px solid #3181b9;">
                         <b>Original Title</b>
                     </div>
                     <div class="originaltitle" name="originaltitle[]" style="padding-top: .5rem;">
@@ -188,7 +192,8 @@
                             <button type="submit" onclick="originalTitle()" class="btn btn_image col-12 d-flex"
                                 style="cursor: pointer;">
                                 <div class="d-flex">
-                                    <div class="icon-2 rounded-circle d-flex justify-content-center align-items-center">
+                                    <div
+                                        class="icon-2 rounded-circle d-flex justify-content-center align-items-center">
                                         <svg width="10" height="10" viewBox="0 0 24 27" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -206,14 +211,15 @@
             </div>
         </div>
 
-        
+
     </div>
     <div class="d-lg-flex d-block py-lg-2">
-<div class="col-lg-12 py-lg-0">
+        <div class="col-lg-12 py-lg-0">
             <div class="box box-bg-2 col-12">
                 <form method="POST" id="pickup" enctype="multipart/form-data">
                     @csrf
-                    <div class="col-3 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
+                    <div class="col-3 my-3 p-0 d-flex justify-content-center"
+                        style="border-bottom:2px solid #3181b9;">
                         <b>Pickup Images</b>
                     </div>
                     <div class="pickup" name="pickup[]" style="padding-top: .5rem;">
@@ -223,7 +229,8 @@
                             <button type="submit" onclick="pickup()" class="btn btn_image col-12 d-flex"
                                 style="cursor: pointer;">
                                 <div class="d-flex">
-                                    <div class="icon-2 rounded-circle d-flex justify-content-center align-items-center">
+                                    <div
+                                        class="icon-2 rounded-circle d-flex justify-content-center align-items-center">
                                         <svg width="10" height="10" viewBox="0 0 24 27" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path

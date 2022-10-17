@@ -321,7 +321,7 @@
                             </div>
 
                             <div class="col-lg-6 col-12 p-0">
-                                <div class="col-12 p-0">
+                                <div class="col-12 pr-0">
                                     <div class="tab_card my-3">
                                         <div class="col-7 py-3">
                                             <div class="text-color" style="cursor: pointer;" id="shipment_loading"
@@ -608,6 +608,7 @@
                                 </button>
                             </div>
                             <div class="col-3">
+                                <input type="hidden" class="next_tab" id="attachments">
                                 <button type="submit" class="btn next-style text-white col-12 py-1"
                                     onclick="create_shipment_form(this.id)" id="general_shipment"
                                     style="cursor: pointer;">

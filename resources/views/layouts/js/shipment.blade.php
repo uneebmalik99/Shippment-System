@@ -3,6 +3,8 @@
         $('#shipment_form').on('submit', function(event) {
             event.preventDefault();
             var formData = new FormData(jQuery('#shipment_form')[0]);
+            $next_tab = $('.next_tab').attr('id');
+            formData.append('tab', $next_tab);
             $.ajax({
                 method: 'POST',
                 url: '{{ URL::to('admin/shipments/general') }}',
@@ -10,7 +12,28 @@
                 processData: false,
                 contentType: false,
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
+                    $('.modal-body').html(data);
+                    $('#exampleModal').modal('show');
+                    $('.shipment-inovice').imageUploader({
+                        maxFiles: 4,
+                        imagesInputName: 'shipment_inovice',
+                    });
+                    $('.stamp_title').imageUploader({
+                        maxFiles: 4,
+                        imagesInputName: 'stamp_title',
+
+                    });
+                    $('.loading_image').imageUploader({
+                        maxFiles: 4,
+                        imagesInputName: 'loading_image',
+
+                    });
+                    $('.other-document').imageUploader({
+                        maxFiles: 4,
+                        imagesInputName: 'other_document',
+
+                    });
                     iziToast.success({
                         title: 'Success',
                         message: 'Data inserted successfully!',
@@ -50,14 +73,6 @@
             success: function(data) {
                 console.log(data);
                 $('#shipment_tbody').html(data);
-                // $('#shipment_filtering_table').DataTable({
-                //     scrollX: true,
-                //     language: {
-                //         search: "",
-                //         sLengthMenu: "_MENU_",
-                //         searchPlaceholder: "Search"
-                //     },
-                // });
             }
         });
 
@@ -66,6 +81,26 @@
 
 <script>
     function shipment_images_upload(id) {
-        alert(id);
+        var formData = new FormData(jQuery('#shipment_attachments_form')[0]);
+        console.log(...formData);
+        $.ajax({
+            method: 'POST',
+            url: '{{ URL::to('admin/shipment/create_images') }}',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                iziToast.success({
+                    title: 'Success',
+                    message: 'Data inserted successfully!',
+                    timeout: 1500,
+                    position: 'topCenter',
+                    zindex: '9999999999999',
+                });
+                setTimeout(function() {
+                    window.location.reload(true);
+                }, 1500);
+            }
+        });
     }
 </script>

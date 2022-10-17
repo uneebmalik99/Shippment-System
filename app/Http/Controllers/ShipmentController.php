@@ -17,7 +17,6 @@ use Illuminate\Http\Request;
 use Storage;
 use Yajra\Datatables\Datatables;
 
-
 class ShipmentController extends Controller
 {
 
@@ -93,6 +92,7 @@ class ShipmentController extends Controller
         // dd($data);
         // years
         $current_date = Carbon::now();
+        $period = CarbonPeriod::create('2022-09-09', $current_date);
         $period = CarbonPeriod::create('2022-09-09', $current_date);
         // dd($period->toArray());
         foreach ($period as $date) {
@@ -179,9 +179,10 @@ class ShipmentController extends Controller
     {
         // return $request->all();
         if ($request->ajax()) {
-
+            $data = [];
             $data = $request->all();
             $vehicles = $request->vehicle;
+            $tab = $request->tab;
 
             $loading_image = $request->file('loading_image');
             $shipment_inovice = $request->file('shipment_inovice');
@@ -195,108 +196,156 @@ class ShipmentController extends Controller
             unset($data['shipment_inovice']);
             unset($data['stamp_title']);
             unset($data['other_document']);
+            unset($data['tab']);
 
             $Obj_vehicle = new Vehicle;
-            $Obj_shipment = new Shipment_Invice;
-            $Obj_stamp = new Stamp_Title;
-            $Obj_loading = new Loading_Image;
-            $Obj_other = new Other_Document;
             $Obj = new Shipment;
             $data['status'] = "2";
             $Obj->create($data);
 
             $shipment = $Obj->where('container_no', $request->container_no)->get();
-
-            if ($shipment_inovice) {
-
-                foreach ($shipment_inovice as $shipment_images) {
-                    $image_name = time() . '.' . $shipment_images->extension();
-                    $filename = Storage::putFile($this->directory, $shipment_images);
-                    $shipment_images->move(public_path($this->directory), $filename);
-                    $Obj_shipment->name = $filename;
-                    $Obj_shipment->thumbnail = $image_name;
-                    $Obj_shipment->shipment_id = $shipment[0]['id'];
-                    $Obj_shipment->save();
-                }
-            }
-
-            if ($stamp_title) {
-
-                foreach ($stamp_title as $stamp_images) {
-                    $image_name = time() . '.' . $stamp_images->extension();
-                    $filename = Storage::putFile($this->directory, $stamp_images);
-                    $stamp_images->move(public_path($this->directory), $filename);
-                    $Obj_stamp->name = $filename;
-                    $Obj_stamp->thumbnail = $image_name;
-                    $Obj_stamp->shipment_id = $shipment[0]['id'];
-                    $Obj_stamp->save();
-                }
-            }
-
-            if ($loading_image) {
-
-                foreach ($loading_image as $load_images) {
-                    $image_name = time() . '.' . $load_images->extension();
-                    $filename = Storage::putFile($this->directory, $load_images);
-                    $load_images->move(public_path($this->directory), $filename);
-                    $Obj_loading->name = $filename;
-                    $Obj_loading->thumbnail = $image_name;
-                    $Obj_loading->shipment_id = $shipment[0]['id'];
-                    $Obj_loading->save();
-                }
-            }
-
-            if ($other_document) {
-
-                foreach ($other_document as $other_images) {
-                    $image_name = time() . '.' . $other_images->extension();
-                    $filename = Storage::putFile($this->directory, $other_images);
-                    $other_images->move(public_path($this->directory), $filename);
-                    $Obj_other->name = $filename;
-                    $Obj_other->thumbnail = $image_name;
-                    $Obj_other->shipment_id = $shipment[0]['id'];
-                    $Obj_other->save();
-                }
-            }
-
+            $data['shipment_id'] = $shipment[0]['id'];
             foreach ($vehicles as $vehicle_id) {
                 $get_vehicle = $Obj_vehicle->find($vehicle_id);
                 $get_vehicle->shipment_id = $shipment[0]['id'];
                 $get_vehicle->save();
             }
-            if ($get_vehicle) {
-                return "Success!";
-            } else {
-                return "Failed!";
-            }
+            $view = view('shipment.' . $tab, $data)->render();
+            return Response($view);
+
+            // if ($shipment_inovice) {
+
+            //     foreach ($shipment_inovice as $shipment_images) {
+            //         $image_name = time() . '.' . $shipment_images->extension();
+            //         $filename = Storage::putFile($this->directory, $shipment_images);
+            //         $shipment_images->move(public_path($this->directory), $filename);
+            //         $Obj_shipment->name = $filename;
+            //         $Obj_shipment->thumbnail = $image_name;
+            //         $Obj_shipment->shipment_id = $shipment[0]['id'];
+            //         $Obj_shipment->save();
+            //     }
+            // }
+
+            // if ($stamp_title) {
+
+            //     foreach ($stamp_title as $stamp_images) {
+            //         $image_name = time() . '.' . $stamp_images->extension();
+            //         $filename = Storage::putFile($this->directory, $stamp_images);
+            //         $stamp_images->move(public_path($this->directory), $filename);
+            //         $Obj_stamp->name = $filename;
+            //         $Obj_stamp->thumbnail = $image_name;
+            //         $Obj_stamp->shipment_id = $shipment[0]['id'];
+            //         $Obj_stamp->save();
+            //     }
+            // }
+
+            // if ($loading_image) {
+
+            //     foreach ($loading_image as $load_images) {
+            //         $image_name = time() . '.' . $load_images->extension();
+            //         $filename = Storage::putFile($this->directory, $load_images);
+            //         $load_images->move(public_path($this->directory), $filename);
+            //         $Obj_loading->name = $filename;
+            //         $Obj_loading->thumbnail = $image_name;
+            //         $Obj_loading->shipment_id = $shipment[0]['id'];
+            //         $Obj_loading->save();
+            //     }
+            // }
+
+            // if ($other_document) {
+
+            //     foreach ($other_document as $other_images) {
+            //         $image_name = time() . '.' . $other_images->extension();
+            //         $filename = Storage::putFile($this->directory, $other_images);
+            //         $other_images->move(public_path($this->directory), $filename);
+            //         $Obj_other->name = $filename;
+            //         $Obj_other->thumbnail = $image_name;
+            //         $Obj_other->shipment_id = $shipment[0]['id'];
+            //         $Obj_other->save();
+            //     }
+            // }
+
+            // if ($get_vehicle) {
+            //     return "Success!";
+            // } else {
+            //     return "Failed!";
+            // }
         }
     }
 
-    // public function profile(Request $request)
-    // {
-    //     $data = [];
-    //     $data = [
-    //         "page_title" => $this->plural . " List",
-    //         "page_heading" => $this->plural . ' List',
-    //         "breadcrumbs" => array('#' => $this->plural . " List"),
-    //         "module" => [
-    //             'type' => $this->type,
-    //             'singular' => $this->singular,
-    //             'plural' => $this->plural,
-    //             'view' => $this->view,
-    //             'db_key' => $this->db_key,
-    //             'action' => $this->action,
-    //             'page' => 'list',
-    //         ],
-    //     ];
-    //     $notification = $this->Notification();
-    //     if ($request->ajax()) {
-    //         $tab = $request->tab;
-    //         $output = view('layouts.shipment_detail.' . $tab, $data)->render();
-    //         return Response($output);
-    //     }
-    //     return view($this->view . 'profile', $data, $notification);
-    // }
+    public function create_images(Request $request)
+    {
+        // dd($request->shipment_id);
+        $shipment_id = $request->shipment_id;
+        $data = [];
+        $shipment_inovice = $request->file('shipment_inovice');
+        $stamp_title = $request->file('stamp_title');
+        $loading_image = $request->file('loading_image');
+        $other_document = $request->file('other_document');
+
+        if ($shipment_inovice) {
+            $Obj_shipment = new Shipment_Invice;
+            foreach ($shipment_inovice as $shipment_images) {
+                $image_name = time() . '.' . $shipment_images->extension();
+                $filename = Storage::putFile($this->directory, $shipment_images);
+                $shipment_images->move(public_path($this->directory), $filename);
+                $data = [
+                    'name' => $filename,
+                    'thumbnail' => $image_name,
+                    'shipment_id' => $shipment_id,
+                ];
+                $Obj_shipment->create($data);
+            }
+            // dd('adsasdssa');
+        }
+
+        if ($stamp_title) {
+            $Obj_stamp = new Stamp_Title;
+            foreach ($stamp_title as $stamp_images) {
+                $image_name = time() . '.' . $stamp_images->extension();
+                $filename = Storage::putFile($this->directory, $stamp_images);
+                $stamp_images->move(public_path($this->directory), $filename);
+                $data = [
+                    'name' => $filename,
+                    'thumbnail' => $image_name,
+                    'shipment_id' => $shipment_id,
+                ];
+                $Obj_stamp->create($data);
+            }
+        }
+
+        if ($loading_image) {
+            $Obj_loading = new Loading_Image;
+            foreach ($loading_image as $load_images) {
+                $image_name = time() . '.' . $load_images->extension();
+                $filename = Storage::putFile($this->directory, $load_images);
+                $load_images->move(public_path($this->directory), $filename);
+                $data = [
+                    'name' => $filename,
+                    'thumbnail' => $image_name,
+                    'shipment_id' => $shipment_id,
+                ];
+                $Obj_loading->create($data);
+            }
+        }
+
+        if ($other_document) {
+            $Obj_other = new Other_Document;
+            foreach ($other_document as $other_images) {
+                $image_name = time() . '.' . $other_images->extension();
+                $filename = Storage::putFile($this->directory, $other_images);
+                $other_images->move(public_path($this->directory), $filename);
+                $data = [
+                    'name' => $filename,
+                    'thumbnail' => $image_name,
+                    'shipment_id' => $shipment_id,
+                ];
+                $Obj_other->create($data);
+            }
+        }
+        return "Success";
+
+    }
 
     public function profile(Request $request)
     {
@@ -384,20 +433,20 @@ class ShipmentController extends Controller
         }
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
 
         $del = Shipment::find($id)->delete();
-        if  ($del){
-            return back()->with('success','Shipment Delete Successfully');
-        }
-        else{
-            return back()->with('failed','Some Error Occurs');
+        if ($del) {
+            return back()->with('success', 'Shipment Delete Successfully');
+        } else {
+            return back()->with('failed', 'Some Error Occurs');
 
         }
     }
 
-
-    public function serverside(Request $request){
+    public function serverside(Request $request)
+    {
         if ($request->ajax()) {
             $data = Shipment::select('*');
             return Datatables::of($data)
@@ -451,8 +500,8 @@ class ShipmentController extends Controller
         return back();
     }
 
-
-    public function filterShipmentt(Request $req){
+    public function filterShipmentt(Request $req)
+    {
         if ($req->ajax()) {
             $data = [];
             $data['records'] = Shipment::where('status', $req->id)->get();
