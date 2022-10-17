@@ -487,13 +487,18 @@
                 contentType: false,
                 success: function(data) {
                     console.log(data);
+                    $('#exampleModal').modal('hide');
                     iziToast.success({
                         title: 'Success',
-                        message: 'Auction Images inserted !',
+                        message: 'Images inserted !',
                         timeout: 1500,
                         position: 'topCenter',
                         zindex: '9999999999999',
                     });
+                setTimeout(function() {
+                    window.location.reload(true);
+                }, 2000);
+
                 },
                 error: function() {
                     iziToast.warning({
