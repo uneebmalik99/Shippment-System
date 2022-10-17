@@ -80,6 +80,7 @@
 </script>
 {{-- Auction Images --}}
 <script>
+
     function auction_images() {
         $('#vehicle_auction_form').on('submit', function(event) {
             event.preventDefault();
@@ -116,6 +117,7 @@
 
 {{-- Warehouse Images --}}
 <script>
+   
     function warehouse_images() {
         $('#vehicle_warehouse_form').on('submit', function(event) {
             event.preventDefault();

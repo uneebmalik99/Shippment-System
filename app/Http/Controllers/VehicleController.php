@@ -17,6 +17,7 @@ use App\Models\PickupImage;
 use App\Models\Shipment;
 use App\Models\User;
 use App\Models\Vehicle;
+use App\Models\VehicleType;
 use App\Models\VehicleStatus;
 use App\Models\WarehouseImage;
 use Carbon\Carbon;
@@ -128,6 +129,8 @@ class VehicleController extends Controller
         $data['buyers'] = User::where('role_id', '4')->get();
         $data['location'] = Location::all();
         $data['shipment'] = Shipment::all();
+        $data['vehicle_types'] = VehicleType::all();
+        $data['vehicle_status'] = VehicleStatus::all();
         if ($request->ajax()) {
             $tab = $request->tab;
             $output = view('layouts.vehicle_create.' . $tab, $data)->render();
@@ -260,9 +263,9 @@ class VehicleController extends Controller
             if ($warehouse) {
                 if ($warehouse != "") {
                     if ($warehouse == "all") {
-                        $records = $records;
+                        $records = $records->with('vehicle_status')->get()->toArray();
                     } else {
-                        $records = $records->where('title_state', $warehouse);
+                        $records = $records->with('vehicle_status')->where('title_state', $warehouse)->get()->toArray();
                     }
                 }
             }
@@ -301,7 +304,7 @@ class VehicleController extends Controller
                     }
                 }
             }
-            $output['records'] = $records->paginate($this->perpage);
+            $output['records'] = $records;
             return view('layouts.vehicle.FilterTable', $output)->render();
         }
     }
@@ -309,13 +312,14 @@ class VehicleController extends Controller
     public function create_form(Request $request)
     {
         $data = $request->all();
+        $vin['vin'] = $data['vin'];
+        // return $vin;
         $tab = $data['tab'];
         $image = $request->file('images');
         $billofsales = $request->file('billofsales');
         $originaltitle = $request->file('originaltitle');
         $pickup = $request->file('pickup');
         unset($data['tab']);
-        // unset($data['images']);
         unset($data['billofsales']);
         unset($data['originaltitle']);
         unset($data['pickup']);
@@ -367,7 +371,7 @@ class VehicleController extends Controller
 
         switch ($tab) {
             case ('general'):
-                $output['view'] = view('layouts.vehicle_create.attachments')->render();
+                $output['view'] = view('layouts.vehicle_create.attachments', $vin)->render();
                 break;
         }
         return Response($output);
@@ -380,9 +384,9 @@ class VehicleController extends Controller
         unset($data['tab']);
         $images = $request->file('images');
         $documents = $request->file('name');
-        // dd($documents);
         $Obj = new Vehicle;
         $Obj_vehicle = $Obj->where('vin', $request->vin)->get();
+        // dd($request->vin);
         $i = 0;
         if ($request->hasFile('images')) {
             foreach ($images as $image) {
@@ -431,7 +435,6 @@ class VehicleController extends Controller
                 case ('auction_copy'):
                     $Obj_file = new AuctionCopy;
                     $this->directory = "/auction_copies";
-
                     break;
             }
             $filename = Storage::putFile($this->directory, $documents);
@@ -439,11 +442,12 @@ class VehicleController extends Controller
             $doc = $documents->move(public_path($this->directory), $filename);
             // dd($doc->getSize() / 1000);/
             $size = $doc->getSize() / 1000;
-            // dd($size);
+            
             $Obj_file->vehicle_id = $Obj_vehicle[0]['id'];
             $Obj_file->name = $filename;
             $Obj_file->type = $type;
             $Obj_file->size = $size . ' kb';
+            
             $Obj_file->save();
 
             $output['result'] = "Success";
@@ -471,7 +475,7 @@ class VehicleController extends Controller
     {
         $action = url($this->action . '/profile/');
         $data = [
-            'vehicle' => Vehicle::with('images')->find($id)->toArray(),
+            'vehicle' => Vehicle::with('billofsales')->find($id)->toArray(),
             "page_title" => "Profile " . $this->singular,
             "page_heading" => "Profile " . $this->singular,
             "button_text" => "Update ",
@@ -519,14 +523,16 @@ class VehicleController extends Controller
 
         if ($request->tab == 'auction_images') {
             $data['images'] = AuctionImage::where('vehicle_id', $request->id)->get()->toArray();
-            $url = url('public/auction_images');
+            $url = url('public/');
         } else if ($request->tab == 'warehouse_images') {
             $data['images'] = WarehouseImage::where('vehicle_id', $request->id)->get()->toArray();
-            $url = url('public/warehouse_images');
+            $url = url('public/');
         } else {
-            $data['images'] = Image::where('vehicle_id', $request->id)->get()->toArray();
-            $url = url('public/vehicle_images');
+            $data['images'] = BillOfSale::where('vehicle_id', $request->id)->get()->toArray();
+            $url = url('public/');
         }
+
+        // return $data['images'];
 
         foreach ($data['images'] as $img) {
             $output[] = '<div class="img">
@@ -540,30 +546,19 @@ class VehicleController extends Controller
     public function serverside(Request $request)
     {
         if ($request->ajax()) {
-            $data = Vehicle::with('vehicle_status')->select('*');
+            $data = Vehicle::with('vehicle_status')->get()->toArray();
             return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('status', function ($row) {
-                    if ($row['status'] == 1) {
-                        $status = "<div>New Order</div>";
-                    } else if ($row['status'] == 2) {
-                        $status = "<div>Dispatched</div>";
-                    } else if ($row['status'] == 3) {
-                        $status = "<div>On Hand</div>";
-                    } else if ($row['status'] == 4) {
-                        $status = "<div>No Title</div>";
-                    } else if ($row['status'] == 5) {
-                        $status = "<div>Towing</div>";
-                    } else {
-                        $status = "<div>Error</div>";
-                    }
-                    return $status;
+            ->addIndexColumn()
+            ->addColumn('status', function($row){
+                $status = "<div>".$row['vehicle_status']['status_name']."</div>";
+                return $status;
                 })
                 ->addColumn('action', function ($row) {
-                    $url_view = url('admin/vehicle/profile/' . $row->id);
-                    $url_delete = url('admin/vehicles/delete/' . $row->id);
-                    $url_edit = url('admin/vehicles/edit/' . $row->id);
-                    $id = $row->id;
+
+                    $url_view = url('admin/vehicle/profile/' . $row['id']);
+                    $url_delete = url('admin/vehicles/delete/' . $row['id']);
+                    $url_edit = url('admin/vehicles/edit/' . $row['id']);
+                    $id = $row['id'];
                     $btn = "<button class='profile-button'><a href=$url_view>
                     <svg width='14' height='13' viewBox='0 0 16 14' fill='none'
                         xmlns='http://www.w3.org/2000/svg'>
@@ -622,6 +617,13 @@ class VehicleController extends Controller
                 return Response($output);
             }
 
+        }
+    }
+
+    public function SelectedDelete(Request $req){
+        $del = Vehicle::whereIn('id', $req->ids)->delete();
+        if($del){
+            return response()->json(['success'=>'All Selected Vehicles Deleted Successfully!']);
         }
     }
 }

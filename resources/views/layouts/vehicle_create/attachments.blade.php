@@ -1,3 +1,4 @@
+
 @include('layouts.vehicle_create.navbar')
 {{-- <div class="head d-flex align-items-center p-3">
     <div class="px-3">
@@ -9,6 +10,7 @@
         <div class="px-lg-3 col-lg-6 py-lg-0 py-3">
             <div class="box box-bg-3 col-12">
                 <form method="POST" id="vehicle_invoice_form" enctype="multipart/form-data">
+                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
                     <div class="col-4 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
                         <b>Auction Invoice</b>
                     </div>
@@ -42,6 +44,8 @@
         <div class="px-lg-3 col-lg-6 py-lg-0">
             <div class="box box-bg-4 col-12">
                 <form method="POST" id="vehicle_copy_form" enctype="multipart/form-data">
+                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
+
                     <div class="col-3 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
                         <b>Auction Copy</b>
                     </div>
@@ -78,6 +82,8 @@
         <div class="px-lg-3 col-lg-6 py-lg-0 py-3">
             <div class="box box-bg-1 col-12">
                 <form method="POST" id="vehicle_auction_form" enctype="multipart/form-data">
+                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
+
                     <div class="col-4 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
                         <b>Auction Images</b>
                     </div>
@@ -111,6 +117,8 @@
         <div class="px-lg-3 col-lg-6 py-lg-0">
             <div class="box box-bg-2 col-12">
                 <form method="POST" id="vehicle_warehouse_form" enctype="multipart/form-data">
+                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
+
                     <div class="col-4 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
                         <b>Warehouse Images</b>
                     </div>
@@ -147,6 +155,8 @@
             <div class="box box-bg-2 col-12">
                 <form method="POST" id="billofsales" enctype="multipart/form-data">
                     @csrf
+                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
+
                     <div class="col-3 my-3 p-0 d-flex justify-content-center"
                         style="border-bottom:2px solid #3181b9;">
                         <b>Bill Of Sales</b>
@@ -155,7 +165,7 @@
                     </div>
                     <div class="d-flex justify-content-center">
                         <div class="p-3 col-6">
-                            <button type="submit" onclick="billofsales()" class="btn btn_image col-12 d-flex"
+                            <button type="button" onclick="billofsales()" class="btn btn_image col-12 d-flex"
                                 style="cursor: pointer;">
                                 <div class="d-flex">
                                     <div
@@ -181,6 +191,8 @@
             <div class="box box-bg-2 col-12">
                 <form method="POST" id="originalTitle" enctype="multipart/form-data">
                     @csrf
+                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
+
                     <div class="col-3 my-3 p-0 d-flex justify-content-center"
                         style="border-bottom:2px solid #3181b9;">
                         <b>Original Title</b>
@@ -189,7 +201,7 @@
                     </div>
                     <div class="d-flex justify-content-center">
                         <div class="p-3 col-6">
-                            <button type="submit" onclick="originalTitle()" class="btn btn_image col-12 d-flex"
+                            <button type="button" onclick="originalTitle()" class="btn btn_image col-12 d-flex"
                                 style="cursor: pointer;">
                                 <div class="d-flex">
                                     <div
@@ -218,15 +230,16 @@
             <div class="box box-bg-2 col-12">
                 <form method="POST" id="pickup" enctype="multipart/form-data">
                     @csrf
-                    <div class="col-3 my-3 p-0 d-flex justify-content-center"
-                        style="border-bottom:2px solid #3181b9;">
+                <input type="hidden" name="vin" id="vin" value="{{$vin}}" />
+
+                    <div class="col-3 my-3 p-0 d-flex justify-content-center" style="border-bottom:2px solid #3181b9;">
                         <b>Pickup Images</b>
                     </div>
                     <div class="pickup" name="pickup[]" style="padding-top: .5rem;">
                     </div>
                     <div class="d-flex justify-content-center">
                         <div class="p-3 col-3">
-                            <button type="submit" onclick="pickup()" class="btn btn_image col-12 d-flex"
+                            <button type="button" onclick="pickup()" class="btn btn_image col-12 d-flex"
                                 style="cursor: pointer;">
                                 <div class="d-flex">
                                     <div

@@ -48,17 +48,21 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/customers/create/billing_customer', [CustomerController::class, 'general_create'])->name('customer.billing_create');
     Route::post('/customers/create/shipper_customer', [CustomerController::class, 'general_create'])->name('customer.shipper_create');
     Route::post('/customers/create/quotation_customer', [CustomerController::class, 'general_create'])->name('customer.quotation_create');
-    Route::get('/customers/edit/{id?}', [CustomerController::class, 'edit'])->name('customer.edit');
-    Route::post('/customers/edit/{id?}', [CustomerController::class, 'edit'])->name('customer.edit');
-    Route::get('/customers/update/{id?}', [CustomerController::class, 'edit'])->name('customer.edit');
-    Route::get('/customers/delete/{id?}', [CustomerController::class, 'delete'])->name('customer.delete');
-    Route::get('/customers/profile/{id?}', [CustomerController::class, 'profile'])->name('customer.profile');
-    Route::get('/customers/profile_tab', [CustomerController::class, 'profile_tab'])->name('customer.profile_tab');
-    Route::get('/customers/search', [CustomerController::class, 'search'])->name('customer.search');
-    Route::get('/customers/pagination', [CustomerController::class, 'search'])->name('customer.pagination');
-    Route::get('/customers/export', [CustomerController::class, 'export'])->name('customer.export');
-    Route::get('/customer/changeStatus/{id?}', [CustomerController::class, 'ChangeStatus'])->name('customer.changeStatus');
-    Route::post('/customer/filterTable', [App\Http\Controllers\CustomerController::class, 'FilterTable'])->name('customer.FilterTable');
+    Route::get('/customers/edit/{id?}',                 [CustomerController::class, 'edit'])->name('customer.edit');
+    Route::post('/customers/edit/{id?}',                [CustomerController::class, 'edit'])->name('customer.edit');
+    Route::get('/customers/update/{id?}',               [CustomerController::class, 'edit'])->name('customer.edit');
+    Route::get('/customers/delete/{id?}',               [CustomerController::class, 'delete'])->name('customer.delete');
+    Route::get('/customers/profile/{id?}',              [CustomerController::class, 'profile'])->name('customer.profile');
+    Route::get('/customers/profile_tab',                [CustomerController::class, 'profile_tab'])->name('customer.profile_tab');
+    Route::get('/customers/search',                     [CustomerController::class, 'search'])->name('customer.search');
+    Route::get('/customers/pagination',                 [CustomerController::class, 'search'])->name('customer.pagination');
+    Route::get('/customers/export',                     [CustomerController::class, 'export'])->name('customer.export');
+    Route::get('/customer/changeStatus/{id?}',          [CustomerController::class, 'ChangeStatus'])->name('customer.changeStatus');
+    Route::post('/customer/filterTable',                [App\Http\Controllers\CustomerController::class, 'FilterTable'])->name('customer.FilterTable');
+
+    Route::post('/customer/changeNotification', [App\Http\Controllers\CustomerController::class, 'changeNotification'])->name('customer.changeNotification');
+
+    Route::post('/customer/update', [App\Http\Controllers\CustomerController::class, 'customerUpdate'])->name('customers.update');
 
     Route::post('/customer/changeNotification', [App\Http\Controllers\CustomerController::class, 'changeNotification'])->name('customer.changeNotification');
 
@@ -75,30 +79,32 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/vehicles/create', [VehicleController::class, 'create'])->name('vehicle.create');
     // Route::get('/vehicles/edit/{id?}',                  [VehicleController::class, 'edit'])->name('vehicle.edit');
     // Route::post('/vehicles/edit/{id?}',                 [VehicleController::class, 'edit'])->name('vehicle.edit');
-    Route::get('/vehicles/delete/{id?}', [VehicleController::class, 'delete'])->name('vehicle.delete');
-    Route::get('/vehicles/update/{id?}', [VehicleController::class, 'edit'])->name('vehicle.edit');
+    Route::get('/vehicles/delete/{id?}',                [VehicleController::class, 'delete'])->name('vehicle.delete');
+    Route::get('/vehicles/update/{id?}',                [VehicleController::class, 'edit'])->name('vehicle.edit');
 
-    Route::get('/vehicles/search', [VehicleController::class, 'filtering'])->name('vehicle.search');
-    Route::get('/vehicles/pagination', [VehicleController::class, 'filtering'])->name('vehicle.pagination');
-    Route::get('/vehicles/filtering', [VehicleController::class, 'filtering'])->name('vehicle.pagination');
-    Route::get('/vehicles/warehouse', [VehicleController::class, 'filtering'])->name('vehicle.pagination');
-    Route::get('/vehicles/year', [VehicleController::class, 'filtering'])->name('vehicle.pagination');
-    Route::get('/vehicles/make', [VehicleController::class, 'filtering'])->name('vehicle.pagination');
-    Route::get('/vehicles/tabs', [VehicleController::class, 'filtering'])->name('vehicle.tabs');
-    Route::get('/vehicles/location', [VehicleController::class, 'filtering'])->name('vehicle.location');
-    Route::post('/vehicles/attachments', [VehicleController::class, 'store_image'])->name('vehicle.images');
-    Route::get('/vehicles/export', [VehicleController::class, 'export'])->name('vehicle.export');
-    Route::get('/vehicles/import', [VehicleController::class, 'import']);
-    Route::post('/vehicles/imports', [VehicleController::class, 'import'])->name('vehicle.import');
-    Route::post('/vehicle/vehicle_changeImages', [VehicleController::class, 'changesImages'])->name('vehicle.changeImages');
-    Route::post('/vehicle/vehicle_changeImages', [VehicleController::class, 'changesImages'])->name('vehicle.changeImages');
+    Route::get('/vehicles/search',                      [VehicleController::class, 'filtering'])->name('vehicle.search');
+    Route::get('/vehicles/pagination',                  [VehicleController::class, 'filtering'])->name('vehicle.pagination');
+    Route::get('/vehicles/filtering',                   [VehicleController::class, 'filtering'])->name('vehicle.pagination');
+    Route::get('/vehicles/warehouse',                   [VehicleController::class, 'filtering'])->name('vehicle.pagination');
+    Route::get('/vehicles/year',                        [VehicleController::class, 'filtering'])->name('vehicle.pagination');
+    Route::get('/vehicles/make',                        [VehicleController::class, 'filtering'])->name('vehicle.pagination');
+    Route::get('/vehicles/tabs',                        [VehicleController::class, 'filtering'])->name('vehicle.tabs');
+    Route::get('/vehicles/location',                    [VehicleController::class, 'filtering'])->name('vehicle.location');
+    Route::post('/vehicles/attachments',                [VehicleController::class, 'store_image'])->name('vehicle.images');
+    Route::get('/vehicles/export',                      [VehicleController::class, 'export'])->name('vehicle.export');
+    Route::get('/vehicles/import',                      [VehicleController::class, 'import']);
+    Route::post('/vehicles/imports',                    [VehicleController::class, 'import'])->name('vehicle.import');
+    Route::post('/vehicle/vehicle_changeImages',        [VehicleController::class, 'changesImages'])->name('vehicle.changeImages');
+    // Route::post('/vehicle/vehicle_changeImages',        [VehicleController::class, 'changesImages'])->name('vehicle.changeImages');
+    
+    Route::get('/vehicle/profile/{id?}',                [VehicleController::class, 'profile'])->name('vehicle.profile');
+    Route::get('/vehicle/vehicle_informationTab',       [VehicleController::class, 'profile_tab'])->name('customer.profile_tab');
+    
+    Route::get('/vehicle/records',       [VehicleController::class, 'serverside'])->name('vehicle.records');
+    Route::post('/vehicle/fetchVehciles',       [VehicleController::class, 'fetchVehicles'])->name('vehicle.fetchVehicles');
 
-    Route::get('/vehicle/profile/{id?}', [VehicleController::class, 'profile'])->name('vehicle.profile');
-    Route::get('/vehicle/vehicle_informationTab', [VehicleController::class, 'profile_tab'])->name('customer.profile_tab');
+    Route::post('/vehicle/SelectedDelete',       [VehicleController::class, 'SelectedDelete'])->name('Vehicle.SelectedDelete');
 
-    Route::get('/vehicle/records', [VehicleController::class, 'serverside'])->name('vehicle.records');
-
-    Route::post('/vehicle/fetchVehciles', [VehicleController::class, 'fetchVehicles'])->name('vehicle.fetchVehicles');
 
     //Sticky Notes Routes
     Route::get('/stickynotes', [StickyController::class, 'index'])->name('sticky.list');

@@ -9,7 +9,7 @@
         <td>{{ @$val['id'] }}</td>
         <td class="d-block">
             <div>
-                <span><b>{{ @$val['company_name'] }}</b></span>
+                {{ @$val['company_name'] }}
             </div>
             <div>
                 <span style="font-size: 12px !important;">{{ @$val['lead'] }}</span>

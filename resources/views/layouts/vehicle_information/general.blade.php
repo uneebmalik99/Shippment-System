@@ -1,3 +1,4 @@
+{{-- {{dd(@$vehicle)}} --}}
 <div class="row my-4">
     <div class="col-sm-10 col-md-10 col-lg-4 pl-0">
         <div class="information_card">
@@ -16,7 +17,7 @@
                 <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
                     <span class="infromation_mainText">Title State</span>
-                    <span class="information_text">{{@$vehicle['title_state ']}}</span>
+                    <span class="information_text">{{@$vehicle['title_state']}}</span>
                 </div>
                 <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
@@ -148,7 +149,8 @@
                         <p style="color:#6D8DA6 ">Note</p><br>
                     </div>
                     <div class="d-flex justify-content-start " style="width: 90%;margin:4px auto ">
-                        <textarea name=" " id=" " cols="40" rows="4" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px; "></textarea>
+                        <textarea name=" " id=" " cols="40" rows="4" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;font-size: 13px;
+    color: #6D8DA6; ">{{@$vehicle['note']}}</textarea>
 
                     </div>
 
@@ -197,11 +199,11 @@
                                 <div class="col-12">
 
                                     <div class="w-100 p-2">
-                                        <img src="{{asset('images/'. @$vehicle['images'][0]['name'])}}" alt=" "class="img_fluid mx-auto w-100">
+                                        <img src="{{asset(@$vehicle['billofsales'][0]['name'])}}" alt=""class="img_fluid mx-auto w-100" style="max-height:172px!important;border-radius: 10px!important;">
 
                                     </div>
                                     
-                                   
+        
                                         
                                   
                                 </div>
@@ -213,9 +215,9 @@
                         <div class="gallary_body">
                             <div class="d-flex flex-wrap justify-content-center changeImages">
 
-                                @foreach(@$vehicle['images'] as $img)                       
+                                @foreach(@$vehicle['billofsales'] as $img)                       
                                 <div class="img">
-                                    <img src="{{asset('images/'.$img['name'])}}" alt=" " style="width: 60px; height: 55px; ">
+                                    <img src="{{asset($img['name'])}}" alt=" " style="width: 60px; height: 55px;" class="download_images">
                                 </div>
                                 @endforeach
                                
@@ -224,6 +226,7 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-12 d-flex justify-content-center ">
+                        <a href="#" id="download_all">
                             <button style="background: rgba(37, 101, 4, 0.72); border-radius: 6px;border:none;color:white;transform: skew(-30deg);">
                                 <div style="transform: skew(30deg);padding:1px 10px;font-size: 13px;">
                                 Download Images in Zip

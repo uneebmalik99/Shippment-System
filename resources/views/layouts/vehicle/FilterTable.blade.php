@@ -1,3 +1,4 @@
+{{-- {{dd(@$records)}} --}}
 <table id="vehicle_filter_table" class="table row-border vehicle_table" style="width:100%!important;">
     <thead class="bg-custom">
         <tr class="font-size">
@@ -26,7 +27,7 @@
                 <td>{{ @$val['model'] }}</td>
                 <td>{{ @$val['vehicle_type'] }}</td>
                 <td>{{ @$val['value'] }}</td>
-                <td>{{ @$val['status'] }}</td>
+                <td>{{ @$val['vehicle_status']['status_name'] }}</td>
                 <td>{{ @$val['buyer_id'] }}</td>
                 <td>
                     <button class="profile-button">

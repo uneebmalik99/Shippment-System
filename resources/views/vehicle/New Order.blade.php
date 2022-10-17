@@ -1,4 +1,4 @@
-<table id="new_order_table" class="table row-border" style="width: 100%!important;">
+<table id="new_order_table" class="table row-border">
     <thead class="bg-custom">
         <tr class="font-size">
             <th class="font-bold-tr">Sr</th>
@@ -24,11 +24,7 @@
     </thead>
     <tbody class="bg-white font-size" id="vehicle_tbody">
         {{-- @dd($records) --}}
-        @if (@count($records) == 0)
-            <tr class="font-size">
-                <td colspan="19" class="h5 text-muted text-center">NO VEHICLES TO DISPLAY</td>
-            </tr>
-        @endif
+       
         <?php $i = 1; ?>
         @foreach ($records as $val)
             {{-- @dd( $val) --}}

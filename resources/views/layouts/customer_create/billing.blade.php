@@ -200,20 +200,17 @@
                 </span>
             </div>
         </div>
-
         <div class="d-flex justify-content-start p-2 ml-5">
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 purchased_from" type="radio"
                     name="purchased_from"value="auction">
                 <span class="px-2">Auction</span>
             </div>
-
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 purchased_from" type="radio"
                     name="purchased_from"value="dealer">
                 <span class="px-2">Dealer</span>
             </div>
-
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 purchased_from" type="radio"
                     name="purchased_from"value="private">

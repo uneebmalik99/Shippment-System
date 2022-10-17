@@ -337,13 +337,13 @@
                     </div>
                 </div>
                 {{-- search filter end --}}
-                <div id="status_body" class="mt-2 bg-light" style="height: 100%;overflow-x: scroll;">
-                    <table id="vehicle_table" class="table row-border vehicle_table" style="width:100%!important">
+                <div id="status_body" class="mt-2 bg-light">
+                    <table id="vehicle_table" class="table row-border vehicle_table">
                         <thead class="bg-custom" style="color:white!important;">
                             <tr>
                                 <th class="font-bold-tr">Sr</th>
                                 <th class="font-bold-tr">Customer Name</th>
-                                <th class="font-bold-tr">VIN</th>
+                                <th class="font-bold-tr w-100"> VIN </th>
                                 <th class="font-bold-tr">YEAR</th>
                                 <th class="font-bold-tr">MAKE</th>
                                 <th class="font-bold-tr">MODEL</th>
@@ -382,7 +382,8 @@
             var table = $('.vehicle_table').DataTable({
                 processing: true,
                 serverSide: true,
-                // scrollX: true,
+                scrollX: true,
+                autoWidth:false,
                 "lengthMenu": [
                     [50, 100, 500],
                     [50, 100, 500]
@@ -391,15 +392,18 @@
                     search: "",
                     sLengthMenu: "_MENU_",
                     searchPlaceholder: "Search",
-
+                    
                     processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
                 },
                 ajax: "{{ route('vehicle.records') }}",
-                columns: [{
-                        data: 'id',
-                        name: 'id'
-                    },
+                columns: [
                     {
+                    data: 'id',
+                    name: 'id',
+                    autoWidth:false,
+                    width:"100%",
+                },
+                {
                         data: 'customer_name',
                         name: 'customer_name'
                     },
@@ -441,14 +445,13 @@
                         orderable: false,
                         searchable: false
                     },
-                ]
-            });
-
-
-
-
-
+                    
+                ],
+              
+            })
         });
+
+        
     </script>
 
     @if (Session::has('success'))
