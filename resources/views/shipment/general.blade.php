@@ -3,11 +3,14 @@
         <div class="bg-white">
             @include('shipment.navbar')
             <div class="mt-3">
+                <div class="col-12 d-flex justify-content-end">
+                    <input type="text" style="outline:none!important;font-size:13px!important;color:gray!important" id="shipment_search" name="shipment_search" onkeyup="search_shipment()" placeholder="Search VIN">
+                </div>
                 <form method="POST" class="col-12" id="shipment_form">
                     @csrf
                     <div class="mt-2 bg-light" id="shipment_body">
-                        <table id="shipment_vehicle_table" class="table ">
-                            <thead class="bg-custom text-dark">
+                        <table id="" class="table ">
+                            <thead class="bg-custom">
                                 <tr style="font-size: 11px!important">
                                     <th>YEAR</th>
                                     <th>MAKE</th>
@@ -20,9 +23,20 @@
                                     <th>ACTION</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="shipment_table">
                                 <tr>
-                                    @foreach ($vehicles as $vehicle)
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Search Vehicles</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                {{-- @foreach ($vehicles as $vehicle)
+                                <tr>
                                         <td>{{ @$vehicle['year'] }}</td>
                                         <td>{{ @$vehicle['make'] }}</td>
                                         <td>{{ @$vehicle['model'] }}</td>
@@ -33,9 +47,9 @@
                                         <td>{{ @$vehicle['customer_name'] }}</td>
                                         <td class="text-center"><input type="checkbox" value="{{ @$vehicle['id'] }}"
                                                 id="vehicle" name="vehicle[]"></td>
-                                        {{-- <input type="hidden" value="{{ @$vehicle['id'] }}"> --}}
+                                        
                                 </tr>
-                                @endforeach
+                                @endforeach --}}
                             </tbody>
                         </table>
                     </div>

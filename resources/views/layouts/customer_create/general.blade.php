@@ -1,4 +1,47 @@
 @include('layouts.customer_create.navbar')
+<style>
+    
+.text-center{
+text-align: center;
+margin-bottom: 20px;
+}
+
+.profile-images-card{
+	margin: auto;
+	display: table;
+	background: #fff;
+	padding: 10px 20px;
+	/* box-shadow: 0px 0px 5px #ddd; */
+}
+
+.profile-images{
+	width: 90px;
+	height: 90px;
+	background: #fff;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.profile-images img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.custom-file input[type='file']{
+	display: none
+}
+
+.custom-file label{
+	cursor: pointer;
+	color: #000;
+	text-align: center;
+	display: table;
+	margin: auto;
+	margin-top: 15px;
+}
+
+</style>
 
 <form method="POST" id="customer_general_form" enctype="multipart/form-data">
     <div>
@@ -60,7 +103,7 @@
 
                                     <div class=" d-flex">
                                         <label for="fax" class="col-5 px-0 font-size font-bold">Main fax
-                                            <span class="text-danger" id="fax_error"></span>
+                                            {{-- <span class="text-danger" id="fax_error"></span> --}}
                                         </label>
                                         <input type="fax"
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="fax"
@@ -78,7 +121,7 @@
 
                                     <div class=" d-flex">
                                         <label for="source" class="col-5 px-0 font-size font-bold">Source
-                                            <span class="text-danger" id="source_error"></span>
+                                            {{-- <span class="text-danger" id="source_error"></span> --}}
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="source"
@@ -111,7 +154,7 @@
                                     <div class=" d-flex">
                                         <label for="customer_type" class="col-5 px-0 font-size font-bold">Customer
                                             Type
-                                            <span class="text-danger" id="customer_type_error"></span>
+                                            {{-- <span class="text-danger" id="customer_type_error"></span> --}}
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
@@ -123,7 +166,7 @@
                                     <div class=" d-flex">
                                         <label for="sales_type" class="col-5 px-0 font-size font-bold">Sales
                                             Type
-                                            <span class="text-danger" id="sales_type_error"></span>
+                                            {{-- <span class="text-danger" id="sales_type_error"></span> --}}
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
@@ -154,7 +197,7 @@
                                     <div class="d-flex">
                                         <label for="payment_type" class="col-5 px-0 font-size font-bold">Payment
                                             Type
-                                            <span class="text-danger" id="payment_type_error"></span>
+                                            {{-- <span class="text-danger" id="payment_type_error"></span> --}}
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
@@ -165,7 +208,7 @@
                                     <div class="d-flex">
                                         <label for="payment_term" class="col-5 px-0 font-size font-bold">Payment
                                             Term
-                                            <span class="text-danger" id="payment_term_error"></span>
+                                            {{-- <span class="text-danger" id="payment_term_error"></span> --}}
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
@@ -176,7 +219,7 @@
 
                                     <div class=" d-flex">
                                         <label for="industry" class="col-5 px-0 font-size font-bold">Industry
-                                            <span class="text-danger" id="industry_error"></span>
+                                            {{-- <span class="text-danger" id="industry_error"></span> --}}
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
@@ -212,7 +255,8 @@
                                 <div class="pb-3 px-2">
                                     <div class="d-flex">
                                         <label for="sales_person" class="col-5 px-0 font-size font-bold">Sales
-                                            person<span class="text-danger" id="sales_person_error"></span>
+                                            person
+                                            {{-- <span class="text-danger" id="sales_person_error"></span> --}}
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
@@ -223,7 +267,8 @@
 
                                     <div class="d-flex">
                                         <label for="inside_person" class="col-5 px-0 font-size font-bold">Inside
-                                            person<span class="text-danger" id="inside_person_error"></span>
+                                            person
+                                            {{-- <span class="text-danger" id="inside_person_error"></span> --}}
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
@@ -233,7 +278,7 @@
 
                                     <div class="d-flex">
                                         <label for="level" class="col-5 px-0 font-size font-bold">Level
-                                            <span class="text-danger" id="level_error"></span>
+                                            {{-- <span class="text-danger" id="level_error"></span> --}}
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
@@ -289,14 +334,18 @@
                                         <label for="zip_code" class="col-5 px-0 font-size font-bold">Zip code
                                             <span class="text-danger" id="zip_code_error"></span>
                                         </label>
-                                        <select class="form-control-sm border border-0 rounded-pill bg col-7"
+                                        <input type="text"
+                                            class="form-control-sm border border-0 rounded-pill bg col-7"
+                                            name="zip_code" id="zip_code" value="{{ @$user['zip_code'] }}">
+
+                                        {{-- <select class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="zip_code" id="zip_code">
                                             @foreach ($location as $locations)
                                                 <option value="{{ $locations['zip_code'] }}">
                                                     {{ $locations['zip_code'] }}
                                                 </option>
                                             @endforeach
-                                        </select>
+                                        </select> --}}
                                     </div>
 
 
@@ -304,13 +353,16 @@
                                         <label for="state" class="col-5 px-0 font-size font-bold">State
                                             <span class="text-danger" id="state_error"></span>
                                         </label>
-                                        <select class="form-control-sm border border-0 rounded-pill bg col-7"
+                                        <input type="text"
+                                            class="form-control-sm border border-0 rounded-pill bg col-7"
+                                            name="state" id="state" value="{{ @$user['state'] }}">
+                                        {{-- <select class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="state" id="state">
                                             @foreach ($location as $locations)
                                                 <option value="{{ $locations['name'] }}">{{ $locations['name'] }}
                                                 </option>
                                             @endforeach
-                                        </select>
+                                        </select> --}}
                                     </div>
 
 
@@ -327,7 +379,8 @@
 
                                     <div class="d-flex">
                                         <label for="address_line2" class="col-5 px-0 font-size font-bold">Address
-                                            (2)<span class="text-danger" id="address_line2_error"></span>
+                                            (2)
+                                            {{-- <span class="text-danger" id="address_line2_error"></span> --}}
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
@@ -337,7 +390,8 @@
 
                                     <div class="d-flex">
                                         <label for="price_code" class="col-5 px-0 font-size font-bold">Price
-                                            code<span class="text-danger" id="price_code_error"></span>
+                                            code
+                                            {{-- <span class="text-danger" id="price_code_error"></span> --}}
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
@@ -350,14 +404,26 @@
 
                     </div>
                     <div class="col-sm-10 col-md-11 col-lg-11 px-3 mx-auto">
-                        <div class="col-12">
-                            <div class="user_image" style="padding-top: .5rem; border-radius: 15px!important;">
+                        <div class="row">
+                            <div class="col-6">
+                                {{-- <div class="user_image" style="padding-top: .5rem; border-radius: 15px!important;">
+                                </div> --}}
+                                <div class="profile-images-card">
+                                    <div class="profile-images">
+                                        <img src="{{asset('images/profile.jpg')}}" id="upload-img">
+                                    </div>
+                                    <div class="custom-file">
+                                        <label for="fileupload">Upload Profile</label>
+                                        <input type="file" id="fileupload" name="customer_image[]" onchange="loadFile(event)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 d-flex align-items-center">
+                                <input type="file" name="user_file[]"
+                                    class="form-control border border-info rounded col-12 w-100" id="user_file">
                             </div>
                         </div>
-                        <div class="col-12">
-                            <input type="file" name="user_file[]"
-                                class="form-control border border-info rounded col-12 w-100" id="user_file">
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -370,10 +436,10 @@
             <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="role_id"
                 id="role_id" readonly value="4">
 
-            <button type="button" class="btn next-style text-white col-1 py-1 mx-2" style="cursor:pointer;"
-                onclick="skip_view(this.id)" id="skip" nexttab="billing">
+            {{-- <button type="button" class="btn next-style text-white col-1 py-1 mx-2" style="cursor:pointer;"
+                onclick="skip_view(this.id)" id="skip" nexttab="billing" skiptab="billing_customer_tab">
                 <div class="unskew">skip</div>
-            </button>
+            </button> --}}
             <button type="button" class="btn next-style text-white col-1 py-1 mx-2" style="cursor:pointer;"
                 onclick="createForm(this.id)" id="general_customer" name="{{ $module['button'] }}"
                 data-next="billing_customer_tab">
@@ -383,3 +449,6 @@
     </div>
 
 </form>
+
+
+

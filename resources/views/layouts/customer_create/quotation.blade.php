@@ -7,7 +7,7 @@
                 <label for="destination_port" class="text-info font-style">Destination Port</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                     name="destination_port" id="destination_port">
             </div>
         </div>
@@ -16,7 +16,7 @@
                 <label for="valid_from" class="text-info font-style">Valid From</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10" name="valid_from"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6" name="valid_from"
                     id="valid_from">
             </div>
         </div>
@@ -25,7 +25,7 @@
                 <label for="valid_till" class="text-info font-style">Valid Till</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10" name="valid_till"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6" name="valid_till"
                     id="valid_till">
             </div>
         </div>
@@ -141,13 +141,10 @@
             </div>
         </div>
     </div>
-    <div class="d-flex">
+    <div class="d-flex py-2">
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                    <div>
-                        <label for="container_size" class="text-info font-style">Container Size</label>
-                    </div>
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -158,9 +155,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="vehicle" class="text-info font-style">Vehicle</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="vehicle" id="vehicle"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -171,9 +168,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="loading_port" class="text-info font-style">Loading Port</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -184,9 +181,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="shipping_line" class="text-info font-style">Shipping Line</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -201,18 +198,18 @@
         <div class="col-4 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="default" class="text-info font-style">Default</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="default" id="default">
                     </div>
                 </div>
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="special_rate" class="text-info font-style">Special Rate</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="special_rate" id="special_rate">
@@ -221,7 +218,7 @@
             </div>
         </div>
         <div class="col-2 px-0">
-            <div class="d-flex justify-content-around align-items-end mt-4 p-2 col-12">
+            <div class="d-flex justify-content-around align-items-end p-2 col-12">
                 <div class="col-3 d-flex icon-style">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -256,9 +253,6 @@
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
                     <div>
-                        <label for="container_size" class="text-info font-style">Container Size</label>
-                    </div>
-                    <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
                             <option value="10">10</option>
@@ -268,9 +262,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="vehicle" class="text-info font-style">Vehicle</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="vehicle" id="vehicle"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -281,9 +275,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="loading_port" class="text-info font-style">Loading Port</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -294,9 +288,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="shipping_line" class="text-info font-style">Shipping Line</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -311,18 +305,18 @@
         <div class="col-4 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="default" class="text-info font-style">Default</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="default" id="default">
                     </div>
                 </div>
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="special_rate" class="text-info font-style">Special Rate</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="special_rate" id="special_rate">
@@ -331,7 +325,7 @@
             </div>
         </div>
         <div class="col-2 px-0">
-            <div class="d-flex justify-content-around align-items-end mt-4 p-2 col-12">
+            <div class="d-flex justify-content-around align-items-end p-2 col-12">
                 <div class="col-3 d-flex icon-style">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -365,9 +359,7 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                    <div>
-                        <label for="container_size" class="text-info font-style">Container Size</label>
-                    </div>
+                   
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -378,9 +370,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="vehicle" class="text-info font-style">Vehicle</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="vehicle" id="vehicle"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -391,9 +383,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="loading_port" class="text-info font-style">Loading Port</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -404,9 +396,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="shipping_line" class="text-info font-style">Shipping Line</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -421,18 +413,18 @@
         <div class="col-4 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="default" class="text-info font-style">Default</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="default" id="default">
                     </div>
                 </div>
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="special_rate" class="text-info font-style">Special Rate</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="special_rate" id="special_rate">
@@ -441,7 +433,7 @@
             </div>
         </div>
         <div class="col-2 px-0">
-            <div class="d-flex justify-content-around align-items-end mt-4 p-2 col-12">
+            <div class="d-flex justify-content-around align-items-end p-2 col-12">
                 <div class="col-3 d-flex icon-style">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -475,9 +467,7 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                    <div>
-                        <label for="container_size" class="text-info font-style">Container Size</label>
-                    </div>
+                   
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -488,9 +478,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="vehicle" class="text-info font-style">Vehicle</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="vehicle" id="vehicle"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -501,9 +491,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="loading_port" class="text-info font-style">Loading Port</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -514,9 +504,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="shipping_line" class="text-info font-style">Shipping Line</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -531,18 +521,18 @@
         <div class="col-4 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="default" class="text-info font-style">Default</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="default" id="default">
                     </div>
                 </div>
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="special_rate" class="text-info font-style">Special Rate</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="special_rate" id="special_rate">
@@ -551,7 +541,7 @@
             </div>
         </div>
         <div class="col-2 px-0">
-            <div class="d-flex justify-content-around align-items-end mt-4 p-2 col-12">
+            <div class="d-flex justify-content-around align-items-end p-2 col-12">
                 <div class="col-3 d-flex icon-style">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -585,9 +575,7 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                    <div>
-                        <label for="container_size" class="text-info font-style">Container Size</label>
-                    </div>
+                   
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -598,9 +586,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="vehicle" class="text-info font-style">Vehicle</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="vehicle" id="vehicle"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -611,9 +599,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="loading_port" class="text-info font-style">Loading Port</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -624,9 +612,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="shipping_line" class="text-info font-style">Shipping Line</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -641,18 +629,18 @@
         <div class="col-4 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="default" class="text-info font-style">Default</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="default" id="default">
                     </div>
                 </div>
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="special_rate" class="text-info font-style">Special Rate</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="special_rate" id="special_rate">
@@ -661,7 +649,7 @@
             </div>
         </div>
         <div class="col-2 px-0">
-            <div class="d-flex justify-content-around align-items-end mt-4 p-2 col-12">
+            <div class="d-flex justify-content-around align-items-end p-2 col-12">
                 <div class="col-3 d-flex icon-style">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -695,9 +683,7 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                    <div>
-                        <label for="container_size" class="text-info font-style">Container Size</label>
-                    </div>
+                    
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -708,9 +694,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="vehicle" class="text-info font-style">Vehicle</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="vehicle" id="vehicle"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -721,9 +707,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="loading_port" class="text-info font-style">Loading Port</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -734,9 +720,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="shipping_line" class="text-info font-style">Shipping Line</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -751,18 +737,18 @@
         <div class="col-4 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="default" class="text-info font-style">Default</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="default" id="default">
                     </div>
                 </div>
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="special_rate" class="text-info font-style">Special Rate</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="special_rate" id="special_rate">
@@ -771,7 +757,7 @@
             </div>
         </div>
         <div class="col-2 px-0">
-            <div class="d-flex justify-content-around align-items-end mt-4 p-2 col-12">
+            <div class="d-flex justify-content-around align-items-end p-2 col-12">
                 <div class="col-3 d-flex icon-style">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -805,9 +791,7 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                    <div>
-                        <label for="container_size" class="text-info font-style">Container Size</label>
-                    </div>
+                  
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -818,9 +802,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="vehicle" class="text-info font-style">Vehicle</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="vehicle" id="vehicle"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -831,9 +815,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="loading_port" class="text-info font-style">Loading Port</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -844,9 +828,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="shipping_line" class="text-info font-style">Shipping Line</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -861,18 +845,18 @@
         <div class="col-4 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="default" class="text-info font-style">Default</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="default" id="default">
                     </div>
                 </div>
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="special_rate" class="text-info font-style">Special Rate</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="special_rate" id="special_rate">
@@ -881,7 +865,7 @@
             </div>
         </div>
         <div class="col-2 px-0">
-            <div class="d-flex justify-content-around align-items-end mt-4 p-2 col-12">
+            <div class="d-flex justify-content-around align-items-end p-2 col-12">
                 <div class="col-3 d-flex icon-style">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -915,9 +899,7 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                    <div>
-                        <label for="container_size" class="text-info font-style">Container Size</label>
-                    </div>
+                   
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -928,9 +910,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="vehicle" class="text-info font-style">Vehicle</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="vehicle" id="vehicle"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -941,9 +923,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="loading_port" class="text-info font-style">Loading Port</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -954,9 +936,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="shipping_line" class="text-info font-style">Shipping Line</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -971,18 +953,18 @@
         <div class="col-4 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="default" class="text-info font-style">Default</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="default" id="default">
                     </div>
                 </div>
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="special_rate" class="text-info font-style">Special Rate</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="special_rate" id="special_rate">
@@ -991,7 +973,7 @@
             </div>
         </div>
         <div class="col-2 px-0">
-            <div class="d-flex justify-content-around align-items-end mt-4 p-2 col-12">
+            <div class="d-flex justify-content-around align-items-end p-2 col-12">
                 <div class="col-3 d-flex icon-style">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -1025,9 +1007,7 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                    <div>
-                        <label for="container_size" class="text-info font-style">Container Size</label>
-                    </div>
+                    
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -1038,9 +1018,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="vehicle" class="text-info font-style">Vehicle</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="vehicle" id="vehicle"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -1051,9 +1031,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="loading_port" class="text-info font-style">Loading Port</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -1064,9 +1044,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div>
+                    {{-- <div>
                         <label for="shipping_line" class="text-info font-style">Shipping Line</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
@@ -1081,18 +1061,18 @@
         <div class="col-4 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="default" class="text-info font-style">Default</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="default" id="default">
                     </div>
                 </div>
                 <div class="col-6">
-                    <div>
+                    {{-- <div>
                         <label for="special_rate" class="text-info font-style">Special Rate</label>
-                    </div>
+                    </div> --}}
                     <div>
                         <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
                             name="special_rate" id="special_rate">
@@ -1101,7 +1081,7 @@
             </div>
         </div>
         <div class="col-2 px-0">
-            <div class="d-flex justify-content-around align-items-end mt-4 p-2 col-12">
+            <div class="d-flex justify-content-around align-items-end p-2 col-12">
                 <div class="col-3 d-flex icon-style">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                         xmlns="http://www.w3.org/2000/svg">

@@ -54,9 +54,24 @@
 {{-- Custom JS for views --}}
 <script type="text/javascript" src="{{ asset('js/ddtf.js') }}"></script>
 
+
 {{-- image upload --}}
 <script type="text/javascript" src="{{ asset('assets/js/image-uploader.min.js') }}"></script>
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+{{-- <script type="text/javascript" src="{{ asset('js/jquery-latest.min.js') }}"></script> --}}
+
+<script>
+    var loadFile = function(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('upload-img');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+</script>
+
+
 
 {{-- csrf tokens --}}
 <script type="text/javascript">

@@ -451,6 +451,11 @@ class ShipmentController extends Controller
             $data = Shipment::select('*');
             return Datatables::of($data)
                 ->addIndexColumn()
+                ->addColumn('shipment_id', function($row){
+                    $totalVehicles = Vehicle::where('shipment_id', $row->id)->count();
+                    $vehicles = '<p style="cursor:pointer">'.$totalVehicles.'</p>';
+                    return $vehicles;
+                })
                 ->addColumn('action', function ($row) {
                     $url_view = url('admin/shipments/profile/' . $row->id);
                     $url_delete = url('admin/shipments/delete/' . $row->id);
@@ -467,7 +472,6 @@ class ShipmentController extends Controller
                                                         d='M8 4.8125C7.33696 4.8125 6.70107 5.04297 6.23223 5.4532C5.76339 5.86344 5.5 6.41984 5.5 7C5.5 7.58016 5.76339 8.13656 6.23223 8.5468C6.70107 8.95703 7.33696 9.1875 8 9.1875C8.66304 9.1875 9.29893 8.95703 9.76777 8.5468C10.2366 8.13656 10.5 7.58016 10.5 7C10.5 6.41984 10.2366 5.86344 9.76777 5.4532C9.29893 5.04297 8.66304 4.8125 8 4.8125ZM4.5 7C4.5 6.18777 4.86875 5.40882 5.52513 4.83449C6.1815 4.26016 7.07174 3.9375 8 3.9375C8.92826 3.9375 9.8185 4.26016 10.4749 4.83449C11.1313 5.40882 11.5 6.18777 11.5 7C11.5 7.81223 11.1313 8.59118 10.4749 9.16551C9.8185 9.73984 8.92826 10.0625 8 10.0625C7.07174 10.0625 6.1815 9.73984 5.52513 9.16551C4.86875 8.59118 4.5 7.81223 4.5 7Z'
                                                         fill='#048B52' />
                                                 </svg>
-
                                             </a>
                                         </button>
                                         <button class='edit-button'>
@@ -484,7 +488,7 @@ class ShipmentController extends Controller
                                         ";
                     return $btn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action','shipment_id'])
                 ->make(true);
         }
 
@@ -499,5 +503,18 @@ class ShipmentController extends Controller
             $output = view('layouts.shipment_filter.filtering', $data)->render();
             return Response($output);
         }
+    }
+
+    public function search_shipment(Request $req){
+        $search_text = $req->searchText;
+        $data = [];
+        if ($req->searchText) {
+            $data['vehicles'] = Vehicle::where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->get()->toArray();
+                
+                $output = view('layouts.shipment_filter.filterVehicles', $data)->render();
+                return Response($output);
+        }
+
+
     }
 }

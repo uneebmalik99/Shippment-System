@@ -123,6 +123,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::post('/shipments/filterShipment', [ShipmentController::class, 'filterShipmentt'])->name('shipments.filter');
 
+    Route::post('/shipments/search_shipment', [ShipmentController::class, 'search_shipment'])->name('shipments.search_shipment');
+
     //Notification Routes`
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.list');
     Route::get('/notifications/create', [NotificationController::class, 'create'])->name('notification.create');

@@ -103,4 +103,23 @@
             }
         });
     }
+
+
+    function search_shipment(){
+        $search_shipmentText = $('#shipment_search').val();
+
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('shipments.search_shipment') }}',
+            data: {
+                'searchText': $search_shipmentText,
+            },
+            success: function(data) {
+               console.log(data);
+               $('#shipment_table').html(data);
+            }
+        });
+        
+
+    }
 </script>

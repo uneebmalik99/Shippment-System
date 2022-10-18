@@ -584,8 +584,9 @@ class CustomerController extends Controller
             // $data = [];
             $data = $request->all();
             $tab = $request->tab;
-            $image = $request->file('images');
+            $image = $request->file('customer_image');
             $file = $request->file('user_file');
+            // dd($image);
             unset($data['user_file']);
             unset($data['tab']);
             $email = $data['email'];
@@ -645,7 +646,7 @@ class CustomerController extends Controller
                         $images->move(public_path($this->directory), $filename);
                         $data['user_image'] = $filename;
                         $data['password'] = Hash::make($request->password);
-                        unset($data['images']);
+                        unset($data['customer_image']);
                     }
                 }
                 $request->validate([
@@ -653,26 +654,26 @@ class CustomerController extends Controller
                     'username' => 'required',
                     'password' => 'required',
                     'phone' => 'required',
-                    'fax' => 'required',
+                    // 'fax' => 'required',
                     'email' => 'required',
-                    'source' => 'required',
+                    // 'source' => 'required',
                     'company_name' => 'required',
                     'company_email' => 'required',
-                    'customer_type' => 'required',
-                    'sales_type' => 'required',
-                    'payment_type' => 'required',
-                    'payment_term' => 'required',
-                    'industry' => 'required',
-                    'sales_person' => 'required',
-                    'inside_person' => 'required',
-                    'level' => 'required',
+                    // 'customer_type' => 'required',
+                    // 'sales_type' => 'required',
+                    // 'payment_type' => 'required',
+                    // 'payment_term' => 'required',
+                    // 'industry' => 'required',
+                    // 'sales_person' => 'required',
+                    // 'inside_person' => 'required',
+                    // 'level' => 'required',
                     'location_number' => 'required',
                     'country' => 'required',
                     'zip_code' => 'required',
                     'state' => 'required',
                     'address_line1' => 'required',
-                    'address_line2' => 'required',
-                    'price_code' => 'required',
+                    // 'address_line2' => 'required',
+                    // 'price_code' => 'required',
                 ]);
                 $Obj = new User;
                 $Obj->create($data);

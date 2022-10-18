@@ -1,13 +1,13 @@
 @include('layouts.customer_create.navbar')
 <form method="POST" id="customer_shipper_form" enctype="multipart/form-data">
     @csrf
-    <div class="d-flex justify-content-around p-2">
+    <div class="d-flex p-2 mt-3">
         <div class="col-4 d-block">
             <div>
                 <label for="shipper_name" class="font-style">Shipper Name</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10" name="shipper_name"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8" name="shipper_name"
                     id="shipper_name">
             </div>
         </div>
@@ -16,7 +16,7 @@
                 <label for="contact_person_name" class="font-style">Contact Person Name</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
                     name="contact_person_name" id="contact_person_name">
             </div>
         </div>
@@ -25,7 +25,7 @@
                 <label for="phone" class="font-style">Phone</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10" name="phone"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8" name="phone"
                     id="phone">
             </div>
         </div>
@@ -37,7 +37,7 @@
                 <label for="company_email" class="font-style">Company Email</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
                     name="company_email" id="company_email">
             </div>
         </div>
@@ -46,7 +46,7 @@
                 <label for="country" class="font-style">Country</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10" name="country"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8" name="country"
                     id="country">
             </div>
         </div>
@@ -55,7 +55,7 @@
                 <label for="city" class="font-style">City</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10" name="city"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8" name="city"
                     id="city">
             </div>
         </div>
@@ -67,7 +67,7 @@
                 <label class="font-style" for="zip_code">Zip code</label>
             </div>
             <div>
-                <input class="form-control-sm border border-0 rounded-pill bg col-10" type="text" name="zip_code"
+                <input class="form-control-sm border border-0 rounded-pill bg col-8" type="text" name="zip_code"
                     id="zip_code">
             </div>
         </div>
@@ -76,7 +76,7 @@
                 <label class="font-style" for="address">Address</label>
             </div>
             <div>
-                <input class="form-control-sm border border-0 rounded-pill bg col-10" type="text" name="address"
+                <input class="form-control-sm border border-0 rounded-pill bg col-8" type="text" name="address"
                     id="address">
             </div>
         </div>
@@ -207,7 +207,7 @@
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="email"
             id="email" value="{{ @$module['email'] }}"readonly>
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" style="cursor:pointer;"
-            onclick="skip_view(this.id)" id="skip" nexttab="quotation">
+            onclick="skip_view(this.id)" id="skip" nexttab="quotation" skiptab="quotation_customer_tab">
             <div class="unskew">skip</div>
         </button>
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="createForm(this.id)"

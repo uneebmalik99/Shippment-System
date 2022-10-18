@@ -7,7 +7,7 @@
                 <label for="first_name" class="font-style">First Name</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
                     style="font-size:12px!important;" name="first_name" id="first_name">
             </div>
         </div>
@@ -16,7 +16,7 @@
                 <label for="company_name" class="font-style">Company Name</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
                     style="font-size:12px!important;" name="company_name" id="company_name">
             </div>
         </div>
@@ -25,7 +25,7 @@
                 <label for="country" class="font-style">Country</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
                     style="font-size:12px!important;" name="country" id="country">
             </div>
         </div>
@@ -37,7 +37,7 @@
                 <label for="last_name" class="font-style">Last Name</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
                     style="font-size:12px!important;" name="last_name" id="last_name">
             </div>
         </div>
@@ -46,7 +46,7 @@
                 <label for="company_email" class="font-style">Company Email</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
                     style="font-size:12px!important;" name="company_email" id="company_email">
             </div>
         </div>
@@ -55,7 +55,7 @@
                 <label for="city" class="font-style">City</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
+                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
                     style="font-size:12px!important;" name="city" id="city">
             </div>
         </div>
@@ -67,7 +67,7 @@
                 <label class="font-style" for="phone">Phone</label>
             </div>
             <div>
-                <input class="form-control-sm border border-0 rounded-pill bg col-10" style="font-size:12px!important;"
+                <input class="form-control-sm border border-0 rounded-pill bg col-8" style="font-size:12px!important;"
                     type="text" name="phone" id="phone">
             </div>
         </div>
@@ -76,7 +76,7 @@
                 <label class="font-style" for="address">Address</label>
             </div>
             <div>
-                <input class="form-control-sm border border-0 rounded-pill bg col-10" style="font-size:12px!important;"
+                <input class="form-control-sm border border-0 rounded-pill bg col-8" style="font-size:12px!important;"
                     type="text" name="address" id="address">
             </div>
         </div>
@@ -85,13 +85,13 @@
                 <label class="font-style" for="zip_code">Zip Code</label>
             </div>
             <div>
-                <input class="form-control-sm border border-0 rounded-pill bg col-10" style="font-size:12px!important;"
+                <input class="form-control-sm border border-0 rounded-pill bg col-8" style="font-size:12px!important;"
                     type="text" name="zip_code" id="zip_code">
             </div>
         </div>
     </div>
 
-    <div class="d-flex w-75 mt-4 p-2 ml-5">
+    {{-- <div class="d-flex w-75 mt-4 p-2 ml-5">
         <div class="text-muted text-left col-4 text-head">
             <div style="font-weight:bold;font-size:14px!important">Identification Type</div>
         </div>
@@ -101,7 +101,7 @@
         <div class="text-muted text-left col-4 text-head">
             <div style="font-weight:bold;font-size:14px!important">Expiry Date</div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="d-flex ml-5 p-2" style="width: 90%!important;">
         <div class="d-block w-100">
@@ -109,7 +109,7 @@
                 <label class="font-style" for="foreign_passport_number">Foreign Passport No</label>
             </div>
             <div>
-                <input class="form-control-sm border border-0 rounded-pill bg col-10" style="font-size:12px!important;"
+                <input class="form-control-sm border border-0 rounded-pill bg col-8" style="font-size:12px!important;"
                     type="text" name="foreign_passport_number" id="foreign_passport_number">
             </div>
         </div>
@@ -118,7 +118,7 @@
                 <label class="font-style" for="identification_number">Identification Number</label>
             </div>
             <div>
-                <input class="form-control-sm border border-0 rounded-pill bg col-10"
+                <input class="form-control-sm border border-0 rounded-pill bg col-8"
                     style="font-size:12px!important;" type="text" name="identification_number"
                     id="identification_number">
             </div>
@@ -128,7 +128,7 @@
                 <label class="font-style" for="expiry_date">Expiry Date</label>
             </div>
             <div>
-                <input class="form-control-sm border border-0 rounded-pill bg col-10"
+                <input class="form-control-sm border border-0 rounded-pill bg col-8"
                     style="font-size:12px!important;" type="text" name="expiry_date" id="expiry_date">
             </div>
         </div>
@@ -295,7 +295,7 @@
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="email"
             id="email" value="{{ @$module['email'] }}"readonly>
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" style="cursor:pointer;"
-            onclick="skip_view(this.id)" id="skip" nexttab="shipper">
+            onclick="skip_view(this.id)" id="skip" nexttab="shipper" skiptab="shipper_customer_tab">
             <div class="unskew">skip</div>
         </button>
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="createForm(this.id)"

@@ -2,7 +2,7 @@
 @section('body')
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+        aria-hidden="true" style="z-index:9999999999999999">
         <div class="modal-dialog modal-fullscreen scrollable mw-100 m-2 px-3 py-2" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">
@@ -295,6 +295,7 @@
                                 <th class="font-bold-tr">LOADING COUNTRY</th>
                                 <th class="font-bold-tr">DESTINATION STATE</th>
                                 <th class="font-bold-tr">DESTINATION COUNTRY</th>
+                                <th>Vehicles</th>
                                 <th class="font-bold-tr">Action</th>
                             </tr>
                         </thead>
@@ -384,6 +385,10 @@
                     {
                         data: 'destination_country',
                         name: 'destination_country'
+                    },
+                    {
+                        data: 'shipment_id',
+                        name: 'shipment_id'
                     },
                     {
                         data: 'action',

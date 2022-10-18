@@ -40,6 +40,7 @@
     function createForm(id) {
         $tab = id;
         $next_tab = $('#' + $tab).data('next');
+        // alert($next_tab);
         if (id == "general_customer") {
             var formData = new FormData(jQuery('#customer_general_form')[0]);
         } else if (id == "billing_customer") {
@@ -210,6 +211,7 @@
     function skip_view(id) {
         $id = id;
         $tab = $('#' + $id).attr('nexttab');
+        $skiptab = $('#' + $id).attr('skiptab');
         // alert($tab);
         $.ajax({
             type: 'get',
@@ -220,6 +222,10 @@
             success: function(data) {
                 $('.modal-body').html(data);
                 $('#exampleModal').modal('show');
+                $('.navbar_tab').removeClass('next-style');
+                $('.navbar_tab').addClass('tab_style');
+                $('#' + $skiptab).addClass('next-style');
+
             }
         });
     }
