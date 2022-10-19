@@ -81,30 +81,30 @@
                 }
             },
             error: function(response) {
-                $('#name_error').text('*');
-                $('#username_error').text('*');
-                $('#password_error').text('*');
-                $('#phone_error').text('*');
-                $('#fax_error').text('*');
-                $('#email_error').text('*');
-                $('#source_error').text('*');
-                $('#company_name_error').text('*');
-                $('#company_email_error').text('*');
-                $('#customer_type_error').text('*');
-                $('#sales_type_error').text('*');
-                $('#payment_type_error').text('*');
-                $('#payment_term_error').text('*');
-                $('#industry_error').text('*');
-                $('#sales_person_error').text('*');
-                $('#inside_person_error').text('*');
-                $('#level_error').text('*');
-                $('#location_number_error').text('*');
-                $('#country_error').text('*');
-                $('#zip_code_error').text('*');
-                $('#state_error').text('*');
-                $('#address_line1_error').text('*');
-                $('#address_line2_error').text('*');
-                $('#price_code_error').text('*');
+                $('#name_error').html('<small>Please Fill*</small>');
+                $('#username_error').html('<small>Please Fill*</small>');
+                $('#password_error').html('<small>Please Fill*</small>');
+                $('#phone_error').html('<small>Please Fill*</small>');
+                $('#fax_error').html('<small>Please Fill*</small>');
+                $('#email_error').html('<small>Please Fill*</small>');
+                $('#source_error').html('<small>Please Fill*</small>');
+                $('#company_name_error').html('<small>Please Fill*</small>');
+                $('#company_email_error').html('<small>Please Fill*</small>');
+                $('#customer_type_error').html('<small>Please Fill*</small>');
+                $('#sales_type_error').html('<small>Please Fill*</small>');
+                $('#payment_type_error').html('<small>Please Fill*</small>');
+                $('#payment_term_error').html('<small>Please Fill*</small>');
+                $('#industry_error').html('<small>Please Fill*</small>');
+                $('#sales_person_error').html('<small>Please Fill*</small>');
+                $('#inside_person_error').html('<small>Please Fill*</small>');
+                $('#level_error').html('<small>Please Fill*</small>');
+                $('#location_number_error').html('<small>Please Fill*</small>');
+                $('#country_error').html('<small>Please Fill*</small>');
+                $('#zip_code_error').html('<small>Please Fill*</small>');
+                $('#state_error').html('<small>Please Fill*</small>');
+                $('#address_line1_error').html('<small>Please Fill*</small>');
+                $('#address_line2_error').html('<small>Please Fill*</small>');
+                $('#price_code_error').html('<small>Please Fill*</small>');
             }
         });
     }

@@ -1,46 +1,44 @@
 @include('layouts.customer_create.navbar')
 <style>
-    
-.text-center{
-text-align: center;
-margin-bottom: 20px;
-}
+    .text-center {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-.profile-images-card{
-	margin: auto;
-	display: table;
-	background: #fff;
-	padding: 10px 20px;
-	/* box-shadow: 0px 0px 5px #ddd; */
-}
+    .profile-images-card {
+        margin: auto;
+        display: table;
+        background: #fff;
+        padding: 10px 20px;
+        /* box-shadow: 0px 0px 5px #ddd; */
+    }
 
-.profile-images{
-	width: 90px;
-	height: 90px;
-	background: #fff;
-	border-radius: 50%;
-	overflow: hidden;
-}
+    .profile-images {
+        width: 90px;
+        height: 90px;
+        background: #fff;
+        border-radius: 50%;
+        overflow: hidden;
+    }
 
-.profile-images img{
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
+    .profile-images img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-.custom-file input[type='file']{
-	display: none
-}
+    .custom-file input[type='file'] {
+        display: none
+    }
 
-.custom-file label{
-	cursor: pointer;
-	color: #000;
-	text-align: center;
-	display: table;
-	margin: auto;
-	margin-top: 15px;
-}
-
+    .custom-file label {
+        cursor: pointer;
+        color: #000;
+        text-align: center;
+        display: table;
+        margin: auto;
+        margin-top: 15px;
+    }
 </style>
 
 <form method="POST" id="customer_general_form" enctype="multipart/form-data">
@@ -69,53 +67,77 @@ margin-bottom: 20px;
                                 <div class="pb-3 px-2">
                                     <div class="d-flex">
                                         <label for="name" class="col-5 px-0 font-size font-bold">Name
-                                            <span class="text-danger" id="name_error"></span>
+                                            <span class="text-danger">*</span>
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="name"
                                             id="name" value="{{ @$user['name'] }}">
+                                            
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <span id="name_error" class="text-danger"></span>
+                                    </div>
+
                                     <div class="d-flex">
-                                        <label for="username" class="col-5 px-0 font-size font-bold">Username
-                                            <span class="text-danger" id="username_error"></span>
+                                        <label for="username" class="col-5 px-0 font-size font-bold">Username 
+                                            <span class="text-danger">*</span>
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="username" id="username" value="{{ @$user['name'] }}">
+
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small id="username_error" class="text-danger"></small>
+                                    </div>
+
                                     <div class="d-flex">
-                                        <label for="username" class="col-5 px-0 font-size font-bold">Password
-                                            <span class="text-danger" id="password_error"></span>
+                                        <label for="username" class="col-5 px-0 font-size font-bold">Password 
+                                            <span class="text-danger">*</span>
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="password" id="password" value="{{ @$user['name'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small id="password_error" class="text-danger"></small>
+                                    </div>
+                                    
                                     <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-12"
                                         name="status" id="status" value="1">
                                     <div class="d-flex">
-                                        <label for="phone" class="px-0 col-5 font-size font-bold">Main phone
-                                            <span class="text-danger" id="phone_error"></span>
+                                        <label for="phone" class="px-0 col-5 font-size font-bold">Main phone 
+                                            <span class="text-danger">*</span>
                                         </label>
                                         <input type="phone" class="form-control-sm border border-0 rounded-pill col-7"
                                             name="phone" id="phone" value="{{ @$user['phone'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small id="phone_error" class="text-danger"></small>
+                                    </div>
 
                                     <div class=" d-flex">
-                                        <label for="fax" class="col-5 px-0 font-size font-bold">Main fax
+                                        <label for="fax" class="col-5 px-0 font-size font-bold">Main fax 
                                             {{-- <span class="text-danger" id="fax_error"></span> --}}
                                         </label>
                                         <input type="fax"
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="fax"
                                             id="fax" value="{{ @$user['fax'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small></small>
+                                    </div>
+
                                     <div class=" d-flex">
-                                        <label for="email" class="col-5 px-0 font-size font-bold">Email
-                                            <span class="text-danger" id="email_error"></span>
+                                        <label for="email" class="col-5 px-0 font-size font-bold">Email 
+                                            <span class="text-danger">*</span>
                                         </label>
                                         <input type="email"
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="email"
                                             id="email" value="{{ @$user['email'] }}">
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small id="email_error" class="text-danger"></small>
                                     </div>
 
 
@@ -127,27 +149,36 @@ margin-bottom: 20px;
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="source"
                                             id="source" value="{{ @$user['source'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small></small>
+                                    </div>
 
                                     <div class=" d-flex">
                                         <label for="company_name" class="col-5 px-0 font-size font-bold">Company
-                                            Name
-                                            <span class="text-danger" id="company_name_error"></span>
+                                            Name 
+                                            <span class="text-danger">*</span>
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="company_name" id="company_name"
                                             value="{{ @$user['company_name'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small id="company_name_error" class="text-danger"></small>
+                                    </div>
 
                                     <div class=" d-flex">
                                         <label for="company_email" class="col-5 px-0 font-size font-bold">Company
-                                            Email
-                                            <span class="text-danger" id="company_email_error"></span>
+                                            Email 
+                                            <span class="text-danger">*</span>
                                         </label>
                                         <input type="email"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="company_email" id="company_email"
                                             value="{{ @$user['company_email'] }}">
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small id="company_email_error" class="text-danger"></small>
                                     </div>
 
 
@@ -161,6 +192,9 @@ margin-bottom: 20px;
                                             name="customer_type" id="customer_type"
                                             value="{{ @$user['customer_type'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small></small>
+                                    </div>
 
 
                                     <div class=" d-flex">
@@ -172,6 +206,10 @@ margin-bottom: 20px;
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="sales_type" id="sales_type" value="{{ @$user['sales_type'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small></small>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -204,6 +242,9 @@ margin-bottom: 20px;
                                             name="payment_type" id="payment_type"
                                             value="{{ @$user['payment_type'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small></small>
+                                    </div>
 
                                     <div class="d-flex">
                                         <label for="payment_term" class="col-5 px-0 font-size font-bold">Payment
@@ -215,6 +256,9 @@ margin-bottom: 20px;
                                             name="payment_term" id="payment_term"
                                             value="{{ @$user['payment_term'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small></small>
+                                    </div>
 
 
                                     <div class=" d-flex">
@@ -224,6 +268,9 @@ margin-bottom: 20px;
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="industry" id="industry" value="{{ @$user['industry'] }}">
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small></small>
                                     </div>
 
                                 </div>
@@ -263,6 +310,9 @@ margin-bottom: 20px;
                                             name="sales_person" id="sales_person"
                                             value="{{ @$user['sales_person'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small></small>
+                                    </div>
 
 
                                     <div class="d-flex">
@@ -274,6 +324,10 @@ margin-bottom: 20px;
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="inside_person" id="inside_person"
                                             value="{{ @$user['address_line1'] }}">
+
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small></small>
                                     </div>
 
                                     <div class="d-flex">
@@ -284,6 +338,10 @@ margin-bottom: 20px;
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="level" id="level" value="{{ @$user['level'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small></small>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -311,28 +369,35 @@ margin-bottom: 20px;
 
                                     <div class="d-flex">
                                         <label for="location_number"
-                                            class="col-5 px-0 font-size font-bold">Location<span class="text-danger"
-                                                id="location_number_error"></span>
+                                            class="col-5 px-0 font-size font-bold">Location <span class="text-danger">*</span>
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="location_number" id="location_number"
                                             value="{{ @$user['location_number'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small
+                                        id="location_number_error" class="text-danger"></small>
+                                    </div>
+
 
                                     <div class="d-flex">
-                                        <label for="country" class="col-5 px-0 font-size font-bold">Country
-                                            <span class="text-danger" id="country_error"></span>
+                                        <label for="country" class="col-5 px-0 font-size font-bold">Country  
+                                            <span class="text-danger">*</span>
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="country" id="country" value="{{ @$user['country'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small  id="country_error" class="text-danger"></small>
+                                    </div>
 
 
                                     <div class="d-flex">
-                                        <label for="zip_code" class="col-5 px-0 font-size font-bold">Zip code
-                                            <span class="text-danger" id="zip_code_error"></span>
+                                        <label for="zip_code" class="col-5 px-0 font-size font-bold">Zip code 
+                                            <span class="text-danger">*</span>
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
@@ -347,11 +412,14 @@ margin-bottom: 20px;
                                             @endforeach
                                         </select> --}}
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small  id="zip_code_error" class="text-danger"></small>
+                                    </div>
 
 
                                     <div class="d-flex">
-                                        <label for="state" class="col-5 px-0 font-size font-bold">State
-                                            <span class="text-danger" id="state_error"></span>
+                                        <label for="state" class="col-5 px-0 font-size font-bold">State 
+                                            <span class="text-danger">*</span>
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
@@ -364,28 +432,37 @@ margin-bottom: 20px;
                                             @endforeach
                                         </select> --}}
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small  id="state_error" class="text-danger"></small>
+                                    </div>
 
 
                                     <div class="d-flex">
                                         <label for="address_line1" class="col-5 px-0 font-size font-bold">Address
-                                            (1)<span class="text-danger" id="address_line1_error"></span>
+                                            (1) <span class="text-danger">*</span>
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="address_line1" id="address_line1"
                                             value="{{ @$user['address_line1'] }}">
                                     </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small id="address_line1_error" class="text-danger"></small>
+                                    </div>
 
 
                                     <div class="d-flex">
                                         <label for="address_line2" class="col-5 px-0 font-size font-bold">Address
-                                            (2)
+                                            (2) 
                                             {{-- <span class="text-danger" id="address_line2_error"></span> --}}
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="address_line2" id="address_line2"
                                             value="{{ @$user['address_line2'] }}">
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <small></small>
                                     </div>
 
                                     <div class="d-flex">
@@ -410,11 +487,12 @@ margin-bottom: 20px;
                                 </div> --}}
                                 <div class="profile-images-card">
                                     <div class="profile-images">
-                                        <img src="{{asset('images/profile.jpg')}}" id="upload-img">
+                                        <img src="{{ asset('images/profile.jpg') }}" id="upload-img">
                                     </div>
                                     <div class="custom-file">
                                         <label for="fileupload">Upload Profile</label>
-                                        <input type="file" id="fileupload" name="customer_image[]" onchange="loadFile(event)">
+                                        <input type="file" id="fileupload" name="customer_image[]"
+                                            onchange="loadFile(event)">
                                     </div>
                                 </div>
                             </div>
@@ -423,7 +501,7 @@ margin-bottom: 20px;
                                     class="form-control border border-info rounded col-12 w-100" id="user_file">
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
@@ -449,6 +527,3 @@ margin-bottom: 20px;
     </div>
 
 </form>
-
-
-

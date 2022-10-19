@@ -10,6 +10,7 @@ use App\Models\AuctionImage;
 use App\Models\AuctionInvoice;
 use App\Models\BillOfSale;
 use App\Models\Image;
+use App\Models\Shipper;
 use App\Models\Location;
 use App\Models\Notification;
 use App\Models\OriginalTitle;
@@ -130,6 +131,7 @@ class VehicleController extends Controller
         $data['location'] = Location::all();
         $data['shipment'] = Shipment::all();
         $data['vehicle_types'] = VehicleType::all();
+        $data['shipper_name'] = Shipper::all();
         $data['vehicle_status'] = VehicleStatus::all();
         if ($request->ajax()) {
             $tab = $request->tab;
@@ -224,6 +226,7 @@ class VehicleController extends Controller
             $data['buyers'] = User::where('role_id', '4')->get();
             $data['location'] = Location::all();
             $data['shipment'] = Shipment::all();
+            $data['customer_name'] = User::where('role_id', 4)->get();
             $output = view('layouts.vehicle_create.general', $data)->render();
             return Response($output);
         }

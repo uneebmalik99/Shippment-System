@@ -15,6 +15,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\pdfController;
 
 Auth::routes();
 
@@ -141,7 +142,22 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/tickets', [TicketController::class, 'index'])->name('ticket.list');
 
     // Master Routes
-    Route::get('/master', [MasterController::class, 'index'])->name('master.list');
+    Route::get('/master',                               [MasterController::class, 'index'])->name('master.list');
+    Route::post('/company',                             [MasterController::class, 'company'])->name('company.list');
+    Route::post('/shipping_countries',                  [MasterController::class, 'shipping_countries'])->name('shipping.countries');
+    Route::post('/shipping_states',                     [MasterController::class, 'shipping_states'])->name('shipping.states');
+    Route::post('/loading_ports',                       [MasterController::class, 'loading_ports'])->name('loading.ports');
+    Route::post('/destination_countries',               [MasterController::class, 'destination_countries'])->name('destination.countries');
+    Route::post('/destination_port',                    [MasterController::class, 'destination_port'])->name('destination.port');
+    Route::post('/make',                                [MasterController::class, 'make'])->name('make.list');
+    Route::post('/model',                               [MasterController::class, 'model'])->name('model.list');
+    Route::post('/color',                               [MasterController::class, 'color'])->name('color.list');
+    Route::post('/title',                               [MasterController::class, 'title'])->name('title.list');
+    Route::post('/key',                                 [MasterController::class, 'key'])->name('key.list');
+    Route::post('/auction',                             [MasterController::class, 'auction'])->name('auction.list');
+    Route::post('/vehicle',                             [MasterController::class, 'vehicle'])->name('vehicle.list');
+    Route::post('/shippment',                           [MasterController::class, 'shippment'])->name('shippment.list');
+    Route::post('/save',                                [MasterController::class, 'save'])->name('add.record');
 
     // Calendar Routes
     Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.list');
@@ -149,11 +165,26 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     //  Dashboard
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.list');
 
+    Route::get('/inventory',                            function(){return "Coming Soon!";});
     //Inventory
-    Route::get('/inventory', function () {return "Coming Soon!";});
-    //Inventory
-    Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice.index');
-    Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoice.create');
+    Route::get('/invoice',                              [InvoiceController::class, 'index'])->name('invoice.index');
+    Route::get('/invoices/create',                      [InvoiceController::class, 'create'])->name('invoice.create');
+    Route::post('/invoices/create',                      [InvoiceController::class, 'create'])->name('invoice.post_create');
+
+    Route::get('/invoices/update/{id?}',                      [InvoiceController::class, 'update'])->name('invoice.get_update');
+    Route::post('/invoices/update/{id?}',                     [InvoiceController::class, 'update'])->name('invoice.post_update');
+
+    Route::get('/invoices/delete/{id?}',                     [InvoiceController::class, 'delete'])->name('invoice.get_delete');
+
+    Route::get('/invoices/pdf', function(){
+        return view('invoice/pdf');
+        });
+        Route::get('/invoices/pdf_files/{id?}',                     [pdfController::class, 'generatePDF'])->name('pdf_files');
+
+        Route::get('/invoices/detail_data/{id?}',                     [pdfController::class, 'detail_data'])->name('invoice.detail_data');
+
+        
+    Route::get('/generate-pdf/{id?}',                     [pdfController::class, 'generatePDF'])->name('generatePDF');
 
 });
 

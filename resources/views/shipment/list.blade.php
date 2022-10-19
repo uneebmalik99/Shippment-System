@@ -300,7 +300,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="shipment_tbody">
-
+                            
                         </tbody>
                     </table>
                 </div>

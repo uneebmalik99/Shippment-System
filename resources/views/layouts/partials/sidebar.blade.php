@@ -367,6 +367,14 @@
                                 </a>
                             </li>
 
+                            <li class="change-loges.html">
+                                <a href="{{ route('master.list') }}">
+                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Master</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+
                             <li class=" ">
                                 <a href="">
                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>

@@ -451,9 +451,15 @@ class ShipmentController extends Controller
             $data = Shipment::select('*');
             return Datatables::of($data)
                 ->addIndexColumn()
+                ->addColumn('id', function($row){
+                    $data['row'] = $row;
+                    $data['vehicles'] = Vehicle::where('shipment_id', $row->id)->get();
+                    $output = view('layouts.shipment_filter.vehicle_table', $data)->render();
+                    return $output;
+                })
                 ->addColumn('shipment_id', function($row){
                     $totalVehicles = Vehicle::where('shipment_id', $row->id)->count();
-                    $vehicles = '<p style="cursor:pointer">'.$totalVehicles.'</p>';
+                    $vehicles = '<p style="cursor:pointer"  data-toggle="modal" data-target="#exampleModalCenter'.$row->id.'">'.$totalVehicles.' Vehicles</p>';
                     return $vehicles;
                 })
                 ->addColumn('action', function ($row) {
@@ -488,7 +494,7 @@ class ShipmentController extends Controller
                                         ";
                     return $btn;
                 })
-                ->rawColumns(['action','shipment_id'])
+                ->rawColumns(['id','action','shipment_id'])
                 ->make(true);
         }
 

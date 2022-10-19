@@ -19,10 +19,17 @@
                         <div id="client_body">
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="customer_name" class="col-6 px-0 font-size font-bold">Client
-                                        Name</label>
-                                    <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="customer_name" id="customer_name" value="{{ @$user['customer_name'] }}">
+                                    <label for="customer_name" class="col-6 px-0 font-size font-bold">Client Name</label>
+                                    <select class="form-control-sm border border-0 rounded-pill bg col-6"
+                                    name="customer_name" id="customer_name" value="{{ @$user['customer_name'] }}">
+                                    <option selected disabled>Select Customer Name</option>
+                                    @foreach ($buyers as $customer_names)
+                                    <option value="{{@$customer_names['name']}}">{{@$customer_names['name']}}</option>
+                                        
+                                    @endforeach
+                                    </select>
+                                    {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                        name="customer_name" id="customer_name" value="{{ @$user['customer_name'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -42,10 +49,12 @@
                                     <div
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                        {{-- <form> --}}
-                                        <input type="text" class="col-9 general_input" name="vin"
+                                        <input type="text" class="col-8 general_input" name="vin"
                                             id="vin" value="{{ @$user['vin'] }}">
-                                             <a href="#" onclick="getInfo()" class="prefix text-dark" style="    text-decoration: none!important;
-                                             margin-left: 3px!important;" id="getinfo" tab="getinfo">GetInfo</a>
+                                             <a href="#" onclick="getInfo()" class="prefix text-dark px-2" style="text-decoration: none!important;
+                                             background:rgb(175, 197, 234);border-radius:20px;" tab="getinfo">
+                                            <span class="text-white px-1" id="getinfo">GetInfo</span> 
+                                            </a>
                                              {{-- </form> --}}
                                     </div>
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
@@ -434,9 +443,16 @@
                                 <div class="d-flex align-items-center">
                                     <label for="shipper_name" class="col-6 px-0 font-size font-bold">Shipper
                                         Name</label>
-                                    <input type="text"
-                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                        <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="shipper_name" id="shipper_name" value="{{ @$user['shipper_name'] }}">
+                                        <option selected disabled>Select Shipper Name</option>
+                                        @foreach($shipper_name as $shipper_names)
+                                        <option value="{{@$shipper_names['shipper_name']}}">{{@$shipper_names['shipper_name']}}</option>
+                                        @endforeach
+                                        </select>
+                                    {{-- <input type="text"
+                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                        name="shipper_name" id="shipper_name" value="{{ @$user['shipper_name'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
