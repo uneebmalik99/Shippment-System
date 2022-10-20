@@ -138,11 +138,7 @@
 }
 
 .next-style {
-    background: linear-gradient(
-        254.1deg,
-        #10c3ea 4.82%,
-        #337fb8 61.08%
-    ) !important;
+    background: linear-gradient( 254.1deg, #10c3ea 4.82%, #337fb8 61.08%) !important;
     border: 1px solid #1c71b0 !important;
     box-shadow: 6px 6px 4px rgba(48, 148, 175, 0.47) !important;
     transform: skew(-30deg) !important;
@@ -242,11 +238,7 @@
 }
 
 .attach {
-    background: linear-gradient(
-        254.26deg,
-        rgba(28, 113, 176, 0.9) 45.03%,
-        #10c2ea 72.6%
-    );
+    background: linear-gradient( 254.26deg, rgba(28, 113, 176, 0.9) 45.03%, #10c2ea 72.6%);
 }
 
 .image {
@@ -367,6 +359,7 @@ table.sortable thead {
     cursor: default;
 }
 
+
 /* table.sortable
     th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
     content: " \25B4\25BE";
@@ -428,13 +421,7 @@ table.sortable thead {
 
 .text-div {
     border: none !important;
-    background: linear-gradient(
-        201.25deg,
-        rgba(252, 252, 252, 0.72) 44.54%,
-        rgba(223, 236, 245, 0.72) 66.39%,
-        rgba(236, 243, 248, 0.72) 69.87%,
-        rgba(236, 243, 248, 0.72) 69.88%
-    ) !important;
+    background: linear-gradient( 201.25deg, rgba(252, 252, 252, 0.72) 44.54%, rgba(223, 236, 245, 0.72) 66.39%, rgba(236, 243, 248, 0.72) 69.87%, rgba(236, 243, 248, 0.72) 69.88%) !important;
     font-weight: 600 !important;
     font-size: 14px !important;
     line-height: 17px !important;
@@ -464,6 +451,7 @@ td {
     color: black !important;
 }
 
+
 /* tr {
 border-bottom: 0.2px solid gray !important;
 } */
@@ -480,4 +468,13 @@ border-bottom: 0.2px solid gray !important;
     width: 80% !important;
     margin: 0 auto !important;
     z-index: 99999999;
+}
+
+#load {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9999;
+    background: url("http://code.jquery.com/mobile/1.3.1/images/ajax-loader.gif") no-repeat center center rgba(0, 0, 0, 0.25);
+    z-index: 999999999999999999999999999999999999999999999999999999999999999999;
 }

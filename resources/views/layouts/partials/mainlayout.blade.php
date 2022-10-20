@@ -3,9 +3,17 @@
 
 <head>
     @include('layouts.partials.head')
+    <style>
+  
+    </style>
 </head>
 
 <body>
+    <div id="load"></div>
+<div id="contents">
+     
+</div>
+
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">

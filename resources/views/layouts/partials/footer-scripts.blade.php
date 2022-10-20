@@ -587,10 +587,8 @@
 
 
     function billofsales() {
-
         var formData = new FormData(jQuery('#billofsales')[0]);
         formData.append('tab', 'billofsales');
-
         $.ajax({
             method: 'POST',
             url: '{{ URL::to('admin/vehicles/attachments') }}',
@@ -1145,7 +1143,7 @@
            });
     });
 </script>
-5:02
+
 {{-- vehicle ports --}}
 <script>
     $("#vehiclepopup").click(function() {
@@ -1183,4 +1181,19 @@
                 }
            });
     });
+</script>
+
+<script>
+document.onreadystatechange = function () {
+var state = document.readyState
+if (state == 'interactive') {
+   document.getElementById('contents').style.visibility="hidden";
+} else if (state == 'complete') {
+  setTimeout(function(){
+     document.getElementById('interactive');
+     document.getElementById('load').style.visibility="hidden";
+     document.getElementById('contents').style.visibility="visible";
+  },1000);
+}
+}
 </script>

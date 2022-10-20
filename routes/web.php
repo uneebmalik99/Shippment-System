@@ -155,7 +155,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/title',                               [MasterController::class, 'title'])->name('title.list');
     Route::post('/key',                                 [MasterController::class, 'key'])->name('key.list');
     Route::post('/auction',                             [MasterController::class, 'auction'])->name('auction.list');
-    Route::post('/vehicle',                             [MasterController::class, 'vehicle'])->name('vehicle.list');
+    // Route::post('/vehicle',                             [MasterController::class, 'vehicle'])->name('vehicle.list');
     Route::post('/shippment',                           [MasterController::class, 'shippment'])->name('shippment.list');
     Route::post('/save',                                [MasterController::class, 'save'])->name('add.record');
 

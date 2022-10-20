@@ -1,5 +1,7 @@
 @extends('layouts.partials.mainlayout')
 @section('body')
+
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true" style="z-index:9999999999999999">
@@ -304,11 +306,18 @@
                         </tbody>
                     </table>
                 </div>
+
+
+
+                
+
             </div>
         </div>
         {{-- listing end --}}
     </div>
 
+
+   
 
 
 
@@ -419,6 +428,8 @@
             });
         }
     </script>
+
+    
 
     @if (Session::has('success'))
         <script>

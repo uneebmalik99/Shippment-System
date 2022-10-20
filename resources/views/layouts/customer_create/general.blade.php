@@ -39,6 +39,15 @@
         margin: auto;
         margin-top: 15px;
     }
+    #user_file{
+        display: none;
+      }
+      label{
+        cursor:pointer;
+      }
+      #imageName{
+        color:green;
+      }
 </style>
 
 <form method="POST" id="customer_general_form" enctype="multipart/form-data">
@@ -490,15 +499,27 @@
                                         <img src="{{ asset('images/profile.jpg') }}" id="upload-img">
                                     </div>
                                     <div class="custom-file">
-                                        <label for="fileupload">Upload Profile</label>
+                                        <label for="fileupload" style="font-size:16px!important"><p>Upload Profile Image</p></label>
                                         <input type="file" id="fileupload" name="customer_image[]"
                                             onchange="loadFile(event)">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6 d-flex align-items-center">
-                                <input type="file" name="user_file[]"
-                                    class="form-control border border-info rounded col-12 w-100" id="user_file">
+                                {{-- <input type="file" name="user_file[]"
+                                    class="form-control border border-info rounded col-12 w-100" id="user_file"> --}}
+                                    <label for="user_file" style="cursor: pointer;
+                                    border: 1px dotted black;
+                                    padding: 9px 96px;">
+                                        
+                                        <img src="{{asset('images/file.png')}}" alt="" style="width: 94px;">
+
+                                        <input id="user_file" type="file" name="user_file[]"/>
+                                        <br/>
+                                        <span id="imageName"></span>
+                                        <br>
+                                        <p>Upload Document</p> <br/>
+                                      </label>
                             </div>
                         </div>
 
@@ -527,3 +548,14 @@
     </div>
 
 </form>
+
+
+<script>
+    let input = document.getElementById("user_file");
+    let imageName = document.getElementById("imageName");
+    input.addEventListener("change", ()=>{
+        let inputImage = document.querySelector("#user_file").files[0];
+        // console.log(inputImage);
+        imageName.innerText = inputImage.name;
+    })
+</script>

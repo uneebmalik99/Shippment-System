@@ -581,32 +581,7 @@ class CustomerController extends Controller
     {
 
         if ($request->ajax()) {
-            $request->validate([
-                'name' => 'required',
-                'username' => 'required',
-                'password' => 'required',
-                'phone' => 'required',
-                // 'fax' => 'required',
-                'email' => 'required',
-                // 'source' => 'required',
-                'company_name' => 'required',
-                'company_email' => 'required',
-                // 'customer_type' => 'required',
-                // 'sales_type' => 'required',
-                // 'payment_type' => 'required',
-                // 'payment_term' => 'required',
-                // 'industry' => 'required',
-                // 'sales_person' => 'required',
-                // 'inside_person' => 'required',
-                // 'level' => 'required',
-                'location_number' => 'required',
-                'country' => 'required',
-                'zip_code' => 'required',
-                'state' => 'required',
-                'address_line1' => 'required',
-                // 'address_line2' => 'required',
-                // 'price_code' => 'required',
-            ]);
+           
             // $data = [];
             $data = $request->all();
             $tab = $request->tab;
@@ -666,6 +641,33 @@ class CustomerController extends Controller
             }
 
             if ($tab == "general_customer") {
+                $request->validate([
+                    'name' => 'required',
+                    'username' => 'required',
+                    'password' => 'required',
+                    'phone' => 'required',
+                    // 'fax' => 'required',
+                    'email' => 'required',
+                    // 'source' => 'required',
+                    'company_name' => 'required',
+                    'company_email' => 'required',
+                    // 'customer_type' => 'required',
+                    // 'sales_type' => 'required',
+                    // 'payment_type' => 'required',
+                    // 'payment_term' => 'required',
+                    // 'industry' => 'required',
+                    // 'sales_person' => 'required',
+                    // 'inside_person' => 'required',
+                    // 'level' => 'required',
+                    'location_number' => 'required',
+                    'country' => 'required',
+                    'zip_code' => 'required',
+                    'state' => 'required',
+                    'address_line1' => 'required',
+                    // 'address_line2' => 'required',
+                    // 'price_code' => 'required',
+                ]);
+    
                 if ($image) {
                     foreach ($image as $images) {
                         $filename = Storage::putFile($this->directory, $images);
@@ -731,6 +733,8 @@ class CustomerController extends Controller
                     'quotation' => 'fade',
                 ];
             }
+
+            
             return Response($output);
         }
     }
