@@ -247,7 +247,7 @@
 
 {{-- Load Modal --}}
 <script>
-    $('.modal_button').on('click', function() {
+    $('.modal_button').on('click', function(){
         $id = $(this).attr('id');
         $tab = "general";
         if ($id == "customer") {
@@ -426,8 +426,8 @@
 
 <script>
     function create_vehicle_form(id) {
-        $('#vehicle_form').on('submit', function(event) {
-            event.preventDefault();
+        // $('#vehicle_form').on('submit', function(event) {
+            // event.preventDefault();
             $tab_id = id;
             $next_tab = $('#' + $tab_id).data('next');
             var formData = new FormData(jQuery('#vehicle_form')[0]);
@@ -478,15 +478,49 @@
                     $('#' + $tab_id + '_tab').addClass('tab_style');
                     $('#' + $next_tab).addClass('next-style');
                 },
-                error: function() {
-                    iziToast.warning({
-                        message: 'Failed to insert data!',
-                        position: 'topCenter',
-                        zindex: '9999999999999'
-                    });
+                error: function(xhr, status, errorThrown) {
+                    // iziToast.warning({
+                    //     message: 'Failed to insert data!',
+                    //     position: 'topCenter',
+                    //     zindex: '9999999999999'
+                    // });
+                    console.log(xhr.responseJSON['errors']);
+                    if(xhr.responseJSON['errors']['customer_name']){
+                        $('#customer_name_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                    }
+                    if(xhr.responseJSON['errors']['buyer_id']){
+                        $('#buyer_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                    }
+                    if(xhr.responseJSON['errors']['vin']){
+                        $('#vin_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                    }
+                    
+                    
+                    
+                    if(xhr.responseJSON['errors']['auction']){
+                        $('#auction_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                    }
+                    if(xhr.responseJSON['errors']['color']){
+                        $('#color_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                    }
+                    if(xhr.responseJSON['errors']['value']){
+                        $('#value_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                    }
+                    
+                    if(xhr.responseJSON['errors']['weight']){
+                        $('#weight_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                    }
+                    if(xhr.responseJSON['errors']['key']){
+                        $('#key_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                    }
+                    if(xhr.responseJSON['errors']['status']){
+                        $('#status_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                    }
+                    // $('#buyer_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                    // $('#key_error').html('<small style="margin-left:72px">Please Fill*</small>');
                 }
             });
-        });
+        // });
     }
 </script>
 

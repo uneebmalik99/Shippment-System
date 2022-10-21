@@ -19,11 +19,11 @@
                         <div id="client_body">
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="customer_name" class="col-6 px-0 font-size font-bold">Client Name</label>
+                                    <label for="customer_name" class="col-6 px-0 font-size font-bold">Client Name <span class="text-danger">*</span></label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                     name="customer_name" id="customer_name" value="{{ @$user['customer_name'] }}">
                                     <option selected disabled>Select Customer Name</option>
-                                    @foreach ($buyers as $customer_names)
+                                    @foreach ($customer_name as $customer_names)
                                     <option value="{{@$customer_names['name']}}">{{@$customer_names['name']}}</option>
                                         
                                     @endforeach
@@ -31,11 +31,9 @@
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="customer_name" id="customer_name" value="{{ @$user['customer_name'] }}"> --}}
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('customer_name')
-                                            {{ $message }}
-                                        @enderror
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="customer_name_error">
+                                        <small></small>
                                     </span>
                                 </div>
                             </div>
@@ -45,7 +43,7 @@
 
 
                                 <div class="d-flex align-items-center">
-                                    <label for="vin" class="col-6 px-0 font-size font-bold">VIN</label>
+                                    <label for="vin" class="col-6 px-0 font-size font-bold">VIN <span class="text-danger">*</span></label>
                                     <div
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                        {{-- <form> --}}
@@ -60,63 +58,55 @@
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="vin" id="vin" value="{{ @$user['vin'] }}"> --}}
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('vin')
-                                            {{ $message }}
-                                        @enderror
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="vin_error">
+                                        
                                     </span>
                                 </div>
                             </div>
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="year" class="col-6 px-0 font-size font-bold">Year</label>
+                                    <label for="year" class="col-6 px-0 font-size font-bold">Year<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="year" id="year" value="{{ @$user['year'] }}" disabled>
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('year')
-                                            {{ $message }}
-                                        @enderror
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="year_error">
+                                       
                                     </span>
                                 </div>
                             </div>
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="make" class="col-6 px-0 font-size font-bold">Make</label>
+                                    <label for="make" class="col-6 px-0 font-size font-bold">Make <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="make" id="make" value="{{ @$user['make'] }}" disabled>
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('make')
-                                            {{ $message }}
-                                        @enderror
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="make_error">
+                                       <small></small>
                                     </span>
                                 </div>
                             </div>
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="model" class="col-6 px-0 font-size font-bold">Model</label>
+                                    <label for="model" class="col-6 px-0 font-size font-bold">Model<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="model" id="model" value="{{ @$user['model'] }}" disabled>
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('model')
-                                            {{ $message }}
-                                        @enderror
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="model_error">
+                                       <small></small>
                                     </span>
                                 </div>
                             </div>
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="vehicle_type" class="col-6 px-0 font-size font-bold">Vehicle Type</label>
+                                    <label for="vehicle_type" class="col-6 px-0 font-size font-bold">Vehicle Type<span class="text-danger">*</span></label>
                                     {{-- <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="vehicle_type" id="vehicle_type" value="{{ @$user['vehicle_type'] }}">
                                     <option selected disabled>Select Type</option>
@@ -127,65 +117,57 @@
                                     <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="vehicle_type" id="vehicle_type" value="{{ @$user['vehicle_type'] }}" disabled>
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('vehicle_type')
-                                            {{ $message }}
-                                        @enderror
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="vehicle_type_error">
+                                        
                                     </span>
                                 </div>
                             </div>
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="color" class="col-6 px-0 font-size font-bold">Color</label>
+                                    <label for="color" class="col-6 px-0 font-size font-bold">Color<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="color" id="color" value="{{ @$user['color'] }}">
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('color')
-                                            {{ $message }}
-                                        @enderror
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="color_error">
+                                        
                                     </span>
                                 </div>
                             </div>
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="weight" class="col-6 px-0 font-size font-bold">Weight (Kgs)</label>
+                                    <label for="weight" class="col-6 px-0 font-size font-bold">Weight (Kgs)<span class="text-danger">*</span></label>
                                     <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="weight"
                                         id="weight" value="{{ @$user['weight'] }}">
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('weight')
-                                            {{ $message }}
-                                        @enderror
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="weight_error">
+                                        
                                     </span>
                                 </div>
                             </div>
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="values" class="col-6 px-0 font-size font-bold">Value ($)</label>
+                                    <label for="values" class="col-6 px-0 font-size font-bold">Value ($)<span class="text-danger">*</span></label>
                                     <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="value"
                                         id="value" value="{{ @$user['values'] }}">
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('values')
-                                            {{ $message }}
-                                        @enderror
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="value_error">
+                                       
                                     </span>
                                 </div>
                             </div>
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="auction" class="col-6 px-0 font-size font-bold">Auction</label>
+                                    <label for="auction" class="col-6 px-0 font-size font-bold">Auction<span class="text-danger">*</span></label>
                                     <div
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                         {{-- <span class="prefix text-dark">$</span> --}}
@@ -199,11 +181,8 @@
                                             id="auction" value="{{ @$user['auction'] }}"> --}}
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('auction')
-                                            {{ $message }}
-                                        @enderror
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="auction_error">
                                     </span>
                                 </div>
                             </div>
@@ -224,36 +203,33 @@
                         <div id="buyer_body">
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="buyer_id" class="col-6 px-0 font-size font-bold">Buyer ID</label>
+                                    <label for="buyer_id" class="col-6 px-0 font-size font-bold">Buyer ID<span class="text-danger">*</span></label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="buyer_id" id="buyer_id">
+                                        
                                         @foreach ($buyers as $buyer)
-                                            <option value="{{ $buyer['id'] }}">{{ $buyer['name'] }}
+                                            <option value="{{ @$buyer['customer_id'] }}">{{ @$buyer['buyer_number'] }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('buyer_id')
-                                            {{ $message }}
-                                        @enderror
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="buyer_error">
+                                        
                                     </span>
                                 </div>
                             </div>
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="keys" class="col-6 px-0 font-size font-bold">Keys</label>
+                                    <label for="keys" class="col-6 px-0 font-size font-bold">Keys<span class="text-danger">*</span></label>
                                     <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="key"
                                         id="key" value="{{ @$user['keys'] }}">
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('keys')
-                                            {{ $message }}
-                                        @enderror
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="key_error">
+                                        
                                     </span>
                                 </div>
                             </div>
@@ -272,7 +248,7 @@
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="title_type" id="title_type" value="{{ @$user['title_type'] }}">
                                 </div>
-                                <div class="d-flex justify-content-end">
+                                <div class="d-flex justify-content-center">
                                     <span class="text-danger">
                                         @error('title_type')
                                             {{ $message }}
@@ -287,7 +263,7 @@
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="hat_number" id="hat_number" value="{{ @$user['hat_number'] }}">
                                 </div>
-                                <div class="d-flex justify-content-end">
+                                <div class="d-flex justify-content-center">
                                     <span class="text-danger">
                                         @error('hat_number')
                                             {{ $message }}
@@ -318,7 +294,7 @@
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="title"
                                         id="title" value="{{ @$user['title'] }}">
                                 </div>
-                                <div class="d-flex justify-content-end">
+                                <div class="d-flex justify-content-center">
                                     <span class="text-danger">
                                         @error('title')
                                             {{ $message }}
@@ -334,7 +310,7 @@
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="title_type" id="title_type" value="{{ @$user['title_type'] }}">
                                 </div>
-                                <div class="d-flex justify-content-end">
+                                <div class="d-flex justify-content-center">
                                     <span class="text-danger">
                                         @error('title_type')
                                             {{ $message }}
@@ -352,7 +328,7 @@
                                         name="title_rec_date" id="title_rec_date"
                                         value="{{ @$user['title_rec_date'] }}">
                                 </div>
-                                <div class="d-flex justify-content-end">
+                                <div class="d-flex justify-content-center">
                                     <span class="text-danger">
                                         @error('title_rec_date')
                                             {{ $message }}
@@ -374,7 +350,7 @@
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="title_state" id="title_state" value="{{ @$user['title_state'] }}"> --}}
                                 </div>
-                                <div class="d-flex justify-content-end">
+                                <div class="d-flex justify-content-center">
                                     <span class="text-danger">
                                         @error('title_state')
                                             {{ $message }}
@@ -390,7 +366,7 @@
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="title_number" id="title_number" value="{{ @$user['title_number'] }}">
                                 </div>
-                                <div class="d-flex justify-content-end">
+                                <div class="d-flex justify-content-center">
                                     <span class="text-danger">
                                         @error('title_number')
                                             {{ $message }}
@@ -430,7 +406,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="d-flex justify-content-end">
+                                        <div class="d-flex justify-content-center">
                                             <span class="text-danger">
                                                 @error('shipment_id')
                                                     {{ $message }}
@@ -454,7 +430,7 @@
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="shipper_name" id="shipper_name" value="{{ @$user['shipper_name'] }}"> --}}
                                 </div>
-                                <div class="d-flex justify-content-end">
+                                <div class="d-flex justify-content-center">
                                     <span class="text-danger">
                                         @error('shipper_name')
                                             {{ $message }}
@@ -465,7 +441,7 @@
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="status" class="col-6 px-0 font-size font-bold">Status</label>
+                                    <label for="status" class="col-6 px-0 font-size font-bold">Status<span class="text-danger">*</span></label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6" name="status"
                                         id="status" value="{{ @$user['status'] }}">
                                         <option selected disabled>Select Status</option>
@@ -477,11 +453,9 @@
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="status"
                                         id="status" value="{{ @$user['status'] }}"> --}}
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger">
-                                        @error('status')
-                                            {{ $message }}
-                                        @enderror
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="status_error">
+                                       
                                     </span>
                                 </div>
                             </div>
@@ -846,7 +820,7 @@
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="added_by_user"
             id="added_by_user" readonly value="{{ Auth::user()->id }}">
         <input type="hidden" readonly name="tab" value="general">
-        <button type="submit" class="btn next-style text-white col-1 py-1" onclick="create_vehicle_form(this.id)"
+        <button type="button" class="btn next-style text-white col-1 py-1" onclick="create_vehicle_form(this.id)"
             id="general_vehicle" data-next='attachments_vehicle_tab' name="{{ $module['button'] }}"
             style="cursor: pointer;">
             <div class="unskew">Next</div>

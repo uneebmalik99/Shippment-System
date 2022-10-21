@@ -494,7 +494,7 @@
                             <div class="col-6">
                                 {{-- <div class="user_image" style="padding-top: .5rem; border-radius: 15px!important;">
                                 </div> --}}
-                                <div class="profile-images-card">
+                                <div class="profile-images-card" style="   border: 1px dotted black;padding: 1px 96px;">
                                     <div class="profile-images">
                                         <img src="{{ asset('images/profile.jpg') }}" id="upload-img">
                                     </div>

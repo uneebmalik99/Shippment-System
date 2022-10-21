@@ -10,6 +10,7 @@ use App\Models\AuctionImage;
 use App\Models\AuctionInvoice;
 use App\Models\BillOfSale;
 use App\Models\Image;
+use App\Models\BillingParty;
 use App\Models\Shipper;
 use App\Models\Location;
 use App\Models\Notification;
@@ -127,7 +128,8 @@ class VehicleController extends Controller
                 'button' => 'Create',
             ],
         ];
-        $data['buyers'] = User::where('role_id', '4')->get();
+        $data['buyers'] = BillingParty::all();
+        $data['customer_name'] = User::where('role_id', 4)->get();
         $data['location'] = Location::all();
         $data['shipment'] = Shipment::all();
         $data['vehicle_types'] = VehicleType::all();
@@ -156,47 +158,7 @@ class VehicleController extends Controller
         if ($request->isMethod('post')) {
             $data = $request->all();
             $Obj = Vehicle::find($id);
-            $request->validate([
-                'customer_name' => 'required',
-                'vin' => 'required',
-                'year' => 'required',
-                'make' => 'required',
-                'model' => 'required|numeric',
-                'vehicle_type' => 'required',
-                'color' => 'required',
-                'weight' => 'required|numeric',
-                'value' => 'required|numeric',
-                'auction' => 'required',
-                'buyer_id' => 'required',
-                'key' => 'required',
-                'note' => 'required',
-                'hat_number' => 'required',
-                'title_type' => 'required',
-                'title' => 'required',
-                'title_rec_date' => 'required|date',
-                'title_state' => 'required',
-                'title_number' => 'required',
-                'shipper_name' => 'required',
-                'status' => 'required',
-                'sale_date' => 'required|date',
-                'paid_date' => 'required|date',
-                'days' => 'required|numeric',
-                'posted_date' => 'required|date',
-                'pickup_date' => 'required|date',
-                'delivered' => 'required|date',
-                'pickup_location' => 'required',
-                'site' => 'required',
-                'dealer_fee' => 'required|numeric',
-                'late_fee' => 'required|numeric',
-                'auction_storage' => 'required|numeric',
-                'towing_charges' => 'required|numeric',
-                'warehouse_storage' => 'required|numeric',
-                'title_fee' => 'required|numeric',
-                'port_detention_fee' => 'required|numeric',
-                'custom_inspection' => 'required|numeric',
-                'additional_fee' => 'required|numeric',
-                'insurance' => 'required',
-            ]);
+           
             $Obj->update($data);
             return redirect($this->action)->with('success', 'Edited successfully.');
         }
@@ -314,63 +276,75 @@ class VehicleController extends Controller
 
     public function create_form(Request $request)
     {
+        $request->validate([
+            'customer_name' => 'required',
+            'vin' => 'required',
+            'color' => 'required',
+            'weight' => 'required',
+            'value' => 'required',
+            'auction' => 'required',
+            'buyer_id' => 'required',
+            'key' => 'required',
+            'status' => 'required',
+        ]);
+
         $data = $request->all();
         $vin['vin'] = $data['vin'];
         // return $vin;
         $tab = $data['tab'];
-        $image = $request->file('images');
-        $billofsales = $request->file('billofsales');
-        $originaltitle = $request->file('originaltitle');
-        $pickup = $request->file('pickup');
+        // $image = $request->file('images');
+        // $billofsales = $request->file('billofsales');
+        // $originaltitle = $request->file('originaltitle');
+        // $pickup = $request->file('pickup');
         unset($data['tab']);
-        unset($data['billofsales']);
-        unset($data['originaltitle']);
-        unset($data['pickup']);
+        // unset($data['billofsales']);
+        // unset($data['originaltitle']);
+        // unset($data['pickup']);
         $Obj = new Vehicle;
-        $Obj_bill = new BillOfSale;
-        $Obj_title = new OriginalTitle;
-        $Obj_pikcup = new PickupImage;
+        // $Obj_bill = new BillOfSale;
+        // $Obj_title = new OriginalTitle;
+        // $Obj_pikcup = new PickupImage;
         $new = $Obj->create($data);
         $Obj_vehicle = $Obj->where('vin', $data['vin'])->get();
-        if ($new) {
-            if ($billofsales) {
-                foreach ($billofsales as $billofsale) {
-                    $image_name = time() . '.' . $billofsale->extension();
-                    $filename = Storage::putFile($this->directory, $billofsale);
-                    $billofsale->move(public_path($this->directory), $filename);
-                    $Obj_bill->vehicle_id = $Obj_vehicle[0]['id'];
-                    $Obj_bill->name = $filename;
-                    $Obj_bill->thumbnail = $image_name;
-                    $Obj_bill->save();
-                }
-            }
+        // if ($new) {
+        //     if ($billofsales) {
+        //         foreach ($billofsales as $billofsale) {
+        //             $image_name = time() . '.' . $billofsale->extension();
+        //             $filename = Storage::putFile($this->directory, $billofsale);
+        //             $billofsale->move(public_path($this->directory), $filename);
+        //             $Obj_bill->vehicle_id = $Obj_vehicle[0]['id'];
+        //             $Obj_bill->name = $filename;
+        //             $Obj_bill->thumbnail = $image_name;
+        //             $Obj_bill->save();
+        //         }
+        //     }
 
-            if ($originaltitle) {
-                foreach ($originaltitle as $originaltitles) {
-                    $image_name = time() . '.' . $originaltitles->extension();
-                    $filename = Storage::putFile($this->directory, $originaltitles);
-                    $originaltitles->move(public_path($this->directory), $filename);
-                    $Obj_title->vehicle_id = $Obj_vehicle[0]['id'];
-                    $Obj_title->name = $filename;
-                    $Obj_title->thumbnail = $image_name;
-                    $Obj_title->save();
-                }
-            }
+        //     if ($originaltitle) {
+        //         foreach ($originaltitle as $originaltitles) {
+        //             $image_name = time() . '.' . $originaltitles->extension();
+        //             $filename = Storage::putFile($this->directory, $originaltitles);
+        //             $originaltitles->move(public_path($this->directory), $filename);
+        //             $Obj_title->vehicle_id = $Obj_vehicle[0]['id'];
+        //             $Obj_title->name = $filename;
+        //             $Obj_title->thumbnail = $image_name;
+        //             $Obj_title->save();
+        //         }
+        //     }
 
-            if ($pickup) {
-                foreach ($pickup as $pickups) {
-                    $image_name = time() . '.' . $pickups->extension();
-                    $filename = Storage::putFile($this->directory, $pickups);
-                    $pickups->move(public_path($this->directory), $filename);
-                    $Obj_pikcup->vehicle_id = $Obj_vehicle[0]['id'];
-                    $Obj_pikcup->name = $filename;
-                    $Obj_pikcup->thumbnail = $image_name;
-                    $Obj_pikcup->save();
-                }
-            }
-        } else {
-            return "Vehicle not created.";
-        }
+        //     if ($pickup) {
+        //         foreach ($pickup as $pickups) {
+        //             $image_name = time() . '.' . $pickups->extension();
+        //             $filename = Storage::putFile($this->directory, $pickups);
+        //             $pickups->move(public_path($this->directory), $filename);
+        //             $Obj_pikcup->vehicle_id = $Obj_vehicle[0]['id'];
+        //             $Obj_pikcup->name = $filename;
+        //             $Obj_pikcup->thumbnail = $image_name;
+        //             $Obj_pikcup->save();
+        //         }
+        //     }
+        // } else {
+        //     return "Vehicle not created.";
+        // }
 
         switch ($tab) {
             case ('general'):

@@ -16,7 +16,7 @@
                 <label for="valid_from" class="text-info font-style">Valid From</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6" name="valid_from"
+                <input type="date" class="form-control-sm border border-0 rounded-pill bg col-6" name="valid_from"
                     id="valid_from">
             </div>
         </div>
@@ -25,7 +25,7 @@
                 <label for="valid_till" class="text-info font-style">Valid Till</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6" name="valid_till"
+                <input type="date" class="form-control-sm border border-0 rounded-pill bg col-6" name="valid_till"
                     id="valid_till">
             </div>
         </div>

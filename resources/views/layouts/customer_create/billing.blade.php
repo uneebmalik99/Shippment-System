@@ -129,7 +129,7 @@
             </div>
             <div>
                 <input class="form-control-sm border border-0 rounded-pill bg col-8"
-                    style="font-size:12px!important;" type="text" name="expiry_date" id="expiry_date">
+                    style="font-size:12px!important;" type="date" name="expiry_date" id="expiry_date">
             </div>
         </div>
     </div>
