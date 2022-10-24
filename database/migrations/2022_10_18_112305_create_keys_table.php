@@ -15,6 +15,8 @@ class CreateKeysTable extends Migration
     {
         Schema::create('keys', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->enum('status',['0', '1' ])->default('1');
             $table->timestamps();
             
         });

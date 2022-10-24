@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consignee;
+use App\Models\ContainerSize;
+use App\Models\ContainerType;
 use App\Models\Loading_Image;
 use App\Models\Location;
 use App\Models\Notification;
@@ -12,6 +14,7 @@ use App\Models\Shipment_Invice;
 use App\Models\Stamp_Title;
 use App\Models\Vehicle;
 use App\Models\Country;
+use App\Models\ShipmentLine;
 use App\Models\State;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -132,6 +135,9 @@ class ShipmentController extends Controller
         $data['records'] = Shipment::all()->toArray();
         $data['location'] = Location::all()->toArray();
         $data['countries'] = Country::where('status', '1')->get();
+        $data['container_size'] = ContainerSize::where('status', '1')->get();
+        $data['container_types'] = ContainerType::where('status', '1')->get();
+        $data['shipment_lines'] = ShipmentLine::where('status', '1')->get();
         $data['states'] = State::where('status', '1')->get();
         if ($request->ajax()) {
             $tab = $request->tab;

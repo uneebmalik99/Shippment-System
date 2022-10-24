@@ -774,447 +774,779 @@
 {{-- company information --}}
 <script>
     $("#companypopup").click(function() {
-        var tab  = $(this).attr("tab");
+        var tab  = $(this).attr("tab"); 
         // alert(tab)
-        $.ajax({
+        $.ajax({  
             type: 'post',
             url: '{{ route('company.list') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
+                data:{tab :tab},  
+                success:function(data){  
+                    $('#common_body').html(data);  
                     $('#commonmodal').modal("show");
                     $("#close_modal").click(function() {
                         $('#commonmodal').modal("hide");
+                    }); 
+                    $(".add-more").click(function() {
+                        current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control company_input" placeholder="Enter Company Name"><div class="input-group-append"><button disabled class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                        $('.add_data_section').append(current_div);
                     });
                     $("#company_save").click(function() {
-                        var data  = $("#company_input").val();
-                        // alert(data)
+                        var formData = new FormData($('#companies_fields')[0]);
+                        //  console.log(...formData);
+                         formData.append('tab', tab);
+                        //  formData.append('id', data);
                         $.ajax({
-                            type: 'post',
+                            method: 'post',
                             url: '{{ route('add.record') }}',
-                                data:{
-                                    tab :tab,
-                                    name:data,
-                                },
-                                success:function(data){
-                                    // alert(data);
-                                    // if(data!=""){
-                                        iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Company is saved'});
-                                        $('#commonmodal').modal("hide");
-                                        location.reload();
-                                    // }
-                                },
-                                error:function(data){
-                                    $name = $(".error-message").html('<strong class="text-danger" >Name already taken</strong>');
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success:function(data){
+                                if(data=='success'){
+                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
+                                    $('#commonmodal').modal("hide");
+                                    location.reload();
                                 }
-                        });
-                    });
-                }
-           });
-    });
+                                if(data=='recordexist'){
+                                    iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
+                                    $('#commonmodal').modal("hide");
+                                    // location.reload();
+                                }
+                            }, 
+
+                        }); 
+                    });    
+                }  
+           }); 
+    }); 
 </script>
+
 {{-- shipping countries --}}
 <script>
     $("#shippingcountriespopup").click(function() {
-        var tab  = $(this).attr("tab");
+        var tab  = $(this).attr("tab"); 
         // alert(tab)
-        $.ajax({
+        $.ajax({  
             type: 'post',
             url: '{{ route('shipping.countries') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
+                data:{tab :tab},  
+                success:function(data){  
+                    $('#common_body').html(data);  
                     $('#commonmodal').modal("show");
                     $("#close_modal").click(function() {
                         $('#commonmodal').modal("hide");
+                    }); 
+                    $(".add-more").click(function() {
+                        current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control shippingcountries_input" placeholder="Enter Company Name"><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                        $('.add_data_section').append(current_div);
                     });
                     $("#shippingcountries_save").click(function() {
-                        var data  = $("#shippingcountries_input").val();
+                        var formData = new FormData($('#shippingcountries_fields')[0]);
+                        //  console.log(...formData);
+                         formData.append('tab', tab);
+                        //  formData.append('id', data);
                         $.ajax({
-                            type: 'post',
+                            method: 'post',
                             url: '{{ route('add.record') }}',
-                                data:{
-                                    tab :tab,
-                                    name:data,
-                                },
-                                success:function(data){
-                                    // alert(data);
-                                    // if(data!=""){
-                                        iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Shipping Country is saved'});
-                                        $('#commonmodal').modal("hide");
-                                        location.reload();
-                                    // }
-                                },
-                                error:function(data){
-                                    $name = $(".error-message").html('<strong class="text-danger" >Name already taken</strong>');
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success:function(data){
+                                if(data=='success'){
+                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
+                                    $('#commonmodal').modal("hide");
+                                    location.reload();
                                 }
-                        });
-                    });
-                }
-           });
-    });
+                                if(data=='recordexist'){
+                                    iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
+                                    $('#commonmodal').modal("hide");
+                                    // location.reload();
+                                }
+                            },  
+                        }); 
+                    }); 
+                }  
+           }); 
+    }); 
 </script>
+
 {{-- shipping states --}}
 <script>
     $("#shippingstatespopup").click(function() {
-        var tab  = $(this).attr("tab");
+        var tab  = $(this).attr("tab"); 
         // alert(tab)
-        $.ajax({
+        $.ajax({  
             type: 'post',
             url: '{{ route('shipping.states') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
+                data:{tab :tab},  
+                success:function(data){  
+                    $('#common_body').html(data);  
                     $('#commonmodal').modal("show");
                     $("#close_modal").click(function() {
                         $('#commonmodal').modal("hide");
+                    }); 
+                    $(".add-more").click(function() {
+                        current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control shippingstates_input" placeholder="Enter Company Name"><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                        $('.add_data_section').append(current_div);
                     });
                     $("#shippingstates_save").click(function() {
-                        var data  = $("#shippingstates_input").val();
+                        var formData = new FormData($('#shippingstates_fields')[0]);
+                        //  console.log(...formData);
+                         formData.append('tab', tab);
+                        //  formData.append('id', data);
                         $.ajax({
-                            type: 'post',
+                            method: 'post',
                             url: '{{ route('add.record') }}',
-                                data:{
-                                    tab :tab,
-                                    name:data,
-                                },
-                                success:function(data){
-                                    // alert(data);
-                                    // if(data!=""){
-                                        iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Shipping States is saved'});
-                                        $('#commonmodal').modal("hide");
-                                        location.reload();
-                                    // }
-                                },
-                                error:function(data){
-                                    $name = $(".error-message").html('<strong class="text-danger" >Name already taken</strong>');
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success:function(data){
+                                if(data=='success'){
+                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
+                                    $('#commonmodal').modal("hide");
+                                    location.reload();
                                 }
-                        });
-                    });
-                }
-           });
-    });
+                                if(data=='recordexist'){
+                                    iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
+                                    $('#commonmodal').modal("hide");
+                                    // location.reload();
+                                }
+                            },  
+                        }); 
+                    }); 
+                }  
+           }); 
+    }); 
 </script>
 
 {{-- loading ports --}}
 <script>
     $("#loadingportspopup").click(function() {
-        var tab  = $(this).attr("tab");
+        var tab  = $(this).attr("tab"); 
         // alert(tab)
-        $.ajax({
+        $.ajax({  
             type: 'post',
             url: '{{ route('loading.ports') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
+                data:{tab :tab},  
+                success:function(data){  
+                    $('#common_body').html(data);  
                     $('#commonmodal').modal("show");
                     $("#close_modal").click(function() {
                         $('#commonmodal').modal("hide");
+                    }); 
+                    $(".add-more").click(function() {
+                        current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control loadingports_input" placeholder="Enter Company Name"><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                        $('.add_data_section').append(current_div);
                     });
                     $("#loadingports_save").click(function() {
-                        var data  = $("#loadingports_input").val();
+                        var formData = new FormData($('#loadingports_fields')[0]);
+                        //  console.log(...formData);
+                         formData.append('tab', tab);
+                        //  formData.append('id', data);
                         $.ajax({
-                            type: 'post',
+                            method: 'post',
                             url: '{{ route('add.record') }}',
-                                data:{
-                                    tab :tab,
-                                    name:data,
-                                },
-                                success:function(data){
-                                    // alert(data);
-                                    // if(data!=""){
-                                        iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Loading Post is saved'});
-                                        $('#commonmodal').modal("hide");
-                                        location.reload();
-                                    // }
-                                },
-                                error:function(data){
-                                    $name = $(".error-message").html('<strong class="text-danger" >Name already taken</strong>');
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success:function(data){
+                                if(data=='success'){
+                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
+                                    $('#commonmodal').modal("hide");
+                                    location.reload();
                                 }
-                        });
-                    });
-                }
-           });
-    });
+                                if(data=='recordexist'){
+                                    iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
+                                    $('#commonmodal').modal("hide");
+                                    // location.reload();
+                                }
+                            },  
+                        }); 
+                    }); 
+                }  
+           }); 
+    }); 
 </script>
+
 {{-- destination countries --}}
 <script>
     $("#destinationcountriespopup").click(function() {
-        var tab  = $(this).attr("tab");
+        var tab  = $(this).attr("tab"); 
         // alert(tab)
-        $.ajax({
+        $.ajax({  
             type: 'post',
             url: '{{ route('destination.countries') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
+                data:{tab :tab},  
+                success:function(data){  
+                    $('#common_body').html(data);  
                     $('#commonmodal').modal("show");
                     $("#close_modal").click(function() {
                         $('#commonmodal').modal("hide");
+                    }); 
+                    $(".add-more").click(function() {
+                        current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control destinationcountries_input" placeholder="Enter Company Name"><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                        $('.add_data_section').append(current_div);
                     });
                     $("#destinationcountries_save").click(function() {
-                        var data  = $("#destinationcountries_input").val();
+                        var formData = new FormData($('#destinationcountries_fields')[0]);
+                        //  console.log(...formData);
+                         formData.append('tab', tab);
+                        //  formData.append('id', data);
                         $.ajax({
-                            type: 'post',
+                            method: 'post',
                             url: '{{ route('add.record') }}',
-                                data:{
-                                    tab :tab,
-                                    name:data,
-                                },
-                                success:function(data){
-                                    // alert(data);
-                                    // if(data!=""){
-                                        iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Destination Country is saved'});
-                                        $('#commonmodal').modal("hide");
-                                        location.reload();
-                                    // }
-                                },
-                                error:function(data){
-                                    $name = $(".error-message").html('<strong class="text-danger" >Name already taken</strong>');
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success:function(data){
+                                if(data=='success'){
+                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
+                                    $('#commonmodal').modal("hide");
+                                    location.reload();
                                 }
-                        });
-                    });
-                }
-           });
-    });
+                                if(data=='recordexist'){
+                                    iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
+                                    $('#commonmodal').modal("hide");
+                                    // location.reload();
+                                }
+                            },  
+                        }); 
+                    }); 
+                }  
+           }); 
+    }); 
 </script>
+
 {{-- destination ports --}}
 <script>
     $("#destinationportpopup").click(function() {
-        var tab  = $(this).attr("tab");
+        var tab  = $(this).attr("tab"); 
         // alert(tab)
-        $.ajax({
+        $.ajax({  
             type: 'post',
             url: '{{ route('destination.port') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
+                data:{tab :tab},  
+                success:function(data){  
+                    $('#common_body').html(data);  
                     $('#commonmodal').modal("show");
                     $("#close_modal").click(function() {
                         $('#commonmodal').modal("hide");
+                    }); 
+                    
+                    $(".add-more").click(function() {
+                        current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control destinationport_input" placeholder="Enter Company Name"><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                        $('.add_data_section').append(current_div);
                     });
                     $("#destinationport_save").click(function() {
-                        var data  = $("#destinationport_input").val();
+                        var formData = new FormData($('#destinationport_fields')[0]);
+                        //  console.log(...formData);
+                         formData.append('tab', tab);
+                        //  formData.append('id', data);
                         $.ajax({
-                            type: 'post',
+                            method: 'post',
                             url: '{{ route('add.record') }}',
-                                data:{
-                                    tab :tab,
-                                    name:data,
-                                },
-                                success:function(data){
-                                    // alert(data);
-                                    // if(data!=""){
-                                        iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Destination Port is saved'});
-                                        $('#commonmodal').modal("hide");
-                                        location.reload();
-                                    // }
-                                },
-                                error:function(data){
-                                    $name = $(".error-message").html('<strong class="text-danger" >Name already taken</strong>');
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success:function(data){
+                                if(data=='success'){
+                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
+                                    $('#commonmodal').modal("hide");
+                                    location.reload();
                                 }
-                        });
-                    });
-                }
-           });
-    });
+                                if(data=='recordexist'){
+                                    iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
+                                    $('#commonmodal').modal("hide");
+                                    // location.reload();
+                                }
+                            },  
+                        }); 
+                    }); 
+                }  
+           }); 
+    }); 
 </script>
+
 {{-- make ports --}}
 <script>
     $("#makepopup").click(function() {
-        var tab  = $(this).attr("tab");
-        // alert(tab)
-        $.ajax({
+        var tab  = $(this).attr("tab"); 
+        alert(tab);
+        $.ajax({  
             type: 'post',
             url: '{{ route('make.list') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
-                    $('#commonmodal').modal("show");
-                    $("#close_modal").click(function() {
-                        $('#commonmodal').modal("hide");
-                    });
-                }
-           });
-    });
+                data:{tab :tab},  
+                success:function(data){  
+                $('#common_body').html(data);  
+                $('#commonmodal').modal("show");
+                $("#close_modal").click(function() {
+                    $('#commonmodal').modal("hide");
+                });
+                $(".add-more").click(function() {
+                    current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control make_input" placeholder="Enter Company Name"><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                    $('.add_data_section').append(current_div);
+                });
+            // master.makeadd
+                $("#input_make").on("change", function(e) {
+                    var tab  = $(this).attr("tab"); 
+                    var model_id = $("#input_make").val();
+                    alert(tab);alert(model_id);
+                    $.ajax({  
+                    type: 'post',
+                    url: '{{ route('master.seriesadd') }}',
+                    data:{
+                        tab :tab,
+                        model_id:model_id,
+                    },  
+                    success:function(data){  
+                        // console.log(data)
+                        html ='<div class="form-group" id="model_section">';
+                        html += '<select class="form-control" id="input_model" tab="model">';
+                        html += '<option disabled selected>select model</option>';
+                        data.forEach(function(key, value) {
+                            html +='<option value="'+key.id+'">' +key.name+ '</option>';
+                        });
+                        html += '</select></div>';
+                        $('#model_section').empty().append(html);
+                        
+                        $("#input_model").on("change", function(e) {
+                                var tab  = $(this).attr("tab"); 
+                                var model_id = $("#input_model").val();
+                                alert(model_id);alert(tab);
+                                $.ajax({  
+                                    type: 'post',
+                                    url: '{{ route('master.seriesadd') }}',
+                                    data:{
+                                    tab :tab,
+                                    model_id:model_id,
+                                },
+                                success:function(data){  
+                                    console.log(data)
+                                    html ='<div class="form-group" id="series_section">';
+                                    html += '<select class="form-control" id="input_series" tab="series">';
+                                    data.forEach(function(key, value) {
+                                        html +='<option value="' +key.id+ '">' +key.name+ '</option>';
+                                    });
+                                    html += '</select></div>';
+                                    $('#series_section').empty().append(html);
+                                }
+                            });   
+
+                        }); 
+                    }
+                });
+
+                 
+                $("#make_save").click(function() {
+                var formData = new FormData($('#make_fields')[0]);
+                //  console.log(...formData);
+                    formData.append('tab', tab);
+                    formData.append('id', data);
+                $.ajax({
+                    method: 'post',
+                    url: '{{ route('add.make') }}',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success:function(data){
+                        if(data=='success'){
+                            iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
+                            $('#commonmodal').modal("hide");
+                            location.reload();
+                        }
+                        if(data=='recordexist'){
+                            iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
+                            $('#commonmodal').modal("hide");
+                            // location.reload();
+                        }
+                    },  
+                }); 
+            });
+
+
+                }); 
+            }  
+        }); 
+    }); 
 </script>
+
 {{-- model ports --}}
 <script>
     $("#modelpopup").click(function() {
-        var tab  = $(this).attr("tab");
-        // alert(tab)
-        $.ajax({
+        var tab  = $(this).attr("tab"); 
+        alert(tab)
+        $.ajax({  
             type: 'post',
             url: '{{ route('model.list') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
+                data:{tab :tab},  
+                success:function(data){  
+                    $('#common_body').html(data);  
                     $('#commonmodal').modal("show");
                     $("#close_modal").click(function() {
                         $('#commonmodal').modal("hide");
                     });
-                }
-           });
-    });
+                    $(".add-more").click(function() {
+                    current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control model_input" placeholder="Enter Company Name"><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                    $('.add_data_section').append(current_div);
+                });
+                $("#model_save").click(function() {
+                    var formData = new FormData($('#model_fields')[0]);
+                    //  console.log(...formData);
+                        formData.append('tab', tab);
+                    //  formData.append('id', data);
+                    $.ajax({
+                        method: 'post',
+                        url: '{{ route('add.record') }}',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success:function(data){
+                            if(data=='success'){
+                                iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
+                                $('#commonmodal').modal("hide");
+                                location.reload();
+                            }
+                            if(data=='recordexist'){
+                                iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
+                                $('#commonmodal').modal("hide");
+                                // location.reload();
+                            }
+                        },  
+                    }); 
+                });  
+                }  
+           }); 
+    }); 
 </script>
+
 {{-- color ports --}}
 <script>
     $("#colorpopup").click(function() {
-        var tab  = $(this).attr("tab");
-        // alert(tab)
-        $.ajax({
+        var tab  = $(this).attr("tab"); 
+        $.ajax({  
             type: 'post',
             url: '{{ route('color.list') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
-                    $('#commonmodal').modal("show");
-                    $("#close_modal").click(function() {
-                        $('#commonmodal').modal("hide");
-                    });
-                }
-           });
-    });
+            data:{tab :tab},  
+            success:function(data){  
+                $('#common_body').html(data);  
+                $('#commonmodal').modal("show");
+                $("#close_modal").click(function() {
+                    $('#commonmodal').modal("hide");
+                }); 
+                $(".add-more").click(function() {
+                    current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control color_input" placeholder="Enter Company Name"><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                    $('.add_data_section').append(current_div);
+                });
+                $("#color_save").click(function() {
+                    var formData = new FormData($('#color_fields')[0]);
+                    //  console.log(...formData);
+                        formData.append('tab', tab);
+                    //  formData.append('id', data);
+                    $.ajax({
+                        method: 'post',
+                        url: '{{ route('add.record') }}',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success:function(data){
+                            if(data=='success'){
+                                iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
+                                $('#commonmodal').modal("hide");
+                                location.reload();
+                            }
+                            if(data=='recordexist'){
+                                iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
+                                $('#commonmodal').modal("hide");
+                                // location.reload();
+                            }
+                        },  
+                    }); 
+                }); 
+            }  
+        }); 
+    }); 
 </script>
+
 {{-- title ports --}}
 <script>
     $("#titlepopup").click(function() {
-        var tab  = $(this).attr("tab");
-        // alert(tab)
-        $.ajax({
+        var tab  = $(this).attr("tab"); 
+        $.ajax({  
             type: 'post',
             url: '{{ route('title.list') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
-                    $('#commonmodal').modal("show");
-                    $("#close_modal").click(function() {
-                        $('#commonmodal').modal("hide");
-                    });
-                    $("#title_save").click(function() {
-                        var data  = $("#title_input").val();
-                        $.ajax({
-                            type: 'post',
-                            url: '{{ route('add.record') }}',
-                                data:{
-                                    tab :tab,
-                                    name:data,
-                                },
-                                success:function(data){
-                                    // alert(data);
-                                    // if(data!=""){
-                                        iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Title is saved'});
-                                        $('#commonmodal').modal("hide");
-                                        location.reload();
-                                    // }
-                                },
-                                error:function(data){
-                                    $name = $(".error-message").html('<strong class="text-danger" >Name already taken</strong>');
-                                }
-                        });
-                    });
-                }
-           });
-    });
+            data:{tab :tab},  
+            success:function(data){  
+                $('#common_body').html(data);  
+                $('#commonmodal').modal("show");
+                $("#close_modal").click(function() {
+                    $('#commonmodal').modal("hide");
+                }); 
+                $(".add-more").click(function() {
+                    current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control title_input" placeholder="Enter Company Name"><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                    $('.add_data_section').append(current_div);
+                });
+                $("#title_save").click(function() {
+                    var formData = new FormData($('#title_fields')[0]);
+                    //  console.log(...formData);
+                        formData.append('tab', tab);
+                    //  formData.append('id', data);
+                    $.ajax({
+                        method: 'post',
+                        url: '{{ route('add.record') }}',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success:function(data){
+                            if(data=='success'){
+                                iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
+                                $('#commonmodal').modal("hide");
+                                location.reload();
+                            }
+                            if(data=='recordexist'){
+                                iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
+                                $('#commonmodal').modal("hide");
+                                // location.reload();
+                            }
+                        },  
+                    }); 
+                }); 
+            }  
+        }); 
+    }); 
 </script>
+
 {{-- key ports --}}
+{{-- title ports --}}
 <script>
     $("#keypopup").click(function() {
-        var tab  = $(this).attr("tab");
-        // alert(tab)
-        $.ajax({
+        var tab  = $(this).attr("tab"); 
+        $.ajax({  
             type: 'post',
             url: '{{ route('key.list') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
-                    $('#commonmodal').modal("show");
-                    $("#close_modal").click(function() {
-                        $('#commonmodal').modal("hide");
-                    });
-                }
-           });
-    });
+            data:{tab :tab},  
+            success:function(data){  
+                $('#common_body').html(data);  
+                $('#commonmodal').modal("show");
+                $("#close_modal").click(function() {
+                    $('#commonmodal').modal("hide");
+                }); 
+                $(".add-more").click(function() {
+                    current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control key_input" placeholder="Enter Company Name"><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                    $('.add_data_section').append(current_div);
+                });
+                $("#key_save").click(function() {
+                    var formData = new FormData($('#key_fields')[0]);
+                    //  console.log(...formData);
+                        formData.append('tab', tab);
+                    //  formData.append('id', data);
+                    $.ajax({
+                        method: 'post',
+                        url: '{{ route('add.record') }}',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success:function(data){
+                            if(data=='success'){
+                                iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
+                                $('#commonmodal').modal("hide");
+                                location.reload();
+                            }
+                            if(data=='recordexist'){
+                                iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
+                                $('#commonmodal').modal("hide");
+                                // location.reload();
+                            }
+                        },  
+                    }); 
+                }); 
+            }  
+        }); 
+    }); 
 </script>
+
 {{-- auction ports --}}
 <script>
     $("#auctionpopup").click(function() {
-        var tab  = $(this).attr("tab");
+        var tab  = $(this).attr("tab"); 
         // alert(tab)
-        $.ajax({
+        $.ajax({  
             type: 'post',
             url: '{{ route('auction.list') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
+                data:{tab :tab},  
+                success:function(data){  
+                    $('#common_body').html(data);  
                     $('#commonmodal').modal("show");
                     $("#close_modal").click(function() {
                         $('#commonmodal').modal("hide");
+                    }); 
+                    $(".add-more").click(function() {
+                        current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control auction_input" placeholder="Enter Company Name"><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                        $('.add_data_section').append(current_div);
                     });
                     $("#auction_save").click(function() {
-                        var data  = $("#auction_input").val();
+                        var formData = new FormData($('#auction_fields')[0]);
+                        //  console.log(...formData);
+                         formData.append('tab', tab);
+                        //  formData.append('id', data);
                         $.ajax({
-                            type: 'post',
+                            method: 'post',
                             url: '{{ route('add.record') }}',
-                                data:{
-                                    tab :tab,
-                                    name:data,
-                                },
-                                success:function(data){
-                                    // alert(data);
-                                    // if(data!=""){
-                                        iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Title is saved'});
-                                        $('#commonmodal').modal("hide");
-                                        location.reload();
-                                    // }
-                                },
-                                error:function(data){
-                                    $name = $(".error-message").html('<strong class="text-danger" >Name already taken</strong>');
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success:function(data){
+                                if(data=='success'){
+                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
+                                    $('#commonmodal').modal("hide");
+                                    location.reload();
                                 }
-                        });
-                    });
-                }
-           });
-    });
+                                if(data=='recordexist'){
+                                    iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
+                                    $('#commonmodal').modal("hide");
+                                    // location.reload();
+                                }
+                            },  
+                        }); 
+                    }); 
+                }  
+           }); 
+    }); 
 </script>
 
 {{-- vehicle ports --}}
 <script>
     $("#vehiclepopup").click(function() {
-        var tab  = $(this).attr("tab");
+        var tab  = $(this).attr("tab"); 
         // alert(tab)
-        $.ajax({
+        $.ajax({  
             type: 'post',
             url: '{{ route('vehicle.list') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
+                data:{tab :tab},  
+                success:function(data){  
+                    $('#common_body').html(data);  
                     $('#commonmodal').modal("show");
                     $("#close_modal").click(function() {
                         $('#commonmodal').modal("hide");
-                    });
-                }
-           });
-    });
+                    }); 
+                }  
+           }); 
+    }); 
 </script>
+
 {{-- shippment ports --}}
 <script>
     $("#shippmentpopup").click(function() {
-        var tab  = $(this).attr("tab");
+        var tab  = $(this).attr("tab"); 
         // alert(tab)
-        $.ajax({
+        $.ajax({  
             type: 'post',
             url: '{{ route('shippment.list') }}',
-                data:{tab :tab},
-                success:function(data){
-                    $('#common_body').html(data);
+                data:{tab :tab},  
+                success:function(data){  
+                    $('#common_body').html(data);  
                     $('#commonmodal').modal("show");
                     $("#close_modal").click(function() {
                         $('#commonmodal').modal("hide");
-                    });
+                    }); 
+                }  
+           }); 
+    }); 
+</script>
+
+
+{{-- delete records --}}
+<script>
+    function deletemaster(id,tab){
+        // alert(id);
+        // alert(tab);
+        if (confirm('Do you really want to delete this record ?')) {
+        var current_id = $(".current_id").val();
+        $.ajax({  
+            type: 'post',
+            url: '{{ route('master.delete') }}',
+                data:{
+                    tab :tab,
+                    id:id,
+                },  
+                success:function(data){
+                    // if(data=='deleted'){
+                        iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Deleted'});
+                        $('#commonmodal').modal("hide");
+                        location.reload();
+                    // }
+                },  
+        }); 
+    }
+    }
+</script>
+
+{{-- update saved records --}}
+<script>
+    function updatemaster(id,tab){
+        alert(id);
+        alert(tab);
+        $.ajax({  
+            type: 'post',
+            url: '{{ route('update.master') }}',
+                data:{tab :tab,id:id},  
+                success:function(data){  
+                    $('#common_body').html(data);  
+                    $('#commonmodal').modal("show");
+                    $("#close_modal").click(function() {
+                        $('#commonmodal').modal("hide");
+                    }); 
+                    $(".save_btn").click(function() {
+                        var name  = $("#input_value").val(); 
+                        var id    = $(this).val();
+                        alert(name);
+                        alert(id);
+                        $.ajax({  
+                            type: 'post',
+                            url: '{{ route('update.save') }}',
+                                data:{
+                                    tab :tab,
+                                    id:id,
+                                    name:name,
+                                },  
+                                success:function(data){
+                                if(data=='updated'){
+                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Updated'});
+                                    $('#commonmodal').modal("hide");
+                                    location.reload();
+                                }
+                            },  
+                        }); 
+                    }); 
+                }  
+           }); 
+    }
+</script>
+
+{{-- status check --}}
+<script>
+     $('input[type=checkbox].status_change').change(function () {
+        var id = $(this).attr("id"); 
+        var tab = $(this).attr("tab"); 
+        var status  = $(this).val(); 
+        alert(id);alert(tab);alert(status)
+        $.ajax({  
+            type: 'post',
+            url: '{{ route('master.status') }}',
+                data:{
+                    tab :tab,
+                    status:status,
+                    id:id
+                },  
+                success:function(data){  
+                    if(data=='updated'){
+                        iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Status Updated'});
+                        $('#commonmodal').modal("hide");
+                        location.reload();
+                    }
                 }
-           });
+        });
     });
+
 </script>
 
 <script>

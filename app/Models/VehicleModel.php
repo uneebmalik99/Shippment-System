@@ -3,21 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 // use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
 
-class ShipmentStatus extends Model
+class VehicleModel extends Model
 {
     use HasFactory;
     // use softDeletes;
     protected $primaryKey = 'id';
-    public $timestamps = true;
-    protected $table = "shipment_statuses";
+    protected $table = "vehicle_models";
     protected $guarded = [];
 
-    public function shipments()
+    public function series()
     {
-        return $this->hasMany('App\Models\Shipment');
+        return $this->belongsTo('App\Models\Series','model_id','id');
     }
-
 }
+

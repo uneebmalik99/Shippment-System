@@ -211,9 +211,16 @@
                                                     <label for="container_size"
                                                         class="col-6 px-0 font-size font-bold">Container
                                                         Size</label>
-                                                    <input type="text"
-                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="container_size" id="container_size">
+                                                    <option selected disabled>Select Container Size</option>
+                                                    @foreach ($container_size as $Csize)
+                                                    <option value="{{@$Csize['name']}}">{{@$Csize['name']}}</option>                                                        
+                                                    @endforeach
+                                                </select>
+                                                    {{-- <input type="text"
+                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        name="container_size" id="container_size"> --}}
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -221,9 +228,16 @@
                                                     <label for="container_type"
                                                         class="col-6 px-0 font-size font-bold">Container
                                                         Type</label>
-                                                    <input type="text"
+                                                    <select class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                    name="container_type" id="container_type">
+                                                    <option selected disabled>Select Container Type</option>
+                                                    @foreach ($container_types as $Ctype)
+                                                    <option value="{{@$Ctype['name']}}">{{@$Ctype['name']}}</option>                                                        
+                                                    @endforeach
+                                                </select>
+                                                    {{-- <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="container_type" id="container_type">
+                                                        name="container_type" id="container_type"> --}}
                                                 </div>
                                             </div>
                                         </div>

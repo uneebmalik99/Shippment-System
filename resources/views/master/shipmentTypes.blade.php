@@ -32,11 +32,11 @@
 <div class="modal-body">
 
     <div class="add_data_section">
-        <form method="POST" id="shipmentTypes">
+
         <div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26);
         filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;">
             <input type="text" name="addmore[]" class="form-control"
-                placeholder="{{$placeholder}}" id="auction_input">
+                placeholder="{{$placeholder}}" id="shipmentTypes_input">
             <div class="input-group-append">
                 <button class="add-more" type="button"
                     style="background: none;outline:none !important;border:none !important">
@@ -69,12 +69,11 @@
                 </button>
             </div>
         </div>
-       
+        <div class="error-message"></div>
 
     </div>
-    <div class="error-message"></div>
     <div class="modal-footer">
-        <button type="button" class="btn save_btn" id="auction_save">
+        <button type="button" class="btn save_btn" id="shipmentTypes">
             <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -84,5 +83,4 @@
             Save
         </button>
     </div>
-</form>
 </div>

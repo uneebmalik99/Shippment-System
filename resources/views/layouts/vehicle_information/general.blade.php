@@ -215,12 +215,18 @@
 
                         <div class="gallary_body">
                             <div class="d-flex flex-wrap justify-content-center changeImages">
-
+                                {{-- {{count(@$vehicle['billofsales'])}} --}}
+                                @if(@$vehicle['billofsales'])
                                 @foreach(@$vehicle['billofsales'] as $img)                       
                                 <div class="img">
                                     <img src="{{asset($img['name'])}}" alt=" " style="width: 60px; height: 55px;" class="download_images">
                                 </div>
                                 @endforeach
+                                @else
+                                <div class="img">
+                                    <img src="#" alt="" style="width: 60px; height: 55px;" class="download_images">
+                                </div>
+                                @endif
                                
                             </div>
                         </div>

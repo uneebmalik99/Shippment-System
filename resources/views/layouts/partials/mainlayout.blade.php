@@ -10,8 +10,7 @@
 
 <body>
     <div id="load"></div>
-<div id="contents">
-     
+    <div id="contents">
 </div>
 
     <div id="pcoded" class="pcoded">

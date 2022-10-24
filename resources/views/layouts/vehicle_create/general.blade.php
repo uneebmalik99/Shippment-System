@@ -127,8 +127,14 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="color" class="col-6 px-0 font-size font-bold">Color<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="color" id="color" value="{{ @$user['color'] }}">
+                                    <select name="color" id="color" value="{{ @$user['color'] }}" class="form-control-sm border border-0 rounded-pill bg col-6">
+                                    <option selected disabled>Select Color</option>
+                                    @foreach($colors as $color)
+                                        <option value="{{@$color['name']}}">{{@$color['name']}}</option>
+                                    @endforeach
+                                    </select>
+                                    {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                        name="color" id="color" value="{{ @$user['color'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="color_error">
@@ -174,8 +180,10 @@
                                         <select class="general_input col-11" name="auction"
                                             id="auction" value="{{ @$user['auction'] }}">
                                             <option selected disabled>Select Auction</option>
-                                            <option>abc</option>
-                                            <option>xyz</option>
+                                            @foreach ($auctions as $auction)    
+                                            <option value="{{@$auction['name']}}">{{@$auction['name']}}</option>
+                                            
+                                            @endforeach
                                         </select>
                                         {{-- <input type="text" class="general_input col-11" name="auction"
                                             id="auction" value="{{ @$user['auction'] }}"> --}}
@@ -223,9 +231,16 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="keys" class="col-6 px-0 font-size font-bold">Keys<span class="text-danger">*</span></label>
-                                    <input type="text"
+                                    <select class="form-control-sm border border-0 rounded-pill bg col-6" name="key"
+                                    id="key" value="{{ @$user['keys'] }}">
+                                    <option selected disabled>Select Keys</option>
+                                     @foreach ($keys as $key)
+                                      <option value="{{@$key['name']}}">{{@$key['name']}}</option>
+                                       @endforeach
+                                      </select>
+                                    {{-- <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="key"
-                                        id="key" value="{{ @$user['keys'] }}">
+                                        id="key" value="{{ @$user['keys'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="key_error">
@@ -290,9 +305,18 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="title" class="col-6 px-0 font-size font-bold">Title</label>
-                                    <input type="text"
+
+                                    <select class="form-control-sm border border-0 rounded-pill bg col-6" name="title"
+                                    id="title">
+                                                    <option selected disabled>Select Container Tyype</option>
+                                                    @foreach ($titles as $title)
+                                                    <option value="{{@$title['name']}}">{{@$title['name']}}</option>                                                        
+                                                    @endforeach
+                                                </select>
+
+                                    {{-- <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="title"
-                                        id="title" value="{{ @$user['title'] }}">
+                                        id="title" value="{{ @$user['title'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger">

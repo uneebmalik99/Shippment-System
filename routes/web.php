@@ -159,7 +159,12 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     // Route::post('/vehicle',                             [MasterController::class, 'vehicle'])->name('vehicle.list');
     Route::post('/shippment',                           [MasterController::class, 'shippment'])->name('shippment.list');
     Route::post('/save',                                [MasterController::class, 'save'])->name('add.record');
-
+    Route::post('/add_make',                            [MasterController::class, 'add_make'])->name('add.make');
+    Route::post('/delete_master',                       [MasterController::class, 'delete_master'])->name('master.delete');
+    Route::post('/update_master',                       [MasterController::class, 'update_master'])->name('update.master');
+    Route::post('/update_save',                         [MasterController::class, 'update_save'])->name('update.save');
+    Route::post('/master_status',                       [MasterController::class, 'master_status'])->name('master.status');
+    Route::post('/master_seriesadd',                    [MasterController::class, 'master_seriesadd'])->name('master.seriesadd');
     // Calendar Routes
     Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.list');
 
