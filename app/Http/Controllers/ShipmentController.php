@@ -11,6 +11,8 @@ use App\Models\Shipment;
 use App\Models\Shipment_Invice;
 use App\Models\Stamp_Title;
 use App\Models\Vehicle;
+use App\Models\Country;
+use App\Models\State;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -129,7 +131,8 @@ class ShipmentController extends Controller
         $data['consignees'] = Consignee::all()->toArray();
         $data['records'] = Shipment::all()->toArray();
         $data['location'] = Location::all()->toArray();
-
+        $data['countries'] = Country::where('status', '1')->get();
+        $data['states'] = State::where('status', '1')->get();
         if ($request->ajax()) {
             $tab = $request->tab;
             $output = view('shipment.' . $tab, $data)->render();

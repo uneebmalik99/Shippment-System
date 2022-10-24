@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LockController;
 use App\Http\Controllers\MasterController;
+use App\Http\Controllers\DetailController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\StickyController;
@@ -176,13 +177,20 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::get('/invoices/delete/{id?}',                     [InvoiceController::class, 'delete'])->name('invoice.get_delete');
 
+    // Route::get('/invoices/pdf', function(){
+    //     return view('invoice/pdf');
+    //     });
+        Route::get('/invoices/pdf_files/{id?}',                     [pdfController::class, 'generatePDF'])->name('pdf_files');
+
+    Route::get('/invoices/detail_data/{id?}',                     [pdfController::class, 'detail_data'])->name('invoice.detail_data');
+
+    Route::get('/invoices/detail_page', function(){
+        return view('invoice/detail_page');
+        });
+    Route::get('/invoices/detail_page/{id?}',                     [DetailController::class, 'detail_page'])->name('invoice.detail_page');
     Route::get('/invoices/pdf', function(){
         return view('invoice/pdf');
         });
-        Route::get('/invoices/pdf_files/{id?}',                     [pdfController::class, 'generatePDF'])->name('pdf_files');
-
-        Route::get('/invoices/detail_data/{id?}',                     [pdfController::class, 'detail_data'])->name('invoice.detail_data');
-
         
     Route::get('/generate-pdf/{id?}',                     [pdfController::class, 'generatePDF'])->name('generatePDF');
 

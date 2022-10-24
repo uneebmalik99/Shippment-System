@@ -7,8 +7,14 @@
                 <label for="destination_port" class="text-info font-style">Destination Port</label>
             </div>
             <div>
-                <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                    name="destination_port" id="destination_port">
+                <select name="destination_port" id="destination_port" class="form-control-sm border border-0 rounded-pill bg col-6">
+                    <option selected disabled>Destination Ports</option>
+                    @foreach($destination_port as $ports)
+                    <option value="{{@$ports['destination']}}">{{@$ports['destination']}}</option>
+                    @endforeach
+                </select>
+                {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                    name="destination_port" id="destination_port"> --}}
             </div>
         </div>
         <div class="col-4 d-block">

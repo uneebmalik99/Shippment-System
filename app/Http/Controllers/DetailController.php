@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\Location;
-use App\Models\Vehicle;
 use App\Models\Notification;
 use Carbon\Carbon;
-use PDF;
 
-class pdfController extends Controller
+class DetailController extends Controller
 {
     private $type = "Invoice";
     private $singular = "Invoice";
@@ -59,57 +57,34 @@ class pdfController extends Controller
         // dd($data);
         return $data;
     }
-    public function detail_data( $id = null){
-        $data = [];
-        
-        $data = [
-            "page_title" => $this->plural . " Detail",
-            "page_heading" => $this->plural . 'detail',
-            "breadcrumbs" => array('#' => $this->plural . " List"),
-            "module" => [
-                'type' => $this->type,
-                'singular' => $this->singular,
-                'plural' => $this->plural,
-                'view' => $this->view,
-                'db_key' => $this->db_key,
-                'action' => $this->action,
-                'page' => 'detail',
-            ],
-        ];
-        $data['location'] = Location::all();
-        $notification = $this->Notification();
-        $data['invoices']=Invoice::find($id)->toArray();
 
+  public function detail_page ($id = null){
+    $data = [];
         
-        return view('invoice.detail',$data, $notification);
-    }
-    public function generatePDF($id = null){
-        // return 'kashif';
-        $data = [];
-        $data['invoices']=Invoice::find($id)->toArray();
-        $pdf = PDF::loadview('invoice.pdf',$data);
-        
-        return $pdf->stream();
-        // $data = [
-        //     'title' => 'welcome to pdf file',
-        //     'date' => date('m/d/y')
-        // ];
-       
-       
-        // return $pdf->download('detail.pdf');
-        
-    }
-    public function search_shipment(Request $req){
-        $search_text = $req->searchText;
-        
-        if ($search_text) {
-            $data['vehicles'] = Vehicle::all();
-            
-                
-                $output = view('layouts.shipment_filter.filterVehicles', $data)->render();
-                return Response($output);
-        }
+    $data = [
+        "page_title" => $this->plural . " Detail_page",
+        "page_heading" => $this->plural . 'detail_page',
+        "breadcrumbs" => array('#' => $this->plural . " List"),
+        "module" => [
+            'type' => $this->type,
+            'singular' => $this->singular,
+            'plural' => $this->plural,
+            'view' => $this->view,
+            'db_key' => $this->db_key,
+            'action' => $this->action,
+            'page' => 'detail_page',
+        ],
+    ];
+    // dd($data);
+    $data['location'] = Location::all();
+    $notification = $this->Notification();
+    $data['invoices']=Invoice::find($id)->toArray();
+    
 
-
-    }
+    
+    return view('invoice.detail_page',$data,$notification);
+    // $data['location'] = Location::all();
+    // $notification = $this->Notification();
+    // return view('invoice.detail_page',$data,$notification);
+  }
 }

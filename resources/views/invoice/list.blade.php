@@ -68,11 +68,11 @@
                             <th scope="row">{{$invoice['user']['username']}}</th>
                             <td>{{$invoice['customer_user_id']}}</td>
                             <td>{{$invoice['total_amount']}}</td>
-                            <td>{{$invoice['paid_amount']}}</td>
+                            <td>{{$invoice['amount_paid']}}</td>
                             <td>{{$invoice['discount']}}</td>
                             <td class="d-flex justify-content-around">
                             <button class='profile-button'
-                            ><a href="{{route('invoice.detail_data').'/'.$invoice['id']}}">
+                            ><a href="{{route('invoice.detail_page').'/'.$invoice['id']}}">
                                <svg width='14' height='13' viewBox='0 0 16 14' fill='none'
                                    xmlns='http://www.w3.org/2000/svg'>
                                    <path

@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\UsersExport;
-use App\Http\Controllers\Controller;
-use App\Models\BillingParty;
-use App\Models\Consignee;
-use App\Models\CustomerDocument;
-use App\Models\Location;
-use App\Models\Notification;
-use App\Models\Quotation;
-use App\Models\Shipper;
-use App\Models\User;
-use App\Models\Vehicle;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Shipper;
+use App\Models\Vehicle;
+use App\Models\Location;
+use App\Models\Consignee;
+use App\Models\Quotation;
+use App\Exports\UsersExport;
+use App\Models\BillingParty;
+use App\Models\Notification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Models\DestinationPort;
+use App\Models\CustomerDocument;
 use Yajra\Datatables\Datatables;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -177,7 +178,9 @@ class CustomerController extends Controller
         if ($request->ajax()) {
             $tab = $request->tab;
             // dd($tab);
+            $data['destination_port'] = DestinationPort::where('status', '1')->get()->toArray();
             $data['location'] = Location::all()->toArray();
+            // dd($data['destination_port']);
             $output = view('layouts.customer_create.' . $tab, $data)->render();
             return Response($output);
         }

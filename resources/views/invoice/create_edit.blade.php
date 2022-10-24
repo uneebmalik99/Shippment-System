@@ -85,10 +85,62 @@
                             <input type="file" name="upload_invoice" class="form-control create-input" placeholder="select file">
                         </div>
                     </div>
+                    <!-- vehicle table -->
+                    <div class="col-12 d-flex justify-content-end">
+                        </div>
+                        <form method="GET" class="col-12" id="shipment_form">
+                            @csrf
+                    <input type="text" style="outline:none!important;font-size:13px!important;color:gray!important" id="shipment_search" name="shipment_search" onkeyup="search_shipment()" placeholder="Search VIN">
+                    <div class="mt-2 bg-light" id="shipment_body">
+                        <table id="" class="table">
+                            <thead class="bg-custom">
+                                <tr style="font-size: 11px!important">
+                                    <th>YEAR</th>
+                                    <th>MAKE</th>
+                                    <th>MODEL</th>
+                                    <th>VIN</th>
+                                    <th>TITLE</th>
+                                    <th>TITLE STATE</th>
+                                    <th>TITLE NUMBER</th>
+                                    <th>CUSTOMER</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody id="shipment_table">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Search Vehicles</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                {{-- @foreach ($vehicles as $vehicle)
+                                <tr>
+                                        <td>{{ @$vehicle['year'] }}</td>
+                                        <td>{{ @$vehicle['make'] }}</td>
+                                        <td>{{ @$vehicle['model'] }}</td>
+                                        <td>{{ @$vehicle['vin'] }}</td>
+                                        <td>{{ @$vehicle['title'] }}</td>
+                                        <td>{{ @$vehicle['title_state'] }}</td>
+                                        <td>{{ @$vehicle['title_number'] }}</td>
+                                        <td>{{ @$vehicle['customer_name'] }}</td>
+                                        <td class="text-center"><input type="checkbox" value="{{ @$vehicle['id'] }}"
+                                                id="vehicle" name="vehicle[]"></td>
+                                        
+                                </tr>
+                                @endforeach --}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- vehicle table--end -->
 
-                    <div class="d-block d-md-flex">
-                        <div class="col-md-6">
-                            <div class="col-12 col-lg-10 d-flex justify-content-between">
+                    <div class="d-block d-lg-flex">
+                        <div class="col-12 col-lg-6">
+                            <div class="col-12 col-lg-12 d-flex justify-content-between">
                                 <div class="col-4">
                                     <button type="button" class="btn file-btn text-white d-flex px-4">
 
@@ -124,7 +176,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 pt-4 pt-md-0">
+                        <div class="col-12 col-lg-6 d-flex justify-content-center pt-4 pt-md-0">
                             <div class="col-md-10 text-center text-md-end">
                                 <button type="button" class="btn file-btn text-white px-4">Back</button>
                             </div>

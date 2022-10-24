@@ -7,16 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pdf files</title>
     <style>
-        /* .pdf-all {
-            width: 59.5%;
-        } */
-
-        /* #pdf {
-            padding-bottom: 35px;
-        } */
-
+        .pdf_all{
+            background-image: url('images/blueocean.png');
+            background-position:center;
+            background-repeat:no-repeat;
+            background-size:400px 400px;
+            opacity: 0.1;
+        }
         .tbls {
-            /* width: 86.8%; */
+            width: 100%;
             padding-bottom: 35px;
         }
 
@@ -25,11 +24,12 @@
         #pdf-3,
         #pdf_4,
         td {
-            border: 1px solid black;
+            border: 0.5px solid black;
             border-collapse: collapse;
         }
         td{
             padding: 5px;
+            
         }
         .side_blak{
             border: none;
@@ -38,7 +38,7 @@
 
         .blak {
             border: none;
-            border-top: 1px solid black;
+            border-top: 0.5px solid black;
         }
 
         #pdf-2 {
@@ -48,12 +48,13 @@
 </head>
 
 <body>
-    <div class="pdf-all">
+    <div class="pdf_all">
         
-            <table id="pdf">
+            <table id="pdf" style="width:100%">
                 <thead>
                     <tr>
-                        <th colspan="3"><img src="{{asset('assets/images/logo_pdf.png')}}" alt="" style="width:100% ;"></th>
+                        <th colspan="4" style="width:30%; padding:8px;"><img src="{{asset('images/login_logo.png')}}" alt="" style="width:50% ;"></th>
+                        <!-- <th  colspan="3">Blue Oceans</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -63,9 +64,8 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="blak">V&S CarGo INC.</td>
-                        
-                        <td class="blak">Phone:</td>
-                        <td class="blak">12345678912</td>
+                        <td class="blak" style="width:30;">Phone:</td>
+                        <td class="blak" style="width:160px;">12345678912</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="side_blak">395 NJ-34</td>
@@ -79,8 +79,7 @@
                         <td class="side_blak">www.fujfbsk.com</td>
                     </tr>
                     <tr>
-                        <td class="side_blak">POSTAL CODE#07747</td>
-                        
+                        <td colspan="4" class="side_blak">POSTAL CODE#07747</td>
                     </tr>
 
                 </tbody>
@@ -89,29 +88,29 @@
         
 
         <div class="tbls">
-            <table id="pdf-2" style="width:50%">
+            <table id="pdf-2" style="width:50%"> 
                 <tr>
                     <td class="blak">Billing Address:</td>
-                    <td class="blak">423432ffs</td>
+                    <td colspan="2" class="blak">423432ffs</td>
                 </tr>
                 <tr>
                     <td class="blak">Name:</td>
-                    <td class="blak">xvvx535</td>
+                    <td colspan="2" class="blak">xvvx535</td>
                 </tr>
                 <tr>
                     <td class="blak">Company:</td>
-                    <td class="blak">xvvx553</td>
+                    <td colspan="2" class="blak">xvvx553</td>
                 </tr>
                 <tr>
                     <td class="blak">Address:</td>
-                    <td class="blak">dhgdf4553</td>
+                    <td colspan="2" class="blak">dhgdf4553</td>
                 </tr>
                 <tr>
                     <td class="blak">ID#</td>
-                    <td class="blak">423424243423</td>
+                    <td colspan="2" class="blak">423424243423</td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="padding: 32px 0px"></td>
+                    <td colspan="3" style="padding: 40px 0px"></td>
                 </tr>
 
             </table>
@@ -183,15 +182,15 @@
 
                 <tr>
                     <td>1</td>
-                    <td>iaghuhewiuhfew</td>
+                    <td>iaghuhewiuhfewihgakjgnhgerhgnersngregerguergegberger</td>
                     <td>$0001</td>
                     <td>N/A</td>
                     <td>$34650021</td>
                 </tr>
                 <tr>
-                    <td rowspan="2">1</td>
-                    <td rowspan="2">1</td>
-                    <td colspan="3">1</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td style="padding:30px 0;" colspan="3"></td>
                 </tr>
                 <tr>
 
