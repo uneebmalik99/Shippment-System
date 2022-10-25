@@ -19,6 +19,7 @@ class CreateStatesTable extends Migration
             $table->string('name')->nullable();
             $table->string('abbrevation')->nullable();
             $table->enum('status',['0', '1' ])->default('1');
+            $table->foreignId('country_id')->constrained('country')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
             // name
             // abbreation

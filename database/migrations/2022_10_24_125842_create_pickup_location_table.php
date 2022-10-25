@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLoadingPortsTable extends Migration
+class CreatePickupLocationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateLoadingPortsTable extends Migration
      */
     public function up()
     {
-        Schema::create('loading_ports', function (Blueprint $table) {
+        Schema::create('pickup_location', function (Blueprint $table) {
             $table->id();
-            $table->string('destination')->nullable();
+            $table->string('name')->nullable();
             $table->enum('status',['0', '1' ])->default('1');
-            $table->foreignId('state_id')->constrained('states')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
-             // destination
-            // status
         });
     }
 
@@ -31,6 +28,6 @@ class CreateLoadingPortsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('loading_ports');
+        Schema::dropIfExists('pickup_location');
     }
 }

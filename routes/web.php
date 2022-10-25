@@ -144,27 +144,15 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     // Master Routes
     Route::get('/master',                               [MasterController::class, 'index'])->name('master.list');
-    Route::post('/company',                             [MasterController::class, 'company'])->name('company.list');
-    Route::post('/shipping_countries',                  [MasterController::class, 'shipping_countries'])->name('shipping.countries');
-    Route::post('/shipping_states',                     [MasterController::class, 'shipping_states'])->name('shipping.states');
-    Route::post('/loading_ports',                       [MasterController::class, 'loading_ports'])->name('loading.ports');
-    Route::post('/destination_countries',               [MasterController::class, 'destination_countries'])->name('destination.countries');
-    Route::post('/destination_port',                    [MasterController::class, 'destination_port'])->name('destination.port');
     Route::post('/make',                                [MasterController::class, 'make'])->name('make.list');
-    Route::post('/model',                               [MasterController::class, 'model'])->name('model.list');
-    Route::post('/color',                               [MasterController::class, 'color'])->name('color.list');
-    Route::post('/title',                               [MasterController::class, 'title'])->name('title.list');
-    Route::post('/key',                                 [MasterController::class, 'key'])->name('key.list');
-    Route::post('/auction',                             [MasterController::class, 'auction'])->name('auction.list');
-    // Route::post('/vehicle',                             [MasterController::class, 'vehicle'])->name('vehicle.list');
-    Route::post('/shippment',                           [MasterController::class, 'shippment'])->name('shippment.list');
-    Route::post('/save',                                [MasterController::class, 'save'])->name('add.record');
     Route::post('/add_make',                            [MasterController::class, 'add_make'])->name('add.make');
     Route::post('/delete_master',                       [MasterController::class, 'delete_master'])->name('master.delete');
     Route::post('/update_master',                       [MasterController::class, 'update_master'])->name('update.master');
     Route::post('/update_save',                         [MasterController::class, 'update_save'])->name('update.save');
     Route::post('/master_status',                       [MasterController::class, 'master_status'])->name('master.status');
-    Route::post('/master_seriesadd',                    [MasterController::class, 'master_seriesadd'])->name('master.seriesadd');
+    Route::post('/show/model',                          [MasterController::class, 'master_seriesadd'])->name('master.seriesadd');
+    Route::post('/openpopup',                           [MasterController::class, 'showmodel'])->name('master.showmodel');
+    Route::post('/save/record',                         [MasterController::class, 'save'])->name('master.save');
     // Calendar Routes
     Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.list');
 
