@@ -9,12 +9,13 @@ use App\Models\Make;
 use App\Models\Site;
 use App\Models\User;
 use App\Models\Color;
-use App\Models\State;
+// use App\Models\State;
 use App\Models\Title;
 use App\Models\Series;
 use App\Models\Auction;
 use App\Models\Company;
 use App\Models\Country;
+use App\Models\State;
 // use App\Models\Status;
 use App\Models\ContainerSize;
 use App\Models\ContainerType;
@@ -549,7 +550,35 @@ class MasterController extends Controller
             $company->status = $status;
             $company->save();
         }
-        if ($tab_name =='shippingcountries' && $id !="") {
+       
+
+        if ($tab_name =='loading_ports' && $id !="") {
+            if ($status=='0') {
+                $status = '1';
+                $loadingPort = loadingPort::find($id);
+            } else {
+                $status = '0';
+                $loadingPort = loadingPort::find($id);
+            }
+            $loadingPort->status = $status;
+            $loadingPort->save();
+        }
+
+        if ($tab_name =='loading_state' && $id !="") {
+            if ($status=='0') {
+                $status = '1';
+                $shippingcountries = State::find($id);
+            } else {
+                $status = '0';
+                $shippingcountries = State::find($id);
+            }
+            $shippingcountries->status = $status;
+            $shippingcountries->save();
+        }
+
+        
+
+        if ($tab_name =='country' && $id !="") {
             if ($status=='0') {
                 $status = '1';
                 $shippingcountries = ShippingCountry::find($id);

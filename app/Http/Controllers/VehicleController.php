@@ -114,6 +114,8 @@ class VehicleController extends Controller
 
     public function create(Request $request)
     {
+
+        
         $action = url($this->action . '/create');
         $data = [
             "page_title" => $this->plural . " create",
@@ -132,7 +134,7 @@ class VehicleController extends Controller
                 'button' => 'Create',
             ],
         ];
-        $data['buyers'] = BillingParty::all();
+        $data['buyers'] = User::where('role_id', 4)->get();
         $data['customer_name'] = User::where('role_id', 4)->get();
         $data['location'] = Location::all();
         $data['shipment'] = Shipment::all();
@@ -284,6 +286,7 @@ class VehicleController extends Controller
 
     public function create_form(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'customer_name' => 'required',
             'vin' => 'required',
@@ -682,7 +685,6 @@ class VehicleController extends Controller
                 return $status;
                 })
                 ->addColumn('action', function ($row) {
-
                     $url_view = url('admin/vehicle/profile/' . $row['id']);
                     $url_delete = url('admin/vehicles/delete/' . $row['id']);
                     $url_edit = url('admin/vehicles/edit/' . $row['id']);

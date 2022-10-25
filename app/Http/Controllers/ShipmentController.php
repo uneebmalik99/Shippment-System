@@ -14,6 +14,7 @@ use App\Models\Shipment_Invice;
 use App\Models\Stamp_Title;
 use App\Models\Vehicle;
 use App\Models\Country;
+use App\Models\ShippingCountry;
 use App\Models\ShipmentLine;
 use App\Models\State;
 use Carbon\Carbon;
@@ -119,7 +120,7 @@ class ShipmentController extends Controller
             "button_text" => "Create",
             "module" => [
                 'type' => $this->type,
-                'type' => $this->type,
+                // 'type' => $this->type,
                 'singular' => $this->singular,
                 'plural' => $this->plural,
                 'view' => $this->view,
@@ -134,13 +135,14 @@ class ShipmentController extends Controller
         $data['consignees'] = Consignee::all()->toArray();
         $data['records'] = Shipment::all()->toArray();
         $data['location'] = Location::all()->toArray();
-        $data['countries'] = Country::where('status', '1')->get();
+        $data['countries'] = ShippingCountry::where('status', '1')->get();
         $data['container_size'] = ContainerSize::where('status', '1')->get();
         $data['container_types'] = ContainerType::where('status', '1')->get();
         $data['shipment_lines'] = ShipmentLine::where('status', '1')->get();
         $data['states'] = State::where('status', '1')->get();
         if ($request->ajax()) {
             $tab = $request->tab;
+            // return $tab;
             $output = view('shipment.' . $tab, $data)->render();
             return Response($output);
         }
@@ -186,7 +188,7 @@ class ShipmentController extends Controller
     // }
     public function create_form(Request $request)
     {
-        // return $request->all();
+        return $request->all();
         if ($request->ajax()) {
             $data = [];
             $data = $request->all();

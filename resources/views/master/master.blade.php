@@ -2175,7 +2175,7 @@
   </div>
 
   {{-- vehiclestatus data --}}
-  <div class="col-xl-3
+  {{-- <div class="col-xl-3
       col-lg-4 col-md-6 col-12 mt-3">
       <div class="card h-100"
           style="border-top:none;background: #FFFFFF;box-shadow: 3px 5px 16px rgba(92, 174, 235, 0.55);border-radius: 10px;">
@@ -2265,7 +2265,7 @@
               </div>
           </div>
       </div>
-  </div>
+  </div> --}}
 
 
   {{-- pickup location name data --}}
