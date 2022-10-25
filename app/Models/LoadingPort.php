@@ -19,4 +19,7 @@ class LoadingPort extends Model
     {
         return $this->belongsTo('App\Models\State', 'state_id', 'id');
     }
+    public function loadingTerminal(){
+        return $this->hasMany('App\Models\LoadingTerminal');
+    }
 }

@@ -20,8 +20,8 @@ class Make extends Model
     }
 
     
-    public function series()
-    {
-        return $this->belongsTo('App\Models\VehicleModel','series_id','id');
-    }
+    // public function series()
+    // {
+    //     return $this->belongsTo('App\Models\VehicleModel','series_id','id');
+    // }
 }

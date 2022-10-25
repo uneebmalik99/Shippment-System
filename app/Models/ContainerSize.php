@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ContainerSize extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 }

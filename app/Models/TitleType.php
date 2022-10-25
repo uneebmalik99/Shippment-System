@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TitleType extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+
+    
+        protected $guarded = [];
 }

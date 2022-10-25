@@ -16,7 +16,10 @@ class VehicleModel extends Model
 
     public function series()
     {
-        return $this->belongsTo('App\Models\Series','model_id','id');
+        return $this->hasMany('App\Models\Series', 'model_id', 'id');
+    }
+    public function make(){
+        return $this->belongsTo('App\Models\Make', 'make_id', 'id');
     }
 }
 

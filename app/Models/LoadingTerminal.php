@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Series extends Model
+class LoadingTerminal extends Model
 {
     use HasFactory;
-    // use softDeletes;
     protected $primaryKey = 'id';
-    protected $table = "series";
+    protected $table = "loading_ports";
     protected $guarded = [];
 
-    public function model()
+    public function loadingPorts()
     {
-        return $this->belongsTo('App\Models\VehicleModel', 'model_id', 'id');
+        return $this->belongsTo('App\Models\LoadingPort', 'loadingport_id', 'id');
     }
 }

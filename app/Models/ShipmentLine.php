@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class ShipmentLine extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 }

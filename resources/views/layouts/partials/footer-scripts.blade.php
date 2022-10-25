@@ -768,7 +768,7 @@
     $(".popup_button").click(function() {
         var tab  = $(this).attr("tab"); 
         var id  = $(this).attr("id"); 
-        alert(tab);
+        // alert(tab);
         // alert(id);
         $.ajax({  
             type: 'post',
@@ -818,7 +818,7 @@
 <script>
     $("#makepopup").click(function() {
         var tab  = $(this).attr("tab"); 
-        alert(tab);
+        // alert(tab);
         $.ajax({  
             type: 'post',
             url: '{{ route('make.list') }}',
@@ -837,7 +837,7 @@
                 $("#input_make").on("change", function(e) {
                     var tab  = $(this).attr("tab"); 
                     var model_id = $("#input_make").val();
-                    alert(tab);alert(model_id);
+                    // alert(tab);alert(model_id);
                     $.ajax({  
                     type: 'post',
                     url: '{{ route('master.seriesadd') }}',
@@ -859,7 +859,7 @@
                         $("#input_model").on("change", function(e) {
                                 var tab  = $(this).attr("tab"); 
                                 var model_id = $("#input_model").val();
-                                alert(model_id);alert(tab);
+                                // alert(model_id);alert(tab);
                                 $.ajax({  
                                     type: 'post',
                                     url: '{{ route('master.seriesadd') }}',
@@ -992,9 +992,8 @@
         var id = $(this).attr("id"); 
         var tab = $(this).attr("tab"); 
         var status  = $(this).val(); 
-        alert(tab);
-        alert(id);
-        // alert(status)
+
+       
         $.ajax({  
             type: 'post',
             url: '{{ route('master.status') }}',
