@@ -127,6 +127,18 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::post('/shipments/search_shipment', [ShipmentController::class, 'search_shipment'])->name('shipments.search_shipment');
 
+    Route::post('/shipments/fetch_state', [ShipmentController::class, 'FetchState'])->name('shipments.FetchState');
+    Route::post('/shipments/fetch_port', [ShipmentController::class, 'FetchPort'])->name('shipments.FetchPort');
+    Route::post('/shipments/fetch_terminal', [ShipmentController::class, 'FetchTerminal'])->name('shipments.FetchTerminal');
+
+    // destination countries 
+    Route::post('/shipments/fetchdestinationstate', [ShipmentController::class, 'FetchDestiState'])->name('shipments.FetachDestiState');
+
+    Route::post('/shipments/fetchdestinationport', [ShipmentController::class, 'FetchDestiPort'])->name('shipments.FetachDestiPort');
+
+    Route::post('/shipments/fetchdestinationterminal', [ShipmentController::class, 'FetchDestiTerminal'])->name('shipments.FetachDestiTerminal');
+
+
     //Notification Routes`
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.list');
     Route::get('/notifications/create', [NotificationController::class, 'create'])->name('notification.create');

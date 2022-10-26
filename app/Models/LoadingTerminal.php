@@ -9,7 +9,7 @@ class LoadingTerminal extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
-    protected $table = "loading_ports";
+    protected $table = "loadin_terminals";
     protected $guarded = [];
 
     public function loadingPorts()

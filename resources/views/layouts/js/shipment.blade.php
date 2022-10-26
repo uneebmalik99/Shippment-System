@@ -123,4 +123,103 @@
 
 
     
+
+    function FetchState(){
+        $country = $('#loading_country').val();
+
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('shipments.FetchState') }}',
+            data: {
+                'country_id': $country,
+            },
+            success: function(data) {
+               console.log(data);
+               $('#loading_state').html(data);
+            }
+        });
+
+
+    }
+
+    function FetchPort(){
+        $state = $('#loading_state').val();
+
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('shipments.FetchPort') }}',
+            data: {
+                'state_id': $state,
+            },
+            success: function(data) {
+               console.log(data);
+               $('#loading_port').html(data);
+            }
+        });
+        
+    }
+
+    function FetchTerminal(){
+        $port = $('#loading_port').val();
+
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('shipments.FetchTerminal') }}',
+            data: {
+                'port_id': $port,
+            },
+            success: function(data) {
+               console.log(data);
+               $('#loading_terminal').html(data);
+            }
+        });
+        
+    }
+
+    function DestinationState(){
+        $country_id = $('#destination_country').val();
+
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('shipments.FetachDestiState') }}',
+            data: {
+                'country_id': $country_id,
+            },
+            success: function(data) {
+               console.log(data);
+               $('#destination_state').html(data);
+            }
+        });
+    }
+    function FetachDestinationPort(){
+        $state_id = $('#destination_state').val();
+
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('shipments.FetachDestiPort') }}',
+            data: {
+                'state_id': $state_id,
+            },
+            success: function(data) {
+               console.log(data);
+               $('#destination_port').html(data);
+            }
+        });
+    }
+
+    function FetchDestiTerimals(){
+        $port_id = $('#destination_port').val();
+
+$.ajax({
+    method: 'POST',
+    url: '{{ route('shipments.FetachDestiTerminal') }}',
+    data: {
+        'port_id': $port_id,
+    },
+    success: function(data) {
+       console.log(data);
+       $('#destination_terminal').html(data);
+    }
+});
+    }
 </script>

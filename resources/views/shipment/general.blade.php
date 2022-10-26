@@ -371,10 +371,10 @@
                                                 <div class="d-flex align-items-center">
                                                     <label for="loading_country"
                                                         class="col-6 px-0 font-size font-bold">Country</label>
-                                                        <select name="loading_country" id="loading_country" class="form-control-sm border border-0 rounded-pill bg col-6">
+                                                        <select name="loading_country" id="loading_country" class="form-control-sm border border-0 rounded-pill bg col-6" onchange="FetchState()">
                                                             <option selected disabled>Select Country</option>
                                                             @foreach($countries as $country)
-                                                            <option value="{{@$country['name']}}">{{@$country['name']}}</option>
+                                                            <option value="{{@$country['id']}}">{{@$country['name']}}</option>
                                                             @endforeach
                                                         </select>
                                                     {{-- <input type="text"
@@ -386,11 +386,12 @@
                                                 <div class="d-flex align-items-center">
                                                     <label for="loading_state"
                                                         class="col-6 px-0 font-size font-bold">State</label>
-                                                        <select name="loading_state" id="loading_state" class="form-control-sm border border-0 rounded-pill bg col-6">
+                                                        <select name="loading_state" id="loading_state" class="form-control-sm border border-0 rounded-pill bg col-6" onchange="FetchPort()">
                                                             <option selected disabled>Select State</option>
+                                                            {{-- <option selected disabled>Select State</option>
                                                             @foreach ($states as $state)
                                                                 <option value="{{@$state['name']}}">{{@$state['name']}}</option>
-                                                            @endforeach
+                                                            @endforeach --}}
                                                         </select>
                                                     {{-- <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
@@ -407,11 +408,12 @@
                                                         name="loading_port" id="loading_port"> --}}
                                                     <select
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="loading_port" id="loading_port">
-                                                        @foreach ($location as $locations)
+                                                        name="loading_port" id="loading_port" onchange="FetchTerminal()">
+                                                        <option selected disabled>Select Ports</option>
+                                                        {{-- @foreach ($location as $locations)
                                                             <option value="{{ $locations['id'] }}">
                                                                 {{ $locations['name'] }}</option>
-                                                        @endforeach
+                                                        @endforeach --}}
                                                     </select>
                                                 </div>
                                             </div>
@@ -420,9 +422,18 @@
                                                     <label for="loading_terminal"
                                                         class="col-6 px-0 font-size font-bold">Loading
                                                         Terminal</label>
-                                                    <input type="text"
+                                                        <select
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="loading_terminal" id="loading_terminal">
+                                                        <option selected disabled>Select Terminals</option>
+                                                        {{-- @foreach ($location as $locations)
+                                                            <option value="{{ $locations['id'] }}">
+                                                                {{ $locations['name'] }}</option>
+                                                        @endforeach --}}
+                                                    </select>
+                                                    {{-- <input type="text"
+                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        name="loading_terminal" id="loading_terminal"> --}}
                                                 </div>
                                             </div>
 
@@ -451,20 +462,33 @@
                                             <div class="col-12 py-2">
                                                 <div class="d-flex align-items-center">
                                                     <label for="destination_country"
-                                                        class="col-6 px-0 font-size font-bold">Country
-                                                        Line</label>
-                                                    <input type="text"
+                                                        class="col-6 px-0 font-size font-bold">Country</label>
+                                                        <select class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        name="destination_country" id="destination_country" onchange="DestinationState()">
+                                                        <option selected disabled>Select Destination Country</option>
+                                                        @foreach ($destination_country as $dcountry)
+                                                        <option value="{{@$dcountry['id']}}">{{@$dcountry['name']}}</option>
+                                                            
+                                                        @endforeach
+                                                    </select>
+                                                    {{-- <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="destination_country" id="destination_country">
+                                                        name="destination_country" id="destination_country"> --}}
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
                                                 <div class="d-flex align-items-center">
                                                     <label for="destination_state"
                                                         class="col-6 px-0 font-size font-bold">State</label>
-                                                    <input type="text"
+
+                                                        <select class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        name="destination_state" id="destination_state" onchange="FetachDestinationPort()">
+                                                        <option selected disabled>Select State</option>
+                                                    
+                                                    </select>
+                                                    {{-- <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="destination_state" id="destination_state">
+                                                        name="destination_state" id="destination_state"> --}}
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -474,11 +498,12 @@
                                                    
                                                     <select
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="destination_port" id="destination_port">
-                                                        @foreach ($location as $locations)
+                                                        name="destination_port" id="destination_port" onchange="FetchDestiTerimals()">
+                                                        <option selected disabled>Select Destination Port</option>
+                                                        {{-- @foreach ($location as $locations)
                                                             <option value="{{ $locations['id'] }}">
                                                                 {{ $locations['name'] }}</option>
-                                                        @endforeach
+                                                        @endforeach --}}
                                                     </select>
                                                 </div>
                                             </div>
@@ -487,9 +512,14 @@
                                                     <label for="destination_terminal"
                                                         class="col-6 px-0 font-size font-bold px-1">Destination
                                                         Terminal</label>
-                                                    <input type="text"
-                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="destination_terminal" id="destination_terminal">
+                                                        <option selected disabled>Select Terminal</option>
+                                                        
+                                                    </select>
+                                                    {{-- <input type="text"
+                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        name="destination_terminal" id="destination_terminal"> --}}
                                                 </div>
                                             </div>
 
