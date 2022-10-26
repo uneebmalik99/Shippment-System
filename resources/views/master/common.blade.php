@@ -39,8 +39,13 @@
             {{-- @foreach ($company as $companydata) --}}
             <div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26);
                 filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;">
+                @if (@$name=='name')
                 <input type="text" name="addmore[]" class="form-control common_input"
-                    placeholder="{{@$placeholder}}" value="{{ @$record[0]['name'] }}" id="input_value" required>
+                placeholder="{{@$placeholder}}" value="{{ @$record[0]['name'] }}" id="input_value" required>
+                @else
+                <input type="text" name="addmore[]" class="form-control common_input"
+                placeholder="{{@$placeholder}}" value="{{ @$record[0]['status_name'] }}" id="input_value" required>
+                @endif
                 <div class="input-group-append">
                     <button class="add-more" type="button"
                         style="background: none;outline:none !important;border:none !important">

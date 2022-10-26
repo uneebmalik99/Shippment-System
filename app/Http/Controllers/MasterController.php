@@ -270,45 +270,54 @@ class MasterController extends Controller
         $id  = $request->id;
         if ($tab=="companies") {
             $data['title'] = "Update Company";
+            $data['name'] = "name";
             $data['record'] = Company::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="shippingcountries") {
             $data['title'] = "Update Shipping Countries";
+            $data['name'] = "name";
             $data['record'] = ShippingCountry::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="shippingstates") {
             $data['title'] = "Update Shipping States";
+            $data['name'] = "name";
             $data['record'] = ShippingState::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="loadingport") {
             // dd($request->input());
             $data['title'] = "Update Loading Ports";
+            $data['name'] = "name";
             $data['record'] = LoadingPort::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="destinationcountries") {
             // dd($request->input());
             $data['title'] = "Update Destination Countries";
+            $data['name'] = "name";
             $data['record'] = DestinationCountry::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="destinationport") {
             // dd($request->input());
             $data['title'] = "Update Destination Port";
+            $data['name'] = "name";
             $data['record'] = DestinationPort::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="title") {
             $data['title'] = "Update Title";
+            $data['name'] = "name";
             $data['record'] = Title::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="auction") {
             // dd($request->input());
             $data['title'] = "Update Auction";
+            $data['name'] = "name";
             $data['record'] = Auction::where('id', '=', $id)->get()->toArray();
         }
-        if ($tab=="model") {
-            // dd($request->input());
-            $data['title'] = "Update model";
-            $data['record'] = VehicleModel::where('id', '=', $id)->get()->toArray();
-        }
+        // if ($tab=="model") {
+        //     // dd($request->input());
+        //     $data['title'] = "Update model";
+        //     $data['name'] = "name";
+        //     $data['record'] = VehicleModel::where('id', '=', $id)->get()->toArray();
+        // }
         // if ($tab=="make") {
         //     // dd($request->input());
         //     $data['title'] = "Update make";
@@ -317,69 +326,78 @@ class MasterController extends Controller
         if ($tab=="color") {
             // dd($request->input());
             $data['title'] = "Update color";
+            $data['name'] = "name";
             $data['record'] = Color::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="key") {
             // dd($request->input());
             $data['title'] = "Update key";
+            $data['name'] = "name";
             $data['record'] = Key::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="vehiclestatus") {
-            // dd($request->input());
-            $data['title'] = "Update Vehicle Status";
-            $data['record'] = VehicleStatus::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="shipmentstatus") {
             // dd($request->input());
             $data['title'] = "Update Shipment Status";
+            $data['name'] = "name";
             $data['record'] = ShipmentStatus::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="shipmentlines") {
             // dd($request->input());
             $data['title'] = "Update Shipment Lines";
+            $data['name'] = "name";
             $data['record'] = ShipmentLine::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="containertype") {
             // dd($request->input());
             $data['title'] = "Update Container Type";
+            $data['name'] = "name";
             $data['record'] = ContainerType::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="containersize") {
             // dd($request->input());
             $data['title'] = "Update Container Size";
+            $data['name'] = "name";
             $data['record'] = ContainerSize::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="titletype") {
             // dd($request->input());
             $data['title'] = "Update Title Type";
+            $data['name'] = "name";
             $data['record'] = TitleType::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="shippername") {
             // dd($request->input());
             $data['title'] = "Update Shippername";
+            $data['name'] = "name";
             $data['record'] = ShipperName::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="vehiclestatus") {
             // dd($request->input());
             $data['title'] = "Update Vehicle Status";
+            $data['name'] = "status_name";
             $data['record'] = VehicleStatus::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="pickuplocation") {
             // dd($request->input());
             $data['title'] = "Update Pickup Location";
+            $data['name'] = "name";
             $data['record'] = PickupLocation::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="site") {
             // dd($request->input());
             $data['title'] = "Update Site";
+            $data['name'] = "name";
             $data['record'] = Site::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="warehouse") {
             $data['title'] = "Update Warehouse";
+            $data['name'] = "name";
             $data['record'] = Warehouse::where('id', '=', $id)->get()->toArray();
         }
+        
         $output = view('master.common', $data)->render();
         return Response($output);
+        
     }
 
 
@@ -778,17 +796,17 @@ class MasterController extends Controller
             $shippername->status = $status;
             $shippername->save();
         }
-        // if ($tab_name =='status' && $id !="") {
-        //     if ($status=='0') {
-        //         $statuss = '1';
-        //         $status = Status::find($id);
-        //     } else {
-        //         $statuss = '0';
-        //         $status = Status::find($id);
-        //     }
-        //     $status->status = $statuss;
-        //     $status->save();
-        // }
+        if ($tab_name =='vehiclestatus' && $id !="") {
+            if ($status=='0') {
+                $statuss = '1';
+                $status = VehicleStatus::find($id);
+            } else {
+                $statuss = '0';
+                $status = VehicleStatus::find($id);
+            }
+            $status->status = $statuss;
+            $status->save();
+        }
         if ($tab_name =='pickuplocation' && $id !="") {
             if ($status=='0') {
                 $status = '1';

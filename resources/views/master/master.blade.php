@@ -1742,7 +1742,7 @@
   </div>
 
 
-  
+
   {{-- Shippment data --}}
   <div class="col-xl-3
   col-lg-4 col-md-6 col-12 mt-3">
@@ -2390,7 +2390,7 @@
   </div>
 
   {{-- vehiclestatus data --}}
-  {{-- <div class="col-xl-3
+  <div class="col-xl-3
       col-lg-4 col-md-6 col-12 mt-3">
       <div class="card h-100"
           style="border-top:none;background: #FFFFFF;box-shadow: 3px 5px 16px rgba(92, 174, 235, 0.55);border-radius: 10px;">
@@ -2441,14 +2441,14 @@
                       style="background: #E7F0F5; border-radius: 9px;display: flex; justify-content: space-between;">
                       <div class="num_name_section">
                           <span class="list_details">{{$i}}.</span>
-                          <span class="list_details">{{$vehiclestatusdata['name']}}</span>
+                          <span class="list_details">{{$vehiclestatusdata['status_name']}}</span>
                       </div>
-                      <input type="hidden" value="{{ $vehiclestatusdata['id'] }}" class="current_id">
+                      <input type="hidden" value="{{ $vehiclestatusdata['id'] }}" class="current_id" >
                       <div class="button_secton" style="margin-left:19px !important">
                           <div class="option_section" style="margin-top:3px;">
                               <input style="margin-right: 5px !important"
                                   class="form-check-input vehiclestatus_change" id="{{$vehiclestatusdata['id']}}"
-                                  tab="vehiclestatus" {{$vehiclestatusdata['vehiclestatus']==1 ?'checked':''}}
+                                  tab="vehiclestatus" {{$vehiclestatusdata['status']==1 ?'checked':''}}
                                   type="checkbox" value="{{$vehiclestatusdata['vehiclestatus']}}">
                               <button class="edit-button" id="{{ $vehiclestatusdata['id'] }}"
                                   onclick="updatemaster(this.id,this.value)" value="vehiclestatus"
@@ -2480,7 +2480,7 @@
               </div>
           </div>
       </div>
-  </div> --}}
+  </div>
 
 
   {{-- pickup location name data --}}
