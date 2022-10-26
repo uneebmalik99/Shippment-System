@@ -1,397 +1,4 @@
-<?php
-
-namespace App\Http\Controllers;
-
-use Carbon\Carbon;
-use App\Models\Key;
-use App\Models\MMS;
-use App\Models\Make;
-use App\Models\Site;
-use App\Models\User;
-use App\Models\Color;
-// use App\Models\State;
-use App\Models\Title;
-use App\Models\Series;
-use App\Models\Auction;
-use App\Models\Company;
-use App\Models\Country;
-use App\Models\State;
-// use App\Models\Status;
-use App\Models\ContainerSize;
-use App\Models\ContainerType;
-use App\Models\ShipmentStatus;
-use App\Models\ShipmentLine;
-use App\Models\Vehicle;
-use App\Models\Location;
-use App\Models\Shipment;
-use App\Models\TitleType;
-use App\Models\Warehouse;
-use App\Models\LoadingPort;
-use App\Models\ShipperName;
-use App\Models\VehicleType;
-use App\Models\Notification;
-use App\Models\VehicleModel;
-use Illuminate\Http\Request;
-use App\Models\ShippingState;
-use App\Models\VehicleStatus;
-use App\Models\PickupLocation;
-use App\Models\DestinationPort;
-use App\Models\ShippingCountry;
-
-use App\Models\DestinationCountry;
-
-use App\Http\Controllers\Controller;
-use App\Models\DestinationState;
-
-class MasterController extends Controller
-{
-    private $type = "Masters";
-    private $singular = "master";
-    private $plural = "Masters";
-    private $view = "master.";
-    private $db_key = "id";
-    private $perpage = 100;
-    private $user = [];
-    private $directory = "user_images";
-    private $action = "/admin/master";
-
-    public function Notification()
-    {
-        $data['notification'] = Notification::with('user')->paginate($this->perpage);
-        $data['location'] = Location::all()->toArray();
-        if ($data['notification']) {
-            $current = Carbon::now();
-            foreach ($data['notification'] as $key => $date_notification) {
-                $date = $date_notification->created_at;
-                $diff = $date->diffInSeconds(\Carbon\Carbon::now());
-                $days = $diff / 86400;
-                $hours = $diff / 3600;
-                $minutes = $diff / 3600;
-                $seconds = $diff % 60;
-
-                if ($days > 1) {
-                    $data['notification'][$key]['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
-                } elseif ($hours > 1) {
-                    $data['notification'][$key]['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . (int) $seconds . 's ';
-                } elseif ($minutes > 1) {
-                    $data['notification'][$key]['date'] = (int) $minutes . 'm,' . (int) $seconds . 's ';
-                } else {
-                    $data['notification'][$key]['date'] = (int) $seconds . 's ';
-                }
-            }
-            $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
-            $data['notification_count'] = count($unread);
-        } else {
-            $data['notification'] = "asda";
-        }
-
-        // dd($data);
-        return $data;
-    }
-
-    public function index()
-    {
-        $data = [];
-        $data = [
-            "page_title" => $this->plural . " List",
-            "page_heading" => $this->plural . ' List',
-            "breadcrumbs" => array('#' => $this->plural . " List"),
-            "module" => [
-                'type' => $this->type,
-                'singular' => $this->singular,
-                'plural' => $this->plural,
-                'view' => $this->view,
-                'db_key' => $this->db_key,
-                'action' => $this->action,
-                'page' => 'list',
-                'action' => $this->action,
-            ],
-        ];
-        $records = User::paginate($this->perpage);
-        $data['records'] = $records;
-        $records = Company::all();
-        $data['companies'] = $records;
-        $records = ShippingCountry::all();
-        $data['shippingcountry'] = $records;
-        $records = ShippingState::all();
-        $data['shippingstates'] = $records;
-        $records = LoadingPort::all();
-        $data['loadingport'] = $records;
-        $records = DestinationPort::all();
-        $data['destinationport'] = $records;
-        $records = Auction::all();
-        $data['auction'] = $records;
-        $records = DestinationCountry::all();
-        $data['destinationcountry'] = $records;
-        $records = Title::all();
-        $data['title'] = $records;
-        $records = Key::all();
-        $data['key'] = $records;
-        $records = VehicleModel::all();
-        $data['model'] = $records;
-        $records = Color::all();
-        $data['color'] = $records;
-        $records = Make::all();
-        $data['make'] = $records;
-        $records = TitleType::all();
-        $data['titletypes'] = $records;
-        $records = ShipperName::all();
-        $data['shippername'] = $records;
-        $records = VehicleStatus::all();
-        $data['vehiclestatus'] = $records;
-        $records = PickupLocation::all();
-        $data['pickuplocation'] = $records;
-        $records = Site::all();
-        $data['site'] = $records;
-        $records = Warehouse::all();
-        $data['warehouse'] = $records;
-        $records = VehicleType::all();
-        $data['vehicletype'] = $records;
-        $records = ContainerSize::all();
-        $data['containersize'] = $records;
-        $records = ShipmentLine::all();
-        $data['shipmentlines'] = $records;
-        $records = ShipmentStatus::all();
-        $data['shipmentstatus'] = $records;
-        $records = ContainerType::all();
-        $data['containertype'] = $records;
-
-        $data['loading_countries'] = ShippingCountry::with('state.loading_ports')->get()->toArray();
-        $data['destination_countries'] = DestinationCountry::with('state.destination_port')->get()->toArray();
-        $data['Vehicle_mms'] = Make::with('model.series')->get()->toArray();
-
-        // $data['states_countries'] = State::with('country')->where('status','1')->get();
-        // return $data['destination_countries'];
-        $notification = $this->Notification();
-        return view($this->view . 'master', $data, $notification);
-    }
-
-    
-    public function make(Request $request){
-        $data = [];
-        $tab = $request->tab;
-        if($tab=="make"){
-        $data['title'] ="Make";
-        $data['placeholder'] ="Enter Make Name";
-        $data['model'] = VehicleModel::all();
-        $data['series'] = Series::all();
-        $data['make'] = Make::all();
-        $output = view('master.make',$data)->render();                     
-        return Response($output);
-        
-
-        $tab = $request->id;
-        $data['model'] = VehicleModel::with($tab);
-        }
-    }
-    public function delete_master(Request $request)
-    {
-        $data = [];
-        $inputdata = $request->input();
-        $tab_name = $request->tab ;
-        $id = $request->id;
-        if ($tab_name =='companies' && $id !="") {
-            $data['deleted'] = Company::find($id)->delete();
-        }
-        if ($tab_name =='shippingcountries' && $id !="") {
-            $data['deleted'] = ShippingCountry::find($id)->delete();
-        }
-        if ($tab_name =='shippingstates' && $id !="") {
-            $data['deleted'] = ShippingState::find($id)->delete();
-        }
-        if ($tab_name =='loadingport' && $id !="") {
-            $data['deleted'] = LoadingPort::find($id)->delete();
-        }
-        if ($tab_name =='destinationcountries' && $id !="") {
-            $data['deleted'] = DestinationCountry::find($id)->delete();
-        }
-        if ($tab_name =='destinationport' && $id !="") {
-            $data['deleted'] = DestinationPort::find($id)->delete();
-        }
-        if ($tab_name =='title' && $id !="") {
-            $data['deleted'] = Title::find($id)->delete();
-        }
-        if ($tab_name =='model' && $id !="") {
-            $data['deleted'] = VehicleModel::find($id)->delete();
-        }
-        if ($tab_name =='key' && $id !="") {
-            $data['deleted'] = Key::find($id)->delete();
-        }
-        if ($tab_name =='color' && $id !="") {
-            $data['deleted'] = Color::find($id)->delete();
-        }
-        if ($tab_name =='auction' && $id !="") {
-            $data['deleted'] = Auction::find($id)->delete();
-        }
-        if ($tab_name =='pickuplocation' && $id !="") {
-            $data['deleted'] = PickupLocation::find($id)->delete();
-        }
-        if ($tab_name =='site' && $id !="") {
-            $data['deleted'] = Site::find($id)->delete();
-        }
-        if ($tab_name =='warehouse' && $id !="") {
-            $data['deleted'] = Warehouse::find($id)->delete();
-        }
-        if ($tab_name =='status' && $id !="") {
-            $data['deleted'] = Status::find($id)->delete();
-        }
-        if ($tab_name =='shippername' && $id !="") {
-            $data['deleted'] = ShipperName::find($id)->delete();
-        }
-        if ($tab_name =='titletype' && $id !="") {
-            $data['deleted'] = TitleType::find($id)->delete();
-        }
-        if ($tab_name =='shippment' && $id !="") {
-            $data['deleted'] = Shipment::find($id)->delete();
-        }
-        if ($tab_name =='vehiclestatus' && $id !="") {
-            $data['deleted'] = VehicleStatus::find($id)->delete();
-        }
-        if ($tab_name =='shipmentstatus' && $id !="") {
-            $data['deleted'] = ShipmentStatus::find($id)->delete();
-        }
-        if ($tab_name =='shipmentlines' && $id !="") {
-            $data['deleted'] = ShipmentLine::find($id)->delete();
-        }
-        if ($tab_name =='containertype' && $id !="") {
-            $data['deleted'] = ContainerType::find($id)->delete();
-        }
-        if ($tab_name =='containersize' && $id !="") {
-            $data['deleted'] = ContainerSize::find($id)->delete();
-        }
-        return 'deleted';
-    }
-
-    public function update_master(Request $request)
-    {
-        // dd($request->input());
-        $data = [];
-        $tab = $request->tab;
-        $id  = $request->id;
-        if ($tab=="companies") {
-            $data['title'] = "Update Company";
-            $data['record'] = Company::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="shippingcountries") {
-            $data['title'] = "Update Shipping Countries";
-            $data['record'] = ShippingCountry::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="shippingstates") {
-            $data['title'] = "Update Shipping States";
-            $data['record'] = ShippingState::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="loadingport") {
-            // dd($request->input());
-            $data['title'] = "Update Loading Ports";
-            $data['record'] = LoadingPort::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="destinationcountries") {
-            // dd($request->input());
-            $data['title'] = "Update Destination Countries";
-            $data['record'] = DestinationCountry::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="destinationport") {
-            // dd($request->input());
-            $data['title'] = "Update Destination Port";
-            $data['record'] = DestinationPort::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="title") {
-            $data['title'] = "Update Title";
-            $data['record'] = Title::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="auction") {
-            // dd($request->input());
-            $data['title'] = "Update Auction";
-            $data['record'] = Auction::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="model") {
-            // dd($request->input());
-            $data['title'] = "Update model";
-            $data['record'] = VehicleModel::where('id', '=', $id)->get()->toArray();
-        }
-        // if ($tab=="make") {
-        //     // dd($request->input());
-        //     $data['title'] = "Update make";
-        //     $data['record'] = Make::where('id', '=', $id)->get()->toArray();
-        // }
-        if ($tab=="color") {
-            // dd($request->input());
-            $data['title'] = "Update color";
-            $data['record'] = Color::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="key") {
-            // dd($request->input());
-            $data['title'] = "Update key";
-            $data['record'] = Key::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="vehiclestatus") {
-            // dd($request->input());
-            $data['title'] = "Update Vehicle Status";
-            $data['record'] = VehicleStatus::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="shipmentstatus") {
-            // dd($request->input());
-            $data['title'] = "Update Shipment Status";
-            $data['record'] = ShipmentStatus::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="shipmentlines") {
-            // dd($request->input());
-            $data['title'] = "Update Shipment Lines";
-            $data['record'] = ShipmentLine::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="containertype") {
-            // dd($request->input());
-            $data['title'] = "Update Container Type";
-            $data['record'] = ContainerType::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="containersize") {
-            // dd($request->input());
-            $data['title'] = "Update Container Size";
-            $data['record'] = ContainerSize::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="titletype") {
-            // dd($request->input());
-            $data['title'] = "Update Title Type";
-            $data['record'] = TitleType::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="shippername") {
-            // dd($request->input());
-            $data['title'] = "Update Shippername";
-            $data['record'] = ShipperName::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="vehiclestatus") {
-            // dd($request->input());
-            $data['title'] = "Update Vehicle Status";
-            $data['record'] = VehicleStatus::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="pickuplocation") {
-            // dd($request->input());
-            $data['title'] = "Update Pickup Location";
-            $data['record'] = PickupLocation::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="site") {
-            // dd($request->input());
-            $data['title'] = "Update Site";
-            $data['record'] = Site::where('id', '=', $id)->get()->toArray();
-        }
-        if ($tab=="warehouse") {
-            $data['title'] = "Update Warehouse";
-            $data['record'] = Warehouse::where('id', '=', $id)->get()->toArray();
-        }
-        $output = view('master.common', $data)->render();
-        return Response($output);
-    }
-
-
-
-
-
-
-
-
-
-
-    public function update_save(Request $request)
+public function update_save(Request $request)
     {
         // dd($request->all());
         $data = [];
@@ -552,70 +159,7 @@ class MasterController extends Controller
             $company->status = $status;
             $company->save();
         }
-       
-
-        if ($tab_name =='loading_ports' && $id !="") {
-            if ($status=='0') {
-                $status = '1';
-                $loadingPort = loadingPort::find($id);
-            } else {
-                $status = '0';
-                $loadingPort = loadingPort::find($id);
-            }
-            $loadingPort->status = $status;
-            $loadingPort->save();
-        }
-
-        if ($tab_name =='loading_state' && $id !="") {
-            if ($status=='0') {
-                $status = '1';
-                $shippingcountries = State::find($id);
-            } else {
-                $status = '0';
-                $shippingcountries = State::find($id);
-            }
-            $shippingcountries->status = $status;
-            $shippingcountries->save();
-        }
-
-        if ($tab_name =='mmake' && $id !="") {
-            if ($status=='0') {
-                $status = '1';
-                $mmake = Make::find($id);
-            } else {
-                $status = '0';
-                $mmake = Make::find($id);
-            }
-            $mmake->status = $status;
-            $mmake->save();
-        }
-        if ($tab_name =='mmodel' && $id !="") {
-            if ($status=='0') {
-                $status = '1';
-                $mmodel = VehicleModel::find($id);
-            } else {
-                $status = '0';
-                $mmodel = VehicleModel::find($id);
-            }
-            $mmodel->status = $status;
-            $mmodel->save();
-        }
-
-        if ($tab_name =='mseries' && $id !="") {
-            if ($status=='0') {
-                $status = '1';
-                $mseries = Series::find($id);
-            } else {
-                $status = '0';
-                $mseries = Series::find($id);
-            }
-            $mseries->status = $status;
-            $mseries->save();
-        }
-
-        
-
-        if ($tab_name =='country' && $id !="") {
+        if ($tab_name =='shippingcountries' && $id !="") {
             if ($status=='0') {
                 $status = '1';
                 $shippingcountries = ShippingCountry::find($id);
@@ -648,7 +192,7 @@ class MasterController extends Controller
             $loadingports->status = $status;
             $loadingports->save();
         }
-        if ($tab_name =='dcountry' && $id !="") {
+        if ($tab_name =='destinationcountries' && $id !="") {
             if ($status=='0') {
                 $status = '1';
                 $destinationcountries = DestinationCountry::find($id);
@@ -659,19 +203,7 @@ class MasterController extends Controller
             $destinationcountries->status = $status;
             $destinationcountries->save();
         }
-        if ($tab_name =='destination_state' && $id !="") {
-            if ($status=='0') {
-                $status = '1';
-                $destinationstate = DestinationState::find($id);
-            } else {
-                $status = '0';
-                $destinationstate = DestinationState::find($id);
-            }
-            $destinationstate->status = $status;
-            $destinationstate->save();
-        }
-
-        if ($tab_name =='destination_ports' && $id !="") {
+        if ($tab_name =='destinationport' && $id !="") {
             if ($status=='0') {
                 $status = '1';
                 $destinationport = DestinationPort::find($id);
@@ -682,8 +214,6 @@ class MasterController extends Controller
             $destinationport->status = $status;
             $destinationport->save();
         }
-
-
         if ($tab_name =='title' && $id !="") {
             $title = new Title();
             if ($status=='0') {
@@ -1126,11 +656,11 @@ class MasterController extends Controller
         }
         if ($request->tab=='vehiclestatus') {
             for ($i=0; $i<$length; $i++) {
-                $data['record_exist'] = VehicleStatus::where('name', '=', $request->addmore[$i])
+                $data['record_exist'] = VehicleStatus::where('status_name', '=', $request->addmore[$i])
                 ->get()->toArray();
                 if (!$data['record_exist']) {
                     $data = [
-                        'name' => $request->addmore[$i],
+                        'status_name' => $request->addmore[$i],
                       ];
                       VehicleStatus::Create($data);
                 }
@@ -1322,11 +852,11 @@ class MasterController extends Controller
         }
         if ($request->tab=='vehiclestatus') {
             for ($i=0; $i<$length; $i++) {
-                $data['record_exist'] = VehicleStatus::where('name', '=', $request->addmore[$i])
+                $data['record_exist'] = VehicleStatus::where('status_name', '=', $request->addmore[$i])
                 ->get()->toArray();
                 if (!$data['record_exist']) {
                     $data = [
-                        'name' => $request->addmore[$i],
+                        'status_name' => $request->addmore[$i],
                       ];
                     Company::Create($data);
                 }

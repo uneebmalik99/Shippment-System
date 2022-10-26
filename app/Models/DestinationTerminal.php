@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DestinationPort extends Model
+class DestinationTerminal extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
-    public $timestamps = true;
-    protected $table = "destination_ports";
+    protected $table = "destination_terminals";
     protected $guarded = [];
 
-    public function state()
+    public function states()
     {
         return $this->belongsTo('App\Models\DestinationState', 'state_id', 'id');
     }

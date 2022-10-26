@@ -479,11 +479,7 @@
                     $('#' + $next_tab).addClass('next-style');
                 },
                 error: function(xhr, status, errorThrown) {
-                    // iziToast.warning({
-                    //     message: 'Failed to insert data!',
-                    //     position: 'topCenter',
-                    //     zindex: '9999999999999'
-                    // });
+                   
                     console.log(xhr.responseJSON['errors']);
                     if(xhr.responseJSON['errors']['customer_name']){
                         $('#customer_name_error').html('<small style="margin-left:72px">Please Fill*</small>');

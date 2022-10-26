@@ -17,6 +17,8 @@ class CreateDestinationPortsTable extends Migration
             $table->id();
             $table->string('destination')->nullable();
             $table->enum('status',['0', '1' ])->default('1');
+            $table->foreignId('state_id')->constrained('destination_states')->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
             // destination
             // status

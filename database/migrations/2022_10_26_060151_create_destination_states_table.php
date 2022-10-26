@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDestinationCountriesTable extends Migration
+class CreateDestinationStatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateDestinationCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('destination_countries', function (Blueprint $table) {
+        Schema::create('destination_states', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('abbrevation')->nullable();
             $table->enum('status',['0', '1' ])->default('1');
+            $table->foreignId('country_id')->constrained('destination_countries')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
-            // destination
-            // status
         });
     }
 
@@ -31,6 +30,6 @@ class CreateDestinationCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('destination_countries');
+        Schema::dropIfExists('destination_states');
     }
 }

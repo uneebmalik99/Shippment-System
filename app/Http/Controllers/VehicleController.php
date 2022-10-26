@@ -134,7 +134,7 @@ class VehicleController extends Controller
                 'button' => 'Create',
             ],
         ];
-        $data['buyers'] = User::where('role_id', 4)->get();
+        $data['buyers'] = BillingParty::all();
         $data['customer_name'] = User::where('role_id', 4)->get();
         $data['location'] = Location::all();
         $data['shipment'] = Shipment::all();

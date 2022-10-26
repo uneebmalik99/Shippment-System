@@ -216,7 +216,7 @@
                                         name="buyer_id" id="buyer_id">
                                         
                                         @foreach ($buyers as $buyer)
-                                            <option value="{{ @$buyer['id'] }}">{{ @$buyer['name'] }}
+                                            <option value="{{ @$buyer['customer_id'] }}">{{ @$buyer['buyer_number'] }}
                                             </option>
                                         @endforeach
                                     </select>
