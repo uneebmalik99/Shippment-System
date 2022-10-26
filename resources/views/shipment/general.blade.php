@@ -342,6 +342,22 @@
                                             </div>
                                             <div class="col-12 py-2">
                                                 <div class="d-flex align-items-center">
+                                                    <label for="select_consignee "
+                                                        class="col-6 px-0 font-size font-bold">Notifier</label>
+                                                    <select
+                                                        class="form-control-sm border border-0 rounded-pill bg col-6">
+                                                        @foreach ($consignees as $consignee)
+                                                            <option
+                                                                class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                                value="{{ $consignee['id'] }}">
+                                                                {{ $consignee['consignee_name'] }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 py-2">
+                                                <div class="d-flex align-items-center">
                                                     <label for="shipper" class="col-6 px-0 font-size font-bold">
                                                         Shipper
                                                     </label>
