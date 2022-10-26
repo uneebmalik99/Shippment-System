@@ -14,6 +14,7 @@ use App\Models\Shipment_Invice;
 use App\Models\Stamp_Title;
 use App\Models\Vehicle;
 use App\Models\Country;
+use App\Models\Company;
 use App\Models\DestinationCountry;
 use App\Models\DestinationPort;
 use App\Models\DestinationState;
@@ -145,6 +146,7 @@ class ShipmentController extends Controller
         $data['container_size'] = ContainerSize::where('status', '1')->get();
         $data['container_types'] = ContainerType::where('status', '1')->get();
         $data['shipment_lines'] = ShipmentLine::where('status', '1')->get();
+        $data['companies'] = Company::where('status', '1')->get();
         $data['destination_country'] = DestinationCountry::where('status', '1')->get();
         // $data['states'] = State::where('status', '1')->get();
         if ($request->ajax()) {
@@ -262,7 +264,7 @@ class ShipmentController extends Controller
     // }
     public function create_form(Request $request)
     {
-        return $request->all();
+        // return $request->all();
         if ($request->ajax()) {
             $data = [];
             $data = $request->all();
@@ -536,12 +538,12 @@ class ShipmentController extends Controller
             $data = Shipment::select('*');
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('id', function($row){
-                    $data['row'] = $row;
-                    $data['vehicles'] = Vehicle::where('shipment_id', $row->id)->get();
-                    $output = view('layouts.shipment_filter.vehicle_table', $data)->render();
-                    return $output;
-                })
+                // ->addColumn('id', function($row){
+                //     $data['row'] = $row;
+                //     $data['vehicles'] = Vehicle::where('shipment_id', $row->id)->get();
+                //     $output = view('layouts.shipment_filter.vehicle_table', $data)->render();
+                //     return $output;
+                // })
                 ->addColumn('shipment_id', function($row){
                     $totalVehicles = Vehicle::where('shipment_id', $row->id)->count();
                     $vehicles = '<p style="cursor:pointer"  data-toggle="modal" data-target="#exampleModalCenter'.$row->id.'">'.$totalVehicles.' Vehicles</p>';
@@ -579,7 +581,7 @@ class ShipmentController extends Controller
                                         ";
                     return $btn;
                 })
-                ->rawColumns(['id','action','shipment_id'])
+                ->rawColumns(['action','shipment_id'])
                 ->make(true);
         }
 

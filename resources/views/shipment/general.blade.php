@@ -77,9 +77,17 @@
                                                     <label for="company_name"
                                                         class="col-6 px-0 font-size font-bold">Company
                                                         Name</label>
-                                                    <input type="text"
-                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="company_name" id="company_name">
+                                                        <option selected disabled>Select Company</option>
+                                                        @foreach ($companies as $company)
+                                                            <option value="{{$company['name']}}">{{$company['name']}}</option>
+                                                        @endforeach
+                                                    
+                                                    </select>
+                                                    {{-- <input type="text"
+                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        name="company_name" id="company_name"> --}}
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -549,9 +557,17 @@
                                                     <label for="shipping_line"
                                                         class="col-6 px-0 font-size font-bold">Shipping
                                                         Line</label>
-                                                    <input type="text"
-                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        <select  class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="shipping_line" id="shipping_line">
+                                                        <option selected disabled>Select Shipping Line</option>
+                                                        @foreach ($shipment_lines as $Slines)
+                                                            <option value="{{@$Slines['name']}}">{{@$Slines['name']}}</option>
+                                                        @endforeach
+                                                    
+                                                    </select>
+                                                    {{-- <input type="text"
+                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        name="shipping_line" id="shipping_line"> --}}
 
                                                 </div>
                                             </div>

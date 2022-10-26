@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ContainerSize extends Model
 {
     use HasFactory;
-
+    protected $primaryKey = 'id';
+    protected $table = "container_sizes";
     protected $guarded = [];
 }

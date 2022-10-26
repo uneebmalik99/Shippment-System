@@ -47,9 +47,13 @@
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
+                           
+                            @foreach($container_size as $csize)
+                                <option value="{{@$csize['name']}}">{{@$csize['name']}}</option>
+                            @endforeach
+                            {{-- <option value="10">10</option>
                             <option value="20">20</option>
-                            <option value="30">30</option>
+                            <option value="30">30</option> --}}
                         </select>
                     </div>
                 </div>
@@ -73,9 +77,9 @@
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach($loading_ports as $lports)
+                                <option value="{{@$lports['destination']}}">{{@$lports['destination']}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -86,9 +90,9 @@
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach($shipping_lines as $Sline)
+                            <option value="{{@$Sline['name']}}">{{@$Sline['name']}}</option>
+                        @endforeach
                         </select>
                     </div>
                 </div>

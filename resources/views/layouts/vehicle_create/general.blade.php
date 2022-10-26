@@ -608,9 +608,15 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="site" class="col-6 px-0 font-size font-bold">Site</label>
-                                    <input type="text"
+                                    <select class="form-control-sm border border-0 rounded-pill bg col-6" name="site"
+                                    id="site">
+                                        @foreach ($sites as $site)
+                                            <option value="{{ $site['name'] }}">{{ $site['name'] }}</option>
+                                        @endforeach
+                                    </select>
+                                    {{-- <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="site"
-                                        id="site" value="{{ @$user['site'] }}">
+                                        id="site" value="{{ @$user['site'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -625,8 +631,8 @@
                                     <label for="port" class="col-6 px-0 font-size font-bold">Warehouse</label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="port" id="port">
-                                        @foreach ($location as $locations)
-                                            <option value="{{ $locations['id'] }}">{{ $locations['name'] }}</option>
+                                        @foreach ($warehouses as $warehouse)
+                                            <option value="{{ $warehouse['id'] }}">{{ $warehouse['name'] }}</option>
                                         @endforeach
                                     </select>
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"

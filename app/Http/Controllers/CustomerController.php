@@ -12,6 +12,9 @@ use App\Models\Quotation;
 use App\Exports\UsersExport;
 use App\Models\BillingParty;
 use App\Models\Notification;
+use App\Models\ContainerSize;
+use App\Models\LoadingPort;
+use App\Models\ShipmentLine;
 use Illuminate\Http\Request;
 use App\Models\DestinationPort;
 use App\Models\CustomerDocument;
@@ -180,6 +183,10 @@ class CustomerController extends Controller
             // dd($tab);
             $data['destination_port'] = DestinationPort::where('status', '1')->get()->toArray();
             $data['location'] = Location::all()->toArray();
+            $data['container_size'] = ContainerSize::where('status', '1')->get();
+            $data['loading_ports'] = LoadingPort::where('status', '1')->get();
+            $data['shipping_lines'] = ShipmentLine::where('status', '1')->get();
+
             // dd($data['destination_port']);
             $output = view('layouts.customer_create.' . $tab, $data)->render();
             return Response($output);
