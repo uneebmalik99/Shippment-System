@@ -112,7 +112,9 @@ class ShipmentController extends Controller
             // dd($date);
             $data['date'][] = $date->format('Y-m-d');
         }
-        // dd($data['date']);
+
+        $data['shipments'] = Shipment::with('vehicle')->get()->toArray();
+        // dd($data['shipments']);
         return view($this->view . 'list', $data, $notification);
     }
 
@@ -535,7 +537,7 @@ class ShipmentController extends Controller
     public function serverside(Request $request)
     {
         if ($request->ajax()) {
-            $data = Shipment::select('*');
+            $data = Shipment::with('vehicle')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('id', function($row){
@@ -585,7 +587,11 @@ class ShipmentController extends Controller
                 ->make(true);
         }
 
-        return back();
+        $data['data'] = Shipment::with('vehicle')->get()->toArray();
+        $action = ['action'=>'kashif'];
+        array_push($data['data'], $action);
+        // dd($data['data']);
+        return $data;
     }
 
     public function filterShipmentt(Request $req)

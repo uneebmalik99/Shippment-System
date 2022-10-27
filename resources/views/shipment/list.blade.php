@@ -280,29 +280,57 @@
 
                 {{-- search filter end --}}
                 <div class="shipment_table_body">
-                    <table id="shipment_table" class="table row-border">
+                    <table id="shipment_table" class="table row-border" style="width:100%!important;overflow-x:scroll!important;">
                         <thead class="bg-custom">
                             <tr class="font-size">
+                                <th></th>
                                 <th class="font-bold-tr">Sr</th>
-                                <th class="font-bold-tr">COMPANY NAME</th>
-                                <th class="font-bold-tr">COMPANY EMAIL</th>
-                                <th class="font-bold-tr">PHONE</th>
-                                <th class="font-bold-tr">TYPE</th>
-                                <th class="font-bold-tr">LOADING DATE</th>
-                                <th class="font-bold-tr">CUT OFF DATE</th>
+                                <th class="font-bold-tr">Consigned To</th>
+                                <th class="font-bold-tr">Container No</th>
+                                <th class="font-bold-tr">Booking No</th>
+                                <th class="font-bold-tr">Lines</th>
+                                <th class="font-bold-tr">Size</th>
+                                <th class="font-bold-tr">Loading Date</th>
                                 <th class="font-bold-tr">SALE DATE</th>
-                                <th class="font-bold-tr">EST ARRIVAL DATE</th>
-                                <th class="font-bold-tr">CONTAINER NO</th>
-                                <th class="font-bold-tr">LOADING STATE</th>
-                                <th class="font-bold-tr">LOADING COUNTRY</th>
-                                <th class="font-bold-tr">DESTINATION STATE</th>
-                                <th class="font-bold-tr">DESTINATION COUNTRY</th>
+                                <th class="font-bold-tr">ARRIVAL DATE</th>
+                                <th class="font-bold-tr">Release Date</th>
+                                <th class="font-bold-tr">Shipper</th>
+                                <th class="font-bold-tr">Loading Port</th>
+                                <th class="font-bold-tr">Delivery Date</th>
+                                <th class="font-bold-tr">Docs</th>
+                                <th class="font-bold-tr">Status</th>
                                 <th>Vehicles</th>
+                                <th>Note</th>
                                 <th class="font-bold-tr">Action</th>
+
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="shipment_tbody">
+                            {{-- @foreach($shipments as $shipment)
+                            <tr>
+                                <td>{{@$shipment['id']}}</td>
+                                <td>{{@$shipment['company_name']}}</td>
+                                <td>{{@$shipment['customer_email']}}</td>
+                                <td>{{@$shipment['customer_phone']}}</td>
+                                <td>{{@$shipment['shipment_type']}}</td>
+                                <td>{{@$shipment['loading_date']}}</td>
+                                <td>{{@$shipment['cut_off_date']}}</td>
+                                <td>{{@$shipment['sale_date']}}</td>
+                                <td>{{@$shipment['est_arrival_date']}}</td>
+                                <td>{{@$shipment['container_no']}}</td>
+                                <td>{{@$shipment['loading_state']}}</td>
+                                <td>{{@$shipment['loading_country']}}</td>
+                                <td>{{@$shipment['destination_state']}}</td>
+                                <td>{{@$shipment['destination_country']}}</td>
+                                <td>{{count(@$shipment['vehicle'])}}Vehicle</td>
+                                <td>{{@$shipment['id']}}
+                                <tr class="collapse">
+                                    <th>kashif</th>
+                                </tr>
+                                </td>
+                            </tr>
                             
+                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>
@@ -323,91 +351,203 @@
 
 
     <script type="text/javascript">
-        $(function() {
-            var table = $('#shipment_table').DataTable({
-                processing: true,
-                serverSide: true,
-                scrollX: true,
-                "lengthMenu": [
-                    [50, 100, 500],
-                    [50, 100, 500]
-                ],
-                language: {
+
+$(document).ready(function () {
+    function format(d) {
+    // `d` is the original data object for the row
+    console.log(d);
+    html = '<table class="table"><thead class="bg-dark"><th>ID</th><th>Customer Name</th><th>VIN</th><th>YEAR</th><th>MAKE</th><th>MODEL</th><th>VEHICLE TYPE</th><th>VALUE</th></thead><tbody id="shipemt_vehicle">';
+        d.forEach(element => {
+            html +='<tr><td>'+element.id+'</td><td>'+element.customer_name+'</td><td>'+element.vin+'</td><td>'+element.year+'</td><td>'+element.make+'</td><td>'+element.model+'</td><td>'+element.vehicle_type+'</td><td>'+element.value+'</td></tr>';
+    });
+    html +='</tbody></table>';
+    return html;
+    // return (
+    //     '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+    //     '<tr>' +
+    //     '<td>Full name:</td>' +
+    //     '<td>' +
+    //     d.id +
+    //     '</td>' +
+    //     '</tr>' +
+    //     '<tr>' +
+    //     '<td>Extension number:</td>' +
+    //     '<td>' +
+    //     d.company_name +
+    //     '</td>' +
+    //     '</tr>' +
+    //     '<tr>' +
+    //     '<td>Extra info:</td>' +
+    //     '<td>And any further details here (images etc)...</td>' +
+    //     '</tr>' +
+    //     '</table>'
+    // );
+}
+
+    var table = $('#shipment_table').DataTable({
+        responsive: {
+            details: {
+                type: 'column',
+                target: -1
+            }
+        },
+        columnDefs: [ {
+            className: 'dtr-control',
+            orderable: false,
+            targets:   -1
+        } ],
+            'scrollX': true,
+                        "lengthMenu": [
+                            [50, 100, 500],
+                            [50, 100, 500]
+                        ],
+        language: {
                     search: "",
                     sLengthMenu: "_MENU_",
                     searchPlaceholder: "Search",
-                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+                    // processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
                 },
-                ajax: "{{ route('shipments.records') }}",
-                columns: [{
-                        data: 'id',
-                        name: 'id'
-                    },
-                    {
-                        data: 'company_name',
-                        name: 'company_name'
-                    },
-                    {
-                        data: 'customer_email',
-                        name: 'customer_email'
-                    },
-                    {
-                        data: 'customer_phone',
-                        name: 'customer_phone'
-                    },
-                    {
-                        data: 'shipment_type',
-                        name: 'shipment_type'
-                    },
-                    {
-                        data: 'loading_date',
-                        name: 'loading_date'
-                    },
-                    {
-                        data: 'cut_off_date',
-                        name: 'cut_off_date'
-                    },
-                    {
-                        data: 'sale_date',
-                        name: 'sale_date'
-                    },
-                    {
-                        data: 'est_arrival_date',
-                        name: 'est_arrival_date'
-                    },
-                    {
-                        data: 'container_no',
-                        name: 'container_no'
-                    },
-                    {
-                        data: 'loading_state',
-                        name: 'loading_state'
-                    },
-                    {
-                        data: 'loading_country',
-                        name: 'loading_country'
-                    },
-                    {
-                        data: 'destination_state',
-                        name: 'destination_state'
-                    },
-                    {
-                        data: 'destination_country',
-                        name: 'destination_country'
-                    },
-                    {
-                        data: 'shipment_id',
-                        name: 'shipment_id'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    },
-                ]
-            });
-        });
+        ajax: "{{ route('shipments.records') }}",
+        columns: [
+            {
+                className: 'dt-control',
+                orderable: false,
+                data: null,
+                defaultContent: '',
+                
+            },
+            // {data: ''},
+            { data: 'id'},
+            { data: 'select_consignee' },
+            { data: 'container_no' },
+            { data: 'booking_number' },
+            { data: 'shipping_line' },
+            { data: 'container_size' },
+            { data: 'loading_date' },
+            { data: 'sale_date' },
+            { data: 'est_arrival_date' },
+            { data: 'ship_date' },
+            { data: 'shipper' },
+            { data: 'loading_port' },
+            { data: 'loading_port' },
+            { data: 'destination_country' },
+            { data: 'status'},
+            { data: 'shipment_id'},
+            { data: 'notes'},
+            { data: 'action'},
+            
+            // { data: 'action' },
+        ],
+        order: [[1, 'asc']],
+        
+        
+    });
+
+     // Add event listener for opening and closing details
+     $('#shipment_table tbody').on('click', 'td.dt-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row(tr);
+
+        console.log(row.data()['vehicle']);
+ 
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            // Open this row
+            row.child(format(row.data()['vehicle'])).show();
+            tr.addClass('shown');
+        }
+    });
+
+});
+
+
+        // $(function() {
+        //     var table = $('#shipment_table').DataTable({
+        //         processing: true,
+        //         serverSide: true,
+        //         "lengthMenu": [
+        //             [50, 100, 500],
+        //             [50, 100, 500]
+        //         ],
+        //         language: {
+        //             search: "",
+        //             sLengthMenu: "_MENU_",
+        //             searchPlaceholder: "Search",
+        //             processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+        //         },
+        //         ajax: "{{ route('shipments.records') }}",
+        //         columns: [{
+        //                 data: 'id',
+        //                 name: 'id'
+        //             },
+        //             {
+        //                 data: 'company_name',
+        //                 name: 'company_name'
+        //             },
+        //             {
+        //                 data: 'customer_email',
+        //                 name: 'customer_email'
+        //             },
+        //             {
+        //                 data: 'customer_phone',
+        //                 name: 'customer_phone'
+        //             },
+        //             {
+        //                 data: 'shipment_type',
+        //                 name: 'shipment_type'
+        //             },
+        //             {
+        //                 data: 'loading_date',
+        //                 name: 'loading_date'
+        //             },
+        //             {
+        //                 data: 'cut_off_date',
+        //                 name: 'cut_off_date'
+        //             },
+        //             {
+        //                 data: 'sale_date',
+        //                 name: 'sale_date'
+        //             },
+        //             {
+        //                 data: 'est_arrival_date',
+        //                 name: 'est_arrival_date'
+        //             },
+        //             {
+        //                 data: 'container_no',
+        //                 name: 'container_no'
+        //             },
+        //             {
+        //                 data: 'loading_state',
+        //                 name: 'loading_state'
+        //             },
+        //             {
+        //                 data: 'loading_country',
+        //                 name: 'loading_country'
+        //             },
+        //             {
+        //                 data: 'destination_state',
+        //                 name: 'destination_state'
+        //             },
+        //             {
+        //                 data: 'destination_country',
+        //                 name: 'destination_country'
+        //             },
+        //             {
+        //                 data: 'shipment_id',
+        //                 name: 'shipment_id'
+        //             },
+        //             {
+        //                 data: 'action',
+        //                 name: 'action',
+        //                 orderable: false,
+        //                 searchable: false
+        //             },
+        //         ]
+        //     });
+        // });
 
         function fetchCustomers(id) {
             $tab = $('#' + id).attr('tab');

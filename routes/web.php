@@ -11,6 +11,7 @@ use App\Http\Controllers\DetailController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\StickyController;
+use App\Http\Controllers\MasterTowing;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
@@ -168,6 +169,14 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/show/model',                          [MasterController::class, 'master_seriesadd'])->name('master.seriesadd');
     Route::post('/openpopup',                           [MasterController::class, 'showmodel'])->name('master.showmodel');
     Route::post('/save/record',                         [MasterController::class, 'save'])->name('master.save');
+
+    // master towing page routes 
+
+    Route::get('/master-towing',                     [MasterTowing::class, 'index'])->name('master.towing');
+
+
+
+
     // Calendar Routes
     Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.list');
 
@@ -201,6 +210,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         });
         
     Route::get('/generate-pdf/{id?}',                     [pdfController::class, 'generatePDF'])->name('generatePDF');
+
+    
+
 
 });
 

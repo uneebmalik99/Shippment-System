@@ -1,5 +1,5 @@
 {{$row->id}}
-<div class="modal fade" id="exampleModalCenter{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index:999999999999999">
+{{-- <div class="modal fade" id="exampleModalCenter{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index:999999999999999">
     <div class="modal-dialog" role="document" style="max-width: 1170px;">
       <div class="modal-content">
         <div class="modal-header">
@@ -70,4 +70,4 @@
        
       </div>
     </div>
-  </div>
+  </div> --}}

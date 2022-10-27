@@ -166,6 +166,32 @@ class MasterController extends Controller
         return view($this->view . 'master', $data, $notification);
     }
 
+
+    public function mastertowing(){
+        $data = [];
+        $data = [
+            "page_title" => $this->plural . " List",
+            "page_heading" => $this->plural . ' List',
+            "breadcrumbs" => array('#' => $this->plural . " List"),
+            "module" => [
+                'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'list',
+                'action' => $this->action,
+            ],
+        ];
+       
+        // $data['states_countries'] = State::with('country')->where('status','1')->get();
+        // return $data['destination_countries'];
+        $notification = $this->Notification();
+        return view($this->view . 'master', $data, $notification);
+
+    }
+
     
     public function make(Request $request){
         $data = [];
