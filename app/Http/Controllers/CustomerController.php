@@ -606,6 +606,10 @@ class CustomerController extends Controller
             $view_data = [];
             $action = url($this->action . '/create');
             $view_data = [
+                'destination_port' => DestinationPort::where('status', '1')->get(),
+                'container_size' => ContainerSize::where('status', '1')->get(),
+                'loading_ports' => LoadingPort::where('status', '1')->get(),
+                'shipping_lines' => ShipmentLine::where('status', '1')->get(),
                 "page_title" => $this->plural . " create",
                 "page_heading" => $this->plural . ' create',
                 "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
@@ -730,6 +734,7 @@ class CustomerController extends Controller
                     'result' => 'success',
                     'tab' => 'Shipper data inserted!',
                     'view' => $view,
+                    'destination_port' => DestinationPort::where('status', '1')->get()->toArray(),
                 ];
 
             } else {

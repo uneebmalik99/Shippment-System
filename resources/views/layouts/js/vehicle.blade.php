@@ -510,4 +510,20 @@
             });
         
     }
+
+    function FetachModel(){
+        $make_id = $('#make').val();
+
+$.ajax({
+    method: 'POST',
+    url: '{{ route('vehicle.FetchModel') }}',
+    data: {
+        'make_id': $make_id,
+    },
+    success: function(data) {
+       console.log(data);
+       $('#model').html(data);
+    }
+});
+    }
 </script>

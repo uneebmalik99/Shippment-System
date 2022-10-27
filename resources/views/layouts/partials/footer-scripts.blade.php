@@ -240,6 +240,13 @@
     })
 
     function hidemodal() {
+
+        iziToast.success({
+                    zindex: '9999999999999',
+                    position: 'topCenter',
+                    title: 'Success',
+                    message: 'Finished Customer Creation!',
+                });
         $('#exampleModal').modal('hide');
 
     }
@@ -263,6 +270,8 @@
                     $('.user_image').imageUploader({
                         maxFiles: 1
                     });
+                    
+                    
                 }
             });
         } else if ($id == "vehicle") {
@@ -438,6 +447,8 @@
                 processData: false,
                 contentType: false,
                 success: function(data) {
+
+                    
                     // iziToast.success({
                     //     title: 'Vehicle',
                     //     message: 'Successfully inserted record!',
@@ -479,6 +490,12 @@
                     $('#' + $next_tab).addClass('next-style');
                 },
                 error: function(xhr, status, errorThrown) {
+
+                    iziToast.warning({
+                    message: 'Failed! Please Fill All Fields',
+                    position: 'topCenter',
+                    zindex: '9999999999999'
+                });
                    
                     console.log(xhr.responseJSON['errors']);
                     if(xhr.responseJSON['errors']['customer_name']){
@@ -730,15 +747,21 @@
                     success: function(data) {
                         console.log(data.Results[0]);
                         vehicle = data.Results[0];
-                        $('#model').val(vehicle.Model);
-                        $('#make').val(vehicle.Make);
+                        // $('#model').val(vehicle.Model);
+                        // $('#make').val(vehicle.Make);
                         $('#year').val(vehicle.ModelYear);
-                        $('#vehicle_type').val(vehicle.VehicleType);
-                        $('#weight').val(vehicle.CurbWeightLB);
-                        $('#value').val(vehicle.BasePrice);
+                        // $('#vehicle_type').val(vehicle.VehicleType);
+                        // $('#weight').val(vehicle.CurbWeightLB);
+                        // $('#value').val(vehicle.BasePrice);
+                        
+                        
+                        $('#model').html('<option value="'+vehicle.Model+'">'+vehicle.Model+'</option>');
+                        $('#make').html('<option value="'+vehicle.Make+'">'+vehicle.Make+'</option>');
+                        // $('#year').html('<option value="'+vehicle.ModelYear+'">'+vehicle.ModelYear+'</option>');
+                        $('#vehicle_type').html('<option value="'+vehicle.VehicleType+'">'+vehicle.VehicleType+'</option>');
                         $('#getinfo').attr('tab', 'reset');
                         $('#getinfo').text('Reset');
-
+                        
                     }
                 });
             }

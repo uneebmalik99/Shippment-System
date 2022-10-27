@@ -913,21 +913,21 @@ class MasterController extends Controller
             $tabname = $request->tab;
             $tab['tab'] = $tabname;
             $title['title'] ="Ware House";
-            $data['placeholder'] ="Enter Key Name";
+            $data['placeholder'] ="Enter Warehouse";
         }
         if ($request->tab=='site') {
             $data = [];
             $tabname = $request->tab;
             $tab['tab'] = $tabname;
             $title['title'] ="Site";
-            $data['placeholder'] ="Enter Site Name";
+            $data['placeholder'] ="Enter Site";
         }
         if ($request->tab=='pickuplocation') {
             $data = [];
             $tabname = $request->tab;
             $tab['tab'] = $tabname;
             $title['title'] ="Pickup Location";
-            $data['placeholder'] ="Enter pickuplocatio";
+            $data['placeholder'] ="Enter Pickup Location";
         }
         if ($request->tab=='vehiclestatus') {
             $data = [];
@@ -945,14 +945,14 @@ class MasterController extends Controller
         if ($request->tab=='titletypes') {
             $data = [];
             $tab['tab'] = $request->tab;
-            $title['title'] ="Shipper Name";
-            $data['placeholder'] ="Enter Title Types";
+            $title['title'] ="Title Type";
+            $data['placeholder'] ="Enter Title Type";
         }
         if ($request->tab=='shippment') {
             $data = [];
             $tab['tab'] = $request->tab;
             $title['title'] ="Shippment";
-            $data['placeholder'] ="Enter Shippments";
+            $data['placeholder'] ="Enter Shippment";
         }
         if ($request->tab=='vehicletype') {
             $data = [];
@@ -981,13 +981,14 @@ class MasterController extends Controller
         if ($request->tab=='color') {
             $data = [];
             $tab['tab'] = $request->tab;
-            $title['title'] ="Title";
+            $title['title'] ="Color";
             $data['placeholder'] ="Enter Color";
         }
         if ($request->tab=='model') {
             $data = [];
             $tab['tab'] = $request->tab;
             $title['title'] ="Model";
+            $data['placeholder'] ="Enter Model";
         }
         if ($request->tab=='destinationport') {
             $data = [];
@@ -1049,11 +1050,9 @@ class MasterController extends Controller
             $title['title'] ="Shipment Status";
             $data['placeholder'] ="Enter Shipment Status";
         }
-
-        $output = view('master.common', $title, $tab, $data)->render();
+        $output = view('master.common', $data,$title, $tab )->render();
         return Response($output);
     }
-
     public function save(Request $request)
     {
         // dd($request->all());
@@ -1144,11 +1143,11 @@ class MasterController extends Controller
         }
         if ($request->tab=='vehiclestatus') {
             for ($i=0; $i<$length; $i++) {
-                $data['record_exist'] = VehicleStatus::where('name', '=', $request->addmore[$i])
+                $data['record_exist'] = VehicleStatus::where('status_name', '=', $request->addmore[$i])
                 ->get()->toArray();
                 if (!$data['record_exist']) {
                     $data = [
-                        'name' => $request->addmore[$i],
+                        'status_name' => $request->addmore[$i],
                       ];
                       VehicleStatus::Create($data);
                 }
@@ -1178,20 +1177,6 @@ class MasterController extends Controller
                 }
             }
         }
-        // there is no table of shippment
-        // if ($request->tab=='shippment') {
-        //     for($i=0; $i<$length; $i++){
-        //         $data['record_exist'] = Shipment::where('company_name', '=', $request->addmore[$i])
-        //         ->get()->toArray();
-        //         if(!$data['record_exist']){
-        //             $data = [
-        //                 'company_name' => $request->addmore[$i],
-        //               ];
-        //               Shipment::Create($data);
-        //         }
-        //     }
-        
-        // }
         if ($request->tab=='vehicletype') {
             for ($i=0; $i<$length; $i++) {
                 $data['record_exist'] = VehicleType::where('vehicle_type', '=', $request->addmore[$i])
@@ -1252,20 +1237,6 @@ class MasterController extends Controller
                 }
             }
         }
-        // make_id error during insertion in model
-        // if ($request->tab=='model') {
-        //     for($i=0; $i<$length; $i++){
-        //         $data['record_exist'] = VehicleModel::where('name', '=', $request->addmore[$i])
-        //         ->get()->toArray();
-        //         if(!$data['record_exist']){
-        //             $data = [
-        //                 'name' => $request->addmore[$i],
-        //               ];
-        //               VehicleModel::Create($data);
-        //         }
-        //     }
-        
-        // }
         if ($request->tab=='destinationport') {
             for ($i=0; $i<$length; $i++) {
                 $data['record_exist'] = DestinationPort::where('destination', '=', $request->addmore[$i])
@@ -1338,19 +1309,8 @@ class MasterController extends Controller
                 }
             }
         }
-        if ($request->tab=='vehiclestatus') {
-            for ($i=0; $i<$length; $i++) {
-                $data['record_exist'] = VehicleStatus::where('name', '=', $request->addmore[$i])
-                ->get()->toArray();
-                if (!$data['record_exist']) {
-                    $data = [
-                        'name' => $request->addmore[$i],
-                      ];
-                    Company::Create($data);
-                }
-            }
-        }
         
         return 'success';
     }
 }
+

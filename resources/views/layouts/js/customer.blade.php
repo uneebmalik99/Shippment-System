@@ -76,11 +76,26 @@
                 $('#' + $next_tab).addClass('next-style');
                 if (data.quotation == 'fade') {
                     // alert('asdassd');
+                //     iziToast.success({
+                //     zindex: '9999999999999',
+                //     position: 'topCenter',
+                //     title: data.result,
+                //     message: data.tab,
+                // });
+
                     $('#exampleModal').modal('hide');
-                    location.reload();
+                    setTimeout(function() {
+            window.location.reload(true);
+        }, 2000);
                 }
             },
             error: function(response) {
+
+                iziToast.warning({
+                    message: 'Failed! Please Fill All Fields',
+                    position: 'topCenter',
+                    zindex: '9999999999999'
+                });
 
                 console.log(response.responseJSON['errors']);
                 if(response.responseJSON['errors']['username']){

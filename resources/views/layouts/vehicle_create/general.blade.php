@@ -68,8 +68,14 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="year" class="col-6 px-0 font-size font-bold">Year<span class="text-danger">*</span></label>
+                                    {{-- <select class="form-control-sm border border-0 rounded-pill bg col-6"
+                                    name="year" id="year">
+                                    <option selected disabled>Select Year</option>
+                                    @foreach($vehicle_year as $vyear)
+                                    <option value="{{@$vyear['name']}}">{{@$vyear['name']}}</option>
+                                </select> --}}
                                     <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="year" id="year" value="{{ @$user['year'] }}" disabled>
+                                        name="year" id="year" value="{{ @$user['year'] }}" >
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="year_error">
@@ -81,8 +87,16 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="make" class="col-6 px-0 font-size font-bold">Make <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="make" id="make" value="{{ @$user['make'] }}" disabled>
+                                    <select class="form-control-sm border border-0 rounded-pill bg col-6"
+                                        name="make" id="make" onchange="FetachModel()">
+                                    <option selected disabled>Select Year</option>
+                                    @foreach($vehicle_make as $vmake)
+                                    <option value="{{@$vmake['name']}}">{{@$vmake['name']}}</option>
+                                    @endforeach
+                                </select>
+                                    
+                                    {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                        name="make" id="make" value="{{ @$user['make'] }}" disabled> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="make_error">
@@ -94,8 +108,13 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="model" class="col-6 px-0 font-size font-bold">Model<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="model" id="model" value="{{ @$user['model'] }}" disabled>
+                                    <select class="form-control-sm border border-0 rounded-pill bg col-6"
+                                    name="model" id="model">
+                                    <option selected disabled>Select Model</option>
+                                    
+                                </select>
+                                    {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                        name="model" id="model" value="{{ @$user['model'] }}" disabled> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="model_error">
@@ -107,15 +126,15 @@
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
                                     <label for="vehicle_type" class="col-6 px-0 font-size font-bold">Vehicle Type<span class="text-danger">*</span></label>
-                                    {{-- <select class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="vehicle_type" id="vehicle_type" value="{{ @$user['vehicle_type'] }}">
+                                    <select class="form-control-sm border border-0 rounded-pill bg col-6"
+                                    name="vehicle_type" id="vehicle_type" value="{{ @$user['vehicle_type'] }}">
                                     <option selected disabled>Select Type</option>
                                     @foreach(@$vehicle_types as $types)
                                     <option value="{{@$types['vehicle_type']}}">{{@$types['vehicle_type']}}</option>
                                     @endforeach
-                                    </select> --}}
-                                    <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="vehicle_type" id="vehicle_type" value="{{ @$user['vehicle_type'] }}" disabled>
+                                    </select>
+                                    {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
+                                        name="vehicle_type" id="vehicle_type" value="{{ @$user['vehicle_type'] }}" disabled> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="vehicle_type_error">

@@ -12,6 +12,8 @@ use App\Models\BillOfSale;
 use App\Models\Image;
 use App\Models\ContainerSize;
 use App\Models\LoadingPort;
+use App\Models\Make;
+use App\Models\VehicleModel;
 use App\Models\Color;
 use App\Models\Key;
 use App\Models\Title;
@@ -146,11 +148,13 @@ class VehicleController extends Controller
         $data['colors'] = Color::where('status', '1')->get();
         $data['keys'] = Key::where('status', '1')->get();
         $data['titles'] = Title::where('status', '1')->get();
-        $data['vehicle_types'] = VehicleType::all();
+        $data['vehicle_make'] = Make::where('status', '1')->get();
+        // $data['vehicle_types'] = VehicleType::all();
         $data['shipper_name'] = Shipper::all();
         $data['vehicle_status'] = VehicleStatus::all();
         $data['warehouses'] = Warehouse::where('status', '1')->get();
         $data['sites'] = Site::where('status', '1')->get();
+        $data['vehicle_types'] = VehicleType::where('status', '1')->get();
         if ($request->ajax()) {
             $tab = $request->tab;
             $output = view('layouts.vehicle_create.' . $tab, $data)->render();
@@ -754,6 +758,17 @@ class VehicleController extends Controller
             }
 
         }
+    }
+
+    public function FetchModel(Request $req){
+        $data = [];
+        $output = [];
+
+        $data['state'] = VehicleModel::where('make_id', $req->make_id)->where('status', '1')->get()->toArray();
+
+        $output = view('layouts.vehicle_create.fetchModel', $data)->render();
+
+        return Response($output);
     }
 
     public function SelectedDelete(Request $req){

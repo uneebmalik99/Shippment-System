@@ -108,6 +108,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/vehicle/SelectedDelete',       [VehicleController::class, 'SelectedDelete'])->name('Vehicle.SelectedDelete');
 
 
+    Route::post('/vehicle/FetchModel',       [VehicleController::class, 'FetchModel'])->name('vehicle.FetchModel');
+
+
     //Sticky Notes Routes
     Route::get('/stickynotes', [StickyController::class, 'index'])->name('sticky.list');
     Route::post('/stickynotes', [StickyController::class, 'create'])->name('sticky.create');
