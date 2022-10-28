@@ -1,4 +1,32 @@
 @extends('layouts.partials.mainlayout')
+<style>
+    table.dataTable td.dt-control:before {
+    height: 1em;
+    width: 1em;
+    margin-top: -9px!important;
+    /* display: inline-block; */
+    color: black!important;
+    /* border: 0.15em solid white; */
+    /* border-radius: 1em; */
+    box-shadow: 0 0 0.2em #444;
+    box-sizing: content-box;
+    text-align: center;
+    text-indent: 0 !important;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1em;
+    content: "+";
+    background-color: #dbdbdb!important;
+}
+table.dataTable tr.dt-hasChild td.dt-control:before {
+    content: "-"!important;
+    background-color: #d33333!important;
+    color:white!important;
+}
+.dataTables_wrapper {
+    border-top: none!important;
+    border-bottom: none!important;
+}
+</style>
 @section('body')
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -282,7 +310,7 @@
                         style="width:100%!important;overflow-x:scroll!important;">
                         <thead class="bg-custom">
                             <tr class="font-size">
-                                <th class="font-bold-tr">Veiw Vehicle</th>
+                                <th class="font-bold-tr">View Vehicles</th>
                                 <th class="font-bold-tr">Image</th>
                                 <th class="font-bold-tr">Consigned To</th>
                                 <th class="font-bold-tr">Container No</th>
@@ -356,7 +384,7 @@
                 console.log(d);
 
                 html =
-                    '<table class="table vehicle_shipment_table"><thead style="background:#768ea6;color:white;"><th>ID</th><th>Customer Name</th><th>VIN</th><th>YEAR</th><th>MAKE</th><th>MODEL</th><th>VEHICLE TYPE</th><th>VALUE</th><th>Action</th></thead><tbody id="shipemt_vehicle">';
+                    '<table class="vehicle_shipment_table my-3" style="width:90%!important;"><thead style="background:#dbdbdb;color:#2c3e50;font-size:12px!important;"><th>ID</th><th>Customer Name</th><th>VIN</th><th>YEAR</th><th>MAKE</th><th>MODEL</th><th>VEHICLE TYPE</th><th>VALUE</th><th>Action</th></thead><tbody id="shipemt_vehicle">';
                 d.forEach(element => {
 
                 $url_view = 'vehicle/profile/' + element.id;
@@ -391,6 +419,8 @@
             }
 
             var table = $('#shipment_table').DataTable({
+                processing: true,
+                serverSide: true,
                 responsive: {
                     details: {
                         type: 'column',
@@ -411,7 +441,7 @@
                     search: "",
                     sLengthMenu: "_MENU_",
                     searchPlaceholder: "Search",
-                    // processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
                 },
                 ajax: "{{ route('shipments.records') }}",
                 columns: [{
@@ -496,12 +526,13 @@
                 if (row.child.isShown()) {
                     // This row is already open - close it
                     row.child.hide();
-                    tr.removeClass('shown');
+                    tr.removeClass('dt-hasChild shown');
                 } else {
                     // Open this row
                     row.child(format(row.data()['vehicle'])).show();
-                    tr.addClass('shown');
+                    tr.addClass('dt-hasChild shown');
                 }
+
                 $('.vehicle_shipment_table').DataTable({
                     "lengthChange": false,
                     "info": false,
