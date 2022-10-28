@@ -1,5 +1,4 @@
 {{-- @if(@$tab=='warehouse') --}}
-
 <div class="modal-header">
     <h5 class="modal-title title_modal">{{@$title}}</h5>
     <button type="button" id="close_modal" class="close" data-dismiss="modal" aria-label="Close">
@@ -28,7 +27,6 @@
                 </filter>
             </defs>
         </svg>
-
     </button>
 </div>
 <div class="modal-body">
@@ -42,9 +40,12 @@
                 @if (@$name=='name')
                 <input type="text" name="addmore[]" class="form-control common_input"
                 placeholder="{{@$placeholder}}" value="{{ @$record[0]['name'] }}" id="input_value" required>
-                @else
+                @elseif(@$name=='status_name')
                 <input type="text" name="addmore[]" class="form-control common_input"
                 placeholder="{{@$placeholder}}" value="{{ @$record[0]['status_name'] }}" id="input_value" required>
+                @else
+                <input type="text" name="addmore[]" class="form-control common_input"
+                placeholder="{{@$placeholder}}" value="{{ @$record[0]['vehicle_type'] }}" id="input_value" required>
                 @endif
                 <div class="input-group-append">
                     <button class="add-more" type="button"

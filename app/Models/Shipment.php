@@ -34,4 +34,7 @@ class Shipment extends Model
     {
         return $this->hasMany('App\Models\Vehicle');
     }
+    public function shipment_invoice(){
+        return $this->hasMany('App\Models\Shipment_Invice');
+    }
 }

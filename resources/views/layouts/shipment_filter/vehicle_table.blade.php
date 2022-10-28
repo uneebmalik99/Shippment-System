@@ -1,4 +1,14 @@
-{{$row->id}}
+
+{{-- {{@$image_path[0]->name}} --}}
+{{-- {{count($image_path)}} --}}
+
+@if( count($image_path) > 0)
+<img src="{{asset(@$image_path[0]->name)}}" alt="" style="width:25px;height:25px;border-radius:50%;">
+@else
+<img src="" alt="" style="width:25px;height:25px;border-radius: 50%">
+@endif
+
+{{-- {{$row->id}} --}}
 {{-- <div class="modal fade" id="exampleModalCenter{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index:999999999999999">
     <div class="modal-dialog" role="document" style="max-width: 1170px;">
       <div class="modal-content">

@@ -216,6 +216,9 @@ class MasterController extends Controller
         $inputdata = $request->input();
         $tab_name = $request->tab ;
         $id = $request->id;
+        if ($tab_name =='vehicletype' && $id !="") {
+            $data['deleted'] = VehicleType::find($id)->delete();
+        }
         if ($tab_name =='companies' && $id !="") {
             $data['deleted'] = Company::find($id)->delete();
         }
@@ -294,6 +297,13 @@ class MasterController extends Controller
         $data = [];
         $tab = $request->tab;
         $id  = $request->id;
+
+        if ($tab=="vehicletype") {
+            $data['title'] = "Update Vehicle Types";
+            $data['name'] = "vehicle_types";
+            $data['record'] = VehicleType::where('id', '=', $id)->get()->toArray();
+        }
+
         if ($tab=="companies") {
             $data['title'] = "Update Company";
             $data['name'] = "name";
@@ -442,6 +452,13 @@ class MasterController extends Controller
         $tab_name = $request->tab ;
         $id = $request->id;
         $name = $request->name;
+
+        if ($tab_name =='vehicletype') {
+            $key = new VehicleType();
+            $key = $key::find($id);
+            $key->vehicle_type = $name;
+            $key->save();
+        }
 
         if ($tab_name =='companies' && $name !="" && $id !="") {
             $companies = new Company();

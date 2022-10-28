@@ -7,10 +7,11 @@
                 <label for="destination_port" class="text-info font-style">Destination Port</label>
             </div>
             <div>
-                <select name="destination_port" id="destination_port" class="form-control-sm border border-0 rounded-pill bg col-6">
+                <select name="destination_port" id="destination_port"
+                    class="form-control-sm border border-0 rounded-pill bg col-6">
                     <option selected disabled>Destination Ports</option>
-                    @foreach($destination_port as $ports)
-                    <option value="{{@$ports['destination']}}">{{@$ports['destination']}}</option>
+                    @foreach ($destination_port as $ports)
+                        <option value="{{ @$ports['destination'] }}">{{ @$ports['destination'] }}</option>
                     @endforeach
                 </select>
                 {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
@@ -47,9 +48,9 @@
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                           
-                            @foreach($container_size as $csize)
-                                <option value="{{@$csize['name']}}">{{@$csize['name']}}</option>
+
+                            @foreach ($container_size as $csize)
+                                <option value="{{ @$csize['name'] }}">{{ @$csize['name'] }}</option>
                             @endforeach
                             {{-- <option value="10">10</option>
                             <option value="20">20</option>
@@ -77,8 +78,8 @@
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            @foreach($loading_ports as $lports)
-                                <option value="{{@$lports['destination']}}">{{@$lports['destination']}}</option>
+                            @foreach ($loading_ports as $lports)
+                                <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -90,9 +91,9 @@
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            @foreach($shipping_lines as $Sline)
-                            <option value="{{@$Sline['name']}}">{{@$Sline['name']}}</option>
-                        @endforeach
+                            @foreach ($shipping_lines as $Sline)
+                                <option value="{{ @$Sline['name'] }}">{{ @$Sline['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -158,9 +159,9 @@
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($container_size as $csize)
+                                <option value="{{ @$csize['name'] }}">{{ @$csize['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -184,9 +185,9 @@
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($loading_ports as $lports)
+                            <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
+                        @endforeach
                         </select>
                     </div>
                 </div>
@@ -197,9 +198,9 @@
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($shipping_lines as $Sline)
+                            <option value="{{ @$Sline['name'] }}">{{ @$Sline['name'] }}</option>
+                        @endforeach
                         </select>
                     </div>
                 </div>
@@ -265,9 +266,9 @@
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($container_size as $csize)
+                                <option value="{{ @$csize['name'] }}">{{ @$csize['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -291,9 +292,9 @@
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($loading_ports as $lports)
+                            <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
+                        @endforeach
                         </select>
                     </div>
                 </div>
@@ -304,9 +305,9 @@
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($shipping_lines as $Sline)
+                                <option value="{{ @$Sline['name'] }}">{{ @$Sline['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -369,13 +370,13 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                   
+
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($container_size as $csize)
+                                <option value="{{ @$csize['name'] }}">{{ @$csize['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -399,9 +400,9 @@
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($loading_ports as $lports)
+                                <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -412,9 +413,9 @@
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($shipping_lines as $Sline)
+                                <option value="{{ @$Sline['name'] }}">{{ @$Sline['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -477,13 +478,13 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                   
+
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($container_size as $csize)
+                                <option value="{{ @$csize['name'] }}">{{ @$csize['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -507,9 +508,9 @@
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($loading_ports as $lports)
+                                <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -520,9 +521,9 @@
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($shipping_lines as $Sline)
+                                <option value="{{ @$Sline['name'] }}">{{ @$Sline['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -585,13 +586,13 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                   
+
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($container_size as $csize)
+                                <option value="{{ @$csize['name'] }}">{{ @$csize['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -615,9 +616,9 @@
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($loading_ports as $lports)
+                            <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
+                        @endforeach
                         </select>
                     </div>
                 </div>
@@ -628,9 +629,9 @@
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($shipping_lines as $Sline)
+                                <option value="{{ @$Sline['name'] }}">{{ @$Sline['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -693,13 +694,13 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                    
+
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($container_size as $csize)
+                                <option value="{{ @$csize['name'] }}">{{ @$csize['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -723,9 +724,9 @@
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($loading_ports as $lports)
+                            <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
+                        @endforeach
                         </select>
                     </div>
                 </div>
@@ -736,9 +737,9 @@
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($shipping_lines as $Sline)
+                                <option value="{{ @$Sline['name'] }}">{{ @$Sline['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -801,13 +802,13 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                  
+
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($container_size as $csize)
+                                <option value="{{ @$csize['name'] }}">{{ @$csize['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -831,9 +832,9 @@
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($loading_ports as $lports)
+                            <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
+                        @endforeach
                         </select>
                     </div>
                 </div>
@@ -844,9 +845,9 @@
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($shipping_lines as $Sline)
+                                <option value="{{ @$Sline['name'] }}">{{ @$Sline['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -909,13 +910,13 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                   
+
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($container_size as $csize)
+                                <option value="{{ @$csize['name'] }}">{{ @$csize['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -939,9 +940,9 @@
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($loading_ports as $lports)
+                            <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
+                        @endforeach
                         </select>
                     </div>
                 </div>
@@ -952,9 +953,9 @@
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($shipping_lines as $Sline)
+                                <option value="{{ @$Sline['name'] }}">{{ @$Sline['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -1017,13 +1018,13 @@
         <div class="col-6 px-0">
             <div class="d-flex justify-content-around p-2 col-12">
                 <div class="col-3">
-                    
+
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($container_size as $csize)
+                                <option value="{{ @$csize['name'] }}">{{ @$csize['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -1047,9 +1048,9 @@
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($loading_ports as $lports)
+                                <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -1060,9 +1061,9 @@
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($shipping_lines as $Sline)
+                                <option value="{{ @$Sline['name'] }}">{{ @$Sline['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

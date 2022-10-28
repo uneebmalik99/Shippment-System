@@ -1,10 +1,8 @@
 @extends('layouts.partials.mainlayout')
 @section('body')
-
-
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true" style="z-index:9999999999999999">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        style="z-index:9999999999999999">
         <div class="modal-dialog modal-fullscreen scrollable mw-100 m-2 px-3 py-2" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">
@@ -280,11 +278,12 @@
 
                 {{-- search filter end --}}
                 <div class="shipment_table_body">
-                    <table id="shipment_table" class="table row-border" style="width:100%!important;overflow-x:scroll!important;">
+                    <table id="shipment_table" class="table row-border"
+                        style="width:100%!important;overflow-x:scroll!important;">
                         <thead class="bg-custom">
                             <tr class="font-size">
-                                <th></th>
-                                <th class="font-bold-tr">Sr</th>
+                                <th class="font-bold-tr">Veiw Vehicle</th>
+                                <th class="font-bold-tr">Image</th>
                                 <th class="font-bold-tr">Consigned To</th>
                                 <th class="font-bold-tr">Container No</th>
                                 <th class="font-bold-tr">Booking No</th>
@@ -306,7 +305,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="shipment_tbody">
-                            {{-- @foreach($shipments as $shipment)
+                            {{-- @foreach ($shipments as $shipment)
                             <tr>
                                 <td>{{@$shipment['id']}}</td>
                                 <td>{{@$shipment['company_name']}}</td>
@@ -337,7 +336,7 @@
 
 
 
-                
+
 
             </div>
         </div>
@@ -345,123 +344,181 @@
     </div>
 
 
-   
+
 
 
 
 
     <script type="text/javascript">
+        $(document).ready(function() {
+            function format(d) {
+                // `d` is the original data object for the row
+                console.log(d);
 
-$(document).ready(function () {
-    function format(d) {
-    // `d` is the original data object for the row
-    console.log(d);
-    html = '<table class="table"><thead class="bg-dark"><th>ID</th><th>Customer Name</th><th>VIN</th><th>YEAR</th><th>MAKE</th><th>MODEL</th><th>VEHICLE TYPE</th><th>VALUE</th></thead><tbody id="shipemt_vehicle">';
-        d.forEach(element => {
-            html +='<tr><td>'+element.id+'</td><td>'+element.customer_name+'</td><td>'+element.vin+'</td><td>'+element.year+'</td><td>'+element.make+'</td><td>'+element.model+'</td><td>'+element.vehicle_type+'</td><td>'+element.value+'</td></tr>';
-    });
-    html +='</tbody></table>';
-    return html;
-    // return (
-    //     '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
-    //     '<tr>' +
-    //     '<td>Full name:</td>' +
-    //     '<td>' +
-    //     d.id +
-    //     '</td>' +
-    //     '</tr>' +
-    //     '<tr>' +
-    //     '<td>Extension number:</td>' +
-    //     '<td>' +
-    //     d.company_name +
-    //     '</td>' +
-    //     '</tr>' +
-    //     '<tr>' +
-    //     '<td>Extra info:</td>' +
-    //     '<td>And any further details here (images etc)...</td>' +
-    //     '</tr>' +
-    //     '</table>'
-    // );
-}
+                html =
+                    '<table class="table vehicle_shipment_table"><thead style="background:#768ea6;color:white;"><th>ID</th><th>Customer Name</th><th>VIN</th><th>YEAR</th><th>MAKE</th><th>MODEL</th><th>VEHICLE TYPE</th><th>VALUE</th><th>Action</th></thead><tbody id="shipemt_vehicle">';
+                d.forEach(element => {
 
-    var table = $('#shipment_table').DataTable({
-        responsive: {
-            details: {
-                type: 'column',
-                target: -1
+                $url_view = 'vehicle/profile/' + element.id;
+
+                    html += '<tr><td>' + element.id + '</td><td>' + element.customer_name + '</td><td>' +
+                        element.vin + '</td><td>' + element.year + '</td><td>' + element.make +
+                        '</td><td>' + element.model + '</td><td>' + element.vehicle_type + '</td><td>' +
+                        element.value + '</td><td> <button class="profile-button"><a href='+$url_view+'><svg width="14" height="13" viewBox="0 0 16 14" fill="none"  xmlns="http://www.w3.org/2000/svg"> <path d="M16 7C16 7 13 2.1875 8 2.1875C3 2.1875 0 7 0 7C0 7 3 11.8125 8 11.8125C13 11.8125 16 7 16 7ZM1.173 7C1.65651 6.35698 2.21264 5.7581 2.833 5.21237C4.12 4.0845 5.88 3.0625 8 3.0625C10.12 3.0625 11.879 4.0845 13.168 5.21237C13.7884 5.7581 14.3445 6.35698 14.828 7C14.77 7.07613 14.706 7.16013 14.633 7.252C14.298 7.672 13.803 8.232 13.168 8.78763C11.879 9.9155 10.119 10.9375 8 10.9375C5.88 10.9375 4.121 9.9155 2.832 8.78763C2.21165 8.2419 1.65552 7.64301 1.172 7H1.173Z" fill="#048B52" /><path d="M8 4.8125C7.33696 4.8125 6.70107 5.04297 6.23223 5.4532C5.76339 5.86344 5.5 6.41984 5.5 7C5.5 7.58016 5.76339 8.13656 6.23223 8.5468C6.70107 8.95703 7.33696 9.1875 8 9.1875C8.66304 9.1875 9.29893 8.95703 9.76777 8.5468C10.2366 8.13656 10.5 7.58016 10.5 7C10.5 6.41984 10.2366 5.86344 9.76777 5.4532C9.29893 5.04297 8.66304 4.8125 8 4.8125ZM4.5 7C4.5 6.18777 4.86875 5.40882 5.52513 4.83449C6.1815 4.26016 7.07174 3.9375 8 3.9375C8.92826 3.9375 9.8185 4.26016 10.4749 4.83449C11.1313 5.40882 11.5 6.18777 11.5 7C11.5 7.81223 11.1313 8.59118 10.4749 9.16551C9.8185 9.73984 8.92826 10.0625 8 10.0625C7.07174 10.0625 6.1815 9.73984 5.52513 9.16551C4.86875 8.59118 4.5 7.81223 4.5 7Z" fill="#048B52" /></svg></a></button></td></tr>';
+                });
+                html += '</tbody></table>';
+                return html;
+                // return (
+                //     '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+                //     '<tr>' +
+                //     '<td>Full name:</td>' +
+                //     '<td>' +
+                //     d.id +
+                //     '</td>' +
+                //     '</tr>' +
+                //     '<tr>' +
+                //     '<td>Extension number:</td>' +
+                //     '<td>' +
+                //     d.company_name +
+                //     '</td>' +
+                //     '</tr>' +
+                //     '<tr>' +
+                //     '<td>Extra info:</td>' +
+                //     '<td>And any further details here (images etc)...</td>' +
+                //     '</tr>' +
+                //     '</table>'
+                // );
             }
-        },
-        columnDefs: [ {
-            className: 'dtr-control',
-            orderable: false,
-            targets:   -1
-        } ],
-            'scrollX': true,
-                        "lengthMenu": [
-                            [50, 100, 500],
-                            [50, 100, 500]
-                        ],
-        language: {
+
+            var table = $('#shipment_table').DataTable({
+                responsive: {
+                    details: {
+                        type: 'column',
+                        target: -1
+                    }
+                },
+                columnDefs: [{
+                    className: 'dtr-control',
+                    orderable: false,
+                    targets: -1
+                }],
+                'scrollX': true,
+                "lengthMenu": [
+                    [50, 100, 500],
+                    [50, 100, 500]
+                ],
+                language: {
                     search: "",
                     sLengthMenu: "_MENU_",
                     searchPlaceholder: "Search",
                     // processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
                 },
-        ajax: "{{ route('shipments.records') }}",
-        columns: [
-            {
-                className: 'dt-control',
-                orderable: false,
-                data: null,
-                defaultContent: '',
-                
-            },
-            // {data: ''},
-            { data: 'id'},
-            { data: 'select_consignee' },
-            { data: 'container_no' },
-            { data: 'booking_number' },
-            { data: 'shipping_line' },
-            { data: 'container_size' },
-            { data: 'loading_date' },
-            { data: 'sale_date' },
-            { data: 'est_arrival_date' },
-            { data: 'ship_date' },
-            { data: 'shipper' },
-            { data: 'loading_port' },
-            { data: 'loading_port' },
-            { data: 'destination_country' },
-            { data: 'status'},
-            { data: 'shipment_id'},
-            { data: 'notes'},
-            { data: 'action'},
-            
-            // { data: 'action' },
-        ],
-        order: [[1, 'asc']],
-        
-        
-    });
+                ajax: "{{ route('shipments.records') }}",
+                columns: [{
+                        className: 'dt-control',
+                        orderable: false,
+                        data: null,
+                        defaultContent: '',
 
-     // Add event listener for opening and closing details
-     $('#shipment_table tbody').on('click', 'td.dt-control', function () {
-        var tr = $(this).closest('tr');
-        var row = table.row(tr);
+                    },
+                    // {data: ''},
+                    {
+                        data: 'id'
+                    },
+                    {
+                        data: 'select_consignee'
+                    },
+                    {
+                        data: 'container_no'
+                    },
+                    {
+                        data: 'booking_number'
+                    },
+                    {
+                        data: 'shipping_line'
+                    },
+                    {
+                        data: 'container_size'
+                    },
+                    {
+                        data: 'loading_date'
+                    },
+                    {
+                        data: 'sale_date'
+                    },
+                    {
+                        data: 'est_arrival_date'
+                    },
+                    {
+                        data: 'ship_date'
+                    },
+                    {
+                        data: 'shipper'
+                    },
+                    {
+                        data: 'loading_port'
+                    },
+                    {
+                        data: 'loading_port'
+                    },
+                    {
+                        data: 'destination_country'
+                    },
+                    {
+                        data: 'status'
+                    },
+                    {
+                        data: 'shipment_id'
+                    },
+                    {
+                        data: 'notes'
+                    },
+                    {
+                        data: 'action'
+                    },
 
-        console.log(row.data()['vehicle']);
- 
-        if (row.child.isShown()) {
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        } else {
-            // Open this row
-            row.child(format(row.data()['vehicle'])).show();
-            tr.addClass('shown');
-        }
-    });
+                    // { data: 'action' },
+                ],
+                order: [
+                    [1, 'asc']
+                ],
 
-});
+
+            });
+
+            // Add event listener for opening and closing details
+            $('#shipment_table tbody').on('click', 'td.dt-control', function() {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+
+                console.log(row.data()['vehicle']);
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                } else {
+                    // Open this row
+                    row.child(format(row.data()['vehicle'])).show();
+                    tr.addClass('shown');
+                }
+                $('.vehicle_shipment_table').DataTable({
+                    "lengthChange": false,
+                    "info": false,
+                    "bPaginate": false,
+                    searching: false,
+                    "ordering": false,
+                    language: {
+                            search: "",
+                            sLengthMenu: "_MENU_",
+                            searchPlaceholder: "Search",
+                            "emptyTable": "No Vehicle Available",
+                        },
+                });
+
+            });
+
+        });
 
 
         // $(function() {
@@ -569,7 +626,8 @@ $(document).ready(function () {
         }
     </script>
 
-    
+    <script></script>
+
 
     @if (Session::has('success'))
         <script>

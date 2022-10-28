@@ -542,7 +542,11 @@ class ShipmentController extends Controller
                 ->addIndexColumn()
                 ->addColumn('id', function($row){
                     $data['row'] = $row;
-                    $data['vehicles'] = Vehicle::where('shipment_id', $row->id)->get();
+                    // $data['vehicles'] = Vehicle::where('shipment_id', $row->id)->get();
+                    
+                    $data['img'] = Shipment_Invice::where('shipment_id', $row->id)->get();
+                    // return $data['img'];
+                    $data['image_path'] = $data['img'];
                     $output = view('layouts.shipment_filter.vehicle_table', $data)->render();
                     return $output;
                 })
