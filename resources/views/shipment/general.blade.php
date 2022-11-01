@@ -78,10 +78,10 @@
                                                         class="col-6 px-0 font-size font-bold">Company
                                                         Name</label>
                                                         <select class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="company_name" id="company_name">
+                                                        name="company_name" id="company_name" onchange="customer_details()">
                                                         <option selected disabled>Select Company</option>
                                                         @foreach ($companies as $company)
-                                                            <option value="{{$company['name']}}">{{$company['name']}}</option>
+                                                            <option value="{{$company['company_name']}}">{{$company['company_name']}}</option>
                                                         @endforeach
                                                     
                                                     </select>
@@ -97,7 +97,7 @@
                                                         Email</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="customer_email" id="customer_email">
+                                                        name="customer_email" id="customer_email" value="">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">

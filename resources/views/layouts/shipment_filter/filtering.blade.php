@@ -1,33 +1,29 @@
 @if (@count($records) == 0)
     <tr class="font-size">
-        <td colspan="11" class="h5 text-muted text-center">NO VEHICLES TO DISPLAY</td>
+        <td colspan="11" class="h5 text-muted text-center">NO Shipment TO DISPLAY</td>
     </tr>
 @endif
-
 @foreach ($records as $val)
     <tr style="border-bottom: 1.2px solid rgba(191, 191, 191, 1) !important">
-        <td>{{ @$val['id'] }}</td>
+        <td></td>
         <td class="d-block">
-            <div>
-                {{ @$val['company_name'] }}
-            </div>
-            <div>
-                <span style="font-size: 12px !important;">{{ @$val['lead'] }}</span>
-            </div>
         </td>
-        <td>{{ @$val['customer_email'] }}</td>
-        <td>{{ @$val['customer_phone'] }}</td>
-        <td>{{ @$val['shipment_type'] }}</td>
-        <td>{{ @$val['loading_date'] }}</td>
-        <td>{{ @$val['cut_off_date'] }}</td>
-        <td>{{ @$val['sail_date'] }}</td>
-        <td>{{ @$val['est_arrival_date'] }}</td>
+        <td>{{ @$val['select_consignee'] }}</td>
         <td>{{ @$val['container_no'] }}</td>
-        <td>{{ @$val['select_consignee '] }}</td>
-        <td>{{ @$val['loading_state '] }}</td>
-        <td>{{ @$val['loading_country '] }}</td>
-        <td>{{ @$val['destination_state'] }}</td>
+        <td>{{ @$val['booking_number'] }}</td>
+        <td>{{ @$val['shipping_line'] }}</td>
+        <td>{{ @$val['container_size'] }}</td>
+        <td>{{ @$val['loading_date'] }}</td>
+        <td>{{ @$val['sale_date'] }}</td>
+        <td>{{ @$val['est_arrival_date'] }}</td>
+        <td>{{ @$val['ship_date '] }}</td>
+        <td>{{ @$val['shipper'] }}</td>
+        <td>{{ @$val['loading_port'] }}</td>
+        <td>{{ @$val['loading_port'] }}</td>
         <td>{{ @$val['destination_country'] }}</td>
+        <td>{{ @$val['status'] }}</td>
+        <td>{{ @$val['shipment_id']}}</td>
+        <td>{{ @$val['notes'] }}</td>
         <td>
             <button class="profile-button">
                 <a href={{ route('shipment.profile') . '/' . @$val['id'] }}>

@@ -1,4 +1,6 @@
 @extends('layouts.partials.mainlayout')
+
+@section('body')
 <style>
     table.dataTable td.dt-control:before {
     height: 1em;
@@ -27,7 +29,6 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
     border-bottom: none!important;
 }
 </style>
-@section('body')
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
         style="z-index:9999999999999999">
@@ -52,7 +53,6 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
         </div>
     </div>
     {{-- Modal End --}}
-
     <div class="bg-white rounded p-2">
         {{-- badges start --}}
         <div class="d-flex m-2">
@@ -71,7 +71,6 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                                         d="M15.167 11.9165H23.8337V14.0832H15.167V11.9165ZM8.66699 4.33318C8.09428 4.31984 7.52482 4.42281 6.99304 4.63585C6.46127 4.8489 5.97823 5.1676 5.57316 5.57268C5.16808 5.97775 4.84938 6.46079 4.63633 6.99256C4.42328 7.52434 4.32032 8.0938 4.33366 8.66651C4.32032 9.23922 4.42328 9.80869 4.63633 10.3405C4.84938 10.8722 5.16808 11.3553 5.57316 11.7603C5.97823 12.1654 6.46127 12.4841 6.99304 12.6972C7.52482 12.9102 8.09428 13.0132 8.66699 12.9998C9.2397 13.0132 9.80917 12.9102 10.3409 12.6972C10.8727 12.4841 11.3558 12.1654 11.7608 11.7603C12.1659 11.3553 12.4846 10.8722 12.6977 10.3405C12.9107 9.80869 13.0137 9.23922 13.0003 8.66651C13.0137 8.0938 12.9107 7.52434 12.6977 6.99256C12.4846 6.46079 12.1659 5.97775 11.7608 5.57268C11.3558 5.1676 10.8727 4.8489 10.3409 4.63585C9.80917 4.42281 9.2397 4.31984 8.66699 4.33318V4.33318ZM8.66699 10.8332C8.37877 10.8471 8.09082 10.8006 7.82164 10.6967C7.55246 10.5927 7.308 10.4336 7.10396 10.2295C6.89992 10.0255 6.74081 9.78105 6.63685 9.51186C6.5329 9.24268 6.48639 8.95473 6.50033 8.66651C6.48639 8.37829 6.5329 8.09034 6.63685 7.82116C6.74081 7.55198 6.89992 7.30752 7.10396 7.10348C7.308 6.89944 7.55246 6.74033 7.82164 6.63637C8.09082 6.53242 8.37877 6.48591 8.66699 6.49985C8.95521 6.48591 9.24316 6.53242 9.51234 6.63637C9.78152 6.74033 10.026 6.89944 10.23 7.10348C10.4341 7.30752 10.5932 7.55198 10.6971 7.82116C10.8011 8.09034 10.8476 8.37829 10.8337 8.66651C10.8476 8.95473 10.8011 9.24268 10.6971 9.51186C10.5932 9.78105 10.4341 10.0255 10.23 10.2295C10.026 10.4336 9.78152 10.5927 9.51234 10.6967C9.24316 10.8006 8.95521 10.8471 8.66699 10.8332V10.8332ZM4.33366 19.4998C4.33366 18.6379 4.67607 17.8112 5.28556 17.2017C5.89505 16.5923 6.7217 16.2498 7.58366 16.2498H9.75032C10.6123 16.2498 11.4389 16.5923 12.0484 17.2017C12.6579 17.8112 13.0003 18.6379 13.0003 19.4998V20.5832H15.167V19.4998C15.167 18.7885 15.0269 18.0842 14.7547 17.427C14.4825 16.7698 14.0835 16.1727 13.5805 15.6697C13.0775 15.1667 12.4804 14.7677 11.8232 14.4955C11.166 14.2233 10.4617 14.0832 9.75032 14.0832H7.58366C6.14707 14.0832 4.76932 14.6539 3.7535 15.6697C2.73768 16.6855 2.16699 18.0633 2.16699 19.4998V20.5832H4.33366V19.4998Z"
                                         fill="#E41414" />
                                 </svg>
-
                             </div>
                         </div>
                         <div>
@@ -278,17 +277,6 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                                     id="arrival_date" aria-describedby="arrival_date" style="height: 31px!important;"
                                     required>
                             </div>
-                            {{-- <input placeholder="Arrival Date"
-                                class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
-                                name="arrival_date" id="arrival_date" type="date"> --}}
-                            {{-- <select
-                                class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
-                                name="arrival_date" id="arrival_date">
-                                <option value="all" disabled selected>Arrival Date</option>
-                                @for ($i = 0; $i < count($date); $i++)
-                                    <option value="{{ $date[$i] }}">{{ $date[$i] }}</option>
-                                @endfor
-                            </select> --}}
                         </div>
                         <div class="col-3 p-0">
                             <select
@@ -329,66 +317,24 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                                 <th>Vehicles</th>
                                 <th>Note</th>
                                 <th class="font-bold-tr">Action</th>
-
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="shipment_tbody">
-                            {{-- @foreach ($shipments as $shipment)
-                            <tr>
-                                <td>{{@$shipment['id']}}</td>
-                                <td>{{@$shipment['company_name']}}</td>
-                                <td>{{@$shipment['customer_email']}}</td>
-                                <td>{{@$shipment['customer_phone']}}</td>
-                                <td>{{@$shipment['shipment_type']}}</td>
-                                <td>{{@$shipment['loading_date']}}</td>
-                                <td>{{@$shipment['cut_off_date']}}</td>
-                                <td>{{@$shipment['sale_date']}}</td>
-                                <td>{{@$shipment['est_arrival_date']}}</td>
-                                <td>{{@$shipment['container_no']}}</td>
-                                <td>{{@$shipment['loading_state']}}</td>
-                                <td>{{@$shipment['loading_country']}}</td>
-                                <td>{{@$shipment['destination_state']}}</td>
-                                <td>{{@$shipment['destination_country']}}</td>
-                                <td>{{count(@$shipment['vehicle'])}}Vehicle</td>
-                                <td>{{@$shipment['id']}}
-                                <tr class="collapse">
-                                    <th>kashif</th>
-                                </tr>
-                                </td>
-                            </tr>
-                            
-                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>
-
-
-
-
-
             </div>
         </div>
         {{-- listing end --}}
     </div>
-
-
-
-
-
-
-
     <script type="text/javascript">
         $(document).ready(function() {
             function format(d) {
-                // `d` is the original data object for the row
                 console.log(d);
-
                 html =
                     '<table class="vehicle_shipment_table my-3" style="width:90%!important;"><thead style="background:#dbdbdb;color:#2c3e50;font-size:12px!important;"><th>ID</th><th>Customer Name</th><th>VIN</th><th>YEAR</th><th>MAKE</th><th>MODEL</th><th>VEHICLE TYPE</th><th>VALUE</th><th>Action</th></thead><tbody id="shipemt_vehicle">';
                 d.forEach(element => {
-
                 $url_view = 'vehicle/profile/' + element.id;
-
                     html += '<tr><td>' + element.id + '</td><td>' + element.customer_name + '</td><td>' +
                         element.vin + '</td><td>' + element.year + '</td><td>' + element.make +
                         '</td><td>' + element.model + '</td><td>' + element.vehicle_type + '</td><td>' +
@@ -396,28 +342,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                 });
                 html += '</tbody></table>';
                 return html;
-                // return (
-                //     '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
-                //     '<tr>' +
-                //     '<td>Full name:</td>' +
-                //     '<td>' +
-                //     d.id +
-                //     '</td>' +
-                //     '</tr>' +
-                //     '<tr>' +
-                //     '<td>Extension number:</td>' +
-                //     '<td>' +
-                //     d.company_name +
-                //     '</td>' +
-                //     '</tr>' +
-                //     '<tr>' +
-                //     '<td>Extra info:</td>' +
-                //     '<td>And any further details here (images etc)...</td>' +
-                //     '</tr>' +
-                //     '</table>'
-                // );
             }
-
             var table = $('#shipment_table').DataTable({
                 processing: true,
                 serverSide: true,
@@ -451,7 +376,6 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                         defaultContent: '',
 
                     },
-                    // {data: ''},
                     {
                         data: 'id'
                     },
@@ -506,33 +430,22 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                     {
                         data: 'action'
                     },
-
-                    // { data: 'action' },
                 ],
                 order: [
                     [1, 'asc']
                 ],
-
-
             });
-
-            // Add event listener for opening and closing details
             $('#shipment_table tbody').on('click', 'td.dt-control', function() {
                 var tr = $(this).closest('tr');
                 var row = table.row(tr);
-
                 console.log(row.data()['vehicle']);
-
                 if (row.child.isShown()) {
-                    // This row is already open - close it
                     row.child.hide();
                     tr.removeClass('dt-hasChild shown');
                 } else {
-                    // Open this row
                     row.child(format(row.data()['vehicle'])).show();
                     tr.addClass('dt-hasChild shown');
                 }
-
                 $('.vehicle_shipment_table').DataTable({
                     "lengthChange": false,
                     "info": false,
@@ -546,101 +459,11 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                             "emptyTable": "No Vehicle Available",
                         },
                 });
-
             });
-
         });
-
-
-        // $(function() {
-        //     var table = $('#shipment_table').DataTable({
-        //         processing: true,
-        //         serverSide: true,
-        //         "lengthMenu": [
-        //             [50, 100, 500],
-        //             [50, 100, 500]
-        //         ],
-        //         language: {
-        //             search: "",
-        //             sLengthMenu: "_MENU_",
-        //             searchPlaceholder: "Search",
-        //             processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
-        //         },
-        //         ajax: "{{ route('shipments.records') }}",
-        //         columns: [{
-        //                 data: 'id',
-        //                 name: 'id'
-        //             },
-        //             {
-        //                 data: 'company_name',
-        //                 name: 'company_name'
-        //             },
-        //             {
-        //                 data: 'customer_email',
-        //                 name: 'customer_email'
-        //             },
-        //             {
-        //                 data: 'customer_phone',
-        //                 name: 'customer_phone'
-        //             },
-        //             {
-        //                 data: 'shipment_type',
-        //                 name: 'shipment_type'
-        //             },
-        //             {
-        //                 data: 'loading_date',
-        //                 name: 'loading_date'
-        //             },
-        //             {
-        //                 data: 'cut_off_date',
-        //                 name: 'cut_off_date'
-        //             },
-        //             {
-        //                 data: 'sale_date',
-        //                 name: 'sale_date'
-        //             },
-        //             {
-        //                 data: 'est_arrival_date',
-        //                 name: 'est_arrival_date'
-        //             },
-        //             {
-        //                 data: 'container_no',
-        //                 name: 'container_no'
-        //             },
-        //             {
-        //                 data: 'loading_state',
-        //                 name: 'loading_state'
-        //             },
-        //             {
-        //                 data: 'loading_country',
-        //                 name: 'loading_country'
-        //             },
-        //             {
-        //                 data: 'destination_state',
-        //                 name: 'destination_state'
-        //             },
-        //             {
-        //                 data: 'destination_country',
-        //                 name: 'destination_country'
-        //             },
-        //             {
-        //                 data: 'shipment_id',
-        //                 name: 'shipment_id'
-        //             },
-        //             {
-        //                 data: 'action',
-        //                 name: 'action',
-        //                 orderable: false,
-        //                 searchable: false
-        //             },
-        //         ]
-        //     });
-        // });
-
         function fetchCustomers(id) {
             $tab = $('#' + id).attr('tab');
             $id = id;
-
             $.ajax({
                 type: 'post',
                 url: '{{ URL::to('admin/shipments/filterShipment') }}',
@@ -650,16 +473,10 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                 },
                 success: function(data) {
                     $('#shipment_tbody').html(data);
-
-
                 }
             });
         }
     </script>
-
-    <script></script>
-
-
     @if (Session::has('success'))
         <script>
             iziToast.warning({

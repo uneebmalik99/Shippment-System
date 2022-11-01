@@ -1,4 +1,3 @@
-{{-- @if(@$tab=='warehouse') --}}
 <div class="modal-header">
     <h5 class="modal-title title_modal">{{@$title}}</h5>
     <button type="button" id="close_modal" class="close" data-dismiss="modal" aria-label="Close">
@@ -27,13 +26,14 @@
                 </filter>
             </defs>
         </svg>
+
     </button>
 </div>
 <div class="modal-body">
     <form method="POST" id="common_fields">
         <div class="common_section">
         <div class="add_data_section">
-            {{-- {{ dd($company) }} --}}
+            {{-- {{ dd($record) }} --}}
             {{-- @foreach ($company as $companydata) --}}
             <div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26);
                 filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;">
@@ -95,4 +95,3 @@
         </div>
     </form>
 </div>
-{{-- @endif --}}

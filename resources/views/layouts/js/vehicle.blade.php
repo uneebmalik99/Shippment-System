@@ -228,12 +228,12 @@
 </script>
 <script>
     function display_model() {
-        iziToast.success({
-            title: 'Success',
-            message: 'Vehicle Created Successfully!',
-            position: 'topCenter',
-            zindex: '9999999999999',
-        });
+        // iziToast.success({
+        //     title: 'Success',
+        //     message: 'Vehicle Created Successfully!',
+        //     position: 'topCenter',
+        //     zindex: '9999999999999',
+        // });
         $('#exampleModal').modal('hide');
         setTimeout(function() {
             window.location.reload(true);
@@ -526,4 +526,17 @@ $.ajax({
     }
 });
     }
+
+
+    function finddays(){
+        paid_date = $('#paid_date').val();
+        sale_date = $('#sale_date').val();
+        var Difference_In_Time = new Date(sale_date).getTime() - new Date(paid_date).getTime();  
+        var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+        var days = Math.abs(Difference_In_Days);
+        $('#days').val(days);
+    }
+
+   
+
 </script>

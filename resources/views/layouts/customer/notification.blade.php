@@ -20,7 +20,6 @@
                 documents</b></button>
     </div>
 </div> --}}
-@if ($notification->count() > 0)
     <div class="card user-card rounded mt-3">
         <div class="px-3 d-flex justify-cotent center">
             <h6 class="text-muted"><b>Notifications</b></h6>
@@ -31,6 +30,9 @@
                     <div class="d-flex">
                         <input class="form-control border border-info rounded" type="text" placeholder="Search">
                     </div>
+
+@if ($notification->count() > 0)
+
 
                     @foreach ($notification as $notifications)
                         <div class="card-body border border-info rounded d-flex mt-3 p-2"
@@ -63,6 +65,12 @@
 
                         </div>
                     @endforeach
+
+                    @else
+    <div class="d-flex justify-content-center align-items-center" style="width:100%;height:100%;margin-top:5%;">
+        <h6 class="mt-2 py-5">Notification Not Found</h6>
+    </div>
+@endif
                 </div>
             </div>
             <div class="col-7 px-0">
@@ -110,8 +118,4 @@
             </div>
         </div>
     </div>
-@else
-    <div class="d-flex justify-content-center align-items-center" style="width:100%;height:100%;margin-top:5%;">
-        <h6 class="mt-2 py-5">Notification Not Found</h6>
-    </div>
-@endif
+

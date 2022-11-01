@@ -1,4 +1,3 @@
-{{-- {{dd(@$shipments)}} --}}
 <style>
     #shipment_details thead th {
         position: sticky !important;
@@ -121,21 +120,6 @@
                     <span class="infromation_mainText">Shipping Line</span>
                     <span class="information_text">{{ @$shipments[0]['shipping_line'] }}</span>
                 </div>
-                {{-- <div class="d-flex justify-content-between my-2 py-1"
-                    style="border: 1px solid rgba(26, 88, 133, 0.17);
-                border-radius: 10px;width: 90%;margin:6px auto">
-                    <span class="infromation_mainText"></span>
-                    <span class="information_text"></span>
-                </div>
-                <div class="d-flex justify-content-between my-2 py-1"
-                    style="border: 1px solid rgba(26, 88, 133, 0.17);
-                border-radius: 10px;width: 90%;margin:6px auto">
-                    <span class="infromation_mainText">VESSEL</span>
-                    <span class="information_text"></span>
-                </div> --}}
-
-
-
                 <div class="information_button d-flex justify-content-center mt-3" style="margin:50px">
                     <button
                         style="background: #1F689E; transform: skew(-30deg) !important;border:none;
@@ -159,14 +143,7 @@
         </div>
     </div>
     <div class="col-sm-10 col-md-10 col-lg-8 pl-0">
-
         <div class="information_second_div">
-
-            {{-- <div class="row">
-                <div class="col-12">   
-                </div>
-            </div> --}}
-
             <div class="row" style="padding-bottom:60px">
                 <div class=" col-sm-12 col-md-5 col-lg-5" style="padding: 10px 10px;">
                     <div class="d-flex justify-content-between my-2 py-1 "
@@ -223,9 +200,11 @@
                                             <button class="img_active_button img_btn" onclick="changeImages(this.id)"
                                                 tab="">
                                                 <div class="imdiv">
+                                                    Vehicle Images
+                                                </div>
                                             </button>
 
-                                            <button class="image_buttonmx-1
+                                            <button class="image_button mx-1
                                                     img_btn" style="margin-left:22px" onclick="changeImages(this.id)"
                                                     tab="auction_images">
                                                     <div class="img_button">
@@ -238,33 +217,22 @@
                                                     tab="warehouse_images">Ware House
                                                     Image</div>
                                             </button>
-
                                         </div>
-
-
                                     </div>
-
                                 </div>
-
                                 <div class="col-12">
-
                                     <div class="w-100 p-2">
                                         <img src="" alt=" "class="img_fluid mx-auto w-100">
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
-
                         <div class="gallary_body">
                             <div class="d-flex flex-wrap justify-content-center changeImages">
-
                                 <div class="img">
                                     <img src="{{ asset('images/' . @$img['name']) }}" alt=" "
                                         style="width: 60px; height: 55px; ">
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -278,15 +246,8 @@
                             </button>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
-
-
-
-
         </div>
         <div class="px-2">
             <div class="row mt-2">
@@ -296,9 +257,10 @@
                 border-radius: 10px;height:388px!important">
                     <table class="table scroll"
                         style="width:100%!important;border:none!important;overflow-x:scroll!important;">
-                        <thead class="bg-custom text-dark">
+                        <thead class="bg-custom text-white">
                             <tr>
                                 <th>#</th>
+                                <th>image</th>
                                 <th>Year</th>
                                 <th>Make</th>
                                 <th>Model</th>
@@ -310,12 +272,14 @@
                                 <th>Lot No</th>
                                 <th>View</th>
                             </tr>
-
                         </thead>
                         <tbody>
                             @foreach ($shipments[0]['vehicle'] as $vehicles)
                                 <tr>
                                     <td>{{ @$vehicles['id'] }}</td>
+                                    <td>
+                                        <img src="{{asset(@$vehicles['warehouse_image'][0]['name'])}}" alt="" style="width:35px;height:35px;border-radius:50%;">
+                                    </td>
                                     <td>{{ @$vehicles['year'] }}</td>
                                     <td>{{ @$vehicles['make'] }}</td>
                                     <td>{{ @$vehicles['model	'] }}</td>
@@ -343,13 +307,10 @@
                                     </td>
                                 </tr>
                             @endforeach
-
                         </tbody>
-
                     </table>
                 </div>
             </div>
         </div>
-
     </div>
 </div>

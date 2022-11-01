@@ -105,7 +105,7 @@
     }
 
 
-    function search_shipment(){
+    function search_shipment() {
         $search_shipmentText = $('#shipment_search').val();
 
         $.ajax({
@@ -115,16 +115,16 @@
                 'searchText': $search_shipmentText,
             },
             success: function(data) {
-               console.log(data);
-               $('#shipment_table').html(data);
+                console.log(data);
+                $('#shipment_table').html(data);
             }
         });
     }
 
 
-    
 
-    function FetchState(){
+
+    function FetchState() {
         $country = $('#loading_country').val();
 
         $.ajax({
@@ -134,15 +134,15 @@
                 'country_id': $country,
             },
             success: function(data) {
-               console.log(data);
-               $('#loading_state').html(data);
+                console.log(data);
+                $('#loading_state').html(data);
             }
         });
 
 
     }
 
-    function FetchPort(){
+    function FetchPort() {
         $state = $('#loading_state').val();
 
         $.ajax({
@@ -152,14 +152,14 @@
                 'state_id': $state,
             },
             success: function(data) {
-               console.log(data);
-               $('#loading_port').html(data);
+                console.log(data);
+                $('#loading_port').html(data);
             }
         });
-        
+
     }
 
-    function FetchTerminal(){
+    function FetchTerminal() {
         $port = $('#loading_port').val();
 
         $.ajax({
@@ -169,14 +169,14 @@
                 'port_id': $port,
             },
             success: function(data) {
-               console.log(data);
-               $('#loading_terminal').html(data);
+                console.log(data);
+                $('#loading_terminal').html(data);
             }
         });
-        
+
     }
 
-    function DestinationState(){
+    function DestinationState() {
         $country_id = $('#destination_country').val();
 
         $.ajax({
@@ -186,12 +186,13 @@
                 'country_id': $country_id,
             },
             success: function(data) {
-               console.log(data);
-               $('#destination_state').html(data);
+                console.log(data);
+                $('#destination_state').html(data);
             }
         });
     }
-    function FetachDestinationPort(){
+
+    function FetachDestinationPort() {
         $state_id = $('#destination_state').val();
 
         $.ajax({
@@ -201,25 +202,41 @@
                 'state_id': $state_id,
             },
             success: function(data) {
-               console.log(data);
-               $('#destination_port').html(data);
+                console.log(data);
+                $('#destination_port').html(data);
             }
         });
     }
 
-    function FetchDestiTerimals(){
+    function FetchDestiTerimals() {
         $port_id = $('#destination_port').val();
 
-$.ajax({
-    method: 'POST',
-    url: '{{ route('shipments.FetachDestiTerminal') }}',
-    data: {
-        'port_id': $port_id,
-    },
-    success: function(data) {
-       console.log(data);
-       $('#destination_terminal').html(data);
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('shipments.FetachDestiTerminal') }}',
+            data: {
+                'port_id': $port_id,
+            },
+            success: function(data) {
+                console.log(data);
+                $('#destination_terminal').html(data);
+            }
+        });
     }
-});
+
+    function customer_details() {
+        company_name = $('#company_name').val();
+
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('shipments.customer_details') }}',
+            data: {
+                'company_name': company_name,
+            },
+            success: function(data) {
+                $('#customer_email').val(data[0]['email']);
+                $('#customer_phone').val(data[0]['phone']);
+            }
+        });
     }
 </script>

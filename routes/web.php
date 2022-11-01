@@ -142,6 +142,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::post('/shipments/fetchdestinationterminal', [ShipmentController::class, 'FetchDestiTerminal'])->name('shipments.FetachDestiTerminal');
 
+    Route::post('/shipments/customer_details', [ShipmentController::class, 'Customer_Details'])->name('shipments.customer_details');
+
 
     //Notification Routes`
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.list');
@@ -170,9 +172,31 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/openpopup',                           [MasterController::class, 'showmodel'])->name('master.showmodel');
     Route::post('/save/record',                         [MasterController::class, 'save'])->name('master.save');
 
+    Route::get('/companies',                           [MasterController::class, 'companiesshow'])->name('master.companies');
+    Route::get('/color',                               [MasterController::class, 'colorshow'])->name('master.color');
+    Route::get('/title',                               [MasterController::class, 'titleshow'])->name('master.title');
+    Route::get('/title/types',                         [MasterController::class, 'titletypeshow'])->name('master.titletypes');
+    Route::get('/key',                                 [MasterController::class, 'keyshow'])->name('master.key');
+    Route::get('/vehicletype',                         [MasterController::class, 'vehicletypeshow'])->name('master.vehicletype');
+    Route::get('/auction',                             [MasterController::class, 'auctionshow'])->name('master.auction');
+    Route::get('/shipment/status',                     [MasterController::class, 'shipmentstatusshow'])->name('master.shipmentstatus');
+    Route::get('/shipment/lines',                      [MasterController::class, 'shipmentlinesshow'])->name('master.shipmentlines');
+    Route::get('/container/type',                      [MasterController::class, 'containertypeshow'])->name('master.containertype');
+    Route::get('/container/size',                      [MasterController::class, 'containersizeshow'])->name('master.containersize');
+    Route::get('/shippername',                         [MasterController::class, 'shippernameshow'])->name('master.shippername');
+    Route::get('/vehiclestatus',                       [MasterController::class, 'vehiclestatushow'])->name('master.vehiclestatus');
+    Route::get('/pickuplocation',                      [MasterController::class, 'pickuplocationshow'])->name('master.pickuplocation');
+    Route::get('/site',                                [MasterController::class, 'siteshow'])->name('master.site');
+    Route::get('/warehouse',                           [MasterController::class, 'warehouseshow'])->name('master.warehouse');
+    Route::get('/shipment/types',                      [MasterController::class, 'shipmenttypeshow'])->name('master.shipmenttype');
+    Route::get('/loading/country',                     [MasterController::class, 'loadingcountryshow'])->name('master.loadingcountry');
+    Route::get('/destination/country',                 [MasterController::class, 'destinationcountryshow'])->name('master.destinationcountry');
+    Route::get('/mms',                                 [MasterController::class, 'mmsshow'])->name('master.mms');
+
     // master towing page routes 
 
     Route::get('/master-towing',                     [MasterTowing::class, 'index'])->name('master.towing');
+
 
 
 

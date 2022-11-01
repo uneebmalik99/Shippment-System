@@ -14,6 +14,7 @@ use App\Models\Shipment_Invice;
 use App\Models\Stamp_Title;
 use App\Models\Vehicle;
 use App\Models\Country;
+use App\Models\User;
 use App\Models\Company;
 use App\Models\DestinationCountry;
 use App\Models\DestinationPort;
@@ -97,6 +98,7 @@ class ShipmentController extends Controller
         ];
 
         $notification = $this->Notification();
+        // $data['companies'] = User::all();
         $data['records'] = Shipment::with('consignee')->paginate($this->perpage);
         $data['booked'] = Shipment::with('consignee')->where('status', '1')->paginate($this->perpage);
         $data['shipped'] = Shipment::with('consignee')->where('status', '2')->paginate($this->perpage);
@@ -148,7 +150,8 @@ class ShipmentController extends Controller
         $data['container_size'] = ContainerSize::where('status', '1')->get();
         $data['container_types'] = ContainerType::where('status', '1')->get();
         $data['shipment_lines'] = ShipmentLine::where('status', '1')->get();
-        $data['companies'] = Company::where('status', '1')->get();
+        // $data['companies'] = Company::where('status', '1')->get();
+        $data['companies'] = User::all();
         $data['destination_country'] = DestinationCountry::where('status', '1')->get();
         // $data['states'] = State::where('status', '1')->get();
         if ($request->ajax()) {
@@ -454,7 +457,7 @@ class ShipmentController extends Controller
             ],
         ];
         $notification = $this->Notification();
-        $data['shipments'] = Shipment::with('vehicle')->where('id', $request->id)->get();
+        $data['shipments'] = Shipment::with('vehicle.warehouse_image')->where('id', $request->id)->get()->toArray();
         // dd($data['shipments']);
         if ($request->ajax()) {
             $tab = $request->tab;
@@ -619,5 +622,10 @@ class ShipmentController extends Controller
         }
 
 
+    }
+
+    public function Customer_Details(Request $req){
+        $customer_details = User::where('company_name', $req->company_name)->get();
+        return $customer_details;
     }
 }
