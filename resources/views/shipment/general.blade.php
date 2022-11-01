@@ -115,9 +115,18 @@
                                                     <label for="shipment_type"
                                                         class="col-6 px-0 font-size font-bold">Shipment
                                                         Type</label>
-                                                    <input type="text"
-                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+
+                                                        <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="shipment_type" id="shipment_type">
+                                                        <option>Select Shipment Types</option>
+                                                        @foreach ($shipment_types as $types)
+                                                            <option value="{{@$types['name']}}">{{@$types['name']}}</option>
+                                                        @endforeach
+                                                    
+                                                    </select>
+                                                    {{-- <input type="text"
+                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                        name="shipment_type" id="shipment_type"> --}}
                                                 </div>
                                             </div>
                                         </div>

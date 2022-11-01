@@ -14,6 +14,7 @@ use App\Models\Shipment_Invice;
 use App\Models\Stamp_Title;
 use App\Models\Vehicle;
 use App\Models\Country;
+use App\Models\ShipmentType;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\DestinationCountry;
@@ -150,6 +151,7 @@ class ShipmentController extends Controller
         $data['container_size'] = ContainerSize::where('status', '1')->get();
         $data['container_types'] = ContainerType::where('status', '1')->get();
         $data['shipment_lines'] = ShipmentLine::where('status', '1')->get();
+        $data['shipment_types'] = ShipmentType::where('status', '1')->get();
         // $data['companies'] = Company::where('status', '1')->get();
         $data['companies'] = User::all();
         $data['destination_country'] = DestinationCountry::where('status', '1')->get();
