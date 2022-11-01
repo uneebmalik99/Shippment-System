@@ -14,6 +14,7 @@ use App\Models\Shipment_Invice;
 use App\Models\Stamp_Title;
 use App\Models\Vehicle;
 use App\Models\Country;
+use App\Models\DCountry;
 use App\Models\ShipmentType;
 use App\Models\User;
 use App\Models\Company;
@@ -25,6 +26,7 @@ use App\Models\LoadingTerminal;
 use App\Models\LoadingPort;
 use App\Models\ShippingCountry;
 use App\Models\ShipmentLine;
+use App\Models\LoadingCountry;
 use App\Models\State;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -147,14 +149,18 @@ class ShipmentController extends Controller
         $data['consignees'] = Consignee::all()->toArray();
         $data['records'] = Shipment::all()->toArray();
         $data['location'] = Location::all()->toArray();
-        $data['countries'] = ShippingCountry::where('status', '1')->get();
+        // $data['countries'] = ShippingCountry::where('status', '1')->get();
+        $data['countries'] = LoadingCountry::select('country')->where('status', '1')->groupBy('country')->get()->toArray();
+
+        // User::select('name')->groupBy('name')->get()->toArray()
         $data['container_size'] = ContainerSize::where('status', '1')->get();
         $data['container_types'] = ContainerType::where('status', '1')->get();
         $data['shipment_lines'] = ShipmentLine::where('status', '1')->get();
         $data['shipment_types'] = ShipmentType::where('status', '1')->get();
         // $data['companies'] = Company::where('status', '1')->get();
         $data['companies'] = User::all();
-        $data['destination_country'] = DestinationCountry::where('status', '1')->get();
+        $data['destination_country'] = DCountry::select('country')->where('status', '1')->groupBy('country')->get()->toArray();
+        
         // $data['states'] = State::where('status', '1')->get();
         if ($request->ajax()) {
             $tab = $request->tab;
@@ -167,7 +173,9 @@ class ShipmentController extends Controller
         $data = [];
         $output = [];
 
-        $data['state'] = State::where('country_id', $req->country_id)->where('status', '1')->get()->toArray();
+        $data['state'] = LoadingCountry::select('state')->where('country',$req->country_id)->groupBy('state')->get()->toArray();
+        // select('name')->groupBy('name')->get()->toArray()
+        // dd($data['state']);
 
         $output = view('shipment.fetchstate', $data)->render();
 
@@ -181,7 +189,9 @@ class ShipmentController extends Controller
         $data = [];
         $output = [];
 
-        $data['port'] = LoadingPort::where('state_id', $req->state_id)->where('status', '1')->get()->toArray();
+        // $data['port'] = LoadingPort::where('state_id', $req->state_id)->where('status', '1')->get()->toArray();
+
+        $data['port'] = LoadingCountry::select('port')->where('state',$req->state_id)->where('status', '1')->groupBy('port')->get()->toArray();
 
         $output = view('shipment.fetchport', $data)->render();
 
@@ -191,7 +201,8 @@ class ShipmentController extends Controller
     public function FetchTerminal(Request $req){
         $data = [];
         $output = [];
-        $data['terminals'] = LoadingTerminal::where('loadingport_id', $req->port_id)->where('status', '1')->get()->toArray();
+        // $data['terminals'] = LoadingTerminal::where('loadingport_id', $req->port_id)->where('status', '1')->get()->toArray();
+        $data['terminal'] = LoadingCountry::select('terminal')->where('port',$req->port_id)->where('status', '1')->groupBy('terminal')->get()->toArray();
         $output = view('shipment.fetchterminal', $data)->render();
         return Response($output);
     }
@@ -200,7 +211,10 @@ class ShipmentController extends Controller
         $data = [];
         $output = [];
 
-        $data['state'] = DestinationState::where('country_id', $req->country_id)->where('status', '1')->get()->toArray();
+        $data['state'] = DCountry::select('state')->where('country', $req->country_id)->where('status', '1')->groupBy('state')->get()->toArray();
+
+        // $data['port'] = LoadingCountry::select('port')->where('state',$req->state_id)->where('status', '1')->groupBy('port')->get()->toArray();
+
 
         $output = view('shipment.fetchstate', $data)->render();
 
@@ -212,7 +226,9 @@ class ShipmentController extends Controller
         $data = [];
         $output = [];
 
-        $data['port'] = DestinationPort::where('state_id', $req->state_id)->where('status', '1')->get()->toArray();
+        // $data['port'] = DestinationPort::where('state_id', $req->state_id)->where('status', '1')->get()->toArray();
+
+        $data['port'] = DCountry::select('port')->where('state', $req->state_id)->where('status', '1')->groupBy('port')->get()->toArray();
 
         $output = view('shipment.fetchport', $data)->render();
 
@@ -223,7 +239,9 @@ class ShipmentController extends Controller
         $data = [];
         $output = [];
 
-        $data['terminals'] = DestinationTerminal::where('destinationPort_id', $req->port_id)->where('status', '1')->get()->toArray();
+        // $data['terminals'] = DestinationTerminal::where('destinationPort_id', $req->port_id)->where('status', '1')->get()->toArray();
+
+        $data['terminal'] = DCountry::select('terminal')->where('port', $req->port_id)->where('status', '1')->groupBy('terminal')->get()->toArray();
 
         $output = view('shipment.fetchterminal', $data)->render();
 

@@ -91,13 +91,13 @@
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="make" class="col-6 px-0 font-size font-bold">Make <span
+                                    <label for="make" class="col-6 px-0 font-size font-bold">Make<span
                                             class="text-danger">*</span></label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6" name="make"
                                         id="make" onchange="FetachModel()">
-                                        <option selected disabled>Select Year</option>
+                                        <option selected disabled>Select Make</option>
                                         @foreach ($vehicle_make as $vmake)
-                                            <option value="{{ @$vmake['name'] }}">{{ @$vmake['name'] }}</option>
+                                            <option value="{{ @$vmake['make'] }}">{{ @$vmake['make'] }}</option>
                                         @endforeach
                                     </select>
 

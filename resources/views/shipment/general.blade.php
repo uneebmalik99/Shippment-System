@@ -407,7 +407,7 @@
                                                         <select name="loading_country" id="loading_country" class="form-control-sm border border-0 rounded-pill bg col-6" onchange="FetchState()">
                                                             <option selected disabled>Select Country</option>
                                                             @foreach($countries as $country)
-                                                            <option value="{{@$country['id']}}">{{@$country['name']}}</option>
+                                                            <option value="{{@$country['country']}}">{{@$country['country']}}</option>
                                                             @endforeach
                                                         </select>
                                                     {{-- <input type="text"
@@ -500,7 +500,7 @@
                                                         name="destination_country" id="destination_country" onchange="DestinationState()">
                                                         <option selected disabled>Select Destination Country</option>
                                                         @foreach ($destination_country as $dcountry)
-                                                        <option value="{{@$dcountry['id']}}">{{@$dcountry['name']}}</option>
+                                                        <option value="{{@$dcountry['country']}}">{{@$dcountry['country']}}</option>
                                                             
                                                         @endforeach
                                                     </select>

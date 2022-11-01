@@ -513,7 +513,6 @@
 
     function FetachModel(){
         $make_id = $('#make').val();
-
 $.ajax({
     method: 'POST',
     url: '{{ route('vehicle.FetchModel') }}',

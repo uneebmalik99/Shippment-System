@@ -12,6 +12,7 @@ use App\Models\BillOfSale;
 use App\Models\Image;
 use App\Models\ContainerSize;
 use App\Models\LoadingPort;
+use App\Models\MMS;
 use App\Models\Make;
 use App\Models\VehicleModel;
 use App\Models\Color;
@@ -152,7 +153,9 @@ class VehicleController extends Controller
         $data['titles'] = Title::where('status', '1')->get();
         $data['title_types'] = TitleType::where('status', '1')->get();
         $data['shipper_names'] = ShipperName::where('status', '1')->get();
-        $data['vehicle_make'] = Make::where('status', '1')->get();
+        // $data['vehicle_make'] = Make::where('status', '1')->get();
+        $data['vehicle_make'] = MMS::select('make')->where('status', '1')->groupBy('make')->get()->toArray();
+        // dd($data['vehicle_make']);
         // $data['vehicle_types'] = VehicleType::all();
         // $data['shipper_name'] = Shipper::all();
         $data['vehicle_status'] = VehicleStatus::all();
@@ -448,7 +451,7 @@ class VehicleController extends Controller
                     'thumbnail' => $file_name,
                     'vehicle_id' => $Obj_vehicle[0]['id'],
                 ];
-                dd($data);
+                // dd($data);
                 $Obj_auctionImages->create($data);
                 $output['result'] = "Success";
             }
@@ -768,7 +771,10 @@ class VehicleController extends Controller
         $data = [];
         $output = [];
 
-        $data['state'] = VehicleModel::where('make_id', $req->make_id)->where('status', '1')->get()->toArray();
+        // $data['state'] = MMS::where('make', $req->make_id)->where('status', '1')->get()->toArray();
+        $data['state'] = MMS::select('model')->where('make', $req->make_id)->where('status', '1')->groupBy('model')->get()->toArray();
+
+        // dd($data['state']);
 
         $output = view('layouts.vehicle_create.fetchModel', $data)->render();
 
