@@ -72,11 +72,14 @@
 
 
                 <div class="information_button d-flex justify-content-center mt-3" style="margin:50px">
-                    <button style="background: #1F689E;
-    transform: skew(-30deg) !important;border:none;
-                    border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;"><div style="transform: skew(30deg) !important;padding:1px 4px">
-                        Trucking PDF
-                    </div></button>
+                    <a href="{{ route('vehicle.createpdf')}} ">
+                        <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
+                        <div style="transform: skew(30deg) !important;padding:1px 4px">
+                            Trucking PDF
+                        </div>
+                        </button>
+                        
+                    </a>
                     <button style="background: #1CACD9;border:none;font-size:12px;
                     transform: skew(-30deg) !important;
                                     border-radius: 4px;color:white;margin-right: 3px;"><div style="transform: skew(30deg) !important;padding:1px 12px">Edit</div></button>

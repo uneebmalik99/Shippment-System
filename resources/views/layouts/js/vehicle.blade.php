@@ -6,6 +6,8 @@
         $model = $('#vehicle_model').val();
         $status = $('#vehicle_status').val();
         $status_name = $('#vehicle_status').find(":selected").text();
+    
+
         // alert($make);
         $.ajax({
             type: 'get',

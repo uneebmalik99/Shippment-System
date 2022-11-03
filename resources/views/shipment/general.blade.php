@@ -52,6 +52,13 @@
                                 @endforeach --}}
                             </tbody>
                         </table>
+
+
+                        <table class="table" style="background:lightgray;">
+                            <tbody id="add_vehicles">
+
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="d-xl-flex border-shipment">
@@ -720,7 +727,7 @@
                             </div>
                             <div class="col-3">
                                 <input type="hidden" class="next_tab" id="attachments">
-                                <button type="submit" class="btn next-style text-white col-12 py-1"
+                                <button type="button" class="btn next-style text-white col-12 py-1"
                                     onclick="create_shipment_form(this.id)" id="general_shipment"
                                     style="cursor: pointer;">
                                     <div class="unskew">Save</div>

@@ -92,7 +92,7 @@
             error: function(response) {
 
                 iziToast.warning({
-                    message: 'Failed! Please Fill All Fields',
+                    message: 'Failed! Some fields are missing',
                     position: 'topCenter',
                     zindex: '9999999999999'
                 });

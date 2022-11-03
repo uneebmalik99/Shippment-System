@@ -289,19 +289,15 @@ class ShipmentController extends Controller
     // }
     public function create_form(Request $request)
     {
-        // return $request->all();
         if ($request->ajax()) {
             $data = [];
             $data = $request->all();
             $vehicles = $request->vehicle;
             $tab = $request->tab;
-
             $loading_image = $request->file('loading_image');
             $shipment_inovice = $request->file('shipment_inovice');
             $stamp_title = $request->file('stamp_title');
             $other_document = $request->file('other_document');
-
-            // dd($image);
             unset($data['vehicle']);
             unset($data['shipment_vehicle_table_length']);
             unset($data['loading_image']);
@@ -309,12 +305,13 @@ class ShipmentController extends Controller
             unset($data['stamp_title']);
             unset($data['other_document']);
             unset($data['tab']);
-
             $Obj_vehicle = new Vehicle;
             $Obj = new Shipment;
             $data['status'] = "2";
-            $Obj->create($data);
-
+            if($vehicles){
+                $Obj->create($data);
+            }
+            
             $shipment = $Obj->where('container_no', $request->container_no)->get();
             $data['shipment_id'] = $shipment[0]['id'];
             foreach ($vehicles as $vehicle_id) {
@@ -324,70 +321,11 @@ class ShipmentController extends Controller
             }
             $view = view('shipment.' . $tab, $data)->render();
             return Response($view);
-
-            // if ($shipment_inovice) {
-
-            //     foreach ($shipment_inovice as $shipment_images) {
-            //         $image_name = time() . '.' . $shipment_images->extension();
-            //         $filename = Storage::putFile($this->directory, $shipment_images);
-            //         $shipment_images->move(public_path($this->directory), $filename);
-            //         $Obj_shipment->name = $filename;
-            //         $Obj_shipment->thumbnail = $image_name;
-            //         $Obj_shipment->shipment_id = $shipment[0]['id'];
-            //         $Obj_shipment->save();
-            //     }
-            // }
-
-            // if ($stamp_title) {
-
-            //     foreach ($stamp_title as $stamp_images) {
-            //         $image_name = time() . '.' . $stamp_images->extension();
-            //         $filename = Storage::putFile($this->directory, $stamp_images);
-            //         $stamp_images->move(public_path($this->directory), $filename);
-            //         $Obj_stamp->name = $filename;
-            //         $Obj_stamp->thumbnail = $image_name;
-            //         $Obj_stamp->shipment_id = $shipment[0]['id'];
-            //         $Obj_stamp->save();
-            //     }
-            // }
-
-            // if ($loading_image) {
-
-            //     foreach ($loading_image as $load_images) {
-            //         $image_name = time() . '.' . $load_images->extension();
-            //         $filename = Storage::putFile($this->directory, $load_images);
-            //         $load_images->move(public_path($this->directory), $filename);
-            //         $Obj_loading->name = $filename;
-            //         $Obj_loading->thumbnail = $image_name;
-            //         $Obj_loading->shipment_id = $shipment[0]['id'];
-            //         $Obj_loading->save();
-            //     }
-            // }
-
-            // if ($other_document) {
-
-            //     foreach ($other_document as $other_images) {
-            //         $image_name = time() . '.' . $other_images->extension();
-            //         $filename = Storage::putFile($this->directory, $other_images);
-            //         $other_images->move(public_path($this->directory), $filename);
-            //         $Obj_other->name = $filename;
-            //         $Obj_other->thumbnail = $image_name;
-            //         $Obj_other->shipment_id = $shipment[0]['id'];
-            //         $Obj_other->save();
-            //     }
-            // }
-
-            // if ($get_vehicle) {
-            //     return "Success!";
-            // } else {
-            //     return "Failed!";
-            // }
         }
     }
 
     public function create_images(Request $request)
     {
-        // dd($request->shipment_id);
         $shipment_id = $request->shipment_id;
         $data = [];
         $shipment_inovice = $request->file('shipment_inovice');
@@ -647,5 +585,18 @@ class ShipmentController extends Controller
     public function Customer_Details(Request $req){
         $customer_details = User::where('company_name', $req->company_name)->get();
         return $customer_details;
+    }
+
+    public function add_vehicles(Request $req){
+        // return $req->id;
+        $data  = [];
+
+        $data['vehicles'] = Vehicle::where('id', $req->id)->get()->toArray();
+
+        // $data['records'] = $records;
+        $output = view('layouts.shipment_filter.checkVehicle', $data)->render();
+        return Response($output);
+
+        // return $data['vehicles'];
     }
 }

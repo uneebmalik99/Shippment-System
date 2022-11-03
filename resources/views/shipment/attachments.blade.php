@@ -63,7 +63,7 @@
                             </button>
                         </div>
                         <div class="col-3">
-                            <input type="hidden" name="shipment_id" value="20">
+                            <input type="hidden" name="shipment_id" value="{{@$shipment_id}}">
                             <button type="button" class="btn next-style text-white col-12 py-1"
                                 id="shipment_general_finish" onclick="display_model()" style="cursor: pointer;">
                                 <div class="unskew">Finish</div>

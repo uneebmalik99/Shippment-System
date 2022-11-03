@@ -11,7 +11,7 @@
                                         <td>{{ @$vehicle['title_number'] }}</td>
                                         <td>{{ @$vehicle['customer_name'] }}</td>
                                         <td class="text-center"><input type="checkbox" value="{{ @$vehicle['id'] }}"
-                                                id="vehicle" name="vehicle[]"></td>
+                                                id="vehicle" name="vehicle[]" onclick="add_vehicle(this.value)"></td>
                                         
                                 </tr>
                                 @endforeach

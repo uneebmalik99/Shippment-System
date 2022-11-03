@@ -36,12 +36,14 @@ class CreateShipmentsTable extends Migration
             $table->foreignId('select_consignee')->nullable()->constrained('consignees')->onUpdate('cascade')->onDelete('cascade');
             $table->string('shipper')->nullable();
             $table->string('loading_terminal')->nullable();
-            $table->foreignId('loading_port')->nullable()->constrained('locations')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('loading_port');
+            // $table->foreignId('loading_port')->nullable()->constrained('locations')->onUpdate('cascade')->onDelete('cascade');
             $table->string('loading_state')->nullable();
             $table->string('discharge_port')->nullable();
             $table->string('loading_country')->nullable();
             $table->string('destination_terminal')->nullable();
-            $table->foreignId('destination_port')->nullable()->constrained('locations')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('destination_port')->nullable();
+            // $table->foreignId('destination_port')->nullable()->constrained('locations')->onUpdate('cascade')->onDelete('cascade');
             $table->string('destination_state')->nullable();
             $table->string('destination_country')->nullable();
             $table->string('hand_over_to')->nullable();

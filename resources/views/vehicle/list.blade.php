@@ -283,7 +283,7 @@
                     </div>
                     {{-- @dd($location) --}}
                     <div class="d-flex py-3 px-0">
-                        <div class="col-3 p-0">
+                        {{-- <div class="col-3 p-0">
                             <select
                                 class="form-control-sm border-style input-border-style rounded vehicle_filtering col-11 text-muted px-2"
                                 name="warehouse" id="vehicle_warehouse">
@@ -293,32 +293,43 @@
                                     <option value="{{ $locations['id'] }}">{{ $locations['name'] }}</option>
                                 @endforeach
                             </select>
-                        </div>
-                        <div class="col-2 p-0">
+                        </div> --}}
+                        <div class="col-3 p-0">
                             <select
                                 class="form-control-sm border-style input-border-style rounded vehicle_filtering col-11 text-muted px-2"
                                 name="year" id="vehicle_year">
                                 <option value="" disabled selected>YEAR</option>
+                                <option value="2013">2013</option>
+                                <option value="2014">2014</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
                                 <option value="2019">2019</option>
                                 <option value="2020">2020</option>
                             </select>
                         </div>
-                        <div class="col-2 p-0">
+                        <div class="col-3 p-0">
                             <select
                                 class="form-control-sm border-style input-border-style rounded vehicle_filtering col-11 text-muted px-2"
                                 name="make" id="vehicle_make">
                                 <option value="" disabled selected>MAKE</option>
-                                <option value="honda">Honda</option>
-                                <option value="toyota">Toyota</option>
+                                @foreach ($make as $makes)
+                                <option value="{{@$makes['make']}}">{{@$makes['make']}}</option>
+                                @endforeach
+                                {{-- <option value="toyota">Toyota</option> --}}
                             </select>
                         </div>
-                        <div class="col-2 p-0">
+                        <div class="col-3 p-0">
                             <select
                                 class="form-control-sm border-style input-border-style rounded vehicle_filtering col-11 text-muted px-2"
                                 name="model" id="vehicle_model">
                                 <option value="" disabled selected>MODEL</option>
-                                <option value="civic">Civic</option>
-                                <option value="corolla">Corolla</option>
+                                @foreach ($model as $models)
+                                <option value="{{@$models['model']}}">{{@$models['model']}}</option>
+                                @endforeach
+                                {{-- <option value="civic">Civic</option> --}}
+                                {{-- <option value="corolla">Corolla</option> --}}
                             </select>
                         </div>
                         <div class="col-3 p-0">
@@ -337,7 +348,7 @@
                     </div>
                 </div>
                 {{-- search filter end --}}
-                <div id="status_body" class="mt-2 bg-light" style="height: 100%;overflow-x: scroll;">
+                <div id="status_body" class="mt-2 bg-light">
                     <table id="vehicle_table" class="table row-border vehicle_table">
                         <thead class="bg-custom" style="color:white!important;">
                             <tr>
@@ -382,7 +393,7 @@
             var table = $('.vehicle_table').DataTable({
                 processing: true,
                 serverSide: true,
-                //scrollX: true,
+                scrollX: true,
                 autoWidth:false,
                 "lengthMenu": [
                     [50, 100, 500],

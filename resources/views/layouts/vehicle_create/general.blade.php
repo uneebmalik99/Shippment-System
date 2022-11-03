@@ -192,7 +192,7 @@
                                 <div class="d-flex align-items-center">
                                     <label for="values" class="col-6 px-0 font-size font-bold">Value ($)<span
                                             class="text-danger">*</span></label>
-                                    <input type="text"
+                                    <input type="number"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="value"
                                         id="value" value="{{ @$user['values'] }}">
                                 </div>

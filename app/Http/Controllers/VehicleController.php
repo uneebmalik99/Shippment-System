@@ -40,6 +40,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Storage;
 use Yajra\Datatables\Datatables;
+use PDF;
 
 class VehicleController extends Controller
 {
@@ -116,7 +117,10 @@ class VehicleController extends Controller
         $data['towing'] = Vehicle::where('status', '5')->get();
         $data['location'] = Location::all();
         $data['status'] = VehicleStatus::all();
-        // dd($data['status']);
+
+        $data['make'] = MMS::select('make')->where('status', '1')->groupBy('make')->get()->toArray();
+        $data['model'] = MMS::select('model')->where('status', '1')->groupBy('model')->get()->toArray();
+        
         return view($this->view . 'list', $data, $notification);
 
     }
@@ -264,21 +268,21 @@ class VehicleController extends Controller
 
             if ($year) {
                 if ($year != "") {
-                    $records = $records->where('year', $year);
+                    $records = $records->where('year', $year)->get()->toArray();
                     // return $records;
                 }
             }
 
             if ($make) {
                 if ($make != "") {
-                    $records = $records->where('make', $make);
+                    $records = $records->where('make', $make)->get()->toArray();
                     // return count($records);
                 }
             }
 
             if ($model) {
                 if ($model != "") {
-                    $records = $records->where('model', $model);
+                    $records = $records->where('model', $model)->get()->toArray();
                     // return count($records);
                 }
             }
@@ -291,6 +295,7 @@ class VehicleController extends Controller
                     } else {
                         $records = $records->with('images')->where('status', $status)->paginate($this->perpage);
                         $data['records'] = $records;
+                        // dd($data['records']);
                         $output['view'] = view('vehicle.' . $status_name, $data)->render();
                         return Response($output);
                     }
@@ -397,11 +402,12 @@ class VehicleController extends Controller
         $pickup = $request->file("pickup");
         // dd($billofsales);
 
+
         $Obj = new Vehicle;
         $Obj_vehicle = $Obj->where('vin', $request->vin)->get();
         // dd($Obj_vehicle[0]['id']);
-        
 
+    
         if($auction_invoice){
             $Obj_auctionInvoice = new AuctionInvoice;
             foreach ($auction_invoice as $auctiofile) {
@@ -454,10 +460,8 @@ class VehicleController extends Controller
                 // dd($data);
                 $Obj_auctionImages->create($data);
                 $output['result'] = "Success";
-            }
-            
+            }   
         }
-
 
         if($billofsales){
             // dd($billofsales);
@@ -475,7 +479,6 @@ class VehicleController extends Controller
                 $Obj_billofsales->create($data);
                 $output['result'] = "Success";
             }
-            
         }
 
 
@@ -511,11 +514,9 @@ class VehicleController extends Controller
                 ];
                 $Obj_originaltitle->create($data);
                 $output['result'] = "Success";
-            }
-            
+            }   
         }
-
-
+        
         if($pickup){
             $Obj_pickup = new PickupImage;
             foreach ($pickup as $pickup) {
@@ -787,4 +788,15 @@ class VehicleController extends Controller
             return response()->json(['success'=>'All Selected Vehicles Deleted Successfully!']);
         }
     }
+
+    public function createpdf(){
+        return view('vehicle.vehiclepdf');
+    }
+    public function exportpdf(){
+        // $pdf = view('vehicle.vehiclepdf');
+        // $data = PDF::LoadView('pdf_view', $pdf);
+            $pdf = PDF::LoadView('vehicle.vehiclepdf');
+            return $pdf->download('invoice.pdf');
+    }
+
 }

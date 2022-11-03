@@ -9,7 +9,6 @@ use App\Models\Make;
 use App\Models\Site;
 use App\Models\User;
 use App\Models\Color;
-use App\Models\ShipmentType;
 // use App\Models\State;
 use App\Models\Title;
 use App\Models\Series;
@@ -38,9 +37,10 @@ use App\Models\VehicleStatus;
 use App\Models\PickupLocation;
 use App\Models\DestinationPort;
 use App\Models\ShippingCountry;
-// use App\Models\ShipmentType;
+use App\Models\ShipmentType;
 use App\Models\LoadingCountry;
 use App\Models\DCountry;
+use App\Models\NoOfVehicle;
 
 use App\Models\DestinationCountry;
 
@@ -226,7 +226,7 @@ class MasterController extends Controller
     public function keyshow(){
          $data = [];
         $data= [
-            "page_title"=>"Key",
+            "page_title"=>"Keys",
             "id"=>"popup_button",
             "class"=>"keypopup",
             "data_toggle"=>"modal",
@@ -271,10 +271,26 @@ class MasterController extends Controller
         $notification = $this->Notification();
         return view($this->view . 'common_list', $data, $notification); 
     }
+    public function no_ofvehicleshow(){
+        $data = [];
+       $data= [
+           "page_title"=>"No. Of Vehicles",
+           "id"=>"popup_button",
+           "class"=>"no_ofvehiclepopup",
+           "data_toggle"=>"modal",
+           "data_target"=>"no_ofvehiclemodal",
+           "tab"=>"no_ofvehicle",
+           "value"=>"no_ofvehicle",
+       ];
+       $records = NoOfVehicle::all();
+       $data['recordlist'] = $records;
+       $notification = $this->Notification();
+       return view($this->view . 'common_list', $data, $notification); 
+   }
     public function shipmentstatusshow(){
          $data = [];
         $data= [
-            "page_title"=>"Shippment Status",
+            "page_title"=>"Shipment Status",
             "id"=>"popup_button",
             "class"=>"shipmentstatuspopup",
             "data_toggle"=>"modal",
@@ -290,7 +306,7 @@ class MasterController extends Controller
     public function shipmentlinesshow(){
          $data = [];
         $data= [
-            "page_title"=>"Shippment Lines",
+            "page_title"=>"Shipping Line",
             "id"=>"popup_button",
             "class"=>"shipmentlinespopup",
             "data_toggle"=>"modal",
@@ -338,7 +354,7 @@ class MasterController extends Controller
     public function titletypeshow(){
          $data = [];
         $data= [
-            "page_title"=>"Title Type List",
+            "page_title"=>"Title Type",
             "id"=>"popup_button",
             "class"=>"titletypepopup",
             "data_toggle"=>"modal",
@@ -354,7 +370,7 @@ class MasterController extends Controller
     public function shippernameshow(){
          $data = [];
         $data= [
-            "page_title"=>"Shippername",
+            "page_title"=>"Shipper Name",
             "id"=>"popup_button",
             "class"=>"shippernamepopup",
             "data_toggle"=>"modal",
@@ -482,7 +498,7 @@ class MasterController extends Controller
     public function mmsshow(){
         $data = [];
         $data= [
-            "page_title"=>"Make Model Series",
+            "page_title"=>"Vehicle",
             "id"=>"popup_button",
             "class"=>"mmspopup",
             "data_toggle"=>"modal",
@@ -552,6 +568,9 @@ class MasterController extends Controller
         if ($tab_name =='auction' && $id !="") {
             $data['deleted'] = Auction::find($id)->delete();
         }
+        if ($tab_name =='no_ofvehicle' && $id !="") {
+            $data['deleted'] = NoOfVehicle::find($id)->delete();
+        }
         if ($tab_name =='pickuplocation' && $id !="") {
             $data['deleted'] = PickupLocation::find($id)->delete();
         }
@@ -613,12 +632,12 @@ class MasterController extends Controller
         $tab = $request->tab;
         $id  = $request->id;
         if ($tab=="companies") {
-            $data['title'] = "Update Company";
+            $data['title'] = "Company";
             $data['name'] = "name";
             $data['record'] = Company::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="shippingcountries") {
-            $data['title'] = "Update Shipping Countries";
+            $data['title'] = "Shipping Countries";
             $data['name'] = "name";
             $data['record'] = ShippingCountry::where('id', '=', $id)->get()->toArray();
         }
@@ -646,15 +665,21 @@ class MasterController extends Controller
             $data['record'] = DestinationPort::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="title") {
-            $data['title'] = "Update Title";
+            $data['title'] = "Title";
             $data['name'] = "name";
             $data['record'] = Title::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="auction") {
             // dd($request->input());
-            $data['title'] = "Update Auction";
+            $data['title'] = "Auction";
             $data['name'] = "name";
             $data['record'] = Auction::where('id', '=', $id)->get()->toArray();
+        }
+        if ($tab=="no_ofvehicle") {
+            // dd($request->input());
+            $data['title'] = "No. Of Vehicles";
+            $data['name'] = "name";
+            $data['record'] = NoOfVehicle::where('id', '=', $id)->get()->toArray();
         }
         // if ($tab=="model") {
         //     // dd($request->input());
@@ -669,101 +694,101 @@ class MasterController extends Controller
         // }
         if ($tab=="color") {
             // dd($request->input());
-            $data['title'] = "Update color";
+            $data['title'] = "Color";
             $data['name'] = "name";
             $data['record'] = Color::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="key") {
             // dd($request->input());
-            $data['title'] = "Update key";
+            $data['title'] = "Keys";
             $data['name'] = "name";
             $data['record'] = Key::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="shipmentstatus") {
             // dd($request->input());
-            $data['title'] = "Update Shipment Status";
+            $data['title'] = "Shipment Status";
             $data['name'] = "name";
             $data['record'] = ShipmentStatus::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="shipmentlines") {
             // dd($request->input());
-            $data['title'] = "Update Shipment Lines";
+            $data['title'] = "Shipping Line";
             $data['name'] = "name";
             $data['record'] = ShipmentLine::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="containertype") {
             // dd($request->input());
-            $data['title'] = "Update Container Type";
+            $data['title'] = "Container Type";
             $data['name'] = "name";
             $data['record'] = ContainerType::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="containersize") {
             // dd($request->input());
-            $data['title'] = "Update Container Size";
+            $data['title'] = "Container Size";
             $data['name'] = "name";
             $data['record'] = ContainerSize::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="titletype") {
             // dd($request->input());
-            $data['title'] = "Update Title Type";
+            $data['title'] = "Title Type";
             $data['name'] = "name";
             $data['record'] = TitleType::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="shippername") {
             // dd($request->input());
-            $data['title'] = "Update Shippername";
+            $data['title'] = "Shipper Name";
             $data['name'] = "name";
             $data['record'] = ShipperName::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="vehiclestatus") {
             // dd($request->input());
-            $data['title'] = "Update Vehicle Status";
+            $data['title'] = "Vehicle Status";
             $data['name'] = "status_name";
             $data['record'] = VehicleStatus::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="pickuplocation") {
             // dd($request->input());
-            $data['title'] = "Update Pickup Location";
+            $data['title'] = "Pickup Location";
             $data['name'] = "name";
             $data['record'] = PickupLocation::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="site") {
             // dd($request->input());
-            $data['title'] = "Update Site";
+            $data['title'] = "Site";
             $data['name'] = "name";
             $data['record'] = Site::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="warehouse") {
-            $data['title'] = "Update Warehouse";
+            $data['title'] = "Warehouse";
             $data['name'] = "name";
             $data['record'] = Warehouse::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="vehicletype") {
-            $data['title'] = "Update Vehicle Types";
+            $data['title'] = "Vehicle Type";
             $data['name'] = "vehicle_types";
             $data['record'] = VehicleType::where('id', '=', $id)->get()->toArray();
         }
         if ($tab=="shipmenttype") {
-            $data['title'] = "Update Shipment Types";
+            $data['title'] = "Shipment Type";
             $data['name'] = "name";
             $data['record'] = ShipmentType::where('id', $id)->get()->toArray();
         }
         if ($tab=="loadingcountry") {
-            $data['title'] = "Update Loading Country";
+            $data['title'] = "Loading Country";
             $data['name'] = "name";
             $data['record'] = LoadingCountry::where('id', $id)->get()->toArray();
             $output = view('master.common_popmodal', $data)->render();
             return Response($output);
         }
         if ($tab=="destinationcountry") {
-            $data['title'] = "Update Destination Country";
+            $data['title'] = "Destination Country";
             $data['name'] = "name";
             $data['record'] = DCountry::where('id', $id)->get()->toArray();
             $output = view('master.common_popmodal', $data)->render();
             return Response($output);
         }
         if ($tab=="mms") {
-            $data['title'] = "Update Make Model Series";
+            $data['title'] = "Vehicle";
             $data['name'] = "name";
             $data['record'] = MMS::where('id', $id)->get()->toArray();
             $output = view('master.mms_popup', $data)->render();
@@ -876,6 +901,12 @@ class MasterController extends Controller
             $auction = $auction::find($id);
             $auction->name = $name;
             $auction->save();
+        }
+        if ($tab_name =='no_ofvehicle') {
+            $no_ofvehicle = new NoOfVehicle();
+            $no_ofvehicle = $no_ofvehicle::find($id);
+            $no_ofvehicle->name = $name;
+            $no_ofvehicle->save();
         }
         if ($tab_name =='make') {
             $make = new Make();
@@ -1170,6 +1201,18 @@ class MasterController extends Controller
             $auction->status = $status;
             $auction->save();
         }
+        if ($tab_name =='no_ofvehicle' && $id !="") {
+            $no_ofvehicleshow = new NoOfVehicle();
+            if ($status=='0') {
+                $status = '1';
+                $no_ofvehicleshow = NoOfVehicle::find($id);
+            } else {
+                $status = '0';
+                $no_ofvehicleshow = NoOfVehicle::find($id);
+            }
+            $no_ofvehicleshow->status = $status;
+            $no_ofvehicleshow->save();
+        }
         // issue aa raha kioun k table shippment ka nahi pata mujhy
         // if ($tab_name =='shippment' && $id !="") {
             //     if ($status=='0') {
@@ -1368,7 +1411,7 @@ class MasterController extends Controller
             $data = [];
             $tabname = $request->tab;
             $tab['tab'] = $tabname;
-            $title['title'] ="Ware House";
+            $title['title'] ="Warehouse";
             $data['placeholder'] ="Enter Warehouse";
         }
         if ($request->tab=='vehicletype') {
@@ -1403,7 +1446,7 @@ class MasterController extends Controller
             $data = [];
             $tab['tab'] = $request->tab;
             $title['title'] ="Shipper Name";
-            $data['placeholder'] ="Enter Shippername";
+            $data['placeholder'] ="Enter Shipper Name";
         }
         if ($request->tab=='titletype') {
             $data = [];
@@ -1420,8 +1463,8 @@ class MasterController extends Controller
         if ($request->tab=='vehicletype') {
             $data = [];
             $tab['tab'] = $request->tab;
-            $title['title'] ="Vehicle Types";
-            $data['placeholder'] ="Enter Vehicle Types";
+            $title['title'] ="Vehicle Type";
+            $data['placeholder'] ="Enter Vehicle Type";
         }
         if ($request->tab=='auction') {
             $data = [];
@@ -1429,10 +1472,16 @@ class MasterController extends Controller
             $title['title'] ="Auction";
             $data['placeholder'] ="Enter Auction";
         }
+        if ($request->tab=='no_ofvehicle') {
+            $data = [];
+            $tab['tab'] = $request->tab;
+            $title['title'] ="No. Of Vehicles";
+            $data['placeholder'] ="Enter No. Of Vehicles";
+        }
         if ($request->tab=='key') {
             $data = [];
             $tab['tab'] = $request->tab;
-            $title['title'] ="Key";
+            $title['title'] ="Keys";
             $data['placeholder'] ="Enter Key";
         }
         if ($request->tab=='title') {
@@ -1477,12 +1526,12 @@ class MasterController extends Controller
             $title['title'] ="Shipping States";
             $data['placeholder'] ="Enter Shipping States";
         }
-        if ($request->tab=='shippingcountries') {
-            $data = [];
-            $tab['tab'] = $request->tab;
-            $title['title'] ="Shipping Countries";
-            $data['placeholder'] ="Enter Shipping Countries";
-        }
+        // if ($request->tab=='destinationcountry') {
+        //     $data = [];
+        //     $tab['tab'] = $request->tab;
+        //     $title['title'] ="Shipping Countries";
+        //     $data['placeholder'] ="Enter Shipping Countries";
+        // }
         if ($request->tab=='companies') {
             $data = [];
             $tab['tab'] = $request->tab;
@@ -1492,19 +1541,19 @@ class MasterController extends Controller
         if ($request->tab=='containersize') {
             $data = [];
             $tab['tab'] = $request->tab;
-            $title['title'] ="containersize";
+            $title['title'] ="Container Size";
             $data['placeholder'] ="Enter Container Size";
         }
         if ($request->tab=='shipmentlines') {
             $data = [];
             $tab['tab'] = $request->tab;
-            $title['title'] ="shipmentlines";
-            $data['placeholder'] ="Enter Shipment Lines";
+            $title['title'] ="Shipping Line";
+            $data['placeholder'] ="Enter Shipping Line";
         }
         if ($request->tab=='containertype') {
             $data = [];
             $tab['tab'] = $request->tab;
-            $title['title'] ="containertype";
+            $title['title'] ="Container Type";
             $data['placeholder'] ="Enter Container Type";
         }
         if ($request->tab=='shipmentstatus') {
@@ -1517,8 +1566,8 @@ class MasterController extends Controller
             $data = [];
             $tabname = $request->tab;
             $tab['tab'] = $tabname;
-            $title['title'] ="Shipment Types";
-            $data['placeholder'] ="Enter Shipment Types";
+            $title['title'] ="Shipment Type";
+            $data['placeholder'] ="Enter Shipment Type";
         }
         if ($request->tab=='loadingcountry') {
             $data = [];
@@ -1556,7 +1605,7 @@ class MasterController extends Controller
             $data = [];
             $tabname = $request->tab;
             $tab['tab'] = $tabname;
-            $title['title'] ="Make Model Series";
+            $title['title'] ="Vehicle";
             $data = [
                 "placeholder" => [
                     'make' => "Enter Make",
@@ -1746,6 +1795,18 @@ class MasterController extends Controller
                         'name' => $request->addmore[$i],
                       ];
                     Auction::Create($data);
+                }
+            }
+        }
+        if ($request->tab=='no_ofvehicle') {
+            for ($i=0; $i<$length; $i++) {
+                $data['record_exist'] = NoOfVehicle::where('name', '=', $request->addmore[$i])
+                ->get()->toArray();
+                if (!$data['record_exist']) {
+                    $data = [
+                        'name' => $request->addmore[$i],
+                      ];
+                      NoOfVehicle::Create($data);
                 }
             }
         }

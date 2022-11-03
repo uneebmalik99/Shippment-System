@@ -1,7 +1,7 @@
 <script>
     function create_shipment_form(id) {
-        $('#shipment_form').on('submit', function(event) {
-            event.preventDefault();
+        // $('#shipment_form').on('submit', function(event) {
+            // event.preventDefault();
             var formData = new FormData(jQuery('#shipment_form')[0]);
             $next_tab = $('.next_tab').attr('id');
             formData.append('tab', $next_tab);
@@ -51,7 +51,7 @@
                     });
                 }
             });
-        });
+        // });
     }
 </script>
 
@@ -238,5 +238,29 @@
                 $('#customer_phone').val(data[0]['phone']);
             }
         });
+    }
+
+    function add_vehicle(id) {
+        var td = event.target.parentNode;
+        var tr = td.parentNode; // the row to be removed
+        tr.parentNode.removeChild(tr);
+
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('shipments.add_vehicles') }}',
+            data: {
+                'id': id,
+            },
+            success: function(data) {
+                $('#add_vehicles').append(data);
+            }
+        });
+    }
+
+    function removerow() {
+        // alert('del');
+        var td = event.target.parentNode;
+        var tr = td.parentNode; // the row to be removed
+        tr.parentNode.removeChild(tr);
     }
 </script>
