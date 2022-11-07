@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\User;
 use App\Models\Location;
-use App\Models\role;
+// use App\Models\role;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -61,6 +63,8 @@ class UserController extends Controller
 
     public function index()
     {
+    //    return auth()->user()->getRoleNames();
+    // return User::role('Super Admin')->get();
 
         $data = [];
         $data = [
@@ -79,18 +83,25 @@ class UserController extends Controller
             ],
         ];
 
-        $data['role'] = Auth::user()->role;
+        // $data['role'] = Auth::user()->role;
+        // if ($data['role']->name == 'Customer') {
 
-        if ($data['role']->name == 'Customer') {
+        if(Auth::user()->hasRole('Customer')){
+
             $records = User::where('email', Auth::user()->email)->get();
             $data['records'] = $records;
+
         } else {
-            $records = User::where('role_id', 1)->orwhere('role_id', 2)->orwhere('role_id', 3)->get();
+
+            $records = User::with('roles')->where('role_id', 1)->orwhere('role_id', 2)->orwhere('role_id', 3)->get();
+            // return $records;
             $data['records'] = $records;
+            
         }
 
         $notification = $this->Notification();
         return view($this->view . 'list', $data, $notification);
+   
     }
 
     public function create(Request $request)
@@ -190,7 +201,16 @@ class UserController extends Controller
         ];
         $notification = $this->Notification();
         $data['records'] = User::find($id)->toArray();
+        $data['roles'] = Role::all()->toArray();
+        $data['permissions'] = Permission::all()->toArray();
+        $user = User::find($id);
+        $data['assignRoles'] = $user->getRoleNames();
+        $data['assignPermissions'] = $user->getAllPermissions();
+
+    
         return view($this->view . 'profile', $data, $notification);
+
+
     }
 
     public function updateProfile(Request $request)

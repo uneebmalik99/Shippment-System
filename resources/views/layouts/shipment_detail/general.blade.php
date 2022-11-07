@@ -314,3 +314,22 @@
         </div>
     </div>
 </div>
+
+
+<div class="d-flex justify-content-end">
+    <div class="col-2">
+        <button type="button" class="btn col-12"><a href="{{route ('shipment_detail.shipment_Hazard_pdf')}}">export pdf</a></button>
+    </div>
+    <div class="col-2">
+    <button type="button" class="btn col-12"><a href="{{route ('shipment_detail.shipment_Houston_pdf')}}">export Houston</a></button>
+    </div>
+    <div class="col-2">
+        <button type="button" class="btn col-12"><a href="{{route ('shipment_detail.shipment_Landing_pdf')}}">export Landing</a></button>
+    </div>
+    <div class="col-2">
+        <button type="button" class="btn col-12"><a href="{{route ('shipment_detail.shipment_Custom_pdf')}}">export Custom</a></button>
+    </div>
+    <div class="col-2">
+        <button type="button" class="btn col-12">pdf</button>
+    </div>
+</div>

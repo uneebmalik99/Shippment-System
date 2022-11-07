@@ -265,6 +265,8 @@
                         </a>
                     </li>
 
+                    @can('Page Access')
+
                     <li class="change-loges.html py-2">
                         <a href="{{ route('customer.list') }}">
                             <span class="pcoded-micon"><i class="fa fa-user"></i></span>
@@ -272,6 +274,7 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
+                    @endcan
                     {{-- <li class="change-loges.html py-2">
                         <a href="javascript:void(0)">
                             <span class="pcoded-micon"><i class="ti-package"></i></span>
@@ -351,6 +354,8 @@
                     </li> --}}
 
 
+                    @can('Page Access')
+
                     <li class="pcoded-hasmenu">
                         <a href="javascript:void(0)">
                             <span class="pcoded-micon"><i class="fas fa-brain"></i></span>
@@ -359,7 +364,7 @@
                         </a>
 
                         <ul class="pcoded-submenu">
-
+                           
                             <li class="change-loges.html py-2">
                                 <a href="{{ route('user.list') }}">
                                     <span class="pcoded-micon"><i class="ti-calendar"></i></span>
@@ -740,6 +745,8 @@
                             </li>
                         </ul> --}}
                     </li>
+
+                    @endcan
 
 
 

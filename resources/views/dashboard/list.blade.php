@@ -349,6 +349,7 @@
         <div class="bg-white rounded p-2 ">
             {{-- badges start --}}
             <div class="pt-3">
+                @can('Page Access')                    
                 <div class="d-flex m-2">
                     <div class="col-3 p-1">
                         <div class="col-12 py-0 px-1">
@@ -464,6 +465,7 @@
                         </div>
                     </div>
                 </div>
+                @endcan
 
                 <div class="d-flex m-2">
                     <div class="col-3 p-1">

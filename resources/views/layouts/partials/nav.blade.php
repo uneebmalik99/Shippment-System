@@ -148,15 +148,20 @@
                                 </a>
                             </li> --}}
                             <li>
-                                @if (Auth::user()->role->name == 'Customer')
+                            @role('Customer')
+                                {{-- @if (Auth::user()->role->name == 'Customer') --}}
                                     <a href="{{ route('customer.profile') . '/' . Auth::user()->id }}">
                                         <i class="ti-user"></i> Profile
                                     </a>
-                                @else
+                            @endrole
+
+                            @role('Super Admin')
+                                {{-- @else --}}
                                     <a href="{{ route('user.profile') . '/' . Auth::user()->id }}">
                                         <i class="ti-user"></i> Profile
                                     </a>
-                                @endif
+                                {{-- @endif --}}
+                                @endrole
                             </li>
                             {{-- <li>
                                 <a href="email-inbox.html">

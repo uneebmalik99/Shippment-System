@@ -13,9 +13,9 @@
     }
 </style>
 <body>
-    <div>
+    {{-- <div>
         <a class="btn btn-primary" href="{{ route('vehicle.exportpdf') }}">Export To PDF</a>
-    </div>
+    </div> --}}
     <div >
         <table style="float:left;width:60% !important">
             <tr>

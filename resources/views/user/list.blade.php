@@ -135,9 +135,7 @@
                 <div class="">
                     <table class="table" id="table_id" style="border:none!important;">
                         <thead style="border:none!imporant;color:rgba(102,102,102,1); ">
-                            @can('can_delete', $role)
-                                <th>UserName</th>
-                            @endcan
+                            <th>UserName</th>
                             <th>STATE / CITY</th>
                             <th>Role</th>
                             <th>STATUS</th>
@@ -174,8 +172,12 @@
                                     </td>
                                     <td>
                                         <div>
-
-                                            @if (@$val['role_id'] == 1)
+                                        @if(count($val['roles']) > 0)
+                                        {{@$val['roles'][0]['name']}}
+                                        @else
+                                        Not Assign Yet
+                                        @endif
+                                            {{-- @if (@$val['role_id'] == 1)
                                                 <b>Super Admin</b>
                                             @endif
                                             @if (@$val['role_id'] == 2)
@@ -186,7 +188,7 @@
                                             @endif
                                             @if (@$val['role_id'] == 4)
                                                 <b>Customer</b>
-                                            @endif
+                                            @endif --}}
 
                                         </div>
                                     </td>
@@ -222,7 +224,7 @@
                                     </td>
                                     {{-- @dd($val['id']) --}}
                                     <td>
-                                        @can('suporsub', $role)
+                                        {{-- @can('suporsub', $role) --}}
                                             <button class="profile-button">
                                                 <a href="{{ route('user.profile') . '/' . @$val['id'] }}">
                                                     <svg width="14" height="14" viewBox="0 0 16 14" fill="none"
@@ -238,9 +240,9 @@
                                                 </a>
 
                                             </button>
-                                        @endcan
-                                        @can('can_view', $role)
-                                            @if ($val['role_id'] != '1')
+                                        {{-- @endcan --}}
+                                        {{-- @can('can_view', $role) --}}
+                                            {{-- @if ($val['role_id'] != '1') --}}
                                                 @if (@$val['status'] == '0')
                                                     <a id="{{ @$val['id'] }}" onclick="change_status(this.id)">
                                                         <button class="active_button">
@@ -277,8 +279,8 @@
                                                         </svg>
                                                     </a>
                                                 </button>
-                                            @endif
-                                        @endcan
+                                            {{-- @endif --}}
+                                        {{-- @endcan --}}
 
 
 

@@ -23,6 +23,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class CustomerController extends Controller
 {
@@ -93,7 +95,8 @@ class CustomerController extends Controller
         ];
 
         $notification = $this->Notification();
-        $data['records'] = User::where('role_id', 4)->paginate($this->perpage);
+        // $data['records'] = User::where('role_id', 4)->paginate($this->perpage);
+        $data['records'] = User::role('Customer')->get();
         // $records = User::where('role_id', 4)->paginate($this->perpage);
         // foreach ($records as $record) {
         //     $date = $record['created_at']->toDateString();
@@ -106,9 +109,9 @@ class CustomerController extends Controller
         //     $i++;
         // }
 
-        $data['active_customer'] = User::where('role_id', 4)->where('status', '1')->get()->count();
+        $data['active_customer'] = User::role('Customer')->where('status', '1')->get()->count();
 
-        $data['Inactive_customer'] = User::where('role_id', 4)->where('status', '0')->get()->count();
+        $data['Inactive_customer'] = User::role('Customer')->where('status', '0')->get()->count();
 
         $Obj = new User;
         $data['inactive'] = $Obj->where('status', '0')->get();
@@ -263,6 +266,7 @@ class CustomerController extends Controller
     {
         $customer = User::find($id);
         $customer->delete();
+        $customer->removeRole('Customer');
         return back()->with('deleted', 'Customer Deleted Successfully!');
     }
 
@@ -404,7 +408,7 @@ class CustomerController extends Controller
         if ($request->ajax()) {
             $table = "";
             $page = "";
-            $total = User::where('role_id', 4)->toArray();
+            $total = User::role('Customer')->get();
             $records = new User;
             if ($request->search) {
                 $records = $records->where('customer_name', 'LIKE', '%' . $request->search . "%")
@@ -649,26 +653,14 @@ class CustomerController extends Controller
                     'username' => 'required',
                     'password' => 'required',
                     'phone' => 'required',
-                    // 'fax' => 'required',
                     'email' => 'required',
-                    // 'source' => 'required',
                     'company_name' => 'required',
                     'company_email' => 'required',
-                    // 'customer_type' => 'required',
-                    // 'sales_type' => 'required',
-                    // 'payment_type' => 'required',
-                    // 'payment_term' => 'required',
-                    // 'industry' => 'required',
-                    // 'sales_person' => 'required',
-                    // 'inside_person' => 'required',
-                    // 'level' => 'required',
                     'location_number' => 'required',
                     'country' => 'required',
                     'zip_code' => 'required',
                     'state' => 'required',
                     'address_line1' => 'required',
-                    // 'address_line2' => 'required',
-                    // 'price_code' => 'required',
                 ]);
     
                 if ($image) {
@@ -686,6 +678,9 @@ class CustomerController extends Controller
                 $user = User::where('email', $email)->get();
                 $user_id = $user[0]['id'];
 
+                $role = User::find($user_id);
+                $role->assignRole('Customer');
+                
                 if ($file) {
                     foreach ($file as $files) {
                         $file_name = time() . '.' . $files->extension();

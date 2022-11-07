@@ -33,6 +33,9 @@ use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Storage;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class ShipmentController extends Controller
 {
@@ -102,11 +105,27 @@ class ShipmentController extends Controller
 
         $notification = $this->Notification();
         // $data['companies'] = User::all();
-        $data['records'] = Shipment::with('consignee')->paginate($this->perpage);
-        $data['booked'] = Shipment::with('consignee')->where('status', '1')->paginate($this->perpage);
-        $data['shipped'] = Shipment::with('consignee')->where('status', '2')->paginate($this->perpage);
-        $data['arrived'] = Shipment::with('consignee')->where('status', '3')->paginate($this->perpage);
-        $data['completed'] = Shipment::with('consignee')->where('status', '4')->paginate($this->perpage);
+
+        if(Auth::user()->hasRole('Customer')){
+            $data['records'] = Shipment::with('consignee')->where('customer_email', auth()->user()->email)->get();
+            $data['booked'] = Shipment::with('consignee')->where('customer_email', auth()->user()->email)->where('status', '1')->get();
+            $data['shipped'] = Shipment::with('consignee')->where('customer_email', auth()->user()->email)->where('status', '2')->get();
+            $data['arrived'] = Shipment::with('consignee')->where('customer_email', auth()->user()->email)->where('status', '3')->get();
+            $data['completed'] = Shipment::with('consignee')->where('customer_email', auth()->user()->email)->where('status', '4')->get();
+        $data['shipments'] = Shipment::with('vehicle')->where('customer_email', auth()->user()->email)->get()->toArray();
+
+           
+        }
+        else{
+            $data['records'] = Shipment::with('consignee')->paginate($this->perpage);
+            $data['booked'] = Shipment::with('consignee')->where('status', '1')->paginate($this->perpage);
+            $data['shipped'] = Shipment::with('consignee')->where('status', '2')->paginate($this->perpage);
+            $data['arrived'] = Shipment::with('consignee')->where('status', '3')->paginate($this->perpage);
+            $data['completed'] = Shipment::with('consignee')->where('status', '4')->paginate($this->perpage);
+        $data['shipments'] = Shipment::with('vehicle')->get()->toArray();
+
+        }
+       
         // dd($data);
         // years
         $current_date = Carbon::now();
@@ -118,7 +137,6 @@ class ShipmentController extends Controller
             $data['date'][] = $date->format('Y-m-d');
         }
 
-        $data['shipments'] = Shipment::with('vehicle')->get()->toArray();
         // dd($data['shipments']);
         return view($this->view . 'list', $data, $notification);
     }
@@ -434,6 +452,9 @@ class ShipmentController extends Controller
             $arrival_date = $request->arrival_date;
             $destination_port = $request->destination_port;
             $records = new Shipment;
+            if(Auth::user()->hasRole('Customer')){
+                $records = $records->where('customer_email', auth()->user()->email);
+            }
             if ($port_of_loading) {
                 if ($port_of_loading != "") {
                     $records = $records->where('loading_port', $port_of_loading);
@@ -498,7 +519,12 @@ class ShipmentController extends Controller
     public function serverside(Request $request)
     {
         if ($request->ajax()) {
-            $data = Shipment::with('vehicle')->get();
+            if(Auth::user()->hasRole('Customer')){
+                $data = Shipment::with('vehicle')->where('customer_email', auth()->user()->email)->get();
+            }
+            else{
+                $data = Shipment::with('vehicle')->get();
+            }
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('id', function($row){
@@ -551,11 +577,14 @@ class ShipmentController extends Controller
                 ->rawColumns(['id','action','shipment_id'])
                 ->make(true);
         }
-
-        $data['data'] = Shipment::with('vehicle')->get()->toArray();
-        $action = ['action'=>'kashif'];
+        if(Auth::user()->hasRole('Customer')){
+            $data['data'] = Shipment::with('vehicle')->where('customer_email', auth()->user()->email)->get()->toArray();
+        }
+        else{
+            $data['data'] = Shipment::with('vehicle')->get()->toArray();
+        }
+        $action = ['action'=>''];
         array_push($data['data'], $action);
-        // dd($data['data']);
         return $data;
     }
 
@@ -563,7 +592,13 @@ class ShipmentController extends Controller
     {
         if ($req->ajax()) {
             $data = [];
-            $data['records'] = Shipment::where('status', $req->id)->get();
+            if(Auth::user()->hasRole('Customer')){
+                $data['records'] = Shipment::where('customer_email', auth()->user()->email)->where('status', $req->id)->get();
+
+            }
+            else{
+                $data['records'] = Shipment::where('status', $req->id)->get();
+            }
             $output = view('layouts.shipment_filter.filtering', $data)->render();
             return Response($output);
         }
@@ -573,7 +608,12 @@ class ShipmentController extends Controller
         $search_text = $req->searchText;
         $data = [];
         if ($req->searchText) {
-            $data['vehicles'] = Vehicle::where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->get()->toArray();
+            if(Auth::user()->hasRole('Customer')){
+                $data['vehicles'] = Vehicle::where('added_by_user', auth()->user()->id)->where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->get()->toArray();
+
+            }else{
+                $data['vehicles'] = Vehicle::where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->get()->toArray();
+            }
                 
                 $output = view('layouts.shipment_filter.filterVehicles', $data)->render();
                 return Response($output);

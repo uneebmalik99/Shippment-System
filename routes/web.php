@@ -155,6 +155,16 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/shipments/customer_details', [ShipmentController::class, 'Customer_Details'])->name('shipments.customer_details');
 
 
+
+    Route::get('/shipment_detail/shipment_Hazard_pdf', [pdfController::class, 'shipmentview'])->name('shipment_detail.shipment_Hazard_pdf');
+
+    Route::get('/shipment_detail/shipment_Houston_pdf', [pdfController::class, 'shipmentHouston'])->name('shipment_detail.shipment_Houston_pdf');
+
+    Route::get('/shipment_detail/shipment_Landing_pdf', [pdfController::class, 'shipmentLanding'])->name('shipment_detail.shipment_Landing_pdf');
+
+    Route::get('/shipment_detail/shipment_Custom_pdf', [pdfController::class, 'shipmentCustom'])->name('shipment_detail.shipment_Custom_pdf');
+
+
     //Notification Routes`
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.list');
     Route::get('/notifications/create', [NotificationController::class, 'create'])->name('notification.create');

@@ -65,11 +65,11 @@
                         {{-- {{dd(@$records)}} --}}
                        @foreach($records as $invoice)
                        <tr class="tb-body text-muted">
-                            <th scope="row">{{$invoice['user']['username']}}</th>
-                            <td>{{$invoice['customer_user_id']}}</td>
-                            <td>{{$invoice['total_amount']}}</td>
-                            <td>{{$invoice['amount_paid']}}</td>
-                            <td>{{$invoice['discount']}}</td>
+                            <th scope="row">{{@$invoice['user']['username']}}</th>
+                            <td>{{@$invoice['customer_user_id']}}</td>
+                            <td>{{@$invoice['total_amount']}}</td>
+                            <td>{{@$invoice['amount_paid']}}</td>
+                            <td>{{@$invoice['discount']}}</td>
                             <td class="d-flex justify-content-around">
                             <button class='profile-button'
                             ><a href="{{route('invoice.detail_page').'/'.$invoice['id']}}">

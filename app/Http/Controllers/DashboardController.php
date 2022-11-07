@@ -11,6 +11,11 @@ use App\Models\Vehicle;
 use App\Models\Shipment;
 use App\Models\Customer;
 use Carbon\Carbon;
+// use App\Http\Controllers\Auth;
+// use Auth;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 
 class DashboardController extends Controller
@@ -79,74 +84,125 @@ class DashboardController extends Controller
                 'action' => $this->action,
             ],
         ];
-        $data['shipments'] = Shipment::all();
 
-        $data['TotalCustomers'] = User::where('role_id', 4)->count();
-        $data['ActiveCustomers'] = User::where('role_id', 4)->where('status', '1')->count();
-        $data['InActiveCustomers'] = User::where('role_id', 4)->where('status', '0')->count();
+        // return auth()->user()->email;
+
+        // auth()->user()->if(Auth::user()->hasRole('Customer')){
+        if(Auth::user()->hasRole('Customer')){
+            $data['shipments'] = Shipment::where('customer_email', auth()->user()->email);
+
+                $data['TotalVehicles'] = Vehicle::where('added_by_user', auth()->user()->id)->count();
+                $data['NewOrders'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', 1)->count();
+                $data['Dispatched'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', 2)->count();
+                $data['onHand'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', 3)->count();
+                $data['noTitle'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', 4)->count();
+                $all_vehicles = Vehicle::where('added_by_user', auth()->user()->id)->get();
+                $allVehicles_value = Vehicle::where('added_by_user', auth()->user()->id)->get()->sum('value');
+                $data['all_vehicles'] = $all_vehicles;
+                $data['allVehicles_value'] = $allVehicles_value;
+
+                $onhand = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '1');
+                $onhand_count = $onhand->count();
+                $onhand_value = $onhand->sum('value');
+                $data['onhand_count'] = $onhand_count;
+                $data['onhand_value'] = $onhand_value;
+        
+                $dispatch =  Vehicle::where('added_by_user', auth()->user()->id)->where('status', '2');
+                $dispatch_count = $dispatch->count();
+                $dispatch_value = $dispatch->sum('value'); 
+                $data['dispatch_count'] = $dispatch_count;
+                $data['dispatch_value'] = $dispatch_value;
 
 
+                 // ======= shipments statuses  ====== 
+                 $booked = Shipment::where('customer_email', auth()->user()->email)->where('status', '1');
+                 $booked_count = $booked->count();
+                 $booked_value = Shipment::where('customer_email', auth()->user()->email)->count();
+                 $data['booked_count'] = $booked_count;
+                 $data['booked_total'] = $booked_value;
+         
+                 $shipped = Shipment::where('customer_email', auth()->user()->email)->where('status', '2');
+                 $shipped_count = $shipped->count();
+                 $shipped_value = Shipment::where('customer_email', auth()->user()->email)->count();
+                 $data['shipped_count'] = $shipped_count;
+                 $data['shipped_total'] = $shipped_value;
+         
+                 $arrived = Shipment::where('customer_email', auth()->user()->email)->where('status', '3');
+                 $arrived_count = $arrived->count();
+                 $arrived_value = Shipment::where('customer_email', auth()->user()->email)->count();
+                 $data['arrived_count'] = $arrived_count;
+                 $data['arrived_total'] = $arrived_value;
+         
+                 $completed = Shipment::where('customer_email', auth()->user()->email)->where('status', '4');
+                 $completed_count = $completed->count();
+                 $completed_value = Shipment::where('customer_email', auth()->user()->email)->count();
+                 $data['completed_count'] = $completed_count;
+                 $data['completed_total'] = $completed_value;
+        }
+        else{
+            $data['shipments'] = Shipment::all();
+            $data['TotalCustomers'] = User::role('Customer')->count();
+            $data['ActiveCustomers'] = User::role('Customer')->where('status', '1')->count();
+            $data['InActiveCustomers'] = User::role('Customer')->where('status', '0')->count();
+            // ===========================  vehicle status ================
+        
+                $data['TotalVehicles'] = Vehicle::all()->count();
+                $data['NewOrders'] = Vehicle::where('status', 1)->count();
+                $data['Dispatched'] = Vehicle::where('status', 2)->count();
+                $data['onHand'] = Vehicle::where('status', 3)->count();
+                $data['noTitle'] = Vehicle::where('status', 4)->count();
+                $all_vehicles = Vehicle::all();
+                $allVehicles_value = Vehicle::get()->sum('value');
+                $data['all_vehicles'] = $all_vehicles;
+                $data['allVehicles_value'] = $allVehicles_value;
         
         
-    // ===========================  vehicle status ================
+        
+                $onhand = Vehicle::where('status', '1');
+                $onhand_count = $onhand->count();
+                $onhand_value = $onhand->sum('value');
+                $data['onhand_count'] = $onhand_count;
+                $data['onhand_value'] = $onhand_value;
+        
+                $dispatch =  Vehicle::where('status', '2');
+                $dispatch_count = $dispatch->count();
+                $dispatch_value = $dispatch->sum('value'); 
+                $data['dispatch_count'] = $dispatch_count;
+                $data['dispatch_value'] = $dispatch_value;
 
-        $data['TotalVehicles'] = Vehicle::all()->count();
 
 
-        $data['NewOrders'] = Vehicle::where('status', 1)->count();
-        $data['Dispatched'] = Vehicle::where('status', 2)->count();
-        $data['onHand'] = Vehicle::where('status', 3)->count();
-        $data['noTitle'] = Vehicle::where('status', 4)->count();
+                // ======= shipments statuses  ====== 
+                $booked = Shipment::where('status', '1');
+                $booked_count = $booked->count();
+                $booked_value = Shipment::all()->count();
+                $data['booked_count'] = $booked_count;
+                $data['booked_total'] = $booked_value;
+        
+                $shipped = Shipment::where('status', '2');
+                $shipped_count = $shipped->count();
+                $shipped_value = Shipment::all()->count();
+                $data['shipped_count'] = $shipped_count;
+                $data['shipped_total'] = $shipped_value;
+        
+                $arrived = Shipment::where('status', '3');
+                $arrived_count = $arrived->count();
+                $arrived_value = Shipment::all()->count();
+                $data['arrived_count'] = $arrived_count;
+                $data['arrived_total'] = $arrived_value;
+        
+                $completed = Shipment::where('status', '4');
+                $completed_count = $completed->count();
+                $completed_value = Shipment::all()->count();
+                $data['completed_count'] = $completed_count;
+                $data['completed_total'] = $completed_value;
+        }
     
 
-        $all_vehicles = Vehicle::all();
-        $allVehicles_value = Vehicle::get()->sum('value');
-        $data['all_vehicles'] = $all_vehicles;
-        $data['allVehicles_value'] = $allVehicles_value;
-
-
-
-        $onhand = Vehicle::where('status', '1');
-        $onhand_count = $onhand->count();
-        $onhand_value = $onhand->sum('value');
-        $data['onhand_count'] = $onhand_count;
-        $data['onhand_value'] = $onhand_value;
-
-        $dispatch =  Vehicle::where('status', '2');
-        $dispatch_count = $dispatch->count();
-        $dispatch_value = $dispatch->sum('value'); 
-        $data['dispatch_count'] = $dispatch_count;
-        $data['dispatch_value'] = $dispatch_value;
 
 
 
 
-        // ======= shipments statuses  ====== 
-
-
-        $booked = Shipment::where('status', '1');
-        $booked_count = $booked->count();
-        $booked_value = Shipment::all()->count();
-        $data['booked_count'] = $booked_count;
-        $data['booked_total'] = $booked_value;
-
-        $shipped = Shipment::where('status', '2');
-        $shipped_count = $shipped->count();
-        $shipped_value = Shipment::all()->count();
-        $data['shipped_count'] = $shipped_count;
-        $data['shipped_total'] = $shipped_value;
-
-        $arrived = Shipment::where('status', '3');
-        $arrived_count = $arrived->count();
-        $arrived_value = Shipment::all()->count();
-        $data['arrived_count'] = $arrived_count;
-        $data['arrived_total'] = $arrived_value;
-
-        $completed = Shipment::where('status', '4');
-        $completed_count = $completed->count();
-        $completed_value = Shipment::all()->count();
-        $data['completed_count'] = $completed_count;
-        $data['completed_total'] = $completed_value;
 
         
 

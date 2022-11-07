@@ -112,4 +112,37 @@ class pdfController extends Controller
 
 
     }
+
+    public function shipmentview(){
+        // $data = [];
+        // $data['shipment']=Shipment::find($id)->toArray();
+        $pdf = PDF::loadview('layouts.shipment_detail.shipment_Hazard_pdf');
+        
+        return $pdf->stream(); 
+    }
+
+    public function shipmentHouston(){
+        // $data = [];
+        // $data['shipment']=Shipment::find($id)->toArray();
+        $pdf = PDF::loadview('layouts.shipment_detail.shipment_Houston_pdf');
+        
+        return $pdf->stream(); 
+    }
+
+    public function shipmentLanding(){
+        // $data = [];
+        // $data['shipment']=Shipment::find($id)->toArray();
+        $pdf = PDF::loadview('layouts.shipment_detail.shipment__Landing_pdf');
+        
+        return $pdf->stream(); 
+    }
+
+    public function shipmentCustom(){
+        // $data = [];
+        // $data['shipment']=Shipment::find($id)->toArray();
+        $pdf = PDF::loadview('layouts.shipment_detail.shipment__Custom_pdf');
+        
+        return $pdf->stream(); 
+    }
+    
 }

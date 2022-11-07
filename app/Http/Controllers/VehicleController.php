@@ -41,6 +41,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use Storage;
 use Yajra\Datatables\Datatables;
 use PDF;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class VehicleController extends Controller
 {
@@ -108,19 +111,33 @@ class VehicleController extends Controller
                 'page' => 'list',
             ],
         ];
-        $notification = $this->Notification();
-        $data['records'] = Vehicle::with('user')->get()->toArray();
-        $data['new_orders'] = Vehicle::where('status', '1')->get();
-        $data['dispatched'] = Vehicle::where('status', '2')->get();
-        $data['on_hand'] = Vehicle::where('status', '3')->get();
-        $data['no_titles'] = Vehicle::where('status', '4')->get();
-        $data['towing'] = Vehicle::where('status', '5')->get();
-        $data['location'] = Location::all();
-        $data['status'] = VehicleStatus::all();
 
-        $data['make'] = MMS::select('make')->where('status', '1')->groupBy('make')->get()->toArray();
-        $data['model'] = MMS::select('model')->where('status', '1')->groupBy('model')->get()->toArray();
-        
+
+        if(Auth::user()->hasRole('Customer')){
+            $data['records'] = Vehicle::with('user')->where('added_by_user', auth()->user()->id)->get()->toArray();
+            $data['new_orders'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '1')->get();
+            $data['dispatched'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '2')->get();
+            $data['on_hand'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '3')->get();
+            $data['no_titles'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '4')->get();
+            $data['towing'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '5')->get();
+            $data['location'] = Location::all();
+            $data['status'] = VehicleStatus::all();
+            $data['make'] = MMS::select('make')->where('status', '1')->groupBy('make')->get()->toArray();
+            $data['model'] = MMS::select('model')->where('status', '1')->groupBy('model')->get()->toArray();
+        }
+        else{
+            $data['records'] = Vehicle::with('user')->get()->toArray();
+            $data['new_orders'] = Vehicle::where('status', '1')->get();
+            $data['dispatched'] = Vehicle::where('status', '2')->get();
+            $data['on_hand'] = Vehicle::where('status', '3')->get();
+            $data['no_titles'] = Vehicle::where('status', '4')->get();
+            $data['towing'] = Vehicle::where('status', '5')->get();
+            $data['location'] = Location::all();
+            $data['status'] = VehicleStatus::all();
+            $data['make'] = MMS::select('make')->where('status', '1')->groupBy('make')->get()->toArray();
+            $data['model'] = MMS::select('model')->where('status', '1')->groupBy('model')->get()->toArray();
+        }
+        $notification = $this->Notification();
         return view($this->view . 'list', $data, $notification);
 
     }
@@ -247,8 +264,17 @@ class VehicleController extends Controller
             ];
             $table = "";
             $page = "";
-            $total = Vehicle::all()->toArray();
-            $records = Vehicle::with('user');
+
+            if(Auth::user()->hasRole('Customer')){
+                $total = Vehicle::where('added_by_user', auth()->user()->id)->get()->toArray();
+                $records = Vehicle::with('user')->where('added_by_user', auth()->user()->id);
+            }
+            else{
+                $total = Vehicle::all()->toArray();
+                $records = Vehicle::with('user');
+            }
+            // $total = Vehicle::all()->toArray();
+            // $records = Vehicle::with('user');
             $warehouse = $request->warehouse;
             $year = $request->year;
             $make = $request->make;
@@ -269,24 +295,18 @@ class VehicleController extends Controller
             if ($year) {
                 if ($year != "") {
                     $records = $records->where('year', $year)->get()->toArray();
-                    // return $records;
                 }
             }
-
             if ($make) {
                 if ($make != "") {
-                    $records = $records->where('make', $make)->get()->toArray();
-                    // return count($records);
+                    $records = $records->where('make', $make)->get()->toArray();       
                 }
             }
-
             if ($model) {
                 if ($model != "") {
                     $records = $records->where('model', $model)->get()->toArray();
-                    // return count($records);
                 }
             }
-
             if ($status) {
                 if ($status != "") {
                     if ($status == 'all') {
@@ -295,7 +315,6 @@ class VehicleController extends Controller
                     } else {
                         $records = $records->with('images')->where('status', $status)->paginate($this->perpage);
                         $data['records'] = $records;
-                        // dd($data['records']);
                         $output['view'] = view('vehicle.' . $status_name, $data)->render();
                         return Response($output);
                     }
@@ -308,7 +327,6 @@ class VehicleController extends Controller
 
     public function create_form(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'customer_name' => 'required',
             'vin' => 'required',
@@ -320,65 +338,13 @@ class VehicleController extends Controller
             'key' => 'required',
             'status' => 'required',
         ]);
-
         $data = $request->all();
         $vin['vin'] = $data['vin'];
-        // return $vin;
         $tab = $data['tab'];
-        // $image = $request->file('images');
-        // $billofsales = $request->file('billofsales');
-        // $originaltitle = $request->file('originaltitle');
-        // $pickup = $request->file('pickup');
         unset($data['tab']);
-        // unset($data['billofsales']);
-        // unset($data['originaltitle']);
-        // unset($data['pickup']);
         $Obj = new Vehicle;
-        // $Obj_bill = new BillOfSale;
-        // $Obj_title = new OriginalTitle;
-        // $Obj_pikcup = new PickupImage;
         $new = $Obj->create($data);
         $Obj_vehicle = $Obj->where('vin', $data['vin'])->get();
-        // if ($new) {
-        //     if ($billofsales) {
-        //         foreach ($billofsales as $billofsale) {
-        //             $image_name = time() . '.' . $billofsale->extension();
-        //             $filename = Storage::putFile($this->directory, $billofsale);
-        //             $billofsale->move(public_path($this->directory), $filename);
-        //             $Obj_bill->vehicle_id = $Obj_vehicle[0]['id'];
-        //             $Obj_bill->name = $filename;
-        //             $Obj_bill->thumbnail = $image_name;
-        //             $Obj_bill->save();
-        //         }
-        //     }
-
-        //     if ($originaltitle) {
-        //         foreach ($originaltitle as $originaltitles) {
-        //             $image_name = time() . '.' . $originaltitles->extension();
-        //             $filename = Storage::putFile($this->directory, $originaltitles);
-        //             $originaltitles->move(public_path($this->directory), $filename);
-        //             $Obj_title->vehicle_id = $Obj_vehicle[0]['id'];
-        //             $Obj_title->name = $filename;
-        //             $Obj_title->thumbnail = $image_name;
-        //             $Obj_title->save();
-        //         }
-        //     }
-
-        //     if ($pickup) {
-        //         foreach ($pickup as $pickups) {
-        //             $image_name = time() . '.' . $pickups->extension();
-        //             $filename = Storage::putFile($this->directory, $pickups);
-        //             $pickups->move(public_path($this->directory), $filename);
-        //             $Obj_pikcup->vehicle_id = $Obj_vehicle[0]['id'];
-        //             $Obj_pikcup->name = $filename;
-        //             $Obj_pikcup->thumbnail = $image_name;
-        //             $Obj_pikcup->save();
-        //         }
-        //     }
-        // } else {
-        //     return "Vehicle not created.";
-        // }
-
         switch ($tab) {
             case ('general'):
                 $output['view'] = view('layouts.vehicle_create.attachments', $vin)->render();
@@ -386,7 +352,6 @@ class VehicleController extends Controller
         }
         return Response($output);
     }
-
     public function store_image(Request $request)
     {
 
@@ -695,7 +660,12 @@ class VehicleController extends Controller
     public function serverside(Request $request)
     {
         if ($request->ajax()) {
-            $data = Vehicle::with('vehicle_status')->get()->toArray();
+            if(Auth::user()->hasRole('Customer')){
+                $data = Vehicle::with('vehicle_status')->where('added_by_user', auth()->user()->id)->get()->toArray();
+            }
+            else{
+                $data = Vehicle::with('vehicle_status')->get()->toArray();
+            }
             return Datatables::of($data)
             ->addIndexColumn()
             ->addColumn('status', function($row){
@@ -749,14 +719,20 @@ class VehicleController extends Controller
     public function fetchVehicles(Request $req)
     {
         if ($req->ajax()) {
-
             $output = [];
             $table = "";
             $page = "";
-            $total = Vehicle::all()->toArray();
-            $records = Vehicle::with('user');
             $status = $req->id;
             $status_name = $req->tab;
+            if(Auth::user()->hasRole('Customer')){
+               
+                $total = Vehicle::where('added_by_user', auth()->user()->id)->get();
+                $records = Vehicle::with('user')->where('added_by_user', auth()->user()->id);
+            }
+            else{
+                $total = Vehicle::all()->toArray();
+                $records = Vehicle::with('user');
+            }
 
             if ($status) {
                 $records = $records->with('images')->where('status', $status)->paginate($this->perpage);
@@ -793,10 +769,8 @@ class VehicleController extends Controller
         return view('vehicle.vehiclepdf');
     }
     public function exportpdf(){
-        // $pdf = view('vehicle.vehiclepdf');
-        // $data = PDF::LoadView('pdf_view', $pdf);
             $pdf = PDF::LoadView('vehicle.vehiclepdf');
-            return $pdf->download('invoice.pdf');
+            return $pdf->stream('invoice.pdf', array("Attachment" => false));
     }
 
 }

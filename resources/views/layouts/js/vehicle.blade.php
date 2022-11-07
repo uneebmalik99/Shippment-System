@@ -44,9 +44,7 @@
                 });
                 $('#dispatched_table').DataTable({
                     scrollX: true,
-                    "columnDefs": [{
-                        "width": "20%",
-                    }],
+                    
                     "lengthMenu": [
                         [50, 100, 500],
                         [50, 100, 500]
@@ -318,10 +316,7 @@
 
                 });
                 $('#dispatched_table').DataTable({
-                    "columnDefs": [{
-                        "width": "20%",
-
-                    }],
+                    
                     scrollX: true,
                     "lengthMenu": [
                         [50, 100, 500],

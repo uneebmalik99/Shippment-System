@@ -5,7 +5,7 @@
         box-shadow: 3px 5px 3px rgba(92, 174, 235, 0.65);
         border-radius: 10px;
         padding-bottom: 16px;   
-        height: 154px;   
+        height: 230px;   
     }
     .all_roles h5{
         color: #2C77E7;
@@ -34,16 +34,7 @@
     }
 </style>
 @section('body')
-    {{-- <div class="row unknow p-5">
-            <div class="col-12 ms-5 mb-4">
-                <button type="button" class="btn"><i><svg width="16" height="17" viewBox="0 0 16 23" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M4.25 4.41797C4.25 6.48547 5.9325 8.16797 8 8.16797C10.0675 8.16797 11.75 6.48547 11.75 4.41797C11.75 2.35047 10.0675 0.667969 8 0.667969C5.9325 0.667969 4.25 2.35047 4.25 4.41797ZM14.6667 16.5013H15.5V15.668C15.5 12.4521 12.8825 9.83463 9.66667 9.83463H6.33333C3.11667 9.83463 0.5 12.4521 0.5 15.668V16.5013H14.6667Z"
-                                fill="#1F689E" />
-                        </svg>
-            </div>
-        </div> --}}
+ 
     <div class="container">
         <div class="row py-5 mt-2">
             <div class="col-lg-4 d-block profile-div">
@@ -53,7 +44,6 @@
                             style="position:absolute;top: -21%;  right: 28.5%; width: 120px;">
                     </div>
                     <div class="p-5">
-                        {{-- @dd() --}}
                         <h3 class="pt-4 pb-1 text-center text-dark">
                             {{ strtoupper(@$records['username']) }}
                         </h3>
@@ -155,57 +145,16 @@
             </div>
         </div>
 
-        {{-- <div class="row">
-            <div class="d-flex permisson-color mb-2 p-0">
-                <i class="p-1"><svg width="22" height="24" viewBox="0 0 22 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M11 0C9.96501 0 8.23551 0.3975 6.60801 0.84C4.94301 1.29 3.26451 1.8225 2.27751 2.145C1.86485 2.28128 1.49899 2.5312 1.22198 2.86605C0.944973 3.20091 0.768039 3.60711 0.711508 4.038C-0.182492 10.7535 1.89201 15.7305 4.40901 19.023C5.47638 20.4314 6.74905 21.6717 8.18451 22.7025C8.76351 23.112 9.30051 23.4255 9.75651 23.64C10.1765 23.838 10.628 24 11 24C11.372 24 11.822 23.838 12.2435 23.64C12.7932 23.3728 13.3191 23.0592 13.8155 22.7025C15.251 21.6718 16.5237 20.4315 17.591 19.023C20.108 15.7305 22.1825 10.7535 21.2885 4.038C21.2321 3.6069 21.0552 3.20046 20.7782 2.86535C20.5012 2.53024 20.1353 2.28004 19.7225 2.1435C18.2897 1.67372 16.8458 1.23859 15.392 0.8385C13.7645 0.399 12.035 0 11 0ZM11 7.5C11.5314 7.49921 12.0459 7.6865 12.4524 8.02869C12.8589 8.37089 13.1311 8.84591 13.221 9.36962C13.3108 9.89333 13.2124 10.4319 12.9432 10.89C12.6739 11.3481 12.2513 11.6962 11.75 11.8725L12.3275 14.8575C12.3485 14.9661 12.3453 15.0779 12.318 15.1851C12.2907 15.2923 12.24 15.3921 12.1696 15.4774C12.0993 15.5627 12.0109 15.6313 11.9108 15.6785C11.8108 15.7256 11.7016 15.75 11.591 15.75H10.409C10.2986 15.7498 10.1895 15.7252 10.0897 15.678C9.9898 15.6307 9.90162 15.562 9.8314 15.4768C9.76118 15.3915 9.71066 15.2918 9.68345 15.1847C9.65625 15.0777 9.65302 14.9659 9.67401 14.8575L10.25 11.8725C9.74876 11.6962 9.32609 11.3481 9.05686 10.89C8.78763 10.4319 8.68921 9.89333 8.77904 9.36962C8.86887 8.84591 9.14115 8.37089 9.54765 8.02869C9.95416 7.6865 10.4686 7.49921 11 7.5Z"
-                            fill="#1F689E" />
-                    </svg>
-                </i>
-                <h3>Permission</h3>
-            </div>
-        </div> --}}
-        {{-- <div class="row">
-            <table class="table">
-                <thead class="thead text-white" style="color:#fff!important;">
-                    <td class="p-3 col-4" style="color:#fff">Role</td>
-                    <td class="p-3 text-center col-2" style="color:#fff">READ</td>
-                    <td class="p-3 text-center col-2" style="color:#fff">WRITE</td>
-                    <td class="p-3 text-center col-2" style="color:#fff">CREATE</td>
-                    <td class="p-3 text-center col-2" style="color:#fff">DELETE</td>
-                </thead>
-            </table>
-            <table class="my-3 table">
-                <tbody>
-                    <tr class="profile_row">
-                        <td class="p-3 SPY col-4 text-dark">Super Admin</td>
-                        <td class="p-3 text-center col-2"><input type="checkbox" value="" class="check-box">
-                        </td>
-                        <td class="p-3 text-center col-2"><input type="checkbox" value="" class="check-box">
-                        </td>
-                        <td class="p-3 text-center col-2"><input type="checkbox" value="" class="check-box">
-                        </td>
-                        <td class="p-3 text-center col-2"><input type="checkbox" value="" class="check-box">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-           
-
-
-        </div> --}}
 
         <div class="row mb-3">
             <div class="col-5">
                 <div class="all_roles">
                     <h5>Roles</h5>
                     <div class="roles d-flex flex-column">
-                        <a>Super Admin</a>
-                        <a>Sub Admin</a>
-                        <a>Location Admin</a>
-                        <a>Customer</a>
+                        @foreach ($roles as $role)
+                        <a>{{@$role['name']}}</a>
+                        @endforeach
+                       
                     </div>
 
                 </div>
@@ -229,14 +178,10 @@
                 <div class="all_roles">
                     <h5>Roles</h5>
                     <div class="roles d-flex flex-column">
-                       @can('super_admin', Auth::user()->role)
-                       <a>Super Admin</a>
-                       @elsecan('sub_admin', Auth::user()->role)
-                       <a>Sub Admin</a>
-                       @elsecan('location_admin', Auth::user()->role)
-                       <a>Location Admin</a>
+                        @foreach ($assignRoles as $role)
+                        <a>{{@$role}}</a>
+                        @endforeach
 
-                       @endcan
                     </div>
 
                 </div>
@@ -249,12 +194,11 @@
                 <div class="all_roles">
                     <h5>Permissions</h5>
                     <div class="roles d-flex flex-column">
-                        <a>Create</a>
-                        <a>Read</a>
-                        <a>Update</a>
-                        <a>Delete</a>
+                        @foreach ($permissions as $permission)
+                        <a>{{@$permission['name']}}</a>
+                        @endforeach
                     </div>
-
+                    
                 </div>
             </div>
             <div class="col-2">
@@ -276,16 +220,9 @@
                 <div class="all_roles">
                     <h5>Permissions</h5>
                     <div class="roles d-flex flex-column">
-                        @can('super_admin', Auth::user()->role)
-                        <a>Create</a>
-                        <a>Read</a>
-                        <a>Update</a>
-                        <a>Delete</a>
-                        @elsecan('sub_admin', Auth::user()->role)
-                        <a>Read</a>
-                        @elsecan('location_admin', Auth::user()->role)
-                        <a>Read</a>
-                        @endcan
+                        @foreach ($assignPermissions as $permission)
+                        <a>{{@$permission['name']}}</a>
+                        @endforeach
                     </div>
 
                 </div>
