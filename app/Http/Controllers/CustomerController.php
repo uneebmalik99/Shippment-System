@@ -217,11 +217,7 @@ class CustomerController extends Controller
 
     public function customerUpdate(Request $req)
     {
-
-        // dd($req->all());
-
         $image = $req->file('user_image');
-        // return $image[0]['name'];
         $file = $req->file('user_file');
         $file_id = $req->file_id;
         $data = $req->all();

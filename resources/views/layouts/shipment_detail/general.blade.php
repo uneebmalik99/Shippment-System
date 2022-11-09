@@ -188,20 +188,20 @@
                     <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;
                     border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
                         <div style="transform: skew(30deg) !important;padding:1px 4px">
-                            <a href="{{route ('shipment_detail.shipment_Hazard_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">Export PDF</a>
+                            <a href="{{route ('shipment_detail.shipment_Hazard_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">Non Hazard Report</a>
                         </div>
                     </button>
 
                     <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;
                     border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
                         <div style="transform: skew(30deg) !important;padding:1px 4px">
-                            <a href="{{route ('shipment_detail.shipment_Houston_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">Export Houston</a>
+                            <a href="{{route ('shipment_detail.shipment_Houston_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">Houston Cover Letter</a>
                         </div>
                     </button>
                     <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;
                     border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
                         <div style="transform: skew(30deg) !important;padding:1px 4px">
-                            <a href="{{route ('shipment_detail.shipment_Landing_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">Export Landing</a>
+                            <a href="{{route ('shipment_detail.shipment_Landing_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">BOL</a>
                         </div>
                     </button>
                 </div>
@@ -210,14 +210,14 @@
                     <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;
                     border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
                         <div style="transform: skew(30deg) !important;padding:1px 4px">
-                            <a href="{{route ('shipment_detail.shipment_Custom_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">Export Custom</a>
+                            <a href="{{route ('shipment_detail.shipment_Custom_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">US Custom</a>
                         </div>
                     </button>
 
                     <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;
                     border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
                         <div style="transform: skew(30deg) !important;padding:1px 4px">
-                            <a href="" style="color:white;text-decoration:none;font-size: 12px;">PDF</a>
+                            <a href="" style="color:white;text-decoration:none;font-size: 12px;">DOCK RECEIPT</a>
                         </div>
                     </button>
                    
