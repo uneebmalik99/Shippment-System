@@ -371,8 +371,10 @@
                                 </div>
                                 <div>
                                     <div class="font-bold"><span>{{ @$ActiveCustomers }}</span> </div>
-                                    <div class="py-1 col-12 text-muted p-0 font-size"><span>Total Customers
-                                            <b>{{ @$TotalCustomers }}</b></span></div>
+                                    <div class="py-1 col-12 text-muted p-0 font-size">
+                                        {{-- <span>Total Customers --}}
+                                            {{-- <b>{{ @$TotalCustomers }}</b></span> --}}
+                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -399,8 +401,10 @@
                                 </div>
                                 <div>
                                     <div class="font-bold"><span class="px-1">{{ @$InActiveCustomers }}</span></div>
-                                    <div class="py-1 col-12 text-muted p-0 font-size"><span>Total Customers
-                                            <b>{{ @$TotalCustomers }}</b></span></div>
+                                    <div class="py-1 col-12 text-muted p-0 font-size">
+                                        {{-- <span>Total Customers
+                                            <b>{{ @$TotalCustomers }}</b></span> --}}
+                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -426,7 +430,9 @@
                                 <div>
                                     <div class="font-bold"><span class="px-1">32</span>
                                     </div>
-                                    <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
+                                    <div class="py-1 col-12 text-muted p-0 font-size">
+                                        {{-- <span>Last week Analytics</span> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -456,9 +462,9 @@
                                 <div>
                                     <div class="font-bold"><span>{{ @$TotalCustomers }}</span> </div>
                                     <div class="py-1 col-12 text-muted p-0 font-size">
-                                        <span>Total Customers
+                                        {{-- <span>Total Customers
                                             <b>{{ @$TotalCustomers }}</b>
-                                        </span>
+                                        </span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -484,9 +490,9 @@
                                 <div>
                                     <div class="font-bold"><span>{{ @$NewOrders }}</span> </div>
                                     <div class="py-1 col-12 text-muted p-0 font-size">
-                                        <span>Total Vehicles
+                                        {{-- <span>Total Vehicles
                                             <b>{{ @$TotalVehicles }}</b>
-                                        </span>
+                                        </span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -535,9 +541,9 @@
                                 <div>
                                     <div class="font-bold"><span>{{ @$Dispatched }}</span> </div>
                                     <div class="py-1 col-12 text-muted p-0 font-size">
-                                        <span>Total Vehicles
+                                        {{-- <span>Total Vehicles
                                             <b>{{ @$TotalVehicles }}</b>
-                                        </span>
+                                        </span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -560,9 +566,9 @@
                                 <div>
                                     <div class="font-bold"><span>{{ @$onHand }}</span> </div>
                                     <div class="py-1 col-12 text-muted p-0 font-size">
-                                        <span>Total Vehicles
+                                        {{-- <span>Total Vehicles
                                             <b>{{ @$TotalVehicles }}</b>
-                                        </span>
+                                        </span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -584,9 +590,9 @@
                                 <div>
                                     <div class="font-bold"><span>{{ @$noTitle }}</span> </div>
                                     <div class="py-1 col-12 text-muted p-0 font-size">
-                                        <span>Total Vehicles
+                                        {{-- <span>Total Vehicles
                                             <b>{{ @$TotalVehicles }}</b>
-                                        </span>
+                                        </span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -617,9 +623,9 @@
                                 <div>
                                     <div class="font-bold"><span>{{ @$booked_count }}</span> </div>
                                     <div class="py-1 col-12 text-muted p-0 font-size">
-                                        <span>Total Shipments
+                                        {{-- <span>Total Shipments
                                             <b>{{ @$booked_total }}</b>
-                                        </span>
+                                        </span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -647,9 +653,9 @@
                                 <div>
                                     <div class="font-bold"><span>{{ @$shipped_count }}</span> </div>
                                     <div class="py-1 col-12 text-muted p-0 font-size">
-                                        <span>Total Shipments
+                                        {{-- <span>Total Shipments
                                             <b>{{ @$shipped_total }}</b>
-                                        </span>
+                                        </span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -677,9 +683,9 @@
                                 <div>
                                     <div class="font-bold"><span>{{ @$arrived_count }}</span> </div>
                                     <div class="py-1 col-12 text-muted p-0 font-size">
-                                        <span>Total Shipments
+                                        {{-- <span>Total Shipments
                                             <b>{{ @$arrived_total }}</b>
-                                        </span>
+                                        </span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -707,9 +713,9 @@
                                 <div>
                                     <div class="font-bold"><span>{{ @$completed_count }}</span> </div>
                                     <div class="py-1 col-12 text-muted p-0 font-size">
-                                        <span>Total Shipments
+                                        {{-- <span>Total Shipments
                                             <b>{{ @$completed_total }}</b>
-                                        </span>
+                                        </span> --}}
                                     </div>
                                 </div>
                             </div>

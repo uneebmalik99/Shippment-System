@@ -17,7 +17,7 @@ class User extends Authenticatable
 
     public function vehicles()
     {
-        return $this->hasMany('App\Models\Vehicle');
+        return $this->hasMany('App\Models\Vehicle', 'buyer_id', 'id');
     }
 
     public function exports()

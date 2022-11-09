@@ -207,8 +207,8 @@ class CustomerController extends Controller
 
     public function edit(Request $request, $id = null)
     {
-
-        $data['documents'] = CustomerDocument::with('user')->where('user_id', $id)->get();
+        // dd($id);
+        $data['documents'] = User::with('documents')->where('id', $id)->get()->toArray();
         $data['location'] = Location::all();
         // dd($data);
         $output = view('layouts.customer.customer_edit', $data)->render();
@@ -218,7 +218,9 @@ class CustomerController extends Controller
     public function customerUpdate(Request $req)
     {
 
-        $image = $req->file('images');
+        // dd($req->all());
+
+        $image = $req->file('user_image');
         // return $image[0]['name'];
         $file = $req->file('user_file');
         $file_id = $req->file_id;
@@ -245,6 +247,7 @@ class CustomerController extends Controller
         }
 
         if ($file) {
+
             foreach ($file as $files) {
                 $file_name = time() . '.' . $files->extension();
                 $docname = Storage::putFile($this->directory, $files);
@@ -252,9 +255,18 @@ class CustomerController extends Controller
                 $documents['thumbnail'] = $file_name;
                 $files->move(public_path($this->directory), $docname);
             }
+            // dd($file_id);
+            if(empty($file_id)){
+            $documents['user_id'] = $req->id;
+            $Obj = new CustomerDocument;
+            $Obj->create($documents);
+            }
+            else{
             $Obj = CustomerDocument::find($file_id);
             $Obj->update($documents);
-            // return '0';
+            }
+            
+            // return ' 0';
 
         }
         $success = 'Customer Updated Successfully!';
@@ -293,7 +305,7 @@ class CustomerController extends Controller
         // return $id;
         $action = url($this->action . '/profile/');
         $data = [
-            'user' => User::find($id)->toArray(),
+            'user' => User::find($id),
             "page_title" => "Profile " . $this->singular,
             "page_heading" => "Profile " . $this->singular,
             "button_text" => "Update ",

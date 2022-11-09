@@ -244,7 +244,7 @@
     $('.vehicle_information_tab').on('click', function() {
         $id = $(this).attr('id');
         $tab = $(this).attr('tab');
-        $('.vehicle_information_tab').removeClass('active_information_button col-3');
+        $('.vehicle_information_tab').removeClass('active_information_button col-3 next-style');
         $('.vehicle_information_tab').addClass('col-2');
         $(this).removeClass('col-2');
         $(this).addClass('active_information_button col-3');
@@ -280,7 +280,8 @@
             },
             success: function(data) {
                 // alert(data);
-                console.log(data);
+                // console.log(data);
+                // alert(data);
                 $('.changeImages').html(data);
             }
         });
@@ -414,7 +415,6 @@
             $('input[name="checkboxes"]').each(function() {
                 this.checked = false;
             })
-
         }
         toggleDeleteAllBtn();
     })

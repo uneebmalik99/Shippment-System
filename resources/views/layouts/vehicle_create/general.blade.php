@@ -1,6 +1,9 @@
 @include('layouts.vehicle_create.navbar')
 <form method="POST" id="vehicle_form" enctype="multipart/form-data">
     @csrf
+    @if(@$user[0]['id'])
+    <input type="hidden" id="id" name="id" value="{{@$user[0]['id']}}">
+    @endif
     <div class="d-lg-flex">
         <div class="col-xl-12 col-12 d-lg-flex p-0">
             <div class="col-lg-6 col-12 p-0">
@@ -22,15 +25,19 @@
                                     <label for="customer_name" class="col-6 px-0 font-size font-bold">Company Name <span
                                             class="text-danger">*</span></label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="customer_name" id="customer_name" value="{{ @$user['customer_name'] }}">
+                                        name="customer_name" id="customer_name" value="{{ @$user[0]['customer_name'] }}">
+                                        @if(@$user[0]['customer_name'])
+                                        <option value="{{@$user[0]['customer_name']}}">{{@$user[0]['customer_name']}}</option>
+                                        @else
                                         <option selected disabled>Select Company Name</option>
+                                        @endif
                                         @foreach ($customer_name as $customer_names)
                                             <option value="{{ @$customer_names['company_name'] }}">
                                                 {{ @$customer_names['company_name'] }}</option>
                                         @endforeach
                                     </select>
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="customer_name" id="customer_name" value="{{ @$user['customer_name'] }}"> --}}
+                                        name="customer_name" id="customer_name" value="{{ @$user[0]['customer_name'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="customer_name_error">
@@ -50,7 +57,7 @@
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                         {{-- <form> --}}
                                         <input type="text" class="col-8 general_input" name="vin" id="vin"
-                                            value="{{ @$user['vin'] }}">
+                                            value="{{ @$user[0]['vin'] }}">
                                         <a href="#" onclick="getInfo()" class="prefix text-dark px-2"
                                             style="text-decoration: none!important;
                                              background:rgb(175, 197, 234);border-radius:20px;"
@@ -60,7 +67,7 @@
                                         {{-- </form> --}}
                                     </div>
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="vin" id="vin" value="{{ @$user['vin'] }}"> --}}
+                                        name="vin" id="vin" value="{{ @$user[0]['vin'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="vin_error">
@@ -80,7 +87,7 @@
                                     <option value="{{@$vyear['name']}}">{{@$vyear['name']}}</option>
                                 </select> --}}
                                     <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="year" id="year" value="{{ @$user['year'] }}">
+                                        name="year" id="year" value="{{ @$user[0]['year'] }}">
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="year_error">
@@ -95,14 +102,18 @@
                                             class="text-danger">*</span></label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6" name="make"
                                         id="make" onchange="FetachModel()">
+                                        @if(@$user[0]['make'])
+                                        <option value="{{@$user[0]['make']}}">{{@$user[0]['make']}}</option>
+                                        @else
                                         <option selected disabled>Select Make</option>
+                                        @endif
                                         @foreach ($vehicle_make as $vmake)
                                             <option value="{{ @$vmake['make'] }}">{{ @$vmake['make'] }}</option>
                                         @endforeach
                                     </select>
 
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="make" id="make" value="{{ @$user['make'] }}" disabled> --}}
+                                        name="make" id="make" value="{{ @$user[0]['make'] }}" disabled> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="make_error">
@@ -117,11 +128,14 @@
                                             class="text-danger">*</span></label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6" name="model"
                                         id="model">
+                                        @if(@$user[0]['model'])
+                                        <option value="{{@$user[0]['model']}}">{{@$user[0]['model']}}</option>
+                                        @else
                                         <option selected disabled>Select Model</option>
-
+                                        @endif
                                     </select>
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="model" id="model" value="{{ @$user['model'] }}" disabled> --}}
+                                        name="model" id="model" value="{{ @$user[0]['model'] }}" disabled> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="model_error">
@@ -135,15 +149,19 @@
                                     <label for="vehicle_type" class="col-6 px-0 font-size font-bold">Vehicle Type<span
                                             class="text-danger">*</span></label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="vehicle_type" id="vehicle_type" value="{{ @$user['vehicle_type'] }}">
+                                        name="vehicle_type" id="vehicle_type" value="{{ @$user[0]['vehicle_type'] }}">
+                                        @if(@$user[0]['vehicle_type'])
+                                        <option value="{{@$user[0]['vehicle_type']}}">{{@$user[0]['vehicle_type']}}</option>
+                                        @else
                                         <option selected disabled>Select Type</option>
+                                        @endif
                                         @foreach (@$vehicle_types as $types)
                                             <option value="{{ @$types['vehicle_type'] }}">{{ @$types['vehicle_type'] }}
                                             </option>
                                         @endforeach
                                     </select>
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="vehicle_type" id="vehicle_type" value="{{ @$user['vehicle_type'] }}" disabled> --}}
+                                        name="vehicle_type" id="vehicle_type" value="{{ @$user[0]['vehicle_type'] }}" disabled> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="vehicle_type_error">
@@ -156,15 +174,19 @@
                                 <div class="d-flex align-items-center">
                                     <label for="color" class="col-6 px-0 font-size font-bold">Color<span
                                             class="text-danger">*</span></label>
-                                    <select name="color" id="color" value="{{ @$user['color'] }}"
+                                    <select name="color" id="color" value="{{ @$user[0]['color'] }}"
                                         class="form-control-sm border border-0 rounded-pill bg col-6">
+                                        @if(@$user[0]['color'])
+                                        <option value="{{@$user[0]['color']}}">{{@$user[0]['color']}}</option>
+                                        @else
                                         <option selected disabled>Select Color</option>
+                                        @endif
                                         @foreach ($colors as $color)
                                             <option value="{{ @$color['name'] }}">{{ @$color['name'] }}</option>
                                         @endforeach
                                     </select>
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="color" id="color" value="{{ @$user['color'] }}"> --}}
+                                        name="color" id="color" value="{{ @$user[0]['color'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="color_error">
@@ -179,7 +201,7 @@
                                             class="text-danger">*</span></label>
                                     <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="weight"
-                                        id="weight" value="{{ @$user['weight'] }}">
+                                        id="weight" value="{{ @$user[0]['weight'] }}">
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="weight_error">
@@ -194,7 +216,7 @@
                                             class="text-danger">*</span></label>
                                     <input type="number"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="value"
-                                        id="value" value="{{ @$user['values'] }}">
+                                        id="value" value="{{ @$user[0]['value'] }}">
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="value_error">
@@ -211,15 +233,19 @@
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                         {{-- <span class="prefix text-dark">$</span> --}}
                                         <select class="general_input col-11" name="auction" id="auction"
-                                            value="{{ @$user['auction'] }}">
+                                            value="{{ @$user[0]['auction'] }}">
+                                            @if(@$user[0]['auction'])
+                                            <option value="{{@$user[0]['auction']}}">{{@$user[0]['auction']}}</option>
+                                            @else
                                             <option selected disabled>Select Auction</option>
+                                            @endif
                                             @foreach ($auctions as $auction)
                                                 <option value="{{ @$auction['name'] }}">{{ @$auction['name'] }}
                                                 </option>
                                             @endforeach
                                         </select>
                                         {{-- <input type="text" class="general_input col-11" name="auction"
-                                            id="auction" value="{{ @$user['auction'] }}"> --}}
+                                            id="auction" value="{{ @$user[0]['auction'] }}"> --}}
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-center">
@@ -248,7 +274,11 @@
                                             class="text-danger">*</span></label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="buyer_id" id="buyer_id">
-
+                                        @if(@$buyers_number[0]['buyer_number'])
+                                        <option value="{{@$buyers_number[0]['customer_id']}}">{{@$buyers_number[0]['buyer_number']}}</option>
+                                        @else
+                                        <option selected disabled>Select Buyer Id</option>
+                                        @endif
                                         @foreach ($buyers as $buyer)
                                             <option value="{{ @$buyer['customer_id'] }}">
                                                 {{ @$buyer['buyer_number'] }}
@@ -268,15 +298,19 @@
                                     <label for="keys" class="col-6 px-0 font-size font-bold">Keys<span
                                             class="text-danger">*</span></label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="key" id="key" value="{{ @$user['keys'] }}">
+                                        name="key" id="key" value="{{ @$user[0]['keys'] }}">
+                                        @if(@$user[0]['key'])
+                                        <option value="{{@$user[0]['key']}}">{{@$user[0]['key']}}</option>
+                                        @else
                                         <option selected disabled>Select Keys</option>
+                                        @endif
                                         @foreach ($keys as $key)
                                             <option value="{{ @$key['name'] }}">{{ @$key['name'] }}</option>
                                         @endforeach
                                     </select>
                                     {{-- <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="key"
-                                        id="key" value="{{ @$user['keys'] }}"> --}}
+                                        id="key" value="{{ @$user[0]['keys'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="key_error">
@@ -289,7 +323,7 @@
                                 <div class="d-flex align-items-center">
                                     <label for="notes" class="col-6 px-0 font-size font-bold">Notes</label>
                                     <textarea type="text" class="form-control-sm border border-0 nonrounded-pill bg col-6" name="note"
-                                        id="note" value="{{ @$user['notes'] }}"></textarea>
+                                        id="note" value="{{ @$user[0]['notes'] }}"></textarea>
                                 </div>
                             </div>
                             {{-- <div class="col-12 py-2">
@@ -297,7 +331,7 @@
                                     <label for="title_type" class="col-6 px-0 font-size font-bold">Title Type</label>
                                     <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="title_type" id="title_type" value="{{ @$user['title_type'] }}">
+                                        name="title_type" id="title_type" value="{{ @$user[0]['title_type'] }}">
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger">
@@ -312,7 +346,7 @@
                                     <label for="hat_number" class="col-6 px-0 font-size font-bold">Hat No</label>
                                     <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="hat_number" id="hat_number" value="{{ @$user['hat_number'] }}">
+                                        name="hat_number" id="hat_number" value="{{ @$user[0]['hat_number'] }}">
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger">
@@ -344,7 +378,11 @@
 
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="title" id="title">
+                                        @if(@$user[0]['title'])
+                                        <option value="{{@$user[0]['title']}}">{{@$user[0]['title']}}</option>
+                                        @else
                                         <option selected disabled>Select Type</option>
+                                        @endif
                                         @foreach ($titles as $title)
                                             <option value="{{ @$title['name'] }}">{{ @$title['name'] }}</option>
                                         @endforeach
@@ -352,7 +390,7 @@
 
                                     {{-- <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="title"
-                                        id="title" value="{{ @$user['title'] }}"> --}}
+                                        id="title" value="{{ @$user[0]['title'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger">
@@ -369,7 +407,11 @@
 
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                     name="title_type" id="title_type">
+                                    @if(@$user[0]['title_type'])
+                                    <option value="{{@$user[0]['title_type']}}">{{@$user[0]['title_type']}}</option>
+                                    @else
                                         <option selected disabled>Select Title Type</option>
+                                    @endif
                                         @foreach ($title_types as $title)
                                             <option value="{{ @$title['name'] }}">{{ @$title['name'] }}</option>
                                         @endforeach
@@ -378,7 +420,7 @@
 
                                 {{-- <input type="text"
                                     class="form-control-sm border border-0 rounded-pill bg col-6"
-                                    name="title_type" id="title_type" value="{{ @$user['title_type'] }}"> --}}
+                                    name="title_type" id="title_type" value="{{ @$user[0]['title_type'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger">
@@ -396,7 +438,7 @@
                                     <input type="date"
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="title_rec_date" id="title_rec_date"
-                                        value="{{ @$user['title_rec_date'] }}">
+                                        value="{{ @$user[0]['title_rec_date'] }}">
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger">
@@ -418,7 +460,7 @@
                                         @endforeach
                                     </select> --}}
                                     <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="title_state" id="title_state" value="{{ @$user['title_state'] }}">
+                                        name="title_state" id="title_state" value="{{ @$user[0]['title_state'] }}">
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger">
@@ -434,7 +476,7 @@
                                     <label for="title_number" class="col-6 px-0 font-size font-bold">Title No</label>
                                     <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="title_number" id="title_number" value="{{ @$user['title_number'] }}">
+                                        name="title_number" id="title_number" value="{{ @$user[0]['title_number'] }}">
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger">
@@ -490,8 +532,12 @@
                                     <label for="shipper_name" class="col-6 px-0 font-size font-bold">Shipper
                                         Name</label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="shipper_name" id="shipper_name" value="{{ @$user['shipper_name'] }}">
+                                        name="shipper_name" id="shipper_name" value="{{ @$user[0]['shipper_name'] }}">
+                                        @if(@$user[0]['shipper_name'])
+                                        <option value="{{@$user[0]['shipper_name']}}">{{@$user[0]['shipper_name']}}</option>
+                                        @else
                                         <option selected disabled>Select Shipper Name</option>
+                                        @endif
                                         @foreach ($shipper_names as $shipper_name)
                                             <option value="{{ @$shipper_name['name'] }}">
                                                 {{ @$shipper_name['name'] }}</option>
@@ -499,7 +545,7 @@
                                     </select>
                                     {{-- <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="shipper_name" id="shipper_name" value="{{ @$user['shipper_name'] }}"> --}}
+                                        name="shipper_name" id="shipper_name" value="{{ @$user[0]['shipper_name'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger">
@@ -515,8 +561,12 @@
                                     <label for="status" class="col-6 px-0 font-size font-bold">Status<span
                                             class="text-danger">*</span></label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="status" id="status" value="{{ @$user['status'] }}">
+                                        name="status" id="status" value="{{ @$user[0]['status'] }}">
+                                        @if(@$user[0]['vehicle_status'])
+                                        <option value="{{@$user[0]['status']}}">{{@$user[0]['vehicle_status']['status_name']}}</option>
+                                        @else
                                         <option selected disabled>Select Status</option>
+                                        @endif
                                         @foreach ($vehicle_status as $status)
                                             <option value="{{ @$status['id'] }}">{{ @$status['status_name'] }}
                                             </option>
@@ -524,7 +574,7 @@
                                     </select>
                                     {{-- <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="status"
-                                        id="status" value="{{ @$user['status'] }}"> --}}
+                                        id="status" value="{{ @$user[0]['status'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <span class="text-danger" id="status_error">
@@ -538,7 +588,7 @@
                                     <label for="sale_date" class="col-6 px-0 font-size font-bold">Sale Date</label>
                                     <input type="date"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="sale_date"
-                                        id="sale_date" value="{{ @$user['sale_date'] }}">
+                                        id="sale_date" value="{{ @$user[0]['sale_date'] }}">
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -554,7 +604,7 @@
                                     <label for="paid_date" class="col-6 px-0 font-size font-bold">Paid Date</label>
                                     <input type="date"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="paid_date"
-                                        id="paid_date" value="{{ @$user['paid_date'] }}" onchange="finddays()">
+                                        id="paid_date" value="{{ @$user[0]['paid_date'] }}" onchange="finddays()">
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -570,7 +620,7 @@
                                     <label for="days" class="col-6 px-0 font-size font-bold">Days</label>
                                     <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="days"
-                                        id="days" value="{{ @$user['days'] }}">
+                                        id="days" value="{{ @$user[0]['days'] }}">
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -586,7 +636,7 @@
                                     <label for="post_date" class="col-6 px-0 font-size font-bold">Post Date</label>
                                     <input type="date"
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="posted_date" id="posted_date" value="{{ @$user['post_date'] }}">
+                                        name="posted_date" id="posted_date" value="{{ @$user[0]['post_date'] }}">
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -603,7 +653,7 @@
                                         Date</label>
                                     <input type="date"
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="pickup_date" id="pickup_date" value="{{ @$user['pickup_date'] }}">
+                                        name="pickup_date" id="pickup_date" value="{{ @$user[0]['pickup_date'] }}">
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -619,7 +669,7 @@
                                     <label for="delivered" class="col-6 px-0 font-size font-bold">Delivered</label>
                                     <input type="date"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="delivered"
-                                        id="delivered" value="{{ @$user['delivered'] }}">
+                                        id="delivered" value="{{ @$user[0]['delivered'] }}">
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -643,7 +693,7 @@
                                     <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="pickup_location" id="pickup_location"
-                                        value="{{ @$user['pickup_location'] }}">
+                                        value="{{ @$user[0]['pickup_location'] }}">
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -659,13 +709,18 @@
                                     <label for="site" class="col-6 px-0 font-size font-bold">Site</label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="site" id="site">
+                                        @if(@$user[0]['site'])
+                                        <option value="{{@$user[0]['site']}}">{{@$user[0]['site']}}</option>
+                                        @else
+                                        <option selected disabled>Select Site</option>
+                                        @endif
                                         @foreach ($sites as $site)
                                             <option value="{{ $site['name'] }}">{{ $site['name'] }}</option>
                                         @endforeach
                                     </select>
                                     {{-- <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="site"
-                                        id="site" value="{{ @$user['site'] }}"> --}}
+                                        id="site" value="{{ @$user[0]['site'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -685,7 +740,7 @@
                                         @endforeach
                                     </select>
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="port" id="port" value="{{ @$user['port'] }}"> --}}
+                                        name="port" id="port" value="{{ @$user[0]['port'] }}"> --}}
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger">
@@ -719,7 +774,7 @@
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                         <span class="prefix text-dark">$</span>
                                         <input type="text" class="col-11 general_input" name="dealer_fee"
-                                            id="dealer_fee" value="{{ @$user['dealer_fee'] }}">
+                                            id="dealer_fee" value="{{ @$user[0]['dealer_fee'] }}">
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -739,7 +794,7 @@
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                         <span class="prefix text-dark">$</span>
                                         <input type="text" class="col-11 general_input" name="late_fee"
-                                            id="late_fee" value="{{ @$user['late_fee'] }}">
+                                            id="late_fee" value="{{ @$user[0]['late_fee'] }}">
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -759,7 +814,7 @@
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                         <span class="prefix text-dark">$</span>
                                         <input type="text" class="general_input col-11" name="auction_storage"
-                                            id="auction_storage" value="{{ @$user['auction_storage'] }}">
+                                            id="auction_storage" value="{{ @$user[0]['auction_storage'] }}">
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -779,7 +834,7 @@
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                         <span class="prefix text-dark">$</span>
                                         <input type="text" class="general_input col-11" name="towing_charges"
-                                            id="towing_charges" value="{{ @$user['towing_charges'] }}">
+                                            id="towing_charges" value="{{ @$user[0]['towing_charges'] }}">
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -798,7 +853,7 @@
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                         <span class="prefix text-dark">$</span>
                                         <input type="text" class="col-11 general_input" name="title_fee"
-                                            id="title_fee" value="{{ @$user['title_fee'] }}">
+                                            id="title_fee" value="{{ @$user[0]['title_fee'] }}">
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -818,7 +873,7 @@
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                         <span class="prefix text-dark">$</span>
                                         <input type="text" class="general_input col-11" name="port_detention_fee"
-                                            id="port_detention_fee" value="{{ @$user['post_detention'] }}">
+                                            id="port_detention_fee" value="{{ @$user[0]['post_detention'] }}">
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -838,7 +893,7 @@
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                         <span class="prefix text-dark">$</span>
                                         <input type="text" class="general_input col-11" name="custom_inspection"
-                                            id="custom_inspection" value="{{ @$user['custom_inspection'] }}">
+                                            id="custom_inspection" value="{{ @$user[0]['custom_inspection'] }}">
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -858,7 +913,7 @@
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                         <span class="prefix text-dark">$</span>
                                         <input type="text" class="col-11 general_input" name="additional_fee"
-                                            id="additional_fee" value="{{ @$user['additional_fee'] }}">
+                                            id="additional_fee" value="{{ @$user[0]['additional_fee'] }}">
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -877,7 +932,7 @@
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                         <span class="prefix text-dark">$</span>
                                         <input type="text" class="general_input col-11" name="insurance"
-                                            id="insurance" value="{{ @$user['insurance'] }}">
+                                            id="insurance" value="{{ @$user[0]['insurance'] }}">
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">

@@ -3,10 +3,60 @@
         margin: 10px 0px;
     }
 </style>
+<style>
+    .text-center {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .profile-images-card {
+        margin: auto;
+        display: table;
+        background: #fff;
+        padding: 10px 20px;
+        /* box-shadow: 0px 0px 5px #ddd; */
+    }
+
+    .profile-images {
+        width: 90px;
+        height: 90px;
+        background: #fff;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .profile-images img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .custom-file input[type='file'] {
+        display: none
+    }
+
+    .custom-file label {
+        cursor: pointer;
+        color: #000;
+        text-align: center;
+        display: table;
+        margin: auto;
+        margin-top: 15px;
+    }
+    #user_file{
+        display: none;
+      }
+      label{
+        cursor:pointer;
+      }
+      #imageName{
+        color:green;
+      }
+</style>
 
 <form method="POST" id="updateCustomers" enctype="multipart/form-data">
-    <input type="hidden" id="id" name="id" value="{{ @$documents[0]['user']['id'] }}">
-    <input type="hidden" id="id" name="file_id" value="{{ @$documents[0]['id'] }}">
+    <input type="hidden" id="id" name="id" value="{{ @$documents[0]['id'] }}">
+    <input type="hidden" id="id" name="file_id" value="{{ @$documents[0]['documents']['id'] }}">
     <div>
         <div class="row my-1">
             <div class="col-12">
@@ -36,7 +86,7 @@
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="name"
-                                            id="name" value="{{ @$documents[0]['user']['name'] }}">
+                                            id="name" value="{{ @$documents[0]['name'] }}">
                                     </div>
                                     <div class="d-flex">
                                         <label for="username" class="col-5 px-0 font-size font-bold">Username
@@ -45,7 +95,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="username" id="username"
-                                            value="{{ @$documents[0]['user']['username'] }}">
+                                            value="{{ @$documents[0]['username'] }}">
                                     </div>
                                     <input type="hidden" name="status" id="status" value="1">
                                     <div class="d-flex">
@@ -53,7 +103,7 @@
                                             <span class="text-danger" id="phone_error"></span>
                                         </label>
                                         <input type="phone" class="form-control-sm border border-0 rounded-pill col-7"
-                                            name="phone" id="phone" value="{{ @$documents[0]['user']['phone'] }}">
+                                            name="phone" id="phone" value="{{ @$documents[0]['phone'] }}">
                                     </div>
 
                                     <div class=" d-flex">
@@ -62,7 +112,7 @@
                                         </label>
                                         <input type="fax"
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="fax"
-                                            id="fax" value="{{ @$documents[0]['user']['fax'] }}">
+                                            id="fax" value="{{ @$documents[0]['fax'] }}">
                                     </div>
                                     <div class=" d-flex">
                                         <label for="email" class="col-5 px-0 font-size font-bold">Email
@@ -70,7 +120,7 @@
                                         </label>
                                         <input type="email"
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="email"
-                                            id="email" value="{{ @$documents[0]['user']['email'] }}">
+                                            id="email" value="{{ @$documents[0]['email'] }}">
                                     </div>
 
 
@@ -80,7 +130,7 @@
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="source"
-                                            id="source" value="{{ @$documents[0]['user']['source'] }}">
+                                            id="source" value="{{ @$documents[0]['source'] }}">
                                     </div>
 
                                     <div class=" d-flex">
@@ -91,7 +141,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="company_name" id="company_name"
-                                            value="{{ @$documents[0]['user']['company_name'] }}">
+                                            value="{{ @$documents[0]['company_name'] }}">
                                     </div>
 
                                     <div class=" d-flex">
@@ -102,7 +152,7 @@
                                         <input type="email"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="company_email" id="company_email"
-                                            value="{{ @$documents[0]['user']['company_email'] }}">
+                                            value="{{ @$documents[0]['company_email'] }}">
                                     </div>
 
 
@@ -114,7 +164,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="customer_type" id="customer_type"
-                                            value="{{ @$documents[0]['user']['customer_type'] }}">
+                                            value="{{ @$documents[0]['customer_type'] }}">
                                     </div>
 
 
@@ -126,7 +176,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="sales_type" id="sales_type"
-                                            value="{{ @$documents[0]['user']['sales_type'] }}">
+                                            value="{{ @$documents[0]['sales_type'] }}">
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +208,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="payment_type" id="payment_type"
-                                            value="{{ @$documents[0]['user']['payment_type'] }}">
+                                            value="{{ @$documents[0]['payment_type'] }}">
                                     </div>
 
                                     <div class="d-flex">
@@ -169,7 +219,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="payment_term" id="payment_term"
-                                            value="{{ @$documents[0]['user']['payment_term'] }}">
+                                            value="{{ @$documents[0]['payment_term'] }}">
                                     </div>
 
 
@@ -180,7 +230,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="industry" id="industry"
-                                            value="{{ @$documents[0]['user']['industry'] }}">
+                                            value="{{ @$documents[0]['industry'] }}">
                                     </div>
 
                                 </div>
@@ -217,7 +267,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="sales_person" id="sales_person"
-                                            value="{{ @$documents[0]['user']['sales_person'] }}">
+                                            value="{{ @$documents[0]['sales_person'] }}">
                                     </div>
 
 
@@ -228,7 +278,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="inside_person" id="inside_person"
-                                            value="{{ @$documents[0]['user']['address_line1'] }}">
+                                            value="{{ @$documents[0]['address_line1'] }}">
                                     </div>
 
                                     <div class="d-flex">
@@ -238,7 +288,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="level" id="level"
-                                            value="{{ @$documents[0]['user']['level'] }}">
+                                            value="{{ @$documents[0]['level'] }}">
                                     </div>
                                 </div>
                             </div>
@@ -273,7 +323,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="location_number" id="location_number"
-                                            value="{{ @$documents[0]['user']['location_number'] }}">
+                                            value="{{ @$documents[0]['location_number'] }}">
                                     </div>
 
                                     <div class="d-flex">
@@ -283,7 +333,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="country" id="country"
-                                            value="{{ @$documents[0]['user']['country'] }}">
+                                            value="{{ @$documents[0]['country'] }}">
                                     </div>
 
 
@@ -293,8 +343,8 @@
                                         </label>
                                         <select class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="zip_code" id="zip_code">
-                                            <option value="{{ @$documents[0]['user']['zip_code'] }}">
-                                                {{ @$documents[0]['user']['zip_code'] }}
+                                            <option value="{{ @$documents[0]['zip_code'] }}">
+                                                {{ @$documents[0]['zip_code'] }}
                                             </option>
                                             @foreach ($location as $locations)
                                                 <option value="{{ $locations['zip_code'] }}">
@@ -311,8 +361,8 @@
                                         </label>
                                         <select class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="state" id="state">
-                                            <option value="{{ @$documents[0]['user']['location_number'] }}">
-                                                {{ @$documents[0]['user']['location_number'] }}
+                                            <option value="{{ @$documents[0]['location_number'] }}">
+                                                {{ @$documents[0]['location_number'] }}
                                             </option>
                                             @foreach ($location as $locations)
                                                 <option value="{{ $locations['name'] }}">{{ $locations['name'] }}
@@ -329,7 +379,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="address_line1" id="address_line1"
-                                            value="{{ @$documents[0]['user']['address_line1'] }}">
+                                            value="{{ @$documents[0]['address_line1'] }}">
                                     </div>
 
 
@@ -340,7 +390,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="address_line2" id="address_line2"
-                                            value="{{ @$documents[0]['user']['address_line2'] }}">
+                                            value="{{ @$documents[0]['address_line2'] }}">
                                     </div>
 
                                     <div class="d-flex">
@@ -350,7 +400,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="price_code" id="price_code"
-                                            value="{{ @$documents[0]['user']['city'] }}">
+                                            value="{{ @$documents[0]['price_code'] }}">
                                     </div>
                                 </div>
                             </div>
@@ -358,7 +408,7 @@
                         </div>
 
                     </div>
-                    <div class="col-sm-10 col-md-11 col-lg-11 px-3 mx-auto">
+                    {{-- <div class="col-sm-10 col-md-11 col-lg-11 px-3 mx-auto">
                         <div class="col-12">
                             <div class="user_image" style="padding-top: .5rem; border-radius: 15px!important;">
                             </div>
@@ -367,7 +417,45 @@
                             <input type="file" name="user_file[]"
                                 class="form-control border border-info rounded col-12 w-100" id="user_file">
                         </div>
+                    </div> --}}
+
+                    <div class="col-sm-10 col-md-11 col-lg-11 px-3 mx-auto">
+                        <div class="row">
+                            <div class="col-6">
+                                {{-- <div class="user_image" style="padding-top: .5rem; border-radius: 15px!important;">
+                                </div> --}}
+                                <div class="profile-images-card" style="   border: 1px dotted black;padding: 1px 96px;">
+                                    <div class="profile-images">
+                                        <img src="{{ asset('images/profile.jpg') }}" id="upload-img">
+                                    </div>
+                                    <div class="custom-file">
+                                        <label for="fileupload" style="font-size:16px!important"><p>Upload Profile Image</p></label>
+                                        <input type="file" id="fileupload" name="user_image[]"
+                                            onchange="loadFile(event)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 d-flex align-items-center">
+                                {{-- <input type="file" name="user_file[]"
+                                    class="form-control border border-info rounded col-12 w-100" id="user_file"> --}}
+                                    <label for="user_file" style="cursor: pointer;
+                                    border: 1px dotted black;
+                                    padding: 9px 96px;">
+                                        
+                                        <img src="{{asset('images/file.png')}}" alt="" style="width: 94px;">
+
+                                        <input id="user_file" type="file" name="user_file[]"/>
+                                        <br/>
+                                        <span id="imageName"></span>
+                                        <br>
+                                        <p>Upload Document</p> <br/>
+                                      </label>
+                            </div>
+                        </div>
+
                     </div>
+
+
                 </div>
             </div>
         </div>
@@ -379,9 +467,19 @@
                 id="role_id" readonly value="4">
 
             <button type="button" class="btn next-style text-white col-1 py-1" style="cursor:pointer;"
-                onclick="createForm(this.id)" id="general_customer" data-next="billing_customer_tab">
-                <div class="unskew">Next</div>
+                onclick="Update_Customer(this.id)" id="general_customer" data-next="billing_customer_tab">
+                <div class="unskew">Update</div>
             </button>
         </div>
     </div>
 </form>
+
+<script>
+    let input = document.getElementById("user_file");
+    let imageName = document.getElementById("imageName");
+    input.addEventListener("change", ()=>{
+        let inputImage = document.querySelector("#user_file").files[0];
+        // console.log(inputImage);
+        imageName.innerText = inputImage.name;
+    })
+</script>

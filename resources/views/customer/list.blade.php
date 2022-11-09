@@ -51,9 +51,9 @@
                         <div>
                             <div class="font-bold"><span>{{ @$active_customer }}</span> </div>
                             <div class="py-1 col-12 text-muted p-0 font-size">
-                                <span>Total Customers
+                                {{-- <span>Total Customers
                                     <b>{{ $records->count() }}</b>
-                                </span>
+                                </span> --}}
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,9 @@
                         </div>
                         <div>
                             <div class="font-bold"><span>{{ @$Inactive_customer }}</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Last week Analytics</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -103,9 +105,14 @@
                             </div>
                         </div>
                         <div>
-                            <div class="font-bold"><span class="px-1">{{ @$shipper->count() }}</span><span
-                                    class="percent_size">({{ @$lastweekanalysis }}%)</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
+                            <div class="font-bold"><span class="px-1">{{ @$shipper->count() }}</span>
+                                {{-- <span class="percent_size">
+                                    ({{ @$lastweekanalysis }}%)
+                                </span> --}}
+                                 </div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Last week Analytics</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,10 +136,14 @@
                             </div>
                         </div>
                         <div>
-                            <div class="font-bold"><span class="px-1">{{ @$consignees->count() }}</span><span
-                                    class="percent_size">({{ @$lastweekconsigneeanalysis }}%)</span>
+                            <div class="font-bold"><span class="px-1">{{ @$consignees->count() }}</span>
+                                {{-- <span
+                                    class="percent_size">({{ @$lastweekconsigneeanalysis }}%)
+                                </span> --}}
                             </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Last week Analytics</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -163,7 +174,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="col-6 p-0">
                             <span class="h5 text-muted">
-                                <b>Search Filter</b>
+                                {{-- <b>Search Filter</b> --}}
                             </span>
                         </div>
                         <div class="col-6 d-flex justify-content-end p-0">
@@ -202,7 +213,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex py-3 px-0">
+                    {{-- <div class="d-flex py-3 px-0">
                         <div class="col-4 p-0">
                             <select class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2"
                                 name="city" id="city" onchange="filterTable(this.value)">
@@ -230,7 +241,7 @@
                                 <option value="0">In Active</option>
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 {{-- search filter end --}}
                 <div class="mt-2 bg-light" style="height: 100%;overflow-x: scroll;">

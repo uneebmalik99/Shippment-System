@@ -1,73 +1,57 @@
 <style>
-    .image_random {
+    .item_1 {
         transition: transform .2s;
         box-sizing: border-box;
     }
-    .image_random:hover{
+    .item_1:hover{
         transform: scale(1.5);
         border-radius: 10px !important; 
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
     .bottom_button{
         position: absolute;
-        top: 5%;
-        left: 70%;
-        transform: translate(100%, -150%);
-        -ms-transform: translate(-50%, -50%);
-        /* background-color: #555;
-        color: white; */
+        top: 85%;
+        left: 85%;
         font-size: 10px;
-        border: none; 
+        border: none;
         cursor: pointer;
         border-radius: 5px;
         text-align: center;
-        text-decoration: none !important; 
+        text-decoration: none !important;
     }
     .left_button{
         position: absolute;
-        top: -30%;
-        left: 15%;
-        transform: translate(-150%, -150%);
-        -ms-transform: translate(-50%, -50%);
-        /* background-color: #555;
-        color: white; */
+        top: 25px;
+        left: 20px;
         font-size: 10px;
-        border: none; 
+        border: none;
         cursor: pointer;
         border-radius: 5px;
         text-align: center;
-        text-decoration: none !important; 
+        text-decoration: none !important;
     }
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 425px) {
         .bottom_button{
         position: absolute;
-        top: 5%;
-        left: 60%;
-        transform: translate(100%, -150%);
-        -ms-transform: translate(-50%, -50%);
-        /* background-color: #555;
-        color: white; */
+        top: 72%;
+        left: 75%;
         font-size: 10px;
-        border: none; 
+        border: none;
         cursor: pointer;
         border-radius: 5px;
         text-align: center;
-        text-decoration: none !important; 
+        text-decoration: none !important;
     }
     .left_button{
         position: absolute;
-        top: -25%;
-        left: 22%;
-        transform: translate(-150%, -150%);
-        -ms-transform: translate(-50%, -50%);
-        /* background-color: #555;
-        color: white; */
+        top: 20px;
+        left: 20px;
         font-size: 10px;
-        border: none; 
+        border: none;
         cursor: pointer;
         border-radius: 5px;
         text-align: center;
-        text-decoration: none !important; 
+        text-decoration: none !important;
     }
 }
 </style>
@@ -175,7 +159,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
-                                        <div class="w-100 d-flex justify-content-center" style="margin: 5px 1px; padding: 0 3px;">
+                                        <div class="w-100 d-flex" style="justify-content: space-around;margin: 5px 1px; padding: 0 3px;">
                                             <button class="img_active_button img_btn" id="vehicle_images" onclick="changeImages(this.id)" tab="{{@$vehicle['id']}}">
                                                 <div class="img_button" style="color:#4d89b5!important;font-size: 12px !important;font-weight:600;">Vehicle Image</div>
                                             </button>
@@ -197,14 +181,8 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <div class="w-100 p-1">
-                                        <img src="{{asset('auction_images/BzyuY7rG5boY563isIYFBFs2hqCXpv9tOCeSYctq.webp')}}" alt=""class="img_fluid mx-auto w-100" style="max-height:172px!important;border-radius: 10px!important;">
-                                    </div>
-                                </div>
-                                <div class="image_section">
-
-                                    <div class="col-12" style="position: relative;">
-                                        <img src="{{ asset('auction_images/LVRQjpx2sh7EOhwvAORvtaGm4Xzk0dOcnkofWuSI.webp') }}" alt=""class="item_1" style="margin-left:3px;width:32%;">
+                                    <div class="w-100 p-3" style="position: relative;">
+                                        <img src="{{asset('auction_images/BzyuY7rG5boY563isIYFBFs2hqCXpv9tOCeSYctq.webp')}}" alt=""class="img_fluid mx-auto w-100" style="border: 1px solid rgba(26, 88, 133, 0.17);max-height:250px !important;border-radius: 10px!important;">
                                         <a class="bottom_button">
                                             <svg width="39" height="25" viewBox="0 0 39 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <rect width="39" height="22" rx="5" fill="white" fill-opacity="0.3"/>
@@ -294,10 +272,15 @@
                                                     
                                             </a>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="image_section">
+
+                                    <div class="col-12">
                                         @if(@$vehicle['billofsales'])
-                                        @foreach(@$vehicle['billofsales'] as $img)  
-                                        <img src="{{asset($img['name'])}}" alt=""class="image_random" style="width:31.5%;">
-                                        @endforeach
+                                            @foreach(@$vehicle['billofsales'] as $img)  
+                                            <img src="{{asset($img['name'])}}" alt=""class="item_1" style="width:31.5%;">
+                                            @endforeach
                                         @endif
                                     </div>
                                 </div>
@@ -305,23 +288,6 @@
                             
                            
                         </div>
-
-                        {{-- <div class="gallary_body">
-                            <div class="d-flex flex-wrap justify-content-center changeImages">
-                                @if(@$vehicle['billofsales'])
-                                @foreach(@$vehicle['billofsales'] as $img)                       
-                                <div class="img">
-                                    <img src="{{asset($img['name'])}}" alt=" " style="width: 60px; height: 55px;" class="download_images">
-                                </div>
-                                @endforeach
-                                @else
-                                <div class="img">
-                                    <img src="#" alt="" style="width: 60px; height: 55px;" class="download_images">
-                                </div>
-                                @endif
-                               
-                            </div>
-                        </div> --}}
                     </div>
                     <div class="row mt-4">
                         <div class="col-12 d-flex justify-content-center ">

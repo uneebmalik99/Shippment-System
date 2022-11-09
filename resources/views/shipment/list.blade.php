@@ -76,9 +76,9 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                         <div>
                             <div class="font-bold"><span>{{ @$booked->count() }}</span> </div>
                             <div class="py-1 col-12 text-muted p-0 font-size">
-                                <span>Total Shipments
+                                {{-- <span>Total Shipments
                                     <b>{{ $records->count() }}</b>
-                                </span>
+                                </span> --}}
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,9 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                         </div>
                         <div>
                             <div class="font-bold"><span>{{ @$shipped->count() }}</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Last week Analytics</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,7 +131,9 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                         </div>
                         <div>
                             <div class="font-bold"><span>{{ @$arrived->count() }}</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Last week Analytics</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,7 +159,9 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                         </div>
                         <div>
                             <div class="font-bold"><span>{{ @$completed->count() }}</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Last week Analytics</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>

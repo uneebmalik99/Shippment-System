@@ -1,6 +1,26 @@
-{{-- @include('layouts.vehicle_information.navbar') --}}
+{{-- {{dd(@$vehicle)}} --}}
 <style>
     .item_1 {
+        transition: transform .2s;
+        box-sizing: border-box;
+    }
+    .item_2{
+        transition: transform .2s;
+        box-sizing: border-box;
+    }
+    .item_3{
+        transition: transform .2s;
+        box-sizing: border-box;
+    }
+    .item_4{
+        transition: transform .2s;
+        box-sizing: border-box;
+    }
+    .item_5{
+        transition: transform .2s;
+        box-sizing: border-box;
+    }
+    .item_6{
         transition: transform .2s;
         box-sizing: border-box;
     }
@@ -9,138 +29,249 @@
         border-radius: 10px !important; 
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
+    .item_2:hover{
+        transform: scale(1.5);
+        border-radius: 10px !important; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
     .bottom_button{
         position: absolute;
-        top: 85%;
-        left: 85%;
+        top: 5%;
+        left: 70%;
+        transform: translate(100%, -150%);
+        -ms-transform: translate(-50%, -50%);
+        /* background-color: #555;
+        color: white; */
         font-size: 10px;
-        border: none;
+        border: none; 
         cursor: pointer;
         border-radius: 5px;
         text-align: center;
-        text-decoration: none !important;
+        text-decoration: none !important; 
     }
     .left_button{
         position: absolute;
-        top: 25px;
-        left: 20px;
+        top: -30%;
+        left: 15%;
+        transform: translate(-150%, -150%);
+        -ms-transform: translate(-50%, -50%);
+        /* background-color: #555;
+        color: white; */
         font-size: 10px;
-        border: none;
+        border: none; 
         cursor: pointer;
         border-radius: 5px;
         text-align: center;
-        text-decoration: none !important;
+        text-decoration: none !important; 
     }
-    @media only screen and (max-width: 425px) {
+    @media only screen and (max-width: 600px) {
         .bottom_button{
         position: absolute;
-        top: 72%;
-        left: 75%;
+        top: 5%;
+        left: 60%;
+        transform: translate(100%, -150%);
+        -ms-transform: translate(-50%, -50%);
+        /* background-color: #555;
+        color: white; */
         font-size: 10px;
-        border: none;
+        border: none; 
         cursor: pointer;
         border-radius: 5px;
         text-align: center;
-        text-decoration: none !important;
+        text-decoration: none !important; 
     }
     .left_button{
         position: absolute;
-        top: 20px;
-        left: 20px;
+        top: -25%;
+        left: 22%;
+        transform: translate(-150%, -150%);
+        -ms-transform: translate(-50%, -50%);
+        /* background-color: #555;
+        color: white; */
         font-size: 10px;
-        border: none;
+        border: none; 
         cursor: pointer;
         border-radius: 5px;
         text-align: center;
-        text-decoration: none !important;
+        text-decoration: none !important; 
     }
 }
 </style>
-<div class="row my-5">
-    <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+<div class="row my-4">
+    <div class="col-sm-10 col-md-10 col-lg-4 pl-0">
+        <div class="information_card">
+            <h6>General Information</h6>
+            <div class="information_div">
+                <div class="d-flex justify-content-between my-2 py-1 " style="border: 1px solid rgba(26, 88, 133, 0.17);
+                border-radius: 10px;width: 90%;margin:6px auto">
+                    <span class="infromation_mainText">Customer Name</span>
+                    <span class="information_text">{{@$vehicle['customer_name']}}</span>
+                </div>
+                <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
+                border-radius: 10px;width: 90%;margin:6px auto">
+                    <span class="infromation_mainText">Title</span>
+                    <span class="information_text">{{@$vehicle['title']}}</span>
+                </div>
+                <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
+                border-radius: 10px;width: 90%;margin:6px auto">
+                    <span class="infromation_mainText">Title State</span>
+                    <span class="information_text">{{@$vehicle['title_state']}}</span>
+                </div>
+                <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
+                border-radius: 10px;width: 90%;margin:6px auto">
+                    <span class="infromation_mainText">Shipper Name</span>
+                    <span class="information_text">{{@$vehicle['shipper_name']}}</span>
+                </div>
+
+                <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
+                border-radius: 10px;width: 90%;margin:6px auto">
+                    <span class="infromation_mainText">Status</span>
+                    <span class="information_text">{{@$vehicle['status']}}</span>
+                </div>
+
+
+                <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
+                border-radius: 10px;width: 90%;margin:6px auto">
+                    <span class="infromation_mainText">Days</span>
+                    <span class="information_text">{{@$vehicle['days']}}</span>
+                </div>
+
+                <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
+                border-radius: 10px;width: 90%;margin:6px auto">
+                    <span class="infromation_mainText">Sale Date</span>
+                    <span class="information_text" style="overflow: hidden;">{{@$vehicle['sale_date']}}</span>
+                </div>
+
+                <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
+                border-radius: 10px;width: 90%;margin:6px auto">
+                    <span class="infromation_mainText">Paid Date</span>
+                    <span class="information_text">{{@$vehicle['paid_date']}}</span>
+                </div>
+
+                <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
+                border-radius: 10px;width: 90%;margin:6px auto">
+                    <span class="infromation_mainText">Posted Date</span>
+                    <span class="information_text">{{@$vehicle['posted_date']}}</span>
+                </div>
+
+                <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
+                border-radius: 10px;width: 90%;margin:6px auto">
+                    <span class="infromation_mainText">Pickup Date</span>
+                    <span class="information_text">{{@$vehicle['pickup_date']}}</span>
+                </div>
+
+                <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
+                border-radius: 10px;width: 90%;margin:6px auto">
+                    <span class="infromation_mainText">Pickup Location</span>
+                    <span class="information_text">{{@$vehicle['pickup_location']}}</span>
+                </div>
+
+
+
+
+                <div class="information_button d-flex justify-content-center mt-3" style="margin:50px">
+                    <a href="{{ route('vehicle.exportpdf')}} " target="_blank">
+                    <button style="background: #1F689E;
+                    transform: skew(-30deg) !important;border:none;
+                    border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;"><div style="transform: skew(30deg) !important;padding:1px 4px">
+                        Trucking PDF
+                    </div></button>
+                </a>
+                    <button style="background: #1CACD9;border:none;font-size:12px;
+                    transform: skew(-30deg) !important;border-radius: 4px;color:white;margin-right: 3px;"><div style="transform: skew(30deg) !important;padding:1px 12px">Edit</div></button>
+
+                </div>
+                <div>
+                    <br>
+                </div>
+
+
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+    <div class="col-sm-10 col-md-10 col-lg-8 pl-0">
+
         <div class="information_second_div">
+
+            <div class="row">
+                <div class="col-12">
+                    <h4>Vehicle Information</h4>
+                </div>
+            </div>
+
             <div class="row" style="padding-bottom:60px">
-                <div class="col-sm-12 col-md-5 col-lg-6 mx-auto mb-4">
-                    <div class="inspection_heading" style="width:80%">
-                        <h6>Inspection</h6>
-                        <div class="information_div">
-                            <div class="d-flex justify-content-between" style="border: 1px solid rgba(26, 88, 133, 0.17);
-                            border-radius: 10px;width: 80%;margin:6px auto;padding:5px; ">
-                                <span class="infromation_mainText">Branch</span>
-                                <span class="information_text">honlolu</span>
-                            </div>
-                            <div class="d-flex justify-content-between" style="border: 1px solid rgba(26, 88, 133, 0.17);
-                            border-radius: 10px;width: 80%;margin:6px auto;padding:5px; ">
-                                <span class="infromation_mainText">Order Date</span>
-                                <span class="information_text">9/23/2022</span>
-                            </div>
-                            <div class="d-flex justify-content-between" style="border: 1px solid rgba(26, 88, 133, 0.17);
-                            border-radius: 10px;width: 80%;margin:6px auto;padding:5px; ">
-                                <span class="infromation_mainText">Received Date</span>
-                                <span class="information_text">10/23/2022</span>
-                            </div>
-                            <div class="d-flex justify-content-between" style="border: 1px solid rgba(26, 88, 133, 0.17);
-                            border-radius: 10px;width: 80%;margin:6px auto;padding:5px; ">
-                                <span class="infromation_mainText">Status</span>
-                                <span class="information_text">Loaded</span>
-                            </div>
-                            <div class="d-flex justify-content-between" style="border: 1px solid rgba(26, 88, 133, 0.17);
-                            border-radius: 10px;width: 80%;margin:6px auto;padding:5px; ">
-                                <span class="infromation_mainText">Shipped Line</span>
-                                <span class="information_text">One</span>
-                            </div>
-                            <div class="d-flex justify-content-between" style="border: 1px solid rgba(26, 88, 133, 0.17);
-                            border-radius: 10px;width: 80%;margin:6px auto;padding:5px; ">
-                                <span class="infromation_mainText">Container Number</span>
-                                <span class="information_text">324</span>
-                            </div>
-                            <div class="d-flex justify-content-between" style="border: 1px solid rgba(26, 88, 133, 0.17);
-                            border-radius: 10px;width: 80%;margin:6px auto;padding:5px; ">
-                                <span class="infromation_mainText">Tracking url</span>
-                                <span class="information_text" style="overflow: hidden;">tracking.com</span>
-                            </div>
-                            <div class="d-flex justify-content-between" style="border: 1px solid rgba(26, 88, 133, 0.17);
-                            border-radius: 10px;width: 80%;margin:6px auto;padding:5px; ">
-                                <span class="infromation_mainText">Final Port</span>
-                                <span class="information_text">xyz</span>
-                            </div>
-                            <div class="d-flex justify-content-between" style="border: 1px solid rgba(26, 88, 133, 0.17);
-                            border-radius: 10px;width: 80%;margin:6px auto;padding:5px; ">
-                                <span class="infromation_mainText">Final City</span>
-                                <span class="information_text">Rawalpindi</span>
-                            </div>
-                            <div class="d-flex justify-content-between" style="border: 1px solid rgba(26, 88, 133, 0.17);
-                            border-radius: 10px;width: 80%;margin:6px auto;padding:5px; ">
-                                <span class="infromation_mainText">Final Country</span>
-                                <span class="information_text">pakistan</span>
-                            </div>
-                            <div class="d-flex justify-content-between" style="border: 1px solid rgba(26, 88, 133, 0.17);
-                            border-radius: 10px;width: 80%;margin:6px auto;padding:5px; ">
-                                <span class="infromation_mainText">Location</span>
-                                <span class="information_text">xyz</span>
-                            </div>
-                            <div>
-                                <br>
-                            </div>
+                <div class=" col-sm-12 col-md-5 col-lg-5">
+                    <div class="d-flex justify-content-between" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                        <span class="infromation_mainText ">Vin</span>
+                        <span class="information_text ">{{@$vehicle['vin']}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                        <span class="infromation_mainText ">Year</span>
+                        <span class="information_text ">{{@$vehicle['year']}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                        <span class="infromation_mainText ">Make</span>
+                        <span class="information_text ">{{@$vehicle['make']}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                        <span class="infromation_mainText ">Modal</span>
+                        <span class="information_text ">{{@$vehicle['model']}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                        <span class="infromation_mainText ">Type</span>
+                        <span class="information_text ">{{@$vehicle['vehicle_type']}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                        <span class="infromation_mainText ">Order Date</span>
+                        <span class="information_text ">{{@$vehicle['sale_date']}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                        <span class="infromation_mainText ">location</span>
+                        <span class="information_text ">{{@$vehicle['pickup_location']}}</span>
+                    </div>
 
+                    <div class="mt-4 " style="width: 80%;margin:4px auto;padding:5px; ">
+                        <p style="color:#6D8DA6; ">Note to department</p>
+                    </div>
+                    <div class=" ">
+                        <select name=" " id=" " class="form-control " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px;font-size:13px;color:#6D8DA6; ">
+                            <option value=" ">Please Select department</option>
+                        </select>
+                    </div>
 
-
-
-                        </div>
-
-
+                    <div class="d-flex justify-content-start " style="width: 80%;margin:4px auto;padding:5px; ">
+                        <p style="color:#6D8DA6 ">Note</p><br>
+                    </div>
+                    <div class="d-flex justify-content-start " style="width: 90%;margin:4px auto;padding:5px; ">
+                        <textarea name=" " id=" " cols="40" rows="4" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;font-size: 13px;
+                    color: #6D8DA6; ">{{@$vehicle['note']}}</textarea>
 
                     </div>
 
-                </div>
+                    <div style="width: 90%; " class="d-flex justify-content-end ">
 
-                <div class="col-sm-12 col-md-7 col-lg-6 mb-4 mt-5">
+                        <button class="send mt-3" style="background: #1CACD9; border-radius: 4px;transform: skew(-30deg) !important;font-size: 13px;border:none;color:white; ">
+                        <div style="transform: skew(30deg) !important;padding:1px 12px ">
+                            Send
+                        </div>
+                    </button>
+
+                    </div>
+
+
+                </div>
+                <div class="col-sm-12 col-md-7 col-lg-7 mb-4">
                     <div class="information_gallary">
                         <div class="gallary_header d-flex">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
-                                        <div class="w-100 d-flex" style="justify-content: space-around;margin: 5px 1px; padding: 0 3px;">
+                                        <div class="w-100 d-flex justify-content-center" style="margin: 5px 1px; padding: 0 3px;">
                                             <button class="img_active_button img_btn" id="vehicle_images" onclick="changeImages(this.id)" tab="{{@$vehicle['id']}}">
                                                 <div class="img_button" style="color:#4d89b5!important;font-size: 12px !important;font-weight:600;">Vehicle Image</div>
                                             </button>
@@ -162,8 +293,14 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <div class="w-100 p-3" style="position: relative;">
-                                        <img src="{{asset('auction_images/BzyuY7rG5boY563isIYFBFs2hqCXpv9tOCeSYctq.webp')}}" alt=""class="img_fluid mx-auto w-100" style="border: 1px solid rgba(26, 88, 133, 0.17);max-height:250px !important;border-radius: 10px!important;">
+                                    <div class="w-100 p-1">
+                                        <img src="{{asset('auction_images/BzyuY7rG5boY563isIYFBFs2hqCXpv9tOCeSYctq.webp')}}" alt=""class="img_fluid mx-auto w-100" style="max-height:172px!important;border-radius: 10px!important;">
+                                    </div>
+                                </div>
+                                <div class="image_section">
+
+                                    <div class="col-12" style="position: relative;">
+                                        <img src="{{ asset('auction_images/LVRQjpx2sh7EOhwvAORvtaGm4Xzk0dOcnkofWuSI.webp') }}" alt=""class="item_1" style="margin-left:3px;width:32%;">
                                         <a class="bottom_button">
                                             <svg width="39" height="25" viewBox="0 0 39 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <rect width="39" height="22" rx="5" fill="white" fill-opacity="0.3"/>
@@ -253,21 +390,33 @@
                                                     
                                             </a>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="image_section">
-
-                                    <div class="col-12">
                                         @if(@$vehicle['billofsales'])
                                             @foreach(@$vehicle['billofsales'] as $img)  
-                                            <img src="{{asset($img['name'])}}" alt=""class="item_1" style="width:31.5%;">
-                                            @endforeach
+                                            <img src="{{asset($img['name'])}}" alt=""class="item_2" style="width:31.5%;">
+                                        @endforeach
                                         @endif
                                     </div>
                                 </div>
                             </div>
                             
                            
+                        </div>
+
+                        <div class="gallary_body">
+                            <div class="d-flex flex-wrap justify-content-center changeImages">
+                                @if(@$vehicle['billofsales'])
+                                @foreach(@$vehicle['billofsales'] as $img)                       
+                                <div class="img">
+                                    <img src="{{asset($img['name'])}}" alt=" " style="width: 60px; height: 55px;" class="download_images">
+                                </div>
+                                @endforeach
+                                @else
+                                <div class="img">
+                                    <img src="#" alt="" style="width: 60px; height: 55px;" class="download_images">
+                                </div>
+                                @endif
+                               
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-4">

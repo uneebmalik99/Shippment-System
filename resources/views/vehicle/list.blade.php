@@ -90,9 +90,11 @@
                         </div>
                         <div>
                             <div class="font-bold"><span>{{ @$new_orders->count() }}</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Total Vehicles
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Total Vehicles
                                     <b>{{ count($records) }}</b>
-                                </span></div>
+                                </span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -112,10 +114,12 @@
                             </div>
                         </div>
                         <div>
-                            <div class="font-bold"><span class="px-1">{{ @$dispatched->count() }}</span><span
-                                    class="percent_size">(-14%)</span>
+                            <div class="font-bold"><span class="px-1">{{ @$dispatched->count() }}</span>
+                                {{-- <span class="percent_size">(-14%)</span> --}}
                             </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Last week Analytics</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -136,7 +140,9 @@
                         </div>
                         <div>
                             <div class="font-bold"><span>{{ @$on_hand->count() }}</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Total Vehicle</span></div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Total Vehicle</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -158,7 +164,9 @@
                         </div>
                         <div>
                             <div class="font-bold"><span>{{ @$no_titles->count() }}</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Last week Analytics</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -178,10 +186,12 @@
                             </div>
                         </div>
                         <div>
-                            <div class="font-bold"><span class="px-1">{{ @$towing->count() }}</span><span
-                                    class="percent_size">(-14%)</span>
+                            <div class="font-bold"><span class="px-1">{{ @$towing->count() }}</span>
+                                {{-- <span class="percent_size">(-14%)</span> --}}
                             </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Last week Analytics</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -203,7 +213,9 @@
                         <div>
                             <div class="font-bold"><span class="px-1">$40,0000</span>
                             </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Last week Analytics</span></div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Last week Analytics</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -354,7 +366,7 @@
                             <tr>
                                 <th class="font-bold-tr">Sr</th>
                                 <th class="font-bold-tr">Customer Name</th>
-                                <th class="font-bold-tr w-50"> VIN </th>
+                                <th class="font-bold-tr">VIN</th>
                                 <th class="font-bold-tr">YEAR</th>
                                 <th class="font-bold-tr">MAKE</th>
                                 <th class="font-bold-tr">MODEL</th>

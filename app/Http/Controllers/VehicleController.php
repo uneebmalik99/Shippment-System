@@ -203,13 +203,16 @@ class VehicleController extends Controller
 
     public function edit(Request $request, $id = null)
     {
+        // dd($request->isMethod('get'));
+
         if ($request->isMethod('post')) {
+            dd('kashif');
             $data = $request->all();
             $Obj = Vehicle::find($id);
-           
             $Obj->update($data);
             return redirect($this->action)->with('success', 'Edited successfully.');
         }
+
         $action = url($this->action . '/edit/' . $id);
         $data = [];
         $data = [
@@ -231,11 +234,25 @@ class VehicleController extends Controller
         ];
         if ($request->ajax()) {
             $id = $request->id;
-            $Obj_vehicle = new Vehicle;
-            $data['user'] = $Obj_vehicle->find($id)->toArray();
-            $data['buyers'] = User::where('role_id', '4')->get();
+            $data['user'] = Vehicle::with('vehicle_status')->where('id', $id)->get()->toArray();
+            // dd($data['user']);
+            // $Obj_vehicle = new Vehicle;
+            // $data['user'] = $Obj_vehicle->find($id)->toArray();
+            $data['buyers'] = BillingParty::all();
+            $data['buyers_number'] = BillingParty::with('customer.vehicles')->get()->toArray();
             $data['location'] = Location::all();
             $data['shipment'] = Shipment::all();
+            $data['vehicle_make'] = MMS::select('make')->where('status', '1')->groupBy('make')->get()->toArray();
+            $data['auctions'] = Auction::where('status', '1')->get();
+            $data['vehicle_types'] = VehicleType::where('status', '1')->get();
+            $data['colors'] = Color::where('status', '1')->get();
+            $data['vehicle_status'] = VehicleStatus::all();
+            $data['warehouses'] = Warehouse::where('status', '1')->get();
+            $data['sites'] = Site::where('status', '1')->get();
+            $data['keys'] = Key::where('status', '1')->get();
+            $data['titles'] = Title::where('status', '1')->get();
+            $data['title_types'] = TitleType::where('status', '1')->get();
+            $data['shipper_names'] = ShipperName::where('status', '1')->get();
             $data['customer_name'] = User::where('role_id', 4)->get();
             $output = view('layouts.vehicle_create.general', $data)->render();
             return Response($output);
@@ -343,6 +360,8 @@ class VehicleController extends Controller
         $tab = $data['tab'];
         unset($data['tab']);
         $Obj = new Vehicle;
+        if($request->id === null)
+    {
         $new = $Obj->create($data);
         $Obj_vehicle = $Obj->where('vin', $data['vin'])->get();
         switch ($tab) {
@@ -351,6 +370,19 @@ class VehicleController extends Controller
                 break;
         }
         return Response($output);
+    }
+    else{
+        $obj = Vehicle::find($request->id);
+        $obj->update($data);
+        $Obj_vehicle = $obj->where('vin', $data['vin'])->get();
+        switch ($tab) {
+            case ('general'):
+                $output['view'] = view('layouts.vehicle_create.attachments', $vin)->render();
+                break;
+        }
+        return Response($output);
+    }
+        
     }
     public function store_image(Request $request)
     {
@@ -649,9 +681,9 @@ class VehicleController extends Controller
         // return $data['images'];
 
         foreach ($data['images'] as $img) {
-            $output[] = '<div class="img">
-         <img src=' . $url . '/' . $img['name'] . ' alt=" " style="width: 60px; height: 55px; ">
-        </div>';
+            $output[] = '
+         <img src=' . $url . '/' . $img['name'] . ' alt=" " style="width:31.5%;" class="item_1">
+        ';
         }
 
         return Response($output);
