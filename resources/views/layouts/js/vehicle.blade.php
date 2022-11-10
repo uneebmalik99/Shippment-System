@@ -282,7 +282,8 @@
                 // alert(data);
                 // console.log(data);
                 // alert(data);
-                $('.changeImages').html(data);
+                $('.main_image').html(data.main_image);
+                $('.changeImages').html(data.images);
             }
         });
     }

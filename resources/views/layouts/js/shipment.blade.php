@@ -263,4 +263,23 @@
         var tr = td.parentNode; // the row to be removed
         tr.parentNode.removeChild(tr);
     }
+
+    function editShipment(id){
+        $id = id;
+
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('shipments.edit') }}',
+            data: {
+                'id': $id,
+            },
+            success: function(data) {
+                console.log(data);
+                // $('.modal-body').html(data);
+                $('.modal-body').html(data);
+                $('#exampleModal').modal('show');
+            }
+        });
+
+    }
 </script>

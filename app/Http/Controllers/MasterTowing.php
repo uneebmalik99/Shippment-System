@@ -111,4 +111,27 @@ class MasterTowing extends Controller
     }
 
 
+    public function shipment_rate(){
+        $data = [];
+        $data = [
+            // "page_title" => $this->plural . " List",
+            "page_heading" => $this->plural . ' List',
+            "breadcrumbs" => array('#' => $this->plural . " List"),
+            "module" => [
+                'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'list',
+                'action' => $this->action,
+            ],
+        ];
+        
+        $notification = $this->Notification();
+        return view($this->view . 'shipment_rate', $data, $notification);
+    }
+
+
 }

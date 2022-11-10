@@ -323,7 +323,7 @@
         <div class="row">
             <div class="col-12 mx-auto">
                 <div class="d-flex dashboard_heading" style="margin-top:-40px!important">
-                    <div style="">
+                    <div style="margin-top:3px!important">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <mask id="path-1-inside-1_1317_355" fill="white">
@@ -338,9 +338,9 @@
                                 fill="#214986" mask="url(#path-1-inside-1_1317_355)" />
                         </svg>
                     </div>
-                    <div>
+                    {{-- <div> --}}
                         <h2 style="color:#1F689E;font-size:22px" class="px-1">Dashboard</h2>
-                    </div>
+                    {{-- </div> --}}
                 </div>
             </div>
         </div>

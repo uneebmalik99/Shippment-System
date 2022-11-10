@@ -12,6 +12,6 @@ class Loading_Image extends Model
 
     public function shipment()
     {
-        return $this->belongsTo('App\Models\Shipment');
+        return $this->belongsTo('App\Models\Shipment','shipment_id', 'id');
     }
 }

@@ -180,9 +180,9 @@
 
                                 </div>
 
-                                <div class="col-12">
-                                    <div class="w-100 p-3" style="position: relative;">
-                                        <img src="{{asset('auction_images/BzyuY7rG5boY563isIYFBFs2hqCXpv9tOCeSYctq.webp')}}" alt=""class="img_fluid mx-auto w-100" style="border: 1px solid rgba(26, 88, 133, 0.17);max-height:250px !important;border-radius: 10px!important;">
+                                <div class="col-12 main_image">
+                                    <div class="w-100  p-3" style="position: relative;">
+                                        <img src="{{asset(@$vehicle['pickupimages'][0]['name'])}}" alt=""class="img_fluid mx-auto w-100" style="max-height:250px !important;border-radius: 10px!important;">
                                         <a class="bottom_button">
                                             <svg width="39" height="25" viewBox="0 0 39 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <rect width="39" height="22" rx="5" fill="white" fill-opacity="0.3"/>
@@ -250,7 +250,7 @@
                                                     
                                             </a>
                                             <br>
-                                            <a href="" style="text-decoration: none">
+                                            <a href="{{asset(@$vehicle['pickupimages'][0]['name'])}}" download="{{@$vehicle['pickupimages'][0]['thumbnail']}}" style="text-decoration: none">
                                                 <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <rect width="23" height="22" rx="5" fill="white" fill-opacity="0.3"/>
                                                     <g filter="url(#filter0_d_0_1)">
@@ -276,9 +276,9 @@
                                 </div>
                                 <div class="image_section">
 
-                                    <div class="col-12">
-                                        @if(@$vehicle['billofsales'])
-                                            @foreach(@$vehicle['billofsales'] as $img)  
+                                    <div class="col-12 changeImages">
+                                        @if(@$vehicle['pickupimages'])
+                                            @foreach(@$vehicle['pickupimages'] as $img)  
                                             <img src="{{asset($img['name'])}}" alt=""class="item_1" style="width:31.5%;">
                                             @endforeach
                                         @endif

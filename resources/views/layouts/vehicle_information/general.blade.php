@@ -85,7 +85,7 @@
                 <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
                     <span class="infromation_mainText">Status</span>
-                    <span class="information_text">{{@$vehicle['status']}}</span>
+                    <span class="information_text">{{@$vehicle['vehicle_status']['status_name']}}</span>
                 </div>
 
 
@@ -136,8 +136,8 @@
                         Trucking PDF
                     </div></button>
                 </a>
-                    <button style="background: #1CACD9;border:none;font-size:12px;
-                    transform: skew(-30deg) !important;border-radius: 4px;color:white;margin-right: 3px;"><div style="transform: skew(30deg) !important;padding:1px 12px">Edit</div></button>
+                    {{-- <button style="background: #1CACD9;border:none;font-size:12px;
+                    transform: skew(-30deg) !important;border-radius: 4px;color:white;margin-right: 3px;"><div style="transform: skew(30deg) !important;padding:1px 12px">Edit</div></button> --}}
 
                 </div>
                 <div>
@@ -212,7 +212,7 @@
 
                     </div>
 
-                    <div style="width: 90%; " class="d-flex justify-content-end ">
+                    {{-- <div style="width: 90%; " class="d-flex justify-content-end ">
 
                         <button class="send mt-3" style="background: #1CACD9; border-radius: 4px;transform: skew(-30deg) !important;font-size: 13px;border:none;color:white; ">
                         <div style="transform: skew(30deg) !important;padding:1px 12px ">
@@ -220,7 +220,7 @@
                         </div>
                     </button>
 
-                    </div>
+                    </div> --}}
 
 
                 </div>
@@ -251,9 +251,9 @@
 
                                 </div>
 
-                                <div class="col-12">
+                                <div class="col-12 main_image">
                                     <div class="w-100  p-3" style="position: relative;">
-                                        <img src="{{asset(@$vehicle['billofsales'][0]['name'])}}" alt=""class="img_fluid mx-auto w-100" style="max-height:250px !important;border-radius: 10px!important;">
+                                        <img src="{{asset(@$vehicle['pickupimages'][0]['name'])}}" alt=""class="img_fluid mx-auto w-100" style="max-height:250px !important;border-radius: 10px!important;">
                                         <a class="bottom_button">
                                             <svg width="39" height="25" viewBox="0 0 39 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <rect width="39" height="22" rx="5" fill="white" fill-opacity="0.3"/>
@@ -321,7 +321,7 @@
                                                     
                                             </a>
                                             <br>
-                                            <a href="{{asset(@$vehicle['billofsales'][0]['name'])}}" download="Vehicle Image" style="text-decoration: none">
+                                            <a href="{{asset(@$vehicle['pickupimages'][0]['name'])}}" download="{{@$vehicle['pickupimages'][0]['thumbnail']}}" style="text-decoration: none">
                                                 <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <rect width="23" height="22" rx="5" fill="white" fill-opacity="0.3"/>
                                                     <g filter="url(#filter0_d_0_1)">
@@ -348,8 +348,8 @@
                                 <div class="image_section">
 
                                     <div class="col-12 changeImages">
-                                        @if(@$vehicle['billofsales'])
-                                            @foreach(@$vehicle['billofsales'] as $img)  
+                                        @if(@$vehicle['pickupimages'])
+                                            @foreach(@$vehicle['pickupimages'] as $img)  
                                             <img src="{{asset($img['name'])}}" alt=""class="item_1" style="width:31.5%;">
                                             @endforeach
                                         @endif

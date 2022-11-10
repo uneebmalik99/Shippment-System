@@ -7,7 +7,7 @@
                     <div class="px-lg-3 col-lg-5 py-lg-0">
                         <div class="box box-bg-2 col-12">
                             @csrf
-                            <div class="col-5 my-3 p-0 d-flex justify-content-center"
+                            <div class="col-7 my-3 p-0 d-flex justify-content-center"
                                 style="border-bottom:2px solid #3181b9;">
                                 <b>Shipment Inovices</b>
                             </div>
@@ -19,7 +19,7 @@
                     <div class="px-lg-3 col-lg-5 py-lg-0">
                         <div class="box box-bg-2 col-12">
                             @csrf
-                            <div class="col-5 my-3 p-0 d-flex justify-content-center"
+                            <div class="col-7 my-3 p-0 d-flex justify-content-center"
                                 style="border-bottom:2px solid #3181b9;">
                                 <b>Stamp Titles</b>
                             </div>
@@ -32,7 +32,7 @@
                     <div class="px-lg-3 col-lg-5 py-lg-0">
                         <div class="box box-bg-2 col-12">
                             @csrf
-                            <div class="col-5 my-3 p-0 d-flex justify-content-center"
+                            <div class="col-7 my-3 p-0 d-flex justify-content-center"
                                 style="border-bottom:2px solid #3181b9;">
                                 <b>Loading Images</b>
                             </div>
@@ -44,7 +44,7 @@
                     <div class="px-lg-3 col-lg-5 py-lg-0">
                         <div class="box box-bg-2 col-12">
                             @csrf
-                            <div class="col-5 my-3 p-0 d-flex justify-content-center"
+                            <div class="col-7 my-3 p-0 d-flex justify-content-center"
                                 style="border-bottom:2px solid #3181b9;">
                                 <b>Other Documents</b>
                             </div>

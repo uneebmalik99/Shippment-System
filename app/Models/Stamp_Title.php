@@ -9,9 +9,7 @@ class Stamp_Title extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
-
     public function shipment(){
-        return $this->belongsTo('App\Models\Shipment');
+        return $this->belongsTo('App\Models\Shipment', 'shipment_id', 'id');
     }
 }

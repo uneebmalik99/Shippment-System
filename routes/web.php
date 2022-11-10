@@ -128,6 +128,10 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/shipments/general', [ShipmentController::class, 'create_form'])->name('shipment.createform');
     Route::get('/shipments/profile/{id?}', [ShipmentController::class, 'profile'])->name('shipment.profile');
     Route::get('/shipments/delete/{id?}', [ShipmentController::class, 'delete'])->name('shipment.delete');
+
+    Route::post('/shipments/edit', [ShipmentController::class, 'edit'])->name('shipments.edit');
+
+
     Route::get('/shipments/filtering', [ShipmentController::class, 'filtering'])->name('shipment.filter');
     Route::get('/shipments/records', [ShipmentController::class, 'serverside'])->name('shipments.records');
     Route::post('/shipment/create_images', [ShipmentController::class, 'create_images'])->name('shipments.create_images');
@@ -144,6 +148,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
 
     Route::post('/shipments/fetch_vehicles', [ShipmentController::class, 'add_vehicles'])->name('shipments.add_vehicles');
+
+
+
 
     // destination countries 
     Route::post('/shipments/fetchdestinationstate', [ShipmentController::class, 'FetchDestiState'])->name('shipments.FetachDestiState');
@@ -163,6 +170,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/shipment_detail/shipment_Landing_pdf', [pdfController::class, 'shipmentLanding'])->name('shipment_detail.shipment_Landing_pdf');
 
     Route::get('/shipment_detail/shipment_Custom_pdf', [pdfController::class, 'shipmentCustom'])->name('shipment_detail.shipment_Custom_pdf');
+
+    Route::get('/shipment_detail/shipment_Dock_pdf', [pdfController::class, 'shipmentDock'])->name('shipment_detail.shipment_Dock_pdf');   
 
 
     //Notification Routes`
@@ -215,6 +224,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     // master towing page routes 
 
     Route::get('/master-towing',                     [MasterTowing::class, 'index'])->name('master.towing');
+
+    Route::get('/shipment-rate',                     [MasterTowing::class, 'shipment_rate'])->name('shipment.rate');
 
 
 

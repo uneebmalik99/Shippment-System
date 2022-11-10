@@ -24,6 +24,19 @@
         </div>
     </div>
     {{-- Modal End --}}
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 mx-auto">
+                <div class="d-flex dashboard_heading" style="margin-top:-40px!important">
+                    <div style="margin-top:1px!important;">
+                        <i class="fa fa-user" style="color:#1F689E"></i>
+                    </div>
+                    <div>
+                        <h2 style="color:#1F689E;font-size:22px" class="px-1">Customers</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <div class="bg-white rounded p-2">
         {{-- badges start --}}

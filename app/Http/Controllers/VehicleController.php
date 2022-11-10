@@ -98,7 +98,7 @@ class VehicleController extends Controller
 
         $data = [];
         $data = [
-            "page_title" => $this->plural . " List",
+            // "page_title" => $this->plural . " List",
             "page_heading" => $this->plural . ' List',
             "breadcrumbs" => array('#' => $this->plural . " List"),
             "module" => [
@@ -621,7 +621,7 @@ class VehicleController extends Controller
     {
         $action = url($this->action . '/profile/');
         $data = [
-            'vehicle' => Vehicle::with('billofsales')->find($id)->toArray(),
+            'vehicle' => Vehicle::with(['pickupimages', 'vehicle_status'])->find($id)->toArray(),
             "page_title" => "Profile " . $this->singular,
             "page_heading" => "Profile " . $this->singular,
             "button_text" => "Update ",
@@ -638,7 +638,7 @@ class VehicleController extends Controller
                 'button' => 'Update',
             ],
         ];
-
+// dd($data['vehicle']);
         $notification = $this->Notification();
         return view($this->view . 'profile', $data, $notification);
 
@@ -652,7 +652,8 @@ class VehicleController extends Controller
 
         $data = [];
 
-        $data['vehicle'] = Vehicle::with('images')->find($id)->toArray();
+        $data['vehicle'] = Vehicle::with(['pickupimages', 'vehicle_status'])->find($id)->toArray();
+        // dd($data['vehicle']);
 
         $output = view('layouts.vehicle_information.' . $tab, $data)->render();
 
@@ -674,14 +675,16 @@ class VehicleController extends Controller
             $data['images'] = WarehouseImage::where('vehicle_id', $request->id)->get()->toArray();
             $url = url('public/');
         } else {
-            $data['images'] = BillOfSale::where('vehicle_id', $request->id)->get()->toArray();
+            $data['images'] = PickupImage::where('vehicle_id', $request->id)->get()->toArray();
             $url = url('public/');
         }
 
         // return $data['images'];
 
+        $output['main_image'] =view('layouts.vehicle_information.Vehicle_image',$data)->render();
+
         foreach ($data['images'] as $img) {
-            $output[] = '
+            $output['images'] = '
          <img src=' . $url . '/' . $img['name'] . ' alt=" " style="width:31.5%;" class="item_1">
         ';
         }

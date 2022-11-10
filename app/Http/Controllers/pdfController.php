@@ -24,7 +24,6 @@ class pdfController extends Controller
 
     public function Notification()
     {
-
         $data['notification'] = Notification::with('user')->paginate($this->perpage);
         $data['location'] = Location::all()->toArray();
         // return $data['notification'];
@@ -32,7 +31,6 @@ class pdfController extends Controller
         if ($data['notification']) {
             $current = Carbon::now();
             foreach ($data['notification'] as $key => $date_notification) {
-
                 $date = $date_notification->created_at;
                 $diff = $date->diffInSeconds(\Carbon\Carbon::now());
                 $days = $diff / 86400;
@@ -55,13 +53,11 @@ class pdfController extends Controller
         } else {
             $data['notification'] = "asda";
         }
-
         // dd($data);
         return $data;
     }
     public function detail_data( $id = null){
         $data = [];
-        
         $data = [
             "page_title" => $this->plural . " Detail",
             "page_heading" => $this->plural . 'detail',
@@ -79,8 +75,6 @@ class pdfController extends Controller
         $data['location'] = Location::all();
         $notification = $this->Notification();
         $data['invoices']=Invoice::find($id)->toArray();
-
-        
         return view('invoice.detail',$data, $notification);
     }
     public function generatePDF($id = null){
@@ -88,26 +82,20 @@ class pdfController extends Controller
         $data = [];
         $data['invoices']=Invoice::find($id)->toArray();
         $pdf = PDF::loadview('invoice.pdf',$data);
-        
         return $pdf->stream();
         // $data = [
         //     'title' => 'welcome to pdf file',
         //     'date' => date('m/d/y')
         // ];
-       
-       
         // return $pdf->download('detail.pdf');
         
     }
     public function search_shipment(Request $req){
         $search_text = $req->searchText;
-        
         if ($search_text) {
             $data['vehicles'] = Vehicle::all();
-            
-                
-                $output = view('layouts.shipment_filter.filterVehicles', $data)->render();
-                return Response($output);
+            $output = view('layouts.shipment_filter.filterVehicles', $data)->render();
+            return Response($output);
         }
 
 
@@ -117,7 +105,6 @@ class pdfController extends Controller
         // $data = [];
         // $data['shipment']=Shipment::find($id)->toArray();
         $pdf = PDF::loadview('layouts.shipment_detail.shipment_Hazard_pdf');
-        
         return $pdf->stream(); 
     }
 
@@ -125,7 +112,6 @@ class pdfController extends Controller
         // $data = [];
         // $data['shipment']=Shipment::find($id)->toArray();
         $pdf = PDF::loadview('layouts.shipment_detail.shipment_Houston_pdf');
-        
         return $pdf->stream(); 
     }
 
@@ -133,7 +119,6 @@ class pdfController extends Controller
         // $data = [];
         // $data['shipment']=Shipment::find($id)->toArray();
         $pdf = PDF::loadview('layouts.shipment_detail.shipment__Landing_pdf');
-        
         return $pdf->stream(); 
     }
 
@@ -141,7 +126,14 @@ class pdfController extends Controller
         // $data = [];
         // $data['shipment']=Shipment::find($id)->toArray();
         $pdf = PDF::loadview('layouts.shipment_detail.shipment__Custom_pdf');
-        
+        return $pdf->stream(); 
+    }
+
+
+    public function shipmentDock(){
+        // $data = [];
+        // $data['shipment']=Shipment::find($id)->toArray();
+        $pdf = PDF::loadview('layouts.shipment_detail.shipment__Dock_pdf');
         return $pdf->stream(); 
     }
     

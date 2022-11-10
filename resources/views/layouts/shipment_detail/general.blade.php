@@ -165,25 +165,20 @@
                     <span class="infromation_mainText">Shipping Line</span>
                     <span class="information_text">{{ @$shipments[0]['shipping_line'] }}</span>
                 </div>
-                <div class="information_button d-flex justify-content-center mt-3" style="margin:50px">
+                {{-- <div class="information_button d-flex justify-content-center mt-3" style="margin:50px">
                     <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;
                     border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
                         <div style="transform: skew(30deg) !important;padding:1px 4px">
                             Trucking PDF
                         </div>
                     </button>
-
-                    
-
-
                     <button style="background: #1CACD9;border:none;font-size:12px;
                     transform: skew(-30deg) !important;
                                     border-radius: 4px;color:white;margin-right: 3px;">
                         <div style="transform: skew(30deg) !important;padding:1px 12px">Edit</div>
                     </button>
-
-                </div>
-
+                </div> --}}
+<br>
                 <div class="information_button d-flex justify-content-center">
                     <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;
                     border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
@@ -217,12 +212,10 @@
                         </div>
                     </button>
 
-
-
                     <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;
                     border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
                         <div style="transform: skew(30deg) !important;padding:1px 4px">
-                            <a href="" style="color:white;text-decoration:none;font-size: 12px;">DOCK RECEIPT</a>
+                            <a href="{{route ('shipment_detail.shipment_Dock_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">DOCK RECEIPT</a>
                         </div>
                     </button>
                    
@@ -271,12 +264,12 @@
                     </div>
                     <div style="width: 90%; " class="d-flex justify-content-end ">
 
-                        <button class="send mt-3"
+                        {{-- <button class="send mt-3"
                             style="background: #1CACD9; border-radius: 4px;transform: skew(-30deg) !important;font-size: 13px;border:none;color:white; ">
                             <div style="transform: skew(30deg) !important;padding:1px 12px ">
                                 Send
                             </div>
-                        </button>
+                        </button> --}}
 
                     </div>
 
@@ -286,7 +279,7 @@
                     <div class="information_gallary">
                         <div class="gallary_header d-flex">
                             <div class="row">
-                                <div class="col-12">
+                                {{-- <div class="col-12">
                                     <div class="w-100">
                                         <div class="w-100 d-flex"
                                             style="justify-content: space-around;margin: 5px 1px; padding: 0 3px;">
@@ -317,11 +310,11 @@
 
                                     </div>
 
-                                </div>
+                                </div> --}}
 
                                 <div class="col-12">
                                     <div class="w-100  p-3" style="position: relative;">
-                                        <img src="{{asset('auction_images/BzyuY7rG5boY563isIYFBFs2hqCXpv9tOCeSYctq.webp')}}"
+                                        <img src="{{asset(@$shipments[0]['loading_image'][0]['name'])}}"
                                             alt="" class="slide img_fluid mx-auto w-100"
                                             style="max-height:250px !important;border-radius: 10px!important;">
                                         <a class="bottom_button">
@@ -422,7 +415,7 @@
 
                                             </a>
                                             <br>
-                                            <a href="" style="text-decoration: none">
+                                            <a href="{{@$shipments[0]['loading_image'][0]['name']}}" download="{{@$shipments[0]['loading_image'][0]['thumbnail']}}" style="text-decoration: none">
                                                 <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <rect width="23" height="22" rx="5" fill="white"
@@ -460,8 +453,8 @@
                                 <div class="image_section">
 
                                     <div class="col-12">
-                                        @if(@$vehicle['billofsales'])
-                                        @foreach(@$vehicle['billofsales'] as $img)
+                                        @if(@$shipments[0]['loading_image'])
+                                        @foreach(@$shipments[0]['loading_image'] as $img)
                                         <img src="{{asset($img['name'])}}" alt="" class="item_1" style="width:31.5%;">
                                         @endforeach
                                         @endif

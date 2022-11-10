@@ -80,7 +80,7 @@ class CustomerController extends Controller
     {
         $data = [];
         $data = [
-            "page_title" => $this->plural . " List",
+            // "page_title" => $this->plural . " List",
             "page_heading" => $this->plural . ' List',
             "breadcrumbs" => array('#' => $this->plural . " List"),
             "module" => [

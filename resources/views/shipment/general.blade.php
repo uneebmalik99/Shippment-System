@@ -56,11 +56,28 @@
 
                         <table class="table" style="background:lightgray;">
                             <tbody id="add_vehicles">
-
+                                @if(@$shipment)
+                                @foreach ($shipment[0]['vehicle'] as $vehicle)
+                               <tr>
+                                       <td>{{ @$vehicle['year'] }}</td>
+                                       <td>{{ @$vehicle['make'] }}</td>
+                                       <td>{{ @$vehicle['model'] }}</td>
+                                       <td>{{ @$vehicle['vin'] }}</td>
+                                       <td>{{ @$vehicle['title'] }}</td>
+                                       <td>{{ @$vehicle['title_state'] }}</td>
+                                       <td>{{ @$vehicle['title_number'] }}</td>
+                                       <td>{{ @$vehicle['customer_name'] }}</td>
+                                       <td class="text-center"><input type="checkbox" value="{{ @$vehicle['id'] }}"
+                                               id="vehicle" name="vehicle[]" onclick="removerow()" checked></td>
+                               </tr>
+                               @endforeach
+                               @endif
                             </tbody>
                         </table>
                     </div>
-
+                    @if(@$shipment[0]['id'])
+                    <input type="hidden" id="id" name="id" value="{{@$shipment[0]['id']}}">
+                    @endif
                     <div class="d-xl-flex border-shipment">
                         <div class="col-12 d-lg-flex p-0">
                             <div class="col-lg-6 col-12 p-0">
@@ -86,7 +103,11 @@
                                                         Name</label>
                                                         <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="company_name" id="company_name" onchange="customer_details()">
+                                                        @if(@$shipment[0]['company_name'])
+                                                        <option value="{{@$shipment[0]['company_name']}}" selected disabled>{{@$shipment[0]['company_name']}}</option>
+                                                        @else
                                                         <option selected disabled>Select Company</option>
+                                                        @endif
                                                         @foreach ($companies as $company)
                                                             <option value="{{$company['company_name']}}">{{$company['company_name']}}</option>
                                                         @endforeach
@@ -104,7 +125,7 @@
                                                         Email</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="customer_email" id="customer_email" value="">
+                                                        name="customer_email" id="customer_email" value="{{@$shipment[0]['customer_email']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -114,7 +135,7 @@
                                                         Phone</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="customer_phone" id="customer_phone">
+                                                        name="customer_phone" id="customer_phone" value="{{@$shipment[0]['customer_phone']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -125,7 +146,11 @@
 
                                                         <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="shipment_type" id="shipment_type">
+                                                        @if(@$shipment[0]['shipment_type'])
+                                                        <option value="{{@$shipment[0]['shipment_type']}}" selected disabled>{{@$shipment[0]['shipment_type']}}</option>
+                                                        @else
                                                         <option>Select Shipment Types</option>
+                                                        @endif
                                                         @foreach ($shipment_types as $types)
                                                             <option value="{{@$types['name']}}">{{@$types['name']}}</option>
                                                         @endforeach
@@ -160,7 +185,7 @@
                                                         Date</label>
                                                     <input type="date"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="loading_date" id="loading_date">
+                                                        name="loading_date" id="loading_date" value="{{@$shipment[0]['loading_date']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -170,7 +195,7 @@
                                                         Date</label>
                                                     <input type="date"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="cut_off_date" id="cut_off_date">
+                                                        name="cut_off_date" id="cut_off_date" value="{{@$shipment[0]['cut_off_date']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -179,7 +204,7 @@
                                                         Date</label>
                                                     <input type="date"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="sale_date" id="sale_date">
+                                                        name="sale_date" id="sale_date" value="{{@$shipment[0]['sale_date']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -190,7 +215,7 @@
                                                         Date</label>
                                                     <input type="date"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="est_arrival_date" id="est_arrival_date">
+                                                        name="est_arrival_date" id="est_arrival_date" value="{{@$shipment[0]['est_arrival_date']}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -217,7 +242,7 @@
                                                         Number</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="booking_number" id="booking_number">
+                                                        name="booking_number" id="booking_number" value="{{@$shipment[0]['booking_number']}}">
 
                                                 </div>
                                             </div>
@@ -227,7 +252,7 @@
                                                         class="col-6 px-0 font-size font-bold">Container Number</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="container_no" id="container_number">
+                                                        name="container_no" id="container_number" value="{{@$shipment[0]['container_no']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -237,9 +262,13 @@
                                                         Size</label>
                                                         <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="container_size" id="container_size">
+                                                        @if(@$shipment[0]['container_size'])
+                                                        <option value="{{@$shipment[0]['container_size']}}">{{@$shipment[0]['container_size']}}</option>
+                                                        @else
                                                     <option selected disabled>Select Container Size</option>
+                                                    @endif
                                                     @foreach ($container_size as $Csize)
-                                                    <option value="{{@$Csize['name']}}">{{@$Csize['name']}}</option>                                                        
+                                                    <option value="{{@$Csize['name']}}">{{@$Csize['name']}}</option>    
                                                     @endforeach
                                                 </select>
                                                     {{-- <input type="text"
@@ -254,9 +283,12 @@
                                                         Type</label>
                                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                                     name="container_type" id="container_type">
+                                                    @if(@$shipment[0]['container_type'])
+                                                    <option value="{{@$shipment[0]['container_type']}}">{{@$shipment[0]['container_type']}}</option>
                                                     <option selected disabled>Select Container Type</option>
+                                                    @endif
                                                     @foreach ($container_types as $Ctype)
-                                                    <option value="{{@$Ctype['name']}}">{{@$Ctype['name']}}</option>                                                        
+                                                    <option value="{{@$Ctype['name']}}">{{@$Ctype['name']}}</option>                                         
                                                     @endforeach
                                                 </select>
                                                     {{-- <input type="text"
@@ -288,7 +320,7 @@
                                                         Reference</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="shipping_reference" id="shipping_reference">
+                                                        name="shipping_reference" id="shipping_reference" value="{{@$shipment[0]['shipping_reference']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -299,7 +331,7 @@
                                                         No</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="ase-itn_number" id="ase-itn_number">
+                                                        name="ase-itn_number" id="ase-itn_number" value="{{@$shipment[0]['ase-itn_number']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -308,7 +340,7 @@
                                                         No</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="xtn_number" id="xtn_number">
+                                                        name="xtn_number" id="xtn_number" value="{{@$shipment[0]['xtn_number']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -319,7 +351,7 @@
                                                             Number</label>
                                                         <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="oti_number" id="oti_number">
+                                                            name="oti_number" id="oti_number" value="{{@$shipment[0]['oti_number']}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -346,6 +378,11 @@
                                                     <select
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="select_consignee" id="select_consignee">
+                                                        @if(@$shipment[0]['select_consignee '])
+                                                        <option value="{{@$shipment[0]['select_consignee']}}" selected disabled>{{@$shipment[0]['select_consignee']}}</option>
+                                                        @else
+                                                        <option selected disabled>Select Consignee</option>
+                                                        @endif
                                                         @foreach ($consignees as $consignee)
                                                             <option
                                                                 class="form-control-sm border border-0 rounded-pill bg col-6"
@@ -362,6 +399,11 @@
                                                         class="col-6 px-0 font-size font-bold">Notifier</label>
                                                     <select
                                                         class="form-control-sm border border-0 rounded-pill bg col-6">
+                                                        @if(@$shipment[0]['select_consignee '])
+                                                        <option value="{{@$shipment[0]['select_consignee']}}" selected disabled>{{@$shipment[0]['select_consignee']}}</option>
+                                                        @else
+                                                        <option selected disabled>Select Notifier</option>
+                                                        @endif
                                                         @foreach ($consignees as $consignee)
                                                             <option
                                                                 class="form-control-sm border border-0 rounded-pill bg col-6"
@@ -379,7 +421,7 @@
                                                     </label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="shipper" id="shipper">
+                                                        name="shipper" id="shipper" value="{{@$shipment[0]['shipper']}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -412,7 +454,11 @@
                                                     <label for="loading_country"
                                                         class="col-6 px-0 font-size font-bold">Country</label>
                                                         <select name="loading_country" id="loading_country" class="form-control-sm border border-0 rounded-pill bg col-6" onchange="FetchState()">
+                                                            @if(@$shipment[0]['loading_country'])
+                                                            <option value="{{@$shipment[0]['loading_country']}}" selected disabled>{{@$shipment[0]['loading_country']}}</option>
+                                                            @else
                                                             <option selected disabled>Select Country</option>
+                                                            @endif
                                                             @foreach($countries as $country)
                                                             <option value="{{@$country['country']}}">{{@$country['country']}}</option>
                                                             @endforeach
@@ -427,7 +473,11 @@
                                                     <label for="loading_state"
                                                         class="col-6 px-0 font-size font-bold">State</label>
                                                         <select name="loading_state" id="loading_state" class="form-control-sm border border-0 rounded-pill bg col-6" onchange="FetchPort()">
+                                                            @if(@$shipment[0]['loading_state'])
+                                                            <option value="{{@$shipment[0]['loading_state']}}" selected disabled>{{@$shipment[0]['loading_state']}}</option>
+                                                            @else
                                                             <option selected disabled>Select State</option>
+                                                            @endif
                                                             {{-- <option selected disabled>Select State</option>
                                                             @foreach ($states as $state)
                                                                 <option value="{{@$state['name']}}">{{@$state['name']}}</option>
@@ -449,7 +499,11 @@
                                                     <select
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="loading_port" id="loading_port" onchange="FetchTerminal()">
+                                                        @if(@$shipment[0]['loading_port'])
+                                                            <option value="{{@$shipment[0]['loading_port']}}" selected disabled>{{@$shipment[0]['loading_port']}}</option>
+                                                            @else
                                                         <option selected disabled>Select Ports</option>
+                                                        @endif
                                                         {{-- @foreach ($location as $locations)
                                                             <option value="{{ $locations['id'] }}">
                                                                 {{ $locations['name'] }}</option>
@@ -465,7 +519,11 @@
                                                         <select
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="loading_terminal" id="loading_terminal">
+                                                        @if(@$shipment[0]['loading_terminal'])
+                                                            <option value="{{@$shipment[0]['loading_terminal']}}" selected disabled>{{@$shipment[0]['loading_terminal']}}</option>
+                                                            @else
                                                         <option selected disabled>Select Terminals</option>
+                                                        @endif
                                                         {{-- @foreach ($location as $locations)
                                                             <option value="{{ $locations['id'] }}">
                                                                 {{ $locations['name'] }}</option>
@@ -505,7 +563,11 @@
                                                         class="col-6 px-0 font-size font-bold">Country</label>
                                                         <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="destination_country" id="destination_country" onchange="DestinationState()">
+                                                        @if(@$shipment[0]['destination_country'])
+                                                            <option value="{{@$shipment[0]['destination_country']}}" selected disabled>{{@$shipment[0]['destination_country']}}</option>
+                                                            @else
                                                         <option selected disabled>Select Destination Country</option>
+                                                        @endif
                                                         @foreach ($destination_country as $dcountry)
                                                         <option value="{{@$dcountry['country']}}">{{@$dcountry['country']}}</option>
                                                             
@@ -523,7 +585,11 @@
 
                                                         <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="destination_state" id="destination_state" onchange="FetachDestinationPort()">
+                                                        @if(@$shipment[0]['destination_state'])
+                                                            <option value="{{@$shipment[0]['destination_state']}}" selected disabled>{{@$shipment[0]['destination_state']}}</option>
+                                                            @else
                                                         <option selected disabled>Select State</option>
+                                                        @endif
                                                     
                                                     </select>
                                                     {{-- <input type="text"
@@ -539,7 +605,11 @@
                                                     <select
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="destination_port" id="destination_port" onchange="FetchDestiTerimals()">
+                                                        @if(@$shipment[0]['destination_port'])
+                                                            <option value="{{@$shipment[0]['destination_port']}}" selected disabled>{{@$shipment[0]['destination_port']}}</option>
+                                                            @else
                                                         <option selected disabled>Select Destination Port</option>
+                                                        @endif
                                                         {{-- @foreach ($location as $locations)
                                                             <option value="{{ $locations['id'] }}">
                                                                 {{ $locations['name'] }}</option>
@@ -554,7 +624,11 @@
                                                         Terminal</label>
                                                         <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="destination_terminal" id="destination_terminal">
+                                                        @if(@$shipment[0]['destination_terminal'])
+                                                            <option value="{{@$shipment[0]['destination_terminal']}}" selected disabled>{{@$shipment[0]['destination_terminal']}}</option>
+                                                            @else
                                                         <option selected disabled>Select Terminal</option>
+                                                        @endif
                                                         
                                                     </select>
                                                     {{-- <input type="text"
@@ -591,7 +665,11 @@
                                                         Line</label>
                                                         <select  class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="shipping_line" id="shipping_line">
+                                                        @if(@$shipment[0]['shipping_line'])
+                                                            <option value="{{@$shipment[0]['shipping_line']}}" selected disabled>{{@$shipment[0]['shipping_line']}}</option>
+                                                            @else
                                                         <option selected disabled>Select Shipping Line</option>
+                                                        @endif
                                                         @foreach ($shipment_lines as $Slines)
                                                             <option value="{{@$Slines['name']}}">{{@$Slines['name']}}</option>
                                                         @endforeach
@@ -609,7 +687,7 @@
                                                         class="col-6 px-0 font-size font-bold">Vessel</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="vessel" id="vessel">
+                                                        name="vessel" id="vessel" value="{{@$shipment[0]['vessel']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -619,7 +697,7 @@
                                                         No</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="seal_number" id="seal_number">
+                                                        name="seal_number" id="seal_number" value="{{@$shipment[0]['seal_number']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -629,7 +707,7 @@
                                                         Type</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="voyage" id="voyage">
+                                                        name="voyage" id="voyage" value="{{@$shipment[0]['voyage']}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -655,7 +733,7 @@
                                                         class="col-6 px-0 font-size font-bold">Units</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="units" id="units">
+                                                        name="units" id="units" value="{{@$shipment[0]['units']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -664,7 +742,7 @@
                                                         class="col-6 px-0 font-size font-bold">Types</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="types" id="types">
+                                                        name="types" id="types" value="{{@$shipment[0]['types']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -673,7 +751,7 @@
                                                         class="col-6 px-0 font-size font-bold">Insurance</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="insurance" id="insurance">
+                                                        name="insurance" id="insurance" value="{{@$shipment[0]['insurance']}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 py-2">
@@ -684,7 +762,7 @@
                                                         No</label>
                                                     <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="fmc_license_number" id="fmc_license_number">
+                                                        name="fmc_license_number" id="fmc_license_number" value="{{@$shipment[0]['fmc_license_number']}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -708,7 +786,7 @@
                                                 <div class="d-flex align-items-center">
                                                     <label for="notes"
                                                         class="col-6 px-0 font-size font-bold">Note</label>
-                                                    <textarea type="text" class="form-control-sm border border-0 col-6 card-pill" name="notes" id="notes"></textarea>
+                                                    <textarea type="text" class="form-control-sm border border-0 col-6 card-pill" name="notes" id="notes" value="{{@$shipment[0]['notes']}}"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -718,7 +796,16 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mt-3">
+                        <div class="col-6">
+                            <div class="col-3">
+                                <button type="button" class="btn next-style text-white col-12 py-1"
+                                    id="shipment_general_finish" onclick="display_model()" style="cursor: pointer;">
+                                    <div class="unskew">Cancel</div>
+                                </button>
+                            </div>
+                        </div>
                         <div class="d-flex justify-content-end col-6">
+
                             <div class="col-3">
                                 <button type="reset" class="btn next-style text-white col-12 py-1"
                                     id="general_vehicle" value="Reset" style="cursor: pointer;">
@@ -730,15 +817,10 @@
                                 <button type="button" class="btn next-style text-white col-12 py-1"
                                     onclick="create_shipment_form(this.id)" id="general_shipment"
                                     style="cursor: pointer;">
-                                    <div class="unskew">Save</div>
+                                    <div class="unskew">Next</div>
                                 </button>
                             </div>
-                            <div class="col-3">
-                                <button type="button" class="btn next-style text-white col-12 py-1"
-                                    id="shipment_general_finish" onclick="display_model()" style="cursor: pointer;">
-                                    <div class="unskew">Finish</div>
-                                </button>
-                            </div>
+                           
                         </div>
                     </div>
                 </form>

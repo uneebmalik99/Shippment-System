@@ -37,4 +37,13 @@ class Shipment extends Model
     public function shipment_invoice(){
         return $this->hasMany('App\Models\Shipment_Invice');
     }
+    public function stamp_titles(){
+        return $this->hasMany('App\Models\Stamp_Title','shipment_id', 'id');
+    }
+    public function loading_image(){
+        return $this->hasMany('App\Models\Loading_Image', 'shipment_id', 'id');
+    }
+    public function other_documents(){
+        return $this->hasMany('App\Models\Other_Document', 'shipment_id','id');
+    }
 }

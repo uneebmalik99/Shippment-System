@@ -522,7 +522,7 @@
                             </li>
 
                             <li class=" ">
-                                <a href="">
+                                <a href="{{route('shipment.rate')}}">
                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.project">Shipment Rate</span>
                                     <span class="pcoded-mcaret"></span>
