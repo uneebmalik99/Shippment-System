@@ -685,7 +685,7 @@ class VehicleController extends Controller
 
         foreach ($data['images'] as $img) {
             $output['images'] = '
-         <img src=' . $url . '/' . $img['name'] . ' alt=" " style="width:31.5%;" class="item_1">
+         <img src=' . $url . '/' . $img['name'] . ' alt=" " style="width:120px!important;height:80px!important;" class="item_1">
         ';
         }
 

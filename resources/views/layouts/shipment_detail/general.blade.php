@@ -316,7 +316,7 @@
                                     <div class="w-100  p-3" style="position: relative;">
                                         <img src="{{asset(@$shipments[0]['loading_image'][0]['name'])}}"
                                             alt="" class="slide img_fluid mx-auto w-100"
-                                            style="max-height:250px !important;border-radius: 10px!important;">
+                                            style="height:230px !important;border-radius: 10px!important;">
                                         <a class="bottom_button">
                                             <svg width="39" height="25" viewBox="0 0 39 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -455,7 +455,7 @@
                                     <div class="col-12">
                                         @if(@$shipments[0]['loading_image'])
                                         @foreach(@$shipments[0]['loading_image'] as $img)
-                                        <img src="{{asset($img['name'])}}" alt="" class="item_1" style="width:31.5%;">
+                                        <img src="{{asset($img['name'])}}" alt="" class="item_1" style="width:120px!important;height:80px!important;">
                                         @endforeach
                                         @endif
                                     </div>

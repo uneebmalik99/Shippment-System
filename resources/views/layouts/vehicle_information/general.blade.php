@@ -253,7 +253,7 @@
 
                                 <div class="col-12 main_image">
                                     <div class="w-100  p-3" style="position: relative;">
-                                        <img src="{{asset(@$vehicle['pickupimages'][0]['name'])}}" alt=""class="img_fluid mx-auto w-100" style="max-height:250px !important;border-radius: 10px!important;">
+                                        <img src="{{asset(@$vehicle['pickupimages'][0]['name'])}}" alt=""class="img_fluid mx-auto w-100" style="height:230px!important;border-radius: 10px!important;">
                                         <a class="bottom_button">
                                             <svg width="39" height="25" viewBox="0 0 39 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <rect width="39" height="22" rx="5" fill="white" fill-opacity="0.3"/>
@@ -350,7 +350,7 @@
                                     <div class="col-12 changeImages">
                                         @if(@$vehicle['pickupimages'])
                                             @foreach(@$vehicle['pickupimages'] as $img)  
-                                            <img src="{{asset($img['name'])}}" alt=""class="item_1" style="width:31.5%;">
+                                            <img src="{{asset($img['name'])}}" alt=""class="item_1" style="width:120px!important;height:80px!important;">
                                             @endforeach
                                         @endif
                                     </div>
