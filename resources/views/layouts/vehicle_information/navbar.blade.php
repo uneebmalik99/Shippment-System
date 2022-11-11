@@ -13,8 +13,8 @@
         <button class="form-control vehicle_information_tab col-2" tab="documents" id="{{ @$vehicle['id'] }}">
             <div class="unskew">Documents</div>
         </button>
-        <button class="form-control vehicle_information_tab col-2" tab="notes" id="{{ @$vehicle['id'] }}">
+        {{-- <button class="form-control vehicle_information_tab col-2" tab="notes" id="{{ @$vehicle['id'] }}">
             <div class="unskew">Notes</div>
-        </button>
+        </button> --}}
     </div>
 </div>

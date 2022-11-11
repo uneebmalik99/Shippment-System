@@ -622,7 +622,7 @@ class VehicleController extends Controller
         $action = url($this->action . '/profile/');
         $data = [
             'vehicle' => Vehicle::with(['pickupimages', 'vehicle_status'])->find($id)->toArray(),
-            "page_title" => "Profile " . $this->singular,
+            "page_title" => "Profile Info",
             "page_heading" => "Profile " . $this->singular,
             "button_text" => "Update ",
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
@@ -683,11 +683,13 @@ class VehicleController extends Controller
 
         $output['main_image'] =view('layouts.vehicle_information.Vehicle_image',$data)->render();
 
-        foreach ($data['images'] as $img) {
-            $output['images'] = '
-         <img src=' . $url . '/' . $img['name'] . ' alt=" " style="width:120px!important;height:80px!important;" class="item_1">
-        ';
-        }
+        $output['images'] = view('layouts.vehicle_information.Vehicle_images', $data)->render();
+
+        // foreach ($data['images'] as $img) {
+        //     $output['images'] = '
+        //  <img src=' . $url . '/' . $img['name'] . ' alt=" " style="width:120px!important;height:80px!important;" class="item_1">
+        // ';
+        // }
 
         return Response($output);
     }

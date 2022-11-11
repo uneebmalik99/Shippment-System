@@ -137,7 +137,11 @@
                     </li>
                     <li class="user-profile header-notification">
                         <a>
+                            @if(Auth::user()->user_image)
+                            <img src="{{ asset(Auth::user()->user_image) }}" alt="User-Profile-Image">
+                            @else
                             <img src="{{ asset('assets/images/user.png') }}" alt="User-Profile-Image">
+                            @endif
                             <span>{{ Auth::user()->username }}</span>
                             <i class="ti-angle-down"></i>
                         </a>

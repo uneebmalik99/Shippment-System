@@ -60,69 +60,114 @@
     <div class="col-sm-10 col-md-10 col-lg-4 pl-0">
         <div class="information_card">
             <h6>General Information</h6>
-            <div class="information_div">
+            <div class="information_div mt-3">
                 <div class="d-flex justify-content-between my-2 py-1 " style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
                     <span class="infromation_mainText">Customer Name</span>
+                    @if(@$vehicle['customer_name'])
                     <span class="information_text">{{@$vehicle['customer_name']}}</span>
+                    @else
+                    <span class="information_text">--</span>
+                    @endif
+
                 </div>
                 <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
                     <span class="infromation_mainText">Title</span>
+                    @if(@$vehicle['title'])
                     <span class="information_text">{{@$vehicle['title']}}</span>
+                    @else
+                    <span class="information_text">--</span>
+                    @endif
                 </div>
                 <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
                     <span class="infromation_mainText">Title State</span>
+                    @if(@$vehicle['title_state'])
                     <span class="information_text">{{@$vehicle['title_state']}}</span>
+                    @else
+                    <span class="information_text">--</span>
+                    @endif
                 </div>
                 <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
                     <span class="infromation_mainText">Shipper Name</span>
+                    @if(@$vehicle['shipper_name'])
                     <span class="information_text">{{@$vehicle['shipper_name']}}</span>
+                    @else
+                    <span class="information_text">--</span>
+                    @endif
                 </div>
 
                 <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
                     <span class="infromation_mainText">Status</span>
+                    @if(@$vehicle['vehicle_status'])
                     <span class="information_text">{{@$vehicle['vehicle_status']['status_name']}}</span>
+                    @else
+                    <span class="information_text">--</span>
+                    @endif
                 </div>
 
 
                 <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
                     <span class="infromation_mainText">Days</span>
+                    @if(@$vehicle['days'])
                     <span class="information_text">{{@$vehicle['days']}}</span>
+                    @else
+                    <span class="information_text">--</span>
+                    @endif
                 </div>
 
                 <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
                     <span class="infromation_mainText">Sale Date</span>
+                    @if(@$vehicle['sale_date'])
                     <span class="information_text" style="overflow: hidden;">{{@$vehicle['sale_date']}}</span>
+                    @else
+                    <span class="information_text">--</span>
+                    @endif
                 </div>
 
                 <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
                     <span class="infromation_mainText">Paid Date</span>
+                    @if(@$vehicle['paid_date'])
                     <span class="information_text">{{@$vehicle['paid_date']}}</span>
+                    @else
+                    <span class="information_text">--</span>
+                    @endif
                 </div>
 
                 <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
                     <span class="infromation_mainText">Posted Date</span>
+                    @if(@$vehicle['posted_date'])
                     <span class="information_text">{{@$vehicle['posted_date']}}</span>
+                    @else
+                    <span class="information_text">--</span>
+                    @endif
                 </div>
 
                 <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
                     <span class="infromation_mainText">Pickup Date</span>
+                    @if(@$vehicle['pickup_date'])
                     <span class="information_text">{{@$vehicle['pickup_date']}}</span>
+                    @else
+                    <span class="information_text">--</span>
+                    @endif
                 </div>
 
                 <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17);
                 border-radius: 10px;width: 90%;margin:6px auto">
                     <span class="infromation_mainText">Pickup Location</span>
+                    @if(@$vehicle['pickup_location'])
                     <span class="information_text">{{@$vehicle['pickup_location']}}</span>
+                    @else
+                    <span class="information_text">--</span>
+                    @endif
                 </div>
 
 
@@ -162,53 +207,83 @@
                     <h4>Vehicle Information</h4>
                 </div>
             </div>
-
             <div class="row" style="padding-bottom:60px">
                 <div class=" col-sm-12 col-md-5 col-lg-5">
-                    <div class="d-flex justify-content-between" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                    <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
                         <span class="infromation_mainText ">Vin</span>
+                        @if(@$vehicle['vin'])
                         <span class="information_text ">{{@$vehicle['vin']}}</span>
+                        @else
+                    <span class="information_text">--</span>
+                    @endif
                     </div>
-                    <div class="d-flex justify-content-between " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                    <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
                         <span class="infromation_mainText ">Year</span>
+                        @if(@$vehicle['year'])
                         <span class="information_text ">{{@$vehicle['year']}}</span>
+                        @else
+                        <span class="information_text">--</span>
+                        @endif
                     </div>
-                    <div class="d-flex justify-content-between " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                    <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
                         <span class="infromation_mainText ">Make</span>
+                        @if(@$vehicle['make'])
                         <span class="information_text ">{{@$vehicle['make']}}</span>
+                        @else
+                    <span class="information_text">--</span>
+                    @endif
                     </div>
-                    <div class="d-flex justify-content-between " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                    <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
                         <span class="infromation_mainText ">Modal</span>
+                        @if(@$vehicle['model'])
                         <span class="information_text ">{{@$vehicle['model']}}</span>
+                        @else
+                    <span class="information_text">--</span>
+                    @endif
                     </div>
-                    <div class="d-flex justify-content-between " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                    <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
                         <span class="infromation_mainText ">Type</span>
+                        @if(@$vehicle['vehicle_type'])
                         <span class="information_text ml-5">{{@$vehicle['vehicle_type']}}</span>
+                        @else
+                    <span class="information_text">--</span>
+                    @endif
                     </div>
-                    <div class="d-flex justify-content-between " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                    <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
                         <span class="infromation_mainText ">Order Date</span>
+                        @if(@$vehicle['sale_date'])
                         <span class="information_text ">{{@$vehicle['sale_date']}}</span>
+                        @else
+                        <span class="information_text">--</span>
+                        @endif
                     </div>
-                    <div class="d-flex justify-content-between " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
+                    <div class="d-flex justify-content-between my-2 py-1" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px; ">
                         <span class="infromation_mainText ">location</span>
+                        @if(@$vehicle['pickup_location'])
                         <span class="information_text ">{{@$vehicle['pickup_location']}}</span>
+                        @else
+                    <span class="information_text">--</span>
+                    @endif
                     </div>
 
-                    <div class="mt-4 " style="width: 80%;margin:4px auto;padding:5px; ">
+                    {{-- <div class="mt-4 " style="width: 80%;margin:4px auto;padding:5px; ">
                         <p style="color:#6D8DA6; ">Note to department</p>
-                    </div>
-                    <div class=" ">
+                    </div> --}}
+                    {{-- <div class=" ">
                         <select name=" " id=" " class="form-control " style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;width: 90%;margin:4px auto;padding:5px;font-size:13px;color:#6D8DA6; ">
                             <option value=" ">Please Select department</option>
                         </select>
-                    </div>
+                    </div> --}}
 
                     <div class="d-flex justify-content-start " style="width: 80%;margin:4px auto;padding:5px; ">
                         <p style="color:#6D8DA6 ">Note</p><br>
                     </div>
                     <div class="d-flex justify-content-start " style="width: 90%;margin:4px auto;padding:5px; ">
                         <textarea name=" " id=" " cols="40" rows="4" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;font-size: 13px;
-                    color: #6D8DA6; ">{{@$vehicle['note']}}</textarea>
+                    color: #6D8DA6; " disabled>@if(@$vehicle['note']){{@$vehicle['note']}}
+                    @else 
+                    --@endif
+                </textarea>
 
                     </div>
 
@@ -225,7 +300,7 @@
 
                 </div>
                 <div class="col-sm-12 col-md-7 col-lg-7 mb-4">
-                    <div class="information_gallary">
+                    <div class="information_gallary" style="margin-top:8px!important;">
                         <div class="gallary_header d-flex">
                             <div class="row">
                                 <div class="col-12">
@@ -347,10 +422,10 @@
                                 </div>
                                 <div class="image_section">
 
-                                    <div class="col-12 changeImages">
+                                    <div class="col-10 mx-auto changeImages">
                                         @if(@$vehicle['pickupimages'])
                                             @foreach(@$vehicle['pickupimages'] as $img)  
-                                            <img src="{{asset($img['name'])}}" alt=""class="item_1" style="width:120px!important;height:80px!important;">
+                                            <img src="{{asset($img['name'])}}" alt=""class="item_1 my-2" style="width:90px!important;height:60px!important;">
                                             @endforeach
                                         @endif
                                     </div>

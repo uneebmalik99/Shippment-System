@@ -18,7 +18,7 @@
     </style> --}}
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-        style="z-index: 9999999999;">
+        style="z-index:99999;">
         <div class="modal-dialog modal-fullscreen scrollable mw-100 m-2 px-3 py-2" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">
@@ -73,7 +73,7 @@
                         <i class="fas fa-car" style="color:#1F689E"></i>
                     </div>
                     <div>
-                        <h2 style="color:#1F689E;font-size:22px" class="px-1">Vehicles</h2>
+                        <h2 style="color:#1F689E;font-size:22px;margin-left: 6px;" class="px-1">Vehicles</h2>
                     </div>
                 </div>
             </div>

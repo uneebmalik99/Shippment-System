@@ -58,11 +58,12 @@
                                         {{-- <form> --}}
                                         <input type="text" class="col-8 general_input" name="vin" id="vin"
                                             value="{{ @$user[0]['vin'] }}">
-                                        <a href="#" onclick="getInfo()" class="prefix text-dark px-2"
+
+                                        <a class="prefix text-dark px-2"
                                             style="text-decoration: none!important;
-                                             background:rgb(175, 197, 234);border-radius:20px;"
-                                            tab="getinfo">
-                                            <span class="text-white px-1" id="getinfo">GetInfo</span>
+                                             background:rgb(175, 197, 234);border-radius:20px;cursor:pointer"
+                                            id="getinfo" onclick="getInfo(this.id)">
+                                            <span class="text-white px-1" id="getinfo"  >GetInfo</span>
                                         </a>
                                         {{-- </form> --}}
                                     </div>

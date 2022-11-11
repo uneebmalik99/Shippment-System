@@ -339,7 +339,7 @@
                         </svg>
                     </div>
                     {{-- <div> --}}
-                        <h2 style="color:#1F689E;font-size:22px" class="px-1">Dashboard</h2>
+                        <h2 style="color:#1F689E;font-size:22px;margin-left: 6px;" class="px-1">Dashboard</h2>
                     {{-- </div> --}}
                 </div>
             </div>

@@ -398,6 +398,7 @@
                 console.log(data);
                 $('.modal-body').html(data);
                 $('#exampleModal').modal('show');
+                $('.modal-title').text('Update Vehicle');
                 $('.user_image').imageUploader({
                     maxFiles: 1
                 });
@@ -477,6 +478,9 @@
     function vehicle_attachments(){
         var formData = new FormData(jQuery('#vehicle_attacments')[0]);
 
+        document.getElementById('load').style.visibility = "visible";
+
+
         $.ajax({
                 method: 'POST',
                 url: '{{ URL::to('admin/vehicles/attachments') }}',
@@ -493,11 +497,16 @@
                         position: 'topCenter',
                         zindex: '9999999999999',
                     });
+                    $('.modal-title').text('New Vehicle');
                 setTimeout(function() {
                     window.location.reload(true);
                 }, 2000);
 
                 },
+                
+                complete: function() {
+        document.getElementById('load').style.visibility = "hidden";
+                    },
                 error: function() {
                     iziToast.warning({
                         message: 'Failed to insert data!',

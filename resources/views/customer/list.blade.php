@@ -32,7 +32,7 @@
                         <i class="fa fa-user" style="color:#1F689E"></i>
                     </div>
                     <div>
-                        <h2 style="color:#1F689E;font-size:22px" class="px-1">Customers</h2>
+                        <h2 style="color:#1F689E;font-size:22px;margin-left: 6px;" class="px-1">Customers</h2>
                     </div>
                 </div>
             </div>

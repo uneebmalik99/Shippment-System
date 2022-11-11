@@ -279,7 +279,7 @@
                                     <div class="col-12 changeImages">
                                         @if(@$vehicle['pickupimages'])
                                             @foreach(@$vehicle['pickupimages'] as $img)  
-                                            <img src="{{asset($img['name'])}}" alt=""class="item_1" style="width:31.5%;">
+                                            <img src="{{asset($img['name'])}}" alt=""class="item_1" style="width:120px!important;height:80px!important;">
                                             @endforeach
                                         @endif
                                     </div>

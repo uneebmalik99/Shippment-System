@@ -237,10 +237,15 @@
             <div class="pcoded-inner-navbar main-menu">
                 <div class="">
                     <div class="main-menu-header">
-                        <img class="img-40" src="{{ asset('assets/images/user.png') }}" alt="User-Profile-Image">
+                        @if(Auth::user()->user_image)
+                            <img  class="img-40" src="{{ asset(Auth::user()->user_image) }}" alt="User-Profile-Image">
+                            @else
+                            <img  class="img-40" src="{{ asset('assets/images/user.png') }}" alt="User-Profile-Image">
+                            @endif
+                        {{-- <img class="img-40" src="{{ asset('assets/images/user.png') }}" alt="User-Profile-Image"> --}}
                         <div class="user-details">
-                            <span>{{ Auth::user()->username }}</span>
-                            <span id="more-details">UX Designer<i class="ti-angle-down"></i></span>
+                            {{-- <span>{{ Auth::user()->username }}</span> --}}
+                            <span id="more-details">{{ Auth::user()->username }} <i class="ti-angle-down"></i></span>
                         </div>
                     </div>
 

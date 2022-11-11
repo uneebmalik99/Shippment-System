@@ -244,11 +244,11 @@
     function hidemodal() {
 
         iziToast.success({
-                    zindex: '9999999999999',
-                    position: 'topCenter',
-                    title: 'Success',
-                    message: 'Finished Customer Creation!',
-                });
+            zindex: '9999999999999',
+            position: 'topCenter',
+            title: 'Success',
+            message: 'Finished Customer Creation!',
+        });
         $('#exampleModal').modal('hide');
 
     }
@@ -256,7 +256,7 @@
 
 {{-- Load Modal --}}
 <script>
-    $('.modal_button').on('click', function(){
+    $('.modal_button').on('click', function() {
         $id = $(this).attr('id');
         $tab = "general";
         if ($id == "customer") {
@@ -272,8 +272,8 @@
                     $('.user_image').imageUploader({
                         maxFiles: 1
                     });
-                    
-                    
+
+
                 }
             });
         } else if ($id == "vehicle") {
@@ -438,103 +438,103 @@
 <script>
     function create_vehicle_form(id) {
         // $('#vehicle_form').on('submit', function(event) {
-            // event.preventDefault();
-            $tab_id = id;
-            $next_tab = $('#' + $tab_id).data('next');
-            var formData = new FormData(jQuery('#vehicle_form')[0]);
-            $.ajax({
-                method: 'POST',
-                url: '{{ URL::to('admin/vehicles/create_form') }}',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(data) {
-
-                    
-                    // iziToast.success({
-                    //     title: 'Vehicle',
-                    //     message: 'Successfully inserted record!',
-                    //     position: 'topCenter',
-                    //     zindex: '9999999999999',
-
-                    // });
-                    $('.modal-body').html(data.view);
-                    $('#exampleModal').modal('show');
-                    $('.vehicle_auction_image').imageUploader({
-                        maxFiles: 15,
-                        imagesInputName: 'auction_images',
+        // event.preventDefault();
+        $tab_id = id;
+        $next_tab = $('#' + $tab_id).data('next');
+        var formData = new FormData(jQuery('#vehicle_form')[0]);
+        $.ajax({
+            method: 'POST',
+            url: '{{ URL::to('admin/vehicles/create_form') }}',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(data) {
 
 
-                    });
-                    $('.billofsales').imageUploader({
-                        maxFiles: 15,
-                        imagesInputName: 'billofsales',
+                // iziToast.success({
+                //     title: 'Vehicle',
+                //     message: 'Successfully inserted record!',
+                //     position: 'topCenter',
+                //     zindex: '9999999999999',
 
-                    });
-                    $('.pickup').imageUploader({
-                        maxFiles: 15,
-                        imagesInputName: 'pickup',
+                // });
+                $('.modal-body').html(data.view);
+                $('#exampleModal').modal('show');
+                $('.vehicle_auction_image').imageUploader({
+                    maxFiles: 15,
+                    imagesInputName: 'auction_images',
 
 
-                    });
-                    $('.originaltitle').imageUploader({
-                        maxFiles: 15,
-                        imagesInputName: 'originaltitle',
+                });
+                $('.billofsales').imageUploader({
+                    maxFiles: 15,
+                    imagesInputName: 'billofsales',
 
-                    });
-                    $('.vehicle_warehouse_image').imageUploader({
-                        maxFiles: 15,
-                        imagesInputName: 'warehouse_images',
+                });
+                $('.pickup').imageUploader({
+                    maxFiles: 15,
+                    imagesInputName: 'pickup',
 
-                    });
-                    $('#' + $tab_id + '_tab').removeClass('next-style');
-                    $('#' + $tab_id + '_tab').addClass('tab_style');
-                    $('#' + $next_tab).addClass('next-style');
-                },
-                error: function(xhr, status, errorThrown) {
 
-                    iziToast.warning({
+                });
+                $('.originaltitle').imageUploader({
+                    maxFiles: 15,
+                    imagesInputName: 'originaltitle',
+
+                });
+                $('.vehicle_warehouse_image').imageUploader({
+                    maxFiles: 15,
+                    imagesInputName: 'warehouse_images',
+
+                });
+                $('#' + $tab_id + '_tab').removeClass('next-style');
+                $('#' + $tab_id + '_tab').addClass('tab_style');
+                $('#' + $next_tab).addClass('next-style');
+            },
+            error: function(xhr, status, errorThrown) {
+
+                iziToast.warning({
                     message: 'Failed! Some fields are missing',
                     position: 'topCenter',
                     zindex: '9999999999999'
                 });
-                   
-                    console.log(xhr.responseJSON['errors']);
-                    if(xhr.responseJSON['errors']['customer_name']){
-                        $('#customer_name_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                    }
-                    if(xhr.responseJSON['errors']['buyer_id']){
-                        $('#buyer_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                    }
-                    if(xhr.responseJSON['errors']['vin']){
-                        $('#vin_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                    }
-                    
-                    
-                    
-                    if(xhr.responseJSON['errors']['auction']){
-                        $('#auction_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                    }
-                    if(xhr.responseJSON['errors']['color']){
-                        $('#color_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                    }
-                    if(xhr.responseJSON['errors']['value']){
-                        $('#value_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                    }
-                    
-                    if(xhr.responseJSON['errors']['weight']){
-                        $('#weight_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                    }
-                    if(xhr.responseJSON['errors']['key']){
-                        $('#key_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                    }
-                    if(xhr.responseJSON['errors']['status']){
-                        $('#status_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                    }
-                    // $('#buyer_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                    // $('#key_error').html('<small style="margin-left:72px">Please Fill*</small>');
+
+                console.log(xhr.responseJSON['errors']);
+                if (xhr.responseJSON['errors']['customer_name']) {
+                    $('#customer_name_error').html('<small style="margin-left:72px">Please Fill*</small>');
                 }
-            });
+                if (xhr.responseJSON['errors']['buyer_id']) {
+                    $('#buyer_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                }
+                if (xhr.responseJSON['errors']['vin']) {
+                    $('#vin_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                }
+
+
+
+                if (xhr.responseJSON['errors']['auction']) {
+                    $('#auction_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                }
+                if (xhr.responseJSON['errors']['color']) {
+                    $('#color_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                }
+                if (xhr.responseJSON['errors']['value']) {
+                    $('#value_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                }
+
+                if (xhr.responseJSON['errors']['weight']) {
+                    $('#weight_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                }
+                if (xhr.responseJSON['errors']['key']) {
+                    $('#key_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                }
+                if (xhr.responseJSON['errors']['status']) {
+                    $('#status_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                }
+                // $('#buyer_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                // $('#key_error').html('<small style="margin-left:72px">Please Fill*</small>');
+            }
+        });
         // });
     }
 </script>
@@ -732,14 +732,17 @@
 </script>
 
 <script>
-    function getInfo() {
+    function getInfo(tab) {
         // vin = KM8JUCAC4DU604504;
+        // tab = $('#getinfo').attr('tab');
+        // document.getElementById('contents').style.visibility = "hidden";
+        document.getElementById('load').style.visibility = "visible";
 
-        tab = $('#getinfo').attr('tab');
-
+        // $("#load").css("display", "block");
+        tab = tab;
+        vin = $('#vin').val();
+        var url = 'https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/' + vin + '?format=json';
         if (tab == 'getinfo') {
-            vin = $('#vin').val();
-            var url = 'https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/' + vin + '?format=json';
             if (vin == '') {
                 alert('Please Enter Vin Number');
             } else {
@@ -749,21 +752,22 @@
                     success: function(data) {
                         console.log(data.Results[0]);
                         vehicle = data.Results[0];
-                        // $('#model').val(vehicle.Model);
-                        // $('#make').val(vehicle.Make);
+
                         $('#year').val(vehicle.ModelYear);
-                        // $('#vehicle_type').val(vehicle.VehicleType);
-                        // $('#weight').val(vehicle.CurbWeightLB);
-                        // $('#value').val(vehicle.BasePrice);
-                        
-                        
-                        $('#model').html('<option value="'+vehicle.Model+'">'+vehicle.Model+'</option>');
-                        $('#make').html('<option value="'+vehicle.Make+'">'+vehicle.Make+'</option>');
+                        $('#model').html('<option value="' + vehicle.Model + '">' + vehicle.Model +
+                            '</option>');
+                        $('#make').html('<option value="' + vehicle.Make + '">' + vehicle.Make +
+                            '</option>');
                         // $('#year').html('<option value="'+vehicle.ModelYear+'">'+vehicle.ModelYear+'</option>');
-                        $('#vehicle_type').html('<option value="'+vehicle.VehicleType+'">'+vehicle.VehicleType+'</option>');
-                        $('#getinfo').attr('tab', 'reset');
+                        $('#vehicle_type').html('<option value="' + vehicle.VehicleType + '">' + vehicle
+                            .VehicleType + '</option>');
+                        $('#getinfo').attr('id', 'reset');
                         $('#getinfo').text('Reset');
-                        
+
+                    },
+                    complete: function() {
+        document.getElementById('load').style.visibility = "hidden";
+
                     }
                 });
             }
@@ -775,8 +779,10 @@
             $('#vehicle_type').val('');
             $('#weight').val('');
             $('#value').val('');
-            $('#getinfo').attr('tab', 'getinfo');
+            $('#getinfo').attr('id', 'getinfo');
             $('#getinfo').text('GetInfo');
+        document.getElementById('load').style.visibility = "hidden";
+
 
 
         }
@@ -787,213 +793,278 @@
 {{-- add records --}}
 <script>
     $("#popup_button").click(function() {
-        var tab  = $(this).attr("tab"); 
-        var id  = $(this).attr("id"); 
-        $.ajax({  
+        var tab = $(this).attr("tab");
+        var id = $(this).attr("id");
+        $.ajax({
             type: 'post',
             url: '{{ route('master.showmodel') }}',
-                data:{tab :tab},  
-                success:function(data){  
-                    $('#common_body').html(data);  
-                    $('#commonmodal').modal("show");
-                    $("#close_modal").click(function() {
-                        $('#commonmodal').modal("hide");
-                    }); 
-                    $(".add-more").click(function() {
-                        current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control common_input" placeholder=""><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
-                        $('.add_data_section').append(current_div);
-                    });
-                    // for name popup insert record
-                    $("#data_save").click(function() {
-                        var formData = new FormData($('#common_fields')[0]);
-                        //  console.log(...formData);
-                         formData.append('tab', tab);
-                        //  formData.append('id', data);
-                        $.ajax({
-                            method: 'post',
-                            url: '{{ route('master.save') }}',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            success:function(data){
-                                if(data=='success'){
-                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
-                                    $('#commonmodal').modal("hide");
-                                    location.reload();
-                                }
-                                if(data=='recordexist'){
-                                    iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
-                                    $('#commonmodal').modal("hide");
-                                    // location.reload();
-                                }
-                            },  
-                        }); 
-                    }); 
-                    // for country,state,port,terminal insert record
-                    $("#record_add").click(function() {
-                        var formData = new FormData($('#common_fields')[0]);
-                        //  console.log(...formData);
-                         formData.append('tab', tab);
-                        //  formData.append('id', data);
-                        $.ajax({
-                            method: 'post',
-                            url: '{{ route('master.save') }}',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            success:function(data){
-                                if(data=='success'){
-                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
-                                    $('#commonmodal').modal("hide");
-                                    location.reload();
-                                }
-                                if(data=='recordexist'){
-                                    iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
-                                    $('#commonmodal').modal("hide");
-                                    // location.reload();
-                                }
-                            },  
-                        }); 
-                    }); 
-                    $("#save_mms").click(function() {
-                        var formData = new FormData($('#common_fields')[0]);
-                        //  console.log(...formData);
-                         formData.append('tab', tab);
-                        //  formData.append('id', data);
-                        $.ajax({
-                            method: 'post',
-                            url: '{{ route('master.save') }}',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            success:function(data){
-                                if(data=='success'){
-                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
-                                    $('#commonmodal').modal("hide");
-                                    location.reload();
-                                }
-                                if(data=='recordexist'){
-                                    iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
-                                    $('#commonmodal').modal("hide");
-                                    // location.reload();
-                                }
-                            },  
-                        }); 
-                    }); 
-                }  
-           }); 
-    }); 
-</script>
-
-{{-- make records --}}
-<script>
-    $("#makepopup").click(function() {
-        var tab  = $(this).attr("tab"); 
-        // alert(tab);
-        $.ajax({  
-            type: 'post',
-            url: '{{ route('make.list') }}',
-                data:{tab :tab},  
-                success:function(data){  
-                $('#common_body').html(data);  
+            data: {
+                tab: tab
+            },
+            success: function(data) {
+                $('#common_body').html(data);
                 $('#commonmodal').modal("show");
                 $("#close_modal").click(function() {
                     $('#commonmodal').modal("hide");
                 });
                 $(".add-more").click(function() {
-                    current_div = '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control make_input" placeholder="Enter Company Name"><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                    current_div =
+                        '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control common_input" placeholder=""><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
+                    $('.add_data_section').append(current_div);
+                });
+                // for name popup insert record
+                $("#data_save").click(function() {
+                    var formData = new FormData($('#common_fields')[0]);
+                    //  console.log(...formData);
+                    formData.append('tab', tab);
+                    //  formData.append('id', data);
+                    $.ajax({
+                        method: 'post',
+                        url: '{{ route('master.save') }}',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(data) {
+                            if (data == 'success') {
+                                iziToast.success({
+                                    timeout: 5000,
+                                    icon: 'fa fa-check',
+                                    title: 'OK',
+                                    message: 'Successfully Record Saved'
+                                });
+                                $('#commonmodal').modal("hide");
+                                location.reload();
+                            }
+                            if (data == 'recordexist') {
+                                iziToast.error({
+                                    timeout: 10000,
+                                    icon: 'fa fa-warning',
+                                    title: 'Error',
+                                    message: 'Record Already Exist'
+                                });
+                                $('#commonmodal').modal("hide");
+                                // location.reload();
+                            }
+                        },
+                    });
+                });
+                // for country,state,port,terminal insert record
+                $("#record_add").click(function() {
+                    var formData = new FormData($('#common_fields')[0]);
+                    //  console.log(...formData);
+                    formData.append('tab', tab);
+                    //  formData.append('id', data);
+                    $.ajax({
+                        method: 'post',
+                        url: '{{ route('master.save') }}',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(data) {
+                            if (data == 'success') {
+                                iziToast.success({
+                                    timeout: 5000,
+                                    icon: 'fa fa-check',
+                                    title: 'OK',
+                                    message: 'Successfully Record Saved'
+                                });
+                                $('#commonmodal').modal("hide");
+                                location.reload();
+                            }
+                            if (data == 'recordexist') {
+                                iziToast.error({
+                                    timeout: 10000,
+                                    icon: 'fa fa-warning',
+                                    title: 'Error',
+                                    message: 'Record Already Exist'
+                                });
+                                $('#commonmodal').modal("hide");
+                                // location.reload();
+                            }
+                        },
+                    });
+                });
+                $("#save_mms").click(function() {
+                    var formData = new FormData($('#common_fields')[0]);
+                    //  console.log(...formData);
+                    formData.append('tab', tab);
+                    //  formData.append('id', data);
+                    $.ajax({
+                        method: 'post',
+                        url: '{{ route('master.save') }}',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(data) {
+                            if (data == 'success') {
+                                iziToast.success({
+                                    timeout: 5000,
+                                    icon: 'fa fa-check',
+                                    title: 'OK',
+                                    message: 'Successfully Record Saved'
+                                });
+                                $('#commonmodal').modal("hide");
+                                location.reload();
+                            }
+                            if (data == 'recordexist') {
+                                iziToast.error({
+                                    timeout: 10000,
+                                    icon: 'fa fa-warning',
+                                    title: 'Error',
+                                    message: 'Record Already Exist'
+                                });
+                                $('#commonmodal').modal("hide");
+                                // location.reload();
+                            }
+                        },
+                    });
+                });
+            }
+        });
+    });
+</script>
+
+{{-- make records --}}
+<script>
+    $("#makepopup").click(function() {
+        var tab = $(this).attr("tab");
+        // alert(tab);
+        $.ajax({
+            type: 'post',
+            url: '{{ route('make.list') }}',
+            data: {
+                tab: tab
+            },
+            success: function(data) {
+                $('#common_body').html(data);
+                $('#commonmodal').modal("show");
+                $("#close_modal").click(function() {
+                    $('#commonmodal').modal("hide");
+                });
+                $(".add-more").click(function() {
+                    current_div =
+                        '<div class="input-group mb-3 after-add-more" style="border: 1px solid rgba(31, 104, 158, 0.26); filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));display:flex;"><input type="text" name="addmore[]" class="form-control make_input" placeholder="Enter Company Name"><div class="input-group-append"><button class="add-more" type="button"style="background: none;outline:none !important;border:none !important"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"> <g filter="url(#filter0_d_2121_81)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8C14.0295 8 10 12.0295 10 17C10 21.9705 14.0295 26 19 26C23.9705 26 28 21.9705 28 17C28 12.0295 23.9705 8 19 8ZM19.8182 20.2727C19.8182 20.4897 19.732 20.6978 19.5785 20.8513C19.4251 21.0047 19.217 21.0909 19 21.0909C18.783 21.0909 18.5749 21.0047 18.4215 20.8513C18.268 20.6978 18.1818 20.4897 18.1818 20.2727V17.8182H15.7273C15.5103 17.8182 15.3022 17.732 15.1487 17.5785C14.9953 17.4251 14.9091 17.217 14.9091 17C14.9091 16.783 14.9953 16.5749 15.1487 16.4215C15.3022 16.268 15.5103 16.1818 15.7273 16.1818H18.1818V13.7273C18.1818 13.5103 18.268 13.3022 18.4215 13.1487C18.5749 12.9953 18.783 12.9091 19 12.9091C19.217 12.9091 19.4251 12.9953 19.5785 13.1487C19.732 13.3022 19.8182 13.5103 19.8182 13.7273V16.1818H22.2727C22.4897 16.1818 22.6978 16.268 22.8513 16.4215C23.0047 16.5749 23.0909 16.783 23.0909 17C23.0909 17.217 23.0047 17.4251 22.8513 17.5785C22.6978 17.732 22.4897 17.8182 22.2727 17.8182H19.8182V20.2727Z"fill="#1F689E" /> </g><defs> <filter id="filter0_d_2121_81" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="2" /><feGaussianBlur stdDeviation="5" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix"values="0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0 0.533333 0 0 0 0.2 0" /><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2121_81" /><feBlend mode="normal" in="SourceGraphic"in2="effect1_dropShadow_2121_81" result="shape" /> </filter></defs></svg></button> </div> </div>';
                     $('.add_data_section').append(current_div);
                 });
                 // master.makeadd
                 $("#input_make").on("change", function(e) {
-                    var tab  = $(this).attr("tab"); 
+                    var tab = $(this).attr("tab");
                     var model_id = $("#input_make").val();
                     // alert(tab);alert(model_id);
-                    $.ajax({  
-                    type: 'post',
-                    url: '{{ route('master.seriesadd') }}',
-                    data:{
-                        tab :tab,
-                        model_id:model_id,
-                    },  
-                    success:function(data){  
-                        // console.log(data)
-                        html ='<div class="form-group" id="model_section">';
-                        html += '<select class="form-control" name="model"  id="input_model" tab="model">';
-                        html += '<option disabled selected>select model</option>';
-                        data.forEach(function(key, value) {
-                            html +='<option value="'+key.id+'">' +key.name+ '</option>';
-                        });
-                        html += '</select></div>';
-                        $('#model_section').empty().append(html);
-                        
-                        $("#input_model").on("change", function(e) {
-                                var tab  = $(this).attr("tab"); 
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ route('master.seriesadd') }}',
+                        data: {
+                            tab: tab,
+                            model_id: model_id,
+                        },
+                        success: function(data) {
+                            // console.log(data)
+                            html =
+                            '<div class="form-group" id="model_section">';
+                            html +=
+                                '<select class="form-control" name="model"  id="input_model" tab="model">';
+                            html +=
+                                '<option disabled selected>select model</option>';
+                            data.forEach(function(key, value) {
+                                html += '<option value="' + key.id +
+                                    '">' + key.name + '</option>';
+                            });
+                            html += '</select></div>';
+                            $('#model_section').empty().append(html);
+
+                            $("#input_model").on("change", function(e) {
+                                var tab = $(this).attr("tab");
                                 var model_id = $("#input_model").val();
                                 // alert(model_id);alert(tab);
-                                $.ajax({  
+                                $.ajax({
                                     type: 'post',
                                     url: '{{ route('master.seriesadd') }}',
-                                    data:{
-                                    tab :tab,
-                                    model_id:model_id,
-                                },
-                                success:function(data){  
-                                    console.log(data)
-                                    html ='<div class="form-group" id="series_section">';
-                                    html += '<select class="form-control" name="series" id="input_series" tab="series">';
-                                    data.forEach(function(key, value) {
-                                        html +='<option value="' +key.id+ '">' +key.name+ '</option>';
+                                    data: {
+                                        tab: tab,
+                                        model_id: model_id,
+                                    },
+                                    success: function(data) {
+                                        console.log(data)
+                                        html =
+                                            '<div class="form-group" id="series_section">';
+                                        html +=
+                                            '<select class="form-control" name="series" id="input_series" tab="series">';
+                                        data.forEach(
+                                            function(
+                                                key,
+                                                value) {
+                                                html +=
+                                                    '<option value="' +
+                                                    key
+                                                    .id +
+                                                    '">' +
+                                                    key
+                                                    .name +
+                                                    '</option>';
+                                            });
+                                        html +=
+                                            '</select></div>';
+                                        $('#series_section')
+                                            .empty().append(
+                                                html);
+                                    }
+                                });
+
+                            });
+                        }
+                    });
+
+
+                    $("#make_save").click(function() {
+
+                        var formData = new FormData($('#make_fields')[0]);
+                        //  console.log(...formData);return
+                        formData.append('tab', tab);
+                        formData.append('id', data);
+                        $.ajax({
+                            method: 'post',
+                            url: '{{ route('add.make') }}',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(data) {
+                                if (data == 'success') {
+                                    iziToast.success({
+                                        timeout: 5000,
+                                        icon: 'fa fa-check',
+                                        title: 'OK',
+                                        message: 'Successfully Record Saved'
                                     });
-                                    html += '</select></div>';
-                                    $('#series_section').empty().append(html);
+                                    $('#commonmodal').modal("hide");
+                                    location.reload();
                                 }
-                            });   
+                                if (data == 'recordexist') {
+                                    iziToast.error({
+                                        timeout: 10000,
+                                        icon: 'fa fa-warning',
+                                        title: 'Error',
+                                        message: 'Record Already Exist'
+                                    });
+                                    $('#commonmodal').modal("hide");
+                                    // location.reload();
+                                }
+                            },
+                        });
+                    });
 
-                        }); 
-                    }
+
                 });
-
-                 
-                $("#make_save").click(function() {
-                    
-                var formData = new FormData($('#make_fields')[0]);
-                //  console.log(...formData);return
-                    formData.append('tab', tab);
-                    formData.append('id', data);
-                $.ajax({
-                    method: 'post',
-                    url: '{{ route('add.make') }}',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success:function(data){
-                        if(data=='success'){
-                            iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Saved'});
-                            $('#commonmodal').modal("hide");
-                            location.reload();
-                        }
-                        if(data=='recordexist'){
-                            iziToast.error({timeout: 10000,icon: 'fa fa-warning', title: 'Error', message: 'Record Already Exist'});
-                            $('#commonmodal').modal("hide");
-                            // location.reload();
-                        }
-                    },  
-                }); 
-            });
-
-
-                }); 
-            }  
-        }); 
-    }); 
+            }
+        });
+    });
 </script>
 
 
 {{-- delete records --}}
 <script>
-    function deletemaster(id,tab){
-            iziToast.show({
+    function deletemaster(id, tab) {
+        iziToast.show({
             theme: 'dark',
             icon: 'icon-trash',
             title: '',
@@ -1002,180 +1073,208 @@
             position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
             progressBarColor: 'rgb(0, 255, 184)',
             buttons: [
-                ['<button>Ok</button>', function (instance, toast) {
-                    $.ajax({  
+                ['<button>Ok</button>', function(instance, toast) {
+                    $.ajax({
                         type: 'post',
                         url: '{{ route('master.delete') }}',
-                            data:{
-                                tab :tab,
-                                id:id,
-                            },  
-                            success:function(data){
-                                if(data=='deleted'){
-                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Deleted'});
-                                    $('#commonmodal').modal("hide");
-                                    location.reload();
-                                }
-                            },  
-                    }); 
+                        data: {
+                            tab: tab,
+                            id: id,
+                        },
+                        success: function(data) {
+                            if (data == 'deleted') {
+                                iziToast.success({
+                                    timeout: 5000,
+                                    icon: 'fa fa-check',
+                                    title: 'OK',
+                                    message: 'Successfully Record Deleted'
+                                });
+                                $('#commonmodal').modal("hide");
+                                location.reload();
+                            }
+                        },
+                    });
                 }, true], // true to focus
-                ['<button>Close</button>', function (instance, toast) {
+                ['<button>Close</button>', function(instance, toast) {
                     instance.hide({
                         transitionOut: 'fadeOutUp',
-                        onClosing: function(instance, toast, closedBy){
-                            console.info('closedBy: ' + closedBy); // The return will be: 'closedBy: buttonName'
+                        onClosing: function(instance, toast, closedBy) {
+                            console.info('closedBy: ' +
+                            closedBy); // The return will be: 'closedBy: buttonName'
                         }
                     }, toast, 'buttonName');
                 }]
             ],
-            onOpening: function(instance, toast){
+            onOpening: function(instance, toast) {
                 console.info('callback abriu!');
             },
-            onClosing: function(instance, toast, closedBy){
+            onClosing: function(instance, toast, closedBy) {
                 console.info('closedBy: ' + closedBy); // tells if it was closed by 'drag' or 'button'
             }
         });
-       
+
     }
 </script>
 
 {{-- update saved records --}}
 <script>
-    function updatemaster(id,tab){
+    function updatemaster(id, tab) {
         // alert(id);
         // alert(tab);
-        $.ajax({  
+        $.ajax({
             type: 'post',
             url: '{{ route('update.master') }}',
-                data:{tab :tab,id:id},  
-                success:function(data){  
-                    $('#common_body').html(data);  
-                    $('#commonmodal').modal("show");
-                    $("#close_modal").click(function() {
-                        $('#commonmodal').modal("hide");
+            data: {
+                tab: tab,
+                id: id
+            },
+            success: function(data) {
+                $('#common_body').html(data);
+                $('#commonmodal').modal("show");
+                $("#close_modal").click(function() {
+                    $('#commonmodal').modal("hide");
+                });
+                // update record 
+                $("#data_save").click(function() {
+                    var name = $("#input_value").val();
+                    var id = $(this).val();
+                    // alert(name);
+                    // alert(id);
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ route('update.save') }}',
+                        data: {
+                            tab: tab,
+                            id: id,
+                            name: name,
+                        },
+                        success: function(data) {
+                            if (data == 'updated') {
+                                iziToast.success({
+                                    timeout: 5000,
+                                    icon: 'fa fa-check',
+                                    title: 'OK',
+                                    message: 'Successfully Record Updated'
+                                });
+                                $('#commonmodal').modal("hide");
+                                location.reload();
+                            }
+                        },
                     });
-                    // update record 
-                    $("#data_save").click(function() {
-                        var name  = $("#input_value").val(); 
-                        var id    = $(this).val();
-                        // alert(name);
-                        // alert(id);
-                        $.ajax({  
-                            type: 'post',
-                            url: '{{ route('update.save') }}',
-                                data:{
-                                    tab :tab,
-                                    id:id,
-                                    name:name,
-                                },  
-                                success:function(data){
-                                if(data=='updated'){
-                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Updated'});
-                                    $('#commonmodal').modal("hide");
-                                    location.reload();
-                                }
-                            },  
-                        }); 
-                    }); 
-                    // update country state port terminal
-                    $("#record_add").click(function() {
-                        var country  = $("#country").val(); 
-                        var state  = $("#state").val(); 
-                        var port  = $("#port").val(); 
-                        var terminal  = $("#terminal").val(); 
-                        var id    = $(this).val();
-                        // alert(country);
-                        // alert(id);
-                        $.ajax({  
-                            type: 'post',
-                            url: '{{ route('update.save') }}',
-                                data:{
-                                    tab :tab,
-                                    id:id,
-                                    country:country,
-                                    state:state,
-                                    port:port,
-                                    terminal:terminal,
-                                },  
-                                success:function(data){
-                                if(data=='updated'){
-                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Updated'});
-                                    $('#commonmodal').modal("hide");
-                                    location.reload();
-                                }
-                            },  
-                        }); 
-                    }); 
-                    // update make model series 
-                    $(".update_mms").click(function() {
-                        var make  = $("#make").val(); 
-                        var model  = $("#model").val(); 
-                        var series  = $("#series").val(); 
-                        var id    = $(this).val();
-                        // alert(country);
-                        // alert(id);
-                        $.ajax({  
-                            type: 'post',
-                            url: '{{ route('update.save') }}',
-                                data:{
-                                    tab :tab,
-                                    id:id,
-                                    make:make,
-                                    model:model,
-                                    series:series,
-                                },  
-                                success:function(data){
-                                if(data=='updated'){
-                                    iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Record Updated'});
-                                    $('#commonmodal').modal("hide");
-                                    location.reload();
-                                }
-                            },  
-                        }); 
-                    }); 
-                }  
-           }); 
+                });
+                // update country state port terminal
+                $("#record_add").click(function() {
+                    var country = $("#country").val();
+                    var state = $("#state").val();
+                    var port = $("#port").val();
+                    var terminal = $("#terminal").val();
+                    var id = $(this).val();
+                    // alert(country);
+                    // alert(id);
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ route('update.save') }}',
+                        data: {
+                            tab: tab,
+                            id: id,
+                            country: country,
+                            state: state,
+                            port: port,
+                            terminal: terminal,
+                        },
+                        success: function(data) {
+                            if (data == 'updated') {
+                                iziToast.success({
+                                    timeout: 5000,
+                                    icon: 'fa fa-check',
+                                    title: 'OK',
+                                    message: 'Successfully Record Updated'
+                                });
+                                $('#commonmodal').modal("hide");
+                                location.reload();
+                            }
+                        },
+                    });
+                });
+                // update make model series 
+                $(".update_mms").click(function() {
+                    var make = $("#make").val();
+                    var model = $("#model").val();
+                    var series = $("#series").val();
+                    var id = $(this).val();
+                    // alert(country);
+                    // alert(id);
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ route('update.save') }}',
+                        data: {
+                            tab: tab,
+                            id: id,
+                            make: make,
+                            model: model,
+                            series: series,
+                        },
+                        success: function(data) {
+                            if (data == 'updated') {
+                                iziToast.success({
+                                    timeout: 5000,
+                                    icon: 'fa fa-check',
+                                    title: 'OK',
+                                    message: 'Successfully Record Updated'
+                                });
+                                $('#commonmodal').modal("hide");
+                                location.reload();
+                            }
+                        },
+                    });
+                });
+            }
+        });
     }
 </script>
 
 {{-- status check --}}
 <script>
-    $('input[type=checkbox].status_change').change(function () {
-        var id = $(this).attr("id"); 
-        var tab = $(this).attr("tab"); 
-        var status  = $(this).val(); 
-        $.ajax({  
+    $('input[type=checkbox].status_change').change(function() {
+        var id = $(this).attr("id");
+        var tab = $(this).attr("tab");
+        var status = $(this).val();
+        $.ajax({
             type: 'post',
             url: '{{ route('master.status') }}',
-                data:{
-                    tab :tab,
-                    status:status,
-                    id:id
-                },  
-                success:function(data){  
-                    if(data=='updated'){
-                        iziToast.success({timeout: 5000, icon: 'fa fa-check', title: 'OK', message: 'Successfully Status Updated'});
-                        $('#commonmodal').modal("hide");
-                        location.reload();
-                    }
+            data: {
+                tab: tab,
+                status: status,
+                id: id
+            },
+            success: function(data) {
+                if (data == 'updated') {
+                    iziToast.success({
+                        timeout: 5000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Status Updated'
+                    });
+                    $('#commonmodal').modal("hide");
+                    location.reload();
                 }
+            }
         });
     });
-
 </script>
 
 
 <script>
-document.onreadystatechange = function () {
-var state = document.readyState
-if (state == 'interactive') {
-   document.getElementById('contents').style.visibility="hidden";
-} else if (state == 'complete') {
-  setTimeout(function(){
-     document.getElementById('interactive');
-     document.getElementById('load').style.visibility="hidden";
-     document.getElementById('contents').style.visibility="visible";
-  },1000);
-}
-}
+    document.onreadystatechange = function() {
+        var state = document.readyState
+        if (state == 'interactive') {
+            document.getElementById('contents').style.visibility = "hidden";
+        } else if (state == 'complete') {
+            setTimeout(function() {
+                document.getElementById('interactive');
+                document.getElementById('load').style.visibility = "hidden";
+                document.getElementById('contents').style.visibility = "visible";
+            }, 1000);
+        }
+    }
 </script>

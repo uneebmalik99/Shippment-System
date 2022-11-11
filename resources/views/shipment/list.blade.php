@@ -63,7 +63,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                         <i class="fas fa-shipping-fast" style="color:#1F689E"></i>
                     </div>
                     <div>
-                        <h2 style="color:#1F689E;font-size:22px" class="px-1">Shipments</h2>
+                        <h2 style="color:#1F689E;font-size:22px;margin-left: 6px;" class="px-1">Shipments</h2>
                     </div>
                 </div>
             </div>
