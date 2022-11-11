@@ -542,7 +542,9 @@ $.ajax({
         var days = Math.abs(Difference_In_Days);
         $('#days').val(days);
     }
-
    
-
+function showAsMainImage(src){
+    $('#main_image_box').attr('src',src);
+    $('#download_image').attr('href',src);
+}
 </script>

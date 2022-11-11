@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-12 mx-auto">
                 <div class="d-flex dashboard_heading" style="margin-top:-40px!important">
-                    <div style="margin-top:1px!important;">
+                    <div>
                         <i class="fa fa-user" style="color:#1F689E"></i>
                     </div>
                     <div>
@@ -292,6 +292,7 @@
                         console.log(data);
                         $('.modal-body').html(data);
                         $('#exampleModal').modal('show');
+                        $('#exampleModalLabel').text('Update Customer');
 
                         $('.user_image').imageUploader({
                             maxFiles: 1

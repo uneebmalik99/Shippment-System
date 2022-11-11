@@ -622,7 +622,7 @@ class VehicleController extends Controller
         $action = url($this->action . '/profile/');
         $data = [
             'vehicle' => Vehicle::with(['pickupimages', 'vehicle_status'])->find($id)->toArray(),
-            "page_title" => "Profile Info",
+            "page_title" => "Vehicle Info",
             "page_heading" => "Profile " . $this->singular,
             "button_text" => "Update ",
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),

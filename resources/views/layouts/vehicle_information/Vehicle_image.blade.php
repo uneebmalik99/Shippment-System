@@ -1,5 +1,5 @@
 <div class="w-100  p-3" style="position: relative;">
-    <img src="{{asset(@$images[0]['name'])}}" alt=""class="img_fluid mx-auto w-100" style="height:230px!important;border-radius: 10px!important;">
+    <img src="{{asset(@$images[0]['name'])}}" alt=""class="img_fluid mx-auto w-100" style="height:230px!important;border-radius: 10px!important;" id="main_image_box">
     <a class="bottom_button">
         <svg width="39" height="25" viewBox="0 0 39 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="39" height="22" rx="5" fill="white" fill-opacity="0.3"/>
@@ -67,7 +67,7 @@
                 
         </a>
         <br>
-        <a href="{{asset(@$images[0]['name'])}}" download="{{@$images[0]['thumbnail']}}" style="text-decoration: none">
+        <a href="{{asset(@$images[0]['name'])}}" download="{{@$images[0]['thumbnail']}}" style="text-decoration: none" id="download_image">
             <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="23" height="22" rx="5" fill="white" fill-opacity="0.3"/>
                 <g filter="url(#filter0_d_0_1)">

@@ -207,6 +207,8 @@
                         zindex: '9999999999999',
 
                     });
+                    $('#exampleModalLabel').text('New Customer');
+
 
                     $('#exampleModal').modal('hide');
                     location.reload();

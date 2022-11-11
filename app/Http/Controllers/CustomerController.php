@@ -302,7 +302,7 @@ class CustomerController extends Controller
         $action = url($this->action . '/profile/');
         $data = [
             'user' => User::find($id),
-            "page_title" => "Profile " . $this->singular,
+            "page_title" => "Customer Profile",
             "page_heading" => "Profile " . $this->singular,
             "button_text" => "Update ",
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
