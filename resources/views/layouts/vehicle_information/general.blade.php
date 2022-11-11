@@ -422,10 +422,10 @@
                                 </div>
                                 <div class="image_section">
 
-                                    <div class="col-10 mx-auto changeImages">
+                                    <div class="mx-auto changeImages" style="margin-left:35px!important;">
                                         @if(@$vehicle['pickupimages'])
                                             @foreach(@$vehicle['pickupimages'] as $img)  
-                                            <img src="{{asset($img['name'])}}" alt=""class="item_1 my-2" style="width:90px!important;height:60px!important;">
+                                            <img src="{{asset($img['name'])}}" alt=""class="item_1 my-1" style="width:90px!important;height:60px!important;">
                                             @endforeach
                                         @endif
                                     </div>
