@@ -326,6 +326,7 @@
 
                                 </div>
 
+                                @if(@$vehicle['pickupimages'])
                                 <div class="col-12 main_image">
                                     <div class="w-100  p-3" style="position: relative;">
                                         <img src="{{asset(@$vehicle['pickupimages'][0]['name'])}}" alt=""class="img_fluid mx-auto w-100" style="height:230px!important;border-radius: 10px!important;" id="main_image_box">
@@ -420,6 +421,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                @else
+                                <h6 class="text-center mt-5 w-100" style="color:gray">No Image Found</h6>
+                                @endif
+
                                 <div class="image_section">
 
                                     <div class="mx-auto changeImages" style="margin-left:35px!important;">
@@ -435,7 +440,8 @@
                            
                         </div>
                     </div>
-                    <div class="row mt-4">
+                    @if(@$vehicle['pickupimages'])
+                    <div class="row mt-4 showhide">
                         <div class="col-12 d-flex justify-content-center ">
                         <a href="#" id="download_all">
                             <button style="background: rgba(37, 101, 4, 0.72); border-radius: 6px;border:none;color:white;transform: skew(-30deg);">
@@ -445,6 +451,7 @@
                         </button>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
 

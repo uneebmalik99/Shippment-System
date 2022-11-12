@@ -621,8 +621,8 @@ class VehicleController extends Controller
     {
         $action = url($this->action . '/profile/');
         $data = [
-            'vehicle' => Vehicle::with(['pickupimages', 'vehicle_status'])->find($id)->toArray(),
-            "page_title" => "Vehicle Info",
+            'vehicle' => Vehicle::with(['pickupimages', 'vehicle_status', 'billofsales'])->find($id)->toArray(),
+            "page_title" => "Vehicle Detail",
             "page_heading" => "Profile " . $this->singular,
             "button_text" => "Update ",
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
@@ -652,7 +652,7 @@ class VehicleController extends Controller
 
         $data = [];
 
-        $data['vehicle'] = Vehicle::with(['pickupimages', 'vehicle_status'])->find($id)->toArray();
+        $data['vehicle'] = Vehicle::with(['pickupimages', 'vehicle_status', 'billofsales', 'originaltitles'])->find($id)->toArray();
         // dd($data['vehicle']);
 
         $output = view('layouts.vehicle_information.' . $tab, $data)->render();

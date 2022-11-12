@@ -737,10 +737,10 @@
         // tab = $('#getinfo').attr('tab');
         // document.getElementById('contents').style.visibility = "hidden";
         document.getElementById('load').style.visibility = "visible";
-
         // $("#load").css("display", "block");
         tab = tab;
         vin = $('#vin').val();
+        // alert(vin);
         var url = 'https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/' + vin + '?format=json';
         if (tab == 'getinfo') {
             if (vin == '') {
@@ -753,6 +753,19 @@
                         console.log(data.Results[0]);
                         vehicle = data.Results[0];
 
+                        if( vehicle.Model == '' && vehicle.Make == '' ){
+                            iziToast.error({
+                                    position:'topCenter',
+                                    timeout: 10000,
+                                    icon: 'fa fa-warning',
+                                    title: 'Error',
+                                    message: 'No Vehicle Found!',
+                                });
+                        }
+                        else{
+
+                        
+
                         $('#year').val(vehicle.ModelYear);
                         $('#model').html('<option value="' + vehicle.Model + '">' + vehicle.Model +
                             '</option>');
@@ -763,6 +776,7 @@
                             .VehicleType + '</option>');
                         $('#getinfo').attr('id', 'reset');
                         $('#getinfo').text('Reset');
+                        }
 
                     },
                     complete: function() {
@@ -779,7 +793,7 @@
             $('#vehicle_type').val('');
             $('#weight').val('');
             $('#value').val('');
-            $('#getinfo').attr('id', 'getinfo');
+            $('.getinf').attr('id', 'getinfo');
             $('#getinfo').text('GetInfo');
         document.getElementById('load').style.visibility = "hidden";
 

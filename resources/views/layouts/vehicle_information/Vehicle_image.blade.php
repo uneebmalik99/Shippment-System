@@ -1,3 +1,4 @@
+@if(@$images)
 <div class="w-100  p-3" style="position: relative;">
     <img src="{{asset(@$images[0]['name'])}}" alt=""class="img_fluid mx-auto w-100" style="height:230px!important;border-radius: 10px!important;" id="main_image_box">
     <a class="bottom_button">
@@ -90,3 +91,13 @@
         </a>
     </div>
 </div>
+
+<script>
+    $('.showhide').css('display', 'block');
+</script>
+@else
+<h6 class="text-center mt-5" style="color:gray">No Image Found</h6>
+<script>
+    $('.showhide').css('display', 'none');
+</script>
+@endif

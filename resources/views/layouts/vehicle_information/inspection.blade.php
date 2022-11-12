@@ -231,7 +231,7 @@
                                     </div>
 
                                 </div>
-
+                                @if(@$vehicle['pickupimages'])
                                 <div class="col-12 main_image">
                                     <div class="w-100  p-3" style="position: relative;">
                                         <img src="{{ asset(@$vehicle['pickupimages'][0]['name']) }}"
@@ -377,6 +377,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                @else
+                                <h6 class="text-center mt-5 w-100" style="color:gray">No Image Found</h6>
+                                @endif
                                 <div class="image_section">
 
                                     <div class="col-12 changeImages">
@@ -393,6 +396,8 @@
 
                         </div>
                     </div>
+
+                    @if(@$vehicle['pickupimages'])
                     <div class="row mt-4">
                         <div class="col-12 d-flex justify-content-center ">
                             <a href="#" id="download_all">
@@ -404,6 +409,7 @@
                                 </button>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
 

@@ -145,8 +145,11 @@
                         style="border-bottom:2px solid #3181B9;">
                         <b>Bill Of Sales</b>
                     </div>
-                    <div class="billofsales" name="billofsales[]" style="padding: .5rem .5rem;">
-                    </div>
+                    <input type="file" name="billofsales[]"
+                        accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
+                    text/plain, application/pdf" class="p-5">
+                    {{-- <div class="billofsales" name="billofsales[]" style="padding: .5rem .5rem;">
+                    </div> --}}
                     {{-- <div class="d-flex justify-content-center">
                         <div class="p-3 col-6">
                             <button type="button" onclick="billofsales()" class="btn btn_image col-12 d-flex"
@@ -181,7 +184,10 @@
                     style="border-bottom:2px solid #3181B9;">
                         <b>Original Title</b>
                     </div>
-                    <div class="originaltitle" name="originaltitle[]" style="padding: .5rem .5rem;">
+                    <input type="file" name="originaltitle[]"
+                        accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
+                    text/plain, application/pdf" class="p-5">
+                    {{-- <div class="originaltitle" name="originaltitle[]" style="padding: .5rem .5rem;"> --}}
                     </div>
                     {{-- <div class="d-flex justify-content-center">
                         <div class="p-3 col-6">
