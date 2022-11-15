@@ -62,17 +62,17 @@ class Vehicle extends Model
 
     public function auction_image()
     {
-        return $this->hasMany('App\Models\AuctionImage');
+        return $this->hasMany('App\Models\AuctionImage', 'vehicle_id', 'id');
     }
 
     public function warehouse_image()
     {
-        return $this->hasMany('App\Models\WarehouseImage');
+        return $this->hasMany('App\Models\WarehouseImage', 'vehicle_id', 'id');
     }
 
     public function auction_invoice()
     {
-        return $this->hasOne('App\Models\AuctionInvoice');
+        return $this->hasOne('App\Models\AuctionInvoice', 'vehicle_id', 'id');
     }
 
     public function shipment()
@@ -82,16 +82,16 @@ class Vehicle extends Model
 
     public function billofsales()
     {
-        return $this->hasMany('App\Models\BillOfSale');
+        return $this->hasMany('App\Models\BillOfSale', 'vehicle_id', 'id');
     }
 
     public function originaltitles()
     {
-        return $this->hasMany('App\Models\OriginalTitle');
+        return $this->hasMany('App\Models\OriginalTitle', 'vehicle_id', 'id');
     }
 
     public function pickupimages()
     {
-        return $this->hasMany('App\Models\PickupImage');
+        return $this->hasMany('App\Models\PickupImage', 'vehicle_id', 'id');
     }
 }

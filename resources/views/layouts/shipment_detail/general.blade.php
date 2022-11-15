@@ -315,8 +315,8 @@
                                 <div class="col-12">
                                     <div class="w-100  p-3" style="position: relative;">
                                         <img src="{{asset(@$shipments[0]['loading_image'][0]['name'])}}"
-                                            alt="" class="slide img_fluid mx-auto w-100"
-                                            style="height:230px !important;border-radius: 10px!important;">
+                                            alt="" class="slide img_fluid mx-auto w-100 main_image"
+                                            style="height:230px !important;border-radius: 10px!important;" id="main_image_box">
                                         <a class="bottom_button">
                                             <svg width="39" height="25" viewBox="0 0 39 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -415,7 +415,7 @@
 
                                             </a>
                                             <br>
-                                            <a href="{{@$shipments[0]['loading_image'][0]['name']}}" download="{{@$shipments[0]['loading_image'][0]['thumbnail']}}" style="text-decoration: none">
+                                            <a href="{{@$shipments[0]['loading_image'][0]['name']}}" download="{{@$shipments[0]['loading_image'][0]['thumbnail']}}" style="text-decoration: none" id="download_shipment_image">
                                                 <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <rect width="23" height="22" rx="5" fill="white"
@@ -455,7 +455,7 @@
                                     <div class="col-12">
                                         @if(@$shipments[0]['loading_image'])
                                         @foreach(@$shipments[0]['loading_image'] as $img)
-                                        <img src="{{asset($img['name'])}}" alt="" class="item_1" style="width:120px!important;height:80px!important;">
+                                        <img src="{{asset($img['name'])}}" alt="" class="item_1 changeImage" style="width:120px!important;height:80px!important;" onclick="shipmentChangeImage(this.src)">
                                         @endforeach
                                         @endif
                                     </div>
@@ -567,3 +567,13 @@
         <button type="button" class="btn col-12">pdf</button>
     </div>
 </div> --}}
+
+<script>
+    function shipmentChangeImage(src){
+        // imagePath = $('.changeImage').attr('src');
+        // alert(imagePath);
+
+        $('#main_image_box').attr('src', src);
+        $('#download_shipment_image').attr('href', src);
+    }
+</script>

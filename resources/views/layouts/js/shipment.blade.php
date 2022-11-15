@@ -29,6 +29,13 @@
                     imagesInputName: 'loading_image',
 
                 });
+                $('.loading_image_update').imageUploader({
+                    maxFiles: 4,
+                    imagesInputName: 'loading_image',
+                    preloaded: loading_old,
+                    preloadedInputName: 'loading_old'
+
+                });
                 $('.other-document').imageUploader({
                     maxFiles: 4,
                     imagesInputName: 'other_document',

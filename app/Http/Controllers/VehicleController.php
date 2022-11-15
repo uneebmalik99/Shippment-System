@@ -344,6 +344,7 @@ class VehicleController extends Controller
 
     public function create_form(Request $request)
     {
+        $vehicle = [];
         $request->validate([
             'customer_name' => 'required',
             'vin' => 'required',
@@ -372,12 +373,14 @@ class VehicleController extends Controller
         return Response($output);
     }
     else{
+        $vehicle['vehicles'] = Vehicle::with('pickupimages','originaltitles', 'billofsales','auction_image', 'warehouse_image')->where('id', $request->id)->get()->toArray();
+        // dd($vehicle['vehicles']);
         $obj = Vehicle::find($request->id);
         $obj->update($data);
         $Obj_vehicle = $obj->where('vin', $data['vin'])->get();
         switch ($tab) {
             case ('general'):
-                $output['view'] = view('layouts.vehicle_create.attachments', $vin)->render();
+                $output['view'] = view('layouts.vehicle_create.attachments', $vin, $vehicle)->render();
                 break;
         }
         return Response($output);
@@ -386,9 +389,14 @@ class VehicleController extends Controller
     }
     public function store_image(Request $request)
     {
+        // dd($request->all());
+
 
         // $data = $request->all();
-        // dd($request->file());
+        // if($request->auction_old){
+        //     dd($request->auction_old);
+        // }
+
         $output = [];
         $auction_invoice = $request->file("auction_invoice");
         $auction_copy = $request->file("auction_copy");
@@ -397,12 +405,53 @@ class VehicleController extends Controller
         $billofsales = $request->file("billofsales");
         $originaltitle = $request->file("originaltitle");
         $pickup = $request->file("pickup");
-        // dd($billofsales);
-
+        // dd($pickup);
 
         $Obj = new Vehicle;
         $Obj_vehicle = $Obj->where('vin', $request->vin)->get();
         // dd($Obj_vehicle[0]['id']);
+
+
+        if($request->auction_old){
+            $auction_old_images = AuctionImage::where('vehicle_id', $Obj_vehicle[0]['id'])->get();
+            foreach($auction_old_images as $old_images){
+                if (in_array($old_images['id'], $request->auction_old)){
+                }
+                else{
+                    $delete = AuctionImage::find($old_images['id'])->delete();
+                }
+            }
+        }
+
+        if($request->pickup_old){
+            $pickup_old_images = PickupImage::where('vehicle_id', $Obj_vehicle[0]['id'])->get();
+            foreach($pickup_old_images as $old_images){
+                if (in_array($old_images['id'], $request->pickup_old)){
+                }
+                else{
+                    $delete = PickupImage::find($old_images['id']);
+                    $delete->delete();
+                }
+            }
+        }
+
+
+        if($request->warehouse_old){
+            $warehouse_old_images = WarehouseImage::where('vehicle_id', $Obj_vehicle[0]['id'])->get();
+            foreach($warehouse_old_images as $old_images){
+                if (in_array($old_images['id'], $request->warehouse_old)){
+                }
+                else{
+                    $delete = WarehouseImage::find($old_images['id']);
+                    $delete->delete();
+                }
+            }
+        }
+
+
+
+
+       
 
     
         if($auction_invoice){
@@ -431,7 +480,7 @@ class VehicleController extends Controller
                 $type = $auctiocopy->extension();
                 $doc = $auctiocopy->move(public_path($this->directory), $filename);
                 $size = $doc->getSize() / 1000;
-                $Obj_auctionCopy->vehicle_id =$Obj_vehicle[0]['id'];
+                $Obj_auctionCopy->vehicle_id = $Obj_vehicle[0]['id'];
                 $Obj_auctionCopy->name = $filename;
                 $Obj_auctionCopy->type = $type;
                 $Obj_auctionCopy->size = $size . ' kb';
@@ -442,6 +491,7 @@ class VehicleController extends Controller
         }
 
 
+        
         if($auction_images){
             $Obj_auctionImages = new AuctionImage;
             foreach ($auction_images as $auctionImages) {
@@ -666,7 +716,7 @@ class VehicleController extends Controller
         $data = [];
         $output = [];
         $id = $request->id;
-        // return $id;
+        // return $request->tab;
 
         if ($request->tab == 'auction_images') {
             $data['images'] = AuctionImage::where('vehicle_id', $request->id)->get()->toArray();
@@ -678,11 +728,8 @@ class VehicleController extends Controller
             $data['images'] = PickupImage::where('vehicle_id', $request->id)->get()->toArray();
             $url = url('public/');
         }
-
         // return $data['images'];
-
         $output['main_image'] =view('layouts.vehicle_information.Vehicle_image',$data)->render();
-
         $output['images'] = view('layouts.vehicle_information.Vehicle_images', $data)->render();
 
         // foreach ($data['images'] as $img) {

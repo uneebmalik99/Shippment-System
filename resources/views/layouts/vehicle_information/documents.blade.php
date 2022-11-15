@@ -150,7 +150,6 @@
                                                                 download="{{ @$vehicle['billofsales'][0]['thumbnail'] }}"
                                                                 target="_blank" style="color:white;text-decoration:none;border:none">download</a>
                                                         </button>
-    
                                                     </td>
                                                 </tr>
                                                 <tr>

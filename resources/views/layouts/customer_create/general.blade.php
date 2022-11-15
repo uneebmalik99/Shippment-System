@@ -555,7 +555,7 @@
     let imageName = document.getElementById("imageName");
     input.addEventListener("change", ()=>{
         let inputImage = document.querySelector("#user_file").files[0];
-        // console.log(inputImage);
+        console.log(inputImage);
         imageName.innerText = inputImage.name;
     })
 </script>

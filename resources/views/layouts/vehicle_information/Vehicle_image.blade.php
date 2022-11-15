@@ -1,4 +1,4 @@
-@if(@$images)
+@if(count(@$images) > 0)
 <div class="w-100  p-3" style="position: relative;">
     <img src="{{asset(@$images[0]['name'])}}" alt=""class="img_fluid mx-auto w-100" style="height:230px!important;border-radius: 10px!important;" id="main_image_box">
     <a class="bottom_button">

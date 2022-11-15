@@ -368,18 +368,49 @@ class ShipmentController extends Controller
             unset($data['stamp_title']);
             unset($data['other_document']);
             unset($data['tab']);
-            $Obj_vehicle = new Vehicle;
-            $Obj = new Shipment;
-            $data['status'] = "2";
-            if($vehicles){
-                $Obj->create($data);
+            if($data['id']){
+                // dd($vehicle_id);
+                if($vehicles){
+                    $old_vehicles = Vehicle::where('shipment_id', $data['id'])->get()->toArray();
+                    foreach($old_vehicles as $old_vehicle){
+                        if(in_array($old_vehicle['id'], $vehicles)){
+                            // dd($vehicles);
+                        }
+                        else{
+                            // dd($old_vehicle['id']);
+                            $update_vehicle = Vehicle::find($old_vehicle['id']);
+                            $update_vehicle->shipment_id = null;
+                            $update_vehicle->update();
+                        }
+                    }
+                    foreach ($vehicles as $vehicle_id) {
+                        $get_vehicle = Vehicle::find($vehicle_id);
+                        $get_vehicle->shipment_id = $data['id'];
+                        $get_vehicle->update();
+                    }
+
+
+                    $shipment = Shipment::find($data['id']);
+                    $shipment->update($data);
+                }
+
+                $data['shipment_id'] = $data['id'];
+                $data['loading_images'] = Shipment::with('loading_image')->get()->toArray();
             }
-            $shipment = $Obj->where('container_no', $request->container_no)->get();
-            $data['shipment_id'] = $shipment[0]['id'];
-            foreach ($vehicles as $vehicle_id) {
-                $get_vehicle = $Obj_vehicle->find($vehicle_id);
-                $get_vehicle->shipment_id = $shipment[0]['id'];
-                $get_vehicle->save();
+            else{
+                $Obj_vehicle = new Vehicle;
+                $Obj = new Shipment;
+                $data['status'] = "2";
+                if($vehicles){
+                    $Obj->create($data);
+                }
+                $shipment = $Obj->where('container_no', $request->container_no)->get();
+                $data['shipment_id'] = $shipment[0]['id'];
+                foreach ($vehicles as $vehicle_id) {
+                    $get_vehicle = $Obj_vehicle->find($vehicle_id);
+                    $get_vehicle->shipment_id = $shipment[0]['id'];
+                    $get_vehicle->save();
+                }
             }
             $view = view('shipment.' . $tab, $data)->render();
             return Response($view);
@@ -388,13 +419,23 @@ class ShipmentController extends Controller
 
     public function create_images(Request $request)
     {
+        // dd($request->loading_old);
         $shipment_id = $request->shipment_id;
         $data = [];
         $shipment_inovice = $request->file('shipment_inovice');
         $stamp_title = $request->file('stamp_title');
         $loading_image = $request->file('loading_image');
         $other_document = $request->file('other_document');
-
+        if($request->loading_old){
+            $loading_old_images = Loading_Image::where('shipment_id', $shipment_id)->get();
+            foreach($loading_old_images as $old_images){
+                if (in_array($old_images['id'], $request->loading_old)){
+                }
+                else{
+                    $delete = Loading_Image::find($old_images['id'])->delete();
+                }
+            }
+        }
         if ($shipment_inovice) {
             $Obj_shipment = new Shipment_Invice;
             foreach ($shipment_inovice as $shipment_images) {
@@ -408,9 +449,7 @@ class ShipmentController extends Controller
                 ];
                 $Obj_shipment->create($data);
             }
-            // dd('adsasdssa');
         }
-
         if ($stamp_title) {
             $Obj_stamp = new Stamp_Title;
             foreach ($stamp_title as $stamp_images) {
@@ -425,7 +464,6 @@ class ShipmentController extends Controller
                 $Obj_stamp->create($data);
             }
         }
-
         if ($loading_image) {
             $Obj_loading = new Loading_Image;
             foreach ($loading_image as $load_images) {
@@ -440,7 +478,6 @@ class ShipmentController extends Controller
                 $Obj_loading->create($data);
             }
         }
-
         if ($other_document) {
             $Obj_other = new Other_Document;
             foreach ($other_document as $other_images) {
@@ -456,9 +493,7 @@ class ShipmentController extends Controller
             }
         }
         return "Success";
-
     }
-
     public function profile(Request $request)
     {
         $data = [];
@@ -478,7 +513,6 @@ class ShipmentController extends Controller
         ];
         $notification = $this->Notification();
         $data['shipments'] = Shipment::with(['vehicle.warehouse_image', 'loading_image'])->where('id', $request->id)->get()->toArray();
-        // dd($data['shipments']);
         if ($request->ajax()) {
             $tab = $request->tab;
             $output = view('layouts.shipment_detail.' . $tab, $data)->render();
@@ -486,7 +520,6 @@ class ShipmentController extends Controller
         }
         return view($this->view . 'profile', $data, $notification);
     }
-
     public function filtering(Request $request)
     {
         if ($request->ajax()) {
@@ -504,13 +537,11 @@ class ShipmentController extends Controller
                     $records = $records->where('loading_port', $port_of_loading);
                 }
             }
-
             if ($loading_date) {
                 if ($loading_date != "") {
                     $records = $records->orwhere('loading_date', $loading_date);
                 }
             }
-
             if ($arrival_date) {
                 if ($arrival_date != "") {
                     $records = $records->orwhere('est_arrival_date', $arrival_date);
