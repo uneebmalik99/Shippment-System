@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 // use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Traits\LockableTrait;
 class User extends Authenticatable
 {
     use HasFactory;
     use HasRoles;
+    use LockableTrait;
     // use softDeletes;
     protected $primaryKey = 'id';
     protected $table = "user";

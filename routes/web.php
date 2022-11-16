@@ -184,8 +184,13 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/notifications/status', [NotificationController::class, 'status'])->name('notification.status');
 
     // Lock screen Routes
-    Route::get('/lock', [LockController::class, 'lockScreen'])->name('lock');
-    Route::post('/unlock', [LockController::class, 'unlock'])->name('unlock');
+    // Route::get('/lock', [LockController::class, 'lockScreen'])->name('lock');
+    // Route::post('/unlock', [LockController::class, 'unlock'])->name('unlock');
+
+    Route::get('/lock', [App\Http\Controllers\Auth\LoginController::class, 'locked'])->name('lock');
+    Route::post('/unlock', [App\Http\Controllers\Auth\LoginController::class, 'unlock'])->name('unlock');
+
+    
     // Tickets Routes
     Route::get('/tickets', [TicketController::class, 'index'])->name('ticket.list');
 

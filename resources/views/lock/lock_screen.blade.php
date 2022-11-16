@@ -1,94 +1,271 @@
+@section('content')
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    @include('layouts.partials.head')
-    <style>
-        .body {
-            width: 100vw;
-            height: 100vh;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Blue Ocean Shipping</title>
+  <link rel="icon" href="{{ asset('images/blueocean.png') }}" type="image/x-icon">
+
 </head>
+<style>
+	*{
+		padding: 0;
+		margin: 0;
+		box-sizing: border-box;
+	}
+	.container-fluid{
+		width: 100vw!important;
+		height: 100vh!important;
+		position: relative!important;
 
+	}
+	#first_img{
+        background: url({{'../public/images/lock_backgroundimage.png'}}) !important;
+        background-repeat: no-repeat !important;
+        background-size:cover !important;
+        background-position:center !important;
+		height: 100vh!important;
+        max-width: 100%!important;
+        height: auto!important;
+
+	}
+	#second_img{
+	    background: url({{'../public/images/login_page.png'}}) !important;
+        background-repeat: no-repeat;
+        background-size:cover;
+        background-position:center;
+        width: inherit;
+        height: 100vh!important;
+
+	}
+	.login{
+		position: absolute!important;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 350px;
+		height: auto;
+		background: white;
+        /* box-shadow: 2px 2px 2px rgba(255,255,255,.1);
+         */
+         border-radius: 10px;
+	}
+	.login h2{
+		text-align: center;
+	}
+    .remember_text{
+
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+
+        color: #787878;
+    }
+    .lock_heading{
+
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 40px;
+        color: #4883B0;
+        text-shadow: 8px 4px 8px rgba(0, 0, 0, 0.25);
+    }
+    .form_control{
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        /* background-color: #fff; */
+        background-clip: padding-box;
+        border-bottom: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+	.login form{
+		padding: 15px 22px;
+	}
+	.login_text{
+		position: absolute;
+		top: 80%;
+		left: 5%;
+
+	}
+    .forget_text{
+
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: #807E7E;
+        text-decoration: none !important;
+    }
+  .login_text:after{
+    content: ' ';
+    position: absolute;
+    top:30px;
+    left:2px;
+    width: 100px;
+    height: 2px;
+    background:white;
+    z-index: 999999999;
+  }
+  .btn_text{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+  }
+	.login_text b{
+		font-size: 22px;
+        color: white;
+	}
+    .copyright{
+        position: absolute;
+        top:88%;
+        right:10%;
+    }
+    .copyright p{
+        text-transform: capitalize;
+        font-size:10px;
+        color: #1F689E;
+
+    }
+    .logo{
+        position: absolute;
+        / width:35px; /
+        z-index: 111;
+        top:8%;
+        left:6%;
+    }
+    input.password{
+        box-shadow: none!important;
+        outline:none!important;
+        margin-top:10%;
+    }
+    input.password:focus{
+        box-shadow: none!important;
+        outline:none!important;
+    }
+    .login_logo{
+      position: absolute;
+      left:20%;
+      top:5%;
+    }
+    .login_logo img{
+      width:150px;
+    }
+    .password{
+        background:transparent;
+        border:none;
+        border-bottom: 1px solid #1890ff;
+        padding: 5px 10px;outline: none;
+    }
+    .password:focus{
+        background:transparent;
+        border:none;
+        border-bottom: 1px solid #1890ff;
+        padding: 5px 10px;outline: none;
+    }
+@media screen and (max-width: 768px) {
+  .login_text b{
+    color: #1F689E;
+    /* padding-top:10px!important; */
+  }
+
+}
+</style>
 <body>
-    <div class="body px-5 d-flex flex-column justify-content-center">
-        <div class="input-border-style bg-white">
-            <div class="h3 col-6 d-flex justify-content-center mt-3">
-                <div class="d-flex align-items-center">
-                    <b>Screen Lock</b>
-                </div>
-                <div class="px-3">
-                    <svg width="42" height="50" viewBox="0 0 42 50" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g filter="url(#filter0_d_169_171)">
-                            <path
-                                d="M27.5 19.5H25V12C25 6.5 20.5 2 15 2C9.5 2 5 6.5 5 12V19.5H2.5C1.25 19.5 0 20.75 0 22V39.5C0 40.75 1.25 42 2.5 42H27.5C28.75 42 30 40.75 30 39.5V22C30 20.75 28.75 19.5 27.5 19.5ZM17.5 37H12.5L13.5 31.5C12.25 31 11.25 29.5 11.25 28.25C11.25 26.25 13 24.5 15 24.5C17 24.5 18.75 26.25 18.75 28.25C18.75 29.75 18 31 16.5 31.5L17.5 37ZM20 19.5H10V12C10 9.25 12.25 7 15 7C17.75 7 20 9.25 20 12V19.5Z"
-                                fill="#426498" />
-                        </g>
-                        <defs>
-                            <filter id="filter0_d_169_171" x="0" y="0" width="42" height="50"
-                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                <feColorMatrix in="SourceAlpha" type="matrix"
-                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                <feOffset dx="7" dy="3" />
-                                <feGaussianBlur stdDeviation="2.5" />
-                                <feComposite in2="hardAlpha" operator="out" />
-                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_169_171" />
-                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_169_171"
-                                    result="shape" />
-                            </filter>
-                        </defs>
-                    </svg>
-                </div>
-            </div>
-            <div class="d-flex py-3">
-                <form action="{{ route('unlock') }}" method="POST" class="col-6">
-                    <div class="col-12 d-flex justify-content-center p-3">
-                        <div class="w-100 d-flex flex-column align-items-center">
-                            <div class="d-flex flex-column align-items-center my-4">
-                                <div>
-                                    <svg width="127" height="127" viewBox="0 0 127 127" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M106.16 98.9401C111.86 92.0825 115.824 83.9531 117.717 75.2395C119.61 66.5258 119.377 57.4844 117.037 48.88C114.697 40.2755 110.319 32.3613 104.274 25.8067C98.228 19.2521 90.6926 14.25 82.305 11.2235C73.9174 8.1971 64.9242 7.23533 56.0862 8.41961C47.2483 9.60388 38.8256 12.8994 31.5306 18.0273C24.2356 23.1552 18.283 29.9646 14.1763 37.8796C10.0697 45.7946 7.92971 54.5822 7.93752 63.4992C7.94052 76.4619 12.5085 89.0094 20.8399 98.9401L20.7606 99.0076C21.0384 99.341 21.3559 99.6267 21.6416 99.9561C21.9988 100.365 22.3838 100.75 22.7529 101.147C23.8641 102.353 25.0071 103.512 26.2057 104.6C26.5708 104.933 26.9478 105.242 27.3169 105.56C28.5869 106.655 29.8926 107.695 31.246 108.664C31.4206 108.783 31.5794 108.937 31.754 109.06V109.013C41.0492 115.554 52.1379 119.065 63.504 119.065C74.8701 119.065 85.9588 115.554 95.254 109.013V109.06C95.4286 108.937 95.5834 108.783 95.762 108.664C97.1114 107.691 98.4211 106.655 99.6911 105.56C100.06 105.242 100.437 104.929 100.802 104.6C102.001 103.508 103.144 102.353 104.255 101.147C104.624 100.75 105.005 100.365 105.366 99.9561C105.648 99.6267 105.97 99.341 106.247 99.0036L106.16 98.9401ZM63.5 31.7492C67.0323 31.7492 70.4852 32.7966 73.4222 34.759C76.3591 36.7214 78.6482 39.5107 79.9999 42.7741C81.3517 46.0374 81.7053 49.6284 81.0162 53.0928C80.3271 56.5571 78.6262 59.7394 76.1285 62.237C73.6308 64.7347 70.4486 66.4357 66.9842 67.1248C63.5198 67.8139 59.9289 67.4602 56.6655 66.1085C53.4022 64.7567 50.6129 62.4677 48.6505 59.5307C46.6881 56.5937 45.6406 53.1408 45.6406 49.6086C45.6406 44.872 47.5223 40.3294 50.8715 36.9801C54.2208 33.6308 58.7634 31.7492 63.5 31.7492ZM31.7778 98.9401C31.8466 93.729 33.9644 88.7545 37.6728 85.0929C41.3813 81.4313 46.3822 79.3769 51.5938 79.3742H75.4063C80.6178 79.3769 85.6188 81.4313 89.3272 85.0929C93.0357 88.7545 95.1534 93.729 95.2222 98.9401C86.5181 106.784 75.2168 111.124 63.5 111.124C51.7832 111.124 40.4819 106.784 31.7778 98.9401Z"
-                                            fill="#426498" />
-                                    </svg>
-                                </div>
-                                <div class="text-muted font-bold">
-                                    <span>This is a user</span>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column align-items-center my-2 p-3 w-100">
-                                <div class="w-100 d-flex justify-content-center">
-                                    <input type="password" name="password" placeholder="Enter Password"
-                                        class="lock_style col-8 p-1 border-0">
-                                </div>
-                                <div class="w-100 d-flex justify-content-center">
-                                    <div class="col-8 text-muted text-right px-0 py-2 font-bold">
-                                        <span>Forget Password?</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-100 d-flex justify-content-center">
-                                <div class="col-6">
-                                    <button class="form-control lock_button text-dark font-bold" style="cursor: pointer;">Unlock</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <div class="col-6">
-                    <div class="col-12 d-flex justify-content-center align-items-center">
-                        <img src="{{ asset('assets/images/lock_bg.png') }}" alt=""
-                            class="img-responsive col-10">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
 
+	<div class="container-fluid" >
+
+		<div class="row">
+
+			<div class="col-md-6 col-lg-6" id="first_img">
+
+			</div>
+			<div class=" col-12 col-sm-12 col-md-6 col-lg-6" id="second_img">
+
+        {{-- <div class="login_logo">
+          <img src="{{asset('images/login_logo.png')}}" alt="">
+        </div> --}}
+
+                <div class="copyright">
+                    <p>copyright@ 2022 all right reserved <br>
+                        Developed by <a href="https://therevolutiontechnologies.com/" target="__blank">The Revolution Technologies</a></p>
+                </div>
+            </div>
+		</div>
+		<div class="login shadow" style="background: linear-gradient(180deg, rgba(171, 213, 245, 0.89) 0%, rgba(255, 255, 255, 0.64) 100%);
+        box-shadow: 3px 4px 49px rgba(123, 123, 123, 0.25);
+        border-radius: 18px;">
+           <form action="{{ route('unlock') }}" method="POST">
+            @csrf
+                <h2><img src="{{asset('images/login_logo.png')}}" alt="" style="width: 178px!important;"></h2>
+			<h5 style="text-align: center;margin-top:7.5%">
+                <svg width="20" height="30" viewBox="0 0 38 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.5556 18.6364H27.4444V13.0455C27.4444 10.9877 26.6198 9.23082 24.9705 7.77486C23.3212 6.31889 21.331 5.59091 19 5.59091C16.669 5.59091 14.6788 6.31889 13.0295 7.77486C11.3802 9.23082 10.5556 10.9877 10.5556 13.0455V18.6364ZM38 21.4318V38.2045C38 38.9811 37.6921 39.6411 37.0764 40.1847C36.4606 40.7282 35.713 41 34.8333 41H3.16667C2.28704 41 1.53935 40.7282 0.923611 40.1847C0.30787 39.6411 0 38.9811 0 38.2045V21.4318C0 20.6553 0.30787 19.9953 0.923611 19.4517C1.53935 18.9081 2.28704 18.6364 3.16667 18.6364H4.22222V13.0455C4.22222 9.47348 5.67361 6.40625 8.57639 3.84375C11.4792 1.28125 14.9537 0 19 0C23.0463 0 26.5208 1.28125 29.4236 3.84375C32.3264 6.40625 33.7778 9.47348 33.7778 13.0455V18.6364H34.8333C35.713 18.6364 36.4606 18.9081 37.0764 19.4517C37.6921 19.9953 38 20.6553 38 21.4318Z" fill="#4883B0"/>
+                    </svg>
+
+                {{-- <img src="{{asset('images/login_logo.png')}}" alt="" style="width: 178px!important;"> --}}
+                <p class="lock_heading">Lock Screen</p>
+            </h5>
+            {{-- <h2 class="lock_heading">
+                Lock Screen
+            </h2> --}}
+  <div class="form-group">
+    {{-- <label for="exampleInputPassword1">Password</label> --}}
+    <input style="border:none;
+    border-bottom: 1px solid #9D9D9D;
+    padding: 5px 10px;outline: none; background:transparent;" type="password" class="password form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" placeholder="Enter Password" name="password">
+    @error('password')
+    <span class="invalid-feedback" role="alert">
+    <strong>{{ $message }}</strong></span>
+    @enderror
+  </div>
+  <div class="w-100 d-flex justify-content-center" style="color:red">
+    <span>{{ @$error }}</span>
+</div>
+  <div class="form-group form-check text-right">
+    <a class="forget_text" href="">Forgot Password</a>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" name="remember"
+    id="remember" {{ old('remember') ? 'checked' : '' }}>
+    <label class="remember_text form-check-label" for="remember">
+        {{ __('Remember Me') }}
+    </label>
+  </div>
+  <div class="form-group">
+  <button type="submit" class="btn_text btn btn-primary form-control" style="background: rgba(33, 73, 134, 0.85);
+  box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 118px;background:#1F689E;outline:none;border:none; width:80%;margin-left:10%;"><svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 7V4C8 2.9 7.1 2 6 2C4.9 2 4 2.9 4 4H2C2 1.79 3.79 0 6 0C8.21 0 10 1.79 10 4V7H11C11.55 7 12 7.45 12 8V15C12 15.55 11.55 16 11 16H1C0.45 16 0 15.55 0 15V8C0 7.45 0.45 7 1 7H8ZM7 14L6.64 11.85C7.15 11.61 7.5 11.1 7.5 10.5C7.5 9.67 6.83 9 6 9C5.17 9 4.5 9.67 4.5 10.5C4.5 11.1 4.85 11.61 5.36 11.85L5 14H7Z" fill="white"/>
+    </svg>
+    Unlock</button>
+  </div>
+</form>
+		</div>
+
+		<div class="login_text">
+		<b>Enter Your Password To Unlock Screen</b>
+		</div>
+
+
+
+
+	</div>
+</body>
+<script type="text/javascript">
+        function preventBack() {
+            window.history.forward();
+        }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+ </script>
 </html>
