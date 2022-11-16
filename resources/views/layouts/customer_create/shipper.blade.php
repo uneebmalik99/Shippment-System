@@ -210,10 +210,12 @@
     <div class="col-12 py-2 px-5 d-flex justify-content-end">
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="email"
             id="email" value="{{ @$module['email'] }}"readonly>
+        @if(!@$shipper[0]['id'])
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" style="cursor:pointer;"
             onclick="skip_view(this.id)" id="skip" nexttab="quotation" skiptab="quotation_customer_tab">
             <div class="unskew">skip</div>
         </button>
+        @endif
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="createForm(this.id)"
             id="shipper_customer" name="{{ $module['button'] }}" style="padding: 4px;"
             data-next="quotation_customer_tab">

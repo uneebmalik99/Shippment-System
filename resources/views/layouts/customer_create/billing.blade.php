@@ -288,20 +288,30 @@
 
         <div class="d-flex justify-content-start p-2 ml-5">
             <div class="d-flex col-4">
-                <input class="form-control-sm border border-0 rounded-pill bg col-10" type="text"
-                    style="font-size:12px!important;" name="buyer_number" id="buyer_number" value="{{@$billing[0]['buyer_number']}}">
+                <input class="form-control-sm border border-0 rounded-pill bg col-10" type="text" style="font-size:12px!important;" name="buyer_number" id="buyer_number" value="{{@$billing[0]['buyer_number']}}" data-role="tagsinput">
             </div>
         </div>
+
+        {{-- <div class="multi_buyer_id">
+            <div class="content">
+                <div class="tags-and-input">
+                    <!-- <span class="tag" data-value="jquery"><i class="fas fa-times-circle"></i></span> -->
+                    <input type="text" class="input form-control-sm border border-0 rounded-pill bg col-10" autocomplete="false">
+                </div>
+            </div>
+        </div> --}}
     </div>
 
     <div class="col-12 py-2 px-5 d-flex justify-content-end">
 
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="email"
             id="email" value="{{ @$module['email'] }}"readonly>
+            @if(!@$billing[0]['id'])
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" style="cursor:pointer;"
             onclick="skip_view(this.id)" id="skip" nexttab="shipper" skiptab="shipper_customer_tab">
             <div class="unskew">skip</div>
         </button>
+        @endif
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="createForm(this.id)"
             id="billing_customer" name="{{ $module['button'] }}" style="padding: 4px;"
             data-next="shipper_customer_tab">

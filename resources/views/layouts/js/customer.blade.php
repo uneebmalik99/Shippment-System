@@ -54,6 +54,7 @@
         }
 
         formData.append('tab', $tab);
+        console.log(...formData);
         $.ajax({
             type: 'post',
             url: '{{ URL::to('admin/customers/create') }}/' + $tab,

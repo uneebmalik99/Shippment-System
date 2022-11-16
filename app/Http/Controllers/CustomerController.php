@@ -775,7 +775,7 @@ class CustomerController extends Controller
 
             } elseif ($tab == "billing_customer") {
 
-                
+                // dd($data);
                 $Obj = BillingParty::updateOrCreate(['id' => $request->id], $data);
                 $output =
                     [
