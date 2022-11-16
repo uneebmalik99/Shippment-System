@@ -206,7 +206,7 @@ class VehicleController extends Controller
         // dd($request->isMethod('get'));
 
         if ($request->isMethod('post')) {
-            dd('kashif');
+            // dd('kashif');
             $data = $request->all();
             $Obj = Vehicle::find($id);
             $Obj->update($data);

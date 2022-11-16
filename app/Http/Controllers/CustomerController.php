@@ -207,11 +207,30 @@ class CustomerController extends Controller
 
     public function edit(Request $request, $id = null)
     {
+        $data = [];
+        $action = url($this->action . '/create');
+        $data = [
+            "page_title" => $this->plural . " create",
+            "page_heading" => $this->plural . ' create',
+            "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
+            "action" => $action,
+            "module" => ['type' => $this->type,
+                'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'create',
+                'button' => 'Create',
+            ],
+        ];
+
         // dd($id);
         $data['documents'] = User::with('documents')->where('id', $id)->get()->toArray();
         $data['location'] = Location::all();
-        // dd($data);
-        $output = view('layouts.customer.customer_edit', $data)->render();
+        // dd($data['documents']);
+        $output = view('layouts.customer_create.general', $data)->render();
         return Response($output);
     }
 
@@ -598,7 +617,14 @@ class CustomerController extends Controller
             $tab = $request->tab;
             $image = $request->file('customer_image');
             $file = $request->file('user_file');
-            // dd($image);
+            if($request->id){
+                if($request->password){}
+                else{
+                    unset($data['password']);
+                }
+            }
+
+            // dd($data);
             unset($data['user_file']);
             unset($data['tab']);
             $email = $data['email'];
@@ -627,6 +653,16 @@ class CustomerController extends Controller
                     'email' => $email,
                 ],
             ];
+            
+            if($request->id){
+                $view_data['billing'] = BillingParty::where('customer_id', $data['id'])->get()->toArray();
+            }
+
+            
+                
+             
+
+            
 
             switch ($tab) {
                 case ('general_customer'):
@@ -635,11 +671,12 @@ class CustomerController extends Controller
                     break;
 
                 case ('billing_customer'):
+                    $view_data['shipper'] = Shipper::where('customer_id', $request->customer_id)->get()->toArray();
                     $view = view('layouts.customer_create.shipper', $view_data)->render();
-
                     break;
 
                 case ('shipper_customer'):
+                    $view_data['quotation'] = Quotation::where('customer_id', $request->customer_id)->get()->toArray();
                     $view = view('layouts.customer_create.quotation', $view_data)->render();
 
                     break;
@@ -656,20 +693,39 @@ class CustomerController extends Controller
             }
 
             if ($tab == "general_customer") {
-                $request->validate([
-                    'name' => 'required',
-                    'username' => 'required',
-                    'password' => 'required',
-                    'phone' => 'required',
-                    'email' => 'required',
-                    'company_name' => 'required',
-                    'company_email' => 'required',
-                    'location_number' => 'required',
-                    'country' => 'required',
-                    'zip_code' => 'required',
-                    'state' => 'required',
-                    'address_line1' => 'required',
-                ]);
+                if($request->id){
+                    $request->validate([
+                        'name' => 'required',
+                        'username' => 'required',
+                        // 'password' => 'required',
+                        'phone' => 'required',
+                        'email' => 'required',
+                        'company_name' => 'required',
+                        'company_email' => 'required',
+                        'location_number' => 'required',
+                        'country' => 'required',
+                        'zip_code' => 'required',
+                        'state' => 'required',
+                        'address_line1' => 'required',
+                    ]);
+                }
+                else{
+                    $request->validate([
+                        'name' => 'required',
+                        'username' => 'required',
+                        'password' => 'required',
+                        'phone' => 'required',
+                        'email' => 'required',
+                        'company_name' => 'required',
+                        'company_email' => 'required',
+                        'location_number' => 'required',
+                        'country' => 'required',
+                        'zip_code' => 'required',
+                        'state' => 'required',
+                        'address_line1' => 'required',
+                    ]);
+                }
+                
     
                 if ($image) {
                     foreach ($image as $images) {
@@ -680,14 +736,21 @@ class CustomerController extends Controller
                         unset($data['customer_image']);
                     }
                 }
-                $Obj = new User;
-                $Obj->create($data);
+                // $Obj = new User;
+                // $Obj->create($data);
+                // dd($data['id']);
+                $Obj = User::updateOrCreate(['id' => $request->id], $data);
                 // $email = $data['email'];
                 $user = User::where('email', $email)->get();
                 $user_id = $user[0]['id'];
 
-                $role = User::find($user_id);
-                $role->assignRole('Customer');
+                if($request->id){
+                }
+                else{
+                    $role = User::find($user_id);
+                    $role->assignRole('Customer');
+                }
+
                 
                 if ($file) {
                     foreach ($file as $files) {
@@ -697,8 +760,10 @@ class CustomerController extends Controller
                         $documents['thumbnail'] = $file_name;
                         $files->move(public_path($this->directory), $docname);
                         $documents['user_id'] = $user_id;
-                        $Obj = new CustomerDocument;
-                        $Obj->create($documents);
+
+                        $Obj = CustomerDocument::updateOrCreate(['user_id' => $request->id], $documents);
+                        // $Obj = new CustomerDocument;
+                        // $Obj->create($documents);
                     }
                 }
                 $output =
@@ -709,8 +774,9 @@ class CustomerController extends Controller
                 ];
 
             } elseif ($tab == "billing_customer") {
-                $Obj = new BillingParty;
-                $Obj->create($data);
+
+                
+                $Obj = BillingParty::updateOrCreate(['id' => $request->id], $data);
                 $output =
                     [
                     'result' => 'success',
@@ -719,8 +785,10 @@ class CustomerController extends Controller
                 ];
 
             } elseif ($tab == "shipper_customer") {
-                $Obj = new Shipper;
-                $Obj->create($data);
+                // dd($data);
+                $Obj = Shipper::updateOrCreate(['id' => $request->id], $data);
+                // $Obj = new Shipper;
+                // $Obj->create($data);
                 $output =
                     [
                     'result' => 'success',
@@ -730,8 +798,10 @@ class CustomerController extends Controller
                 ];
 
             } else {
-                $Obj = new Quotation;
-                $Obj->create($data);
+                // dd($data);
+                $Obj = Quotation::updateOrCreate(['id'=> $request->id], $data);
+                // $Obj = new Quotation;
+                // $Obj->create($data);
                 $output =
                     [
                     'result' => 'success',
@@ -810,9 +880,9 @@ class CustomerController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $data['row'] = $row;
-                    $url_view = url('admin/shipments/profile/' . $row->id);
-                    $url_delete = url('admin/shipments/delete/' . $row->id);
-                    $url_edit = url('admin/shipments/edit/' . $row->id);
+                    // $url_view = url('admin/shipments/profile/' . $row->id);
+                    // $url_delete = url('admin/shipments/delete/' . $row->id);
+                    // $url_edit = url('admin/shipments/edit/' . $row->id);
                     $output = view('layouts.customer.action_buttons', $data)->render();
                     return $output;
                 })

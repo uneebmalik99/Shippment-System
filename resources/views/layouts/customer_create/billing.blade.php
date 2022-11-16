@@ -1,6 +1,10 @@
 @include('layouts.customer_create.navbar')
 <form method="POST" id="customer_billing_form" enctype="multipart/form-data">
     @csrf
+    @if(@$billing[0]['id'])
+    <input type="hidden" id="id" name="id" value="{{@$billing[0]['id']}}">
+    <input type="hidden" id="customer_id" name="customer_id" value="{{@$billing[0]['customer_id']}}">
+    @endif
     <div class="d-flex px-2 ml-5 mt-4" style="width: 90%!important;">
         <div class="d-block w-100">
             <div>
@@ -8,7 +12,7 @@
             </div>
             <div>
                 <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
-                    style="font-size:12px!important;" name="first_name" id="first_name">
+                    style="font-size:12px!important;" name="first_name" id="first_name" value="{{@$billing[0]['first_name']}}">
             </div>
         </div>
         <div class="d-block w-100">
@@ -17,7 +21,7 @@
             </div>
             <div>
                 <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
-                    style="font-size:12px!important;" name="company_name" id="company_name">
+                    style="font-size:12px!important;" name="company_name" id="company_name" value="{{@$billing[0]['company_name']}}">
             </div>
         </div>
         <div class="d-block w-100">
@@ -26,7 +30,7 @@
             </div>
             <div>
                 <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
-                    style="font-size:12px!important;" name="country" id="country">
+                    style="font-size:12px!important;" name="country" id="country" value="{{@$billing[0]['country']}}">
             </div>
         </div>
     </div>
@@ -38,7 +42,7 @@
             </div>
             <div>
                 <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
-                    style="font-size:12px!important;" name="last_name" id="last_name">
+                    style="font-size:12px!important;" name="last_name" id="last_name" value="{{@$billing[0]['last_name']}}">
             </div>
         </div>
         <div class="d-block w-100">
@@ -47,7 +51,7 @@
             </div>
             <div>
                 <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
-                    style="font-size:12px!important;" name="company_email" id="company_email">
+                    style="font-size:12px!important;" name="company_email" id="company_email" value="{{@$billing[0]['company_email']}}">
             </div>
         </div>
         <div class="d-block w-100">
@@ -56,7 +60,7 @@
             </div>
             <div>
                 <input type="text" class="form-control-sm border border-0 rounded-pill bg col-8"
-                    style="font-size:12px!important;" name="city" id="city">
+                    style="font-size:12px!important;" name="city" id="city" value="{{@$billing[0]['city']}}">
             </div>
         </div>
     </div>
@@ -68,7 +72,7 @@
             </div>
             <div>
                 <input class="form-control-sm border border-0 rounded-pill bg col-8" style="font-size:12px!important;"
-                    type="text" name="phone" id="phone">
+                    type="text" name="phone" id="phone" value="{{@$billing[0]['phone']}}">
             </div>
         </div>
         <div class="d-block w-100 p-2">
@@ -77,7 +81,7 @@
             </div>
             <div>
                 <input class="form-control-sm border border-0 rounded-pill bg col-8" style="font-size:12px!important;"
-                    type="text" name="address" id="address">
+                    type="text" name="address" id="address" value="{{@$billing[0]['address']}}">
             </div>
         </div>
         <div class="d-block w-100">
@@ -86,7 +90,7 @@
             </div>
             <div>
                 <input class="form-control-sm border border-0 rounded-pill bg col-8" style="font-size:12px!important;"
-                    type="text" name="zip_code" id="zip_code">
+                    type="text" name="zip_code" id="zip_code" value="{{@$billing[0]['zip_code']}}">
             </div>
         </div>
     </div>
@@ -110,7 +114,7 @@
             </div>
             <div>
                 <input class="form-control-sm border border-0 rounded-pill bg col-8" style="font-size:12px!important;"
-                    type="text" name="foreign_passport_number" id="foreign_passport_number">
+                    type="text" name="foreign_passport_number" id="foreign_passport_number" value="{{@$billing[0]['foreign_passport_number']}}">
             </div>
         </div>
         <div class="d-block w-100">
@@ -120,7 +124,7 @@
             <div>
                 <input class="form-control-sm border border-0 rounded-pill bg col-8"
                     style="font-size:12px!important;" type="text" name="identification_number"
-                    id="identification_number">
+                    id="identification_number" value="{{@$billing[0]['identification_number']}}">
             </div>
         </div>
         <div class="d-block w-100">
@@ -129,7 +133,7 @@
             </div>
             <div>
                 <input class="form-control-sm border border-0 rounded-pill bg col-8"
-                    style="font-size:12px!important;" type="date" name="expiry_date" id="expiry_date">
+                    style="font-size:12px!important;" type="date" name="expiry_date" id="expiry_date" value="{{@$billing[0]['expiry_date']}}">
             </div>
         </div>
     </div>
@@ -145,12 +149,12 @@
 
         <div class="d-flex justify-content-start p-2 ml-5">
             <div class="text-muted d-flex col-3">
-                <input class="text-muted d-flex px-2 shipping" type="radio" name="shipping" value="single">
+                <input class="text-muted d-flex px-2 shipping" type="radio" name="shipping" value="single" {{ @$billing[0]['shipping'] == "single" ? 'checked' : '' }}>
                 <span class="px-2">Single Unit</span>
             </div>
 
             <div class="text-muted d-flex col-3">
-                <input class="text-muted d-flex px-2 shipping" type="radio" name="shipping" value="multiple">
+                <input class="text-muted d-flex px-2 shipping" type="radio" name="shipping" value="multiple" {{ @$billing[0]['shipping'] == "multiple" ? 'checked' : '' }}>
                 <span class="px-2">Multiple Unit</span>
             </div>
         </div>
@@ -168,25 +172,25 @@
         <div class="d-flex justify-content-start p-2 ml-5">
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 shipment_type" type="radio" name="shipment_type"
-                    value="vehicle">
+                    value="vehicle" {{ @$billing[0]['shipment_type'] == "vehicle" ? 'checked' : '' }}>
                 <span class="px-2">Vehicle</span>
             </div>
 
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 shipment_type" type="radio" name="shipment_type"
-                    value="motorcycle">
+                    value="motorcycle" {{ @$billing[0]['shipment_type'] == "motorcycle" ? 'checked' : '' }}>
                 <span class="px-2">Motorcycle</span>
             </div>
 
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 shipment_type" type="radio" name="shipment_type"
-                    value="package">
+                    value="package" {{ @$billing[0]['shipping'] == "package" ? 'checked' : '' }}>
                 <span class="px-2">Package</span>
             </div>
 
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 shipment_type" type="radio" name="shipment_type"
-                    value="boat">
+                    value="boat" {{ @$billing[0]['shipping'] == "boat" ? 'checked' : '' }}>
                 <span class="px-2">Boat</span>
             </div>
         </div>
@@ -203,23 +207,23 @@
         <div class="d-flex justify-content-start p-2 ml-5">
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 purchased_from" type="radio"
-                    name="purchased_from"value="auction">
+                    name="purchased_from" value="auction" {{ @$billing[0]['purchased_from'] == "auction" ? 'checked' : '' }}>
                 <span class="px-2">Auction</span>
             </div>
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 purchased_from" type="radio"
-                    name="purchased_from"value="dealer">
+                    name="purchased_from" value="dealer" {{ @$billing[0]['purchased_from'] == "dealer" ? 'checked' : '' }}>
                 <span class="px-2">Dealer</span>
             </div>
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 purchased_from" type="radio"
-                    name="purchased_from"value="private">
+                    name="purchased_from" value="private" {{ @$billing[0]['purchased_from'] == "private" ? 'checked' : '' }}>
                 <span class="px-2">Private</span>
             </div>
 
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 purchased_from" type="radio"
-                    name="purchased_from"value="pwn">
+                    name="purchased_from" value="pwn" {{ @$billing[0]['purchased_from'] == "pwn" ? 'checked' : '' }}>
                 <span class="px-2">Own</span>
             </div>
         </div>
@@ -237,13 +241,13 @@
         <div class="d-flex justify-content-start p-2 ml-5">
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 request_pickup" type="radio" name="request_pickup"
-                    value="yes">
+                    value="yes" {{ @$billing[0]['request_pickup'] == "yes" ? 'checked' : '' }}>
                 <span class="px-2">Yes</span>
             </div>
 
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 request_pickup" type="radio" name="request_pickup"
-                    value="no">
+                    value="no" {{ @$billing[0]['request_pickup'] == "no" ? 'checked' : '' }}>
                 <span class="px-2">No</span>
             </div>
         </div>
@@ -261,13 +265,13 @@
         <div class="d-flex justify-content-start p-2 ml-5">
             <div class="text-muted d-flex col-3">
                 <input class="text-muted d-flex px-2 end_use" type="radio" name="end_use" id="personal"
-                    value="personal">
+                    value="personal" {{ @$billing[0]['end_use'] == "personal" ? 'checked' : '' }}>
                 <span class="px-2">Personal Use</span>
             </div>
 
             <div class="text-muted d-flex col-5">
                 <input class="text-muted d-flex px-2 end_use" type="radio" name="end_use" id="business"
-                    value="business">
+                    value="business" {{ @$billing[0]['end_use'] == "business" ? 'checked' : '' }}>
                 <span class="px-2">Resale and wholesale business</span>
             </div>
         </div>
@@ -285,7 +289,7 @@
         <div class="d-flex justify-content-start p-2 ml-5">
             <div class="d-flex col-4">
                 <input class="form-control-sm border border-0 rounded-pill bg col-10" type="text"
-                    style="font-size:12px!important;" name="buyer_number" id="buyer_number">
+                    style="font-size:12px!important;" name="buyer_number" id="buyer_number" value="{{@$billing[0]['buyer_number']}}">
             </div>
         </div>
     </div>

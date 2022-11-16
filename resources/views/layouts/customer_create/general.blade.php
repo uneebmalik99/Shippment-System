@@ -51,6 +51,9 @@
 </style>
 
 <form method="POST" id="customer_general_form" enctype="multipart/form-data">
+    @if(@$documents[0]['id'])
+    <input type="hidden" id="id" name="id" value="{{@$documents[0]['id']}}">
+    @endif
     <div>
         <div class="row my-1">
             <div class="col-12">
@@ -80,7 +83,7 @@
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="name"
-                                            id="name" value="{{ @$user['name'] }}">
+                                            id="name" value="{{ @$documents[0]['name'] }}">
                                             
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
@@ -93,7 +96,7 @@
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
-                                            name="username" id="username" value="{{ @$user['name'] }}">
+                                            name="username" id="username" value="{{ @$documents[0]['username'] }}">
 
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
@@ -119,7 +122,7 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="phone" class="form-control-sm border border-0 rounded-pill col-7"
-                                            name="phone" id="phone" value="{{ @$user['phone'] }}">
+                                            name="phone" id="phone" value="{{ @$documents[0]['phone'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small id="phone_error" class="text-danger"></small>
@@ -131,7 +134,7 @@
                                         </label>
                                         <input type="fax"
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="fax"
-                                            id="fax" value="{{ @$user['fax'] }}">
+                                            id="fax" value="{{ @$documents[0]['fax'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small></small>
@@ -143,7 +146,7 @@
                                         </label>
                                         <input type="email"
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="email"
-                                            id="email" value="{{ @$user['email'] }}">
+                                            id="email" value="{{ @$documents[0]['email'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small id="email_error" class="text-danger"></small>
@@ -156,7 +159,7 @@
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7" name="source"
-                                            id="source" value="{{ @$user['source'] }}">
+                                            id="source" value="{{ @$documents[0]['source'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small></small>
@@ -170,7 +173,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="company_name" id="company_name"
-                                            value="{{ @$user['company_name'] }}">
+                                            value="{{ @$documents[0]['company_name'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small id="company_name_error" class="text-danger"></small>
@@ -184,7 +187,7 @@
                                         <input type="email"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="company_email" id="company_email"
-                                            value="{{ @$user['company_email'] }}">
+                                            value="{{ @$documents[0]['company_email'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small id="company_email_error" class="text-danger"></small>
@@ -199,7 +202,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="customer_type" id="customer_type"
-                                            value="{{ @$user['customer_type'] }}">
+                                            value="{{ @$documents[0]['customer_type'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small></small>
@@ -213,7 +216,7 @@
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
-                                            name="sales_type" id="sales_type" value="{{ @$user['sales_type'] }}">
+                                            name="sales_type" id="sales_type" value="{{ @$documents[0]['sales_type'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small></small>
@@ -249,7 +252,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="payment_type" id="payment_type"
-                                            value="{{ @$user['payment_type'] }}">
+                                            value="{{ @$documents[0]['payment_type'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small></small>
@@ -263,7 +266,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="payment_term" id="payment_term"
-                                            value="{{ @$user['payment_term'] }}">
+                                            value="{{ @$documents[0]['payment_term'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small></small>
@@ -276,7 +279,7 @@
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
-                                            name="industry" id="industry" value="{{ @$user['industry'] }}">
+                                            name="industry" id="industry" value="{{ @$documents[0]['industry'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small></small>
@@ -317,7 +320,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="sales_person" id="sales_person"
-                                            value="{{ @$user['sales_person'] }}">
+                                            value="{{ @$documents[0]['sales_person'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small></small>
@@ -332,7 +335,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="inside_person" id="inside_person"
-                                            value="{{ @$user['address_line1'] }}">
+                                            value="{{ @$documents[0]['inside_person'] }}">
 
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
@@ -345,7 +348,7 @@
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
-                                            name="level" id="level" value="{{ @$user['level'] }}">
+                                            name="level" id="level" value="{{ @$documents[0]['level'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small></small>
@@ -383,7 +386,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="location_number" id="location_number"
-                                            value="{{ @$user['location_number'] }}">
+                                            value="{{ @$documents[0]['location_number'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small
@@ -397,7 +400,7 @@
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
-                                            name="country" id="country" value="{{ @$user['country'] }}">
+                                            name="country" id="country" value="{{ @$documents[0]['country'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small  id="country_error" class="text-danger"></small>
@@ -410,7 +413,7 @@
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
-                                            name="zip_code" id="zip_code" value="{{ @$user['zip_code'] }}">
+                                            name="zip_code" id="zip_code" value="{{ @$documents[0]['zip_code'] }}">
 
                                         {{-- <select class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="zip_code" id="zip_code">
@@ -432,7 +435,7 @@
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
-                                            name="state" id="state" value="{{ @$user['state'] }}">
+                                            name="state" id="state" value="{{ @$documents[0]['state'] }}">
                                         {{-- <select class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="state" id="state">
                                             @foreach ($location as $locations)
@@ -453,7 +456,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="address_line1" id="address_line1"
-                                            value="{{ @$user['address_line1'] }}">
+                                            value="{{ @$documents[0]['address_line1'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small id="address_line1_error" class="text-danger"></small>
@@ -468,7 +471,7 @@
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
                                             name="address_line2" id="address_line2"
-                                            value="{{ @$user['address_line2'] }}">
+                                            value="{{ @$documents[0]['address_line2'] }}">
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
                                         <small></small>
@@ -481,7 +484,7 @@
                                         </label>
                                         <input type="text"
                                             class="form-control-sm border border-0 rounded-pill bg col-7"
-                                            name="price_code" id="price_code" value="{{ @$user['city'] }}">
+                                            name="price_code" id="price_code" value="{{ @$documents[0]['price_code'] }}">
                                     </div>
                                 </div>
                             </div>
@@ -546,9 +549,21 @@
             </button>
         </div>
     </div>
-
+    {{-- {{dd(@$documents[0]['documents']['file'])}} --}}
 </form>
 
+@if(@$documents[0]['documents'])
+<script>
+    let inputImage = document.querySelector("#user_file").files[0];
+        imageName.innerText = "{{@$documents[0]['documents']['thumbnail']}}";
+</script>
+@endif
+
+@if(@$documents[0]['user_image'])
+<script>
+    $('#upload-img').attr('src', '{{asset(@$documents[0]["user_image"])}}');
+</script>
+@endif
 
 <script>
     let input = document.getElementById("user_file");

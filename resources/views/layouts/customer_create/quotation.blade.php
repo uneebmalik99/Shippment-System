@@ -1,5 +1,8 @@
 @include('layouts.customer_create.navbar')
 <form method="POST" id="customer_quotation_form" enctype="multipart/form-data">
+    @if(@$quotation[0]['id'])
+    <input type="hidden" id="id" name="id" value="{{@$quotation[0]['id']}}">
+    @endif
     @csrf
     <div class="d-flex justify-content-around p-2">
         <div class="col-4 d-block">
@@ -9,7 +12,12 @@
             <div>
                 <select name="destination_port" id="destination_port"
                     class="form-control-sm border border-0 rounded-pill bg col-6">
+                    @if(@$quotation[0]['destination_port'])
+                    <option value="{{@$quotation[0]['destination_port']}}" selected>{{@$quotation[0]['destination_port']}}</option>
+
+                    @else
                     <option selected disabled>Destination Ports</option>
+                    @endif
                     @foreach ($destination_port as $ports)
                         <option value="{{ @$ports['destination'] }}">{{ @$ports['destination'] }}</option>
                     @endforeach
@@ -24,7 +32,7 @@
             </div>
             <div>
                 <input type="date" class="form-control-sm border border-0 rounded-pill bg col-6" name="valid_from"
-                    id="valid_from">
+                    id="valid_from" value="{{@$quotation[0]['valid_from']}}">
             </div>
         </div>
         <div class="col-4 d-block">
@@ -33,7 +41,7 @@
             </div>
             <div>
                 <input type="date" class="form-control-sm border border-0 rounded-pill bg col-6" name="valid_till"
-                    id="valid_till">
+                    id="valid_till" value="{{@$quotation[0]['valid_till']}}">
             </div>
         </div>
     </div>
@@ -48,7 +56,11 @@
                     <div>
                         <select name="container_size" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-
+                            @if(@$quotation[0]['container_size'])
+                            <option value="{{@$quotation[0]['container_size']}}" selected>{{@$quotation[0]['container_size']}}</option>
+                            @else
+                            <option selected disabled>Select Container Size</option>
+                            @endif
                             @foreach ($container_size as $csize)
                                 <option value="{{ @$csize['name'] }}">{{ @$csize['name'] }}</option>
                             @endforeach
@@ -65,6 +77,11 @@
                     <div>
                         <select name="vehicle" id="vehicle"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
+                            @if(@$quotation[0]['vehicle'])
+                            <option value="{{@$quotation[0]['vehicle']}}" selected>{{@$quotation[0]['vehicle']}}</option>
+                            @else
+                            <option selected disabled>Select Vehicles</option>
+                            @endif
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="30">30</option>
@@ -78,6 +95,11 @@
                     <div>
                         <select name="loading_port" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
+                            @if(@$quotation[0]['loading_port'])
+                            <option value="{{@$quotation[0]['loading_port']}}" selected>{{@$quotation[0]['loading_port']}}</option>
+                            @else
+                            <option selected disabled>Select Loading Port</option>
+                            @endif
                             @foreach ($loading_ports as $lports)
                                 <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
                             @endforeach
@@ -91,6 +113,11 @@
                     <div>
                         <select name="shipping_line" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
+                            @if(@$quotation[0]['shipping_line'])
+                            <option value="{{@$quotation[0]['shipping_line']}}" selected>{{@$quotation[0]['shipping_line']}}</option>
+                            @else
+                            <option selected disabled>Select Shipping Line</option>
+                            @endif
                             @foreach ($shipping_lines as $Sline)
                                 <option value="{{ @$Sline['name'] }}">{{ @$Sline['name'] }}</option>
                             @endforeach
@@ -106,8 +133,7 @@
                         <label for="default" class="text-info font-style">Default</label>
                     </div>
                     <div>
-                        <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
-                            name="default" id="default">
+                        <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10" name="default[]" id="default" value="{{@$quotation[0]['default']}}">
                     </div>
                 </div>
                 <div class="col-6">
@@ -115,8 +141,7 @@
                         <label for="special_rate" class="text-info font-style">Special Rate</label>
                     </div>
                     <div>
-                        <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10"
-                            name="special_rate" id="special_rate">
+                        <input type="text" class="form-control-sm border border-0 rounded-pill bg col-10" name="special_rate[]" id="special_rate" value="{{@$quotation[0]['special_rate']}}">
                     </div>
                 </div>
             </div>
