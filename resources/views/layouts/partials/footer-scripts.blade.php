@@ -479,11 +479,11 @@
 <script>
     function create_vehicle_form(id) {
         // $('#vehicle_form').on('submit', function(event) {
-        // event.preventDefault();
+            // event.preventDefault();
+        document.getElementById('load').style.visibility = "visible";
         $tab_id = id;
         $next_tab = $('#' + $tab_id).data('next');
         var formData = new FormData(jQuery('#vehicle_form')[0]);
-        document.getElementById('load').style.visibility = "visible";
         $.ajax({
             method: 'POST',
             url: '{{ URL::to('admin/vehicles/create_form') }}',
@@ -491,15 +491,8 @@
             processData: false,
             contentType: false,
             success: function(data) {
-
-
-                // iziToast.success({
-                //     title: 'Vehicle',
-                //     message: 'Successfully inserted record!',
-                //     position: 'topCenter',
-                //     zindex: '9999999999999',
-
-                // });
+                
+                document.getElementById('load').style.visibility = "hidden";
                 $('.modal-body').html(data.view);
                 $('#exampleModal').modal('show');
                 $('.vehicle_auction_image').imageUploader({
@@ -512,22 +505,16 @@
                     imagesInputName: 'auction_images',
                     preloadedInputName: 'auction_old',
                 });
-
-               
-
                 $('.pick').imageUploader({
                     imagesInputName: 'pickup',
                     maxFiles: 15,
                 });
-
                 $('.pick_update').imageUploader({
                     imagesInputName: 'pickup',
                     maxFiles: 15,
                     preloaded: pickup_image,
                     preloadedInputName: 'pickup_old'
                 });
-
-                
                 $('.billofsales').imageUploader({
                     maxFiles: 15,
                     imagesInputName: 'billofsales',
@@ -550,14 +537,14 @@
                     preloaded: warehouse_image,
                     preloadedInputName: 'warehouse_old'
                 });
-
-
                 $('#' + $tab_id + '_tab').removeClass('next-style');
                 $('#' + $tab_id + '_tab').addClass('tab_style');
                 $('#' + $next_tab).addClass('next-style');
+                
             },
             complete: function() {
                 document.getElementById('load').style.visibility = "hidden";
+
             },
             error: function(xhr, status, errorThrown) {
 
@@ -599,11 +586,9 @@
                 if (xhr.responseJSON['errors']['status']) {
                     $('#status_error').html('<small style="margin-left:72px">Please Fill*</small>');
                 }
-                // $('#buyer_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                // $('#key_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                
             }
         });
-        // });
     }
 </script>
 
