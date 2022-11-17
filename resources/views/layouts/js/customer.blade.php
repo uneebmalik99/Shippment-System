@@ -92,7 +92,7 @@
                 }
             },
             complete: function() {
-                alert('complete');
+                // alert('complete');
                 document.getElementById('load').style.visibility = "hidden";
             },
             error: function(response) {
