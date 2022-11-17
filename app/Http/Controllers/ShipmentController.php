@@ -161,7 +161,8 @@ class ShipmentController extends Controller
                 'page' => 'create',
             ],
         ];
-
+        $data['buyer_ids'] = User::with('billings')->get()->toArray();
+        // dd($data['buyer_ids']);
         $notification = $this->Notification();
         $data['vehicles'] = Vehicle::where('shipment_id', null)->get();
         $data['consignees'] = Consignee::all()->toArray();
@@ -209,6 +210,7 @@ class ShipmentController extends Controller
                 'page' => 'create',
             ],
         ];
+        $data['buyer_ids'] = User::with('billings')->get()->toArray();
 
         $data['shipment'] = Shipment::with('vehicle')->where('id', $req->id)->get()->toArray();
         // dd($data['shipment']);
@@ -355,6 +357,7 @@ class ShipmentController extends Controller
         if ($request->ajax()) {
             $data = [];
             $data = $request->all();
+            // dd($data);
             $vehicles = $request->vehicle;
             $tab = $request->tab;
             $loading_image = $request->file('loading_image');
@@ -368,7 +371,7 @@ class ShipmentController extends Controller
             unset($data['stamp_title']);
             unset($data['other_document']);
             unset($data['tab']);
-            if($data['id']){
+            if($request->id){
                 // dd($vehicle_id);
                 if($vehicles){
                     $old_vehicles = Vehicle::where('shipment_id', $data['id'])->get()->toArray();

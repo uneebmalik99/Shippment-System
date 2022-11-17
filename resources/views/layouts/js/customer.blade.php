@@ -55,6 +55,7 @@
 
         formData.append('tab', $tab);
         console.log(...formData);
+        document.getElementById('load').style.visibility = "visible";
         $.ajax({
             type: 'post',
             url: '{{ URL::to('admin/customers/create') }}/' + $tab,
@@ -77,18 +78,22 @@
                 $('#' + $next_tab).addClass('next-style');
                 if (data.quotation == 'fade') {
                     // alert('asdassd');
-                //     iziToast.success({
-                //     zindex: '9999999999999',
-                //     position: 'topCenter',
-                //     title: data.result,
-                //     message: data.tab,
-                // });
+                    //     iziToast.success({
+                    //     zindex: '9999999999999',
+                    //     position: 'topCenter',
+                    //     title: data.result,
+                    //     message: data.tab,
+                    // });
 
                     $('#exampleModal').modal('hide');
                     setTimeout(function() {
-            window.location.reload(true);
-        }, 2000);
+                        window.location.reload(true);
+                    }, 2000);
                 }
+            },
+            complete: function() {
+                alert('complete');
+                document.getElementById('load').style.visibility = "hidden";
             },
             error: function(response) {
 
@@ -99,40 +104,40 @@
                 });
 
                 console.log(response.responseJSON['errors']);
-                if(response.responseJSON['errors']['username']){
+                if (response.responseJSON['errors']['username']) {
                     $('#username_error').html('<small>Please Fill*</small>');
                 }
-                if(response.responseJSON['errors']['name']){
+                if (response.responseJSON['errors']['name']) {
                     $('#name_error').html('<small>Please Fill*</small>');
                 }
-                if(response.responseJSON['errors']['password']){
+                if (response.responseJSON['errors']['password']) {
                     $('#password_error').html('<small>Please Fill*</small>');
                 }
-                if(response.responseJSON['errors']['phone']){
+                if (response.responseJSON['errors']['phone']) {
                     $('#phone_error').html('<small>Please Fill*</small>');
                 }
-                if(response.responseJSON['errors']['email']){
+                if (response.responseJSON['errors']['email']) {
                     $('#email_error').html('<small>Please Fill*</small>');
                 }
-                if(response.responseJSON['errors']['company_name']){
+                if (response.responseJSON['errors']['company_name']) {
                     $('#company_name_error').html('<small>Please Fill*</small>');
                 }
-                if(response.responseJSON['errors']['company_email']){
+                if (response.responseJSON['errors']['company_email']) {
                     $('#company_email_error').html('<small>Please Fill*</small>');
                 }
-                if(response.responseJSON['errors']['location_number']){
+                if (response.responseJSON['errors']['location_number']) {
                     $('#location_number_error').html('<small>Please Fill*</small>');
                 }
-                if(response.responseJSON['errors']['country']){
+                if (response.responseJSON['errors']['country']) {
                     $('#country_error').html('<small>Please Fill*</small>');
                 }
-                if(response.responseJSON['errors']['zip_code']){
+                if (response.responseJSON['errors']['zip_code']) {
                     $('#zip_code_error').html('<small>Please Fill*</small>');
                 }
-                if(response.responseJSON['errors']['state']){
+                if (response.responseJSON['errors']['state']) {
                     $('#state_error').html('<small>Please Fill*</small>');
                 }
-                if(response.responseJSON['errors']['address_line1']){
+                if (response.responseJSON['errors']['address_line1']) {
                     $('#address_line1_error').html('<small>Please Fill*</small>');
                 }
             }
@@ -158,14 +163,14 @@
                         url: "{{ route('customer.changeStatus') }}" + '/' + id,
                         success: function(data) {
                             iziToast.success({
-                            zindex: '9999999999999',
-                            position: 'topCenter',
-                            title: 'Deleted',
-                            message: data,
-                });
-                setTimeout(function() {
-            window.location.reload(true);
-        }, 2000);
+                                zindex: '9999999999999',
+                                position: 'topCenter',
+                                title: 'Deleted',
+                                message: data,
+                            });
+                            setTimeout(function() {
+                                window.location.reload(true);
+                            }, 2000);
                         }
                     });
 

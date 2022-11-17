@@ -1,13 +1,13 @@
-<div class="col-3 h-100 p-0">
+<div class="col-lg-3 h-100 p-0">
     <div class="col-lg-12 p-0">
         <div class="card user-card rounded">
             <div class="card-header-img">
                 @if(@$user['user_image'])
-                <img class="img-fluid w-50" src="{{ asset(@$user['user_image']) }}" alt="card-img"/>
+                <img class="rounded-circle" style="height:175px !important;width:175px !important;border:3px solid #2c3e50" src="{{ asset(@$user['user_image']) }}" alt="card-img"/>
                 @else
-                <img class="img-fluid w-50" src="{{ asset('assets/images/user.png') }}" alt="card-img" />
+                <img class="rounded-circle" style="height:175px !important;width:175px !important;border:3px solid #2c3e50" src="{{ asset('assets/images/user.png') }}" alt="card-img" />
                 @endif
-                
+
                 <div>
                     <h6 class="mx-0 my-2 text-muted"><b>{{ strtoupper(@$user['customer_name']) }}</b></h6>
                     <span class="font-size">{{ @$user['customer_email'] }}</span>
@@ -27,14 +27,14 @@
                         </span>
                 </div>
                 <div class="p-3">
-                    
+
                     <div class="d-flex justify-content-start">
                         <span class="text-muted"><b>Details</b></span>
                     </div>
                     <hr class="m-0" style="border:1px solid #555454">
                 </div>
                 <div class="d-flex flex-column align-items-start">
-                    
+
                     {{-- <span class="text-muted py-1 px-3">
                         <b>Email:</b> {{ @$user['email'] }}
                         </span> --}}

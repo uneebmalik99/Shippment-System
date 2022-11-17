@@ -164,6 +164,7 @@ class VehicleController extends Controller
                 'button' => 'Create',
             ],
         ];
+        
         $data['buyers'] = BillingParty::all();
         $data['customer_name'] = User::where('role_id', 4)->get();
         $data['location'] = Location::all();
@@ -344,6 +345,7 @@ class VehicleController extends Controller
 
     public function create_form(Request $request)
     {
+        // dd($request->all());
         $vehicle = [];
         $request->validate([
             'customer_name' => 'required',

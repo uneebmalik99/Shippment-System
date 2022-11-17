@@ -388,6 +388,7 @@
                         imagesInputName: 'loading_image',
 
                     });
+                    
                     $('.other-document').imageUploader({
                         maxFiles: 4,
                         imagesInputName: 'other_document',
@@ -482,6 +483,7 @@
         $tab_id = id;
         $next_tab = $('#' + $tab_id).data('next');
         var formData = new FormData(jQuery('#vehicle_form')[0]);
+        document.getElementById('load').style.visibility = "visible";
         $.ajax({
             method: 'POST',
             url: '{{ URL::to('admin/vehicles/create_form') }}',
@@ -553,6 +555,9 @@
                 $('#' + $tab_id + '_tab').removeClass('next-style');
                 $('#' + $tab_id + '_tab').addClass('tab_style');
                 $('#' + $next_tab).addClass('next-style');
+            },
+            complete: function() {
+                document.getElementById('load').style.visibility = "hidden";
             },
             error: function(xhr, status, errorThrown) {
 

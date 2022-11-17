@@ -1,3 +1,4 @@
+
 @include('layouts.customer_create.navbar')
 <form method="POST" id="customer_billing_form" enctype="multipart/form-data">
     @csrf
@@ -288,7 +289,7 @@
 
         <div class="d-flex justify-content-start p-2 ml-5">
             <div class="d-flex col-4">
-                <input class="form-control-sm border border-0 rounded-pill bg col-10" type="text" style="font-size:12px!important;" name="buyer_number" id="buyer_number" value="{{@$billing[0]['buyer_number']}}" data-role="tagsinput">
+                <input type="text" data-role="tagsinput" class="form-control border border-0 rounded-pill bg col-10" style="font-size:12px!important;" name="buyer_number"  id="buyer_number" value="{{@$billing[0]['buyer_number']}}">
             </div>
         </div>
 
@@ -319,3 +320,4 @@
         </button>
     </div>
 </form>
+<script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>

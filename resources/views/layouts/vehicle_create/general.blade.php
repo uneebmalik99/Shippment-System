@@ -281,9 +281,14 @@
                                         <option selected disabled>Select Buyer Id</option>
                                         @endif
                                         @foreach ($buyers as $buyer)
+                                            @php
+                                                $buyerid = explode(',', $buyer['buyer_number']);
+
+                                            @endphp
+                                            @foreach ($buyerid as $ids)
                                             <option value="{{ @$buyer['customer_id'] }}">
-                                                {{ @$buyer['buyer_number'] }}
-                                            </option>
+                                            {{$ids}}</option>
+                                            @endforeach
                                         @endforeach
                                     </select>
                                 </div>

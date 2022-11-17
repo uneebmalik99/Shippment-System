@@ -1,19 +1,48 @@
-<div class="d-flex justify-content-between">
+<div class="d-lg-flex justify-content-between mt-lg-0 mt-md-0 mt-sm-0 mt-5">
     <div>
-        <button class="btn btn_custom rounded text-white profile_tabs font-size font-bold d-flex" id="account"
+        <button class="btn btn_custom rounded text-white profile_tabs font-size d-flex"           id="account"
             style="cursor: pointer;" cust_id="{{ @$user['id'] }}">
             <svg width="12" height="15" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M16.9337 12.9769C16.4915 12.0843 15.8499 11.2735 15.0446 10.5897C14.2417 9.9039 13.2906 9.35713 12.2438 8.97956C12.2344 8.97556 12.2251 8.97356 12.2157 8.96957C13.6758 8.07061 14.6251 6.60632 14.6251 4.95424C14.6251 2.21742 12.0235 0 8.81256 0C5.60162 0 3.00006 2.21742 3.00006 4.95424C3.00006 6.60632 3.94928 8.07061 5.40943 8.97157C5.40006 8.97556 5.39068 8.97756 5.38131 8.98155C4.33131 9.35912 3.38912 9.90049 2.58053 10.5917C1.77594 11.276 1.13444 12.0867 0.691465 12.9789C0.256282 13.8524 0.0215788 14.7889 5.86078e-05 15.7377C-0.000566951 15.759 0.00382061 15.7802 0.0129629 15.8001C0.0221052 15.8199 0.0358171 15.838 0.0532908 15.8533C0.0707645 15.8686 0.0916463 15.8807 0.114706 15.889C0.137765 15.8973 0.162536 15.9015 0.187559 15.9015H1.59381C1.69693 15.9015 1.77896 15.8316 1.78131 15.7457C1.82818 14.2035 2.55475 12.7592 3.83912 11.6644C5.16803 10.5318 6.93287 9.90848 8.81256 9.90848C10.6922 9.90848 12.4571 10.5318 13.786 11.6644C15.0704 12.7592 15.7969 14.2035 15.8438 15.7457C15.8462 15.8336 15.9282 15.9015 16.0313 15.9015H17.4376C17.4626 15.9015 17.4874 15.8973 17.5104 15.889C17.5335 15.8807 17.5544 15.8686 17.5718 15.8533C17.5893 15.838 17.603 15.8199 17.6122 15.8001C17.6213 15.7802 17.6257 15.759 17.6251 15.7377C17.6016 14.7828 17.3696 13.8539 16.9337 12.9769ZM8.81256 8.39024C7.73678 8.39024 6.72428 8.03266 5.96256 7.38341C5.20084 6.73417 4.78131 5.87117 4.78131 4.95424C4.78131 4.0373 5.20084 3.17431 5.96256 2.52506C6.72428 1.87582 7.73678 1.51823 8.81256 1.51823C9.88834 1.51823 10.9008 1.87582 11.6626 2.52506C12.4243 3.17431 12.8438 4.0373 12.8438 4.95424C12.8438 5.87117 12.4243 6.73417 11.6626 7.38341C10.9008 8.03266 9.88834 8.39024 8.81256 8.39024Z"
                     fill="#B5B5B5" />
             </svg>
-            <span class="px-1 font-size font-bold">
+            <span class="px-1 font-size font-bold" >
                 Account
             </span>
         </button>
     </div>
     <div>
-        <button class="border-0 form-control text-muted profile_tabs font-size font-bold d-flex" id="consignee"
+        <button  class="sborder-0 form-control text-muted profile_tabs font-size d-flex" id="billing"
+        style="cursor: pointer;border:none!important;font-weight: 400;  text-align: center; white-space: nowrap; vertical-align: middle; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;user-select: none;border: 1px solid transparent;padding: 0.375rem 0.75rem;font-size: 1rem;line-height: 1.5; border-radius: 0.25rem;"  cust_id="{{ @$user['id'] }}">
+            <svg width="12" height="15" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M20 20.1673H4C3.73478 20.1673 3.48043 20.0707 3.29289 19.8988C3.10536 19.7269 3 19.4938 3 19.2507V2.75065C3 2.50754 3.10536 2.27438 3.29289 2.10247C3.48043 1.93056 3.73478 1.83398 4 1.83398H20C20.2652 1.83398 20.5196 1.93056 20.7071 2.10247C20.8946 2.27438 21 2.50754 21 2.75065V19.2507C21 19.4938 20.8946 19.7269 20.7071 19.8988C20.5196 20.0707 20.2652 20.1673 20 20.1673ZM19 18.334V3.66732H5V18.334H19ZM8 8.25065H16V10.084H8V8.25065ZM8 11.9173H16V13.7507H8V11.9173Z"
+                    fill="#8B8B8B" />
+            </svg>
+
+            <span class="px-1 font-size font-bold" >
+                Billing Information
+            </span>
+        </button>
+    </div>
+    <div>
+        <button class="border-0 form-control text-muted profile_tabs font-size d-flex" id="shipper"
+            style="cursor: pointer;" cust_id="{{ @$user['id'] }}">
+            <svg width="12" height="15" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M28.7633 2.77695C29.7535 2.26739 30.8674 2 32 2C33.1326 2 34.2465 2.26739 35.2367 2.77695L60.2867 15.6702C60.806 15.9379 61.2387 16.3293 61.5399 16.804C61.8412 17.2786 62 17.8193 62 18.37V43.8075C61.9997 44.9092 61.6816 45.9907 61.0785 46.9401C60.4754 47.8895 59.6093 48.6722 58.57 49.207L35.2367 61.223C34.2465 61.7326 33.1326 62 32 62C30.8674 62 29.7535 61.7326 28.7633 61.223L5.43 49.207C4.39118 48.6724 3.52544 47.8902 2.92238 46.9415C2.31932 45.9927 2.00088 44.9118 2 43.8106V18.37C1.99998 17.8193 2.15881 17.2786 2.46005 16.804C2.76129 16.3293 3.19399 15.9379 3.71333 15.6702L28.7667 2.77695H28.7633Z" stroke="#8B8B8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 16.5527L32 31.9975M32 31.9975L62 16.5527M32 31.9975V61.3426" stroke="#8B8B8B" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M17 24.2748L47 8.83008M12 33.0104L22 38.1751" stroke="#8B8B8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+
+            <span class="px-1 font-size font-bold" >
+                Shipper
+            </span>
+        </button>
+    </div>
+    <div>
+        <button class="border-0 form-control text-muted profile_tabs font-size d-flex" id="consignee"
             style="cursor: pointer;" cust_id="{{ @$user['id'] }}">
             <svg width="12" height="15" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -21,27 +50,27 @@
                     fill="#8B8B8B" />
             </svg>
 
-            <span class="px-1 font-size font-bold">
+            <span class="px-1 font-size font-bold" >
                 Consignee
             </span>
         </button>
     </div>
     <div>
-        <button class="border-0 form-control text-muted profile_tabs font-size font-bold d-flex" id="billing"
+        <button class="border-0 form-control text-muted profile_tabs font-size d-flex" id="quotation"
             style="cursor: pointer;" cust_id="{{ @$user['id'] }}">
-            <svg width="12" height="15" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M20 20.1673H4C3.73478 20.1673 3.48043 20.0707 3.29289 19.8988C3.10536 19.7269 3 19.4938 3 19.2507V2.75065C3 2.50754 3.10536 2.27438 3.29289 2.10247C3.48043 1.93056 3.73478 1.83398 4 1.83398H20C20.2652 1.83398 20.5196 1.93056 20.7071 2.10247C20.8946 2.27438 21 2.50754 21 2.75065V19.2507C21 19.4938 20.8946 19.7269 20.7071 19.8988C20.5196 20.0707 20.2652 20.1673 20 20.1673ZM19 18.334V3.66732H5V18.334H19ZM8 8.25065H16V10.084H8V8.25065ZM8 11.9173H16V13.7507H8V11.9173Z"
-                    fill="#8B8B8B" />
-            </svg>
+            <svg width="12" height="15" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M42 7V0H0V17.5H15.75V49H49V7H42ZM3.5 14V3.5H38.5V7H15.75V14H3.5ZM45.5 45.5H19.25V10.5H45.5V45.5Z" fill="#8B8B8B"/>
+                </svg>
 
-            <span class="px-1 font-size font-bold">
-                Billing Information
+
+
+            <span class="px-1 font-size font-bold" >
+                Quotation
             </span>
         </button>
     </div>
     <div>
-        <button class="border-0 form-control text-muted profile_tabs font-size font-bold d-flex" id="notification"
+        <button class="border-0 form-control text-muted profile_tabs font-size d-flex" id="notification"
             style="cursor: pointer;" cust_id="{{ @$user['id'] }}">
             <svg width="12" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -49,13 +78,13 @@
                     fill="#898989" />
             </svg>
 
-            <span class="px-1 font-size font-bold">
+            <span class="px-1 font-size font-bold" >
                 Notifications
             </span>
         </button>
     </div>
     <div>
-        <button class="sborder-0 form-control text-muted profile_tabs font-size font-bold d-flex" id="document"
+        <button class="sborder-0 form-control text-muted profile_tabs font-size d-flex" id="document"
             style="cursor: pointer;border:none!important" cust_id="{{ @$user['id'] }}">
             <svg width="12" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -66,7 +95,7 @@
                     fill="#7D7D7D" />
             </svg>
 
-            <span class="px-1 font-size font-bold">
+            <span class="px-1 font-size font-bold" >
                 Documents
             </span>
         </button>

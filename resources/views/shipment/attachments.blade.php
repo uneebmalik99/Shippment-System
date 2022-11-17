@@ -79,15 +79,12 @@
                                 @endif
                             @else
                                 <script>
-                                    $('.loading_image').imageUploader({
-                                        maxFiles: 4,
-                                        imagesInputName: 'loading_image',
-                                    });
+                                    // $('.loading_image').imageUploader({
+                                    //     maxFiles: 4,
+                                    //     imagesInputName: 'loading_image',
+                                    // });
                                 </script>
                             @endif
-
-
-
                         </div>
                     </div>
 

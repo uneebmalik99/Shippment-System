@@ -58,7 +58,7 @@ class User extends Authenticatable
 
     public function billings()
     {
-        return $this->hasMany('App\Models\BillingParty');
+        return $this->hasMany('App\Models\BillingParty', 'customer_id', 'id');
     }
 
     public function shippers()
@@ -74,5 +74,8 @@ class User extends Authenticatable
     public function notifications()
     {
         return $this->hasMany('App\Models\Notification');
+    }
+    public function buyer_id(){
+        return $this->hasMany('App\Models\CustomerBuyerId', 'customer_id', 'id');
     }
 }

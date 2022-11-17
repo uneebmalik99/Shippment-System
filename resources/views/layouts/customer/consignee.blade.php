@@ -1,6 +1,4 @@
-
-
-<div class="card user-card rounded mt-3">
+<div class="card user-card rounded  mt-lg-4 mt-md-4 mt-sm-4 mt-4">
     <div class="px-3 d-flex justify-cotent center">
         <h6 class="text-muted"><b>Consignee Information</b></h6>
     </div>
@@ -74,10 +72,10 @@
                 <span class="px-2">Multiple</span>
             </div>
         </div>
-        <div class="text-muted"><input class="form-control w-25 border border-primary rounded" type="text"
-                name="port"></div>
-        <div class="d-flex justify-content-start mt-2">
+            {{-- <div class="text-muted"><input class="form-control w-25 border border-primary rounded" type="text"
+                    name="port"></div> --}}
+        {{-- <div class="d-flex justify-content-start mt-2">
             <input class="btn btn-info rounded" type="submit" value="Submit">
-        </div>
+        </div> --}}
     </div>
 </div>

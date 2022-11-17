@@ -1,3 +1,6 @@
+{{-- @foreach($buyer_ids as $ids)
+{{dd($ids['billings'][0]['company_name'])}}
+@endforeach --}}
 <div>
     <div>
         <div class="bg-white">
@@ -378,17 +381,27 @@
                                                     <select
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
                                                         name="select_consignee" id="select_consignee">
-                                                        @if(@$shipment[0]['select_consignee '])
+                                                        @if(@$shipment[0]['select_consignee'])
                                                         <option value="{{@$shipment[0]['select_consignee']}}" selected disabled>{{@$shipment[0]['select_consignee']}}</option>
                                                         @else
                                                         <option selected disabled>Select Consignee</option>
                                                         @endif
-                                                        @foreach ($consignees as $consignee)
+                                                        @foreach ($buyer_ids as $buyer_id)
+                                                        @if(@$buyer_id['billings'][0]['company_name'])
                                                             <option
                                                                 class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                                value="{{ $consignee['id'] }}">
-                                                                {{ $consignee['consignee_name'] }}
+                                                                value="{{ @$buyer_id['id'] }}">
+                                                                {{ @$buyer_id['billings'][0]['company_name'] }}
                                                             </option>
+                                                            @endif
+                                                            <option
+                                                                class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                                value="{{ $buyer_id['id'] }}">
+                                                                {{ $buyer_id['company_name'] }}
+                                                            </option>
+
+                                                            
+
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -404,12 +417,24 @@
                                                         @else
                                                         <option selected disabled>Select Notifier</option>
                                                         @endif
-                                                        @foreach ($consignees as $consignee)
+                                                        @foreach ($buyer_ids as $buyer_id)
+                                                        
+                                                        @if(@$buyer_id['billings'][0]['company_name'])
                                                             <option
                                                                 class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                                value="{{ $consignee['id'] }}">
-                                                                {{ $consignee['consignee_name'] }}
+                                                                value="{{ @$buyer_id['id'] }}">
+                                                                {{ @$buyer_id['billings'][0]['company_name'] }}
                                                             </option>
+                                                            @endif
+
+                                                            <option
+                                                                class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                                value="{{ $buyer_id['id'] }}">
+                                                                {{ $buyer_id['company_name'] }}
+                                                            </option>
+
+                                                            
+
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -767,7 +792,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="tab_card my-3">
                                         <div class="col-7 py-3">
                                             <div class="text-color" style="cursor: pointer;" id="note"

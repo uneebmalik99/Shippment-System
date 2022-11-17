@@ -1,8 +1,11 @@
+
 @extends('layouts.partials.mainlayout')
+
 @section('body')
     <!-- Modal -->
+    
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-        style="z-index: 99999999999999;">
+        style="z-index: 21474!important;">
         <div class="modal-dialog modal-fullscreen scrollable mw-100 m-2 px-3 py-2" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">

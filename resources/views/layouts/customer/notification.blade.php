@@ -20,60 +20,61 @@
                 documents</b></button>
     </div>
 </div> --}}
-    <div class="card user-card rounded mt-3">
-        <div class="px-3 d-flex justify-cotent center">
-            <h6 class="text-muted"><b>Notifications</b></h6>
-        </div>
-        <div class="col-12 mt-2 d-flex">
-            <div class="col-5 pl-0">
+<div class="card user-card rounded mt-3">
+    <div class="px-3 d-flex justify-cotent center">
+        <h6 class="text-muted"><b>Notifications</b></h6>
+    </div>
+    <div class="row mx-4">
+            <div class="col-xxl-5 col-lg-5 col-md-12 col-sm-12 col-12 pl-0">
                 <div class="card user-card border border-info rounded p-3 h-100">
                     <div class="d-flex">
                         <input class="form-control border border-info rounded" type="text" placeholder="Search">
                     </div>
 
-@if ($notification->count() > 0)
+                    @if ($notification->count() > 0)
 
 
                     @foreach ($notification as $notifications)
-                        <div class="card-body border border-info rounded d-flex mt-3 p-2"
-                            id="{{ @$notifications['id'] }}" style="cursor: pointer;"
-                            onclick="viewnotification(this.id)">
-                            <div class="col-9">
-                                <div class="text-left p-0">
-                                    <span>
-                                        <i class="fa-solid fa-clock-rotate-left px-1"></i>
-                                        <b class=" text-dark">{{ substr(@$notifications['subject'], 0, 15) }}</b>...
-                                    </span>
-                                </div>
-                                <div>
-                                    <span class="text-muted">
-                                        {{-- str_limit(strip_tags($post->body), 50) --}}
-                                        {{-- {{str_limit(strip_tags(@$notifications['message']),50)}} --}}
-                                        {{ substr(strip_tags(@$notifications['message']), 0, 50) }}
-                                        {{-- @if (strlen(strip_tags(@$notification['subject'])) > 50)
-                                          ... <a href="{{ action('PostsController@show', $post) }}" class="btn btn-info btn-sm">Read More</a>
-                                        @endif --}}
-                                    </span>...
-                                </div>
-
+                    <div class="card-body border border-info rounded d-flex mt-3 p-2" id="{{ @$notifications['id'] }}"
+                        style="cursor: pointer;" onclick="viewnotification(this.id)">
+                        <div class="col-lg-9">
+                            <div class="text-left p-0">
+                                <span>
+                                    <i class="fa-solid fa-clock-rotate-left px-1"></i>
+                                    <b class=" text-dark">{{ substr(@$notifications['subject'], 0, 15) }}</b>...
+                                </span>
                             </div>
-                            <div class="col-3">
-                                <div class="col-3" style="background-color:#E7E7FF; border-radius:px;">
-                                    1
-                                </div>
+                            <div>
+                                <span class="text-muted">
+                                    {{-- str_limit(strip_tags($post->body), 50) --}}
+                                    {{-- {{str_limit(strip_tags(@$notifications['message']),50)}} --}}
+                                    {{ substr(strip_tags(@$notifications['message']), 0, 50) }}
+                                    {{-- @if (strlen(strip_tags(@$notification['subject'])) > 50)
+                                    ... <a href="{{ action('PostsController@show', $post) }}"
+                                        class="btn btn-info btn-sm">Read More</a>
+                                    @endif --}}
+                                </span>...
                             </div>
 
                         </div>
+                        <div class="col-lg-3">
+                            <div class="col-12" style="background-color:#E7E7FF; border-radius:px;">
+                                1
+                            </div>
+                        </div>
+
+                    </div>
                     @endforeach
 
                     @else
-    <div class="d-flex justify-content-center align-items-center" style="width:100%;height:100%;margin-top:5%;">
-        <h6 class="mt-2 py-5">Notification Not Found</h6>
-    </div>
-@endif
+                    <div class="d-flex justify-content-center align-items-center"
+                        style="width:100%;height:100%;margin-top:5%;">
+                        <h6 class="mt-2 py-5">Notification Not Found</h6>
+                    </div>
+                    @endif
                 </div>
             </div>
-            <div class="col-7 px-0">
+            <div class="col-xxl-7 col-lg-7 col-md-12 col-sm-12 col-12 px-0">
                 <div class="card user-card border border-info rounded p-3 h-100">
                     <div class="row">
                         <div class="px-2 d-flex">
@@ -117,5 +118,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    {{-- </div> --}}
 
+    </div>
+</div>
