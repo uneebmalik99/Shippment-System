@@ -230,11 +230,12 @@
             </div>
 
             <div class="d-flex justify-content-start mt-2">
-                <div class="d-flex col-4">
-                    <input disabled class="form-control-sm border border-info rounded" type="text" name="buyer_number"
+                <div class="d-flex justify-content-start col-8">
+                    <input disabled class="form-control-sm border border-info rounded" type="text" name="buyer_number" data-role="tagsinput"
                         id="buyer" value="{{ @$billing[0]['buyer_number'] }}">
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>

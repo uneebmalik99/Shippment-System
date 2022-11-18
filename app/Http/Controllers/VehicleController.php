@@ -859,4 +859,14 @@ class VehicleController extends Controller
             return $pdf->stream('invoice.pdf', array("Attachment" => false));
     }
 
+    public function getbuyersids(Request $request){
+        $data = [];
+        $output = [];
+        $data['buyerids'] = User::with('billings')->where('company_name', $request->company_name)->get()->toArray();
+        // dd($data['buyerids']);
+        $output = view('layouts.vehicle_create.buyerIds' , $data)->render();
+        // dd($output);
+        return Response($output);
+    }
+
 }

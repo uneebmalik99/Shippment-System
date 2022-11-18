@@ -279,9 +279,7 @@
                 'id': $id,
             },
             success: function(data) {
-                // alert(data);
-                // console.log(data);
-                // alert(data);
+                
                 $('.main_image').html(data.main_image);
                 $('.changeImages').html(data.images);
             }
@@ -546,5 +544,27 @@ $.ajax({
 function showAsMainImage(src){
     $('#main_image_box').attr('src',src);
     $('#download_image').attr('href',src);
+}
+
+
+
+
+
+function getbuyerids(){
+    company_name = $('#customer_name').val();
+    // alert(company_name);
+    $.ajax({
+            method: 'POST',
+            url: '{{ route('vehicles.get_buyerids') }}',
+            data: {
+                'company_name': company_name,
+            },
+            success: function(data) {
+                // alert(data);
+                $('#buyer_id').html(data);
+                // $('#customer_email').val(data[0]['email']);
+                // $('#customer_phone').val(data[0]['phone']);
+            }
+        });
 }
 </script>

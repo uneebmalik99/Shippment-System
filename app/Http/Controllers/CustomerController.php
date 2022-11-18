@@ -109,7 +109,7 @@ class CustomerController extends Controller
         //     $data['records'][] = $records;
         //     $i++;
         // }
-
+        $data['consignees'] = Shipper::where('consignee', '!=' , Null)->count();
         $data['active_customer'] = User::role('Customer')->where('status', '1')->get()->count();
 
         $data['Inactive_customer'] = User::role('Customer')->where('status', '0')->get()->count();
@@ -155,7 +155,7 @@ class CustomerController extends Controller
         }
 
         $data['shipper'] = Shipper::all();
-        $data['consignees'] = Consignee::all();
+        // $data['consignees'] = Consignee::all();
         return view($this->view . 'list', $data, $notification);
     }
 

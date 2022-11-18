@@ -6,7 +6,7 @@
 
     <div id="vehicle_information_main">
         @include('layouts.vehicle_information.general')
-
+        
     </div>
 
 

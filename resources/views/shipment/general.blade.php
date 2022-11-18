@@ -444,9 +444,22 @@
                                                     <label for="shipper" class="col-6 px-0 font-size font-bold">
                                                         Shipper
                                                     </label>
-                                                    <input type="text"
+                                                    <select class="form-control-sm border border-0 rounded-pill bg col-6"
+                                                    name="shipper" id="shipper">
+                                                    @if(@$shipment[0]['shipper'])
+                                                    <option value="{{@$shipment[0]['shipper']}}">{{@$shipment[0]['shipper']}}</option>
+                                                    @else
+                                                    <option selected disabled>Select Shipper</option>
+                                                    @endif
+                                                    @foreach($shippers as $shipper)
+                                                    <option value="{{@$shipper['shipper_name']}}">{{@$shipper['shipper_name']}}</option>
+                                                    @endforeach
+                                                
+                                                </select>
+
+                                                    {{-- <input type="text"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="shipper" id="shipper" value="{{@$shipment[0]['shipper']}}">
+                                                        name="shipper" id="shipper" value="{{@$shipment[0]['shipper']}}"> --}}
                                                 </div>
                                             </div>
                                         </div>

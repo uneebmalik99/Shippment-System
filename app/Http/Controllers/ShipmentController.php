@@ -14,6 +14,7 @@ use App\Models\Shipment_Invice;
 use App\Models\Stamp_Title;
 use App\Models\Vehicle;
 use App\Models\Country;
+use App\Models\Shipper;
 use App\Models\DCountry;
 use App\Models\ShipmentType;
 use App\Models\User;
@@ -179,9 +180,9 @@ class ShipmentController extends Controller
         // $data['companies'] = Company::where('status', '1')->get();
         $data['companies'] = User::all();
         $data['destination_country'] = DCountry::select('country')->where('status', '1')->groupBy('country')->get()->toArray();
-        
+        $data['shippers'] = Shipper::all();
         // $data['states'] = State::where('status', '1')->get();
-        if ($request->ajax()) {
+        if($request->ajax()) {
             $tab = $request->tab;
             // return $tab;
             $output = view('shipment.' . $tab, $data)->render();
@@ -214,6 +215,7 @@ class ShipmentController extends Controller
 
         $data['shipment'] = Shipment::with('vehicle')->where('id', $req->id)->get()->toArray();
         // dd($data['shipment']);
+        $data['shippers'] = Shipper::all();
 
         $notification = $this->Notification();
         $data['vehicles'] = Vehicle::where('shipment_id', null)->get();
@@ -523,6 +525,21 @@ class ShipmentController extends Controller
         }
         return view($this->view . 'profile', $data, $notification);
     }
+
+    
+    public function profile_tab(Request $request)
+    {
+        $id = $request->id;
+        $data = [];
+        $data['shipments'] = Shipment::with('shipment_invoice', 'stamp_titles','other_documents')->where('id', $request->id)->get()->toArray();
+        if ($request->tab) {
+            $tab = $request->tab;
+            $output = view('layouts.shipment_detail.' . $tab, $data)->render();
+        }
+        return Response($output);
+    }
+
+
     public function filtering(Request $request)
     {
         if ($request->ajax()) {

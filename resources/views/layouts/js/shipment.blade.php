@@ -15,15 +15,14 @@
                 // console.log(data);
                 $('.modal-body').html(data);
                 $('#exampleModal').modal('show');
-                $('.shipment-inovice').imageUploader({
-                    maxFiles: 4,
-                    imagesInputName: 'shipment_inovice',
-                });
-                $('.stamp_title').imageUploader({
-                    maxFiles: 4,
-                    imagesInputName: 'stamp_title',
-
-                });
+                // $('.shipment-inovice').imageUploader({
+                //     maxFiles: 4,
+                //     imagesInputName: 'shipment_inovice',
+                // });
+                // $('.stamp_title').imageUploader({
+                //     maxFiles: 4,
+                //     imagesInputName: 'stamp_title',
+                // });
                 $('.loading_image').imageUploader({
                     maxFiles: 4,
                     imagesInputName: 'loading_image',
@@ -36,11 +35,11 @@
                     preloadedInputName: 'loading_old'
 
                 });
-                $('.other-document').imageUploader({
-                    maxFiles: 4,
-                    imagesInputName: 'other_document',
+                // $('.other-document').imageUploader({
+                //     maxFiles: 4,
+                //     imagesInputName: 'other_document',
 
-                });
+                // });
                 iziToast.success({
                     title: 'Success',
                     message: 'Data inserted successfully!',
@@ -287,10 +286,33 @@
             success: function(data) {
                 console.log(data);
                 // $('.modal-body').html(data);
+                $('.modal-title').text('Update Shipment');
                 $('.modal-body').html(data);
                 $('#exampleModal').modal('show');
             }
         });
 
     }
+</script>
+<script>
+    $('.shipment_information_tab').on('click', function() {
+        $id = $(this).attr('id');
+        $tab = $(this).attr('tab');
+        $('.shipment_information_tab').removeClass('active_information_button col-3 next-style');
+        $('.shipment_information_tab').addClass('col-2');
+        $(this).removeClass('col-2');
+        $(this).addClass('active_information_button col-3');
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('admin/shipment/shipment_informationTab') }}',
+            data: {
+                'tab': $tab,
+                'id': $id,
+            },
+            success: function(data) {
+                console.log(data)
+                $('#shipment_tab_body').html(data);
+            }
+        });
+    });
 </script>

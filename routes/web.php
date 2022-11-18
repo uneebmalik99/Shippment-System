@@ -116,6 +116,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::post('/vehicle/FetchModel',       [VehicleController::class, 'FetchModel'])->name('vehicle.FetchModel');
 
+    Route::post('/vehicle/getbuyerids',       [VehicleController::class, 'getbuyersids'])->name('vehicles.get_buyerids');
+
 
     //Sticky Notes Routes
     Route::get('/stickynotes', [StickyController::class, 'index'])->name('sticky.list');
@@ -135,20 +137,15 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/shipments/filtering', [ShipmentController::class, 'filtering'])->name('shipment.filter');
     Route::get('/shipments/records', [ShipmentController::class, 'serverside'])->name('shipments.records');
     Route::post('/shipment/create_images', [ShipmentController::class, 'create_images'])->name('shipments.create_images');
-
     Route::post('/shipments/filterShipment', [ShipmentController::class, 'filterShipmentt'])->name('shipments.filter');
-
     Route::post('/shipments/search_shipment', [ShipmentController::class, 'search_shipment'])->name('shipments.search_shipment');
-
     Route::post('/shipments/fetch_state', [ShipmentController::class, 'FetchState'])->name('shipments.FetchState');
     Route::post('/shipments/fetch_port', [ShipmentController::class, 'FetchPort'])->name('shipments.FetchPort');
-
-
     Route::post('/shipments/fetch_terminal', [ShipmentController::class, 'FetchTerminal'])->name('shipments.FetchTerminal');
-
-
     Route::post('/shipments/fetch_vehicles', [ShipmentController::class, 'add_vehicles'])->name('shipments.add_vehicles');
 
+
+    Route::get('/shipment/shipment_informationTab',       [ShipmentController::class, 'profile_tab'])->name('shipment.profile_tab');
 
 
 

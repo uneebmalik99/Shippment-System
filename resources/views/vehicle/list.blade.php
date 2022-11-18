@@ -444,8 +444,6 @@
                     {
                         data: 'vin',
                         name: 'vin',
-                        autoWidth:false,
-                        width:"50%",
                     },
                     {
                         data: 'year',

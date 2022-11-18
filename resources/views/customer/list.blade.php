@@ -1,7 +1,14 @@
 
-@extends('layouts.partials.mainlayout')
 
+@extends('layouts.partials.mainlayout')
 @section('body')
+<style>
+    .bootstrap-tagsinput {
+      background-color: #aadbff!important;
+      border: none;
+      border-radius: 10px!important;
+  }
+</style>
     <!-- Modal -->
     
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -152,7 +159,7 @@
                             </div>
                         </div>
                         <div>
-                            <div class="font-bold"><span class="px-1">{{ @$consignees->count() }}</span>
+                            <div class="font-bold"><span class="px-1">{{ @$consignees }}</span>
                                 {{-- <span
                                     class="percent_size">({{ @$lastweekconsigneeanalysis }}%)
                                 </span> --}}

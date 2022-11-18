@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Location;
 use App\Models\Vehicle;
 use App\Models\Shipment;
+use App\Models\Shipper;
 use App\Models\Customer;
 use Carbon\Carbon;
 // use App\Http\Controllers\Auth;
@@ -90,7 +91,7 @@ class DashboardController extends Controller
         // auth()->user()->if(Auth::user()->hasRole('Customer')){
         if(Auth::user()->hasRole('Customer')){
             $data['shipments'] = Shipment::where('customer_email', auth()->user()->email);
-
+                $data['consignee'] = Shipper::where('consignee', '!=' , Null)->where('customer_id', auth()->user()->id)->count();
                 $data['TotalVehicles'] = Vehicle::where('added_by_user', auth()->user()->id)->count();
                 $data['NewOrders'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', 1)->count();
                 $data['Dispatched'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', 2)->count();
@@ -144,6 +145,9 @@ class DashboardController extends Controller
             $data['TotalCustomers'] = User::role('Customer')->count();
             $data['ActiveCustomers'] = User::role('Customer')->where('status', '1')->count();
             $data['InActiveCustomers'] = User::role('Customer')->where('status', '0')->count();
+            $data['consignee'] = Shipper::where('consignee', '!=' , Null)->count();
+
+            
             // ===========================  vehicle status ================
         
                 $data['TotalVehicles'] = Vehicle::all()->count();

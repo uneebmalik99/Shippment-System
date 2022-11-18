@@ -825,8 +825,8 @@
                         $('#make').html('<option value="' + vehicle.Make + '">' + vehicle.Make +
                             '</option>');
                         // $('#year').html('<option value="'+vehicle.ModelYear+'">'+vehicle.ModelYear+'</option>');
-                        $('#vehicle_type').html('<option value="' + vehicle.VehicleType + '">' + vehicle
-                            .VehicleType + '</option>');
+                        // $('#vehicle_type').html('<option value="' + vehicle.VehicleType + '">' + vehicle
+                        //     .VehicleType + '</option>');
                         $('#getinfo').attr('id', 'reset');
                         $('#getinfo').text('Reset');
                         }

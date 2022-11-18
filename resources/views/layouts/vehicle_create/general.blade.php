@@ -25,7 +25,7 @@
                                     <label for="customer_name" class="col-6 px-0 font-size font-bold">Company Name <span
                                             class="text-danger">*</span></label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
-                                        name="customer_name" id="customer_name" value="{{ @$user[0]['customer_name'] }}">
+                                        name="customer_name" id="customer_name" value="{{ @$user[0]['customer_name'] }}" onchange="getbuyerids()">
                                         @if(@$user[0]['customer_name'])
                                         <option value="{{@$user[0]['customer_name']}}">{{@$user[0]['customer_name']}}</option>
                                         @else

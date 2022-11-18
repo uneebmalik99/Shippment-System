@@ -428,7 +428,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="font-bold"><span class="px-1">32</span>
+                                    <div class="font-bold"><span class="px-1">{{@$consignee}}</span>
                                     </div>
                                     <div class="py-1 col-12 text-muted p-0 font-size">
                                         {{-- <span>Last week Analytics</span> --}}
