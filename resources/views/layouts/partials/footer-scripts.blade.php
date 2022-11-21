@@ -1345,3 +1345,251 @@
         }
     }
 </script>
+
+
+{{-- towing rate and shipping rate  --}}
+
+
+
+<script>
+    document.onreadystatechange = function() {
+        var state = document.readyState
+        if (state == 'interactive') {
+            document.getElementById('contents').style.visibility = "hidden";
+        } else if (state == 'complete') {
+            setTimeout(function() {
+                document.getElementById('interactive');
+                document.getElementById('load').style.visibility = "hidden";
+                document.getElementById('contents').style.visibility = "visible";
+            }, 1000);
+        }
+    }
+</script>
+<script>
+    function saveshipmentrate(id,value){
+        var container_size  = $('#container_size').val();
+        var vehicle         = $('#vehicle').val();
+        var loading_port    = $('#loading_port').val();
+        var destination     = $('#destination').val();
+        var shipping_line   = $('#shipping_line').val();
+        var rate            = $('#rate').val();
+        $.ajax({
+            type: 'post',
+            url: '{{ route('save.shipmentrate') }}',
+            data: {
+                container_size: container_size,
+                vehicle: vehicle,
+                loading_port: loading_port,
+                destination: destination,
+                shipping_line: shipping_line,
+                rate: rate,
+            },
+            success: function(data) {
+                if (data == 'success') {
+                    iziToast.success({
+                        timeout: 5000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Record Saved'
+                    });
+                    setTimeout(function () {
+                    location.reload(true);
+                }, 5000);
+                }
+            },
+        });
+    }
+</script>
+<script>
+    function deletemaster_rate(id) {
+        $.ajax({
+            type: 'post',
+            url: '{{ route('delete.shipmentrate') }}',
+            data: {
+                id: id,
+            },
+            success: function(data) {
+                if (data == 'deleted') {
+                    iziToast.success({
+                        timeout: 5000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Record Deleted'
+                    });
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 5000);
+                }
+            },
+        });
+    }
+</script>
+<script>
+    function statusshipmentrate(id,value){
+        $.ajax({
+            type: 'post',
+            url: '{{ route('shipmentrate.status') }}',
+            data: {
+                status: value,
+                id: id
+            },
+            success: function(data) {
+                if (data == 'updated') {
+                    iziToast.success({
+                        timeout: 5000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Status Updated'
+                    });
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 5000);
+                }
+            }
+        });
+    }
+</script>
+<script>
+    $("#shipment_rate_add").click(function() {
+        var id = $(this).attr("id");
+        $.ajax({
+            type: 'post',
+            url: '{{ route('shipment_rate.showmodel') }}',
+            data: {
+                id: id
+            },
+            success: function(data) {
+                $('#shipmentrate_body').html(data);
+            }
+        });
+    });
+</script>
+<script>
+    function update_shipmentrate(id,value){
+        $.ajax({
+            type: 'post',
+            url: '{{ route('shipment_rate.showmodel') }}',
+            data: {
+                id: id,
+                value,value
+            },
+            success: function(data) {
+                $('#shipmentrate_body').html(data);
+            }
+        });
+    }
+</script>
+<script>
+    function saveshipmentrate(id,value){
+        var container_size  = $('#container_size').val();
+        var vehicle         = $('#vehicle').val();
+        var loading_port    = $('#loading_port').val();
+        var destination     = $('#destination').val();
+        var shipping_line   = $('#shipping_line').val();
+        var rate            = $('#rate').val();
+        $.ajax({
+            type: 'post',
+            url: '{{ route('updatesave.shipmentrate') }}',
+            data: {
+                container_size: container_size,
+                vehicle: vehicle,
+                loading_port: loading_port,
+                destination: destination,
+                shipping_line: shipping_line,
+                rate: rate,
+                id:id,
+                value,value,
+            },
+            success: function(data) {
+                if (data == 'updated') {
+                    iziToast.success({
+                        timeout: 5000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Record Updated'
+                    });
+                //     setTimeout(function () {
+                //     location.reload(true);
+                // }, 5000);
+                location.reload();
+                }
+                if (data == 'success') {
+                    iziToast.success({
+                        timeout: 5000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Record Saved'
+                    });
+                //     setTimeout(function () {
+                //     location.reload(true);
+                // }, 5000);
+                location.reload();
+                }
+            },
+        });
+    }
+</script>
+<script>
+    $("#towing_rate_add").click(function(){
+        var id = $(this).attr("id");
+        $.ajax({
+            type: 'post',
+            url: '{{ route('towing_rate.showmodel') }}',
+            data: {
+                id: id
+            },
+            success: function(data) {
+                $('#towingrate_body').html(data);
+            }
+        });
+    });
+</script>
+<script>
+    function deletetowing_rate(id){
+        $.ajax({
+            type: 'post',
+            url: '{{ route('delete.towingrate') }}',
+            data: {
+                id: id,
+            },
+            success: function(data) {
+                if (data == 'deleted') {
+                    iziToast.success({
+                        timeout: 5000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Record Deleted'
+                    });
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 5000);
+                }
+            },
+        });
+    }
+</script>
+<script>
+    function statustowingrate(id,value){
+        $.ajax({
+            type: 'post',
+            url: '{{ route('towingrate.status') }}',
+            data: {
+                status: value,
+                id: id
+            },
+            success: function(data) {
+                if (data == 'updated') {
+                    iziToast.success({
+                        timeout: 5000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Status Updated'
+                    });
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 5000);
+                }
+            }
+        });
+    }
+</script>

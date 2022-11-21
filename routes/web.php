@@ -12,6 +12,8 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\StickyController;
 use App\Http\Controllers\MasterTowing;
+use App\Http\Controllers\ShipmentRateController;
+use App\Http\Controllers\MasterTowingController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
@@ -225,9 +227,20 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/vehicle',                             [MasterController::class, 'mmsshow'])->name('master.mms');
     // master towing page routes 
 
-    Route::get('/master-towing',                     [MasterTowing::class, 'index'])->name('master.towing');
+    Route::get('/master/towing',                       [MasterTowingController::class, 'index'])->name('master.towing');
+    Route::post('/master/towing/save',                 [MasterTowingController::class, 'save'])->name('save.towingrate');
+    Route::post('/master/towing/delete',               [MasterTowingController::class, 'delete'])->name('delete.towingrate');
+    Route::post('/master/towing/status',               [MasterTowingController::class, 'changestatus'])->name('towingrate.status');
+    Route::post('/master/towing/showmodel',            [MasterTowingController::class, 'show_model'])->name('towing_rate.showmodel');
 
-    Route::get('/shipment-rate',                     [MasterTowing::class, 'shipment_rate'])->name('shipment.rate');
+    // master shipment rate page routes
+    Route::get('/shipment/rate',                       [ShipmentRateController::class, 'index'])->name('shipment.rate');
+
+    Route::post('/shipment/rate/save',                 [ShipmentRateController::class, 'save'])->name('save.shipmentrate');
+    Route::post('/master/shipment/delete',             [ShipmentRateController::class, 'delete'])->name('delete.shipmentrate');
+    Route::post('/master/shipment/status',             [ShipmentRateController::class, 'changestatus'])->name('shipmentrate.status');
+    Route::post('/master/shipment/showmodel',          [ShipmentRateController::class, 'show_model'])->name('shipment_rate.showmodel');
+    Route::post('/master/shipment/update',             [ShipmentRateController::class, 'update_save'])->name('updatesave.shipmentrate');
 
 
 

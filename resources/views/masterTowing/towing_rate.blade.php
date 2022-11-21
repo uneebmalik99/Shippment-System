@@ -183,78 +183,50 @@
 </style>
 <div class="container-fluid p-0">
     <div class="bg-white rounded p-2">
-
-        <div class="row p-2">
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12 p-2">
-
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="loading_date"
-                            style="height: 31px!important;font-size:12px!important;background:white!important;">Valid From</span>
-                    </div>
-                    <input type="date" class="form-control-sm border-style shipment_filtering col-7 text-muted px-2"
-                        id="loading_date" aria-describedby="loading_date" style="height: 31px!important;" required="">
-                </div>
-
-
-
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12 p-2">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="arrival_date"
-                            style="height: 31px!important;font-size:12px!important;background:white!important">Valid To</span>
-                    </div>
-                    <input type="date" class="form-control-sm border-style shipment_filtering col-7 text-muted px-2"
-                        id="arrival_date" aria-describedby="arrival_date" style="height: 31px!important;" required="">
-                </div>
-            </div>
-        </div>
-        <table id="shipmentrate_table" style="width: 100% !important">
-            <thead style="background: #3e5871 ;color:#fff">
+        <table id="towingrate_table" style="width: 100% !important">
+            <thead style="width: 100% !important;background: #3e5871 ;color:#fff">
                 <tr>
                     <th>Sr#</th>
-                    <th>Container Size</th>
-                    <th>Vehicle</th>
-                    <th>Loading Port</th>
-                    <th>Destination</th>
-                    <th>Shipping Line</th>
-                    <th>Rate</th>
+                    <th>City</th>
+                    <th>Auction</th>
+                    <th>New Jersery</th>
+                    <th>Georgia</th>
+                    <th>Teses</th>
+                    <th>California</th>
+                    <th>Seattle</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $i='1' ?>
-                @foreach (@$shippment_rate as $ShipRecord)
+                @foreach ($master_towing as $TowingRecord)
                 <tr>
                     <td>{{ $i }}.</td>
-                    <td>{{ @$ShipRecord['container_size'] }}</td>
-                    <td>{{ @$ShipRecord['vehicle'] }}</td>
-                    <td>{{ @$ShipRecord['loading_port'] }}</td>
-                    <td>{{ @$ShipRecord['destination'] }}</td>
-                    <td>{{ @$ShipRecord['shipping_line'] }}</td>
-                    <td>{{ @$ShipRecord['rate'] }}</td>
+                    <td> {{ @$TowingRecord['city'] }}</td>
+                    <td> {{ @$TowingRecord['auction'] }}</td>
+                    <td> {{ @$TowingRecord['new_jersery'] }}</td>
+                    <td> {{ @$TowingRecord['georgia'] }}</td>
+                    <td> {{ @$TowingRecord['teses'] }}</td>
+                    <td>{{ @$TowingRecord['california'] }}</td>
+                    <td> {{ @$TowingRecord['seattle'] }}</td>
                     <td>
-                        @if($ShipRecord['status']=='1')
-                        <div class="font-size badge badge-success m-2 rounded">
+                        @if($TowingRecord['status']=='1')
+                        <div class="font-size badge badge-success py-1 px-2 rounded">
                             <span>Active</span>
                         </div>
                         @endif
-                        @if($ShipRecord['status']=='0')
-                        <div class="font-size badge badge-danger m-2 rounded">
+                        @if($TowingRecord['status']=='0')
+                        <div class="font-size badge badge-danger py-1 px-2 rounded">
                             <span>Inactive</span>
                         </div>
                         @endif
                     </td>
                     <td style="text-center">
-                        <input class="form-check-input" id="{{$ShipRecord['id']}}"
-                            onchange="statusshipmentrate(this.id,this.value)" {{$ShipRecord['status']==1 ?'checked':''}}
-                            type="checkbox" value="{{$ShipRecord['status']}}">
-                        <button data-target="#shipmentrate_modal" data-toggle="modal" value="update"
-                            id="{{ @$ShipRecord['id'] }}" onclick="update_shipmentrate(this.id,this.value)"
-                            class="update_shipmentrate" id="{{ @$ShipRecord['id'] }}"
-                            style="outline:none !important;border:none !important;cursor: pointer !important;">
+                        <input class="form-check-input" id="{{$TowingRecord['id']}}"
+                            onchange="statustowingrate(this.id,this.value)" {{$TowingRecord['status']==1 ?'checked':''}}
+                            type="checkbox" value="{{$TowingRecord['status']}}">
+                        <button class="edit-button" id="{{ @$TowingRecord['id'] }}" style="cursor: pointer !important;">
                             <svg width="10" height="10" viewBox="0 0 16 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -263,8 +235,9 @@
                             </svg>
                         </button>
                         <button class="delete-button"
-                            onclick="confirm('Are you sure you want to delete this item?'); deletemaster_rate(this.id,this.value)"
-                            id="{{ @$ShipRecord['id'] }}" style="cursor: pointer !important;margin-left:5px !important">
+                            onclick="confirm('Are you sure you want to delete this item?'); deletetowing_rate(this.id,this.value)"
+                            id="{{ @$TowingRecord['id'] }}"
+                            style="cursor: pointer !important;margin-left:5px !important">
 
                             <svg width="10" height="10" viewBox="0 0 12 12" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -283,46 +256,44 @@
 
 
     <!-- add update modal -->
-    <div class="modal fade" id="shipmentrate_modal" role="dialog">
-        <div class="modal fade show" id="shipmentrate_modal" tabindex="-1" role="dialog"
+    <div class="modal fade" id="towingrate_modal" role="dialog">
+        <div class="modal fade show" id="towingrate_modal" tabindex="-1" role="dialog"
             aria-labelledby="commonmodalLabel" aria-modal="true" style="display: block;">
             <div class="modal-dialog" role="document">
-                <div class="modal-content" id="shipmentrate_body">
+                <div class="modal-content" id="towingrate_body">
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 <script>
-    $('#shipmentrate_table').DataTable({
-                'columnDefs': [ {
-                'targets': [-1,-2],
-                'orderable': false,
-            }],
-            scrollX: true,
-            select: true,
-            dom: 'Blfrtip',
-            lengthMenu: [
-                [10, 25, 50],
-                ['10', '25', '50']
-            ],
-            language: {
-                search: "",
-                sLengthMenu: "_MENU_",
-                searchPlaceholder: "Search"
-            },
-            buttons: [{
-                text: 'Add New Record',
-                attr: {
-                    id: 'shipment_rate_add',
-                    // class:'btn',
-                    'data-toggle':'modal',
-                    'data-target':'#shipmentrate_modal',
-                    // 'tab':'',
-                    },
-            }],
-        });
+    $('#towingrate_table').DataTable({
+            'columnDefs': [ {
+            'targets': [-1,-2],
+            'orderable': false,
+        }],
+        scrollX: true,
+        select: true,
+        dom: 'Blfrtip',
+        lengthMenu: [
+            [10, 25, 50],
+            ['10', '25', '50']
+        ],
+        language: {
+            search: "",
+            sLengthMenu: "_MENU_",
+            searchPlaceholder: "Search"
+        },
+        buttons: [{
+            text: 'Add New Record',
+            attr: {
+                id: 'towing_rate_add',
+                // class:'btn',
+                'data-toggle':'modal',
+                'data-target':'#towingrate_modal',
+                // 'tab':'',
+                },
+        }],
+    });
 </script>
 @endsection
