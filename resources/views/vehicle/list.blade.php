@@ -112,7 +112,7 @@
                 </div>
             </div>
 
-            <div class="col-4 p-1" id="2" tab="dispatched" onclick="fetchVehicles(this.id)" style="cursor:pointer">
+            <div class="col-4 p-1" id="2" tab="Dispatched" onclick="fetchVehicles(this.id)" style="cursor:pointer">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -183,7 +183,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4 p-1" id="5" tab="towing" onclick="fetchVehicles(this.id)"
+            <div class="col-4 p-1" id="5" tab="Towing" onclick="fetchVehicles(this.id)"
                 style="cursor:pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
