@@ -806,6 +806,7 @@ class CustomerController extends Controller
                     $id = $val['id'];
                 }
                 $data['customer_id'] = $id;
+                // $data['customer_id'] = 66;
 
                 unset($data['email']);
             }
@@ -915,9 +916,41 @@ class CustomerController extends Controller
                 ];
 
             } else {
-               
-                $Obj = Quotation::updateOrCreate(['id'=> $request->id], $data);
-                
+                // dd($request->id[0]);
+                if($request->id){
+                    for($i = 0; $i<count($request->default); $i++){
+                        $Obj = Quotation::where('id', $request->id[$i])->update( [
+                            'destination_port' => $data['destination_port'],
+                            'valid_from' => $data['valid_from'],
+                            'valid_till' => $data['valid_till'],
+                            'container_size' => $data['container_size'][$i],
+                            'vehicle' => $data['vehicle'][$i],
+                            'loading_port' => $data['loading_port'][$i],
+                            'shipping_line' => $data['shipping_line'][$i],
+                            'default' => $data['default'][$i],
+                            'special_rate' => $data['special_rate'][$i],
+                            'customer_id' => $data['customer_id']
+                        ]);
+                    }
+                }
+                else{
+                    for($i = 0; $i<count($request->default); $i++){
+                        $Obj = Quotation::Create([
+                            'destination_port' => $data['destination_port'],
+                            'valid_from' => $data['valid_from'],
+                            'valid_till' => $data['valid_till'],
+                            'container_size' => $data['container_size'][$i],
+                            'vehicle' => $data['vehicle'][$i],
+                            'loading_port' => $data['loading_port'][$i],
+                            'shipping_line' => $data['shipping_line'][$i],
+                            'default' => $data['default'][$i],
+                            'special_rate' => $data['special_rate'][$i],
+                            'customer_id' => $data['customer_id']
+                        ]);
+                    }
+                }
+           
+                // $Obj = Quotation::updateOrCreate(['id'=> $request->id], $data);
                 $output =
                     [
                     'result' => 'success',

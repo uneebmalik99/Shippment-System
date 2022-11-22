@@ -1,4 +1,6 @@
-<table id="on_hand_table" class="table scroll row-border">
+{{-- {{dd($records[0]['pickupimages'][0]['name'])}} --}}
+
+<table id="on_hand_table" class="table row-border" style="width:100%!important;">
     <thead class="bg-custom">
         <tr class="font-size">
             <th><input type="checkbox" name="main_checkbox"><label></label>
@@ -15,19 +17,22 @@
                 </button>
             </th>
             <th class="font-bold-tr">Sr</th>
-            <th class="font-bold-tr">CLIENT</th>
+            <th class="font-bold-tr">IMAGE</th>
+            <th class="font-bold-tr">CLIENTS</th>
             <th class="font-bold-tr">YEAR</th>
             <th class="font-bold-tr">MAKE</th>
             <th class="font-bold-tr">MODEL</th>
             <th class="font-bold-tr">VIN</th>
-            <th class="font-bold-tr">LOT</th>
-            <th class="font-bold-tr">Buyer Id</th>
             <th class="font-bold-tr">AUCTION</th>
+            <th class="font-bold-tr">BUYER ID</th>
+            <th class="font-bold-tr">LOT</th>
             <th class="font-bold-tr">TITLE</th>
-            <th class="font-bold-tr">KEYS</th>
+            <th class="font-bold-tr">KEY</th>
+            <th class="font-bold-tr">DEL DATE</th>
             <th class="font-bold-tr">AGE</th>
+            <th class="font-bold-tr">TOW</th>
             <th class="font-bold-tr">SHIPPER</th>
-            <th class="font-bold-tr">ACTION</th>
+            <th class="font-bold-tr">ACTIONS</th>
         </tr>
     </thead>
     <tbody class="bg-white font-size" id="vehicle_tbody">
@@ -44,6 +49,13 @@
                 <td><input type="checkbox" name="checkboxes" data-id="{{@$val['id']}}"></td>
                 <td>{{ @$i }}</td>
                 <td>
+                    @if($records[0]['pickupimages'][0]['name'])
+                    <i class="fa fa-camera" aria-hidden="true" style="color:#3e5871!important;"></i>
+                    @endif
+                    
+                    {{-- <img src="{{asset($records[0]['pickupimages'][0]['name'])}}" alt="" style="width: 25px;height:25px;border-radius:50%;"> --}}
+                </td>
+                <td>
                         
                             {{ @$val['customer_name'] }}<br>
                             
@@ -53,12 +65,14 @@
                 <td>{{ @$val['make'] }}</td>
                 <td>{{ @$val['model'] }}</td>
                 <td>{{ @$val['vin'] }}</td>
-                <td>{{ @$val['lot'] }}</td>
-                <td>{{ @$val['buyer_id'] }}</td>
                 <td>{{ @$val['auction'] }}</td>
+                <td>{{ @$val['buyer_id'] }}</td>
+                <td>{{ @$val['lot'] }}</td>
                 <td>{{ @$val['title'] }}</td>
                 <td>{{ @$val['keys'] }}</td>
+                <td>{{ @$val['delivered_date'] }}</td>
                 <td>{{ @$val['age'] }}</td>
+                <td>{{ @$val['towing_charges'] }}</td>
                 <td>{{ @$val['shipper'] }}</td>
                 <td>
                     <button class='profile-button'><a href={{route('vehicle.profile', @$val['id'])}}>
@@ -101,3 +115,4 @@
         @endforeach
     </tbody>
 </table>
+

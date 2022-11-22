@@ -63,17 +63,17 @@ class User extends Authenticatable
 
     public function shippers()
     {
-        return $this->hasMany('App\Models\Shipper');
+        return $this->hasMany('App\Models\Shipper', 'customer_id', 'id');
     }
 
     public function quotations()
     {
-        return $this->hasMany('App\Models\Quotation');
+        return $this->hasMany('App\Models\Quotation', 'customer_id', 'id');
     }
 
     public function notifications()
     {
-        return $this->hasMany('App\Models\Notification');
+        return $this->hasMany('App\Models\Notification', 'customer_id', 'id');
     }
     public function buyer_id(){
         return $this->hasMany('App\Models\CustomerBuyerId', 'customer_id', 'id');

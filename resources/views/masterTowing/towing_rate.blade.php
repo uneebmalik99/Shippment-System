@@ -1,6 +1,57 @@
 @extends('layouts.partials.mainlayout')
 @section('body')
 <style>
+    .dropdown-check-list {
+  display: inline-block;
+}
+
+.dropdown-check-list .anchor {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 50px 5px 10px;
+  border: 1px solid #ccc;
+}
+
+.dropdown-check-list .anchor:after {
+  position: absolute;
+  content: "";
+  border-left: 2px solid black;
+  border-top: 2px solid black;
+  padding: 5px;
+  right: 10px;
+  top: 20%;
+  -moz-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+
+.dropdown-check-list .anchor:active:after {
+  right: 8px;
+  top: 21%;
+}
+
+.dropdown-check-list ul.items {
+  padding: 2px;
+  display: none;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.dropdown-check-list ul.items li {
+  list-style: none;
+}
+
+.dropdown-check-list.visible .anchor {
+  color: #0094ff;
+}
+
+.dropdown-check-list.visible .items {
+  display: block;
+}
     tbody tr td {
         background-color: #fff !important;
         box-shadow: none !important;
@@ -70,10 +121,9 @@
 
     .modal {
         position: fixed;
-        top: 50px;
-        right: 0;
-        bottom: 0;
-        left: 370px;
+        width:50%;
+        left:25%;
+        top:10%;
         z-index: 1050;
         display: none;
         overflow: hidden;
@@ -164,6 +214,16 @@
     }
 
     @media only screen and (max-width: 600px) {
+        .modal {
+            position: fixed;
+            width:80%;
+            left:10%;
+            top:10%;
+            z-index: 1050;
+            display: none;
+            overflow: hidden;
+            outline: 0;
+        }
         .title_cards {
             font-size: 15px !important;
         }
@@ -189,6 +249,7 @@
                     <th>Sr#</th>
                     <th>City</th>
                     <th>Auction</th>
+                    <th>Rate</th>
                     <th>New Jersery</th>
                     <th>Georgia</th>
                     <th>Teses</th>
@@ -205,6 +266,7 @@
                     <td>{{ $i }}.</td>
                     <td> {{ @$TowingRecord['city'] }}</td>
                     <td> {{ @$TowingRecord['auction'] }}</td>
+                    <td> {{ @$TowingRecord['rate'] }}</td>
                     <td> {{ @$TowingRecord['new_jersery'] }}</td>
                     <td> {{ @$TowingRecord['georgia'] }}</td>
                     <td> {{ @$TowingRecord['teses'] }}</td>
@@ -212,12 +274,12 @@
                     <td> {{ @$TowingRecord['seattle'] }}</td>
                     <td>
                         @if($TowingRecord['status']=='1')
-                        <div class="font-size badge badge-success py-1 px-2 rounded">
+                        <div class="font-size badge badge-success py-1 px-2 mr-2 rounded">
                             <span>Active</span>
                         </div>
                         @endif
                         @if($TowingRecord['status']=='0')
-                        <div class="font-size badge badge-danger py-1 px-2 rounded">
+                        <div class="font-size badge badge-danger py-1 px-2 mr-2 rounded">
                             <span>Inactive</span>
                         </div>
                         @endif
@@ -226,7 +288,7 @@
                         <input class="form-check-input" id="{{$TowingRecord['id']}}"
                             onchange="statustowingrate(this.id,this.value)" {{$TowingRecord['status']==1 ?'checked':''}}
                             type="checkbox" value="{{$TowingRecord['status']}}">
-                        <button class="edit-button" id="{{ @$TowingRecord['id'] }}" style="cursor: pointer !important;">
+                        <button value="udpate" data-toggle="modal" data-target="#towingrate_modal"  onclick="update_towingrate(this.id,this.value)" class="edit-button" id="{{ @$TowingRecord['id'] }}" style="cursor: pointer !important;">
                             <svg width="10" height="10" viewBox="0 0 16 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path

@@ -1,4 +1,4 @@
-<table id="no_title" class="table row-border">
+<table id="no_title" class="table row-border" style="width:100%!important;">
     <thead class="bg-custom">
         <tr class="font-size">
             <th class="font-bold-tr">Sr</th>

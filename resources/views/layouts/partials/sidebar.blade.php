@@ -378,6 +378,15 @@
                                 </a>
                             </li>
 
+                            <li class="change-loges.html py-2">
+                                <a href="{{ route('importVehicles.list') }}">
+                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Imported Vehicles</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+
+
                             <li class="change-loges.html">
                                 <a href="{{ route('master.companies') }}">
                                     <span class="pcoded-micon"><i class="ti-calendar"></i></span>
@@ -469,13 +478,7 @@
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
-                            {{-- <li class="change-loges.html">
-                                <a href="{{ route('master.vehiclestatus') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Vehicle Status</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li> --}}
+                           
                             <li class="change-loges.html">
                                 <a href="{{ route('master.pickuplocation') }} ">
                                     <span class="pcoded-micon"><i class="ti-calendar"></i></span>
@@ -526,7 +529,21 @@
                                 </a>
                             </li>
 
-                            <li class=" ">
+                        </ul>
+                    </li>
+
+                    @endcan
+
+                    <li class="pcoded-hasmenu">
+                        <a href="javascript:void(0)">
+                            <span class="pcoded-micon"><i class="fas fa-percent"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Rate</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+
+                        <ul class="pcoded-submenu">
+
+                            <li class="">
                                 <a href="{{route('shipment.rate')}}">
                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.project">Shipment Rate</span>
@@ -534,7 +551,7 @@
                                 </a>
                             </li>
 
-                            <li class=" ">
+                            <li class="">
                                 <a href="{{route('master.towing')}}">
                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.project">Towing Rate</span>
@@ -543,227 +560,16 @@
                             </li>
                         </ul>
 
-
-                        {{-- <ul class="pcoded-submenu">
-                            <li class="change-loges.html py-2">
-                                <a href="{{ route('user.list') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Users</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.companies') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Company</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.color') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Color</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.title') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Title</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.key') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Key</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.vehicletype') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Vehicle Types</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.auction') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Auction</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Vehicle</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.shipmentstatus') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Shipment Status</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.shipmentlines') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Shipment Lines</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.containertype') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Container Type</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.containersize') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Container Size</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href=" {{ route('master.titletypes')}} ">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Title Types</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.shippername') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Shippername</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.pickuplocation') }} ">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Pickup Location</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.site') }} ">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Site</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.warehouse') }} ">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Warehouse</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.shipmenttype') }} ">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Shipment Types</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.loadingcountry') }} ">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Loading Country</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.destinationcountry') }} ">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Destination Country</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.mms') }} ">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">MMS</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class=" ">
-                                <a href="">
-                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.project">Shipment Rate</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class=" ">
-                                <a href="">
-                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.project">Towing Rate</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul> --}}
-                        {{-- <ul class="pcoded-submenu">
-
-                            <li class="change-loges.html py-2">
-                                <a href="{{ route('user.list') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Users</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.list') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Master</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-
-                            <li class="change-loges.html">
-                                <a href="{{ route('master.loading_countires') }}">
-                                    <span class="pcoded-micon"><i class="ti-calendar"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.event-calendar.main">Loading Countries</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-
-                            <li class=" ">
-                                <a href="">
-                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.project">Shipment Rate</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-
-                            <li class=" ">
-                                <a href="{{route('master.towing')}}">
-                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.project">Towing Rate</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul> --}}
                     </li>
 
-                    @endcan
-
-
-
-
-                    <li class="change-loges.html py-2">
+                    {{-- <li class="change-loges.html py-2">
                         <a href="" class="comingsoon">
                             <span class="pcoded-micon"><i class="fas fa-percent"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.internationalize.main">Rate</span>
 
                             <span class="pcoded-mcaret"></span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="change-loges.html py-2">
                         <a href="{{ route('calendar.list') }}">
                             <span class="pcoded-micon"><i class="fas fa-calendar"></i></span>

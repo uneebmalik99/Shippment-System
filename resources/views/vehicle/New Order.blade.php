@@ -1,4 +1,4 @@
-<table id="new_order_table" class="table row-border">
+<table id="new_order_table" class="table row-border" style="width:100%!important;">
     <thead class="bg-custom">
         <tr class="font-size">
             <th class="font-bold-tr">Sr</th>
@@ -9,17 +9,16 @@
             <th class="font-bold-tr">MODEL</th>
             <th class="font-bold-tr">VIN</th>
             <th class="font-bold-tr">AUCTION</th>
-            <th class="font-bold-tr">BIDDER</th>
-            <th class="font-bold-tr">LOT</th>
-            <th class="font-bold-tr">WEIGHT</th>
+            <th class="font-bold-tr">BUYER ID</th>
+            <th class="font-bold-tr">LOT #</th>
             <th class="font-bold-tr">STATE</th>
-            <th class="font-bold-tr">PICK UP LOCATION</th>
-            <th class="font-bold-tr">OFFSITE</th>
+            <th class="font-bold-tr">LOCATION</th>
+            <th class="font-bold-tr">SITE</th>
             <th class="font-bold-tr">TITLE</th>
-            <th class="font-bold-tr">KEYS</th>
+            <th class="font-bold-tr">KEY</th>
             <th class="font-bold-tr">SALE DATE</th>
             <th class="font-bold-tr">AGE</th>
-            <th class="font-bold-tr">ACTION</th>
+            <th class="font-bold-tr">ACTIONS</th>
         </tr>
     </thead>
     <tbody class="bg-white font-size" id="vehicle_tbody">
@@ -39,7 +38,6 @@
                 <td>{{ @$val['auction'] }}</td>
                 <td>{{ @$val['bidder'] }}</td>
                 <td>{{ @$val['lot'] }}</td>
-                <td>{{ @$val['weight'] }}</td>
                 <td>{{ @$val['state'] }}</td>
                 <td>{{ @$val['pickup_location'] }}</td>
                 <td>{{ @$val['offsite'] }}</td>

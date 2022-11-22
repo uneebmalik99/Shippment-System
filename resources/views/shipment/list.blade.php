@@ -6,10 +6,7 @@
     height: 1em;
     width: 1em;
     margin-top: -9px!important;
-    /* display: inline-block; */
     color: black!important;
-    /* border: 0.15em solid white; */
-    /* border-radius: 1em; */
     box-shadow: 0 0 0.2em #444;
     box-sizing: content-box;
     text-align: center;
@@ -323,25 +320,23 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                         style="width:100%!important;overflow-x:scroll!important;">
                         <thead class="bg-custom">
                             <tr class="font-size">
-                                <th class="font-bold-tr">View Vehicles</th>
-                                <th class="font-bold-tr">Image</th>
-                                <th class="font-bold-tr">Consigned To</th>
-                                <th class="font-bold-tr">Container No</th>
-                                <th class="font-bold-tr">Booking No</th>
-                                <th class="font-bold-tr">Lines</th>
-                                <th class="font-bold-tr">Size</th>
-                                <th class="font-bold-tr">Loading Date</th>
-                                <th class="font-bold-tr">SALE DATE</th>
-                                <th class="font-bold-tr">ARRIVAL DATE</th>
-                                <th class="font-bold-tr">Release Date</th>
+                                <th class="font-bold-tr">VIEW VEHICLES</th>
+                                <th class="font-bold-tr">IMAGE</th>
+                                <th class="font-bold-tr">CONSIGNEES</th>
+                                <th class="font-bold-tr">CONTAINER NO:</th>
+                                <th class="font-bold-tr">BOOKING NO</th>
+                                <th class="font-bold-tr">LINES</th>
+                                <th class="font-bold-tr">NO OF VEHICLES</th>
+                                <th class="font-bold-tr">SIZE</th>
+                                <th class="font-bold-tr">LOAD DATE</th>
+                                <th class="font-bold-tr">CUT OFF DATE</th>
+                                <th class="font-bold-tr">EXPORT DATE</th>
+                                <th class="font-bold-tr">ARR Date</th>
                                 <th class="font-bold-tr">Shipper</th>
-                                <th class="font-bold-tr">Loading Port</th>
-                                <th class="font-bold-tr">Delivery Date</th>
-                                <th class="font-bold-tr">Docs</th>
-                                <th class="font-bold-tr">Status</th>
-                                <th>Vehicles</th>
-                                <th>Note</th>
-                                <th class="font-bold-tr">Action</th>
+                                <th class="font-bold-tr">LOADING PORT</th>
+                                <th class="font-bold-tr">DESTINATION PORT</th>
+                                <th class="font-bold-tr">DOCS</th>
+                                <th class="font-bold-tr">ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white font-size" id="shipment_tbody">
@@ -417,6 +412,9 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                         data: 'shipping_line'
                     },
                     {
+                        data: 'shipment_id'
+                    },
+                    {
                         data: 'container_size'
                     },
                     {
@@ -438,16 +436,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                         data: 'loading_port'
                     },
                     {
-                        data: 'loading_port'
-                    },
-                    {
-                        data: 'destination_country'
-                    },
-                    {
-                        data: 'status'
-                    },
-                    {
-                        data: 'shipment_id'
+                        data: 'destination_port'
                     },
                     {
                         data: 'notes'
@@ -497,7 +486,9 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                     'id': $id,
                 },
                 success: function(data) {
-                    $('#shipment_tbody').html(data);
+                    // $('#shipment_tbody').html(data);
+                    $('.shipment_table_body').html(data);
+
                 }
             });
         }

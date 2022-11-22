@@ -138,6 +138,10 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::get('/shipments/filtering', [ShipmentController::class, 'filtering'])->name('shipment.filter');
     Route::get('/shipments/records', [ShipmentController::class, 'serverside'])->name('shipments.records');
+
+    Route::get('/shipments/FetchStatusRecords', [ShipmentController::class, 'FetchStatusRecords'])->name('shipments.FetchStatusRecords');
+
+
     Route::post('/shipment/create_images', [ShipmentController::class, 'create_images'])->name('shipments.create_images');
     Route::post('/shipments/filterShipment', [ShipmentController::class, 'filterShipmentt'])->name('shipments.filter');
     Route::post('/shipments/search_shipment', [ShipmentController::class, 'search_shipment'])->name('shipments.search_shipment');
@@ -194,6 +198,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/tickets', [TicketController::class, 'index'])->name('ticket.list');
 
     // Master Routes
+    Route::get('/importVehicles',                           [MasterController::class, 'importVehicles'])->name('importVehicles.list');
+
+
     Route::get('/master',                               [MasterController::class, 'index'])->name('master.list');
     Route::post('/make',                                [MasterController::class, 'make'])->name('make.list');
     Route::post('/add_make',                            [MasterController::class, 'add_make'])->name('add.make');
@@ -226,6 +233,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/destination/country',                 [MasterController::class, 'destinationcountryshow'])->name('master.destinationcountry');
     Route::get('/vehicle',                             [MasterController::class, 'mmsshow'])->name('master.mms');
     // master towing page routes 
+
+    Route::post('/master/towing/saveupdate',           [MasterTowingController::class, 'update_save'])->name('updatesave.towingrate');
 
     Route::get('/master/towing',                       [MasterTowingController::class, 'index'])->name('master.towing');
     Route::post('/master/towing/save',                 [MasterTowingController::class, 'save'])->name('save.towingrate');

@@ -45055,7 +45055,7 @@ body.dark-layout .chat-bg {
 }
 
 .pcoded-inner-navbar {
-    height: 100%;
+    /* height: 100%; */
 }
 
 .pcoded[theme-layout="vertical"] .pcoded-header {

@@ -1,5 +1,8 @@
 @extends('layouts.partials.mainlayout')
 @section('body')
+<style>
+    
+</style>
     <div class="card-block">
         <div class="row">
             <div class="col-xl-2 col-md-12">

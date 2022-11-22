@@ -7,7 +7,10 @@
     #shipment_table_length,
     #shipment_vehicle_table_length,
     #shipment_filtering_table_length,
-    #vehicle_filter_table_length {
+    #vehicle_filter_table_length,
+    #shipment_table1_length,
+    #shipment_table2_length,
+    #on_hand_table_main_length {
         padding: 2% 0% 1% 2% !important;
     }
     
@@ -20,7 +23,10 @@
     #shipment_table_length select,
     #shipment_vehicle_table_length select,
     #shipment_filtering_table_length select,
-    #vehicle_filter_table_length select {
+    #vehicle_filter_table_length select,
+    #shipment_table1_length select,
+    #shipment_table2_length select,
+    #on_hand_table_main_length select {
         height: calc(1.8125rem + 2px) !important;
         border: 1px solid rgba(189, 189, 189, 1) !important;
         border-radius: 0.25rem !important;
@@ -43,7 +49,10 @@
     #shipment_table_filter,
     #shipment_vehicle_table_filter,
     #shipment_filtering_table_filter,
-    #vehicle_filter_table_filter {
+    #vehicle_filter_table_filter,
+    #shipment_table1_filter,
+    #shipment_table2_filter,
+    #on_hand_table_main_filter {
         padding: 2% 2% 1% 0% !important;
     }
     
@@ -56,7 +65,10 @@
     #shipment_table_filter input,
     #shipment_vehicle_table_filter input,
     #shipment_filtering_table_filter input,
-    #vehicle_filter_table_filter input {
+    #vehicle_filter_table_filter input,
+    #shipment_table1_filter input,
+    #shipment_table2_filter input,
+    #on_hand_table_main_filter input {
         border: 1px solid rgba(189, 189, 189, 1) !important;
         color: #2b3d51 !important;
         border-radius: 0.25rem !important;
@@ -74,7 +86,10 @@
     #shipment_table_wrapper,
     #shipment_vehicle_table_wrapper,
     #shipment_filtering_table_wrapper,
-    #vehicle_filter_table_wrapper {
+    #vehicle_filter_table_wrapper,
+    /* #shipment_table1_wrapper, */
+    
+    #shipment_table2_wrapper {
         background-color: white !important;
     }
     

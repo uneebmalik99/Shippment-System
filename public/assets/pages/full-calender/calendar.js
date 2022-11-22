@@ -1,7 +1,7 @@
 	"use strict";
 	$(document).ready(function() {
 	    $('#external-events .fc-event').each(function() {
-	        
+
 	        // store data so the calendar knows to render an event upon drop
 	        $(this).data('event', {
 	            title: $.trim($(this).text()), // use the element's text as the event title

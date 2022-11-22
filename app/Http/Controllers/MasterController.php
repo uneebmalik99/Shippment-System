@@ -9,6 +9,7 @@ use App\Models\Make;
 use App\Models\Site;
 use App\Models\User;
 use App\Models\Color;
+use App\Models\ImportVehicle;
 // use App\Models\State;
 use App\Models\Title;
 use App\Models\Series;
@@ -1946,6 +1947,24 @@ class MasterController extends Controller
         return 'success';
     }
 
+
+    public function importVehicles(){
+
+        $data = [];
+        $data= [
+            "page_title"=>"Imported Vehicles",
+            "id"=>"popup_button",
+            "class"=>"companiespopup",
+            "data_toggle"=>"modal",
+            "data_target"=>"companiesmodal",
+            "tab"=>"companies",
+            "value"=>"companies",
+        ];
+
+        $notification = $this->Notification();
+        $data['importVehicles'] = ImportVehicle::all();
+        return view($this->view . 'import_vehicles', $data, $notification);
+    }
 }
 
 

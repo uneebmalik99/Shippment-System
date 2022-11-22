@@ -126,5 +126,34 @@ class MasterTowingController extends Controller
         }
         return view($this->view . 'towingrate_common_model',$data);
     }
+    public function update_save(Request $request){
+        // dd($request->all());
+        $master_towing = new MasterTowing;
+        if($request->id!=''){
+            $id = $request->id;
+            $master_towing = MasterTowing::find($id);
+            $master_towing->city = $request->city;
+            $master_towing->auction = $request->auction;
+            $master_towing->rate = $request->rate;
+            $master_towing->new_jersery = $request->new_jersery;
+            $master_towing->georgia = $request->georgia;
+            $master_towing->teses = $request->teses;
+            $master_towing->california = $request->california;
+            $master_towing->seattle = $request->seattle;
+            $master_towing->save();
+            return "updated";
+        }else{
+            $master_towing->city = $request->city;
+            $master_towing->auction = $request->auction;
+            $master_towing->rate = $request->rate;
+            $master_towing->new_jersery = $request->new_jersery;
+            $master_towing->georgia = $request->georgia;
+            $master_towing->teses = $request->teses;
+            $master_towing->california = $request->california;
+            $master_towing->seattle = $request->seattle;
+            $master_towing->save();
+            return 'success';
+        }
+    }
 }
 

@@ -30,26 +30,44 @@
     <form method="POST" id="common_fields">
         <div class="common_section">
             <div class="add_data_section">
-                <div class="form-group">
+                <div class="row m-1">
                     <input type="text" name="city" class="form-control mb-3"
-                    placeholder="Enter City name" id="city" value="">
+                    placeholder="Enter City name" id="city" value="{{ @$towing_rate[0]['city'] }}">
                 </div>
-                <div class="form-group">
+                <div class="row m-1">
                     <input type="text" name="auction" class="form-control mb-3"
-                    placeholder="Enter Auction" id="auction">
+                    placeholder="Enter Auction" id="auction" value="{{ @$towing_rate[0]['auction'] }}">
                 </div>
-                <div class="form-group">
+                <div class="row m-1">
                     <input type="text" name="rate" class="form-control mb-3" placeholder="Enter Rate"
-                    id="rate">
+                    id="rate" value="{{ @$towing_rate[0]['rate'] }}">
                 </div>
-                <div class="form-group">
-                    <input type="text" name="destination" class="form-control mb-3"
-                    placeholder="Enter port of Loading" id="destination">
+                <div id="list1" class="col-12 dropdown-check-list visible" tabindex="100">
+                    <span class="anchor col-12">Select City</span>
+                    @if(@$btn_id=='update')
+                    <ul class="items col-12">
+                      <li class="justify-content-around"><input name="new_jersery" id="new_jersery" class="mr-3" type="checkbox" value="" {{(@$towing_rate[0]['new_jersery']==@$towing_rate[0]['rate']) ?'checked':''}} />New Jersery</li>
+                      <li class="justify-content-around"><input name="georgia" id="georgia" class="mr-3" type="checkbox" value="" {{(@$towing_rate[0]['georgia']==@$towing_rate[0]['rate']) ?'checked':''}} />Gerogia</li>
+                      <li class="justify-content-around"><input name="teses" id="teses" class="mr-3" type="checkbox" value="" {{(@$towing_rate[0]['teses']==@$towing_rate[0]['rate']) ?'checked':''}} />Teses </li>
+                      <li class="justify-content-around"><input name="california" id="california" class="mr-3" type="checkbox" value="" {{(@$towing_rate[0]['california']==@$towing_rate[0]['rate']) ?'checked':''}} />Claifornia </li>
+                      <li class="justify-content-around"><input name="seattle" id="seattle" class="mr-3" type="checkbox" value="" {{(@$towing_rate[0]['seattle']==@$towing_rate[0]['rate']) ?'checked':''}} />Seattle </li>
+                    </ul>
+                    @endif
+                    @if(@$btn_id=='save')
+                    <ul class="items col-12">
+                      <li class="justify-content-around"><input name="new_jersery" id="new_jersery" class="mr-3" type="checkbox"/>New Jersery</li>
+                      <li class="justify-content-around"><input name="georgia" id="georgia" class="mr-3" type="checkbox" />Gerogia</li>
+                      <li class="justify-content-around"><input name="teses" id="teses" class="mr-3" type="checkbox" />Teses </li>
+                      <li class="justify-content-around"><input name="california" id="california" class="mr-3" type="checkbox" />Claifornia </li>
+                      <li class="justify-content-around"><input name="seattle" id="seattle" class="mr-3" type="checkbox" value="" />Seattle </li>
+                    </ul>
+                    @endif
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn save_btn" id="" name="" value="" onclick="" >
+            <button type="button" class="btn save_btn" id="{{ @$towing_rate[0]['id']}}"
+            name="{{ @$button_value }}" value="{{ @$btn_id }}" onclick="savetowingrate(this.id,this.value)" >
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -61,3 +79,12 @@
         </div>
     </form>
 </div>
+<script>
+    var checkList = document.getElementById('list1');
+    checkList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+    if (checkList.classList.contains('visible'))
+        checkList.classList.remove('visible');
+    else
+        checkList.classList.add('visible');
+    }
+</script>

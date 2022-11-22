@@ -268,6 +268,9 @@
             message: 'Finished Customer Creation!',
         });
         $('#exampleModal').modal('hide');
+        setTimeout(function() {
+            location.reload();
+            }, 1000);
 
     }
 </script>
@@ -1350,7 +1353,6 @@
 {{-- towing rate and shipping rate  --}}
 
 
-
 <script>
     document.onreadystatechange = function() {
         var state = document.readyState
@@ -1589,6 +1591,73 @@
                         location.reload(true);
                     }, 5000);
                 }
+            }
+        });
+    }
+</script>
+<script>
+    function savetowingrate(id,value){
+        var city            = $('#city').val();
+        var auction         = $('#auction').val();
+        var rate            = $('#rate').val();
+        var new_jersery     = $('#new_jersery').is(':checked')?rate:'';
+        var georgia         = $('#georgia').is(':checked')?rate:'';
+        var teses           = $('#teses').is(':checked')?rate:'';
+        var california      = $('#california').is(':checked')?rate:'';
+        var seattle         = $('#seattle').is(':checked')?rate:'';
+        $.ajax({
+            type: 'post',
+            url: '{{ route('updatesave.towingrate') }}',
+            data: {
+                city,city,
+                auction,auction,
+                rate,rate,
+                new_jersery,new_jersery,
+                georgia,georgia,
+                teses,teses,
+                california,california,
+                seattle,seattle,
+                // value,value,
+                id,id,
+            },
+            success: function(data) {
+                if (data == 'updated') {
+                    iziToast.success({
+                        timeout: 5000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Record Updated'
+                    });
+                    setTimeout(function () {
+                    location.reload(true);
+                }, 5000);
+                }
+                if (data == 'success') {
+                    iziToast.success({
+                        timeout: 5000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Record Saved'
+                    });
+                    setTimeout(function () {
+                    location.reload(true);
+                }, 5000);
+                }
+            },
+        });
+    }
+</script>
+<script>
+    function update_towingrate(id,value){
+        $.ajax({
+            type: 'post',
+            url: '{{ route('towing_rate.showmodel') }}',
+            data: {
+                id: id,
+                value,value
+            },
+            success: function(data) {
+                $('#towingrate_body').html(data);
             }
         });
     }

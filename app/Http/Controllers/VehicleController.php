@@ -15,6 +15,7 @@ use App\Models\LoadingPort;
 use App\Models\MMS;
 use App\Models\Make;
 use App\Models\VehicleModel;
+use App\Models\ImportVehicle;
 use App\Models\Color;
 use App\Models\Key;
 use App\Models\Title;
@@ -44,6 +45,7 @@ use PDF;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+// use Excel;
 
 class VehicleController extends Controller
 {
@@ -114,7 +116,8 @@ class VehicleController extends Controller
 
 
         if(Auth::user()->hasRole('Customer')){
-            $data['records'] = Vehicle::with('user')->where('added_by_user', auth()->user()->id)->get()->toArray();
+
+            $data['records'] = Vehicle::with('user','pickupimages')->where('added_by_user', auth()->user()->id)->where('status', 3)->get()->toArray();
             $data['new_orders'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '1')->get();
             $data['dispatched'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '2')->get();
             $data['on_hand'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '3')->get();
@@ -126,7 +129,7 @@ class VehicleController extends Controller
             $data['model'] = MMS::select('model')->where('status', '1')->groupBy('model')->get()->toArray();
         }
         else{
-            $data['records'] = Vehicle::with('user')->get()->toArray();
+            $data['records'] = Vehicle::with('user','pickupimages')->where('status', 3)->get()->toArray();
             $data['new_orders'] = Vehicle::where('status', '1')->get();
             $data['dispatched'] = Vehicle::where('status', '2')->get();
             $data['on_hand'] = Vehicle::where('status', '3')->get();
@@ -665,7 +668,92 @@ class VehicleController extends Controller
             $output = view('layouts.vehicle.import_vehicles')->render();
             return Response($output);
         }
-        Excel::import(new VehicleImport, request()->file('import_document'));
+        $path = $request->file('import_document')->getRealPath();
+        $data =  Excel::toArray([], $path);
+
+       $vehicle_array = [];
+
+        foreach($data as $value){
+            // dd($value);
+            $i = 1;
+            foreach($value as $row){
+                if($i != 1){
+                    // dd($row);
+                    if($row[0] != null && $row[1] != null && $row[2] != null && $row[3] != null && $row[4] != null && $row[5] != null && $row[6] != null && $row[7] != null && $row[8] != null && $row[9] != null && $row[10] != null && $row[11] != null && $row[20] != null ){
+                        array_push($vehicle_array, $row);
+                    }
+                    else{
+                        dd('your file not according to revolution criteria');
+                    }
+                }
+                $i++;
+            }
+
+        }
+        $import_vehicle = [];
+        foreach($vehicle_array as $newValues){
+            $import_vehicle = [
+                'customer_name' => $newValues[0],
+                'vin' => $newValues[1],
+                'year' => $newValues[2],
+                'make' => $newValues[3],
+                'model' => $newValues[4],
+                'vehicle_type' => $newValues[5],
+                'color' => $newValues[6],
+                'weight' => $newValues[7],
+                'value' => $newValues[8],
+                'auction' => $newValues[9],
+                'buyer_id' => $newValues[10],
+                'key' => $newValues[11],
+                'note' => $newValues[12],
+                'hat_number' => $newValues[13],
+                'title_type' => $newValues[14],
+                'title' => $newValues[15],
+                'title_rec_date' => $newValues[16],
+                'title_state' => $newValues[17],
+                'title_number' => $newValues[18],
+                'shipper_name' => $newValues[19],
+                'status' => $newValues[20],
+                'sale_date' => $newValues[21],
+                'paid_date' => $newValues[22],
+                'days' => $newValues[23],
+                'posted_date' => $newValues[24],
+                'pickup_date' => $newValues[25],
+                'delivered' => $newValues[26],
+                'delivered_date' => $newValues[27],
+                'pickup_location' => $newValues[28],
+                'site' => $newValues[29],
+                'dealer_fee' => $newValues[30],
+                'late_fee' => $newValues[31],
+                'auction_storage' => $newValues[32],
+                'towing_charges' => $newValues[33],
+                'warehouse_storage' => $newValues[34],
+                'title_fee' => $newValues[34],
+                'port_detention_fee' => $newValues[35],
+                'custom_inspection' => $newValues[36],
+                'additional_fee' => $newValues[37],
+                'insurance' => $newValues[38],
+                'fee' => $newValues[39],
+                'customer_paying_fee' => $newValues[40],
+                'profit' => $newValues[41],
+                'paid_by' => $newValues[42],
+                'bidder' => $newValues[43],
+                'lot' => $newValues[44],
+                'entry_date' => $newValues[45],
+                'age' => $newValues[46],
+                'assign_date' => $newValues[47],
+                'description' => $newValues[48],
+                'dispatch_date' => $newValues[49],
+                'port' => $newValues[50],
+                'vehicle_is_deleted' => $newValues[51],
+                'shipment_id' => $newValues[52],
+                'add_by_user' => $newValues[53],
+            ];
+            ImportVehicle::create($import_vehicle);
+         }
+    
+
+        // Excel::import(new VehicleImport, $vehicle_array);
         return redirect()->route('vehicle.list')->with('success', "Vehicles imported successfully!");
     }
 
@@ -810,19 +898,18 @@ class VehicleController extends Controller
             $page = "";
             $status = $req->id;
             $status_name = $req->tab;
-            if(Auth::user()->hasRole('Customer')){
-               
+            if(Auth::user()->hasRole('Customer')){  
                 $total = Vehicle::where('added_by_user', auth()->user()->id)->get();
                 $records = Vehicle::with('user')->where('added_by_user', auth()->user()->id);
             }
             else{
                 $total = Vehicle::all()->toArray();
-                $records = Vehicle::with('user');
+                $records = Vehicle::with('user','pickupimages');
             }
-
             if ($status) {
                 $records = $records->with('images')->where('status', $status)->paginate($this->perpage);
                 $data['records'] = $records;
+                // dd($data['records']);
                 $output['view'] = view('vehicle.' . $status_name, $data)->render();
                 return Response($output);
             }
