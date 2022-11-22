@@ -7,7 +7,7 @@
             <th class="font-bold-tr">MAKE</th>
             <th class="font-bold-tr">MODEL</th>
             <th class="font-bold-tr">VIN</th>
-            <th class="font-bold-tr">LOT</th>
+            <th class="font-bold-tr">LOT #</th>
             <th class="font-bold-tr">BIDDER</th>
             <th class="font-bold-tr">AUCTION</th>
             <th class="font-bold-tr">TITLE</th>

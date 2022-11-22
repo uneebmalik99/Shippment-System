@@ -316,18 +316,18 @@
                     },
 
                 });
-                $('#dispatched_table').DataTable({
-                    scrollX: true,
-                    "lengthMenu": [
-                        [50, 100, 500],
-                        [50, 100, 500]
-                    ],
-                    language: {
-                        search: "",
-                        sLengthMenu: "_MENU_",
-                        searchPlaceholder: "Search"
-                    },
-                });
+                    $('#dispatched_table').DataTable({
+                        scrollX: true,
+                        "lengthMenu": [
+                            [50, 100, 500],
+                            [50, 100, 500]
+                        ],
+                        language: {
+                            search: "",
+                            sLengthMenu: "_MENU_",
+                            searchPlaceholder: "Search"
+                        },
+                    });
                 $('#on_hand_table').DataTable({
                     scrollX: true,
                     "lengthMenu": [

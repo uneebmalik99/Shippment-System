@@ -625,11 +625,31 @@
                         [50, 100, 500],
                         [50, 100, 500]
                     ],
+                    columnDefs: [
+            { orderable: true, targets: 8 },
+            { orderable: true, targets: 9 },
+            { orderable: true, targets: 10 },
+            { orderable: true, targets: 11 },
+            { orderable: false, targets: '_all' }
+        ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
                         searchPlaceholder: "Search"
                     },
                 });
+                $('#dispatched_table').DataTable({
+                   scrollX: true,
+                   "lengthMenu": [
+                       [50, 100, 500],
+                       [50, 100, 500]
+                   ],
+                   language: {
+                       search: "",
+                       sLengthMenu: "_MENU_",
+                       searchPlaceholder: "Search"
+                   },
+               });
     </script>
+    
 @endsection
