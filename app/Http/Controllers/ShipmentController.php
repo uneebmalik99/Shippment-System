@@ -115,6 +115,9 @@ class ShipmentController extends Controller
             $data['completed'] = Shipment::with('consignee')->where('customer_email', auth()->user()->email)->where('status', '4')->get();
         $data['shipments'] = Shipment::with('vehicle')->where('customer_email', auth()->user()->email)->get()->toArray();
 
+        $data['loading_port'] = LoadingCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
+        $data['destination_port'] = DCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
+
            
         }
         else{
@@ -124,10 +127,14 @@ class ShipmentController extends Controller
             $data['arrived'] = Shipment::with('consignee')->where('status', '3')->paginate($this->perpage);
             $data['completed'] = Shipment::with('consignee')->where('status', '4')->paginate($this->perpage);
         $data['shipments'] = Shipment::with('vehicle')->get()->toArray();
+        $data['loading_port'] = LoadingCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
+
+        $data['destination_port'] = DCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
+        
 
         }
        
-        // dd($data);
+        // dd($data['loading_port']);
         // years
         $current_date = Carbon::now();
         $period = CarbonPeriod::create('2022-09-09', $current_date);
@@ -503,7 +510,7 @@ class ShipmentController extends Controller
     {
         $data = [];
         $data = [
-            "page_title" => "Shipment Info",
+            "page_title" => "Shipment Detail",
             "page_heading" => $this->plural . ' List',
             "breadcrumbs" => array('#' => $this->plural . " List"),
             "module" => [
@@ -531,7 +538,7 @@ class ShipmentController extends Controller
     {
         $id = $request->id;
         $data = [];
-        $data['shipments'] = Shipment::with('shipment_invoice', 'stamp_titles','other_documents')->where('id', $request->id)->get()->toArray();
+        $data['shipments'] = Shipment::with('loading_image', 'shipment_invoice', 'stamp_titles','other_documents')->where('id', $request->id)->get()->toArray();
         if ($request->tab) {
             $tab = $request->tab;
             $output = view('layouts.shipment_detail.' . $tab, $data)->render();
@@ -543,42 +550,8 @@ class ShipmentController extends Controller
     public function filtering(Request $request)
     {
         if ($request->ajax()) {
+            // dd($request->all());
             $data = [];
-            $port_of_loading = $request->port_of_loading;
-            $loading_date = $request->loading_date;
-            $arrival_date = $request->arrival_date;
-            $destination_port = $request->destination_port;
-            $records = new Shipment;
-            if(Auth::user()->hasRole('Customer')){
-                $records = $records->where('customer_email', auth()->user()->email);
-            }
-            if ($port_of_loading) {
-                if ($port_of_loading != "") {
-                    $records = $records->where('loading_port', $port_of_loading);
-                }
-            }
-            if ($loading_date) {
-                if ($loading_date != "") {
-                    $records = $records->orwhere('loading_date', $loading_date);
-                }
-            }
-            if ($arrival_date) {
-                if ($arrival_date != "") {
-                    $records = $records->orwhere('est_arrival_date', $arrival_date);
-                }
-            }
-
-            if ($destination_port) {
-                if ($destination_port != "") {
-                    $records = $records->orwhere('destination_port', $destination_port);
-                }
-            }
-            $records = $records->get();
-
-            if ($port_of_loading == "all" || $destination_port == "all") {
-                $records = Shipment::all();
-            }
-
             $data = [
                 "page_title" => $this->plural . " List",
                 "page_heading" => $this->plural . ' List',
@@ -593,7 +566,52 @@ class ShipmentController extends Controller
                     'page' => 'list',
                 ],
             ];
-            $data['records'] = $records;
+            $port_of_loading = $request->port_of_loading;
+            $loading_date = $request->loading_date;
+            $arrival_date = $request->arrival_date;
+            $destination_port = $request->destination_port;
+            // $records = new Shipment;
+            // if(Auth::user()->hasRole('Customer')){
+            //     $records = $records->where('customer_email', auth()->user()->email);
+            // }
+            if ($port_of_loading) {
+                if ($port_of_loading != "") {
+                    // $records = $records->where('loading_port', $port_of_loading);
+                    $data['tab'] = 'loading_port';
+                    $data['value'] = $port_of_loading;
+
+                    
+                }
+            }
+            if ($loading_date) {
+                if ($loading_date != "") {
+                    // $records = $records->orwhere('loading_date', $loading_date);
+                    $data['tab'] = 'loading_date';
+                    $data['value'] = $loading_date;
+                }
+            }
+            if ($arrival_date) {
+                if ($arrival_date != "") {
+                    // $records = $records->orwhere('est_arrival_date', $arrival_date);
+                    $data['tab'] = 'arrival_date';
+                    $data['value'] = $arrival_date;
+                }
+            }
+
+            if ($destination_port) {
+                if ($destination_port != "") {
+                    // $records = $records->orwhere('destination_port', $destination_port);
+                    $data['tab'] = 'destination_port';
+                    $data['value'] = $destination_port;
+                }
+            }
+            // $records = $records->get();
+
+            if ($port_of_loading == "all" || $destination_port == "all") {
+                // $records = Shipment::all();
+                $data['tab'] = 'all';
+            }
+
             $output = view('layouts.shipment_filter.filtering', $data)->render();
             return Response($output);
         }
@@ -616,13 +634,30 @@ class ShipmentController extends Controller
     }
     public function FetchStatusRecords(Request $request)
     {
+        
         if ($request->ajax()) {
             if(Auth::user()->hasRole('Customer')){
                 $data = Shipment::with('vehicle')->where('status', $request->columns[0]['data']['tab'])->where('customer_email', auth()->user()->email)->get();
             }
             else{
-
-                $data = Shipment::with('vehicle')->where('status', $request->columns[0]['data']['tab'])->get();
+                if($request->columns[0]['data']['tab'] == 'loading_port'){
+                    $data = Shipment::with('vehicle')->where('loading_port', $request->columns[0]['data']['value'])->get();
+                }
+                elseif($request->columns[0]['data']['tab'] == 'destination_port'){
+                    $data = Shipment::with('vehicle')->where('destination_port', $request->columns[0]['data']['value'])->get();
+                }
+                elseif($request->columns[0]['data']['tab'] == 'loading_date'){
+                    $data = Shipment::with('vehicle')->where('loading_date', $request->columns[0]['data']['value'])->get();
+                }
+                elseif($request->columns[0]['data']['tab'] == 'arrival_date'){
+                    $data = Shipment::with('vehicle')->where('arrival_date', $request->columns[0]['data']['value'])->get();
+                }
+                elseif($request->columns[0]['data']['tab'] == 'all'){
+                    $data = Shipment::with('vehicle')->get();
+                }
+                else{
+                    $data = Shipment::with('vehicle')->where('status', $request->columns[0]['data']['tab'])->get();
+                }
             }
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -638,7 +673,7 @@ class ShipmentController extends Controller
                 })
                 ->addColumn('shipment_id', function($row){
                     $totalVehicles = Vehicle::where('shipment_id', $row->id)->count();
-                    $vehicles = '<p style="cursor:pointer"  data-toggle="modal" data-target="#exampleModalCenter'.$row->id.'">'.$totalVehicles.'</p>';
+                    $vehicles = $totalVehicles;
                     return $vehicles;
                 })
                 ->addColumn('action', function ($row) {
@@ -723,7 +758,7 @@ class ShipmentController extends Controller
                 })
                 ->addColumn('shipment_id', function($row){
                     $totalVehicles = Vehicle::where('shipment_id', $row->id)->count();
-                    $vehicles = '<p style="cursor:pointer"  data-toggle="modal" data-target="#exampleModalCenter'.$row->id.'">'.$totalVehicles.'</p>';
+                    $vehicles = $totalVehicles;
                     return $vehicles;
                 })
                 ->addColumn('action', function ($row) {

@@ -121,9 +121,8 @@
                 }
             },
             columnDefs: [{
-                className: 'dtr-control',
                 orderable: false,
-                targets: -1
+                targets: '_all'
             }],
             'scrollX': true,
             "lengthMenu": [

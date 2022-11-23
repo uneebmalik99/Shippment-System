@@ -500,3 +500,7 @@ border-bottom: 0.2px solid gray !important;
      */
     /* z-index: 2147483648; */
 }
+
+table.dataTable thead .sorting_asc {
+    background:none!important;
+}

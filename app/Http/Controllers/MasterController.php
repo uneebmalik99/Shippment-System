@@ -1963,6 +1963,7 @@ class MasterController extends Controller
 
         $notification = $this->Notification();
         $data['importVehicles'] = ImportVehicle::all();
+        $data['customers'] = User::role('Customer')->get()->toArray();
         return view($this->view . 'import_vehicles', $data, $notification);
     }
 }

@@ -58,7 +58,7 @@ class MasterTowingController extends Controller
     public function index(){
         $data = [];
         $data = [
-            "page_title" => "Master Towing List",
+            "page_title" => "Master Towing",
             "page_heading" => $this->plural . ' List',
             "breadcrumbs" => array('#' => $this->plural . " List"),
             "module" => [
@@ -112,20 +112,37 @@ class MasterTowingController extends Controller
         $master_towing->save();
         return 'updated';
     }
+    // public function show_model(Request $request){
+    //     if($request->id=='towing_rate_add'){
+    //         $data = [];
+    //         $data['title'] = "Towing Rate";
+    //         $data['btn_id'] = "save";
+    //         $data['button_value'] = "save_towingrate";
+    //     }else{
+    //         $data['towing_rate'] = MasterTowing::where('id',$request->id)->get()->toArray();
+    //         $data['title'] = "Towing Rate";
+    //         $data['btn_id'] = "update";
+    //         $data['button_value'] = "update_towingrate";
+    //     }
+    //     return view($this->view . 'towingrate_common_model',$data);
+    // }
+
     public function show_model(Request $request){
         if($request->id=='towing_rate_add'){
             $data = [];
             $data['title'] = "Towing Rate";
             $data['btn_id'] = "save";
             $data['button_value'] = "save_towingrate";
+            $data['commonbutton'] = "save";
         }else{
             $data['towing_rate'] = MasterTowing::where('id',$request->id)->get()->toArray();
             $data['title'] = "Towing Rate";
             $data['btn_id'] = "update";
-            $data['button_value'] = "update_towingrate";
+            $data['commonbutton'] = "update";
         }
         return view($this->view . 'towingrate_common_model',$data);
     }
+
     public function update_save(Request $request){
         // dd($request->all());
         $master_towing = new MasterTowing;

@@ -183,14 +183,14 @@
                     <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;
                     border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
                         <div style="transform: skew(30deg) !important;padding:1px 4px">
-                            <a href="{{route ('shipment_detail.shipment_Hazard_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">Non Hazard Report</a>
+                            <a href="{{route ('shipment_detail.shipment_Hazard_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;" target="_blank">Non Hazard Report</a>
                         </div>
                     </button>
 
                     <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;
                     border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
                         <div style="transform: skew(30deg) !important;padding:1px 4px">
-                            <a href="{{route ('shipment_detail.shipment_Houston_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">Houston Cover Letter</a>
+                            <a href="{{route ('shipment_detail.shipment_Houston_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;" target="_blank">Houston Cover Letter</a>
                         </div>
                     </button>
                    
@@ -201,21 +201,21 @@
                     <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;
                     border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
                         <div style="transform: skew(30deg) !important;padding:1px 4px">
-                            <a href="{{route ('shipment_detail.shipment_Landing_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">BOL</a>
+                            <a href="{{route ('shipment_detail.shipment_Landing_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;" target="_blank">BOL</a>
                         </div>
                     </button>
 
                     <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;
                     border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
                         <div style="transform: skew(30deg) !important;padding:1px 4px">
-                            <a href="{{route ('shipment_detail.shipment_Custom_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">US Custom</a>
+                            <a href="{{route ('shipment_detail.shipment_Custom_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;" target="_blank">US Custom</a>
                         </div>
                     </button>
 
                     <button style="background: #1F689E; transform: skew(-30deg) !important;border:none;
                     border-radius: 4px;color:white;margin-right: 6px;font-size: 12px;">
                         <div style="transform: skew(30deg) !important;padding:1px 4px">
-                            <a href="{{route ('shipment_detail.shipment_Dock_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;">DOCK RECEIPT</a>
+                            <a href="{{route ('shipment_detail.shipment_Dock_pdf')}}" style="color:white;text-decoration:none;font-size: 12px;" target="_blank">DOCK RECEIPT</a>
                         </div>
                     </button>
                    
@@ -262,7 +262,18 @@
                         <span class="infromation_mainText">LABEL</span>
                         <span class="information_text">Testing</span>
                     </div>
-                    <div style="width: 90%; " class="d-flex justify-content-end ">
+
+                    <div class="d-flex justify-content-start " style="width: 80%;margin:4px auto;padding:5px; ">
+                        <p style="color:#6D8DA6 ">Note</p><br>
+                    </div>
+                    <div class="d-flex justify-content-start " style="width: 90%;margin:4px auto;padding:5px; ">
+                        <textarea name=" " id=" " cols="40" rows="4" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;font-size: 13px;
+                    color: #6D8DA6; " disabled>@if(@$shipments[0]['note']){{@$shipments[0]['note']}}
+                    @else 
+                    --@endif
+                </textarea>
+
+                    </div>                    {{-- <div style="width: 90%; " class="d-flex justify-content-end "> --}}
 
                         {{-- <button class="send mt-3"
                             style="background: #1CACD9; border-radius: 4px;transform: skew(-30deg) !important;font-size: 13px;border:none;color:white; ">
@@ -271,7 +282,7 @@
                             </div>
                         </button> --}}
 
-                    </div>
+                    {{-- </div> --}}
 
 
                 </div>
@@ -452,7 +463,7 @@
                                 </div>
                                 <div class="image_section">
 
-                                    <div class="col-12">
+                                    <div class="col-11 mx-auto">
                                         @if(@$shipments[0]['loading_image'])
                                         @foreach(@$shipments[0]['loading_image'] as $img)
                                         <img src="{{asset($img['name'])}}" alt="" class="item_1 changeImage" style="width:120px!important;height:80px!important;" onclick="shipmentChangeImage(this.src)">
@@ -507,8 +518,10 @@
                                     <td>{{ @$vehicles['id'] }}</td>
                                     <td>
                                         {{-- {{@$vehicles['warehouse_image'][0]['name']}} --}}
+                                        @if(@$vehicles['warehouse_image'])
                                         <img src="{{asset(@$vehicles['warehouse_image'][0]['name'])}}" alt=""
                                             style="width:35px;height:35px;border-radius:50%;">
+                                            @endif
                                     </td>
                                     <td>{{ @$vehicles['year'] }}</td>
                                     <td>{{ @$vehicles['make'] }}</td>

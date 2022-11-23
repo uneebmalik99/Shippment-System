@@ -30,7 +30,14 @@
                     <td>{{@$vehicles['value']}}</td>
                     <td>{{@$vehicles['status']}}</td>
                     <td>{{@$vehicles['buery_id']}}</td>
-                    <td>Action</td>
+                    <td>
+                        <select name="assignTo_customer" id="{{@$vehicles['id']}}" onchange="assignToCustomer(this.id)">
+                            <option selected disabled>Select Customer</option>
+                            @foreach($customers as $customer)
+                            <option value="{{@$customer['id']}}" >{{@$customer['username']}}</option>
+                            @endforeach
+                        </select>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

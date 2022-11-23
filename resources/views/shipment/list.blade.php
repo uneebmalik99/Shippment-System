@@ -28,7 +28,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
 </style>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-        style="z-index:9999999999999999">
+        style="z-index:999999">
         <div class="modal-dialog modal-fullscreen scrollable mw-100 m-2 px-3 py-2" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">
@@ -255,8 +255,8 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                                 name="port_of_loading" id="port_of_loading">
                                 <option value="all" disabled selected>Port of Loading</option>
                                 <option value="all">All Ports</option>
-                                @foreach ($location as $port)
-                                    <option value="{{ $port['id'] }}">{{ $port['name'] }}</option>
+                                @foreach ($loading_port as $port)
+                                    <option value="{{@$port['port']}}">{{@$port['port']}}</option>
                                 @endforeach
                                 {{-- <option value="2">Swiss</option> --}}
                             </select>
@@ -306,8 +306,8 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                                 name="destination_port" id="destination_port">
                                 <option value="all" disabled selected>Destination Port</option>
                                 <option value="all">All Ports</option>
-                                @foreach ($location as $port)
-                                    <option value="{{ $port['id'] }}">{{ $port['name'] }}</option>
+                                @foreach ($destination_port as $port)
+                                    <option value="{{ $port['port'] }}">{{ $port['port'] }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -324,7 +324,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                                 <th class="font-bold-tr">IMAGE</th>
                                 <th class="font-bold-tr">CONSIGNEES</th>
                                 <th class="font-bold-tr">CONTAINER NO:</th>
-                                <th class="font-bold-tr">BOOKING NO</th>
+                                <th class="font-bold-tr">BOOKING NO:</th>
                                 <th class="font-bold-tr">LINES</th>
                                 <th class="font-bold-tr">NO OF VEHICLES</th>
                                 <th class="font-bold-tr">SIZE</th>
@@ -373,9 +373,10 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                     }
                 },
                 columnDefs: [{
-                    className: 'dtr-control',
-                    orderable: false,
-                    targets: -1
+                    // className: 'dtr-control',
+                    // orderable: false,
+                    // targets: -1,
+                    orderable: false, targets: '_all'
                 }],
                 'scrollX': true,
                 "lengthMenu": [

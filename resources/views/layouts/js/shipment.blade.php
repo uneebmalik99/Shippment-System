@@ -5,6 +5,8 @@
         var formData = new FormData(jQuery('#shipment_form')[0]);
         $next_tab = $('.next_tab').attr('id');
         formData.append('tab', $next_tab);
+        document.getElementById('load').style.visibility = "visible";
+
         $.ajax({
             method: 'POST',
             url: '{{ URL::to('admin/shipments/general') }}',
@@ -12,6 +14,7 @@
             processData: false,
             contentType: false,
             success: function(data) {
+        document.getElementById('load').style.visibility = "hidden";
                 // console.log(data);
                 $('.modal-body').html(data);
                 $('#exampleModal').modal('show');
@@ -48,6 +51,9 @@
                     zindex: '9999999999999',
                 });
             },
+            complete: function() {
+        document.getElementById('load').style.visibility = "hidden";
+                    },
             error: function() {
                 iziToast.warning({
                     message: 'Failed to insert data!',
@@ -78,7 +84,9 @@
             },
             success: function(data) {
                 console.log(data);
-                $('#shipment_tbody').html(data);
+                // $('#shipment_tbody').html(data);
+                $('.shipment_table_body').html(data);
+
             }
         });
 

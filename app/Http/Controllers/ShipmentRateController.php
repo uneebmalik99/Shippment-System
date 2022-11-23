@@ -56,7 +56,7 @@ class ShipmentRateController extends Controller
     public function index(){
         $data = [];
         $data = [
-            "page_title" => "Shippment Rate List",
+            "page_title" => "Shippment Rate",
             "page_heading" => $this->plural . ' List',
             "breadcrumbs" => array('#' => $this->plural . " List"),
             "module" => [
@@ -132,20 +132,38 @@ class ShipmentRateController extends Controller
         //     $shipment_rate->save();
         //     return 'updated';
         // }
+    // public function show_model(Request $request){
+    //     if($request->id=='shipment_rate_add'){
+    //         $data = [];
+    //         $data['title'] = "Shipmet Rate";
+    //         $data['btn_id'] = "save";
+    //         $data['button_value'] = "save_shipmentrate";
+    //     }else{
+    //         $data['shippment_rate'] = ShippmentRate::where('id',$request->id)->get()->toArray();
+    //         $data['title'] = "Shipmet Rate";
+    //         $data['btn_id'] = "update";
+    //         $data['button_value'] = "update_shipmentrate";
+    //     }
+    //     return view($this->view . 'shipment_common_model',$data);
+    // }
+
     public function show_model(Request $request){
         if($request->id=='shipment_rate_add'){
             $data = [];
             $data['title'] = "Shipmet Rate";
             $data['btn_id'] = "save";
             $data['button_value'] = "save_shipmentrate";
+            $data['commonbutton'] = "Save";
         }else{
             $data['shippment_rate'] = ShippmentRate::where('id',$request->id)->get()->toArray();
             $data['title'] = "Shipmet Rate";
             $data['btn_id'] = "update";
-            $data['button_value'] = "update_shipmentrate";
+            $data['commonbutton'] = "Update";
         }
         return view($this->view . 'shipment_common_model',$data);
     }
+
+
     public function update_save(Request $request){
         $shipment_rate = new ShippmentRate;
         if($request->value=='update'){

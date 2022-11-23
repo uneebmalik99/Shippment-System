@@ -409,7 +409,6 @@
                                         </a>
                                     </button>
                                 </th>
-                                <th class="font-bold-tr">Sr</th>
                                 <th class="font-bold-tr">IMAGE</th>
                                 <th class="font-bold-tr">CLIENTS</th>
                                 <th class="font-bold-tr">YEAR</th>
@@ -440,7 +439,6 @@
                                 {{-- @dd($val['images'][0]['name']) --}}
                                 <tr>
                                     <td><input type="checkbox" name="checkboxes" data-id="{{@$val['id']}}"></td>
-                                    <td>{{ @$i }}</td>
                                     <td>
                                         @if($records[0]['pickupimages'][0]['name'])
                                         <i class="fa fa-camera" aria-hidden="true" style="color:#3e5871!important;"></i>
@@ -547,11 +545,7 @@
                 },
                 ajax: "{{ route('vehicle.records') }}",
                 columns: [
-                    {
-                    data: 'id',
-                    name: 'id',
-                    
-                },
+                   
                 {
                         data: 'customer_name',
                         name: 'customer_name'

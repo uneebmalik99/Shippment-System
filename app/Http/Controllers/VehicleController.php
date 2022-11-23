@@ -668,7 +668,9 @@ class VehicleController extends Controller
             $output = view('layouts.vehicle.import_vehicles')->render();
             return Response($output);
         }
-        $path = $request->file('import_document')->getRealPath();
+        $path1 = $request->file('import_document')->store('temp');
+        $path = storage_path('app').'/'.$path1;
+        // $path = $request->file('import_document')->getRealPath();
         $data =  Excel::toArray([], $path);
 
        $vehicle_array = [];
@@ -954,6 +956,23 @@ class VehicleController extends Controller
         $output = view('layouts.vehicle_create.buyerIds' , $data)->render();
         // dd($output);
         return Response($output);
+    }
+
+
+    public function assignToCustomer(Request $request){
+        $data = [];
+        $assign_vehicle = ImportVehicle::where('id', $request->vehicle_id)->get()->toArray();
+        $assign_vehicle[0]['added_by_user'] = $request->customer_id;
+        unset($assign_vehicle[0]['id']);
+        $data = $assign_vehicle;
+        $obj = new Vehicle;
+        $obj->create($data[0]);
+        if($obj){
+            // $assign_vehicle->delete();
+            ImportVehicle::find($request->vehicle_id)->delete();
+            return 'Assign To Customer Successfully';
+        }
+
     }
 
 }

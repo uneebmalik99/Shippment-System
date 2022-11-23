@@ -1654,11 +1654,40 @@
             url: '{{ route('towing_rate.showmodel') }}',
             data: {
                 id: id,
-                value,value
+                value:value
             },
             success: function(data) {
                 $('#towingrate_body').html(data);
             }
         });
+    }
+
+
+    function assignToCustomer(vehicle_id){
+        customer_id = $('#'+vehicle_id).val();
+        $.ajax({
+            type: 'post',
+        url: '{{ route('vehicle.assignToCustomer') }}',
+            data: {
+                vehicle_id: vehicle_id,
+                customer_id: customer_id
+            },
+            success: function(data) {
+                // alert(data);
+            iziToast.success({
+            zindex: '9999999999999',
+            position: 'topCenter',
+            title: 'Success',
+            message: data,
+        });
+        setTimeout(function() {
+            location.reload();
+            }, 1000);
+
+
+                // $('#towingrate_body').html(data);
+            }
+        });
+        
     }
 </script>

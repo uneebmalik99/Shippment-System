@@ -121,6 +121,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/vehicle/getbuyerids',       [VehicleController::class, 'getbuyersids'])->name('vehicles.get_buyerids');
 
 
+    Route::post('/vehicle/assignToCustomer',       [VehicleController::class, 'assignToCustomer'])->name('vehicle.assignToCustomer');
+
+
     //Sticky Notes Routes
     Route::get('/stickynotes', [StickyController::class, 'index'])->name('sticky.list');
     Route::post('/stickynotes', [StickyController::class, 'create'])->name('sticky.create');
@@ -232,6 +235,12 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/loading/country',                     [MasterController::class, 'loadingcountryshow'])->name('master.loadingcountry');
     Route::get('/destination/country',                 [MasterController::class, 'destinationcountryshow'])->name('master.destinationcountry');
     Route::get('/vehicle',                             [MasterController::class, 'mmsshow'])->name('master.mms');
+
+
+
+
+
+
     // master towing page routes 
 
     Route::post('/master/towing/saveupdate',           [MasterTowingController::class, 'update_save'])->name('updatesave.towingrate');

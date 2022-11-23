@@ -63,7 +63,7 @@
         </td>
     </tr>
 @endforeach --}}
-
+{{-- {{dd($value)}} --}}
 <table id="shipment_table1" class="table row-border" style="width:100%!important;">
     <thead class="bg-custom">
         <tr class="font-size">
@@ -93,7 +93,16 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        v = '{{@$value}}';
+        if(v){
+            value = v;
+        }
+        else{
+            value = '';
+        }
         tab = '{{@$tab}}';
+        
+
         
         function format(d) {
             console.log(d);
@@ -120,9 +129,9 @@
                 }
             },
             columnDefs: [{
-                className: 'dtr-control',
-                orderable: false,
-                targets: -1
+                // className: 'dtr-control',
+                // orderable: false,
+                orderable: false, targets: '_all'
             }],
             'scrollX': true,
             "lengthMenu": [
@@ -144,6 +153,7 @@
                     defaultContent: '',
                     data: {
                 'tab': tab,
+                'value': value,
             },
 
                 },

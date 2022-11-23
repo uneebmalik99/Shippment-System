@@ -1,7 +1,6 @@
 <table id="towing_table" class="table row-border" style="width:100%!important;">
     <thead class="bg-custom">
         <tr class="font-size">
-            <th class="font-bold-tr">Sr</th>
             <th class="font-bold-tr">DELIVER DATE</th>
             <th class="font-bold-tr">CLIENT</th>
             <th class="font-bold-tr">YEAR</th>
@@ -29,7 +28,6 @@
         @foreach ($records as $val)
             {{-- @dd( $val) --}}
             <tr>
-                <td>{{ @$i }}</td>
                 <td>{{ @$val['delivered_date'] }}</td>
                 <td>{{ @$val['customer_name'] }}</td>
                 <td>{{ @$val['year'] }}</td>

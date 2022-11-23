@@ -30,32 +30,43 @@
     <form method="POST" id="common_fields">
         <div class="common_section">
             <div class="add_data_section">
-                <div class="form-group">
+                <div class="form-row">
+                <div class="col">
+                    <label style="font-size: 14px">Container Size</label>
                     <input type="text" name="container_size" class="form-control mb-3"
                         placeholder="Container Size" value="{{ @$shippment_rate[0]['container_size'] }}" id="container_size" style="border: 1px solid rgba(31, 104, 158, 0.26);
                         filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));">
                 </div>
-                <div class="form-group">
+                <div class="col">
+                   <label style="font-size: 14px">Vehicles</label>
                     <input type="text" name="vehicle" class="form-control mb-3"
-                        placeholder="Vehicle" value="{{ @$shippment_rate[0]['vehicle'] }}" id="vehicle" style="border: 1px solid rgba(31, 104, 158, 0.26);
+                        placeholder="Vehicles" value="{{ @$shippment_rate[0]['vehicle'] }}" id="vehicle" style="border: 1px solid rgba(31, 104, 158, 0.26);
                         filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));">
                 </div>
-                <div class="form-group">
+            </div>
+            <div class="form-row">
+                <div class="col">
+                   <label style="font-size: 14px">Loading Port</label>
                     <input type="text" name="loading_port" class="form-control mb-3"
                         placeholder="Landing Port" value="{{ @$shippment_rate[0]['loading_port'] }}" id="loading_port" style="border: 1px solid rgba(31, 104, 158, 0.26);
                         filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));">
                 </div>
-                <div class="form-group">
+                <div class="col">
+                   <label style="font-size: 14px">Destination Port</label>
                     <input type="text" name="destination" class="form-control mb-3"
-                        placeholder="Destination" value="{{ @$shippment_rate[0]['destination'] }}" id="destination" style="border: 1px solid rgba(31, 104, 158, 0.26);
+                        placeholder="Destination Port" value="{{ @$shippment_rate[0]['destination'] }}" id="destination" style="border: 1px solid rgba(31, 104, 158, 0.26);
                         filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));">
                 </div>
-                <div class="form-group">
+            </div>
+            <div class="form-row">
+                <div class="col">
+                   <label style="font-size: 14px">Shipping Line</label>
                     <input type="text" name="shipping_line" class="form-control mb-3"
                         placeholder="Shipping Line" value="{{ @$shippment_rate[0]['shipping_line'] }}" id="shipping_line" style="border: 1px solid rgba(31, 104, 158, 0.26);
                         filter: drop-shadow(2px 2px 2px rgba(92, 174, 235, 0.55));">
                 </div>
-                <div class="form-group">
+                <div class="col">
+                   <label style="font-size: 14px">Rate</label>
                     <input type="text" name="rate" class="form-control mb-3"
                         placeholder="Rate" value="{{ @$shippment_rate[0]['rate'] }}" id="rate">
                         <input type="hidden" name="update_id" value="{{ @$shippment_rate[0]['container_size'] }}" id="update_id" style="border: 1px solid rgba(31, 104, 158, 0.26);
@@ -72,7 +83,7 @@
                         d="M1.11111 10H8.88888C9.18357 10 9.46618 9.88294 9.67455 9.67456C9.88293 9.46619 9.99999 9.18357 9.99999 8.88889V2.77778C10.0004 2.70467 9.9864 2.63219 9.95875 2.5645C9.93111 2.49682 9.89037 2.43525 9.83888 2.38334L7.61666 0.16112C7.56475 0.109631 7.50318 0.0688944 7.4355 0.0412474C7.36781 0.0136005 7.29533 -0.000413432 7.22222 9.28571e-06H1.11111C0.816425 9.28571e-06 0.53381 0.117072 0.325437 0.325446C0.117063 0.533819 0 0.816435 0 1.11112V8.88889C0 9.18357 0.117063 9.46619 0.325437 9.67456C0.53381 9.88294 0.816425 10 1.11111 10ZM6.66666 8.88889H3.33333V6.11111H6.66666V8.88889ZM5.55555 2.22223H4.44444V1.11112H5.55555V2.22223ZM1.11111 1.11112H2.22222V3.33334H6.66666V1.11112H6.99444L8.88888 3.00556V8.88889H7.77777V6.11111C7.77777 5.81643 7.66071 5.53382 7.45233 5.32544C7.24396 5.11707 6.96135 5 6.66666 5H3.33333C3.03865 5 2.75603 5.11707 2.54766 5.32544C2.33928 5.53382 2.22222 5.81643 2.22222 6.11111V8.88889H1.11111V1.11112Z"
                         fill="white"></path>
                 </svg>
-                Save
+                {{ @$commonbutton }}
             </button>
         </div>
     </form>

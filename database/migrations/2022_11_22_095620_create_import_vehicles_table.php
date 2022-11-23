@@ -69,7 +69,7 @@ class CreateImportVehiclesTable extends Migration
             $table->string('port')->nullable();
             $table->string('vehicle_is_deleted')->nullable();
             $table->string('shipment_id')->nullable();
-            $table->string('add_by_user')->nullable();
+            $table->string('added_by_user')->nullable();
             $table->timestamps();
         });
     }
