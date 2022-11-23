@@ -749,7 +749,7 @@ class VehicleController extends Controller
                 'port' => $newValues[50],
                 'vehicle_is_deleted' => $newValues[51],
                 'shipment_id' => $newValues[52],
-                'add_by_user' => $newValues[53],
+                'added_by_user' => $newValues[53],
             ];
             ImportVehicle::create($import_vehicle);
          }

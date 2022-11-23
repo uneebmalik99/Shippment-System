@@ -632,6 +632,7 @@
                         searchPlaceholder: "Search"
                     },
                 });
+                
                 $('#dispatched_table').DataTable({
                    scrollX: true,
                    "lengthMenu": [
