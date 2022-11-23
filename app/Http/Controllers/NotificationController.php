@@ -14,7 +14,7 @@ class NotificationController extends Controller
     private $type = "Notifications";
     private $singular = "Notification";
     private $plural = "Notifications";
-    private $view = "Notification.";
+    private $view = "notification.";
     private $db_key = "id";
     private $user = [];
     private $perpage = 100;
