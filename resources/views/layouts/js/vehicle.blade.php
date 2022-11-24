@@ -6,7 +6,7 @@
         $model = $('#vehicle_model').val();
         $status = $('#vehicle_status').val();
         $status_name = $('#vehicle_status').find(":selected").text();
-    
+
 
         // alert($make);
         $.ajax({
@@ -44,7 +44,7 @@
                 });
                 $('#dispatched_table').DataTable({
                     scrollX: true,
-                    
+
                     "lengthMenu": [
                         [50, 100, 500],
                         [50, 100, 500]
@@ -67,7 +67,7 @@
                         searchPlaceholder: "Search"
                     },
                 });
-                
+
                 $('#towing_table').DataTable({
                     scrollX: true,
                     "lengthMenu": [
@@ -280,7 +280,7 @@
                 'id': $id,
             },
             success: function(data) {
-                
+
                 $('.main_image').html(data.main_image);
                 $('.changeImages').html(data.images);
             }
@@ -309,6 +309,13 @@
                         [50, 100, 500],
                         [50, 100, 500]
                     ],
+                    columnDefs: [
+
+                        {
+                            orderable: false,
+                            targets: '_all'
+                        }
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -316,23 +323,18 @@
                     },
 
                 });
-                    $('#dispatched_table').DataTable({
-                        scrollX: true,
-                        "lengthMenu": [
-                            [50, 100, 500],
-                            [50, 100, 500]
-                        ],
-                        language: {
-                            search: "",
-                            sLengthMenu: "_MENU_",
-                            searchPlaceholder: "Search"
-                        },
-                    });
-                $('#on_hand_table').DataTable({
+                $('#dispatched_table').DataTable({
                     scrollX: true,
                     "lengthMenu": [
                         [50, 100, 500],
                         [50, 100, 500]
+                    ],
+                    columnDefs: [
+
+                        {
+                            orderable: false,
+                            targets: '_all'
+                        }
                     ],
                     language: {
                         search: "",
@@ -340,11 +342,52 @@
                         searchPlaceholder: "Search"
                     },
                 });
+
                 $('#on_hand_table_main').DataTable({
                     scrollX: true,
                     "lengthMenu": [
                         [50, 100, 500],
                         [50, 100, 500]
+                    ],
+                    columnDefs: [
+
+                        {
+                            orderable: false,
+                            targets: '_all'
+                        }
+                    ],
+                    language: {
+                        search: "",
+                        sLengthMenu: "_MENU_",
+                        searchPlaceholder: "Search"
+                    },
+                });
+                $('#on_hand_table').DataTable({
+                    scrollX: true,
+                    "lengthMenu": [
+                        [50, 100, 500],
+                        [50, 100, 500]
+                    ],
+                    columnDefs: [{
+                            orderable: true,
+                            targets: 8
+                        },
+                        {
+                            orderable: true,
+                            targets: 9
+                        },
+                        {
+                            orderable: true,
+                            targets: 10
+                        },
+                        {
+                            orderable: true,
+                            targets: 11
+                        },
+                        {
+                            orderable: false,
+                            targets: '_all'
+                        }
                     ],
                     language: {
                         search: "",
@@ -358,6 +401,13 @@
                         [50, 100, 500],
                         [50, 100, 500]
                     ],
+                    columnDefs: [
+
+                        {
+                            orderable: false,
+                            targets: '_all'
+                        }
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -370,6 +420,13 @@
                         [50, 100, 500],
                         [50, 100, 500]
                     ],
+                    columnDefs: [
+
+                        {
+                            orderable: false,
+                            targets: '_all'
+                        }
+                    ],
                     language: {
                         search: "",
                         sLengthMenu: "_MENU_",
@@ -381,6 +438,13 @@
                     "lengthMenu": [
                         [50, 100, 500],
                         [50, 100, 500]
+                    ],
+                    columnDefs: [
+
+                        {
+                            orderable: false,
+                            targets: '_all'
+                        }
                     ],
                     language: {
                         search: "",
@@ -485,87 +549,89 @@
     });
 
 
-    function vehicle_attachments(){
+    function vehicle_attachments() {
         var formData = new FormData(jQuery('#vehicle_attacments')[0]);
 
         document.getElementById('load').style.visibility = "visible";
 
 
         $.ajax({
-                method: 'POST',
-                url: '{{ URL::to('admin/vehicles/attachments') }}',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    console.log(data);
-                    $('#exampleModal').modal('hide');
-                    iziToast.success({
-                        title: 'Success',
-                        message: 'Images inserted !',
-                        timeout: 1500,
-                        position: 'topCenter',
-                        zindex: '9999999999999',
-                    });
-                    $('.modal-title').text('New Vehicle');
+            method: 'POST',
+            url: '{{ URL::to('admin/vehicles/attachments') }}',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                console.log(data);
+                $('#exampleModal').modal('hide');
+                iziToast.success({
+                    title: 'Success',
+                    message: 'Images inserted !',
+                    timeout: 1500,
+                    position: 'topCenter',
+                    zindex: '9999999999999',
+                });
+                $('.modal-title').text('New Vehicle');
                 setTimeout(function() {
                     window.location.reload(true);
                 }, 2000);
 
-                },
-                
-                complete: function() {
-        document.getElementById('load').style.visibility = "hidden";
-                    },
-                error: function() {
-                    iziToast.warning({
-                        message: 'Failed to insert data!',
-                        position: 'topCenter',
-                        zindex: '9999999999999'
-                    });
-                }
-            });
-        
+            },
+
+            complete: function() {
+                document.getElementById('load').style.visibility = "hidden";
+            },
+            error: function() {
+                document.getElementById('load').style.visibility = "hidden";
+
+                iziToast.warning({
+                    message: 'Failed to insert data!',
+                    position: 'topCenter',
+                    zindex: '9999999999999'
+                });
+            }
+        });
+
     }
 
-    function FetachModel(){
+    function FetachModel() {
         $make_id = $('#make').val();
-$.ajax({
-    method: 'POST',
-    url: '{{ route('vehicle.FetchModel') }}',
-    data: {
-        'make_id': $make_id,
-    },
-    success: function(data) {
-       console.log(data);
-       $('#model').html(data);
-    }
-});
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('vehicle.FetchModel') }}',
+            data: {
+                'make_id': $make_id,
+            },
+            success: function(data) {
+                console.log(data);
+                $('#model').html(data);
+            }
+        });
     }
 
 
-    function finddays(){
+    function finddays() {
         paid_date = $('#paid_date').val();
         sale_date = $('#sale_date').val();
-        var Difference_In_Time = new Date(sale_date).getTime() - new Date(paid_date).getTime();  
+        var Difference_In_Time = new Date(sale_date).getTime() - new Date(paid_date).getTime();
         var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
         var days = Math.abs(Difference_In_Days);
         $('#days').val(days);
     }
-   
-function showAsMainImage(src){
-    $('#main_image_box').attr('src',src);
-    $('#download_image').attr('href',src);
-}
+
+    function showAsMainImage(src) {
+        $('#main_image_box').attr('src', src);
+        $('#download_image').attr('href', src);
+    }
 
 
 
 
 
-function getbuyerids(){
-    company_name = $('#customer_name').val();
-    // alert(company_name);
-    $.ajax({
+    function getbuyerids() {
+        company_name = $('#customer_name').val();
+        // alert(company_name);
+        $.ajax({
             method: 'POST',
             url: '{{ route('vehicles.get_buyerids') }}',
             data: {
@@ -578,5 +644,5 @@ function getbuyerids(){
                 // $('#customer_phone').val(data[0]['phone']);
             }
         });
-}
+    }
 </script>

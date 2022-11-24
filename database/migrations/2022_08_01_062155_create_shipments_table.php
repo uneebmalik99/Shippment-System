@@ -36,7 +36,7 @@ class CreateShipmentsTable extends Migration
             $table->foreignId('select_consignee')->nullable()->constrained('user')->onUpdate('cascade')->onDelete('cascade');
             $table->string('shipper')->nullable();
             $table->string('loading_terminal')->nullable();
-            $table->string('loading_port');
+            $table->string('loading_port')->nullable();
             // $table->foreignId('loading_port')->nullable()->constrained('locations')->onUpdate('cascade')->onDelete('cascade');
             $table->string('loading_state')->nullable();
             $table->string('discharge_port')->nullable();
@@ -57,7 +57,7 @@ class CreateShipmentsTable extends Migration
             $table->string('insurance')->nullable();
             $table->string('fmc_license_number')->nullable();
             $table->string('select_notify_party')->nullable();
-            $table->foreignId('status')->constrained('shipment_statuses')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('status')->nullable();
             $table->string('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();

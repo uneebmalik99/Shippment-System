@@ -28,7 +28,7 @@
     }
 
     .modal-header{
-        background: #1F689E;
+        background: #3e5871;
     }
     .modal {
         position: fixed;
@@ -208,7 +208,7 @@
                     </div>
                     <div class="bodydetails" style="height: 350px !important;
                     overflow: scroll;">
-                       
+
                         @foreach ($loading_countries as $loading_country)
                         <div class="serial mx-3 my-2"
                             style="background: #E7F0F5; border-radius: 9px;display: flex; justify-content: space-between;" data-toggle="collapse" data-target="#state{{@$loading_country['id']}}">
@@ -251,7 +251,7 @@
                         <div class="bodydetails collapse" id="state{{@$loading_country['id']}}">
                             @foreach (@$loading_country['state'] as $lState)
                             <span style="display:flex;justify-content:start;margin-left:19%!important;"><small>City</small></span>
-                                
+
                             <div class="serial mx-3 my-1" id="state_port{{@$lState['id']}}"
                             style="display: flex;
                             justify-content: start;
@@ -359,10 +359,10 @@
 
                         @endforeach
 
-                        
+
                         </div>
                         @endforeach
-                    
+
                     </div>
                 </div>
             </div>
@@ -415,7 +415,7 @@
                     </div>
                     <div class="bodydetails" style="height: 350px !important;
                     overflow: scroll;">
-                       
+
                         @foreach ($destination_countries as $destination_country)
                         <div class="serial mx-3 my-2"
                             style="background: #E7F0F5; border-radius: 9px;display: flex; justify-content: space-between;" data-toggle="collapse" data-target="#desti_state{{@$destination_country['id']}}">
@@ -458,7 +458,7 @@
                         <div class="bodydetails collapse" id="desti_state{{@$destination_country['id']}}">
                             @foreach (@$destination_country['state'] as $dState)
                             <span style="display:flex;justify-content:start;margin-left:19%!important;"><small>City</small></span>
-                            
+
                             <div class="serial mx-3 my-1" id="dstate_port{{@$dState['id']}}"
                             style="display: flex;
                             justify-content: start;
@@ -566,10 +566,10 @@
 
                         @endforeach
 
-                        
+
                         </div>
                         @endforeach
-                    
+
                     </div>
                 </div>
             </div>
@@ -622,7 +622,7 @@
                     </div>
                     <div class="bodydetails"  style="height: 350px !important;
                     overflow: scroll;">
-                       
+
                         @foreach ($Vehicle_mms as $mms)
                         <div class="serial mx-3 my-2"
                             style="background: #E7F0F5; border-radius: 9px;display: flex; justify-content: space-between;" data-toggle="collapse" data-target="#make{{@$mms['id']}}">
@@ -664,7 +664,7 @@
                         </div>
                         <div class="bodydetails collapse" id="make{{@$mms['id']}}">
                             @foreach (@$mms['model'] as $mModel)
-                                
+
                             <span style="display:flex;justify-content:start;margin-left:19%!important;"><small>Model</small></span>
                             <div class="serial mx-3 my-1" id="make_series{{@$mModel['id']}}"
                             style="display: flex;
@@ -773,10 +773,10 @@
 
                         @endforeach
 
-                        
+
                         </div>
                         @endforeach
-                    
+
                     </div>
                 </div>
             </div>
@@ -1659,8 +1659,8 @@
                                  </defs>
                              </svg>
                          </button>
- 
- 
+
+
                      </div>
                  </div>
                  <div class="bodydetails">
@@ -2532,7 +2532,7 @@
             </div>
         </div>
 
-        
+
         {{-- vehiclestatus data --}}
         <div class="col-xl-3
             col-lg-4 col-md-6 col-12 mt-3 vehiclestatus">

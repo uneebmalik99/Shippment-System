@@ -13,15 +13,7 @@ class Notification extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     protected $table = "notifications";
-    protected $fillable = [
-        'subject',
-        'message',
-        'is_read',
-        'status',
-        'user_id',
-        'expiry_date',
-        'added_by_role',
-    ];
+    protected $guarded = [];
 
     public function user()
     {

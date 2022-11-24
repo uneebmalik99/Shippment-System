@@ -23,27 +23,38 @@ class StickyController extends Controller
 
     public function Notification()
     {
+
         $data['notification'] = Notification::with('user')->paginate($this->perpage);
-        $current = Carbon::now();
-        $date = $data['notification'][0]['created_at'];
+        $data['location'] = Location::all()->toArray();
+        // return $data['notification'];
+        // dd(\Carbon\Carbon::now());
+        if ($data['notification']) {
+            $current = Carbon::now();
+            foreach ($data['notification'] as $key => $date_notification) {
 
-        $diff = $date->diffInSeconds(\Carbon\Carbon::now());
-        $days = $diff / 86400;
-        $hours = $diff / 3600;
-        $minutes = $diff / 60;
-        $seconds = $diff % 60;
+                $date = $date_notification->created_at;
+                $diff = $date->diffInSeconds(\Carbon\Carbon::now());
+                $days = $diff / 86400;
+                $hours = $diff / 3600;
+                $minutes = $diff / 3600;
+                $seconds = $diff % 60;
 
-        if ($days > 1) {
-            $data['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . $minutes . 'm,' . $seconds . 's ';
-        } elseif ($hours > 1) {
-            $data['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
-        } elseif ($minutes > 1) {
-            $data['date'] = (int) $minutes . 'm,' . $seconds . 's ';
+                if ($days > 1) {
+                    $data['notification'][$key]['date'] = (int) $days . 'd,' . (int) $hours . 'h,' . (int) $minutes . 'm,' . $seconds . 's ';
+                } elseif ($hours > 1) {
+                    $data['notification'][$key]['date'] = (int) $hours . 'h,' . (int) $minutes . 'm,' . (int) $seconds . 's ';
+                } elseif ($minutes > 1) {
+                    $data['notification'][$key]['date'] = (int) $minutes . 'm,' . (int) $seconds . 's ';
+                } else {
+                    $data['notification'][$key]['date'] = (int) $seconds . 's ';
+                }
+            }
+            $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
+            $data['notification_count'] = count($unread);
         } else {
-            $data['date'] = $seconds . 's ';
         }
-        $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
-        $data['notification_count'] = count($unread);
+
+        // dd($data);
         return $data;
     }
 

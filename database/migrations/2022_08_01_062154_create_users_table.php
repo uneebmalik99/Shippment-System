@@ -23,8 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('company_name');
             $table->string('company_email');
-            $table->enum('status',['0', '1' ])->default('0');
-            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('status',['0', '1' ])->default('1');
+            $table->string('role_id')->nullable();
             $table->string('user_is_detected')->nullable();
             $table->string('address_line1')->nullable();
             $table->string('address_line2')->nullable();
@@ -46,7 +46,7 @@ class CreateUsersTable extends Migration
             $table->string('payment_term')->nullable();
             $table->string('price_code')->nullable();
             $table->string('location_number')->nullable();
-            $table->string('added_by_user');
+            $table->string('added_by_user')->nullable();
             $table->string('user_image')->nullable();
             $table->softDeletes();
             $table->timestamps();

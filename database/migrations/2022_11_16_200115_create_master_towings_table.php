@@ -17,6 +17,7 @@ class CreateMasterTowingsTable extends Migration
             $table->id();
             $table->string('city')->nullable();
             $table->string('auction')->nullable();
+            $table->string('rate');
             $table->string('new_jersery')->nullable();
             $table->string('georgia')->nullable();
             $table->string('teses')->nullable();

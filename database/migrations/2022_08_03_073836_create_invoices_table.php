@@ -16,7 +16,7 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('export_id')->constrained('exports')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('customer_user_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('customer_user_id')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('consignee_id')->constrained('consignees')->onDelete('cascade')->onUpdate('cascade');
             $table->float('vehicle_id');
             $table->float('total_amount');
@@ -42,7 +42,7 @@ class CreateInvoicesTable extends Migration
             $table->string('working');
             $table->string('created_by');
             $table->string('payment_team');
-            $table->foreignId('added_by_role')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('added_by_role')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

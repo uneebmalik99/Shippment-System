@@ -87,7 +87,7 @@ class MasterController extends Controller
             $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
             $data['notification_count'] = count($unread);
         } else {
-            $data['notification'] = "asda";
+            // $data['notification'] = "asda";`
         }
 
         // dd($data);
@@ -188,7 +188,7 @@ class MasterController extends Controller
         $records = Company::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function colorshow(){
         $data = [];
@@ -206,7 +206,7 @@ class MasterController extends Controller
         $records = Color::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function titleshow(){
         $data = [];
@@ -222,7 +222,7 @@ class MasterController extends Controller
         $records = Title::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function keyshow(){
          $data = [];
@@ -238,7 +238,7 @@ class MasterController extends Controller
         $records = Key::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function vehicletypeshow(){
         $data = [];
@@ -254,7 +254,7 @@ class MasterController extends Controller
         $records = VehicleType::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function auctionshow(){
          $data = [];
@@ -270,7 +270,7 @@ class MasterController extends Controller
         $records = Auction::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function no_ofvehicleshow(){
         $data = [];
@@ -286,7 +286,7 @@ class MasterController extends Controller
        $records = NoOfVehicle::all();
        $data['recordlist'] = $records;
        $notification = $this->Notification();
-       return view($this->view . 'common_list', $data, $notification); 
+       return view($this->view . 'common_list', $data, $notification);
    }
     public function shipmentstatusshow(){
          $data = [];
@@ -302,7 +302,7 @@ class MasterController extends Controller
         $records = ShipmentStatus::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function shipmentlinesshow(){
          $data = [];
@@ -318,7 +318,7 @@ class MasterController extends Controller
         $records = ShipmentLine::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function containertypeshow(){
          $data = [];
@@ -334,7 +334,7 @@ class MasterController extends Controller
         $records = ContainerType::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function containersizeshow(){
          $data = [];
@@ -350,7 +350,7 @@ class MasterController extends Controller
         $records = ContainerSize::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function titletypeshow(){
          $data = [];
@@ -366,7 +366,7 @@ class MasterController extends Controller
         $records = TitleType::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function shippernameshow(){
          $data = [];
@@ -382,7 +382,7 @@ class MasterController extends Controller
         $records = Shippername::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function vehiclestatushow(){
          $data = [];
@@ -398,7 +398,7 @@ class MasterController extends Controller
         $records = VehicleStatus::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function pickuplocationshow(){
          $data = [];
@@ -414,7 +414,7 @@ class MasterController extends Controller
         $records = PickupLocation::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function siteshow(){
          $data = [];
@@ -430,7 +430,7 @@ class MasterController extends Controller
         $records = Site::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function warehouseshow(){
          $data = [];
@@ -446,7 +446,7 @@ class MasterController extends Controller
         $records = Warehouse::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
-        return view($this->view . 'common_list', $data, $notification); 
+        return view($this->view . 'common_list', $data, $notification);
     }
     public function shipmenttypeshow(){
         $data = [];
@@ -462,7 +462,7 @@ class MasterController extends Controller
        $records = ShipmentType::all();
        $data['recordlist'] = $records;
        $notification = $this->Notification();
-       return view($this->view . 'common_list', $data, $notification); 
+       return view($this->view . 'common_list', $data, $notification);
    }
     public function loadingcountryshow(){
         $data = [];
@@ -478,7 +478,7 @@ class MasterController extends Controller
             $records = LoadingCountry::all();
             $data['recordlist'] = $records;
             $notification = $this->Notification();
-        return view($this->view . 'common_page', $data, $notification); 
+        return view($this->view . 'common_page', $data, $notification);
     }
     public function destinationcountryshow(){
         $data = [];
@@ -494,7 +494,7 @@ class MasterController extends Controller
             $records = DCountry::all();
             $data['recordlist'] = $records;
             $notification = $this->Notification();
-        return view($this->view . 'common_page', $data, $notification); 
+        return view($this->view . 'common_page', $data, $notification);
     }
     public function mmsshow(){
         $data = [];
@@ -510,9 +510,9 @@ class MasterController extends Controller
             $records = MMS::all();
             $data['recordlist'] = $records;
             $notification = $this->Notification();
-        return view($this->view . 'mms', $data, $notification); 
+        return view($this->view . 'mms', $data, $notification);
     }
-    
+
     public function make(Request $request){
         $data = [];
         $tab = $request->tab;
@@ -522,9 +522,9 @@ class MasterController extends Controller
         $data['model'] = VehicleModel::all();
         $data['series'] = Series::all();
         $data['make'] = Make::all();
-        $output = view('master.make',$data)->render();                     
+        $output = view('master.make',$data)->render();
         return Response($output);
-        
+
 
         $tab = $request->id;
         $data['model'] = VehicleModel::with($tab);
@@ -630,6 +630,7 @@ class MasterController extends Controller
     {
         // dd($request->input());
         $data = [];
+        $data['common_btn'] = "Update";
         $tab = $request->tab;
         $id  = $request->id;
         if ($tab=="companies") {
@@ -784,6 +785,7 @@ class MasterController extends Controller
         if ($tab=="destinationcountry") {
             $data['title'] = "Destination Country";
             $data['name'] = "name";
+            $data['common_btn'] = "Update";
             $data['record'] = DCountry::where('id', $id)->get()->toArray();
             $output = view('master.common_popmodal', $data)->render();
             return Response($output);
@@ -791,14 +793,15 @@ class MasterController extends Controller
         if ($tab=="mms") {
             $data['title'] = "Vehicle";
             $data['name'] = "name";
+            $data['common_btn'] = "Update";
             $data['record'] = MMS::where('id', $id)->get()->toArray();
             $output = view('master.mms_popup', $data)->render();
             return Response($output);
         }
-        
+
         $output = view('master.common', $data)->render();
         return Response($output);
-        
+
     }
 
     public function update_save(Request $request)
@@ -999,7 +1002,7 @@ class MasterController extends Controller
             $key->name = $name;
             $key->save();
         }
-        
+
         return 'updated';
     }
     public function master_status(Request $request)
@@ -1404,176 +1407,113 @@ class MasterController extends Controller
             return $data['series'];
         }
     }
-    
+
     public function showmodel(Request $request)
     {
-        // dd($request->all());
+        $data = [];
+        $data['common_btn'] = "Save";
+        $tab['tab'] = $request->tab;
         if ($request->tab=='warehouse') {
-            $data = [];
-            $tabname = $request->tab;
-            $tab['tab'] = $tabname;
             $title['title'] ="Warehouse";
             $data['placeholder'] ="Enter Warehouse";
         }
         if ($request->tab=='vehicletype') {
-            $data = [];
-            $tabname = $request->tab;
-            $tab['tab'] = $tabname;
             $title['title'] ="Vehicel Types";
             $data['placeholder'] ="Enter Vehicle Types";
         }
         if ($request->tab=='site') {
-            $data = [];
-            $tabname = $request->tab;
-            $tab['tab'] = $tabname;
             $title['title'] ="Site";
             $data['placeholder'] ="Enter Site";
         }
         if ($request->tab=='pickuplocation') {
-            $data = [];
-            $tabname = $request->tab;
-            $tab['tab'] = $tabname;
             $title['title'] ="Pickup Location";
             $data['placeholder'] ="Enter Pickup Location";
         }
         if ($request->tab=='vehiclestatus') {
-            $data = [];
-            $tabname = $request->tab;
-            $tab['tab'] = $tabname;
             $title['title'] ="Vehicle Status";
             $data['placeholder'] ="Enter Vehicle Status";
         }
         if ($request->tab=='shippername') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Shipper Name";
             $data['placeholder'] ="Enter Shipper Name";
         }
         if ($request->tab=='titletype') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Title Type";
             $data['placeholder'] ="Enter Title Type";
         }
         if ($request->tab=='shippment') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Shippment";
             $data['placeholder'] ="Enter Shippment";
         }
         if ($request->tab=='vehicletype') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Vehicle Type";
             $data['placeholder'] ="Enter Vehicle Type";
         }
         if ($request->tab=='auction') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Auction";
             $data['placeholder'] ="Enter Auction";
         }
         if ($request->tab=='no_ofvehicle') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="No. Of Vehicles";
             $data['placeholder'] ="Enter No. Of Vehicles";
         }
         if ($request->tab=='key') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Keys";
             $data['placeholder'] ="Enter Key";
         }
         if ($request->tab=='title') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Title";
             $data['placeholder'] ="Enter Title";
         }
         if ($request->tab=='color') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Color";
             $data['placeholder'] ="Enter Color";
         }
         if ($request->tab=='model') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Model";
             $data['placeholder'] ="Enter Model";
         }
         if ($request->tab=='destinationport') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Destination Port";
             $data['placeholder'] ="Enter Destination Port";
         }
         if ($request->tab=='destinationcountries') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Destination Countries";
             $data['placeholder'] ="Enter Destination Countries";
         }
         if ($request->tab=='loadingport') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Loading Ports";
             $data['placeholder'] ="Enter Loading Ports";
         }
         if ($request->tab=='shippingstates') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Shipping States";
             $data['placeholder'] ="Enter Shipping States";
         }
-        // if ($request->tab=='destinationcountry') {
-        //     $data = [];
-        //     $tab['tab'] = $request->tab;
-        //     $title['title'] ="Shipping Countries";
-        //     $data['placeholder'] ="Enter Shipping Countries";
-        // }
         if ($request->tab=='companies') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Company";
             $data['placeholder'] ="Enter Company";
         }
         if ($request->tab=='containersize') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Container Size";
             $data['placeholder'] ="Enter Container Size";
         }
         if ($request->tab=='shipmentlines') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Shipping Line";
             $data['placeholder'] ="Enter Shipping Line";
         }
         if ($request->tab=='containertype') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Container Type";
             $data['placeholder'] ="Enter Container Type";
         }
         if ($request->tab=='shipmentstatus') {
-            $data = [];
-            $tab['tab'] = $request->tab;
             $title['title'] ="Shipment Status";
             $data['placeholder'] ="Enter Shipment Status";
         }
         if ($request->tab=='shipmenttype') {
-            $data = [];
-            $tabname = $request->tab;
-            $tab['tab'] = $tabname;
             $title['title'] ="Shipment Type";
             $data['placeholder'] ="Enter Shipment Type";
         }
         if ($request->tab=='loadingcountry') {
-            $data = [];
-            $tabname = $request->tab;
-            $tab['tab'] = $tabname;
             $title['title'] ="Loading Country";
             $data = [
                 "placeholder" => [
@@ -1587,11 +1527,9 @@ class MasterController extends Controller
             return Response($output);
         }
         if ($request->tab=='destinationcountry') {
-            $data = [];
-            $tabname = $request->tab;
-            $tab['tab'] = $tabname;
             $title['title'] ="Destination Country";
             $data = [
+                'common_btn'=>'Save',
                 "placeholder" => [
                     'country' => "Enter Country",
                     'state' => "Enter State",
@@ -1603,11 +1541,9 @@ class MasterController extends Controller
             return Response($output);
         }
         if ($request->tab=='mms') {
-            $data = [];
-            $tabname = $request->tab;
-            $tab['tab'] = $tabname;
             $title['title'] ="Vehicle";
             $data = [
+                'common_btn' => "Save",
                 "placeholder" => [
                     'make' => "Enter Make",
                     'model' => "Enter Model",
@@ -1943,7 +1879,7 @@ class MasterController extends Controller
                 }
             }
         }
-        
+
         return 'success';
     }
 

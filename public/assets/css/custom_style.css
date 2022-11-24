@@ -502,5 +502,13 @@ border-bottom: 0.2px solid gray !important;
 }
 
 table.dataTable thead .sorting_asc {
-    background:none!important;
+    background: none!important;
+}
+
+#mCSB_1_scrollbar_vertical {
+    display: none!important;
+}
+
+.pcoded-left-item {
+    padding-bottom: 22px!important;
 }

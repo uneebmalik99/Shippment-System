@@ -67,9 +67,9 @@ class CreateVehiclesTable extends Migration
             $table->date('assign_date')->nullable();
             $table->longText('description')->nullable();
             $table->date('dispatch_date')->nullable();
-            $table->foreignId('port')->constrained('locations')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('port')->constrained('locations')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->string('vehicle_is_deleted')->nullable();
-            $table->foreignId('shipment_id')->constrained('shipments')->nullable()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('shipment_id')->constrained('shipments')->nullable()->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('added_by_user')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();

@@ -55,6 +55,8 @@
         document.getElementById('load').style.visibility = "hidden";
                     },
             error: function() {
+        document.getElementById('load').style.visibility = "hidden";
+
                 iziToast.warning({
                     message: 'Failed to insert data!',
                     timeout: 1500,
@@ -119,6 +121,14 @@
             complete: function() {
                 document.getElementById('load').style.visibility = "hidden";
             },
+            error: function() {
+                document.getElementById('load').style.visibility = "hidden";
+                iziToast.warning({
+                    message: 'Failed to insert data!',
+                    position: 'topCenter',
+                    zindex: '9999999999999'
+                });
+            }
         });
     }
 

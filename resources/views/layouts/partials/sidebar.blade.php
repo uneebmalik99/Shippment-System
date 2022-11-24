@@ -271,7 +271,6 @@
                     </li>
 
                     @can('Page Access')
-
                     <li class="change-loges.html py-2">
                         <a href="{{ route('customer.list') }}">
                             <span class="pcoded-micon"><i class="fa fa-user"></i></span>

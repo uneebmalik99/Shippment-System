@@ -80,7 +80,6 @@ class ShipmentController extends Controller
             $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
             $data['notification_count'] = count($unread);
         } else {
-            $data['notification'] = "asda";
         }
         // dd($data);
         return $data;

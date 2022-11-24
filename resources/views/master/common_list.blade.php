@@ -61,7 +61,7 @@
     }
 
     .modal-header{
-        background: #1F689E;
+        background: #3e5871;
     }
     .modal {
         position: fixed;
@@ -107,7 +107,7 @@
     }
 
     .save_btn {
-        background: #297FBF;
+        background: #3e5871;
         border-radius: 5px;
         font-family: 'Inter';
         font-style: normal;

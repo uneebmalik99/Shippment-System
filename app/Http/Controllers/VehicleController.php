@@ -89,9 +89,8 @@ class VehicleController extends Controller
             $unread = Notification::with('user')->where('status', '0')->get();
             $data['notification_count'] = count($unread);
         } else {
-            $data['notification'] = "asda";
+            // $data['notification'] = "";
         }
-        // dd($data);
         return $data;
     }
 
@@ -140,6 +139,7 @@ class VehicleController extends Controller
             $data['make'] = MMS::select('make')->where('status', '1')->groupBy('make')->get()->toArray();
             $data['model'] = MMS::select('model')->where('status', '1')->groupBy('model')->get()->toArray();
         }
+
         $notification = $this->Notification();
         return view($this->view . 'list', $data, $notification);
 

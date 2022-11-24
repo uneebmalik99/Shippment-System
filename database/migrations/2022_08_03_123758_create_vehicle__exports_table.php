@@ -17,7 +17,7 @@ class CreateVehicleExportsTable extends Migration
             $table->id();
             $table->foreignId('vehicle_id')->constrained('vehicles')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('export_id')->constrained('exports')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('customer_user_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('customer_user_id')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
             $table->double('custom_duty')->nullable();
             $table->double('clearance')->nullable();
             $table->double('towing')->nullable();

@@ -73,7 +73,7 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn save_btn" id="company_save">
+        <button style="background: #3e5871 !imortant" type="button" class="btn save_btn" id="company_save">
             <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path

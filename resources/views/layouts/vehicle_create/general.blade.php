@@ -31,10 +31,12 @@
                                         @else
                                         <option selected disabled>Select Company Name</option>
                                         @endif
+                                        @if($customer_name)
                                         @foreach ($customer_name as $customer_names)
                                             <option value="{{ @$customer_names['company_name'] }}">
                                                 {{ @$customer_names['company_name'] }}</option>
                                         @endforeach
+                                        @endif
                                     </select>
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="customer_name" id="customer_name" value="{{ @$user[0]['customer_name'] }}"> --}}
@@ -108,9 +110,11 @@
                                         @else
                                         <option selected disabled>Select Make</option>
                                         @endif
+                                        @if($vehicle_make)
                                         @foreach ($vehicle_make as $vmake)
                                             <option value="{{ @$vmake['make'] }}">{{ @$vmake['make'] }}</option>
                                         @endforeach
+                                        @endif
                                     </select>
 
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
@@ -156,10 +160,12 @@
                                         @else
                                         <option selected disabled>Select Type</option>
                                         @endif
+                                        @if($vehicle_types)
                                         @foreach (@$vehicle_types as $types)
                                             <option value="{{ @$types['vehicle_type'] }}">{{ @$types['vehicle_type'] }}
                                             </option>
                                         @endforeach
+                                        @endif
                                     </select>
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="vehicle_type" id="vehicle_type" value="{{ @$user[0]['vehicle_type'] }}" disabled> --}}
@@ -182,9 +188,11 @@
                                         @else
                                         <option selected disabled>Select Color</option>
                                         @endif
+                                        @if($colors)
                                         @foreach ($colors as $color)
                                             <option value="{{ @$color['name'] }}">{{ @$color['name'] }}</option>
                                         @endforeach
+                                        @endif
                                     </select>
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="color" id="color" value="{{ @$user[0]['color'] }}"> --}}
@@ -240,10 +248,12 @@
                                             @else
                                             <option selected disabled>Select Auction</option>
                                             @endif
+                                            @if($auctions)
                                             @foreach ($auctions as $auction)
                                                 <option value="{{ @$auction['name'] }}">{{ @$auction['name'] }}
                                                 </option>
                                             @endforeach
+                                            @endif
                                         </select>
                                         {{-- <input type="text" class="general_input col-11" name="auction"
                                             id="auction" value="{{ @$user[0]['auction'] }}"> --}}
@@ -280,6 +290,7 @@
                                         @else
                                         <option selected disabled>Select Buyer Id</option>
                                         @endif
+                                        @if($buyers)
                                         @foreach ($buyers as $buyer)
                                             @php
                                                 $buyerid = explode(',', $buyer['buyer_number']);
@@ -290,6 +301,7 @@
                                             {{$ids}}</option>
                                             @endforeach
                                         @endforeach
+                                        @endif
                                     </select>
                                 </div>
                                 <div class="d-flex justify-content-center">
@@ -310,9 +322,11 @@
                                         @else
                                         <option selected disabled>Select Keys</option>
                                         @endif
+                                        @if($keys)
                                         @foreach ($keys as $key)
                                             <option value="{{ @$key['name'] }}">{{ @$key['name'] }}</option>
                                         @endforeach
+                                        @endif
                                     </select>
                                     {{-- <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="key"
@@ -389,9 +403,11 @@
                                         @else
                                         <option selected disabled>Select Type</option>
                                         @endif
+                                        @if($titles)
                                         @foreach ($titles as $title)
                                             <option value="{{ @$title['name'] }}">{{ @$title['name'] }}</option>
                                         @endforeach
+                                        @endif
                                     </select>
 
                                     {{-- <input type="text"
@@ -418,9 +434,11 @@
                                     @else
                                         <option selected disabled>Select Title Type</option>
                                     @endif
+                                    @if($title_types)
                                         @foreach ($title_types as $title)
                                             <option value="{{ @$title['name'] }}">{{ @$title['name'] }}</option>
                                         @endforeach
+                                    @endif
                                     </select>
 
 
@@ -544,10 +562,12 @@
                                         @else
                                         <option selected disabled>Select Shipper Name</option>
                                         @endif
+                                        @if($shipper_names)
                                         @foreach ($shipper_names as $shipper_name)
                                             <option value="{{ @$shipper_name['name'] }}">
                                                 {{ @$shipper_name['name'] }}</option>
                                         @endforeach
+                                        @endif
                                     </select>
                                     {{-- <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6"
@@ -573,10 +593,12 @@
                                         @else
                                         <option selected disabled>Select Status</option>
                                         @endif
+                                        @if($vehicle_status)
                                         @foreach ($vehicle_status as $status)
                                             <option value="{{ @$status['id'] }}">{{ @$status['status_name'] }}
                                             </option>
                                         @endforeach
+                                        @endif
                                     </select>
                                     {{-- <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="status"
@@ -720,9 +742,11 @@
                                         @else
                                         <option selected disabled>Select Site</option>
                                         @endif
+                                        @if($sites)
                                         @foreach ($sites as $site)
                                             <option value="{{ $site['name'] }}">{{ $site['name'] }}</option>
                                         @endforeach
+                                        @endif
                                     </select>
                                     {{-- <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="site"
@@ -741,9 +765,14 @@
                                     <label for="port" class="col-6 px-0 font-size font-bold">Warehouse</label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="port" id="port">
+                                        
+                                        <option selected disabled>Select Warehouse</option>
+                                        
+                                        @if($warehouses)
                                         @foreach ($warehouses as $warehouse)
                                             <option value="{{ $warehouse['id'] }}">{{ $warehouse['name'] }}</option>
                                         @endforeach
+                                        @endif
                                     </select>
                                     {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="port" id="port" value="{{ @$user[0]['port'] }}"> --}}

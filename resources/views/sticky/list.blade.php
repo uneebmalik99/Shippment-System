@@ -11,15 +11,15 @@
                     </div>
                     <div class="d-flex">
                         <div class="card-header-right rounded d-flex align-items-center h-50 p-1 mr-2"
-                            style="background: rgba(33, 73, 134, 0.27); color: #214986">
+                            >
                             <i class="icofont icofont-rounded-down"></i>
                         </div>
                         <div class="card-header-right rounded d-flex align-items-center h-50 p-1 mr-2"
-                            style="background: rgba(105, 108, 255, 0.16); color: ##696CFF;">
+                            style="background: >
                             <i class="icofont icofont-refresh"></i>
                         </div>
                         <div class="card-header-right rounded d-flex align-items-center h-50 p-1"
-                            style="background: rgba(239, 87, 87, 0.29); color: rgba(239, 87, 87, 1);">
+                            >
                             <i class="icofont icofont-close-circled"></i>
                         </div>
                     </div>

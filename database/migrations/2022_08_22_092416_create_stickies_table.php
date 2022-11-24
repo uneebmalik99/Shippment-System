@@ -17,7 +17,7 @@ class CreateStickiesTable extends Migration
             $table->id();
             $table->string('notes');
             $table->string('sticky_id');
-            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('customer_id')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

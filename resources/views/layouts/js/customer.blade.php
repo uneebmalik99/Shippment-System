@@ -96,6 +96,7 @@
                 document.getElementById('load').style.visibility = "hidden";
             },
             error: function(response) {
+                document.getElementById('load').style.visibility = "hidden";
 
                 iziToast.warning({
                     message: 'Failed! Some fields are missing',

@@ -70,7 +70,6 @@ class CustomerController extends Controller
             $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
             $data['notification_count'] = count($unread);
         } else {
-            $data['notification'] = "asda";
         }
 
         // dd($data);
@@ -1023,7 +1022,7 @@ class CustomerController extends Controller
     public function serverside(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::where('role_id', 4);
+            $data = User::role('Customer');
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

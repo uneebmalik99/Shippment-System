@@ -39,8 +39,8 @@ class CreateExportsTable extends Migration
             $table->string('export_invoice');
             $table->string('note');
             $table->boolean('export_is_deleted')->default(0);
-            $table->foreignId('added_by_role')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('customer_user_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('added_by_role')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('customer_user_id')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('notes_status');
             $table->integer('oti_number');
             $table->timestamps();
