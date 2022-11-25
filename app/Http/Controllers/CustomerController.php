@@ -8,6 +8,7 @@ use App\Models\Shipper;
 use App\Models\Vehicle;
 use App\Models\Location;
 use App\Models\Consignee;
+use App\Models\DCountry;
 use App\Models\Quotation;
 use App\Models\CustomerBuyerId;
 use App\Exports\UsersExport;
@@ -19,6 +20,7 @@ use App\Models\ShipmentLine;
 use Illuminate\Http\Request;
 use App\Models\DestinationPort;
 use App\Models\CustomerDocument;
+use App\Models\LoadingCountry;
 use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -183,10 +185,10 @@ class CustomerController extends Controller
         if ($request->ajax()) {
             $tab = $request->tab;
             // dd($tab);
-            $data['destination_port'] = DestinationPort::where('status', '1')->get()->toArray();
+            $data['destination_port'] = DCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
             $data['location'] = Location::all()->toArray();
             $data['container_size'] = ContainerSize::where('status', '1')->get();
-            $data['loading_ports'] = LoadingPort::where('status', '1')->get();
+            $data['loading_ports'] = LoadingCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
             $data['shipping_lines'] = ShipmentLine::where('status', '1')->get();
 
             // dd($data['destination_port']);
@@ -226,8 +228,8 @@ class CustomerController extends Controller
             ],
         ];
 
-        // dd($id);
-        $data['documents'] = User::with('documents')->where('id', $id)->get()->toArray();
+        $data['documents'] = User::with('customer_documents')->where('id', $id)->get()->toArray();
+        // dd($data['documents']);
         $data['location'] = Location::all();
         // dd($data['documents']);
         $output = view('layouts.customer_create.general', $data)->render();
@@ -731,6 +733,7 @@ class CustomerController extends Controller
            
             // $data = [];
             $data = $request->all();
+            // dd($data);
             $tab = $request->tab;
             $image = $request->file('customer_image');
             $file = $request->file('user_file');
@@ -750,9 +753,9 @@ class CustomerController extends Controller
             $view_data = [];
             $action = url($this->action . '/create');
             $view_data = [
-                'destination_port' => DestinationPort::where('status', '1')->get(),
+                'destination_port' => DCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray(),
                 'container_size' => ContainerSize::where('status', '1')->get(),
-                'loading_ports' => LoadingPort::where('status', '1')->get(),
+                'loading_ports' => LoadingCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray(),
                 'shipping_lines' => ShipmentLine::where('status', '1')->get(),
                 "page_title" => $this->plural . " create",
                 "page_heading" => $this->plural . ' create',
@@ -892,7 +895,7 @@ class CustomerController extends Controller
                 ];
 
             } elseif ($tab == "billing_customer") {
-                
+                // dd($data);
                 $Obj = BillingParty::updateOrCreate(['id' => $request->id], $data);
                 $output =
                     [
@@ -911,7 +914,7 @@ class CustomerController extends Controller
                     'result' => 'success',
                     'tab' => 'Shipper data inserted!',
                     'view' => $view,
-                    'destination_port' => DestinationPort::where('status', '1')->get()->toArray(),
+                    'destination_port' => DCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray(),
                 ];
 
             } else {

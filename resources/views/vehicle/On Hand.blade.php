@@ -47,9 +47,9 @@
             <tr>
                 <td><input type="checkbox" name="checkboxes" data-id="{{@$val['id']}}"></td>
                 <td>
-                    @if($records[0]['pickupimages'][0]['name'])
+                    {{-- @if($records[0]['pickupimages'][0]['name']) --}}
                     <i class="fa fa-camera" aria-hidden="true" style="color:#3e5871!important;"></i>
-                    @endif
+                    {{-- @endif --}}
                     
                     {{-- <img src="{{asset($records[0]['pickupimages'][0]['name'])}}" alt="" style="width: 25px;height:25px;border-radius:50%;"> --}}
                 </td>

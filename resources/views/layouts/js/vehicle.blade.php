@@ -482,71 +482,71 @@
         });
     }
 
-    $(document).on('click', 'input[name="main_checkbox"]', function() {
-        if (this.checked) {
-            $('input[name="checkboxes"]').each(function() {
-                this.checked = true;
-            })
-        } else {
-            $('input[name="checkboxes"]').each(function() {
-                this.checked = false;
-            })
-        }
-        toggleDeleteAllBtn();
-    })
+    // $(document).on('click', 'input[name="main_checkbox"]', function() {
+    //     if (this.checked) {
+    //         $('input[name="checkboxes"]').each(function() {
+    //             this.checked = true;
+    //         })
+    //     } else {
+    //         $('input[name="checkboxes"]').each(function() {
+    //             this.checked = false;
+    //         })
+    //     }
+    //     toggleDeleteAllBtn();
+    // })
 
-    $(document).on('change', 'input[name="checkboxes"]', function() {
-        if ($('input[name="checkboxes"]').length == $('input[name="checkboxes"]:checked').length) {
-            $('input[name="main_checkbox"]').prop('checked', true);
-        } else {
-            $('input[name="main_checkbox"]').prop('checked', false);
+    // $(document).on('change', 'input[name="checkboxes"]', function() {
+    //     if ($('input[name="checkboxes"]').length == $('input[name="checkboxes"]:checked').length) {
+    //         $('input[name="main_checkbox"]').prop('checked', true);
+    //     } else {
+    //         $('input[name="main_checkbox"]').prop('checked', false);
 
-        }
-        toggleDeleteAllBtn();
-    })
-
-
-    function toggleDeleteAllBtn() {
-        if ($('input[name="checkboxes"]:checked').length > 0) {
-            $('button#deleteAllbtn').text('Delete (' + $('input[name="checkboxes"]:checked').length + ')').removeClass(
-                'd-none');
-        } else {
-            $('#deleteAllbtn').addClass('d-none');
-        }
-    }
+    //     }
+    //     toggleDeleteAllBtn();
+    // })
 
 
-    $(document).on('click', '#deleteAllbtn', function() {
-        var deleteAllid = [];
-        $('input[name="checkboxes"]:checked').each(function() {
-            deleteAllid.push($(this).data('id'));
-        });
-        $.ajax({
-            type: 'post',
-            url: '{{ route('Vehicle.SelectedDelete') }}',
-            data: {
-                ids: deleteAllid
-            },
-            success: function(data) {
-                iziToast.warning({
-                    title: 'Vehicle',
-                    message: data.success,
-                    position: 'topCenter',
-                    zindex: '9999999999999',
-                });
+    // function toggleDeleteAllBtn() {
+    //     if ($('input[name="checkboxes"]:checked').length > 0) {
+    //         $('button#deleteAllbtn').text('Delete (' + $('input[name="checkboxes"]:checked').length + ')').removeClass(
+    //             'd-none');
+    //     } else {
+    //         $('#deleteAllbtn').addClass('d-none');
+    //     }
+    // }
 
 
-                setTimeout(function() {
-                    window.location.reload(true);
-                }, 2000);
+    // $(document).on('click', '#deleteAllbtn', function() {
+    //     var deleteAllid = [];
+    //     $('input[name="checkboxes"]:checked').each(function() {
+    //         deleteAllid.push($(this).data('id'));
+    //     });
+    //     $.ajax({
+    //         type: 'post',
+    //         url: '{{ route('Vehicle.SelectedDelete') }}',
+    //         data: {
+    //             ids: deleteAllid
+    //         },
+    //         success: function(data) {
+    //             iziToast.warning({
+    //                 title: 'Vehicle',
+    //                 message: data.success,
+    //                 position: 'topCenter',
+    //                 zindex: '9999999999999',
+    //             });
 
 
-            }
-        });
+    //             setTimeout(function() {
+    //                 window.location.reload(true);
+    //             }, 2000);
+
+
+    //         }
+    //     });
 
 
 
-    });
+    // });
 
 
     function vehicle_attachments() {

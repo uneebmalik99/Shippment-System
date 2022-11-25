@@ -517,9 +517,12 @@
                                         
                                         <img src="{{asset('images/file.png')}}" alt="" style="width: 94px;">
 
-                                        <input id="user_file" type="file" name="user_file[]"/>
+                                        <input id="user_file" class="user_file" type="file" name="user_file[]" multiple/>
                                         <br/>
-                                        <span id="imageName"></span>
+                                        <div class="imageName">
+
+                                        </div>
+                                        {{-- <span id="imageName"></span> --}}
                                         <br>
                                         <p>Upload Document</p> <br/>
                                       </label>
@@ -542,21 +545,42 @@
                 onclick="skip_view(this.id)" id="skip" nexttab="billing" skiptab="billing_customer_tab">
                 <div class="unskew">skip</div>
             </button> --}}
+            @if(@$documents[0]['id'])
+            <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="create_customer(this.id)"
+            id="general_customer" name="{{ $module['button'] }}" style="padding: 4px;"
+            data-next="quotation_customer_tab">
+            <div class="unskew">Update</div>
+        </button>
+        @else
+        <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="create_customer(this.id)"
+            id="general_customer" name="{{ $module['button'] }}" style="padding: 4px;"
+            data-next="quotation_customer_tab">
+            <div class="unskew">Save</div>
+        </button>
+            
+            @endif
+
             <button type="button" class="btn next-style text-white col-1 py-1 mx-2" style="cursor:pointer;"
                 onclick="createForm(this.id)" id="general_customer" name="{{ $module['button'] }}"
                 data-next="billing_customer_tab">
                 <div class="unskew">Next</div>
             </button>
+            
         </div>
     </div>
     {{-- {{dd(@$documents[0]['documents']['file'])}} --}}
 </form>
 
-@if(@$documents[0]['documents'])
+{{-- {{dd($documents[0]['customer_documents'])}} --}}
+@if(@$documents[0]['customer_documents'])
+@foreach (@$documents[0]['customer_documents'] as $file)   
+ 
 <script>
     let inputImage = document.querySelector("#user_file").files[0];
-        imageName.innerText = "{{@$documents[0]['documents']['thumbnail']}}";
+    // $('.imageName').append('<p>{{@$file["thumbnail"]}}</p>');
+        // imageName.innerText = "{{@$documents[0]['documents']['thumbnail']}}";
 </script>
+@endforeach
 @endif
 
 @if(@$documents[0]['user_image'])
@@ -569,8 +593,12 @@
     let input = document.getElementById("user_file");
     let imageName = document.getElementById("imageName");
     input.addEventListener("change", ()=>{
-        let inputImage = document.querySelector("#user_file").files[0];
-        console.log(inputImage);
-        imageName.innerText = inputImage.name;
+        let inputImage = document.querySelector(".user_file").files;
+        // console.log(inputImage.length);
+        for(var i=0; i < inputImage.length; i++){
+            console.log(inputImage[i].name);
+            $('.imageName').append('<p>'+inputImage[i].name+'</p>');
+        }
+        // imageName.innerText = inputImage.length + 'files selected';
     })
 </script>

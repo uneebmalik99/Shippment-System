@@ -36,6 +36,89 @@
 
     // }
 
+    function create_customer(id){
+        $tab = id;
+        $next_tab = $('#' + $tab).data('next');
+        var formData = new FormData(jQuery('#customer_general_form')[0]);
+        formData.append('tab', $tab);
+        console.log(...formData);
+        // document.getElementById('load').style.visibility = "visible";
+
+        $.ajax({
+            type: 'post',
+            url: '{{ URL::to('admin/customers/create') }}/' + $tab,
+            processData: false,
+            contentType: false,
+            data: formData,
+
+            success: function(data) {
+                iziToast.success({
+                    zindex: '9999999999999',
+                    position: 'topCenter',
+                    title: data.result,
+                    message: data.tab,
+                });
+                
+               
+
+                    $('#exampleModal').modal('hide');
+                    setTimeout(function() {
+                        window.location.reload(true);
+                    }, 2000);
+            },
+            complete: function() {
+                // alert('complete');
+                document.getElementById('load').style.visibility = "hidden";
+            },
+            error: function(response) {
+                document.getElementById('load').style.visibility = "hidden";
+
+                iziToast.warning({
+                    message: 'Failed! Some fields are missing',
+                    position: 'topCenter',
+                    zindex: '9999999999999'
+                });
+
+                console.log(response.responseJSON['errors']);
+                if (response.responseJSON['errors']['username']) {
+                    $('#username_error').html('<small>Please Fill*</small>');
+                }
+                if (response.responseJSON['errors']['name']) {
+                    $('#name_error').html('<small>Please Fill*</small>');
+                }
+                if (response.responseJSON['errors']['password']) {
+                    $('#password_error').html('<small>Please Fill*</small>');
+                }
+                if (response.responseJSON['errors']['phone']) {
+                    $('#phone_error').html('<small>Please Fill*</small>');
+                }
+                if (response.responseJSON['errors']['email']) {
+                    $('#email_error').html('<small>Please Fill*</small>');
+                }
+                if (response.responseJSON['errors']['company_name']) {
+                    $('#company_name_error').html('<small>Please Fill*</small>');
+                }
+                if (response.responseJSON['errors']['company_email']) {
+                    $('#company_email_error').html('<small>Please Fill*</small>');
+                }
+                if (response.responseJSON['errors']['location_number']) {
+                    $('#location_number_error').html('<small>Please Fill*</small>');
+                }
+                if (response.responseJSON['errors']['country']) {
+                    $('#country_error').html('<small>Please Fill*</small>');
+                }
+                if (response.responseJSON['errors']['zip_code']) {
+                    $('#zip_code_error').html('<small>Please Fill*</small>');
+                }
+                if (response.responseJSON['errors']['state']) {
+                    $('#state_error').html('<small>Please Fill*</small>');
+                }
+                if (response.responseJSON['errors']['address_line1']) {
+                    $('#address_line1_error').html('<small>Please Fill*</small>');
+                }
+            }
+        });
+    }
 
     function createForm(id) {
         $tab = id;

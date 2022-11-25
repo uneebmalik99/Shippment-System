@@ -2,7 +2,7 @@
 
 @include('layouts.customer_create.navbar')
 <form method="POST" id="customer_quotation_form" enctype="multipart/form-data">
-    @if(count(@$quotation) > 0)
+    @if((@$quotation))
     {{-- <input type="hidden" id="id" name="id" value="66"> --}}
     @foreach(@$quotation as $quo)
     <input type="hidden" id="id" name="id[]" value="{{@$quo['id']}}">
@@ -18,13 +18,13 @@
                 <select name="destination_port" id="destination_port"
                     class="form-control-sm border border-0 rounded-pill bg col-6">
                     @if(@$quotation[0]['destination_port'])
-                    <option value="{{@$quotation[0]['destination_port']}}" selected>{{@$quotation[0]['destination_port']}}</option>
+                    <option value="{{@$quotation[0]['port']}}" selected>{{@$quotation[0]['port']}}</option>
 
                     @else
                     <option selected disabled>Destination Ports</option>
                     @endif
                     @foreach ($destination_port as $ports)
-                        <option value="{{ @$ports['destination'] }}">{{ @$ports['destination'] }}</option>
+                        <option value="{{ @$ports['port'] }}">{{ @$ports['port'] }}</option>
                     @endforeach
                 </select>
                 {{-- <input type="text" class="form-control-sm border border-0 rounded-pill bg col-6"
@@ -100,7 +100,7 @@
                         <select name="loading_port[]" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
                             @if(@$quotation[0]['loading_port'])
-                            <option value="{{@$quotation[0]['loading_port']}}" selected>{{@$quotation[0]['loading_port']}}</option>
+                            <option value="{{@$quotation[0]['port']}}" selected>{{@$quotation[0]['port']}}</option>
                             @else
                             <option selected value="null">Select Loading Port</option>
                             @endif
@@ -367,11 +367,22 @@
     <div class="col-12 py-2 px-5 d-flex justify-content-end">
         <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="email"
             id="email" value="{{ @$module['email'] }}"readonly>
+        
+        @if(@$quotation)
+        <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="createForm(this.id)"
+            id="quotation_customer" name="{{ $module['button'] }}" style="padding: 4px;"
+            data-next="shipper_customer_tab">
+            <div class="unskew">Update</div>
+        </button>
+        @else
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="createForm(this.id)"
             id="quotation_customer" name="{{ $module['button'] }}" style="padding: 4px;"
             data-next="shipper_customer_tab">
             <div class="unskew">Save</div>
         </button>
+        @endif
+
+        
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="hidemodal()"
             style="padding: 4px;" data-next="shipper_customer_tab">
             <div class="unskew">Finish</div>

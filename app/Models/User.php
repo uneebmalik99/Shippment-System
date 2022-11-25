@@ -22,6 +22,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Vehicle', 'buyer_id', 'id');
     }
 
+    public function customer_documents()
+    {
+        return $this->hasMany('App\Models\CustomerDocument', 'user_id', 'id');
+    }
+
     public function exports()
     {
         return $this->hasMany('App\Models\Export');
