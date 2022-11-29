@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\User;
 use App\Models\Location;
+use App\Models\VehicleCart;
 use Carbon\Carbon;
 
 class CalendarController extends Controller
@@ -73,6 +74,8 @@ class CalendarController extends Controller
                 'action' => $this->action,
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = User::paginate($this->perpage);
         $data['records'] = $records;
         $notification = $this->Notification();

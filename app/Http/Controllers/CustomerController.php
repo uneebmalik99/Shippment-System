@@ -10,6 +10,8 @@ use App\Models\Location;
 use App\Models\Consignee;
 use App\Models\DCountry;
 use App\Models\Quotation;
+use App\Models\VehicleCart;
+use App\Models\NoOfVehicle;
 use App\Models\CustomerBuyerId;
 use App\Exports\UsersExport;
 use App\Models\BillingParty;
@@ -95,6 +97,7 @@ class CustomerController extends Controller
                 'page' => 'list',
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
 
         $notification = $this->Notification();
         // $data['records'] = User::where('role_id', 4)->paginate($this->perpage);
@@ -162,47 +165,83 @@ class CustomerController extends Controller
 
     public function create(Request $request)
     {
-
+        
         $data = [];
         $action = url($this->action . '/create');
-        $data = [
-            "page_title" => $this->plural . " create",
-            "page_heading" => $this->plural . ' create',
-            "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
-            "action" => $action,
-            "module" => ['type' => $this->type,
-                'type' => $this->type,
-                'singular' => $this->singular,
-                'plural' => $this->plural,
-                'view' => $this->view,
-                'db_key' => $this->db_key,
-                'action' => $this->action,
-                'page' => 'create',
-                'button' => 'Create',
-            ],
-        ];
+        if($request->email){
+            $tab = $request->tab;
+
+            $customer = User::where('email', $request->email)->get()->toArray();
+            // dd($customer[0]['id']);
+
+            
+            $data = [
+                "page_title" => $this->plural . " create",
+                "page_heading" => $this->plural . ' create',
+                "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
+                "action" => $action,
+                "module" => [
+                    'type' => $this->type,
+                    // 'type' => $this->type,
+                    'singular' => $this->singular,
+                    'plural' => $this->plural,
+                    'view' => $this->view,
+                    'db_key' => $this->db_key,
+                    'action' => $this->action,
+                    'page' => 'create',
+                    'button' => 'Create',
+                    'email' => $request->email,
+                ],
+            ];
+            if($tab == 'shipper'){
+                $data['shipper'] = Shipper::where('customer_id', $customer[0]['id'])->get()->toArray();
+            }
+            if($tab == 'quotation'){
+                $data['quotation'] = Quotation::where('customer_id', $customer[0]['id'])->get()->toArray();
+            }
+        }
+        else{
+            $data = [
+                "page_title" => $this->plural . " create",
+                "page_heading" => $this->plural . ' create',
+                "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
+                "action" => $action,
+                "module" => [
+                    'type' => $this->type,
+                    // 'type' => $this->type,
+                    'singular' => $this->singular,
+                    'plural' => $this->plural,
+                    'view' => $this->view,
+                    'db_key' => $this->db_key,
+                    'action' => $this->action,
+                    'page' => 'create',
+                    'button' => 'Create',
+                ],
+            ];
+        }
+       
 
         if ($request->ajax()) {
             $tab = $request->tab;
-            // dd($tab);
             $data['destination_port'] = DCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
             $data['location'] = Location::all()->toArray();
             $data['container_size'] = ContainerSize::where('status', '1')->get();
             $data['loading_ports'] = LoadingCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
             $data['shipping_lines'] = ShipmentLine::where('status', '1')->get();
+            $data['no_of_vehicle'] = NoOfVehicle::where('status', '1')->get();
 
-            // dd($data['destination_port']);
             $output = view('layouts.customer_create.' . $tab, $data)->render();
             return Response($output);
         }
+        
 
-        if ($request->isMethod('post')) {
-            $record = $request->all();
-            $Obj = new User;
-            $result = $Obj->create($record);
-            return redirect($this->action)->with('success', 'Vehicle addedd successfully.');
+        // if ($request->isMethod('post')) {
+        //     $record = $request->all();
+        //     $Obj = new User;
+        //     $result = $Obj->create($record);
+        //     return redirect($this->action)->with('success', 'Vehicle addedd successfully.');
 
-        }
+        // }
         $notification = $this->Notification();
         return view($this->view . 'create_edit', $data, $notification);
     }
@@ -216,8 +255,9 @@ class CustomerController extends Controller
             "page_heading" => $this->plural . ' create',
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
             "action" => $action,
-            "module" => ['type' => $this->type,
+            "module" => [
                 'type' => $this->type,
+                // 'type' => $this->type,
                 'singular' => $this->singular,
                 'plural' => $this->plural,
                 'view' => $this->view,
@@ -339,6 +379,7 @@ class CustomerController extends Controller
                 'button' => 'Update',
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
 
         $all_vehicles = Vehicle::all()->count();
         $customer_vehicles = Vehicle::where('added_by_user', $id)->count();
@@ -614,6 +655,22 @@ class CustomerController extends Controller
 
         $id = $request->id;
         $data = [];
+        $data = [
+            "page_title" => $this->plural . " create",
+            "page_heading" => $this->plural . ' create',
+            "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
+            "module" => [
+                'type' => $this->type,
+                // 'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'create',
+                'button' => 'Create',
+            ],
+        ];
         $data['user'] = User::find($id)->toArray();
         $data['billing'] = BillingParty::where('customer_id', $id)->get();
         $data['shipper'] = Shipper::where('customer_id', $id)->get();
@@ -621,7 +678,15 @@ class CustomerController extends Controller
         $data['notification'] = Notification::where('user_id', $id)->get();
         $data['documents'] = CustomerDocument::where('user_id', $id)->get()->toArray();
 
+        $data['destination_port'] = DCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
+        $data['container_size'] = ContainerSize::where('status', '1')->get();
+        $data['loading_ports'] = LoadingCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
+        $data['shipping_lines'] = ShipmentLine::where('status', '1')->get();
+        $data['no_of_vehicle'] = NoOfVehicle::where('status', '1')->get();
+
         $all_vehicles = Vehicle::all()->count();
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
 
         $customer_vehicles = Vehicle::where('added_by_user', $id)->count();
         $CustomerVehicles_value = Vehicle::get()->sum('value');
@@ -738,7 +803,9 @@ class CustomerController extends Controller
             $image = $request->file('customer_image');
             $file = $request->file('user_file');
             if($request->id){
-                if($request->password){}
+                if($request->password){
+                    $data['password'] = Hash::make($request->password);
+                }
                 else{
                     unset($data['password']);
                 }
@@ -761,8 +828,9 @@ class CustomerController extends Controller
                 "page_heading" => $this->plural . ' create',
                 "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
                 "action" => $action,
-                "module" => ['type' => $this->type,
+                "module" => [
                     'type' => $this->type,
+                    // 'type' => $this->type,
                     'singular' => $this->singular,
                     'plural' => $this->plural,
                     'view' => $this->view,
@@ -797,6 +865,8 @@ class CustomerController extends Controller
 
                 case ('shipper_customer'):
                     $view_data['quotation'] = Quotation::where('customer_id', $request->customer_id)->get()->toArray();
+            $view_data['no_of_vehicle'] = NoOfVehicle::where('status', '1')->get();
+
                     $view = view('layouts.customer_create.quotation', $view_data)->render();
 
                     break;
@@ -860,6 +930,7 @@ class CustomerController extends Controller
                 // $Obj = new User;
                 // $Obj->create($data);
                 // dd($data['id']);
+                $data['password'] = Hash::make($request->password);
                 $Obj = User::updateOrCreate(['id' => $request->id], $data);
                 // $email = $data['email'];
                 $user = User::where('email', $email)->get();

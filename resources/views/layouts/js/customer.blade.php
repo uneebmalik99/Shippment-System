@@ -332,14 +332,26 @@
     function skip_view(id) {
         $id = id;
         $tab = $('#' + $id).attr('nexttab');
+        $currenttab = $('#' + $id).attr('currenttab');
+
+       if ($currenttab == "billing_customer") {
+            var formData = new FormData(jQuery('#customer_billing_form')[0]);
+        } else if ($currenttab == "shipper_customer") {
+            var formData = new FormData(jQuery('#customer_shipper_form')[0]);
+        } else {
+            alert('no tab');
+        }
+        formData.append('tab', $tab);
         $skiptab = $('#' + $id).attr('skiptab');
-        // alert($tab);
         $.ajax({
-            type: 'get',
+            type: 'post',
             url: '{{ URL::to('admin/customers/create') }}',
-            data: {
-                'tab': $tab
-            },
+            processData: false,
+            contentType: false,
+            // data: {
+            //     'tab': $tab
+            // },
+            data:formData,
             success: function(data) {
                 $('.modal-body').html(data);
                 $('#exampleModal').modal('show');

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\User;
 use App\Models\Location;
+use App\Models\VehicleCart;
 // use App\Models\role;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -82,6 +83,8 @@ class UserController extends Controller
                 'action' => $this->action,
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
 
         // $data['role'] = Auth::user()->role;
         // if ($data['role']->name == 'Customer') {

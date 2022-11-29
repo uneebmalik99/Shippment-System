@@ -75,6 +75,23 @@
                                </tr>
                                @endforeach
                                @endif
+
+                               @if(@$vehicle_cart)
+                               @foreach ($vehicle_cart as $vehicle)
+                               <tr>
+                                <td>{{ @$vehicle['vehicle']['year'] }}</td>
+                                <td>{{ @$vehicle['vehicle']['make'] }}</td>
+                                <td>{{ @$vehicle['vehicle']['model'] }}</td>
+                                <td>{{ @$vehicle['vehicle']['vin'] }}</td>
+                                <td>{{ @$vehicle['vehicle']['title'] }}</td>
+                                <td>{{ @$vehicle['vehicle']['title_state'] }}</td>
+                                <td>{{ @$vehicle['vehicle']['title_number'] }}</td>
+                                <td>{{ @$vehicle['vehicle']['customer_name'] }}</td>
+                                <td class="text-center"><input type="checkbox" value="{{ @$vehicle['vehicle']['id'] }}"
+                                        id="vehicle" name="vehicle[]" onclick="removerow()" checked></td>
+                        </tr>
+                               @endforeach
+                               @endif
                             </tbody>
                         </table>
                     </div>

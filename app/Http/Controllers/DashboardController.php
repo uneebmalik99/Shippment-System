@@ -85,6 +85,8 @@ class DashboardController extends Controller
                 'action' => $this->action,
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
 
         // return auth()->user()->email;
 

@@ -1,4 +1,4 @@
-@if(@count($vehicles) > 0)
+@if(@$vehicles)
 {{-- @if (@count($records) == 0) --}}
 @foreach ($vehicles as $vehicle)
                                <tr>

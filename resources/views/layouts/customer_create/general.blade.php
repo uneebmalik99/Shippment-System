@@ -548,13 +548,13 @@
             @if(@$documents[0]['id'])
             <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="create_customer(this.id)"
             id="general_customer" name="{{ $module['button'] }}" style="padding: 4px;"
-            data-next="quotation_customer_tab">
+            data-next="billing_customer_tab">
             <div class="unskew">Update</div>
         </button>
         @else
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="create_customer(this.id)"
             id="general_customer" name="{{ $module['button'] }}" style="padding: 4px;"
-            data-next="quotation_customer_tab">
+            data-next="billing_customer_tab">
             <div class="unskew">Save</div>
         </button>
             

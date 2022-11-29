@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\ShippmentRate;
 use App\Models\User;
+use App\Models\VehicleCart;
 use App\Models\Notification;
 use App\Models\Location;
 use Illuminate\Http\Request;
@@ -70,6 +71,8 @@ class ShipmentRateController extends Controller
                 'action' => $this->action,
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $notification = $this->Notification();
         $data['shippment_rate']  = ShippmentRate::all()->toArray();
         return view($this->view . 'shipment_rate', $data, $notification);

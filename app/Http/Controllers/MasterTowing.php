@@ -72,6 +72,8 @@ class MasterTowingController extends Controller
                 'action' => $this->action,
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $notification = $this->Notification();
         $data['master_towing']  = MasterTowing::all()->toArray();
         return view($this->view . 'towing_rate', $data, $notification);

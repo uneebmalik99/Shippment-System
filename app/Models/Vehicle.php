@@ -94,4 +94,8 @@ class Vehicle extends Model
     {
         return $this->hasMany('App\Models\PickupImage', 'vehicle_id', 'id');
     }
+
+    public function vehicle_cart(){
+        return $this->hasMany('App\Models\VehicleCart', 'vehicle_id', 'id');
+    }
 }

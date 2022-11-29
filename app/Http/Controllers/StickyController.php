@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Notification;
 use App\Models\Sticky;
 use App\Models\Location;
+use App\Models\VehicleCart;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -75,6 +76,8 @@ class StickyController extends Controller
                 'page' => 'list',
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $notification = $this->Notification();
         $data['location'] = Location::all();
         $data['records'] = Sticky::with('user')->paginate($this->perpage);

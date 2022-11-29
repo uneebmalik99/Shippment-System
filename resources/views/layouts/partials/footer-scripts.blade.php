@@ -1691,4 +1691,18 @@
         });
         
     }
+
+
+    $('#vehicle_cart').DataTable({
+        columnDefs: [{
+                    
+                    orderable: false, targets: '_all'
+                }],
+                    scrollX: true,
+                    "lengthChange": false,
+                    "info": false,
+                    "bPaginate": false,
+                    "bFilter": false,
+
+                });
 </script>

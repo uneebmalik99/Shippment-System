@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Location;
 use App\Models\Notification;
 use App\Models\User;
+use App\Models\VehicleCart;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -75,6 +76,9 @@ class NotificationController extends Controller
                 'current_time' => Carbon::now(),
             ],
         ];
+
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
 
         $notification = $this->Notification();
         $data['user'] = User::where('role_id', '4')->get();

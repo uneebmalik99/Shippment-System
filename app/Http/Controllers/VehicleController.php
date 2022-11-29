@@ -10,6 +10,7 @@ use App\Models\AuctionImage;
 use App\Models\AuctionInvoice;
 use App\Models\BillOfSale;
 use App\Models\Image;
+use App\Models\VehicleCart;
 use App\Models\ContainerSize;
 use App\Models\LoadingPort;
 use App\Models\MMS;
@@ -112,6 +113,9 @@ class VehicleController extends Controller
                 'page' => 'list',
             ],
         ];
+
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+        // dd($data['vehicles_cart']);
 
 
         if(Auth::user()->hasRole('Customer')){
@@ -780,6 +784,8 @@ class VehicleController extends Controller
                 'button' => 'Update',
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
 // dd($data['vehicle']);
         $notification = $this->Notification();
         return view($this->view . 'profile', $data, $notification);
@@ -972,6 +978,25 @@ class VehicleController extends Controller
             ImportVehicle::find($request->vehicle_id)->delete();
             return 'Assign To Customer Successfully';
         }
+
+    }
+
+
+    public function AddToCart(Request $request){
+
+        $data = [];
+        $data['vehicle_id'] = $request->vehicle_id;
+
+       $ch = VehicleCart::create($data);
+
+       if($ch){
+        return 'Vehicle added to cart successfully!';
+       }
+       else{
+        return 'Some Error Occurs';
+       }
+
+
 
     }
 

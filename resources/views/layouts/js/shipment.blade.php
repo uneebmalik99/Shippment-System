@@ -311,6 +311,24 @@
         });
 
     }
+
+    function addtoshipment(){
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('shipments.addtoshipment') }}',
+            // data: {
+            //     'id': $id,
+            // },
+            success: function(data) {
+                console.log(data);
+                // $('.modal-body').html(data);
+                // $('.modal-title').text('Update Shipment');
+                // $('#add_vehicles').append('kashif');
+                $('.modal-body').html(data);
+                $('#exampleModal').modal('show');
+            }
+        });
+    }
 </script>
 <script>
     $('.shipment_information_tab').on('click', function() {

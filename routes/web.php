@@ -49,6 +49,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     // Customer Routes
     Route::get('/customers', [CustomerController::class, 'index'])->name('customer.list');
     Route::get('/customers/create', [CustomerController::class, 'create'])->name('customer.create');
+    Route::post('/customers/create', [CustomerController::class, 'create'])->name('customer.create');
     Route::post('/customers/create/general_customer', [CustomerController::class, 'general_create'])->name('customer.general_create');
     Route::post('/customers/create/billing_customer', [CustomerController::class, 'general_create'])->name('customer.billing_create');
     Route::post('/customers/create/shipper_customer', [CustomerController::class, 'general_create'])->name('customer.shipper_create');
@@ -124,6 +125,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/vehicle/assignToCustomer',       [VehicleController::class, 'assignToCustomer'])->name('vehicle.assignToCustomer');
 
 
+    Route::post('/vehicle/addToCart',       [VehicleController::class, 'AddToCart'])->name('vehicle.add_to_cart');
+
+
     //Sticky Notes Routes
     Route::get('/stickynotes', [StickyController::class, 'index'])->name('sticky.list');
     Route::post('/stickynotes', [StickyController::class, 'create'])->name('sticky.create');
@@ -137,6 +141,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/shipments/delete/{id?}', [ShipmentController::class, 'delete'])->name('shipment.delete');
 
     Route::post('/shipments/edit', [ShipmentController::class, 'edit'])->name('shipments.edit');
+
+    Route::post('/shipments/addtoshipment', [ShipmentController::class, 'addtoshipment'])->name('shipments.addtoshipment');
 
 
     Route::get('/shipments/filtering', [ShipmentController::class, 'filtering'])->name('shipment.filter');

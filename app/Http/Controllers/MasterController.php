@@ -10,6 +10,7 @@ use App\Models\Site;
 use App\Models\User;
 use App\Models\Color;
 use App\Models\ImportVehicle;
+use App\Models\VehicleCart;
 // use App\Models\State;
 use App\Models\Title;
 use App\Models\Series;
@@ -112,6 +113,7 @@ class MasterController extends Controller
                 'action' => $this->action,
             ],
         ];
+
         $records = User::paginate($this->perpage);
         $data['records'] = $records;
         $records = Company::all();
@@ -166,6 +168,7 @@ class MasterController extends Controller
         $data['loading_countries'] = ShippingCountry::with('state.loading_ports')->get()->toArray();
         $data['destination_countries'] = DestinationCountry::with('state.destination_port')->get()->toArray();
         $data['Vehicle_mms'] = Make::with('model.series')->get()->toArray();
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
 
         // $data['states_countries'] = State::with('country')->where('status','1')->get();
         // return $data['destination_countries'];
@@ -183,6 +186,8 @@ class MasterController extends Controller
             "tab"=>"companies",
             "value"=>"companies",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = User::paginate($this->perpage);
         $data['records'] = $records;
         $records = Company::all();
@@ -201,6 +206,8 @@ class MasterController extends Controller
             "tab"=>"color",
             "value"=>"color",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = User::paginate($this->perpage);
         $data['records'] = $records;
         $records = Color::all();
@@ -219,6 +226,8 @@ class MasterController extends Controller
             "tab"=>"title",
             "value"=>"title",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = Title::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -235,6 +244,8 @@ class MasterController extends Controller
             "tab"=>"key",
             "value"=>"key",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = Key::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -251,6 +262,8 @@ class MasterController extends Controller
             "tab"=>"vehicletype",
             "value"=>"vehicletype",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = VehicleType::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -267,6 +280,8 @@ class MasterController extends Controller
             "tab"=>"auction",
             "value"=>"auction",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = Auction::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -283,6 +298,8 @@ class MasterController extends Controller
            "tab"=>"no_ofvehicle",
            "value"=>"no_ofvehicle",
        ];
+       $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
        $records = NoOfVehicle::all();
        $data['recordlist'] = $records;
        $notification = $this->Notification();
@@ -299,6 +316,8 @@ class MasterController extends Controller
             "tab"=>"shipmentstatus",
             "value"=>"shipmentstatus",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = ShipmentStatus::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -315,6 +334,8 @@ class MasterController extends Controller
             "tab"=>"shipmentlines",
             "value"=>"shipmentlines",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = ShipmentLine::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -331,6 +352,8 @@ class MasterController extends Controller
             "tab"=>"containertype",
             "value"=>"containertype",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = ContainerType::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -347,6 +370,8 @@ class MasterController extends Controller
             "tab"=>"containersize",
             "value"=>"containersize",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = ContainerSize::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -363,6 +388,8 @@ class MasterController extends Controller
             "tab"=>"titletype",
             "value"=>"titletype",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = TitleType::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -379,6 +406,8 @@ class MasterController extends Controller
             "tab"=>"shippername",
             "value"=>"shippername",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = Shippername::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -395,6 +424,8 @@ class MasterController extends Controller
             "tab"=>"vehiclestatus",
             "value"=>"vehiclestatus",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = VehicleStatus::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -411,6 +442,8 @@ class MasterController extends Controller
             "tab"=>"pickuplocation",
             "value"=>"pickuplocation",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = PickupLocation::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -427,6 +460,8 @@ class MasterController extends Controller
             "tab"=>"site",
             "value"=>"site",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = Site::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -443,6 +478,8 @@ class MasterController extends Controller
             "tab"=>"warehouse",
             "value"=>"warehouse",
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = Warehouse::all();
         $data['recordlist'] = $records;
         $notification = $this->Notification();
@@ -459,6 +496,8 @@ class MasterController extends Controller
            "tab"=>"shipmenttype",
            "value"=>"shipmenttype",
        ];
+       $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
        $records = ShipmentType::all();
        $data['recordlist'] = $records;
        $notification = $this->Notification();
@@ -475,6 +514,8 @@ class MasterController extends Controller
             "tab"=>"loadingcountry",
             "value"=>"loadingcountry",
             ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
             $records = LoadingCountry::all();
             $data['recordlist'] = $records;
             $notification = $this->Notification();
@@ -491,6 +532,8 @@ class MasterController extends Controller
             "tab"=>"destinationcountry",
             "value"=>"destinationcountry",
             ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
             $records = DCountry::all();
             $data['recordlist'] = $records;
             $notification = $this->Notification();
@@ -507,6 +550,8 @@ class MasterController extends Controller
             "tab"=>"mms",
             "value"=>"mms",
             ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
             $records = MMS::all();
             $data['recordlist'] = $records;
             $notification = $this->Notification();
@@ -522,6 +567,8 @@ class MasterController extends Controller
         $data['model'] = VehicleModel::all();
         $data['series'] = Series::all();
         $data['make'] = Make::all();
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $output = view('master.make',$data)->render();
         return Response($output);
 
@@ -1900,6 +1947,8 @@ class MasterController extends Controller
         $notification = $this->Notification();
         $data['importVehicles'] = ImportVehicle::all();
         $data['customers'] = User::role('Customer')->get()->toArray();
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         return view($this->view . 'import_vehicles', $data, $notification);
     }
 }

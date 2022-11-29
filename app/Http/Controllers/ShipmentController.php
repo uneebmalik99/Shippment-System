@@ -10,6 +10,7 @@ use App\Models\Location;
 use App\Models\Notification;
 use App\Models\Other_Document;
 use App\Models\Shipment;
+use App\Models\VehicleCart;
 use App\Models\Shipment_Invice;
 use App\Models\Stamp_Title;
 use App\Models\Vehicle;
@@ -104,6 +105,8 @@ class ShipmentController extends Controller
         ];
 
         $notification = $this->Notification();
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         // $data['companies'] = User::all();
 
         if(Auth::user()->hasRole('Customer')){
@@ -195,7 +198,58 @@ class ShipmentController extends Controller
             return Response($output);
         }
     }
+    
+    function addtoshipment(Request $req){
+        
+        $output = [];
+        $action = url($this->action . '/create');
+        $data = [
+            "page_title" => $this->plural . " create",
+            "page_heading" => $this->plural . ' create',
+            "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
+            "action" => $action,
+            "button_text" => "Create",
+            "module" => [
+                'type' => $this->type,
+                // 'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'create',
+            ],
+        ];
 
+        $data['vehicle_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+        // dd($vehicle_cart);
+        // $output['cart'] = view('layouts.shipment_filter.checkVehicle', $data)->render();
+        // dd($data['vehicle_cart']);
+
+        $data['buyer_ids'] = User::with('billings')->get()->toArray();
+        // dd($data['shipment']);
+        $data['shippers'] = Shipper::all();
+
+        $notification = $this->Notification();
+        $data['vehicles'] = Vehicle::where('shipment_id', null)->get();
+        $data['consignees'] = Consignee::all()->toArray();
+        $data['records'] = Shipment::all()->toArray();
+        $data['location'] = Location::all()->toArray();
+        // $data['countries'] = ShippingCountry::where('status', '1')->get();
+        $data['countries'] = LoadingCountry::select('country')->where('status', '1')->groupBy('country')->get()->toArray();
+
+        // User::select('name')->groupBy('name')->get()->toArray()
+        $data['container_size'] = ContainerSize::where('status', '1')->get();
+        $data['container_types'] = ContainerType::where('status', '1')->get();
+        $data['shipment_lines'] = ShipmentLine::where('status', '1')->get();
+        $data['shipment_types'] = ShipmentType::where('status', '1')->get();
+        // $data['companies'] = Company::where('status', '1')->get();
+        $data['companies'] = User::all();
+        $data['destination_country'] = DCountry::select('country')->where('status', '1')->groupBy('country')->get()->toArray();
+
+        $output = view('shipment.general', $data);
+        return Response($output);
+    }
     function edit(Request $req){
         // return $req->id;
         $output = [];
@@ -420,8 +474,10 @@ class ShipmentController extends Controller
                 foreach ($vehicles as $vehicle_id) {
                     $get_vehicle = $Obj_vehicle->find($vehicle_id);
                     $get_vehicle->shipment_id = $shipment[0]['id'];
+                    $get_vehicle->status = 2;
                     $get_vehicle->save();
                 }
+                VehicleCart::query()->delete();
             }
             $view = view('shipment.' . $tab, $data)->render();
             return Response($view);
@@ -523,6 +579,8 @@ class ShipmentController extends Controller
             ],
         ];
         $notification = $this->Notification();
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $data['shipments'] = Shipment::with(['vehicle.warehouse_image', 'loading_image'])->where('id', $request->id)->get()->toArray();
         if ($request->ajax()) {
             $tab = $request->tab;
@@ -858,9 +916,11 @@ class ShipmentController extends Controller
         if ($req->searchText) {
             if(Auth::user()->hasRole('Customer')){
                 $data['vehicles'] = Vehicle::where('added_by_user', auth()->user()->id)->where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->get()->toArray();
+                // dd($data['vehicles']);
 
             }else{
                 $data['vehicles'] = Vehicle::where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->get()->toArray();
+                // dd($data['vehicles']);
             }
                 
                 $output = view('layouts.shipment_filter.filterVehicles', $data)->render();

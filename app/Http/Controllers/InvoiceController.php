@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use LDAP\Result;
+use App\Models\VehicleCart;
 
 
 class InvoiceController extends Controller
@@ -80,6 +81,8 @@ class InvoiceController extends Controller
                 'page' => 'list',
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $notification = $this->Notification();
         return view($this->view . 'list', $data, $notification);
     }

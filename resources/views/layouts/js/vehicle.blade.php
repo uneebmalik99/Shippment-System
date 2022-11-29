@@ -548,6 +548,27 @@
 
     // });
 
+    function addtoShipment(id){
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('vehicle.add_to_cart') }}',
+            data: {
+                'vehicle_id': id,
+            },
+            success: function(data) {
+                // alert(data);
+                iziToast.success({
+                    title: 'Success',
+                    message: data,
+                    timeout: 1500,
+                    position: 'topCenter',
+                    zindex: '9999999999999',
+                });
+                // $('#model').html(data);
+            }
+        });
+    }
+
 
     function vehicle_attachments() {
         var formData = new FormData(jQuery('#vehicle_attacments')[0]);

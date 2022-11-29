@@ -1,5 +1,4 @@
-{{-- {{dd(count(@$quotation))}} --}}
-
+{{-- {{$quotation[0]['id']}} --}}
 @include('layouts.customer_create.navbar')
 <form method="POST" id="customer_quotation_form" enctype="multipart/form-data">
     @if((@$quotation))
@@ -18,8 +17,7 @@
                 <select name="destination_port" id="destination_port"
                     class="form-control-sm border border-0 rounded-pill bg col-6">
                     @if(@$quotation[0]['destination_port'])
-                    <option value="{{@$quotation[0]['port']}}" selected>{{@$quotation[0]['port']}}</option>
-
+                    <option value="{{@$quotation[0]['destination_port']}}" selected>{{@$quotation[0]['destination_port']}}</option>
                     @else
                     <option selected disabled>Destination Ports</option>
                     @endif
@@ -86,9 +84,9 @@
                             @else
                             <option selected value="null">Select Vehicles</option>
                             @endif
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($no_of_vehicle as $no)
+                             <option value="{{@$no['name']}}">{{$no['name']}}</option>
+                             @endforeach
                         </select>
                     </div>
                 </div>
@@ -100,12 +98,12 @@
                         <select name="loading_port[]" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
                             @if(@$quotation[0]['loading_port'])
-                            <option value="{{@$quotation[0]['port']}}" selected>{{@$quotation[0]['port']}}</option>
+                            <option value="{{@$quotation[0]['loading_port']}}" selected>{{@$quotation[0]['loading_port']}}</option>
                             @else
                             <option selected value="null">Select Loading Port</option>
                             @endif
                             @foreach ($loading_ports as $lports)
-                                <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
+                                <option value="{{ @$lports['port'] }}">{{ @$lports['port'] }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -204,9 +202,10 @@
                              @else
                              <option selected value="null">Select</option>
                              @endif
-                             <option value="10">10</option>
-                             <option value="20">20</option>
-                             <option value="30">30</option>
+                             @foreach ($no_of_vehicle as $no)
+                             <option value="{{@$no['name']}}">{{$no['name']}}</option>
+                             @endforeach
+                             
                          </select>
                      </div>
                  </div>

@@ -401,7 +401,8 @@
                             style="width:100%!important;">
                             <thead class="bg-custom">
                                 <tr class="font-size">
-                                    <th><input type="checkbox" name="main_checkbox"><label></label>
+                                    <th>
+                                        {{-- <input type="checkbox" name="main_checkbox"><label></label>
                                         <button class="delete-button d-none" id="deleteAllbtn">
                                             <a href="#">
                                                 <svg width="14" height="13" viewBox="0 0 12 12" fill="none"
@@ -412,7 +413,8 @@
                                                 </svg>
 
                                             </a>
-                                        </button>
+                                        </button> --}}
+                                        ADD
                                     </th>
                                     <th class="font-bold-tr">IMAGE</th>
                                     <th class="font-bold-tr">CLIENTS</th>
@@ -443,7 +445,7 @@
                                 @foreach ($records as $val)
                                     {{-- @dd($val['images'][0]['name']) --}}
                                     <tr>
-                                        <td><input type="checkbox" name="checkboxes" data-id="{{ @$val['id'] }}"></td>
+                                        <td><input type="checkbox" name="checkboxes" id="{{ @$val['id'] }}" title="Add" onchange="addtoShipment(this.id)"></td>
                                         <td>
 
                                            

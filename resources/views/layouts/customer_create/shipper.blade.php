@@ -212,7 +212,7 @@
             id="email" value="{{ @$module['email'] }}" readonly>
         @if(!@$shipper[0]['id'])
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" style="cursor:pointer;"
-            onclick="skip_view(this.id)" id="skip" nexttab="quotation" skiptab="quotation_customer_tab">
+            onclick="skip_view(this.id)" id="skip" currenttab="shipper_customer" nexttab="quotation" skiptab="quotation_customer_tab">
             <div class="unskew">skip</div>
         </button>
         @endif
