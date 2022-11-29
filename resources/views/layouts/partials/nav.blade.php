@@ -143,7 +143,7 @@
                                 <h6>Vehicles</h6>
                                 <label class="label label-danger">New</label>
                             </li>
-                            @if ($notification)
+                            @if ($vehicles_cart)
                                 {{-- @dd($vehicles_cart[0]) --}}
                                 {{-- <li class="notification_body" value="{{ @$notifications['id'] }}"
                                         style="cursor: pointer;"
@@ -193,13 +193,16 @@
                                     {{-- </tbody> --}}
                                 </table>
                             @else
-                                <div>
+                                <div class="text-center">
                                     Nothing to display
                                 </div>
                             @endif
+
+                            @if ($vehicles_cart)
                             <li>
                                 <label class="label label-danger" onclick="addtoshipment()">Add to Shippment</label>
                             </li>
+                            @endif
                         </ul>
                     </li>
 

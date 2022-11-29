@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\User;
 use App\Models\Location;
+use App\Models\VehicleCart;
 use App\Models\Vehicle;
 use App\Models\Shipment;
 use App\Models\Shipper;
