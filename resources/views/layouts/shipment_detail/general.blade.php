@@ -268,7 +268,9 @@
                     </div>
                     <div class="d-flex justify-content-start " style="width: 90%;margin:4px auto;padding:5px; ">
                         <textarea name=" " id=" " cols="40" rows="4" style="border: 1px solid rgba(26, 88, 133, 0.17); border-radius: 10px;font-size: 13px;
-                    color: #6D8DA6; " disabled>@if(@$shipments[0]['note']){{@$shipments[0]['note']}}
+                    color: #6D8DA6; " disabled>
+                    @if(@$shipments[0]['notes'])
+                    {{@$shipments[0]['notes']}}
                     @else 
                     --@endif
                 </textarea>

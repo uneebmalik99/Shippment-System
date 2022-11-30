@@ -98,16 +98,55 @@
             font-weight: 500 !important;
         }
     </style>
-
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen scrollable mw-100 m-2 px-3 py-2" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between title_style">
+                    <div>
+                        <h5 class="modal-title text-white" id="exampleModalLabel">Add New User</h5>
+                    </div>
+                    <div>
+                        <button type="button" class="close text-white h6" data-dismiss="modal" aria-label="Close"
+                            style="margin-top: -11px;
+                font-size: 26px;">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Modal End --}}
     <div class="container bg-light border">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-12 w-100 d-flex justify-content-between align-items-center my-3">
                 <div>
-                    <h5 class="font-bold">Users</h5>
+                    <a href="{{ route('user.list') }}" class="btn text-white px-4" style="background: #3fd3f8;
+                    box-shadow: 0px 4px 4px rgba(241, 233, 233, 0.25);
+                    border-radius: 100px;font-size:12px;font-weight:400"><h5 class="font-bold">Users</h5></a>
+                </div>
+                <div>
+                    <button onclick="showPermissions()" id="permissions" style="background: #25e2f0;
+                    box-shadow: 0px 4px 4px rgba(241, 233, 233, 0.25);
+                    border-radius: 100px;font-size:12px;font-weight:400;border:none">
+                    <a class="btn text-white px-4"><h5 class="font-bold">Permissions</h5></a>
+                    </button>
+                </div>
+                <div>
+                    <button onclick="showRoles()" id="roles" style="background: #0ecff1;
+                    box-shadow: 0px 4px 4px rgba(126, 181, 190, 0.25);
+                    border-radius: 100px;font-size:12px;font-weight:400;border:none">
+                    <a class="btn text-white px-4"><h5 class="font-bold">Roles</h5></a>
+                    </button>
                 </div>
                 <div>
                     <a href="{{ route('user.createRole') }}" class="btn text-white px-4"
-                        style="background: #2B00D4;
+                        style="background: #5ee5f7;
                     box-shadow: 0px 4px 4px rgba(241, 233, 233, 0.25);
                     border-radius: 100px;font-size:12px"><i
                             class="fa fa-plus" style="font-weight:400;"></i>Add Role</a>
@@ -120,7 +159,7 @@
                             src="{{ asset('assets/images/Flter.png') }}" alt="" style="width:12px;height:12px">
                         Filter</button>
 
-                    <button class="btn text-white px-4"
+                    <button onclick="createUser()" class="btn text-white px-4"
                         style="background: #2B00D4;
                     box-shadow: 0px 4px 4px rgba(241, 233, 233, 0.25);
                     border-radius: 100px;font-size:12px"><i
@@ -132,10 +171,10 @@
 
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
-                <div class="">
+                <div class="main-box">
                     <table class="table" id="table_id" style="border:none!important;">
                         <thead style="border:none!imporant;color:rgba(102,102,102,1); ">
-                            <th>UserName</th>
+                            <th>User Name</th>
                             <th>STATE / CITY</th>
                             <th>Role</th>
                             <th>STATUS</th>
@@ -215,13 +254,7 @@
 
                                         </div>
                                     </td>
-                                    <td>
-                                        <div>
-                                            <p></p>
-                                            <b>April 2, 2022</b>
-                                            <p>5.20AM</p>
-                                        </div>
-                                    </td>
+                                    
                                     {{-- @dd($val['id']) --}}
                                     <td>
                                         {{-- @can('suporsub', $role) --}}
@@ -259,8 +292,8 @@
 
 
 
-                                                <button class="edit-button">
-                                                    <a href="">
+                                                <button id="{{ @$val['id'] }}" class="edit-button" onclick="editUser(this.id)">
+                                                    <a>
                                                         <svg width="14" height="14" viewBox="0 0 16 16" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -318,4 +351,5 @@
             });
         </script>
     @endif
+    
 @endsection

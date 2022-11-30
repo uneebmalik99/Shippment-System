@@ -179,8 +179,9 @@
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="color" class="col-6 px-0 font-size font-bold">Color<span
-                                            class="text-danger">*</span></label>
+                                    <label for="color" class="col-6 px-0 font-size font-bold">Color
+                                        {{-- <span class="text-danger">*</span> --}}
+                                        </label>
                                     <select name="color" id="color" value="{{ @$user[0]['color'] }}"
                                         class="form-control-sm border border-0 rounded-pill bg col-6">
                                         @if(@$user[0]['color'])
@@ -206,8 +207,9 @@
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="weight" class="col-6 px-0 font-size font-bold">Weight (Kgs)<span
-                                            class="text-danger">*</span></label>
+                                    <label for="weight" class="col-6 px-0 font-size font-bold">Weight (Kgs)
+                                        {{-- <span class="text-danger">*</span> --}}
+                                        </label>
                                     <input type="text"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="weight"
                                         id="weight" value="{{ @$user[0]['weight'] }}">
@@ -221,8 +223,9 @@
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="values" class="col-6 px-0 font-size font-bold">Value ($)<span
-                                            class="text-danger">*</span></label>
+                                    <label for="values" class="col-6 px-0 font-size font-bold">Value ($)
+                                        {{-- <span class="text-danger">*</span> --}}
+                                    </label>
                                     <input type="number"
                                         class="form-control-sm border border-0 rounded-pill bg col-6" name="value"
                                         id="value" value="{{ @$user[0]['value'] }}">

@@ -12,8 +12,8 @@
         <button class="mx-1 form-control shipment_information_tab col-2"  id="{{@$shipments[0]['id']}}" tab="documents">
             <div class="unskew">Documents</div>
         </button>
-        <button class="mx-1 form-control shipment_information_tab col-2" tab="notes" id="{{ @$shipment['id'] }}">
+        {{-- <button class="mx-1 form-control shipment_information_tab col-2" tab="notes" id="{{ @$shipment['id'] }}">
             <div class="unskew" id="">Notes</div>
-        </button>
+        </button> --}}
     </div>
 </div>

@@ -202,11 +202,13 @@ class UserController extends Controller
                 'page' => 'profile',
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+        $user = User::find($id);
         $notification = $this->Notification();
         $data['records'] = User::find($id)->toArray();
-        $data['roles'] = Role::all()->toArray();
+        $data['roles'] = Role::all()->whereNotIn('name', $user->getRoleNames())->toArray();
         $data['permissions'] = Permission::all()->toArray();
-        $user = User::find($id);
+        
         $data['assignRoles'] = $user->getRoleNames();
         $data['assignPermissions'] = $user->getAllPermissions();
 
@@ -300,6 +302,8 @@ class UserController extends Controller
             ],
         ];
         $data['roles'] = role::all()->toArray();
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
 
         $notification = $this->Notification();
         return view($this->view . 'showRole', $data, $notification);
@@ -348,6 +352,86 @@ class UserController extends Controller
         $output = view('user.createRole', $data)->render();
         return Response($output);
 
+    }
+
+
+    public function showUpdateUser(Request $req)
+    {   
+        
+        $id = $req->id;
+        $data['user'] = User::find($id)->toArray();
+        $data['roles'] = role::get();
+        $output = view('user.createuser', $data)->render();
+        return Response($output);
+
+    }
+    public function createUser(Request $req){
+        $data['roles'] = role::get();
+        $output = view('user.createUser',$data)->render();
+        return Response($output);
+    }
+    public function addUsers(Request $req){
+        $role = role::where('id',$req['role_id'])->select('name')->first();
+        
+        $user = User::updateOrCreate(
+            ['id' => $req->id],
+            [
+                "name" => $req['name'],
+                "username" => $req['user_name'],
+                "password" => Hash::make($req['password']),
+                "email" => $req['email'],
+                "company_name" => $req['company_name'],
+                "company_email" => $req['company_email'],
+                "address_line1" => $req['address_line1'],
+                "address_line2" => $req['address_line2'],
+                "city" => $req['city'],
+                "country" => $req['country'],
+                "zip_code" => $req['zip_code'],
+                "phone" => $req['phone'],
+                "role_id" => $req['role_id']
+            ]
+        );
+        
+        if($role['name'] == 'Super Admin'){
+            $user->assignRole('Super Admin');
+        }
+        if($role['name'] == 'Sub Admin'){
+            $user->assignRole('Sub Admin');
+        }
+        if($role['name'] == 'Location Admin'){
+            $user->assignRole('Location Admin');
+        }
+        if($role['name'] == 'Customer'){
+            $user->assignRole('Customer');
+        }
+        
+        return Response($user);
+    }
+    public function assignRole(Request $req){
+        $user = User::where('id',$req['id'])->first();
+        $role = $user->assignRole($req['role']);
+        if($role){
+            return "Assigned";
+        }
+    }
+    public function dismissrole(Request $req){
+        $user = User::where('id',$req['id'])->first();
+        $role = $user->removeRole($req['role']);
+        if($role){
+            return "Revoked";
+        }
+    }
+    public function permissions(){
+        $data['permissions'] = Permission::all()->toArray();
+        
+        $output = view('user.showPermission',$data)->render();
+
+        return Response($output);
+    }
+    public function roles(){
+        $data['roles'] = role::all()->toArray();
+        $output = view('user.showRoles',$data)->render();
+        return Response($output);
     }
 
 }

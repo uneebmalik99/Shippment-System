@@ -128,6 +128,8 @@
                             <label class="col-6 profile_style">STATUS
                                 <input type="text" name="status" class="form-control mt-1 profile_input col-12"
                                     value="{{ @$records['status'] }}"></label>
+                                    <input type="hidden" name="id" id="{{ @$records['id'] }}" class="form-control mt-1 profile_input col-12"
+                                    value="{{ @$records['id'] }}">
                         </div>
                     </div>
                     <div class="row">

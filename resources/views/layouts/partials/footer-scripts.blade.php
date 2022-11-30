@@ -574,16 +574,16 @@
                 if (xhr.responseJSON['errors']['auction']) {
                     $('#auction_error').html('<small style="margin-left:72px">Please Fill*</small>');
                 }
-                if (xhr.responseJSON['errors']['color']) {
-                    $('#color_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                }
-                if (xhr.responseJSON['errors']['value']) {
-                    $('#value_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                }
+                // if (xhr.responseJSON['errors']['color']) {
+                //     $('#color_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                // }
+                // if (xhr.responseJSON['errors']['value']) {
+                //     $('#value_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                // }
 
-                if (xhr.responseJSON['errors']['weight']) {
-                    $('#weight_error').html('<small style="margin-left:72px">Please Fill*</small>');
-                }
+                // if (xhr.responseJSON['errors']['weight']) {
+                //     $('#weight_error').html('<small style="margin-left:72px">Please Fill*</small>');
+                // }
                 if (xhr.responseJSON['errors']['key']) {
                     $('#key_error').html('<small style="margin-left:72px">Please Fill*</small>');
                 }
@@ -1705,4 +1705,183 @@
                     "bFilter": false,
 
                 });
+</script>
+
+
+<script>
+    /**
+     * Roles Profile Scripts
+     * 
+     * 
+    */
+            //the selector will match all input controls of type :checkbox
+            //and attach a click event handler 
+            $("assign_roles input:checkbox").on('click', function() {
+            // in the handler, 'this' refers to the box clicked on
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                // the name of the box is retrieved using the .attr() method
+                // as it is assumed and expected to be immutable
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                // the checked state of the group/box on the other hand will change
+                // and the current value is retrieved using .prop() method
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+            }
+            });
+     /**
+      * 
+      * Dismiss Roles
+      * 
+      * 
+       /    
+      //the selector will match all input controls of type :checkbox
+            //and attach a click event handler 
+            $("dismiss_roles input:checkbox").on('click', function() {
+            // in the handler, 'this' refers to the box clicked on
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                // the name of the box is retrieved using the .attr() method
+                // as it is assumed and expected to be immutable
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                // the checked state of the group/box on the other hand will change
+                // and the current value is retrieved using .prop() method
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+            }
+            });   
+    function assignRoleToUser(){
+        let role = $(".assign_roles input:checked").val();
+        let id = $("#user_id").val();
+        
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('user.assignrole') }}',
+            data: {
+                role: role,
+                id: id
+            },
+            success: function(data) {
+                
+               if (data == "Assigned") {
+                    iziToast.success({
+                        timeout: 5000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Assigned Role'
+                    });
+                
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 5000);
+                }
+            }
+        });
+    }
+    function dismissRoleToUser(){
+        let role = $(".dismiss_roles input:checked").val();
+        let id = $("#user_id").val();
+        
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('user.dismissrole') }}',
+            data: {
+                role: role,
+                id: id
+            },
+            success: function(data) {
+            
+               if (data == "Revoked") {
+                    iziToast.success({
+                        timeout: 5000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Revoke Role'
+                    });
+                
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 5000);
+                }
+            }
+        });   
+    }
+</script>
+{{-- User List Profile dynamic Tabs of Permissions and Roles --}}
+<script>
+    function showPermissions(){
+        //alert("here is");
+        $.ajax({
+            type: 'GET',
+            url: '{{ route('user.allpermissions') }}',
+            
+            success: function(data) {
+                
+                $('.main-box').html(data);
+            }
+        });
+    }
+    function showRoles(){
+        $.ajax({
+            type: 'GET',
+            url: '{{ route('user.allroles') }}',
+            
+            success: function(data) {
+                
+                $('.main-box').html(data);
+            }
+        });
+    }
+    function createUser(){
+        $.ajax({
+            type: 'GET',
+            url: '{{ route('user.createUser') }}',
+            success: function(data) {
+                $('.modal-body').html(data);
+                $('#exampleModal').modal('show');
+            }
+        });
+    }
+    function editUser(id){
+        $id = id;
+        $.ajax({
+            type: "GET",
+            url: "{{ route('user.edituser') }}",
+            data: {
+                id: $id
+            },
+            success: function(data) {
+                // alert(data);
+                $('.modal-body').html(data);
+                $('#exampleModal').modal('show');
+            }
+        });
+    }
+    function addUser() {
+
+            $.ajax({
+                type: 'post',
+                url: '{{ route('user.addUser') }}',
+                data: $('form').serialize(),
+                success: function(data) {
+                    //    alert(data);
+
+                    iziToast.success({
+                        title: 'User',
+                        message: data.name + " Added Successfully!",
+                        position: 'topCenter',
+                        zindex: '9999999999999',
+
+                    });
+
+                    $('#exampleModal').modal('hide');
+                    location.reload();
+
+                }
+            });
+    }
 </script>

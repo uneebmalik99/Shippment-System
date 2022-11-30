@@ -1,4 +1,4 @@
-{{-- {{dd(@$documents[0]['id'])}} --}}
+{{-- {{dd(@$documents)}} --}}
 <div class="card user-card rounded mt-3">
     <div class="px-3 d-flex justify-cotent">
         <h6 class="text-muted"><b>Documents Information</b></h6>
@@ -28,15 +28,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($documents as $document)
                             <tr>
                                 <td>1</td>
-                                <td>{{@$user['customer_type']}}</td>
-                                <td>{{@$documents[0]['thumbnail']}}</td>
+                                <td>{{@$document['user']['customer_type']}}</td>
+                                <td>{{@$document['thumbnail']}}</td>
                                 <td style="text-align: center;
                                 width: 33%;">
 
                                         @if (@$documents)
-                                        <a target="_blank" href="{{ asset('/'.@$documents[0]['file']) }}"
+                                        <a target="_blank" href="{{ asset('/'.@$document['file']) }}"
                                         >
 
                                   <button class="profile-button" style="cursor: pointer !important;">
@@ -63,6 +64,7 @@
 
                                 </td>
                             </tr>
+                            @endforeach
 
                         </tbody>
                     </table>

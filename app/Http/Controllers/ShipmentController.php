@@ -465,7 +465,7 @@ class ShipmentController extends Controller
             else{
                 $Obj_vehicle = new Vehicle;
                 $Obj = new Shipment;
-                $data['status'] = "2";
+                $data['status'] = "1";
                 if($vehicles){
                     $Obj->create($data);
                 }
@@ -474,7 +474,7 @@ class ShipmentController extends Controller
                 foreach ($vehicles as $vehicle_id) {
                     $get_vehicle = $Obj_vehicle->find($vehicle_id);
                     $get_vehicle->shipment_id = $shipment[0]['id'];
-                    $get_vehicle->status = 2;
+                    $get_vehicle->status = 7;
                     $get_vehicle->save();
                 }
                 VehicleCart::query()->delete();

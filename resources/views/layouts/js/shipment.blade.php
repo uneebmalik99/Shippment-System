@@ -1,12 +1,12 @@
 <script>
     function create_shipment_form(id) {
-        // $('#shipment_form').on('submit', function(event) {
-        // event.preventDefault();
+
+        
+       
         var formData = new FormData(jQuery('#shipment_form')[0]);
         $next_tab = $('.next_tab').attr('id');
         formData.append('tab', $next_tab);
         document.getElementById('load').style.visibility = "visible";
-
         $.ajax({
             method: 'POST',
             url: '{{ URL::to('admin/shipments/general') }}',
@@ -14,18 +14,9 @@
             processData: false,
             contentType: false,
             success: function(data) {
-        document.getElementById('load').style.visibility = "hidden";
-                // console.log(data);
+                document.getElementById('load').style.visibility = "hidden";
                 $('.modal-body').html(data);
                 $('#exampleModal').modal('show');
-                // $('.shipment-inovice').imageUploader({
-                //     maxFiles: 4,
-                //     imagesInputName: 'shipment_inovice',
-                // });
-                // $('.stamp_title').imageUploader({
-                //     maxFiles: 4,
-                //     imagesInputName: 'stamp_title',
-                // });
                 $('.loading_image').imageUploader({
                     maxFiles: 4,
                     imagesInputName: 'loading_image',
@@ -38,11 +29,6 @@
                     preloadedInputName: 'loading_old'
 
                 });
-                // $('.other-document').imageUploader({
-                //     maxFiles: 4,
-                //     imagesInputName: 'other_document',
-
-                // });
                 iziToast.success({
                     title: 'Success',
                     message: 'Data inserted successfully!',
@@ -50,12 +36,16 @@
                     position: 'topCenter',
                     zindex: '9999999999999',
                 });
+
+                $('#' + id +'_tab').removeClass('next-style');
+                $('#' + id +'_tab').addClass('tab_style');
+                $('#attachments_shipment_tab').addClass('next-style');
             },
             complete: function() {
-        document.getElementById('load').style.visibility = "hidden";
-                    },
+                document.getElementById('load').style.visibility = "hidden";
+            },
             error: function() {
-        document.getElementById('load').style.visibility = "hidden";
+                document.getElementById('load').style.visibility = "hidden";
 
                 iziToast.warning({
                     message: 'Failed to insert data!',
@@ -65,7 +55,7 @@
                 });
             }
         });
-        // });
+        
     }
 </script>
 
@@ -312,7 +302,7 @@
 
     }
 
-    function addtoshipment(){
+    function addtoshipment() {
         $.ajax({
             method: 'POST',
             url: '{{ route('shipments.addtoshipment') }}',
@@ -321,9 +311,7 @@
             // },
             success: function(data) {
                 console.log(data);
-                // $('.modal-body').html(data);
-                // $('.modal-title').text('Update Shipment');
-                // $('#add_vehicles').append('kashif');
+
                 $('.modal-body').html(data);
                 $('#exampleModal').modal('show');
             }

@@ -276,9 +276,9 @@
                                     </a>
                                 </div>
                                 <div class="col-4 d-flex justify-content-end px-2">
-                                    <a href="{{ route('vehicle.export') }}"
+                                    <a href="{{ route('vehicle.export') . '/'. 3 }}"
                                         class="px-1 text-muted font-size form-contorl-sm border p-1 rounded col-12"
-                                        style="background: #DBDBDB; cursor: pointer;">
+                                        style="background: #DBDBDB; cursor: pointer;" id="exportVehicle">
                                         <div class="d-flex justify-content-center align-items-center px-1">
                                             <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">

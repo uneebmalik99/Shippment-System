@@ -357,9 +357,9 @@ class VehicleController extends Controller
         $request->validate([
             'customer_name' => 'required',
             'vin' => 'required',
-            'color' => 'required',
-            'weight' => 'required',
-            'value' => 'required',
+            // 'color' => 'required',
+            // 'weight' => 'required',
+            // 'value' => 'required',
             'auction' => 'required',
             'buyer_id' => 'required',
             'key' => 'required',
@@ -661,9 +661,9 @@ class VehicleController extends Controller
         // return Response($output);
     }
     
-    public function export()
+    public function export($id)
     {
-        return Excel::download(new VehicleExport, 'vehicles.xlsx');
+        return Excel::download(new VehicleExport($id), 'vehicles.xlsx');
     }
 
     public function import(Request $request)

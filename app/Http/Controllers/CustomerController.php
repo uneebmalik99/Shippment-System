@@ -676,7 +676,7 @@ class CustomerController extends Controller
         $data['shipper'] = Shipper::where('customer_id', $id)->get();
         $data['quotation'] = Quotation::where('customer_id', $id)->get();
         $data['notification'] = Notification::where('user_id', $id)->get();
-        $data['documents'] = CustomerDocument::where('user_id', $id)->get()->toArray();
+        $data['documents'] = CustomerDocument::with('user')->where('user_id', $id)->get()->toArray();
 
         $data['destination_port'] = DCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
         $data['container_size'] = ContainerSize::where('status', '1')->get();

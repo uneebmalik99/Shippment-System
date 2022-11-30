@@ -220,7 +220,7 @@
                                             </div>
                                             <div class="col-12 py-2">
                                                 <div class="d-flex align-items-center">
-                                                    <label for="sale_date" class="col-6 px-0 font-size font-bold">Sale
+                                                    <label for="sale_date" class="col-6 px-0 font-size font-bold">Sail
                                                         Date</label>
                                                     <input type="date"
                                                         class="form-control-sm border border-0 rounded-pill bg col-6"
@@ -305,15 +305,14 @@
                                                     name="container_type" id="container_type">
                                                     @if(@$shipment[0]['container_type'])
                                                     <option value="{{@$shipment[0]['container_type']}}">{{@$shipment[0]['container_type']}}</option>
+                                                    @else
                                                     <option selected disabled>Select Container Type</option>
                                                     @endif
                                                     @foreach ($container_types as $Ctype)
                                                     <option value="{{@$Ctype['name']}}">{{@$Ctype['name']}}</option>                                         
                                                     @endforeach
                                                 </select>
-                                                    {{-- <input type="text"
-                                                        class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                        name="container_type" id="container_type"> --}}
+                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -323,7 +322,7 @@
                                         <div class="col-7 py-3">
                                             <div class="text-color" style="cursor: pointer;" id="shipment_reference"
                                                 onclick="slide(this.id)">
-                                                <svg width="8" height="6" viewBox="0 0 8 6" fill="none"
+                                                <svg width="8" height="6" viewbox="0 0 8 6" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1 1.36328L4 4.82148L7 1.36328" stroke="#FF8514"
                                                         stroke-width="2" stroke-linecap="round"
@@ -840,7 +839,7 @@
                                                 <div class="d-flex align-items-center">
                                                     <label for="notes"
                                                         class="col-6 px-0 font-size font-bold">Note</label>
-                                                    <textarea type="text" class="form-control-sm border border-0 col-6 card-pill" name="notes" id="notes" value="{{@$shipment[0]['notes']}}"></textarea>
+                                                    <textarea type="text" class="form-control-sm border border-0 col-6 card-pill" name="notes" id="notes" value="{{@$shipment[0]['notes']}}">{{@$shipment[0]['notes']}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -870,7 +869,7 @@
                                 <input type="hidden" class="next_tab" id="attachments">
                                 <button type="button" class="btn next-style text-white col-12 py-1"
                                     onclick="create_shipment_form(this.id)" id="general_shipment"
-                                    style="cursor: pointer;">
+                                    style="cursor: pointer;" tab="attachments_shipment_tab">
                                     <div class="unskew">Next</div>
                                 </button>
                             </div>

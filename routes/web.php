@@ -45,6 +45,19 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/users/deleteRole/{id?}', [App\Http\Controllers\UserController::class, 'deleteRole'])->name('delete.role');
 
     Route::post('/users/showupdatemodel}', [App\Http\Controllers\UserController::class, 'showUpdateRole'])->name('user.updatemodelshow');
+    Route::post('/users/addUsers', [App\Http\Controllers\UserController::class, 'addUsers'])->name('user.addUser');
+
+    Route::get('/users/editUser',[App\Http\Controllers\UserController::class,'showUpdateUser'])->name('user.edituser');
+    Route::post("/users/assignRoles",[App\Http\Controllers\UserController::class,'assignRole'])->name('user.assignrole');
+    Route::post("/users/dismissrole",[App\Http\Controllers\UserController::class,'dismissrole'])->name('user.dismissrole');
+    Route::get('/users/deleteRole/{id?}', [App\Http\Controllers\UserController::class, 'deleteRole'])->name('delete.role');
+
+    Route::post('/users/showupdatemodel}', [App\Http\Controllers\UserController::class, 'showUpdateRole'])->name('user.updatemodelshow');
+    Route::get('/user/allpermissions',[App\Http\Controllers\UserController::class,'permissions'])->name('user.allpermissions');
+    Route::get('/user/allroles',[App\Http\Controllers\UserController::class,'roles'])->name('user.allroles');
+
+
+ Route::get('/users/createUser',[App\Http\Controllers\UserController::class,'createUser'])->name('user.createUser');
 
     // Customer Routes
     Route::get('/customers', [CustomerController::class, 'index'])->name('customer.list');
@@ -97,7 +110,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/vehicles/tabs',                        [VehicleController::class, 'filtering'])->name('vehicle.tabs');
     Route::get('/vehicles/location',                    [VehicleController::class, 'filtering'])->name('vehicle.location');
     Route::post('/vehicles/attachments',                [VehicleController::class, 'store_image'])->name('vehicle.images');
-    Route::get('/vehicles/export',                      [VehicleController::class, 'export'])->name('vehicle.export');
+    Route::get('/vehicles/export/{id?}',                      [VehicleController::class, 'export'])->name('vehicle.export');
     Route::get('/vehicles/import',                      [VehicleController::class, 'import']);
     Route::post('/vehicles/imports',                    [VehicleController::class, 'import'])->name('vehicle.import');
     Route::post('/vehicle/vehicle_changeImages',        [VehicleController::class, 'changesImages'])->name('vehicle.changeImages');

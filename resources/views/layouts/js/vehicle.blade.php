@@ -291,6 +291,8 @@
     function fetchVehicles(id) {
         $tab = $('#' + id).attr('tab');
         $id = id;
+
+
         $.ajax({
             type: 'post',
             url: '{{ URL::to('admin/vehicle/fetchVehciles') }}',
@@ -299,6 +301,8 @@
                 'id': $id,
             },
             success: function(data) {
+                $route = '{{ route('vehicle.export') . '/' }}' + id;
+                $('#exportVehicle').attr('href', $route);
                 console.log(data);
 
                 $('#status_body').html(data.view);
@@ -548,7 +552,7 @@
 
     // });
 
-    function addtoShipment(id){
+    function addtoShipment(id) {
         $.ajax({
             method: 'POST',
             url: '{{ route('vehicle.add_to_cart') }}',
@@ -564,6 +568,9 @@
                     position: 'topCenter',
                     zindex: '9999999999999',
                 });
+                setTimeout(function() {
+                    window.location.reload(true);
+                }, 2000);
                 // $('#model').html(data);
             }
         });
@@ -666,4 +673,20 @@
             }
         });
     }
+
+    // function exportVehicle(id){
+    //     $.ajax({
+    //         method: 'get',
+    //         url: '{{ route('vehicle.export') }}',
+    //         data: {
+    //             'id': id,
+    //         },
+    //         success: function(data) {
+    //             // alert(data);
+    //             // $('#buyer_id').html(data);
+    //             // $('#customer_email').val(data[0]['email']);
+    //             // $('#customer_phone').val(data[0]['phone']);
+    //         }
+    //     });
+    // }
 </script>

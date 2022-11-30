@@ -12,9 +12,13 @@ class VehicleExport implements FromCollection, WithHeadings, WithMapping
     /**
      * @return \Illuminate\Support\Collection
      */
+    public function __construct(int $status) 
+    {
+        $this->status = $status;
+    }
     public function collection()
     {
-        return Vehicle::all();
+        return Vehicle::with('vehicle_status')->where('status', $this->status)->get();
     }
 
     public function headings(): array
@@ -101,7 +105,7 @@ class VehicleExport implements FromCollection, WithHeadings, WithMapping
             $row->title_state,
             $row->title_number,
             $row->shipper_name,
-            $row->status,
+            $row->vehicle_status->status_name,
             $row->sale_date,
             $row->paid_date,
             $row->days,

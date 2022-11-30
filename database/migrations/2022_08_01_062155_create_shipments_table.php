@@ -57,7 +57,8 @@ class CreateShipmentsTable extends Migration
             $table->string('insurance')->nullable();
             $table->string('fmc_license_number')->nullable();
             $table->string('select_notify_party')->nullable();
-            $table->string('status')->nullable();
+            $table->foreignId('status')->nullable()->constrained('shipment_statuses')->onUpdate('cascade')->onDelete('cascade');
+            // $table->string('status')->nullable();
             $table->string('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
