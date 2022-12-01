@@ -37,7 +37,7 @@
                 </button>
                 <form class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @foreach ( $permissions as $permission)
-                        <label class="dropdown-item"><input type="checkbox" name="permission[]" value="{{ $permission['name'] }}">{{ $permission['name'] }}</label>
+                        <label class="dropdown-item"><input type="checkbox" name="permission[]" value="{{ @$permission['name'] }}">{{ $permission['name'] }}</label>
                     @endforeach
                  
                 </form>

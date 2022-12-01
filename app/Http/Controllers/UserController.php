@@ -326,7 +326,7 @@ class UserController extends Controller
                 'name' => $req['role_name'],
             ]
         );
-        $role->permissions()->sync($req['permission']);
+        $role->givePermissionTo($req['permission']);
         return Response($role);
     }
 
@@ -343,8 +343,9 @@ class UserController extends Controller
     public function showUpdateRole(Request $req)
     {
         $id = $req->id;
-        $data['roles'] = role::find($id)->toArray();
-
+        $role = role::find($id)->first();
+        $data['roles'] = $role->toArray();
+        $data['permissions'] = $role->permissions;
         $output = view('user.createRole', $data)->render();
         return Response($output);
 
