@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitec54bb33ab4b4712a1de33c34a7dbd1e
+class ComposerStaticInitc987a06e3e3eee1c2bbe0526b0fd63ad
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -390,8 +390,8 @@ class ComposerStaticInitec54bb33ab4b4712a1de33c34a7dbd1e
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -662,6 +662,7 @@ class ComposerStaticInitec54bb33ab4b4712a1de33c34a7dbd1e
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\ShipmentUpdate' => __DIR__ . '/../..' . '/app/Console/Commands/ShipmentUpdate.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Exports\\UsersExport' => __DIR__ . '/../..' . '/app/Exports/UsersExport.php',
@@ -7364,7 +7365,6 @@ class ComposerStaticInitec54bb33ab4b4712a1de33c34a7dbd1e
         'Symfony\\Component\\String\\Slugger\\AsciiSlugger' => __DIR__ . '/..' . '/symfony/string/Slugger/AsciiSlugger.php',
         'Symfony\\Component\\String\\Slugger\\SluggerInterface' => __DIR__ . '/..' . '/symfony/string/Slugger/SluggerInterface.php',
         'Symfony\\Component\\String\\UnicodeString' => __DIR__ . '/..' . '/symfony/string/UnicodeString.php',
-        'Symfony\\Component\\Translation\\CatalogueMetadataAwareInterface' => __DIR__ . '/..' . '/symfony/translation/CatalogueMetadataAwareInterface.php',
         'Symfony\\Component\\Translation\\Catalogue\\AbstractOperation' => __DIR__ . '/..' . '/symfony/translation/Catalogue/AbstractOperation.php',
         'Symfony\\Component\\Translation\\Catalogue\\MergeOperation' => __DIR__ . '/..' . '/symfony/translation/Catalogue/MergeOperation.php',
         'Symfony\\Component\\Translation\\Catalogue\\OperationInterface' => __DIR__ . '/..' . '/symfony/translation/Catalogue/OperationInterface.php',
@@ -7426,7 +7426,6 @@ class ComposerStaticInitec54bb33ab4b4712a1de33c34a7dbd1e
         'Symfony\\Component\\Translation\\Loader\\QtFileLoader' => __DIR__ . '/..' . '/symfony/translation/Loader/QtFileLoader.php',
         'Symfony\\Component\\Translation\\Loader\\XliffFileLoader' => __DIR__ . '/..' . '/symfony/translation/Loader/XliffFileLoader.php',
         'Symfony\\Component\\Translation\\Loader\\YamlFileLoader' => __DIR__ . '/..' . '/symfony/translation/Loader/YamlFileLoader.php',
-        'Symfony\\Component\\Translation\\LocaleSwitcher' => __DIR__ . '/..' . '/symfony/translation/LocaleSwitcher.php',
         'Symfony\\Component\\Translation\\LoggingTranslator' => __DIR__ . '/..' . '/symfony/translation/LoggingTranslator.php',
         'Symfony\\Component\\Translation\\MessageCatalogue' => __DIR__ . '/..' . '/symfony/translation/MessageCatalogue.php',
         'Symfony\\Component\\Translation\\MessageCatalogueInterface' => __DIR__ . '/..' . '/symfony/translation/MessageCatalogueInterface.php',
@@ -7527,6 +7526,7 @@ class ComposerStaticInitec54bb33ab4b4712a1de33c34a7dbd1e
         'Symfony\\Contracts\\Service\\ServiceSubscriberTrait' => __DIR__ . '/..' . '/symfony/service-contracts/ServiceSubscriberTrait.php',
         'Symfony\\Contracts\\Service\\Test\\ServiceLocatorTest' => __DIR__ . '/..' . '/symfony/service-contracts/Test/ServiceLocatorTest.php',
         'Symfony\\Contracts\\Translation\\LocaleAwareInterface' => __DIR__ . '/..' . '/symfony/translation-contracts/LocaleAwareInterface.php',
+        'Symfony\\Contracts\\Translation\\Test\\TranslatorTest' => __DIR__ . '/..' . '/symfony/translation-contracts/Test/TranslatorTest.php',
         'Symfony\\Contracts\\Translation\\TranslatableInterface' => __DIR__ . '/..' . '/symfony/translation-contracts/TranslatableInterface.php',
         'Symfony\\Contracts\\Translation\\TranslatorInterface' => __DIR__ . '/..' . '/symfony/translation-contracts/TranslatorInterface.php',
         'Symfony\\Contracts\\Translation\\TranslatorTrait' => __DIR__ . '/..' . '/symfony/translation-contracts/TranslatorTrait.php',
@@ -7700,10 +7700,10 @@ class ComposerStaticInitec54bb33ab4b4712a1de33c34a7dbd1e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitec54bb33ab4b4712a1de33c34a7dbd1e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitec54bb33ab4b4712a1de33c34a7dbd1e::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitec54bb33ab4b4712a1de33c34a7dbd1e::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitec54bb33ab4b4712a1de33c34a7dbd1e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc987a06e3e3eee1c2bbe0526b0fd63ad::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc987a06e3e3eee1c2bbe0526b0fd63ad::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc987a06e3e3eee1c2bbe0526b0fd63ad::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitc987a06e3e3eee1c2bbe0526b0fd63ad::$classMap;
 
         }, null, ClassLoader::class);
     }

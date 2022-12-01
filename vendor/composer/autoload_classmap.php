@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\ShipmentUpdate' => $baseDir . '/app/Console/Commands/ShipmentUpdate.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Exports\\UsersExport' => $baseDir . '/app/Exports/UsersExport.php',
@@ -6708,7 +6709,6 @@ return array(
     'Symfony\\Component\\String\\Slugger\\AsciiSlugger' => $vendorDir . '/symfony/string/Slugger/AsciiSlugger.php',
     'Symfony\\Component\\String\\Slugger\\SluggerInterface' => $vendorDir . '/symfony/string/Slugger/SluggerInterface.php',
     'Symfony\\Component\\String\\UnicodeString' => $vendorDir . '/symfony/string/UnicodeString.php',
-    'Symfony\\Component\\Translation\\CatalogueMetadataAwareInterface' => $vendorDir . '/symfony/translation/CatalogueMetadataAwareInterface.php',
     'Symfony\\Component\\Translation\\Catalogue\\AbstractOperation' => $vendorDir . '/symfony/translation/Catalogue/AbstractOperation.php',
     'Symfony\\Component\\Translation\\Catalogue\\MergeOperation' => $vendorDir . '/symfony/translation/Catalogue/MergeOperation.php',
     'Symfony\\Component\\Translation\\Catalogue\\OperationInterface' => $vendorDir . '/symfony/translation/Catalogue/OperationInterface.php',
@@ -6770,7 +6770,6 @@ return array(
     'Symfony\\Component\\Translation\\Loader\\QtFileLoader' => $vendorDir . '/symfony/translation/Loader/QtFileLoader.php',
     'Symfony\\Component\\Translation\\Loader\\XliffFileLoader' => $vendorDir . '/symfony/translation/Loader/XliffFileLoader.php',
     'Symfony\\Component\\Translation\\Loader\\YamlFileLoader' => $vendorDir . '/symfony/translation/Loader/YamlFileLoader.php',
-    'Symfony\\Component\\Translation\\LocaleSwitcher' => $vendorDir . '/symfony/translation/LocaleSwitcher.php',
     'Symfony\\Component\\Translation\\LoggingTranslator' => $vendorDir . '/symfony/translation/LoggingTranslator.php',
     'Symfony\\Component\\Translation\\MessageCatalogue' => $vendorDir . '/symfony/translation/MessageCatalogue.php',
     'Symfony\\Component\\Translation\\MessageCatalogueInterface' => $vendorDir . '/symfony/translation/MessageCatalogueInterface.php',
@@ -6871,6 +6870,7 @@ return array(
     'Symfony\\Contracts\\Service\\ServiceSubscriberTrait' => $vendorDir . '/symfony/service-contracts/ServiceSubscriberTrait.php',
     'Symfony\\Contracts\\Service\\Test\\ServiceLocatorTest' => $vendorDir . '/symfony/service-contracts/Test/ServiceLocatorTest.php',
     'Symfony\\Contracts\\Translation\\LocaleAwareInterface' => $vendorDir . '/symfony/translation-contracts/LocaleAwareInterface.php',
+    'Symfony\\Contracts\\Translation\\Test\\TranslatorTest' => $vendorDir . '/symfony/translation-contracts/Test/TranslatorTest.php',
     'Symfony\\Contracts\\Translation\\TranslatableInterface' => $vendorDir . '/symfony/translation-contracts/TranslatableInterface.php',
     'Symfony\\Contracts\\Translation\\TranslatorInterface' => $vendorDir . '/symfony/translation-contracts/TranslatorInterface.php',
     'Symfony\\Contracts\\Translation\\TranslatorTrait' => $vendorDir . '/symfony/translation-contracts/TranslatorTrait.php',
