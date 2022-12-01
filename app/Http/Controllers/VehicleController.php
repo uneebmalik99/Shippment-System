@@ -66,6 +66,7 @@ class VehicleController extends Controller
         $data['notification'] = Notification::with('user')->get();
         $data['location'] = Location::all()->toArray();
         // dd();
+        // kashif
         if ($data['notification']->toArray()) {
             $current = Carbon::now();
             foreach ($data['notification'] as $key => $date_notification) {
