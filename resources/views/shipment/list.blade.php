@@ -1,16 +1,44 @@
 @extends('layouts.partials.mainlayout')
+
 @section('body')
+<style>
+    table.dataTable td.dt-control:before {
+    height: 1em;
+    width: 1em;
+    margin-top: -9px!important;
+    color: black!important;
+    box-shadow: 0 0 0.2em #444;
+    box-sizing: content-box;
+    text-align: center;
+    text-indent: 0 !important;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1em;
+    content: "+";
+    background-color: #dbdbdb!important;
+}
+table.dataTable tr.dt-hasChild td.dt-control:before {
+    content: "-"!important;
+    background-color: #d33333!important;
+    color:white!important;
+}
+.dataTables_wrapper {
+    border-top: none!important;
+    border-bottom: none!important;
+}
+</style>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        style="z-index:999999">
         <div class="modal-dialog modal-fullscreen scrollable mw-100 m-2 px-3 py-2" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between title_style">
                     <div>
-                        <h5 class="modal-title" id="exampleModalLabel">New {{ $module['singular'] }}</h5>
+                        <h5 class="modal-title text-white" id="exampleModalLabel">New {{ $module['singular'] }}</h5>
                     </div>
                     <div>
-                        <button type="button" class="close text-white h6" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close text-white h6" data-dismiss="modal" aria-label="Close"
+                            style="margin-top: -11px;
+                        font-size: 26px;">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -23,10 +51,27 @@
     </div>
     {{-- Modal End --}}
 
+
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 mx-auto">
+                <div class="d-flex dashboard_heading" style="margin-top:-40px!important">
+                    <div style="margin-top:1px!important;">
+                        <i class="fas fa-shipping-fast" style="color:#1F689E"></i>
+                    </div>
+                    <div>
+                        <h2 style="color:#1F689E;font-size:22px;margin-left: 6px;" class="px-1">Shipments</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     <div class="bg-white rounded p-2">
         {{-- badges start --}}
         <div class="d-flex m-2">
-            <div class="col-3 p-1">
+            <div class="col-3 p-1" id="1" tab="Booked" onclick="fetchCustomers(this.id)" style="cursor: pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -41,18 +86,20 @@
                                         d="M15.167 11.9165H23.8337V14.0832H15.167V11.9165ZM8.66699 4.33318C8.09428 4.31984 7.52482 4.42281 6.99304 4.63585C6.46127 4.8489 5.97823 5.1676 5.57316 5.57268C5.16808 5.97775 4.84938 6.46079 4.63633 6.99256C4.42328 7.52434 4.32032 8.0938 4.33366 8.66651C4.32032 9.23922 4.42328 9.80869 4.63633 10.3405C4.84938 10.8722 5.16808 11.3553 5.57316 11.7603C5.97823 12.1654 6.46127 12.4841 6.99304 12.6972C7.52482 12.9102 8.09428 13.0132 8.66699 12.9998C9.2397 13.0132 9.80917 12.9102 10.3409 12.6972C10.8727 12.4841 11.3558 12.1654 11.7608 11.7603C12.1659 11.3553 12.4846 10.8722 12.6977 10.3405C12.9107 9.80869 13.0137 9.23922 13.0003 8.66651C13.0137 8.0938 12.9107 7.52434 12.6977 6.99256C12.4846 6.46079 12.1659 5.97775 11.7608 5.57268C11.3558 5.1676 10.8727 4.8489 10.3409 4.63585C9.80917 4.42281 9.2397 4.31984 8.66699 4.33318V4.33318ZM8.66699 10.8332C8.37877 10.8471 8.09082 10.8006 7.82164 10.6967C7.55246 10.5927 7.308 10.4336 7.10396 10.2295C6.89992 10.0255 6.74081 9.78105 6.63685 9.51186C6.5329 9.24268 6.48639 8.95473 6.50033 8.66651C6.48639 8.37829 6.5329 8.09034 6.63685 7.82116C6.74081 7.55198 6.89992 7.30752 7.10396 7.10348C7.308 6.89944 7.55246 6.74033 7.82164 6.63637C8.09082 6.53242 8.37877 6.48591 8.66699 6.49985C8.95521 6.48591 9.24316 6.53242 9.51234 6.63637C9.78152 6.74033 10.026 6.89944 10.23 7.10348C10.4341 7.30752 10.5932 7.55198 10.6971 7.82116C10.8011 8.09034 10.8476 8.37829 10.8337 8.66651C10.8476 8.95473 10.8011 9.24268 10.6971 9.51186C10.5932 9.78105 10.4341 10.0255 10.23 10.2295C10.026 10.4336 9.78152 10.5927 9.51234 10.6967C9.24316 10.8006 8.95521 10.8471 8.66699 10.8332V10.8332ZM4.33366 19.4998C4.33366 18.6379 4.67607 17.8112 5.28556 17.2017C5.89505 16.5923 6.7217 16.2498 7.58366 16.2498H9.75032C10.6123 16.2498 11.4389 16.5923 12.0484 17.2017C12.6579 17.8112 13.0003 18.6379 13.0003 19.4998V20.5832H15.167V19.4998C15.167 18.7885 15.0269 18.0842 14.7547 17.427C14.4825 16.7698 14.0835 16.1727 13.5805 15.6697C13.0775 15.1667 12.4804 14.7677 11.8232 14.4955C11.166 14.2233 10.4617 14.0832 9.75032 14.0832H7.58366C6.14707 14.0832 4.76932 14.6539 3.7535 15.6697C2.73768 16.6855 2.16699 18.0633 2.16699 19.4998V20.5832H4.33366V19.4998Z"
                                         fill="#E41414" />
                                 </svg>
-
                             </div>
                         </div>
                         <div>
-                            <div class="font-bold"><span>21,459</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Total
-                                    Containers</span></div>
+                            <div class="font-bold"><span>{{ @$booked->count() }}</span> </div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Total Shipments
+                                    <b>{{ $records->count() }}</b>
+                                </span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-3 p-1">
+            <div class="col-3 p-1" id="2" tab="Shipped" onclick="fetchCustomers(this.id)" style="cursor: pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -71,14 +118,15 @@
                             </div>
                         </div>
                         <div>
-                            <div class="font-bold"><span>21,459</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Total
-                                    User</span></div>
+                            <div class="font-bold"><span>{{ @$shipped->count() }}</span> </div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Last week Analytics</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-3 p-1">
+            <div class="col-3 p-1" id="3" tab="Arrived" onclick="fetchCustomers(this.id)" style="cursor: pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -97,14 +145,16 @@
                             </div>
                         </div>
                         <div>
-                            <div class="font-bold"><span>21,459</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Total
-                                    User</span></div>
+                            <div class="font-bold"><span>{{ @$arrived->count() }}</span> </div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Last week Analytics</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-3 p-1">
+            <div class="col-3 p-1" id="4" tab="Completed" onclick="fetchCustomers(this.id)"
+                style="cursor: pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -123,9 +173,10 @@
                             </div>
                         </div>
                         <div>
-                            <div class="font-bold"><span>21,459</span> </div>
-                            <div class="py-1 col-12 text-muted p-0 font-size"><span>Total
-                                    User</span></div>
+                            <div class="font-bold"><span>{{ @$completed->count() }}</span> </div>
+                            <div class="py-1 col-12 text-muted p-0 font-size">
+                                {{-- <span>Last week Analytics</span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -139,192 +190,316 @@
             <div class="border-style card-rounded">
                 {{-- new customer alert start --}}
                 <div class="row d-flex justify-content-between">
-                    <div>
+                    {{-- <div>
                         @if (session('success'))
                             <div class="btn alert alert-success m-0">
                                 <span>{{ session('success') }}</span>
                             </div>
                         @endif
-                    </div>
+                    </div> --}}
                 </div>
                 {{-- alert end --}}
                 {{-- search filter start --}}
                 <div class="px-4 pt-2 mt-4">
-                    <div>
+                    <div class="d-flex justify-content-between">
+                        <div class="col-6 p-0">
+                            <span class="h5 text-muted">
+                                <b>Search Filter</b>
+                            </span>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end p-0">
+                            <div class="col-4 d-flex justify-content-end px-2">
+                                <a href="{{ route('customer.export') }}"
+                                    class="px-1 text-muted font-size form-contorl-sm border p-1 rounded col-12"
+                                    style="background: #DBDBDB; cursor: pointer;">
+                                    <div class="d-flex justify-content-center align-items-center px-1">
+                                        <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11 16H13V7H16L12 2L8 7H11V16Z" fill="#2c3e50" />
+                                            <path
+                                                d="M5 22H19C20.103 22 21 21.103 21 20V11C21 9.897 20.103 9 19 9H15V11H19V20H5V11H9V9H5C3.897 9 3 9.897 3 11V20C3 21.103 3.897 22 5 22Z"
+                                                fill="#2c3e50" />
+                                        </svg>
+                                        <span class="pl-1 font-size" style="color:#2c3e50">Export</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-5 px-0 d-flex justify-content-center">
+                                <button type="button"
+                                    class="text-white form-control-sm border py-1 btn-info rounded modal_button px-2 col-12"
+                                    style="background: #2c3e50;" data-target="#exampleModal" id="shipment">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a class="text-white d-flex align-items-center">
+                                            {{-- <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M19 7.99911H17V10.9991H14V12.9991H17V15.9991H19V12.9991H22V10.9991H19V7.99911ZM4 7.99911C3.98768 8.52776 4.08273 9.05342 4.27939 9.54429C4.47605 10.0352 4.77024 10.481 5.14415 10.855C5.51807 11.2289 5.96395 11.5231 6.45482 11.7197C6.94569 11.9164 7.47134 12.0114 8 11.9991C8.52866 12.0114 9.05431 11.9164 9.54518 11.7197C10.0361 11.5231 10.4819 11.2289 10.8558 10.855C11.2298 10.481 11.524 10.0352 11.7206 9.54429C11.9173 9.05342 12.0123 8.52776 12 7.99911C12.0123 7.47045 11.9173 6.94479 11.7206 6.45392C11.524 5.96305 11.2298 5.51718 10.8558 5.14326C10.4819 4.76934 10.0361 4.47516 9.54518 4.2785C9.05431 4.08184 8.52866 3.98679 8 3.99911C7.47134 3.98679 6.94569 4.08184 6.45482 4.2785C5.96395 4.47516 5.51807 4.76934 5.14415 5.14326C4.77024 5.51718 4.47605 5.96305 4.27939 6.45392C4.08273 6.94479 3.98768 7.47045 4 7.99911ZM10 7.99911C10.0129 8.26516 9.96993 8.53096 9.87398 8.77943C9.77802 9.02791 9.63115 9.25356 9.4428 9.44191C9.25446 9.63026 9.0288 9.77712 8.78032 9.87308C8.53185 9.96904 8.26605 10.012 8 9.99911C7.73395 10.012 7.46815 9.96904 7.21968 9.87308C6.9712 9.77712 6.74554 9.63026 6.5572 9.44191C6.36885 9.25356 6.22198 9.02791 6.12602 8.77943C6.03007 8.53096 5.98714 8.26516 6 7.99911C5.98714 7.73306 6.03007 7.46726 6.12602 7.21878C6.22198 6.97031 6.36885 6.74465 6.5572 6.55631C6.74554 6.36796 6.9712 6.22109 7.21968 6.12513C7.46815 6.02917 7.73395 5.98625 8 5.99911C8.26605 5.98625 8.53185 6.02917 8.78032 6.12513C9.0288 6.22109 9.25446 6.36796 9.4428 6.55631C9.63115 6.74465 9.77802 6.97031 9.87398 7.21878C9.96993 7.46726 10.0129 7.73306 10 7.99911ZM4 17.9991C4 17.2035 4.31607 16.4404 4.87868 15.8778C5.44129 15.3152 6.20435 14.9991 7 14.9991H9C9.79565 14.9991 10.5587 15.3152 11.1213 15.8778C11.6839 16.4404 12 17.2035 12 17.9991V18.9991H14V17.9991C14 17.3425 13.8707 16.6923 13.6194 16.0857C13.3681 15.4791 12.9998 14.9279 12.5355 14.4636C12.0712 13.9993 11.52 13.631 10.9134 13.3797C10.3068 13.1284 9.65661 12.9991 9 12.9991H7C5.67392 12.9991 4.40215 13.5259 3.46447 14.4636C2.52678 15.4013 2 16.673 2 17.9991V18.9991H4V17.9991Z"
+                                                    fill="#FBFBFB" />
+                                            </svg> --}}
+                                            <i class="fas fa-shipping-fast"></i>
+                                            <span class="pl-2 font-size">Add New Shippment</span></a>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div>
                         <span class="h5 text-muted">
                             <b>Search Filter</b>
                         </span>
-                    </div>
+                    </div> --}}
                     <div class="d-flex py-3 px-0">
                         <div class="col-3 p-0">
-                            <select class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2"
-                                name="author" id="author">
-                                <option value="" disabled selected>Port of loading</option>
-                                <option value="1">Charlie</option>
-                                <option value="2">Swiss</option>
+                            <select
+                                class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
+                                name="port_of_loading" id="port_of_loading">
+                                <option value="all" disabled selected>Port of Loading</option>
+                                <option value="all">All Ports</option>
+                                @foreach ($loading_port as $port)
+                                    <option value="{{@$port['port']}}">{{@$port['port']}}</option>
+                                @endforeach
+                                {{-- <option value="2">Swiss</option> --}}
                             </select>
                         </div>
                         <div class="col-3 p-0">
-                            <select class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2"
-                                name="author" id="author">
-                                <option value="" disabled selected>Loading Date</option>
-                                <option value="1">Charlie</option>
-                                <option value="2">Swiss</option>
-                            </select>
-                        </div>
-                        <div class="col-3 p-0">
-                            <select class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2"
-                                name="author" id="author">
-                                <option value="" disabled selected>Arrival Date</option>
-                                <option value="1">Honda</option>
-                                <option value="2">Corolla</option>
-                            </select>
-                        </div>
-                        <div class="col-3 p-0">
-                            <select class="form-control-sm border-style input-border-style rounded col-11 text-muted px-2"
-                                name="author" id="author">
-                                <option value="" disabled selected>Destination Port</option>
-                                <option value="1">Active</option>
-                                <option value="2">In Acrtive</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="border-style px-3 pt-4 pb-2 d-flex justify-content-between">
-                    <div class="col-1 p-0 d-flex align-items-center text-muted">
-                        <div class="col-12 d-flex justify-content-center px-1">
-                            <select class="form-control-sm border-style rounded col-12" name="pagination"
-                                id="pagination_customer">
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="300">300</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-11 d-flex justify-content-end align-items-center">
-                        <div class="col-8 p-0 d-flex justify-content-end">
-                            <input type="text"
-                                class="form-control-sm border-style border-info rounded col-6 text-dark text-left"
-                                id="search_customer" name="search" placeholder="Search">
-                        </div>
-                        <div class="col-2 px-3 d-flex justify-content-end">
-                            <a href="{{ route('customer.export') }}"
-                                class="px-1 text-muted font-size form-contorl-sm border p-1 rounded col-12"
-                                style="background: #DBDBDB; cursor: pointer;">
-                                <div class="d-flex justify-content-center align-items-center px-1">
-                                    <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11 16H13V7H16L12 2L8 7H11V16Z" fill="#8F8F8F" />
-                                        <path
-                                            d="M5 22H19C20.103 22 21 21.103 21 20V11C21 9.897 20.103 9 19 9H15V11H19V20H5V11H9V9H5C3.897 9 3 9.897 3 11V20C3 21.103 3.897 22 5 22Z"
-                                            fill="#8F8F8F" />
-                                    </svg>
-                                    {{-- <a href="{{ route('customer.export') }}" class="px-1 text-muted font-size"> --}}
-                                    Export
-                                </div>
-                            </a>
-                            {{-- </button> --}}
-                        </div>
-                        <div class="col-2 px-0 d-flex justify-content-end">
-                            <button type="button"
-                                class="text-white form-control-sm border py-1 btn-info rounded col-12 modal_button"
-                                style="background: #696CFF;" data-target="#exampleModal">
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <svg width="18" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M19 7.99911H17V10.9991H14V12.9991H17V15.9991H19V12.9991H22V10.9991H19V7.99911ZM4 7.99911C3.98768 8.52776 4.08273 9.05342 4.27939 9.54429C4.47605 10.0352 4.77024 10.481 5.14415 10.855C5.51807 11.2289 5.96395 11.5231 6.45482 11.7197C6.94569 11.9164 7.47134 12.0114 8 11.9991C8.52866 12.0114 9.05431 11.9164 9.54518 11.7197C10.0361 11.5231 10.4819 11.2289 10.8558 10.855C11.2298 10.481 11.524 10.0352 11.7206 9.54429C11.9173 9.05342 12.0123 8.52776 12 7.99911C12.0123 7.47045 11.9173 6.94479 11.7206 6.45392C11.524 5.96305 11.2298 5.51718 10.8558 5.14326C10.4819 4.76934 10.0361 4.47516 9.54518 4.2785C9.05431 4.08184 8.52866 3.98679 8 3.99911C7.47134 3.98679 6.94569 4.08184 6.45482 4.2785C5.96395 4.47516 5.51807 4.76934 5.14415 5.14326C4.77024 5.51718 4.47605 5.96305 4.27939 6.45392C4.08273 6.94479 3.98768 7.47045 4 7.99911ZM10 7.99911C10.0129 8.26516 9.96993 8.53096 9.87398 8.77943C9.77802 9.02791 9.63115 9.25356 9.4428 9.44191C9.25446 9.63026 9.0288 9.77712 8.78032 9.87308C8.53185 9.96904 8.26605 10.012 8 9.99911C7.73395 10.012 7.46815 9.96904 7.21968 9.87308C6.9712 9.77712 6.74554 9.63026 6.5572 9.44191C6.36885 9.25356 6.22198 9.02791 6.12602 8.77943C6.03007 8.53096 5.98714 8.26516 6 7.99911C5.98714 7.73306 6.03007 7.46726 6.12602 7.21878C6.22198 6.97031 6.36885 6.74465 6.5572 6.55631C6.74554 6.36796 6.9712 6.22109 7.21968 6.12513C7.46815 6.02917 7.73395 5.98625 8 5.99911C8.26605 5.98625 8.53185 6.02917 8.78032 6.12513C9.0288 6.22109 9.25446 6.36796 9.4428 6.55631C9.63115 6.74465 9.77802 6.97031 9.87398 7.21878C9.96993 7.46726 10.0129 7.73306 10 7.99911ZM4 17.9991C4 17.2035 4.31607 16.4404 4.87868 15.8778C5.44129 15.3152 6.20435 14.9991 7 14.9991H9C9.79565 14.9991 10.5587 15.3152 11.1213 15.8778C11.6839 16.4404 12 17.2035 12 17.9991V18.9991H14V17.9991C14 17.3425 13.8707 16.6923 13.6194 16.0857C13.3681 15.4791 12.9998 14.9279 12.5355 14.4636C12.0712 13.9993 11.52 13.631 10.9134 13.3797C10.3068 13.1284 9.65661 12.9991 9 12.9991H7C5.67392 12.9991 4.40215 13.5259 3.46447 14.4636C2.52678 15.4013 2 16.673 2 17.9991V18.9991H4V17.9991Z"
-                                            fill="#FBFBFB" />
-                                    </svg>
 
-                                    <a href="{{ route('shipment.create') }}" class="text-white rounded">Add
-                                        New Shippment</a>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="loading_date"
+                                        style="height: 31px!important;font-size:12px!important;background:white!important;">Loading</span>
                                 </div>
-                            </button>
+                                <input type="date"
+                                    class="form-control-sm border-style shipment_filtering col-7 text-muted px-2"
+                                    id="loading_date" aria-describedby="loading_date" style="height: 31px!important;"
+                                    required>
+                            </div>
+
+                            {{-- <input placeholder="Loading Date"
+                                class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
+                                name="arrival_date" id="loading_date" type="text" onfocus="(this.type='date')"> --}}
+                            {{-- <select
+                                class="form-control-sm border-style input-border-style rounded shipment_filtering col-11 text-muted px-2"
+                                name="loading_date" id="loading_date">
+                                <option value="all" disabled selected>Loading Date</option>
+                                @for ($i = 0; $i < count($date); $i++)
+                                    <option value="{{ $date[$i] }}">{{ $date[$i] }}</option>
+                                @endfor
+
+
+                            </select> --}}
+                        </div>
+                        <div class="col-3 p-0">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="arrival_date"
+                                        style="height: 31px!important;font-size:12px!important;background:white!important">Arrival</span>
+                                </div>
+                                <input type="date"
+                                    class="form-control-sm border-style shipment_filtering col-7 text-muted px-2"
+                                    id="arrival_date" aria-describedby="arrival_date" style="height: 31px!important;"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="col-3 p-0">
+                            <select
+                                class="form-control-sm border-style input-border-style rounded shipment_filtering col-12 text-muted px-2"
+                                name="destination_port" id="destination_port">
+                                <option value="all" disabled selected>Destination Port</option>
+                                <option value="all">All Ports</option>
+                                @foreach ($destination_port as $port)
+                                    <option value="{{ $port['port'] }}">{{ $port['port'] }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
+
                 {{-- search filter end --}}
-                <div class="mt-2 bg-light" id="sort" style="height: 100%;overflow-x: scroll;">
-                    <table class="table sortable scroll">
-                        <thead class="bg-custom text-dark">
-                            @if (@$records->count() == 0)
-                                <tr>
-                                    <td colspan="9" class="h6 text-muted text-center">NO CUSTOMERS TO DISPLAY</td>
-                                </tr>
-                            @endif
-                            <tr class="font-size font-bold">
-                                <th class="sorttable_nosort">Sr</th>
-                                <th>COMPANY NAME</th>
-                                <th>COMPANY EMAIL</th>
-                                <th>PHONE</th>
-                                <th>TYPE</th>
-                                <th>LOADING DATE</th>
-                                <th>CUT OFF DATE</th>
-                                <th>SAIL DATE</th>
-                                <th>EST ARRIVAL DATE</th>
-                                <th>CONTAINER NO</th>
-                                <th>CONSIGNEE</th>
-                                <th>LOADING STATE</th>
-                                <th>LOADING COUNTRY</th>
-                                <th>DESTINATION STATE</th>
-                                <th>DESTINATION COUNTRY</th>
-                                <th class="sorttable_nosort">Action</th>>
+                <div class="shipment_table_body">
+                    <table id="shipment_table" class="table row-border"
+                        style="width:100%!important;overflow-x:scroll!important;">
+                        <thead class="bg-custom">
+                            <tr class="font-size">
+                                <th class="font-bold-tr">VIEW VEHICLES</th>
+                                <th class="font-bold-tr">IMAGE</th>
+                                <th class="font-bold-tr">CONSIGNEES</th>
+                                <th class="font-bold-tr">CONTAINER NO:</th>
+                                <th class="font-bold-tr">BOOKING NO:</th>
+                                <th class="font-bold-tr">LINES</th>
+                                <th class="font-bold-tr">NO OF VEHICLES</th>
+                                <th class="font-bold-tr">SIZE</th>
+                                <th class="font-bold-tr">LOAD DATE</th>
+                                <th class="font-bold-tr">CUT OFF DATE</th>
+                                <th class="font-bold-tr">EXPORT DATE</th>
+                                <th class="font-bold-tr">ARR Date</th>
+                                <th class="font-bold-tr">Shipper</th>
+                                <th class="font-bold-tr">LOADING PORT</th>
+                                <th class="font-bold-tr">DESTINATION PORT</th>
+                                <th class="font-bold-tr">DOCS</th>
+                                <th class="font-bold-tr">ACTIONS</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white font-size" id="tbody">
-                            @foreach ($records as $val)
-                                <tr style="border-bottom: 1.2px solid rgba(191, 191, 191, 1) !important">
-                                    <td>{{ @$val['id'] }}</td>
-                                    <td class="d-block">
-                                        <div>
-                                            <span><b>{{ @$val['company_name'] }}</b></span>
-                                        </div>
-                                        <div>
-                                            <span style="font-size: 12px !important;">{{ @$val['lead'] }}</span>
-                                        </div>
-                                    </td>
-                                    <td>{{ @$val['customer_email'] }}</td>
-                                    <td>{{ @$val['customer_phone'] }}</td>
-                                    <td>{{ @$val['shipment_type'] }}</td>
-                                    <td>{{ @$val['loading_date'] }}</td>
-                                    <td>{{ @$val['cut_off_date'] }}</td>
-                                    <td>{{ @$val['sail_date'] }}</td>
-                                    <td>{{ @$val['est_arrival_date'] }}</td>
-                                    <td>{{ @$val['container_no'] }}</td>
-                                    <td>{{ @$val['select_consignee '] }}</td>
-                                    <td>{{ @$val['loading_state '] }}</td>
-                                    <td>{{ @$val['loading_country '] }}</td>
-                                    <td>{{ @$val['destination_state'] }}</td>
-                                    <td>{{ @$val['destination_country'] }}</td>
-                                    <td>
-                                        <button><a
-                                                href={{ url($module['action'] . '/edit/' . $val[$module['db_key']]) }}><i
-                                                    class="ti-pencil"></i></a></button>
-                                        <button><a
-                                                href={{ url($module['action'] . '/delete/' . $val[$module['db_key']]) }}><i
-                                                    class="ti-trash"></i></a></button>
-                                    </td>
-
-                                </tr>
-                            @endforeach
+                        <tbody class="bg-white font-size" id="shipment_tbody">
                         </tbody>
                     </table>
-                </div>
-                <div class="d-flex justify-content-end p-2" id="page">
-                    <div>
-                        <div>
-                            <p>
-                                Displaying {{ $records->count() }} of {{ $records->total() }} Shipments(s).
-                            </p>
-                        </div>
-                        <div>
-                            {{ $records->links() }}
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
         {{-- listing end --}}
     </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            function format(d) {
+                console.log(d);
+                html =
+                    '<table class="vehicle_shipment_table my-3" style="width:90%!important;"><thead style="background:#dbdbdb;color:#2c3e50;font-size:12px!important;"><th>ID</th><th>Customer Name</th><th>VIN</th><th>YEAR</th><th>MAKE</th><th>MODEL</th><th>VEHICLE TYPE</th><th>VALUE</th><th>Action</th></thead><tbody id="shipemt_vehicle">';
+                d.forEach(element => {
+                $url_view = 'vehicle/profile/' + element.id;
+                    html += '<tr><td>' + element.id + '</td><td>' + element.customer_name + '</td><td>' +
+                        element.vin + '</td><td>' + element.year + '</td><td>' + element.make +
+                        '</td><td>' + element.model + '</td><td>' + element.vehicle_type + '</td><td>' +
+                        element.value + '</td><td> <button class="profile-button"><a href='+$url_view+'><svg width="14" height="13" viewBox="0 0 16 14" fill="none"  xmlns="http://www.w3.org/2000/svg"> <path d="M16 7C16 7 13 2.1875 8 2.1875C3 2.1875 0 7 0 7C0 7 3 11.8125 8 11.8125C13 11.8125 16 7 16 7ZM1.173 7C1.65651 6.35698 2.21264 5.7581 2.833 5.21237C4.12 4.0845 5.88 3.0625 8 3.0625C10.12 3.0625 11.879 4.0845 13.168 5.21237C13.7884 5.7581 14.3445 6.35698 14.828 7C14.77 7.07613 14.706 7.16013 14.633 7.252C14.298 7.672 13.803 8.232 13.168 8.78763C11.879 9.9155 10.119 10.9375 8 10.9375C5.88 10.9375 4.121 9.9155 2.832 8.78763C2.21165 8.2419 1.65552 7.64301 1.172 7H1.173Z" fill="#048B52" /><path d="M8 4.8125C7.33696 4.8125 6.70107 5.04297 6.23223 5.4532C5.76339 5.86344 5.5 6.41984 5.5 7C5.5 7.58016 5.76339 8.13656 6.23223 8.5468C6.70107 8.95703 7.33696 9.1875 8 9.1875C8.66304 9.1875 9.29893 8.95703 9.76777 8.5468C10.2366 8.13656 10.5 7.58016 10.5 7C10.5 6.41984 10.2366 5.86344 9.76777 5.4532C9.29893 5.04297 8.66304 4.8125 8 4.8125ZM4.5 7C4.5 6.18777 4.86875 5.40882 5.52513 4.83449C6.1815 4.26016 7.07174 3.9375 8 3.9375C8.92826 3.9375 9.8185 4.26016 10.4749 4.83449C11.1313 5.40882 11.5 6.18777 11.5 7C11.5 7.81223 11.1313 8.59118 10.4749 9.16551C9.8185 9.73984 8.92826 10.0625 8 10.0625C7.07174 10.0625 6.1815 9.73984 5.52513 9.16551C4.86875 8.59118 4.5 7.81223 4.5 7Z" fill="#048B52" /></svg></a></button></td></tr>';
+                });
+                html += '</tbody></table>';
+                return html;
+            }
+            var table = $('#shipment_table').DataTable({
+                processing: true,
+                serverSide: true,
+                responsive: {
+                    details: {
+                        type: 'column',
+                        target: -1
+                    }
+                },
+                columnDefs: [{
+                    // className: 'dtr-control',
+                    // orderable: false,
+                    // targets: -1,
+                    orderable: false, targets: '_all'
+                }],
+                'scrollX': true,
+                "lengthMenu": [
+                    [50, 100, 500],
+                    [50, 100, 500]
+                ],
+                language: {
+                    search: "",
+                    sLengthMenu: "_MENU_",
+                    searchPlaceholder: "Search",
+                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+                },
+                ajax: "{{ route('shipments.records') }}",
+                columns: [{
+                        className: 'dt-control',
+                        orderable: false,
+                        data: null,
+                        defaultContent: '',
+
+                    },
+                    {
+                        data: 'id'
+                    },
+                    {
+                        data: 'select_consignee'
+                    },
+                    {
+                        data: 'container_no'
+                    },
+                    {
+                        data: 'booking_number'
+                    },
+                    {
+                        data: 'shipping_line'
+                    },
+                    {
+                        data: 'shipment_id'
+                    },
+                    {
+                        data: 'container_size'
+                    },
+                    {
+                        data: 'loading_date'
+                    },
+                    {
+                        data: 'sale_date'
+                    },
+                    {
+                        data: 'est_arrival_date'
+                    },
+                    {
+                        data: 'ship_date'
+                    },
+                    {
+                        data: 'shipper'
+                    },
+                    {
+                        data: 'loading_port'
+                    },
+                    {
+                        data: 'destination_port'
+                    },
+                    {
+                        data: 'notes'
+                    },
+                    {
+                        data: 'action'
+                    },
+                ],
+                order: [
+                    [1, 'asc']
+                ],
+            });
+            $('#shipment_table tbody').on('click', 'td.dt-control', function() {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+                console.log(row.data()['vehicle']);
+                if (row.child.isShown()) {
+                    row.child.hide();
+                    tr.removeClass('dt-hasChild shown');
+                } else {
+                    row.child(format(row.data()['vehicle'])).show();
+                    tr.addClass('dt-hasChild shown');
+                }
+                $('.vehicle_shipment_table').DataTable({
+                    "lengthChange": false,
+                    "info": false,
+                    "bPaginate": false,
+                    searching: false,
+                    "ordering": false,
+                    language: {
+                            search: "",
+                            sLengthMenu: "_MENU_",
+                            searchPlaceholder: "Search",
+                            "emptyTable": "No Vehicle Available",
+                        },
+                });
+            });
+        });
+        function fetchCustomers(id) {
+            $tab = $('#' + id).attr('tab');
+            $id = id;
+            $.ajax({
+                type: 'post',
+                url: '{{ URL::to('admin/shipments/filterShipment') }}',
+                data: {
+                    'tab': $tab,
+                    'id': $id,
+                },
+                success: function(data) {
+                    // $('#shipment_tbody').html(data);
+                    $('.shipment_table_body').html(data);
+
+                }
+            });
+        }
+    </script>
+    @if (Session::has('success'))
+        <script>
+            iziToast.warning({
+                position: 'topRight',
+                message: '{{ Session::get('success') }}',
+            });
+        </script>
+    @endif
 @endsection

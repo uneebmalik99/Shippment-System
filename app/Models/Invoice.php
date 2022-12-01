@@ -39,18 +39,13 @@ class Invoice extends Model
         return $this->belongsTo('App\Models\Export');
     }
 
-    public function customer()
-    {
-        return $this->belongsTo('App\Models\Customer');
-    }
 
     public function consignee()
     {
         return $this->belongsTo('App\Models\Consignee');
     }
-
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User','customer_user_id','id');
     }
 }

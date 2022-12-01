@@ -28,7 +28,7 @@ class CreateShippersTable extends Migration
             $table->string('original_shipping_documents')->nullable();
             $table->string('insurance')->nullable();
             $table->string('destination_port')->nullable();
-            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('customer_id')->constrained('user')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

@@ -1,23 +1,13 @@
-@include('layouts.vehicle_create.navbar')
 <div>
-    <div class="col-5 d-flex">
-        <div class="col-6 px-0 py-0 pl-1 billing">
-            <button class="text-center form-control btn border border-info" style="cursor: pointer;" id="general">
-                General
+    <div class="col-4 d-flex">
+        <div class="col-md-6 col-12 px-0 py-0 pl-1 billing px-1">
+            <button class="text-center form-control border next-style vehicle_navbar" id="general_vehicle_tab">
+                <div class="unskew">General</div>
             </button>
         </div>
-        <div class="col-6 px-0 py-0 pl-1 billing">
-            <button class="text-center form-control btn border border-info" style="cursor: pointer;" id="attachments">
-                Attachments</button>
-        </div>
-        <div class="col-6 px-0 py-0 pl-1">
-            <button class="text-center form-control btn border border-info" style="cursor: pointer;" id="shipper">
-                Shipper
-            </button>
-        </div>
-        <div class="col-6 px-0 py-0 pl-1">
-            <button class="text-center form-control btn border border-info" style="cursor: pointer;" id="quotation">
-                Quotation
+        <div class="col-md-6 col-12 px-0 py-0 pl-1 billing px-1">
+            <button class="text-center form-control border tab_style vehicle_navbar" id="attachments_vehicle_tab">
+                <div class="unskew">Attachments</div>
             </button>
         </div>
     </div>

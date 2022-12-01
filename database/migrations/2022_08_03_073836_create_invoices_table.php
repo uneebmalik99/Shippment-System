@@ -16,10 +16,13 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('export_id')->constrained('exports')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('customer_user_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('customer_user_id')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('consignee_id')->constrained('consignees')->onDelete('cascade')->onUpdate('cascade');
+            $table->float('vehicle_id');
             $table->float('total_amount');
-            $table->float('paid_amount');
+            $table->float('amount_paid');
+            $table->float('amount_due');
+            $table->float('due');
             $table->string('export_invoice');
             $table->string('note');
             $table->float('adjustment_damaged');
@@ -31,7 +34,15 @@ class CreateInvoicesTable extends Migration
             $table->float('discount');
             $table->float('before_discount');
             $table->string('upload_invoice');
-            $table->foreignId('added_by_role')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('number');
+            $table->string('issued_by');
+            $table->string('status');
+            $table->string('issued_at');
+            $table->string('references');
+            $table->string('working');
+            $table->string('created_by');
+            $table->string('payment_team');
+            $table->foreignId('added_by_role')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\User;
+use App\Models\Location;
+use App\Models\VehicleCart;
 use Carbon\Carbon;
 
 class CalendarController extends Controller
@@ -21,7 +23,8 @@ class CalendarController extends Controller
 
     public function Notification()
     {
-        $data['notification'] = Notification::with('customer')->paginate($this->perpage);
+        $data['notification'] = Notification::with('user')->paginate($this->perpage);
+        $data['location'] = Location::all();
         // dd();
         if ($data['notification']->toArray()) {
             $current = Carbon::now();
@@ -44,7 +47,7 @@ class CalendarController extends Controller
                     $data['notification'][$key]['date'] = (int) $seconds . 's ';
                 }
             }
-            $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
+            $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
             $data['notification_count'] = count($unread);
         } else {
             $data['notification'] = "asda";
@@ -71,6 +74,8 @@ class CalendarController extends Controller
                 'action' => $this->action,
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
         $records = User::paginate($this->perpage);
         $data['records'] = $records;
         $notification = $this->Notification();

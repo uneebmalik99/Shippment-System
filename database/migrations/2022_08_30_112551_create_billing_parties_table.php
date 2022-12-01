@@ -33,7 +33,7 @@ class CreateBillingPartiesTable extends Migration
             $table->string('request_pickup')->nullable();
             $table->string('end_use')->nullable();
             $table->string('buyer_number')->nullable();
-            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('customer_id')->constrained('user')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

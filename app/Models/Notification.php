@@ -13,18 +13,10 @@ class Notification extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     protected $table = "notifications";
-    protected $fillable = [
-        'subject',
-        'message',
-        'is_read',
-        'status',
-        'user_id',
-        'expiry_date',
-        'added_by_role',
-    ];
+    protected $guarded = [];
 
-    public function customer()
+    public function user()
     {
-        return $this->belongsTo('App\Models\Customer', 'user_id', 'id');
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 }

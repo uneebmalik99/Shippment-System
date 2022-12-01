@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+use App\Models\Location;
 use App\Models\Notification;
+use App\Models\User;
+use App\Models\VehicleCart;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,7 @@ class NotificationController extends Controller
     private $type = "Notifications";
     private $singular = "Notification";
     private $plural = "Notifications";
-    private $view = "Notification.";
+    private $view = "notification.";
     private $db_key = "id";
     private $user = [];
     private $perpage = 100;
@@ -22,7 +24,9 @@ class NotificationController extends Controller
 
     public function Notification()
     {
-        $data['notification'] = Notification::with('customer')->paginate($this->perpage);
+        $data['notification'] = Notification::with('user')->paginate($this->perpage);
+        $data['location'] = Location::all()->toArray();
+
         // dd();
         if ($data['notification']->toArray()) {
             $current = Carbon::now();
@@ -45,7 +49,7 @@ class NotificationController extends Controller
                     $data['notification'][$key]['date'] = (int) $seconds . 's ';
                 }
             }
-            $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
+            $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
             $data['notification_count'] = count($unread);
         } else {
             $data['notification'] = "asda";
@@ -73,8 +77,11 @@ class NotificationController extends Controller
             ],
         ];
 
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
+
         $notification = $this->Notification();
-        $data['user'] = Customer::all()->toArray();
+        $data['user'] = User::where('role_id', '4')->get();
         // dd($data['user']);
         // return $notification;
         return view($this->view . 'list', $data, $notification);

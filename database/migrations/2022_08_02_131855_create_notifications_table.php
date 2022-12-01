@@ -19,7 +19,7 @@ class CreateNotificationsTable extends Migration
             $table->text('message');
             $table->boolean('is_read');
             $table->integer('status');
-            $table->foreignId('user_id')->constrained('customers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('user')->onUpdate('cascade')->onDelete('cascade');
             $table->date('expiry_date');
             $table->softDeletes();
             $table->timestamps();

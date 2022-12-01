@@ -3,9 +3,15 @@
 
 <head>
     @include('layouts.partials.head')
+    <style>
+  
+    </style>
 </head>
 
 <body>
+    <div id="load"></div>
+    <div id="contents"></div>
+
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
@@ -61,7 +67,10 @@
     <!-- Warning Section Ends -->
     <!-- Required Jquery -->
     @include('layouts.partials.footer-scripts')
-    @include('layouts.js.vehiclejs')
+    @include('layouts.js.vehicle')
+    @include('layouts.js.shipment')
+    @include('layouts.js.customer')
+    {{-- @include('layouts.js.vehiclejs') --}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
         integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
@@ -69,26 +78,44 @@
 
     <script>
         $(document).ready(function() {
-            $('#table_id').DataTable();
-        });
-
-        $(document).ready(function() {
-            $('#user_table').DataTable();
-        });
-
-
-        $(document).ready(function() {
-            $('#vedicls_table').DataTable({
-                "language": {
-                    search: ""
-                },
-                "lengthChange": false,
-                "searching": false,
-                "ordering": false,
+            
+           
+            $('#table_id').DataTable({
+                "lengthMenu": [[50, 100, 500], [50, 100, 500]],
             });
-        });
-    </script>
 
+
+        
+            
+            $('#user_table').DataTable({
+                "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+            });
+
+               
+        });
+    //     $(document).ready(function() {
+    //         $('#customer_table').DataTable({
+    //             "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+    //             language: {
+    //                 search: "",
+    //                 sLengthMenu: "_MENU_",
+    //                 searchPlaceholder: "Search"
+    //             },
+    //     });
+    // }
+        $('#dashboard_shipment').DataTable({
+                //    scrollX: true,
+                    "lengthChange": false,
+                    "info": false,
+                    "bPaginate": false,
+                //    "lengthMenu": [[50, 100, 500], [50, 100, 500]],
+                    language: {
+                        search: "",
+                        sLengthMenu: "_MENU_",
+                        searchPlaceholder: "Search"
+                    },
+                });
+    </script>
 
 </body>
 

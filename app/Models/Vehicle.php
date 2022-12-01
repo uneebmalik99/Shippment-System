@@ -15,65 +15,14 @@ class Vehicle extends Model
     protected $table = "vehicles";
     protected $guarded = [];
 
-    protected $fillable = [
-        'customer_name',
-        'vin',
-        'year',
-        'make',
-        'model',
-        'vehicle_type',
-        'color',
-        'weight',
-        'value',
-        'auction',
-        'buyer_id',
-        'key',
-        'note',
-        'hat_number',
-        'title_type',
-        'title',
-        'title_rec_date',
-        'title_state',
-        'title_number',
-        'shipper_name',
-        'status',
-        'sale_date',
-        'paid_date',
-        'days',
-        'posted_date',
-        'pickup_date',
-        'delivered',
-        'pickup_location',
-        'site',
-        'dealer_fee',
-        'late_fee',
-        'auction_storage',
-        'towing_charges',
-        'warehouse_storage',
-        'title_fee',
-        'port_detention_fee',
-        'custom_inspection',
-        'additional_fee',
-        'shipment_id',
-        'insurance',
-        'vehicle_is_deleted',
-        'added_by_role',
-        'added_by_email',
-    ];
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'buyer_id', 'id');
+    }
 
     public function location()
     {
-        return $this->belongsTo('App\Models\Location');
-    }
-
-    public function customer()
-    {
-        return $this->belongsTo('App\Models\Customer', 'buyer_id', 'id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\Location', 'title_state', 'id');
     }
 
     public function document()
@@ -105,8 +54,48 @@ class Vehicle extends Model
     {
         return $this->hasMany('App\Models\StickyNote');
     }
+
+    public function vehicle_status()
+    {
+        return $this->belongsTo('App\Models\VehicleStatus', 'status', 'id');
+    }
+
+    public function auction_image()
+    {
+        return $this->hasMany('App\Models\AuctionImage', 'vehicle_id', 'id');
+    }
+
+    public function warehouse_image()
+    {
+        return $this->hasMany('App\Models\WarehouseImage', 'vehicle_id', 'id');
+    }
+
+    public function auction_invoice()
+    {
+        return $this->hasOne('App\Models\AuctionInvoice', 'vehicle_id', 'id');
+    }
+
     public function shipment()
     {
-        return $this->belongsTo(Shipment::class, 'shipment_id');
+        return $this->belongsTo('App\Models\Shipment');
+    }
+
+    public function billofsales()
+    {
+        return $this->hasMany('App\Models\BillOfSale', 'vehicle_id', 'id');
+    }
+
+    public function originaltitles()
+    {
+        return $this->hasMany('App\Models\OriginalTitle', 'vehicle_id', 'id');
+    }
+
+    public function pickupimages()
+    {
+        return $this->hasMany('App\Models\PickupImage', 'vehicle_id', 'id');
+    }
+
+    public function vehicle_cart(){
+        return $this->hasMany('App\Models\VehicleCart', 'vehicle_id', 'id');
     }
 }

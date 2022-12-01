@@ -22,7 +22,7 @@ class Image extends Model
         'base_url',
     ];
 
-    public function vehcile()
+    public function vehicle()
     {
         return $this->belongsTo('App\Models\Vehicle');
     }

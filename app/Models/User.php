@@ -3,45 +3,34 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Spatie\Permission\Traits\HasRoles;
+use App\Traits\LockableTrait;
 class User extends Authenticatable
 {
     use HasFactory;
-    use softDeletes;
+    use HasRoles;
+    use LockableTrait;
+    // use softDeletes;
     protected $primaryKey = 'id';
-    public $timestamps = false;
-    protected $table = "users";
-    protected $fillable = [
-        'username',
-        'authkey',
-        'password',
-        'password_reset_token',
-        'email',
-        'status',
-        'role_id',
-        'user_is_detected',
-        'address_line1',
-        'address_line2',
-        'city',
-        'state',
-        'zip_code',
-        'phone',
-        'fax',
-        'customer_name',
-    ];
+    protected $table = "user";
+    protected $guarded = [];
 
-    public function customers()
+    public function vehicles()
     {
-        return $this->hasMany('App\Models\Customer');
+        return $this->hasMany('App\Models\Vehicle', 'buyer_id', 'id');
+    }
+
+    public function customer_documents()
+    {
+        return $this->hasMany('App\Models\CustomerDocument', 'user_id', 'id');
     }
 
     public function exports()
     {
         return $this->hasMany('App\Models\Export');
     }
-
 
     public function locations()
     {
@@ -62,8 +51,36 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\AuthAssignment');
     }
+    // public function role()
+    // {
+    //     return $this->belongsTo('App\Models\role');
+    // }
 
-    public function role(){
-        return $this->belongsTo('App\Models\role');
+    public function documents()
+    {
+        return $this->hasOne('App\Models\CustomerDocument');
+    }
+
+    public function billings()
+    {
+        return $this->hasMany('App\Models\BillingParty', 'customer_id', 'id');
+    }
+
+    public function shippers()
+    {
+        return $this->hasMany('App\Models\Shipper', 'customer_id', 'id');
+    }
+
+    public function quotations()
+    {
+        return $this->hasMany('App\Models\Quotation', 'customer_id', 'id');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany('App\Models\Notification', 'customer_id', 'id');
+    }
+    public function buyer_id(){
+        return $this->hasMany('App\Models\CustomerBuyerId', 'customer_id', 'id');
     }
 }

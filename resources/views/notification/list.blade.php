@@ -1,5 +1,6 @@
 @extends('layouts.partials.mainlayout')
 @section('body')
+                                        {{-- @dd($user) --}}
 
     <div class="contaier my-5">
         <div class="row">
@@ -36,9 +37,9 @@
                                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                                     </div>
                                                     <div class="mt-2">
-                                                        <h4>{{ $value->subject }}</h4>
+                                                        <h4>{{ substr($value->subject, 0, 18) }}...</h4>
                                                         <div class="lessText">
-                                                            <p>{!! $value->message !!}</p>
+                                                            <p>{!! substr($value->message, 0 , 22) !!}...</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -139,13 +140,13 @@
                                 </div>
                                 <div class="user_id py-2">
                                     <label for="user_id">Assign To</label>
-                                    <select name="user_id" id="user_id" class="mx-2 col-3">
-                                        {{-- @dd($user) --}}
-                                        @foreach ($user as $user)
-                                            <option value="{{ $user['id'] }}">{{ $user['customer_name'] }}</option>
+                                <select name="user_id" id="user_id" class="mx-auto form-control">
+                                        @foreach ($user as $users)
+                                            <option value="{{ $users['id'] }}">{{ $users['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+                                <input type="hidden" name="is_read" id="is_read" value="0">
                                 <br>
                                 <div class="row save_notificatio_button">
                                     <div class="col-8"></div>
@@ -155,6 +156,7 @@
                                             class="px-3 py-1">Save</button>
                                     </div>
                                 </div>
+
                             </form>
 
                         </div>

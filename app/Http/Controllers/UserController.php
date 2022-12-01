@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\User;
+use App\Models\Location;
+use App\Models\VehicleCart;
+// use App\Models\role;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
-    private $type = "users";
-    private $singular = "user";
-    private $plural = "users";
+    private $type = "Users";
+    private $singular = "User";
+    private $plural = "Users";
     private $view = "user.";
     private $db_key = "id";
     private $perpage = 100;
@@ -24,7 +29,8 @@ class UserController extends Controller
 
     public function Notification()
     {
-        $data['notification'] = Notification::with('customer')->paginate($this->perpage);
+        $data['notification'] = Notification::with('user')->paginate($this->perpage);
+        $data['location'] = Location::all();
         // dd();
         if ($data['notification']->toArray()) {
             $current = Carbon::now();
@@ -47,7 +53,7 @@ class UserController extends Controller
                     $data['notification'][$key]['date'] = (int) $seconds . 's ';
                 }
             }
-            $unread = Notification::with('customer')->where('status', '0')->paginate($this->perpage);
+            $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
             $data['notification_count'] = count($unread);
         } else {
             $data['notification'] = "asda";
@@ -58,6 +64,8 @@ class UserController extends Controller
 
     public function index()
     {
+    //    return auth()->user()->getRoleNames();
+    // return User::role('Super Admin')->get();
 
         $data = [];
         $data = [
@@ -75,19 +83,28 @@ class UserController extends Controller
                 'action' => $this->action,
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
 
-        $data['role'] = Auth::user()->role;
 
-        if ($data['role']->name == 'Customer') {
+        // $data['role'] = Auth::user()->role;
+        // if ($data['role']->name == 'Customer') {
+
+        if(Auth::user()->hasRole('Customer')){
+
             $records = User::where('email', Auth::user()->email)->get();
             $data['records'] = $records;
+
         } else {
-            $records = User::all();
+
+            $records = User::with('roles')->where('role_id', 1)->orwhere('role_id', 2)->orwhere('role_id', 3)->get();
+            // return $records;
             $data['records'] = $records;
+            
         }
 
         $notification = $this->Notification();
         return view($this->view . 'list', $data, $notification);
+   
     }
 
     public function create(Request $request)
@@ -172,8 +189,8 @@ class UserController extends Controller
     {
         $data = [];
         $data = [
-            "page_title" => $this->singular . 'Profile',
-            "page_heading" => $this->singular . 'Profile',
+            "page_title" => $this->singular . ' Profile',
+            "page_heading" => $this->singular . ' Profile',
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
             "module" => ['type' => $this->type,
                 'type' => $this->type,
@@ -185,9 +202,20 @@ class UserController extends Controller
                 'page' => 'profile',
             ],
         ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+        $user = User::find($id);
         $notification = $this->Notification();
         $data['records'] = User::find($id)->toArray();
+        $data['roles'] = Role::all()->whereNotIn('name', $user->getRoleNames())->toArray();
+        $data['permissions'] = Permission::all()->toArray();
+        
+        $data['assignRoles'] = $user->getRoleNames();
+        $data['assignPermissions'] = $user->getAllPermissions();
+
+    
         return view($this->view . 'profile', $data, $notification);
+
+
     }
 
     public function updateProfile(Request $request)
@@ -252,6 +280,158 @@ class UserController extends Controller
                 return Response($output);
             }
         }
+    }
+
+    public function createRole()
+    {
+
+        $data = [];
+        $data = [
+            "page_title" => $this->plural . " Create Role",
+            "page_heading" => $this->plural . ' CreateRole',
+            "breadcrumbs" => array('#' => $this->plural . " List"),
+            "module" => [
+                'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'CreateRole',
+                'action' => $this->action,
+            ],
+        ];
+        $data['roles'] = role::all()->toArray();
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
+
+        $notification = $this->Notification();
+        return view($this->view . 'showRole', $data, $notification);
+
+    }
+
+    public function createroles()
+    {
+
+        $output = view('user.createRole')->render();
+        return Response($output);
+
+    }
+
+    public function addRoles(Request $req)
+    {
+
+        // return
+
+        $data = role::updateOrCreate(
+            ['id' => $req->id],
+            [
+                'name' => $req['role_name'],
+            ]
+        );
+
+        return Response($data);
+
+    }
+
+    public function deleteRole($id)
+    {
+        $role = role::find($id);
+        $role->delete();
+        if ($role) {
+            return back()->with('delete', 'Role Deleted Successfully!');
+
+        }
+    }
+
+    public function showUpdateRole(Request $req)
+    {
+        $id = $req->id;
+        $data['roles'] = role::find($id)->toArray();
+
+        $output = view('user.createRole', $data)->render();
+        return Response($output);
+
+    }
+
+
+    public function showUpdateUser(Request $req)
+    {   
+        
+        $id = $req->id;
+        $data['user'] = User::find($id)->toArray();
+        $data['roles'] = role::get();
+        $output = view('user.createuser', $data)->render();
+        return Response($output);
+
+    }
+    public function createUser(Request $req){
+        $data['roles'] = role::get();
+        $output = view('user.createUser',$data)->render();
+        return Response($output);
+    }
+    public function addUsers(Request $req){
+        $role = role::where('id',$req['role_id'])->select('name')->first();
+        
+        $user = User::updateOrCreate(
+            ['id' => $req->id],
+            [
+                "name" => $req['name'],
+                "username" => $req['user_name'],
+                "password" => Hash::make($req['password']),
+                "email" => $req['email'],
+                "company_name" => $req['company_name'],
+                "company_email" => $req['company_email'],
+                "address_line1" => $req['address_line1'],
+                "address_line2" => $req['address_line2'],
+                "city" => $req['city'],
+                "country" => $req['country'],
+                "zip_code" => $req['zip_code'],
+                "phone" => $req['phone'],
+                "role_id" => $req['role_id']
+            ]
+        );
+        
+        if($role['name'] == 'Super Admin'){
+            $user->assignRole('Super Admin');
+        }
+        if($role['name'] == 'Sub Admin'){
+            $user->assignRole('Sub Admin');
+        }
+        if($role['name'] == 'Location Admin'){
+            $user->assignRole('Location Admin');
+        }
+        if($role['name'] == 'Customer'){
+            $user->assignRole('Customer');
+        }
+        
+        return Response($user);
+    }
+    public function assignRole(Request $req){
+        $user = User::where('id',$req['id'])->first();
+        $role = $user->assignRole($req['role']);
+        if($role){
+            return "Assigned";
+        }
+    }
+    public function dismissrole(Request $req){
+        $user = User::where('id',$req['id'])->first();
+        $role = $user->removeRole($req['role']);
+        if($role){
+            return "Revoked";
+        }
+    }
+    public function permissions(){
+        $data['permissions'] = Permission::all()->toArray();
+        
+        $output = view('user.showPermission',$data)->render();
+
+        return Response($output);
+    }
+    public function roles(){
+        $data['roles'] = role::all()->toArray();
+        $output = view('user.showRoles',$data)->render();
+        return Response($output);
     }
 
 }

@@ -18,7 +18,7 @@ class CreateAuthAssignmentsTable extends Migration
             $table->string('user_id');
             //SETTING THE PRIMARY KEYS
             $table->primary(['item_name','user_id']);
-            $table->foreignId('auth_user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('auth_user_id')->constrained('user')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

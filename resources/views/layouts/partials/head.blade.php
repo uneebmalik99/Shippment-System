@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css">
+
+
+
 <title>Blue Ocean Shipping</title>
 <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,7 +25,8 @@
 <!-- Favicon icon -->
 {{-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> --}}
 {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> --}}
-<link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+
+<link rel="icon" href="{{ asset('images/blueocean.png') }}" type="image/x-icon">
 <!-- Google font-->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 {{-- CK Editor --}}
@@ -35,8 +40,11 @@
 <!-- Required Fremwork -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/bootstrap/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/vehicle.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/admin_profile.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/notification.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/master.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/createinvoice.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/invoice.css') }}">
 <!-- themify-icons line icon -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/themify-icons/themify-icons.css') }}">
 {{-- Fontawesome icons --}}
@@ -47,6 +55,7 @@
 <link rel="stylesheet" href="{{ asset('assets/css/image-uploader.min.css') }}">
 {{-- DataTable Css --}}
 <link rel="stylesheet" href="{{ asset('assets/css/datatable.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/custom_datatable.css') }}">
 <!--sticky Css-->
 <link rel="stylesheet" href="{{ asset('assets/pages/sticky/css/jquery.postitall.css') }}" type="text/css"
     media="all">
@@ -68,14 +77,33 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/simple-line-icons.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ionicons.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.mCustomScrollbar.css') }}">
+{{-- File uploader --}}
+<script src="https://js.upload.io/upload-js/v1"></script>
 
 {{-- Datatable --}}
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
     integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
     integrity="sha512-DIW4FkYTOxjCqRt7oS9BFO+nVOwDL4bzukDyDtMO7crjUZhwpyrWBFroq+IqRe6VnJkTpRAS6nhDvf0w+wHmxg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"> --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+{{-- multipe input tag --}}
+{{-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="preconnect" href="https://fonts.gstatic.com"> --}}
+{{-- multipe input tag  --}}
+
+    

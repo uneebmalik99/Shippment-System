@@ -25,7 +25,7 @@ class CreateConsigneesTable extends Migration
             $table->string('zip_code');
             $table->string('phone');
             $table->string('cargo_details');
-            $table->foreignId('added_by_role')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('added_by_role')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

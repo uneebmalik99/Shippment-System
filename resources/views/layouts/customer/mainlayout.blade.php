@@ -7,12 +7,17 @@
             <i class="icofont icofont-close-circled"></i>
         </div>
     </div> --}}
-    <div class="card-block d-flex">
+    <style>
+        .page-wrapper{
+            padding: 0px !important;
+        }
+    </style>
+    <div class="card-block d-lg-flex">
         {{-- Sidebar start --}}
         @include('layouts.customer.sidebar')
         {{-- Sidebar end --}}
         {{-- Project list start --}}
-        <div class="col-9 px-2">
+        <div class="col-lg-9">
             @include('layouts.customer.navbar')
             <div id="tab_body">
                 @include('layouts.customer.account')
