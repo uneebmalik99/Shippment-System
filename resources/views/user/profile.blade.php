@@ -118,6 +118,8 @@
                             <label class="col-6 profile_style">NAME
                                 <input type="text" name="name" class="form-control mt-1 profile_input col-12"
                                     value="{{ @$records['username'] }}"></label>
+                                    <input type="hidden" id="user_id" va class="form-control mt-1 profile_input col-12"
+                                    value="{{ @$records['id'] }}">
                         </div>
                     </div>
                     <div class="row">
@@ -152,9 +154,9 @@
             <div class="col-5">
                 <div class="all_roles">
                     <h5>Roles</h5>
-                    <div class="roles d-flex flex-column">
+                    <div class="assign_roles roles d-flex flex-column">
                         @foreach ($roles as $role)
-                        <a>{{@$role['name']}}</a>
+                        <a>{{@$role['name']}} <input type="checkbox" name="{{ @$role['name'] }}" value="{{  @$role['name'] }}"/></a>
                         @endforeach
                        
                     </div>
@@ -163,12 +165,12 @@
             </div>
             <div class="col-2">
                 <div class="role_buttons d-flex flex-column">
-                    <button class="btn btn-success">
+                    <button class="btn btn-success" onclick="assignRoleToUser()">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 10L12 1V5.99L1 6V14H12V19L19 10Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         </button><br>
-                        <button class="btn btn-danger">
+                        <button class="btn btn-danger" onclick="dismissRoleToUser()">
                             <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.85785 10.2105L9.02204 19.0592L8.93012 14.0702L19.9274 13.8252L19.7801 5.82678L8.78258 6.06177L8.69047 1.06275L1.85785 10.2105Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -179,9 +181,9 @@
             <div class="col-5">
                 <div class="all_roles">
                     <h5>Roles</h5>
-                    <div class="roles d-flex flex-column">
+                    <div class="dismiss_roles roles d-flex flex-column">
                         @foreach ($assignRoles as $role)
-                        <a>{{@$role}}</a>
+                        <a>{{@$role}} <input type="checkbox" name="{{ @$role }}" value="{{  @$role  }}" /></a>
                         @endforeach
 
                     </div>

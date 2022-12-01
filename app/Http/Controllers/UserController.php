@@ -312,26 +312,22 @@ class UserController extends Controller
 
     public function createroles()
     {
-
-        $output = view('user.createRole')->render();
+        $data['permissions'] = Permission::all()->toArray();
+        $output = view('user.createRole',$data)->render();
         return Response($output);
 
     }
 
     public function addRoles(Request $req)
     {
-
-        // return
-
-        $data = role::updateOrCreate(
+        $role = role::updateOrCreate(
             ['id' => $req->id],
             [
                 'name' => $req['role_name'],
             ]
         );
-
-        return Response($data);
-
+        $role->givePermissionTo($req['permission']);
+        return Response($role);
     }
 
     public function deleteRole($id)
@@ -347,8 +343,9 @@ class UserController extends Controller
     public function showUpdateRole(Request $req)
     {
         $id = $req->id;
-        $data['roles'] = role::find($id)->toArray();
-
+        $role = role::find($id)->first();
+        $data['roles'] = $role->toArray();
+        $data['permissions'] = $role->permissions;
         $output = view('user.createRole', $data)->render();
         return Response($output);
 
@@ -408,6 +405,7 @@ class UserController extends Controller
         return Response($user);
     }
     public function assignRole(Request $req){
+        
         $user = User::where('id',$req['id'])->first();
         $role = $user->assignRole($req['role']);
         if($role){

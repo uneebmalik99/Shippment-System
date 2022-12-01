@@ -146,7 +146,6 @@ class VehicleController extends Controller
 
         $notification = $this->Notification();
         return view($this->view . 'list', $data, $notification);
-
     }
 
     public function create(Request $request)
@@ -160,7 +159,8 @@ class VehicleController extends Controller
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " create"),
             "action" => $action,
             "button_text" => "Create",
-            "module" => ['type' => $this->type,
+            "module" => [
+                'type' => $this->type,
                 'type' => $this->type,
                 'singular' => $this->singular,
                 'plural' => $this->plural,
@@ -229,7 +229,8 @@ class VehicleController extends Controller
             "button_text" => "Update ",
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
             'action' => $action,
-            "module" => ['type' => $this->type,
+            "module" => [
+                'type' => $this->type,
                 'type' => $this->type,
                 'singular' => $this->singular,
                 'plural' => $this->plural,
@@ -773,7 +774,7 @@ class VehicleController extends Controller
             "button_text" => "Update ",
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
             'action' => $action,
-            "module" => ['type' => $this->type,
+            "module" => [
                 'type' => $this->type,
                 'singular' => $this->singular,
                 'plural' => $this->plural,

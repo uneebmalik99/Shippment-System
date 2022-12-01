@@ -30,6 +30,20 @@
             <label for="date">Date</label>
             <input type="date" name="date" id="date" class="form-control">
         </div>
+        <div class="col-sm-10 col-md-6 mt-3">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Permissions
+                </button>
+                <form class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @foreach ( $permissions as $permission)
+                        <label class="dropdown-item"><input type="checkbox" name="permission[]" value="{{ @$permission['name'] }}">{{ $permission['name'] }}</label>
+                    @endforeach
+                 
+                </form>
+              </div>
+              
+        </div>
     </div>
     <div class="row">
         <div class="col-12">

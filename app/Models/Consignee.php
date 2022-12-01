@@ -36,4 +36,8 @@ class Consignee extends Model
     {
         return $this->hasMany('App\Models\Invoice');
     }
+    public function shipments()
+    {
+        return $this->belongsToMany(shipments::class);
+    }
 }
