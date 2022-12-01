@@ -408,6 +408,7 @@ class UserController extends Controller
         return Response($user);
     }
     public function assignRole(Request $req){
+        
         $user = User::where('id',$req['id'])->first();
         $role = $user->assignRole($req['role']);
         if($role){
