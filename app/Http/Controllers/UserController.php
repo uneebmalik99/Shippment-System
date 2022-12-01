@@ -312,26 +312,22 @@ class UserController extends Controller
 
     public function createroles()
     {
-
-        $output = view('user.createRole')->render();
+        $data['permissions'] = Permission::all()->toArray();
+        $output = view('user.createRole',$data)->render();
         return Response($output);
 
     }
 
     public function addRoles(Request $req)
     {
-
-        // return
-
-        $data = role::updateOrCreate(
+        $role = role::updateOrCreate(
             ['id' => $req->id],
             [
                 'name' => $req['role_name'],
             ]
         );
-
-        return Response($data);
-
+        $role->permissions()->sync($req['permission']);
+        return Response($role);
     }
 
     public function deleteRole($id)
