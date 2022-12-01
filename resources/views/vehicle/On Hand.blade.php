@@ -3,7 +3,8 @@
 <table id="on_hand_table" class="table row-border" style="width:100%!important;">
     <thead class="bg-custom">
         <tr class="font-size">
-            <th><input type="checkbox" name="main_checkbox"><label></label>
+            <th>ADD
+                {{-- <input type="checkbox" name="main_checkbox"><label></label>
                 <button class="delete-button d-none" id="deleteAllbtn">
                     <a href="#">
                         <svg width="14" height="13" viewBox="0 0 12 12" fill="none"
@@ -14,7 +15,7 @@
                         </svg>
 
                     </a>
-                </button>
+                </button> --}}
             </th>
             <th class="font-bold-tr">IMAGE</th>
             <th class="font-bold-tr">CLIENTS</th>

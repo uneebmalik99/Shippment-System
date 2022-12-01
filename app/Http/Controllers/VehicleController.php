@@ -699,7 +699,7 @@ class VehicleController extends Controller
         $import_vehicle = [];
         foreach($vehicle_array as $newValues){
             $import_vehicle = [
-                'customer_name' => $newValues[0],
+                'customer_name' => '',
                 'vin' => $newValues[1],
                 'year' => $newValues[2],
                 'make' => $newValues[3],
@@ -718,8 +718,8 @@ class VehicleController extends Controller
                 'title_rec_date' => $newValues[16],
                 'title_state' => $newValues[17],
                 'title_number' => $newValues[18],
-                'shipper_name' => $newValues[19],
-                'status' => $newValues[20],
+                'shipper_name' => null,
+                'status' => 1,
                 'sale_date' => $newValues[21],
                 'paid_date' => $newValues[22],
                 'days' => $newValues[23],
@@ -750,7 +750,7 @@ class VehicleController extends Controller
                 'assign_date' => $newValues[47],
                 'description' => $newValues[48],
                 'dispatch_date' => $newValues[49],
-                'port' => $newValues[50],
+                'port' => null,
                 'vehicle_is_deleted' => $newValues[51],
                 'shipment_id' => $newValues[52],
                 'added_by_user' => $newValues[53],
