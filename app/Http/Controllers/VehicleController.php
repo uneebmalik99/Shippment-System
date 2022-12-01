@@ -774,7 +774,7 @@ class VehicleController extends Controller
             "button_text" => "Update ",
             "breadcrumbs" => array("dashboard" => "Dashboard", "#" => $this->plural . " List"),
             'action' => $action,
-            "module" => ['type' => $this->type,
+            "module" => [
                 'type' => $this->type,
                 'singular' => $this->singular,
                 'plural' => $this->plural,
