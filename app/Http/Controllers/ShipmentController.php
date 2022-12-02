@@ -459,8 +459,9 @@ class ShipmentController extends Controller
                     $shipment->update($data);
                 }
 
-                $data['shipment_id'] = $data['id'];
-                $data['loading_images'] = Shipment::with('loading_image')->get()->toArray();
+                $data['shipment_id'] = $request->id;
+                $data['loading_images'] = Shipment::with('loading_image')->where('id', $request->id)->get()->toArray();
+                // dd($request->id);
             }
             else{
                 $Obj_vehicle = new Vehicle;
@@ -595,7 +596,7 @@ class ShipmentController extends Controller
     {
         $id = $request->id;
         $data = [];
-        $data['shipments'] = Shipment::with('loading_image', 'shipment_invoice', 'stamp_titles','other_documents')->where('id', $request->id)->get()->toArray();
+        $data['shipments'] = Shipment::with('vehicle.warehouse_image', 'loading_image', 'shipment_invoice', 'stamp_titles','other_documents')->where('id', $request->id)->get()->toArray();
         if ($request->tab) {
             $tab = $request->tab;
             $output = view('layouts.shipment_detail.' . $tab, $data)->render();
@@ -946,5 +947,22 @@ class ShipmentController extends Controller
         return Response($output);
 
         // return $data['vehicles'];
+    }
+
+    public function deleteFromCart(Request $req){
+        $data = [];
+        $data = VehicleCart::find($req->id);
+
+        if($data){
+            $data->delete();
+            return true;
+        }
+        else
+        {
+            return true;
+        
+        }
+
+
     }
 }

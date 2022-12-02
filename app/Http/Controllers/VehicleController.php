@@ -6,7 +6,7 @@ use App\Exports\VehicleExport;
 use App\Http\Controllers\Controller;
 use App\Imports\VehicleImport;
 use App\Models\AuctionCopy;
-use App\Models\AuctionImage;
+use App\Models\AuctionImage; 
 use App\Models\AuctionInvoice;
 use App\Models\BillOfSale;
 use App\Models\Image;
@@ -97,7 +97,6 @@ class VehicleController extends Controller
 
     public function index()
     {
-
         $data = [];
         $data = [
             // "page_title" => $this->plural . " List",
@@ -160,7 +159,6 @@ class VehicleController extends Controller
             "action" => $action,
             "button_text" => "Create",
             "module" => [
-                'type' => $this->type,
                 'type' => $this->type,
                 'singular' => $this->singular,
                 'plural' => $this->plural,

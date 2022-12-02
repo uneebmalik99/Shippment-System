@@ -473,7 +473,7 @@
                                 @endif
                                 <div class="image_section">
 
-                                    <div class="col-11 mx-auto changeImages">
+                                    <div class="col-11 mx-auto changeImages d-flex">
                                         @if (@$shipments[0]['loading_image'])
                                             @foreach (@$shipments[0]['loading_image'] as $img)
                                                 <img src="{{ asset($img['name']) }}" alt=""class="item_1"
