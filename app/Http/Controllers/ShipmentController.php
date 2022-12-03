@@ -187,7 +187,7 @@ class ShipmentController extends Controller
         $data['shipment_lines'] = ShipmentLine::where('status', '1')->get();
         $data['shipment_types'] = ShipmentType::where('status', '1')->get();
         // $data['companies'] = Company::where('status', '1')->get();
-        $data['companies'] = User::all();
+        $data['companies'] = User::role('Customer')->get();
         $data['destination_country'] = DCountry::select('country')->where('status', '1')->groupBy('country')->get()->toArray();
         $data['shippers'] = Shipper::all();
         // $data['states'] = State::where('status', '1')->get();
@@ -932,7 +932,7 @@ class ShipmentController extends Controller
     }
 
     public function Customer_Details(Request $req){
-        $customer_details = User::where('company_name', $req->company_name)->get();
+        $customer_details = User::with('shippers')->where('company_name', $req->company_name)->get();
         return $customer_details;
     }
 

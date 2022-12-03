@@ -362,29 +362,29 @@
     </div>
     @endfor
     @endif
+    
+    <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="email"
+        id="email" value="{{ @$module['email'] }}" readonly />
+    <div class="d-flex justify-content-between">
 
-    <div class="col-12 py-2 px-5 d-flex justify-content-end">
-        <input type="hidden" class="form-control-sm border border-0 rounded-pill bg col-6" name="email"
-            id="email" value="{{ @$module['email'] }}"readonly>
-        
-        @if(@$quotation)
-        <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="createForm(this.id)"
-            id="quotation_customer" name="{{ $module['button'] }}" style="padding: 4px;"
-            data-next="shipper_customer_tab">
-            <div class="unskew">Update</div>
-        </button>
-        @else
-        <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="createForm(this.id)"
-            id="quotation_customer" name="{{ $module['button'] }}" style="padding: 4px;"
-            data-next="shipper_customer_tab">
-            <div class="unskew">Save</div>
-        </button>
-        @endif
-
-        
-        <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="hidemodal()"
+        <div class="col-6 py-2 px-5">
+            <button type="button" class="btn next-style text-white col-3 py-1 mx-2" onclick="hidemodal()"
             style="padding: 4px;" data-next="shipper_customer_tab">
-            <div class="unskew">Finish</div>
+            <div class="unskew">Cancel</div>
         </button>
+        </div>
+    
+        <div class="col-6 py-2 px-5 d-flex justify-content-end">
+            
+            <button type="button" class="btn next-style text-white col-3 py-1 mx-2" onclick="createForm(this.id)"
+                id="quotation_customer" name="{{ $module['button'] }}" style="padding: 4px;"
+                data-next="shipper_customer_tab">
+                <div class="unskew">Finish</div>
+            </button>
+        </div>
+            
+    
+            
+            
     </div>
 </form>

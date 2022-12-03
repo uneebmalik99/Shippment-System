@@ -465,7 +465,7 @@
                                 </div>
                                 <div class="image_section">
 
-                                    <div class="col-11 mx-auto d-flex">
+                                    <div class="col-11 mx-auto d-flex flex-wrap">
                                         @if(@$shipments[0]['loading_image'])
                                         @foreach(@$shipments[0]['loading_image'] as $img)
                                         <img src="{{asset($img['name'])}}" alt="" class="item_1 changeImage" style="width:120px!important;height:80px!important;" onclick="shipmentChangeImage(this.src)">

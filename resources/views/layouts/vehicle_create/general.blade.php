@@ -267,6 +267,28 @@
                                     </span>
                                 </div>
                             </div>
+
+
+                            <div class="col-12 py-2">
+                                <div class="d-flex align-items-center">
+                                    <label for="lot" class="col-6 px-0 font-size font-bold">Lot
+                                       </label>
+                                    <div
+                                        class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
+                                        {{-- <span class="prefix text-dark">$</span> --}}
+                                       
+                                        <input type="number" class="general_input col-11" name="lot"
+                                            id="lot" value="{{ @$user[0]['lot'] }}">
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <span class="text-danger" id="auction_error">
+                                    </span>
+                                </div>
+                            </div>
+
+
+
                         </div>
                     </div>
                     <div class="tab_card my-3">
@@ -288,23 +310,23 @@
                                             class="text-danger">*</span></label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="buyer_id" id="buyer_id">
-                                        @if(@$buyers_number[0]['buyer_number'])
-                                        <option value="{{@$buyers_number[0]['customer_id']}}">{{@$buyers_number[0]['buyer_number']}}</option>
+                                        @if(@$user[0]['buyer_id'])
+                                        <option value="{{@$user[0]['buyer_id']}}">{{@$user[0]['buyer_id']}}</option>
                                         @else
                                         <option selected disabled>Select Buyer Id</option>
                                         @endif
-                                        @if($buyers)
+                                        {{-- @if($buyers)
                                         @foreach ($buyers as $buyer)
                                             @php
                                                 $buyerid = explode(',', $buyer['buyer_number']);
 
                                             @endphp
                                             @foreach ($buyerid as $ids)
-                                            <option value="{{ @$buyer['customer_id'] }}">
+                                            <option value="{{$ids}}">
                                             {{$ids}}</option>
                                             @endforeach
-                                        @endforeach
-                                        @endif
+                                        @endforeach --}}
+                                        {{-- @endif --}}
                                     </select>
                                 </div>
                                 <div class="d-flex justify-content-center">

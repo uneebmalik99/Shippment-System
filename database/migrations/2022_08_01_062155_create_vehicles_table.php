@@ -25,7 +25,8 @@ class CreateVehiclesTable extends Migration
             $table->string('weight')->nullable();
             $table->string('value')->nullable();
             $table->string('auction')->nullable();
-            $table->foreignId('buyer_id')->constrained('user')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->string('buyer_id')->nullable();
+            // $table->foreignId('buyer_id')->constrained('user')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->string('key')->nullable();
             $table->string('note')->nullable();
             $table->string('hat_number')->nullable();

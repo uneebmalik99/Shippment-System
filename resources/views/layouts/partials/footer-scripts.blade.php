@@ -483,7 +483,10 @@
     function create_vehicle_form(id) {
         // $('#vehicle_form').on('submit', function(event) {
             // event.preventDefault();
-        document.getElementById('load').style.visibility = "visible";
+
+        
+
+        // document.getElementById('load').style.visibility = "visible";
         $tab_id = id;
         $next_tab = $('#' + $tab_id).data('next');
         var formData = new FormData(jQuery('#vehicle_form')[0]);

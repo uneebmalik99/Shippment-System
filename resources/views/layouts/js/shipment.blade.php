@@ -24,12 +24,12 @@
                 $('.modal-body').html(data);
                 $('#exampleModal').modal('show');
                 $('.loading_image').imageUploader({
-                    maxFiles: 4,
+                    maxFiles: 30,
                     imagesInputName: 'loading_image',
 
                 });
                 $('.loading_image_update').imageUploader({
-                    maxFiles: 4,
+                    maxFiles: 30,
                     imagesInputName: 'loading_image',
                     preloaded: loading_old,
                     preloadedInputName: 'loading_old'
@@ -261,8 +261,12 @@
                 'company_name': company_name,
             },
             success: function(data) {
+                console.log(data[0]['shippers'][0]['consignee'])
+                // alert(data[0]['shipper']['id']);
                 $('#customer_email').val(data[0]['email']);
                 $('#customer_phone').val(data[0]['phone']);
+                $('#select_consignee').append('<option selected disabled>'+data[0]['shippers'][0]['consignee']+'</option>');
+                $('#notifier').append('<option selected disabled>'+data[0]['shippers'][0]['consignee']+'</option>');
             }
         });
     }

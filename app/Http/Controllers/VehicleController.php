@@ -171,7 +171,7 @@ class VehicleController extends Controller
         ];
         
         $data['buyers'] = BillingParty::all();
-        $data['customer_name'] = User::where('role_id', 4)->get();
+        $data['customer_name'] = User::role('Customer')->get();
         $data['location'] = Location::all();
         $data['shipment'] = Shipment::all();
         $data['auctions'] = Auction::where('status', '1')->get();
@@ -185,7 +185,7 @@ class VehicleController extends Controller
         // dd($data['vehicle_make']);
         // $data['vehicle_types'] = VehicleType::all();
         // $data['shipper_name'] = Shipper::all();
-        $data['vehicle_status'] = VehicleStatus::all();
+        $data['vehicle_status'] = VehicleStatus::limit(3)->get();
         $data['warehouses'] = Warehouse::where('status', '1')->get();
         $data['sites'] = Site::where('status', '1')->get();
         $data['vehicle_types'] = VehicleType::where('status', '1')->get();
@@ -253,14 +253,14 @@ class VehicleController extends Controller
             $data['auctions'] = Auction::where('status', '1')->get();
             $data['vehicle_types'] = VehicleType::where('status', '1')->get();
             $data['colors'] = Color::where('status', '1')->get();
-            $data['vehicle_status'] = VehicleStatus::all();
+            $data['vehicle_status'] = VehicleStatus::limit(3)->get();
             $data['warehouses'] = Warehouse::where('status', '1')->get();
             $data['sites'] = Site::where('status', '1')->get();
             $data['keys'] = Key::where('status', '1')->get();
             $data['titles'] = Title::where('status', '1')->get();
             $data['title_types'] = TitleType::where('status', '1')->get();
             $data['shipper_names'] = ShipperName::where('status', '1')->get();
-            $data['customer_name'] = User::where('role_id', 4)->get();
+            $data['customer_name'] = User::role('Customer')->get();
             $output = view('layouts.vehicle_create.general', $data)->render();
             return Response($output);
         }
@@ -351,14 +351,11 @@ class VehicleController extends Controller
 
     public function create_form(Request $request)
     {
-        // dd($request->all());
         $vehicle = [];
         $request->validate([
             'customer_name' => 'required',
             'vin' => 'required',
-            // 'color' => 'required',
-            // 'weight' => 'required',
-            // 'value' => 'required',
+            
             'auction' => 'required',
             'buyer_id' => 'required',
             'key' => 'required',

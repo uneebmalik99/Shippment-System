@@ -5,7 +5,7 @@
     $buyerid = explode(',', $buyer['billings'][0]['buyer_number']);
 @endphp
 @foreach ($buyerid as $ids)
-<option value="{{ @$buyer['id'] }}">
+<option value="{{$ids}}">
 {{$ids}}</option>
 @endforeach
 @endforeach
