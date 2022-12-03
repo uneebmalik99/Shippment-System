@@ -207,12 +207,14 @@ class UserController extends Controller
         $notification = $this->Notification();
         $data['records'] = User::find($id)->toArray();
         $data['roles'] = Role::all()->whereNotIn('name', $user->getRoleNames())->toArray();
-        $data['permissions'] = Permission::all()->toArray();
+        
+        $data['permissions'] = Permission::all()->whereNotIn('name',$user->getPermissionsViaRoles())->take(5)->toArray();
         
         $data['assignRoles'] = $user->getRoleNames();
-        $data['assignPermissions'] = $user->getAllPermissions();
+        $data['assignPermissions'] = $user->getPermissionsViaRoles();
 
-    
+        $data['routes'] = Permission::all()->skip(5);
+        $data['assignedRoutes'] = $user->getAllPermissions()->skip(5);
         return view($this->view . 'profile', $data, $notification);
 
 
@@ -430,6 +432,21 @@ class UserController extends Controller
         $data['roles'] = role::all()->toArray();
         $output = view('user.showRoles',$data)->render();
         return Response($output);
+    }
+    public function assignroute(Request $req){
+    
+        $user = User::where('id',$req['id'])->first();
+        $role = $user->givePermissionTo($req['role']);
+        if($role){
+            return "Assigned";
+        }
+    }
+    public function dismissroute(Request $req){
+        $user = User::where('id',$req['id'])->first();
+        $role = $user->revokePermissionTo($req['role']);
+        if($role){
+            return "Revoked";
+        }
     }
 
 }

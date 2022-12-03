@@ -1747,7 +1747,7 @@
                 
                if (data == "Assigned") {
                     iziToast.success({
-                        timeout: 5000,
+                        timeout: 3000,
                         icon: 'fa fa-check',
                         title: 'OK',
                         message: 'Successfully Assigned Role'
@@ -1755,7 +1755,7 @@
                 
                     setTimeout(function () {
                         location.reload(true);
-                    }, 5000);
+                    }, 3000);
                 }
             }
         });
@@ -1775,7 +1775,7 @@
             
                if (data == "Revoked") {
                     iziToast.success({
-                        timeout: 5000,
+                        timeout: 2000,
                         icon: 'fa fa-check',
                         title: 'OK',
                         message: 'Successfully Revoke Role'
@@ -1783,10 +1783,66 @@
                 
                     setTimeout(function () {
                         location.reload(true);
-                    }, 5000);
+                    }, 2000);
                 }
             }
         });   
+    }
+    function assignRouteToUser(){
+        let role = $(".route input:checked").val();
+        let id = $("#user_id").val();
+        
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('user.assignroute') }}',
+            data: {
+                role: role,
+                id: id
+            },
+            success: function(data) {
+                
+               if (data == "Assigned") {
+                    iziToast.success({
+                        timeout: 3000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Assigned Route'
+                    });
+                
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 3000);
+                }
+            }
+        });
+    }
+    function dismissalRouteToUser(){
+        let role = $(".dismissroute input:checked").val();
+        let id = $("#user_id").val();
+
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('user.dismissroute') }}',
+            data: {
+                role: role,
+                id: id
+            },
+            success: function(data) {
+                
+               if (data == "Revoked") {
+                    iziToast.success({
+                        timeout: 3000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Revoked Route'
+                    });
+                
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 3000);
+                }
+            }
+        });
     }
 </script>
 {{-- User List Profile dynamic Tabs of Permissions and Roles --}}

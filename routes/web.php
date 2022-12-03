@@ -50,6 +50,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/users/editUser',[App\Http\Controllers\UserController::class,'showUpdateUser'])->name('user.edituser');
     Route::post("/users/assignRoles",[App\Http\Controllers\UserController::class,'assignRole'])->name('user.assignrole');
     Route::post("/users/dismissrole",[App\Http\Controllers\UserController::class,'dismissrole'])->name('user.dismissrole');
+    Route::post("/users/assignRoute",[App\Http\Controllers\UserController::class,'assignroute'])->name('user.assignroute');
+    Route::post("/users/dismissroute",[App\Http\Controllers\UserController::class,'dismissroute'])->name('user.dismissroute');
     Route::get('/users/deleteRole/{id?}', [App\Http\Controllers\UserController::class, 'deleteRole'])->name('delete.role');
 
     Route::post('/users/showupdatemodel}', [App\Http\Controllers\UserController::class, 'showUpdateRole'])->name('user.updatemodelshow');
