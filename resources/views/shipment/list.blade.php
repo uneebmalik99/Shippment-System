@@ -391,6 +391,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                 },
                 ajax: "{{ route('shipments.records') }}",
                 columns: [{
+                        // class: 'details-control',
                         className: 'dt-control',
                         orderable: false,
                         data: null,

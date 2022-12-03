@@ -445,7 +445,9 @@
                                 @foreach ($records as $val)
                                     {{-- @dd($val['images'][0]['name']) --}}
                                     <tr>
-                                        <td><input type="checkbox" name="checkboxes" id="{{ @$val['id'] }}" title="Add" onchange="addtoShipment(this.id)"></td>
+                                        <td>
+                                            <input type="checkbox" name="checkboxes" id="{{ @$val['id'] }}" title="Add" onchange="addtoShipment(this.id)">
+                                        </td>
                                         <td>
 
                                            

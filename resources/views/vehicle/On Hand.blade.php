@@ -46,7 +46,10 @@
         @foreach ($records as $val)
             {{-- @dd($val['images'][0]['name']) --}}
             <tr>
-                <td><input type="checkbox" name="checkboxes" data-id="{{@$val['id']}}"></td>
+                <td>
+                    {{-- <input type="checkbox" name="checkboxes" data-id="{{@$val['id']}}"> --}}
+                    <input type="checkbox" name="checkboxes" id="{{ @$val['id'] }}" title="Add" onchange="addtoShipment(this.id)">
+                </td>
                 <td>
                     {{-- @if($records[0]['pickupimages'][0]['name']) --}}
                     <i class="fa fa-camera" aria-hidden="true" style="color:#3e5871!important;"></i>

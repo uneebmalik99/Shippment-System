@@ -1,11 +1,15 @@
 <script>
     function create_shipment_form(id) {
 
-        
+        $('#general_shipment_tab').removeClass('next-style');
+        $('#general_shipment_tab').addClass('tab_style');
        
+        alert($('#general_shipment_tab').removeClass('next-style'));
         var formData = new FormData(jQuery('#shipment_form')[0]);
         $next_tab = $('.next_tab').attr('id');
         formData.append('tab', $next_tab);
+
+
         document.getElementById('load').style.visibility = "visible";
         $.ajax({
             method: 'POST',
@@ -14,7 +18,10 @@
             processData: false,
             contentType: false,
             success: function(data) {
+        $('#attachments_shipment_tab').addClass('next-style');
+                
                 document.getElementById('load').style.visibility = "hidden";
+                
                 $('.modal-body').html(data);
                 $('#exampleModal').modal('show');
                 $('.loading_image').imageUploader({
@@ -37,9 +44,12 @@
                     zindex: '9999999999999',
                 });
 
+
                 $('#' + id +'_tab').removeClass('next-style');
-                $('#' + id +'_tab').addClass('tab_style');
-                $('#attachments_shipment_tab').addClass('next-style');
+        $('#' + id +'_tab').addClass('tab_style');
+        $('#attachments_shipment_tab').addClass('next-style');
+
+               
             },
             complete: function() {
                 document.getElementById('load').style.visibility = "hidden";
@@ -275,11 +285,22 @@
         });
     }
 
-    function removerow() {
-        // alert('del');
+    function removerow(id) {
+
         var td = event.target.parentNode;
         var tr = td.parentNode; // the row to be removed
         tr.parentNode.removeChild(tr);
+
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('shipment.deleteFromCart') }}',
+            data: {
+                'id': id,
+            },
+            success: function(data) {
+
+            }
+        });
     }
 
     function editShipment(id) {
@@ -322,6 +343,7 @@
     $('.shipment_information_tab').on('click', function() {
         $id = $(this).attr('id');
         $tab = $(this).attr('tab');
+        // alert($tab);
         $('.shipment_information_tab').removeClass('active_information_button col-3 next-style');
         $('.shipment_information_tab').addClass('col-2');
         $(this).removeClass('col-2');
