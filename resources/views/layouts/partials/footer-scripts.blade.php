@@ -862,7 +862,79 @@
         }
     }
 </script>
+{{-- - get Shipment Info --}}
+<script>
+    function getshipmentInfo(tab) {
+        
+        document.getElementById('load').style.visibility = "visible";
+        
+        tab = tab;
+        ar_number = $('#ar_number').val();
+         
+        //var url = 'https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/' + ar_number + '?format=json';
+        if (tab == 'getshipmentinfo') {
+            if (ar_number == '') {
+                alert('Please Enter Container Number');
+            } else {
+                $.ajax({
+                    type: 'GET',
+                    url: route("invoice.shipments"),
+                    data: {
+                            ar_number: ar_number
+                        },
+                    success: function(data) {
+                        console.log(data.Results[0]);
+                        // vehicle = data.Results[0];
 
+                        if( vehicle.Model == '' && vehicle.Make == '' ){
+                            iziToast.error({
+                                    position:'topCenter',
+                                    timeout: 10000,
+                                    icon: 'fa fa-warning',
+                                    title: 'Error',
+                                    message: 'No Shippment Found!',
+                                });
+                        }
+                        else{
+
+                        
+
+                        $('#year').val(vehicle.ModelYear);
+                        $('#model').html('<option value="' + vehicle.Model + '">' + vehicle.Model +
+                            '</option>');
+                        $('#make').html('<option value="' + vehicle.Make + '">' + vehicle.Make +
+                            '</option>');
+                        // $('#year').html('<option value="'+vehicle.ModelYear+'">'+vehicle.ModelYear+'</option>');
+                        // $('#vehicle_type').html('<option value="' + vehicle.VehicleType + '">' + vehicle
+                        //     .VehicleType + '</option>');
+                        $('#getinfo').attr('id', 'reset');
+                        $('#getinfo').text('Reset');
+                        }
+
+                    },
+                    complete: function() {
+        document.getElementById('load').style.visibility = "hidden";
+
+                    }
+                });
+            }
+
+        } else {
+            $('#model').val('');
+            $('#make').val('');
+            $('#year').val('');
+            $('#vehicle_type').val('');
+            $('#weight').val('');
+            $('#value').val('');
+            $('.getinf').attr('id', 'getinfo');
+            $('#getinfo').text('GetInfo');
+        document.getElementById('load').style.visibility = "hidden";
+
+
+
+        }
+    }
+</script>
 
 {{-- add records --}}
 <script>
@@ -1750,7 +1822,7 @@
                 
                if (data == "Assigned") {
                     iziToast.success({
-                        timeout: 5000,
+                        timeout: 3000,
                         icon: 'fa fa-check',
                         title: 'OK',
                         message: 'Successfully Assigned Role'
@@ -1758,7 +1830,7 @@
                 
                     setTimeout(function () {
                         location.reload(true);
-                    }, 5000);
+                    }, 3000);
                 }
             }
         });
@@ -1778,7 +1850,7 @@
             
                if (data == "Revoked") {
                     iziToast.success({
-                        timeout: 5000,
+                        timeout: 2000,
                         icon: 'fa fa-check',
                         title: 'OK',
                         message: 'Successfully Revoke Role'
@@ -1786,10 +1858,66 @@
                 
                     setTimeout(function () {
                         location.reload(true);
-                    }, 5000);
+                    }, 2000);
                 }
             }
         });   
+    }
+    function assignRouteToUser(){
+        let role = $(".route input:checked").val();
+        let id = $("#user_id").val();
+        
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('user.assignroute') }}',
+            data: {
+                role: role,
+                id: id
+            },
+            success: function(data) {
+                
+               if (data == "Assigned") {
+                    iziToast.success({
+                        timeout: 3000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Assigned Route'
+                    });
+                
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 3000);
+                }
+            }
+        });
+    }
+    function dismissalRouteToUser(){
+        let role = $(".dismissroute input:checked").val();
+        let id = $("#user_id").val();
+
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('user.dismissroute') }}',
+            data: {
+                role: role,
+                id: id
+            },
+            success: function(data) {
+                
+               if (data == "Revoked") {
+                    iziToast.success({
+                        timeout: 3000,
+                        icon: 'fa fa-check',
+                        title: 'OK',
+                        message: 'Successfully Revoked Route'
+                    });
+                
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 3000);
+                }
+            }
+        });
     }
 </script>
 {{-- User List Profile dynamic Tabs of Permissions and Roles --}}
@@ -1866,3 +1994,4 @@
             });
     }
 </script>
+

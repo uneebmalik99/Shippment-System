@@ -156,7 +156,7 @@
                     <h5>Roles</h5>
                     <div class="assign_roles roles d-flex flex-column">
                         @foreach ($roles as $role)
-                        <a>{{@$role['name']}} <input type="checkbox" name="{{ @$role['name'] }}" value="{{  @$role['name'] }}"/></a>
+                        <a> <input type="checkbox" name="{{ @$role['name'] }}" value="{{  @$role['name'] }}"/>&nbsp&nbsp{{@$role['name']}}</a>
                         @endforeach
                        
                     </div>
@@ -183,7 +183,7 @@
                     <h5>Roles</h5>
                     <div class="dismiss_roles roles d-flex flex-column">
                         @foreach ($assignRoles as $role)
-                        <a>{{@$role}} <input type="checkbox" name="{{ @$role }}" value="{{  @$role  }}" /></a>
+                        <a> <input type="checkbox" name="{{ @$role }}" value="{{  @$role  }}" />&nbsp&nbsp{{@$role}}</a>
                         @endforeach
 
                     </div>
@@ -196,7 +196,7 @@
         <div class="row mb-3">
             <div class="col-5">
                 <div class="all_roles">
-                    <h5>Permissions</h5>
+                    <h5>All Permissions</h5>
                     <div class="roles d-flex flex-column">
                         @foreach ($permissions as $permission)
                         <a>{{@$permission['name']}}</a>
@@ -207,22 +207,22 @@
             </div>
             <div class="col-2">
                 <div class="role_buttons d-flex flex-column">
-                    <button class="btn btn-success">
+                        {{-- <button class="btn btn-success">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 10L12 1V5.99L1 6V14H12V19L19 10Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         </button><br>
                         <button class="btn btn-danger">
-                            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1.85785 10.2105L9.02204 19.0592L8.93012 14.0702L19.9274 13.8252L19.7801 5.82678L8.78258 6.06177L8.69047 1.06275L1.85785 10.2105Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.85785 10.2105L9.02204 19.0592L8.93012 14.0702L19.9274 13.8252L19.7801 5.82678L8.78258 6.06177L8.69047 1.06275L1.85785 10.2105Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                                 
-                        </button>
+                        </button> --}}
                 </div>
             </div>
             <div class="col-5">
                 <div class="all_roles">
-                    <h5>Permissions</h5>
+                    <h5>Permissions Assigned</h5>
                     <div class="roles d-flex flex-column">
                         @foreach ($assignPermissions as $permission)
                         <a>{{@$permission['name']}}</a>
@@ -234,24 +234,26 @@
         </div>
 
 
-        <div class="row mb-3">
+        {{-- <div class="row mb-3">
             <div class="col-5">
                 <div class="all_roles">
                     <h5>Routes</h5>
-                    <div class="roles d-flex flex-column">
-                       
+                    <div class="roles route d-flex flex-column">
+                       @foreach ($routes as $route)
+                           <a><input type="checkbox" name="{{ @$route }}" value="{{  @$route['name']  }}" />&nbsp&nbsp{{ @$route['name'] }}</a>
+                       @endforeach
                     </div>
 
                 </div>
             </div>
             <div class="col-2">
                 <div class="role_buttons d-flex flex-column">
-                    <button class="btn btn-success">
+                    <button class="btn btn-success" onclick="assignRouteToUser()">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 10L12 1V5.99L1 6V14H12V19L19 10Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         </button><br>
-                        <button class="btn btn-danger">
+                        <button class="btn btn-danger" onclick="dismissalRouteToUser()">
                             <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.85785 10.2105L9.02204 19.0592L8.93012 14.0702L19.9274 13.8252L19.7801 5.82678L8.78258 6.06177L8.69047 1.06275L1.85785 10.2105Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -262,13 +264,15 @@
             <div class="col-5">
                 <div class="all_roles">
                     <h5>Routes</h5>
-                    <div class="roles d-flex flex-column">
-                      
+                    <div class="roles dismissroute d-flex flex-column">
+                        @foreach ($assignedRoutes as  $assignRoute)
+                            <a><input type="checkbox" name="{{ @$assignRoute }}" value="{{  @$assignRoute['name']  }}"/>&nbsp&nbsp{{ @$assignRoute['name'] }}</a>
+                        @endforeach
                     </div>
 
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
 
