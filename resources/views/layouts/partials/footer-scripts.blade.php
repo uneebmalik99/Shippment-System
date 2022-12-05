@@ -887,9 +887,9 @@
                         },
                         success: function(data) {
                             // alert(data);
-                            // console.log(data.shipments[0]['id']);
+                             
 
-                            $('#customer_email').val(data.shipments[0]['company_name']);
+                            $('#company_name').val(data.shipments[0]['company_name']);
                             $('#port_of_loading').val(data.shipments[0]['loading_port']);
                             $('#destination_port').val(data.shipments[0]['destination_port']);
                             $('#container_size').val(data.shipments[0]['container_size']);
@@ -2035,5 +2035,12 @@
 
             }
         });
+    }
+</script>
+<script>
+    function create_invoice_form(){
+      
+        var formData = new FormData($('#shipment_form'));
+         console.log(formData);
     }
 </script>
