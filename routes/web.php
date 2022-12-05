@@ -181,6 +181,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::post('/shipment/vehicle_deleteFromCart',       [ShipmentController::class, 'deleteFromCart'])->name('shipment.deleteFromCart');
 
+    Route::get('/shipment/export',                     [ShipmentController::class, 'export'])->name('shipment.export');
+
 
 
     // destination countries 

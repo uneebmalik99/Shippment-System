@@ -209,7 +209,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                         </div>
                         <div class="col-6 d-flex justify-content-end p-0">
                             <div class="col-4 d-flex justify-content-end px-2">
-                                <a href="{{ route('customer.export') }}"
+                                <a href="{{ route('shipment.export') }}"
                                     class="px-1 text-muted font-size form-contorl-sm border p-1 rounded col-12"
                                     style="background: #DBDBDB; cursor: pointer;">
                                     <div class="d-flex justify-content-center align-items-center px-1">

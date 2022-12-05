@@ -327,6 +327,8 @@
                                     class="form-control-sm border-style input-border-style rounded vehicle_filtering col-11 text-muted px-2"
                                     name="year" id="vehicle_year">
                                     <option value="" disabled selected>YEAR</option>
+                                    <option value="all">All</option>
+
                                     <option value="2013">2013</option>
                                     <option value="2014">2014</option>
                                     <option value="2015">2015</option>
@@ -364,8 +366,8 @@
                                 <select
                                     class="form-control-sm border-style input-border-style rounded vehicle_filtering col-12 text-muted"
                                     name="status" id="vehicle_status">
-                                    <option value="all">All</option>
                                     <option value="" disabled selected>STATUS</option>
+                                    <option value="all">All</option>
                                     @foreach ($status as $stat)
                                         {{-- @dd($stat) --}}
                                         <option value="{{ $stat['id'] }}">
