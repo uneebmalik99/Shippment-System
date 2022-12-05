@@ -64,32 +64,32 @@
                                                 </div>
                                                 <div class="col-12 py-2">
                                                     <div class="d-flex align-items-center">
-                                                        <label for="total_amount"
+                                                        <label for="port_of_loading"
                                                             class="col-6 px-0 font-size font-bold">Port Of Loading</label>
                                                         <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="total_amount" id="total_amount" value="{{ @$invoices[0]['total_amount']  }}">
+                                                            name="port_of_loading" id="port_of_loading" value="">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 py-2">
                                                     <div class="d-flex align-items-center">
-                                                        <label for="shipment_type"
+                                                        <label for="destination_port"
                                                             class="col-6 px-0 font-size font-bold">Port Destination</label>
     
                                                             <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="paid_amount" id="paid_amount" value="{{@$invoices[0]['paid_amount'] }}">   
+                                                            name="destination_port" id="destination_port" value="{{@$invoices[0]['paid_amount'] }}">   
                                                         
                                                     </div>
                                                 </div>
                                                 <div class="col-12 py-2">
                                                     <div class="d-flex align-items-center">
-                                                        <label for="shipment_type"
+                                                        <label for="container_size"
                                                             class="col-6 px-0 font-size font-bold">Container Size(40HC)</label>
     
                                                             <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="container_size" id="container_size" value="{{@$invoices[0]['container_size'] }}">   
+                                                            name="container_size" id="container_size" value="">   
                                                         {{-- <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
                                                             name="shipment_type" id="shipment_type"> --}}
@@ -221,18 +221,7 @@
                                     <th>ACTION</th>
                                 </tr>
                             </thead>
-                            <tbody id="shipment_table">
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>Search Vehicles</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                            <tbody id="inovice_shipment_table">
                                 {{-- @foreach ($vehicles as $vehicle)
                                 <tr>
                                         <td>{{ @$vehicle['year'] }}</td>
@@ -252,45 +241,7 @@
                         </table>
 
 
-                        <table class="table" style="background:lightgray;">
-                            <tbody id="add_vehicles">
-                                @if(@$shipment)
-                                @foreach ($shipment[0]['vehicle'] as $vehicle)
-                               <tr>
-                                       <td>{{ @$vehicle['year'] }}</td>
-                                       <td>{{ @$vehicle['make'] }}</td>
-                                       <td>{{ @$vehicle['model'] }}</td>
-                                       <td>{{ @$vehicle['vin'] }}</td>
-                                       <td>{{ @$vehicle['title'] }}</td>
-                                       <td>{{ @$vehicle['title_state'] }}</td>
-                                       <td>{{ @$vehicle['title_number'] }}</td>
-                                       <td>{{ @$vehicle['customer_name'] }}</td>
-                                       <td class="text-center"><input type="checkbox" value="{{ @$vehicle['id'] }}"
-                                               id="{{@$vehicle['id']}}" tab="{{@$vehicle['id']}}" name="vehicle[]" onclick="removerow(this.id)" checked></td>
-                                        
-                               </tr>
-                               @endforeach
-                               @endif
-
-                               @if(@$vehicle_cart)
-                               @foreach ($vehicle_cart as $vehicle)
-                               <tr>
-                                <td>{{ @$vehicle['vehicle']['year'] }}</td>
-                                <td>{{ @$vehicle['vehicle']['make'] }}</td>
-                                <td>{{ @$vehicle['vehicle']['model'] }}</td>
-                                <td>{{ @$vehicle['vehicle']['vin'] }}</td>
-                                <td>{{ @$vehicle['vehicle']['title'] }}</td>
-                                <td>{{ @$vehicle['vehicle']['title_state'] }}</td>
-                                <td>{{ @$vehicle['vehicle']['title_number'] }}</td>
-                                <td>{{ @$vehicle['vehicle']['customer_name'] }}</td>
-                                <td class="text-center">
-                                    <input type="checkbox" value="{{ @$vehicle['vehicle']['id'] }}" id="{{@$vehicle['id']}}"  tab="{{@$vehicle['id']}}" name="vehicle[]" onclick="removerow(this.id)" checked></td>
-                                
-                        </tr>
-                               @endforeach
-                               @endif
-                            </tbody>
-                        </table>
+                        
                     </div>
                     <div class="d-flex justify-content-end mt-3">
                         <div class="col-6">
