@@ -872,91 +872,75 @@
             if (ar_number == '') {
                 // alert('Please Enter Container Number');
                 iziToast.warning({
-                                message: 'Please Enter Container Number',
-                                position: 'topCenter',
-                                zindex: '9999999999999'
-                            });
-        document.getElementById('load').style.visibility = "hidden";
+                    message: 'Please Enter Container Number',
+                    position: 'topCenter',
+                    zindex: '9999999999999'
+                });
+                document.getElementById('load').style.visibility = "hidden";
 
             } else {
                 $.ajax({
-                        type: 'Post',
-                        url: '{{ route('invoice.shipments') }}',
-                        data: {
-                            ar_number: ar_number
-                        },
-                        success: function(data) {
-                            // alert(data);
-                            // console.log(data.shipments[0]['id']);
-
-                            $('#customer_email').val(data.shipments[0]['company_name']);
-                            $('#port_of_loading').val(data.shipments[0]['loading_port']);
-                            $('#destination_port').val(data.shipments[0]['destination_port']);
-                            $('#container_size').val(data.shipments[0]['container_size']);
-
-                            var html = [];
-
-                            data.shipments[0]['vehicle'].forEach(element => {
-                                output = "<tr><td>" + element.year + "</td><td>" + element.make +
-                                    "</td><td>" + element.model + "</td><td>" + element.vin +
-                                    "</td><td>" + element.vin + "</td><td>" + element.vin +
-                                    "</td><td>" + element.vin + "</td><td>" + element.vin +
-                                    "</td><td class='text-center'><input type='checkbox' value='' id='vehicle' name=''></td></tr>";
-
-                                html.push(output);
-
-
-
-                            });
-                            $('#inovice_shipment_table').append(html);
-
-                            // html = "<tr>
-                            //     <td>"++"</td>
-                            //                 <td>{{ @$vehicle['make'] }}</td>
-                            //                 <td>{{ @$vehicle['model'] }}</td>
-                            //                 <td>{{ @$vehicle['vin'] }}</td>
-                            //                 <td>{{ @$vehicle['title'] }}</td>
-                            //                 <td>{{ @$vehicle['title_state'] }}</td>
-                            //                 <td>{{ @$vehicle['title_number'] }}</td>
-                            //                 <td>{{ @$vehicle['customer_name'] }}</td>
-                            //                 <td class="text-center"><input type="checkbox" value="{{ @$vehicle['id'] }}"
-                            //                         id="vehicle" name="vehicle[]"></td>
-
-                            //         </tr>"
-
-
-                        },
-                        complete: function() {
+                    type: 'Post',
+                    url: '{{ route('invoice.shipments') }}',
+                    data: {
+                        ar_number: ar_number
+                    },
+                    success: function(data) {
+                        if (data.shipments == '') {
                             document.getElementById('load').style.visibility = "hidden";
-
-                        },
-                        error: function() {
-                            document.getElementById('load').style.visibility = "hidden";
-
                             iziToast.warning({
-                                message: 'Failed to insert data!',
+                                message: 'not match with any shipment',
                                 position: 'topCenter',
                                 zindex: '9999999999999'
                             });
-
                         }
+
+                        $('#customer_email').val(data.shipments[0]['company_name']);
+                        $('#port_of_loading').val(data.shipments[0]['loading_port']);
+                        $('#destination_port').val(data.shipments[0]['destination_port']);
+                        $('#container_size').val(data.shipments[0]['container_size']);
+                        var html = [];
+                        data.shipments[0]['vehicle'].forEach(element => {
+                            output = "<tr><td>" + element.year + "</td><td>" + element.make +
+                                "</td><td>" + element.model + "</td><td>" + element.vin +
+                                "</td><td>" + element.vin + "</td><td>" + element.vin +
+                                "</td><td>" + element.vin + "</td><td>" + element.vin +
+                                "</td><td class='text-center'><input type='checkbox' value='' id='vehicle' name=''></td></tr>";
+
+                            html.push(output);
+                        });
+                        $('#inovice_shipment_table').append(html);
+
+                    },
+                    complete: function() {
+                        document.getElementById('load').style.visibility = "hidden";
+                    },
+                    error: function() {
+                        document.getElementById('load').style.visibility = "hidden";
+                        alert('not match with any shipment');
+                        iziToast.warning({
+                            message: 'not match with any shipment',
+                            position: 'topCenter',
+                            zindex: '9999999999999'
+                        });
+                    }
                 });
+            }
+
+        } else {
+            $('#model').val('');
+            $('#make').val('');
+            $('#year').val('');
+            $('#vehicle_type').val('');
+            $('#weight').val('');
+            $('#value').val('');
+            $('.getinf').attr('id', 'getinfo');
+            $('#getinfo').text('GetInfo');
+            document.getElementById('load').style.visibility = "hidden";
+
+
+
         }
-
-    } else {
-        $('#model').val('');
-        $('#make').val('');
-        $('#year').val('');
-        $('#vehicle_type').val('');
-        $('#weight').val('');
-        $('#value').val('');
-        $('.getinf').attr('id', 'getinfo');
-        $('#getinfo').text('GetInfo');
-        document.getElementById('load').style.visibility = "hidden";
-
-
-
-    }
     }
 </script>
 
