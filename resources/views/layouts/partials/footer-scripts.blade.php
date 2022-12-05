@@ -2021,3 +2021,10 @@
         });
     }
 </script>
+<script>
+    function create_invoice_form(){
+      
+        var formData = new FormData($('#shipment_form'));
+         console.log(formData);
+    }
+</script>

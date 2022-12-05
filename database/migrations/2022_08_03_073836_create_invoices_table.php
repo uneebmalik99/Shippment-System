@@ -42,6 +42,18 @@ class CreateInvoicesTable extends Migration
             $table->string('working');
             $table->string('created_by');
             $table->string('payment_team');
+            $table->string('ar_number',255);
+            $table->string('company_name',255);
+            $table->string('port_of_loading',255);
+            $table->string('destination_port',255);
+            $table->string('container_size',255);
+            $table->integer("invoice_no");
+            $table->string("invoice_date");
+            $table->integer("invoice_amount");
+            $table->string("due_date");
+            $table->string("payment_date");
+            $table->integer("received_amount");
+            $table->integer("balance");
             $table->foreignId('added_by_role')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();
