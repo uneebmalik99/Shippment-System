@@ -229,7 +229,6 @@ class VehicleController extends Controller
             'action' => $action,
             "module" => [
                 'type' => $this->type,
-                'type' => $this->type,
                 'singular' => $this->singular,
                 'plural' => $this->plural,
                 'view' => $this->view,
@@ -242,7 +241,8 @@ class VehicleController extends Controller
         if ($request->ajax()) {
             $id = $request->id;
             $data['user'] = Vehicle::with('vehicle_status')->where('id', $id)->get()->toArray();
-            // dd($data['user']);
+            $data['update_buyer_id'] = User::with('billings')->wherecompany_name($data['user'][0]['customer_name'])->get()->toArray();
+            // dd($data['update_buyer_id']);
             // $Obj_vehicle = new Vehicle;
             // $data['user'] = $Obj_vehicle->find($id)->toArray();
             $data['buyers'] = BillingParty::all();

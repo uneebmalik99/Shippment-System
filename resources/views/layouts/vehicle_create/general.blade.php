@@ -315,18 +315,21 @@
                                         @else
                                         <option selected disabled>Select Buyer Id</option>
                                         @endif
-                                        {{-- @if($buyers)
-                                        @foreach ($buyers as $buyer)
+                                        
+                                        @if($update_buyer_id)
+                                        @foreach ($update_buyer_id[0]['billings'] as $buyer)
                                             @php
                                                 $buyerid = explode(',', $buyer['buyer_number']);
 
                                             @endphp
                                             @foreach ($buyerid as $ids)
+                                            @if($ids != @$user[0]['buyer_id'])
                                             <option value="{{$ids}}">
                                             {{$ids}}</option>
+                                            @endif
                                             @endforeach
-                                        @endforeach --}}
-                                        {{-- @endif --}}
+                                        @endforeach
+                                        @endif
                                     </select>
                                 </div>
                                 <div class="d-flex justify-content-center">
@@ -620,8 +623,10 @@
                                         @endif
                                         @if($vehicle_status)
                                         @foreach ($vehicle_status as $status)
-                                            <option value="{{ @$status['id'] }}">{{ @$status['status_name'] }}
-                                            </option>
+                                        @if(@$status['status_name'] != @$user[0]['vehicle_status']['status_name'])
+                                        <option value="{{ @$status['id'] }}">{{ @$status['status_name'] }}
+                                        </option>
+                                        @endif
                                         @endforeach
                                         @endif
                                     </select>
