@@ -38,6 +38,9 @@ use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ShipmentExport;
+
 
 class ShipmentController extends Controller
 {
@@ -964,5 +967,10 @@ class ShipmentController extends Controller
         }
 
 
+    }
+
+    public function export()
+    {
+        return Excel::download(new ShipmentExport, 'shipment.xlsx');
     }
 }
