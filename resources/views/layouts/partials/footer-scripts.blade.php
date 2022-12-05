@@ -85,15 +85,14 @@
 
 {{-- csrf tokens --}}
 <script type="text/javascript">
-
-// let auction_image = [
-//     { src: 'https://picsum.photos/500/500?random=1'},
-//     { src: 'https://picsum.photos/500/500?random=2'},
-//     { src: 'https://picsum.photos/500/500?random=3'},
-//     { src: 'https://picsum.photos/500/500?random=4'},
-//     { src: 'https://picsum.photos/500/500?random=5'},
-//     { src: 'https://picsum.photos/500/500?random=6'},
-// ];
+    // let auction_image = [
+    //     { src: 'https://picsum.photos/500/500?random=1'},
+    //     { src: 'https://picsum.photos/500/500?random=2'},
+    //     { src: 'https://picsum.photos/500/500?random=3'},
+    //     { src: 'https://picsum.photos/500/500?random=4'},
+    //     { src: 'https://picsum.photos/500/500?random=5'},
+    //     { src: 'https://picsum.photos/500/500?random=6'},
+    // ];
 
     $.ajaxSetup({
         headers: {
@@ -270,7 +269,7 @@
         $('#exampleModal').modal('hide');
         setTimeout(function() {
             location.reload();
-            }, 1000);
+        }, 1000);
 
     }
 </script>
@@ -280,8 +279,7 @@
     $('.modal_button').on('click', function() {
         $id = $(this).attr('id');
         $tab = "general";
-        if ($id == "customer")
-        {
+        if ($id == "customer") {
             $.ajax({
                 type: 'get',
                 url: '{{ URL::to('admin/customers/create') }}',
@@ -314,7 +312,7 @@
                         maxFiles: 4,
                         imagesInputName: 'originaltitle',
                     });
-                    
+
                     $('.vehicle_auction_image').imageUploader({
                         imagesInputName: 'auction_images',
                         maxFiles: 15,
@@ -324,10 +322,10 @@
                         imagesInputName: 'warehouse_images',
                         maxFiles: 15,
                     });
-                    
 
 
-                $('.vehicle_auction_image_update').imageUploader({
+
+                    $('.vehicle_auction_image_update').imageUploader({
                         preloaded: auction_image,
                         imagesInputName: 'auction_images',
                         maxFiles: 15,
@@ -349,7 +347,7 @@
                         maxFiles: 15,
                         preloaded: pickup_image,
                         preloadedInputName: 'pickup_old',
-                });
+                    });
 
                 }
             });
@@ -391,12 +389,12 @@
                         imagesInputName: 'loading_image',
 
                     });
-                    
+
                     $('.other-document').imageUploader({
                         maxFiles: 4,
                         imagesInputName: 'other_document',
                     });
-                    
+
                 }
             });
         }
@@ -482,9 +480,9 @@
 <script>
     function create_vehicle_form(id) {
         // $('#vehicle_form').on('submit', function(event) {
-            // event.preventDefault();
+        // event.preventDefault();
 
-        
+
 
         // document.getElementById('load').style.visibility = "visible";
         $tab_id = id;
@@ -497,7 +495,7 @@
             processData: false,
             contentType: false,
             success: function(data) {
-                
+
                 document.getElementById('load').style.visibility = "hidden";
                 $('.modal-body').html(data.view);
                 $('#exampleModal').modal('show');
@@ -526,7 +524,7 @@
                     imagesInputName: 'billofsales',
 
                 });
-                
+
                 $('.originaltitle').imageUploader({
                     maxFiles: 15,
                     imagesInputName: 'originaltitle',
@@ -546,7 +544,7 @@
                 $('#' + $tab_id + '_tab').removeClass('next-style');
                 $('#' + $tab_id + '_tab').addClass('tab_style');
                 $('#' + $next_tab).addClass('next-style');
-                
+
             },
             complete: function() {
                 document.getElementById('load').style.visibility = "hidden";
@@ -593,7 +591,7 @@
                 if (xhr.responseJSON['errors']['status']) {
                     $('#status_error').html('<small style="margin-left:72px">Please Fill*</small>');
                 }
-                
+
             }
         });
     }
@@ -813,34 +811,33 @@
                         console.log(data.Results[0]);
                         vehicle = data.Results[0];
 
-                        if( vehicle.Model == '' && vehicle.Make == '' ){
+                        if (vehicle.Model == '' && vehicle.Make == '') {
                             iziToast.error({
-                                    position:'topCenter',
-                                    timeout: 10000,
-                                    icon: 'fa fa-warning',
-                                    title: 'Error',
-                                    message: 'No Vehicle Found!',
-                                });
-                        }
-                        else{
+                                position: 'topCenter',
+                                timeout: 10000,
+                                icon: 'fa fa-warning',
+                                title: 'Error',
+                                message: 'No Vehicle Found!',
+                            });
+                        } else {
 
-                        
 
-                        $('#year').val(vehicle.ModelYear);
-                        $('#model').html('<option value="' + vehicle.Model + '">' + vehicle.Model +
-                            '</option>');
-                        $('#make').html('<option value="' + vehicle.Make + '">' + vehicle.Make +
-                            '</option>');
-                        // $('#year').html('<option value="'+vehicle.ModelYear+'">'+vehicle.ModelYear+'</option>');
-                        // $('#vehicle_type').html('<option value="' + vehicle.VehicleType + '">' + vehicle
-                        //     .VehicleType + '</option>');
-                        $('#getinfo').attr('id', 'reset');
-                        $('#getinfo').text('Reset');
+
+                            $('#year').val(vehicle.ModelYear);
+                            $('#model').html('<option value="' + vehicle.Model + '">' + vehicle.Model +
+                                '</option>');
+                            $('#make').html('<option value="' + vehicle.Make + '">' + vehicle.Make +
+                                '</option>');
+                            // $('#year').html('<option value="'+vehicle.ModelYear+'">'+vehicle.ModelYear+'</option>');
+                            // $('#vehicle_type').html('<option value="' + vehicle.VehicleType + '">' + vehicle
+                            //     .VehicleType + '</option>');
+                            $('#getinfo').attr('id', 'reset');
+                            $('#getinfo').text('Reset');
                         }
 
                     },
                     complete: function() {
-        document.getElementById('load').style.visibility = "hidden";
+                        document.getElementById('load').style.visibility = "hidden";
 
                     }
                 });
@@ -855,7 +852,7 @@
             $('#value').val('');
             $('.getinf').attr('id', 'getinfo');
             $('#getinfo').text('GetInfo');
-        document.getElementById('load').style.visibility = "hidden";
+            document.getElementById('load').style.visibility = "hidden";
 
 
 
@@ -865,74 +862,101 @@
 {{-- - get Shipment Info --}}
 <script>
     function getshipmentInfo(tab) {
-        
+
         document.getElementById('load').style.visibility = "visible";
-        
+
         tab = tab;
         ar_number = $('#ar_number').val();
-         
-        //var url = 'https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/' + ar_number + '?format=json';
+
         if (tab == 'getshipmentinfo') {
             if (ar_number == '') {
-                alert('Please Enter Container Number');
+                // alert('Please Enter Container Number');
+                iziToast.warning({
+                                message: 'Please Enter Container Number',
+                                position: 'topCenter',
+                                zindex: '9999999999999'
+                            });
+        document.getElementById('load').style.visibility = "hidden";
+
             } else {
                 $.ajax({
-                    type: 'GET',
-                    url: route("invoice.shipments"),
-                    data: {
+                        type: 'Post',
+                        url: '{{ route('invoice.shipments') }}',
+                        data: {
                             ar_number: ar_number
                         },
-                    success: function(data) {
-                        console.log(data.Results[0]);
-                        // vehicle = data.Results[0];
+                        success: function(data) {
+                            // alert(data);
+                            // console.log(data.shipments[0]['id']);
 
-                        if( vehicle.Model == '' && vehicle.Make == '' ){
-                            iziToast.error({
-                                    position:'topCenter',
-                                    timeout: 10000,
-                                    icon: 'fa fa-warning',
-                                    title: 'Error',
-                                    message: 'No Shippment Found!',
-                                });
+                            $('#customer_email').val(data.shipments[0]['company_name']);
+                            $('#port_of_loading').val(data.shipments[0]['loading_port']);
+                            $('#destination_port').val(data.shipments[0]['destination_port']);
+                            $('#container_size').val(data.shipments[0]['container_size']);
+
+                            var html = [];
+
+                            data.shipments[0]['vehicle'].forEach(element => {
+                                output = "<tr><td>" + element.year + "</td><td>" + element.make +
+                                    "</td><td>" + element.model + "</td><td>" + element.vin +
+                                    "</td><td>" + element.vin + "</td><td>" + element.vin +
+                                    "</td><td>" + element.vin + "</td><td>" + element.vin +
+                                    "</td><td class='text-center'><input type='checkbox' value='' id='vehicle' name=''></td></tr>";
+
+                                html.push(output);
+
+
+
+                            });
+                            $('#inovice_shipment_table').append(html);
+
+                            // html = "<tr>
+                            //     <td>"++"</td>
+                            //                 <td>{{ @$vehicle['make'] }}</td>
+                            //                 <td>{{ @$vehicle['model'] }}</td>
+                            //                 <td>{{ @$vehicle['vin'] }}</td>
+                            //                 <td>{{ @$vehicle['title'] }}</td>
+                            //                 <td>{{ @$vehicle['title_state'] }}</td>
+                            //                 <td>{{ @$vehicle['title_number'] }}</td>
+                            //                 <td>{{ @$vehicle['customer_name'] }}</td>
+                            //                 <td class="text-center"><input type="checkbox" value="{{ @$vehicle['id'] }}"
+                            //                         id="vehicle" name="vehicle[]"></td>
+
+                            //         </tr>"
+
+
+                        },
+                        complete: function() {
+                            document.getElementById('load').style.visibility = "hidden";
+
+                        },
+                        error: function() {
+                            document.getElementById('load').style.visibility = "hidden";
+
+                            iziToast.warning({
+                                message: 'Failed to insert data!',
+                                position: 'topCenter',
+                                zindex: '9999999999999'
+                            });
+
                         }
-                        else{
-
-                        
-
-                        $('#year').val(vehicle.ModelYear);
-                        $('#model').html('<option value="' + vehicle.Model + '">' + vehicle.Model +
-                            '</option>');
-                        $('#make').html('<option value="' + vehicle.Make + '">' + vehicle.Make +
-                            '</option>');
-                        // $('#year').html('<option value="'+vehicle.ModelYear+'">'+vehicle.ModelYear+'</option>');
-                        // $('#vehicle_type').html('<option value="' + vehicle.VehicleType + '">' + vehicle
-                        //     .VehicleType + '</option>');
-                        $('#getinfo').attr('id', 'reset');
-                        $('#getinfo').text('Reset');
-                        }
-
-                    },
-                    complete: function() {
-        document.getElementById('load').style.visibility = "hidden";
-
-                    }
                 });
-            }
+        }
 
-        } else {
-            $('#model').val('');
-            $('#make').val('');
-            $('#year').val('');
-            $('#vehicle_type').val('');
-            $('#weight').val('');
-            $('#value').val('');
-            $('.getinf').attr('id', 'getinfo');
-            $('#getinfo').text('GetInfo');
+    } else {
+        $('#model').val('');
+        $('#make').val('');
+        $('#year').val('');
+        $('#vehicle_type').val('');
+        $('#weight').val('');
+        $('#value').val('');
+        $('.getinf').attr('id', 'getinfo');
+        $('#getinfo').text('GetInfo');
         document.getElementById('load').style.visibility = "hidden";
 
 
 
-        }
+    }
     }
 </script>
 
@@ -1107,7 +1131,7 @@
                         success: function(data) {
                             // console.log(data)
                             html =
-                            '<div class="form-group" id="model_section">';
+                                '<div class="form-group" id="model_section">';
                             html +=
                                 '<select class="form-control" name="model"  id="input_model" tab="model">';
                             html +=
@@ -1246,7 +1270,7 @@
                         transitionOut: 'fadeOutUp',
                         onClosing: function(instance, toast, closedBy) {
                             console.info('closedBy: ' +
-                            closedBy); // The return will be: 'closedBy: buttonName'
+                                closedBy); // The return will be: 'closedBy: buttonName'
                         }
                     }, toast, 'buttonName');
                 }]
@@ -1426,7 +1450,7 @@
 </script>
 
 
-{{-- towing rate and shipping rate  --}}
+{{-- towing rate and shipping rate --}}
 
 
 <script>
@@ -1444,13 +1468,13 @@
     }
 </script>
 <script>
-    function saveshipmentrate(id,value){
-        var container_size  = $('#container_size').val();
-        var vehicle         = $('#vehicle').val();
-        var loading_port    = $('#loading_port').val();
-        var destination     = $('#destination').val();
-        var shipping_line   = $('#shipping_line').val();
-        var rate            = $('#rate').val();
+    function saveshipmentrate(id, value) {
+        var container_size = $('#container_size').val();
+        var vehicle = $('#vehicle').val();
+        var loading_port = $('#loading_port').val();
+        var destination = $('#destination').val();
+        var shipping_line = $('#shipping_line').val();
+        var rate = $('#rate').val();
         $.ajax({
             type: 'post',
             url: '{{ route('save.shipmentrate') }}',
@@ -1470,9 +1494,9 @@
                         title: 'OK',
                         message: 'Successfully Record Saved'
                     });
-                    setTimeout(function () {
-                    location.reload(true);
-                }, 5000);
+                    setTimeout(function() {
+                        location.reload(true);
+                    }, 5000);
                 }
             },
         });
@@ -1494,7 +1518,7 @@
                         title: 'OK',
                         message: 'Successfully Record Deleted'
                     });
-                    setTimeout(function () {
+                    setTimeout(function() {
                         location.reload(true);
                     }, 5000);
                 }
@@ -1503,7 +1527,7 @@
     }
 </script>
 <script>
-    function statusshipmentrate(id,value){
+    function statusshipmentrate(id, value) {
         $.ajax({
             type: 'post',
             url: '{{ route('shipmentrate.status') }}',
@@ -1519,7 +1543,7 @@
                         title: 'OK',
                         message: 'Successfully Status Updated'
                     });
-                    setTimeout(function () {
+                    setTimeout(function() {
                         location.reload(true);
                     }, 5000);
                 }
@@ -1543,13 +1567,14 @@
     });
 </script>
 <script>
-    function update_shipmentrate(id,value){
+    function update_shipmentrate(id, value) {
         $.ajax({
             type: 'post',
             url: '{{ route('shipment_rate.showmodel') }}',
             data: {
                 id: id,
-                value,value
+                value,
+                value
             },
             success: function(data) {
                 $('#shipmentrate_body').html(data);
@@ -1558,13 +1583,13 @@
     }
 </script>
 <script>
-    function saveshipmentrate(id,value){
-        var container_size  = $('#container_size').val();
-        var vehicle         = $('#vehicle').val();
-        var loading_port    = $('#loading_port').val();
-        var destination     = $('#destination').val();
-        var shipping_line   = $('#shipping_line').val();
-        var rate            = $('#rate').val();
+    function saveshipmentrate(id, value) {
+        var container_size = $('#container_size').val();
+        var vehicle = $('#vehicle').val();
+        var loading_port = $('#loading_port').val();
+        var destination = $('#destination').val();
+        var shipping_line = $('#shipping_line').val();
+        var rate = $('#rate').val();
         $.ajax({
             type: 'post',
             url: '{{ route('updatesave.shipmentrate') }}',
@@ -1575,8 +1600,9 @@
                 destination: destination,
                 shipping_line: shipping_line,
                 rate: rate,
-                id:id,
-                value,value,
+                id: id,
+                value,
+                value,
             },
             success: function(data) {
                 if (data == 'updated') {
@@ -1586,10 +1612,10 @@
                         title: 'OK',
                         message: 'Successfully Record Updated'
                     });
-                //     setTimeout(function () {
-                //     location.reload(true);
-                // }, 5000);
-                location.reload();
+                    //     setTimeout(function () {
+                    //     location.reload(true);
+                    // }, 5000);
+                    location.reload();
                 }
                 if (data == 'success') {
                     iziToast.success({
@@ -1598,17 +1624,17 @@
                         title: 'OK',
                         message: 'Successfully Record Saved'
                     });
-                //     setTimeout(function () {
-                //     location.reload(true);
-                // }, 5000);
-                location.reload();
+                    //     setTimeout(function () {
+                    //     location.reload(true);
+                    // }, 5000);
+                    location.reload();
                 }
             },
         });
     }
 </script>
 <script>
-    $("#towing_rate_add").click(function(){
+    $("#towing_rate_add").click(function() {
         var id = $(this).attr("id");
         $.ajax({
             type: 'post',
@@ -1623,7 +1649,7 @@
     });
 </script>
 <script>
-    function deletetowing_rate(id){
+    function deletetowing_rate(id) {
         $.ajax({
             type: 'post',
             url: '{{ route('delete.towingrate') }}',
@@ -1638,7 +1664,7 @@
                         title: 'OK',
                         message: 'Successfully Record Deleted'
                     });
-                    setTimeout(function () {
+                    setTimeout(function() {
                         location.reload(true);
                     }, 5000);
                 }
@@ -1647,7 +1673,7 @@
     }
 </script>
 <script>
-    function statustowingrate(id,value){
+    function statustowingrate(id, value) {
         $.ajax({
             type: 'post',
             url: '{{ route('towingrate.status') }}',
@@ -1663,7 +1689,7 @@
                         title: 'OK',
                         message: 'Successfully Status Updated'
                     });
-                    setTimeout(function () {
+                    setTimeout(function() {
                         location.reload(true);
                     }, 5000);
                 }
@@ -1672,29 +1698,38 @@
     }
 </script>
 <script>
-    function savetowingrate(id,value){
-        var city            = $('#city').val();
-        var auction         = $('#auction').val();
-        var rate            = $('#rate').val();
-        var new_jersery     = $('#new_jersery').is(':checked')?rate:'';
-        var georgia         = $('#georgia').is(':checked')?rate:'';
-        var teses           = $('#teses').is(':checked')?rate:'';
-        var california      = $('#california').is(':checked')?rate:'';
-        var seattle         = $('#seattle').is(':checked')?rate:'';
+    function savetowingrate(id, value) {
+        var city = $('#city').val();
+        var auction = $('#auction').val();
+        var rate = $('#rate').val();
+        var new_jersery = $('#new_jersery').is(':checked') ? rate : '';
+        var georgia = $('#georgia').is(':checked') ? rate : '';
+        var teses = $('#teses').is(':checked') ? rate : '';
+        var california = $('#california').is(':checked') ? rate : '';
+        var seattle = $('#seattle').is(':checked') ? rate : '';
         $.ajax({
             type: 'post',
             url: '{{ route('updatesave.towingrate') }}',
             data: {
-                city,city,
-                auction,auction,
-                rate,rate,
-                new_jersery,new_jersery,
-                georgia,georgia,
-                teses,teses,
-                california,california,
-                seattle,seattle,
+                city,
+                city,
+                auction,
+                auction,
+                rate,
+                rate,
+                new_jersery,
+                new_jersery,
+                georgia,
+                georgia,
+                teses,
+                teses,
+                california,
+                california,
+                seattle,
+                seattle,
                 // value,value,
-                id,id,
+                id,
+                id,
             },
             success: function(data) {
                 if (data == 'updated') {
@@ -1704,9 +1739,9 @@
                         title: 'OK',
                         message: 'Successfully Record Updated'
                     });
-                    setTimeout(function () {
-                    location.reload(true);
-                }, 5000);
+                    setTimeout(function() {
+                        location.reload(true);
+                    }, 5000);
                 }
                 if (data == 'success') {
                     iziToast.success({
@@ -1715,22 +1750,22 @@
                         title: 'OK',
                         message: 'Successfully Record Saved'
                     });
-                    setTimeout(function () {
-                    location.reload(true);
-                }, 5000);
+                    setTimeout(function() {
+                        location.reload(true);
+                    }, 5000);
                 }
             },
         });
     }
 </script>
 <script>
-    function update_towingrate(id,value){
+    function update_towingrate(id, value) {
         $.ajax({
             type: 'post',
             url: '{{ route('towing_rate.showmodel') }}',
             data: {
                 id: id,
-                value:value
+                value: value
             },
             success: function(data) {
                 $('#towingrate_body').html(data);
@@ -1739,47 +1774,48 @@
     }
 
 
-    function assignToCustomer(vehicle_id){
-        customer_id = $('#'+vehicle_id).val();
+    function assignToCustomer(vehicle_id) {
+        customer_id = $('#' + vehicle_id).val();
         $.ajax({
             type: 'post',
-        url: '{{ route('vehicle.assignToCustomer') }}',
+            url: '{{ route('vehicle.assignToCustomer') }}',
             data: {
                 vehicle_id: vehicle_id,
                 customer_id: customer_id
             },
             success: function(data) {
                 // alert(data);
-            iziToast.success({
-            zindex: '9999999999999',
-            position: 'topCenter',
-            title: 'Success',
-            message: data,
-        });
-        setTimeout(function() {
-            location.reload();
-            }, 1000);
+                iziToast.success({
+                    zindex: '9999999999999',
+                    position: 'topCenter',
+                    title: 'Success',
+                    message: data,
+                });
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
 
 
                 // $('#towingrate_body').html(data);
             }
         });
-        
+
     }
 
 
     $('#vehicle_cart').DataTable({
         columnDefs: [{
-                    
-                    orderable: false, targets: '_all'
-                }],
-                    scrollX: true,
-                    "lengthChange": false,
-                    "info": false,
-                    "bPaginate": false,
-                    "bFilter": false,
 
-                });
+            orderable: false,
+            targets: '_all'
+        }],
+        scrollX: true,
+        "lengthChange": false,
+        "info": false,
+        "bPaginate": false,
+        "bFilter": false,
+
+    });
 </script>
 
 
@@ -1788,29 +1824,29 @@
      * Roles Profile Scripts
      * 
      * 
-    */
-            //the selector will match all input controls of type :checkbox
-            //and attach a click event handler 
-            $("assign_roles input:checkbox").on('click', function() {
-            // in the handler, 'this' refers to the box clicked on
-            var $box = $(this);
-            if ($box.is(":checked")) {
-                // the name of the box is retrieved using the .attr() method
-                // as it is assumed and expected to be immutable
-                var group = "input:checkbox[name='" + $box.attr("name") + "']";
-                // the checked state of the group/box on the other hand will change
-                // and the current value is retrieved using .prop() method
-                $(group).prop("checked", false);
-                $box.prop("checked", true);
-            } else {
-                $box.prop("checked", false);
-            }
-            });
-     
-    function assignRoleToUser(){
+     */
+    //the selector will match all input controls of type :checkbox
+    //and attach a click event handler 
+    $("assign_roles input:checkbox").on('click', function() {
+        // in the handler, 'this' refers to the box clicked on
+        var $box = $(this);
+        if ($box.is(":checked")) {
+            // the name of the box is retrieved using the .attr() method
+            // as it is assumed and expected to be immutable
+            var group = "input:checkbox[name='" + $box.attr("name") + "']";
+            // the checked state of the group/box on the other hand will change
+            // and the current value is retrieved using .prop() method
+            $(group).prop("checked", false);
+            $box.prop("checked", true);
+        } else {
+            $box.prop("checked", false);
+        }
+    });
+
+    function assignRoleToUser() {
         let role = $(".assign_roles input:checked").val();
         let id = $("#user_id").val();
-        
+
         $.ajax({
             type: 'POST',
             url: '{{ route('user.assignrole') }}',
@@ -1819,26 +1855,27 @@
                 id: id
             },
             success: function(data) {
-                
-               if (data == "Assigned") {
+
+                if (data == "Assigned") {
                     iziToast.success({
                         timeout: 3000,
                         icon: 'fa fa-check',
                         title: 'OK',
                         message: 'Successfully Assigned Role'
                     });
-                
-                    setTimeout(function () {
+
+                    setTimeout(function() {
                         location.reload(true);
                     }, 3000);
                 }
             }
         });
     }
-    function dismissRoleToUser(){
+
+    function dismissRoleToUser() {
         let role = $(".dismiss_roles input:checked").val();
         let id = $("#user_id").val();
-        
+
         $.ajax({
             type: 'POST',
             url: '{{ route('user.dismissrole') }}',
@@ -1847,26 +1884,27 @@
                 id: id
             },
             success: function(data) {
-            
-               if (data == "Revoked") {
+
+                if (data == "Revoked") {
                     iziToast.success({
                         timeout: 2000,
                         icon: 'fa fa-check',
                         title: 'OK',
                         message: 'Successfully Revoke Role'
                     });
-                
-                    setTimeout(function () {
+
+                    setTimeout(function() {
                         location.reload(true);
                     }, 2000);
                 }
             }
-        });   
+        });
     }
-    function assignRouteToUser(){
+
+    function assignRouteToUser() {
         let role = $(".route input:checked").val();
         let id = $("#user_id").val();
-        
+
         $.ajax({
             type: 'POST',
             url: '{{ route('user.assignroute') }}',
@@ -1875,23 +1913,24 @@
                 id: id
             },
             success: function(data) {
-                
-               if (data == "Assigned") {
+
+                if (data == "Assigned") {
                     iziToast.success({
                         timeout: 3000,
                         icon: 'fa fa-check',
                         title: 'OK',
                         message: 'Successfully Assigned Route'
                     });
-                
-                    setTimeout(function () {
+
+                    setTimeout(function() {
                         location.reload(true);
                     }, 3000);
                 }
             }
         });
     }
-    function dismissalRouteToUser(){
+
+    function dismissalRouteToUser() {
         let role = $(".dismissroute input:checked").val();
         let id = $("#user_id").val();
 
@@ -1903,16 +1942,16 @@
                 id: id
             },
             success: function(data) {
-                
-               if (data == "Revoked") {
+
+                if (data == "Revoked") {
                     iziToast.success({
                         timeout: 3000,
                         icon: 'fa fa-check',
                         title: 'OK',
                         message: 'Successfully Revoked Route'
                     });
-                
-                    setTimeout(function () {
+
+                    setTimeout(function() {
                         location.reload(true);
                     }, 3000);
                 }
@@ -1922,30 +1961,32 @@
 </script>
 {{-- User List Profile dynamic Tabs of Permissions and Roles --}}
 <script>
-    function showPermissions(){
+    function showPermissions() {
         //alert("here is");
         $.ajax({
             type: 'GET',
             url: '{{ route('user.allpermissions') }}',
-            
+
             success: function(data) {
-                
+
                 $('.main-box').html(data);
             }
         });
     }
-    function showRoles(){
+
+    function showRoles() {
         $.ajax({
             type: 'GET',
             url: '{{ route('user.allroles') }}',
-            
+
             success: function(data) {
-                
+
                 $('.main-box').html(data);
             }
         });
     }
-    function createUser(){
+
+    function createUser() {
         $.ajax({
             type: 'GET',
             url: '{{ route('user.createUser') }}',
@@ -1955,7 +1996,8 @@
             }
         });
     }
-    function editUser(id){
+
+    function editUser(id) {
         $id = id;
         $.ajax({
             type: "GET",
@@ -1970,28 +2012,28 @@
             }
         });
     }
+
     function addUser() {
 
-            $.ajax({
-                type: 'post',
-                url: '{{ route('user.addUser') }}',
-                data: $('form').serialize(),
-                success: function(data) {
-                    //    alert(data);
+        $.ajax({
+            type: 'post',
+            url: '{{ route('user.addUser') }}',
+            data: $('form').serialize(),
+            success: function(data) {
+                //    alert(data);
 
-                    iziToast.success({
-                        title: 'User',
-                        message: data.name + " Added Successfully!",
-                        position: 'topCenter',
-                        zindex: '9999999999999',
+                iziToast.success({
+                    title: 'User',
+                    message: data.name + " Added Successfully!",
+                    position: 'topCenter',
+                    zindex: '9999999999999',
 
-                    });
+                });
 
-                    $('#exampleModal').modal('hide');
-                    location.reload();
+                $('#exampleModal').modal('hide');
+                location.reload();
 
-                }
-            });
+            }
+        });
     }
 </script>
-

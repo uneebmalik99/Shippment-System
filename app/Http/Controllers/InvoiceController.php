@@ -7,6 +7,7 @@ use App\Models\Export;
 use App\Models\Invoice;
 use App\Models\Consignee;
 use App\Models\Notification;
+use App\Models\Shipment;
 use Carbon\Carbon;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
@@ -180,5 +181,14 @@ class InvoiceController extends Controller
                 $data= Invoice::find($id);
                 $data->delete();
                 return back();
+    }
+
+    public function fetchShipment(Request $request){
+
+        $data = [];
+        $data['shipments'] = Shipment::with('vehicle')->wherecontainer_no($request->ar_number)->get()->toArray();
+        return Response($data);
+        // dd($data['shipments']);
+
     }
 }

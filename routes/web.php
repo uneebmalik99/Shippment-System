@@ -185,6 +185,10 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
 
 
+    Route::post('/invoice/fetchShipment',                     [InvoiceController::class, 'fetchShipment'])->name('invoice.shipments');
+
+
+
     // destination countries 
     Route::post('/shipments/fetchdestinationstate', [ShipmentController::class, 'FetchDestiState'])->name('shipments.FetachDestiState');
 
