@@ -59,22 +59,19 @@
                     <thead>
                         <tr class="font-size">
                             <th class="font-bold-tr">VIEW VEHICLES</th>
-                            <th class="font-bold-tr">IMAGE</th>
-                            <th class="font-bold-tr">CONSIGNEES</th>
-                            <th class="font-bold-tr">CONTAINER NO:</th>
-                            <th class="font-bold-tr">BOOKING NO:</th>
-                            <th class="font-bold-tr">LINES</th>
-                            <th class="font-bold-tr">NO OF VEHICLES</th>
-                            <th class="font-bold-tr">SIZE</th>
-                            <th class="font-bold-tr">LOAD DATE</th>
-                            <th class="font-bold-tr">CUT OFF DATE</th>
-                            <th class="font-bold-tr">EXPORT DATE</th>
-                            <th class="font-bold-tr">ARR Date</th>
-                            <th class="font-bold-tr">Shipper</th>
+                            <th class="font-bold-tr">CONTAINER NUMBER</th>
+                            <th class="font-bold-tr">COMPANY NAME</th>
                             <th class="font-bold-tr">LOADING PORT</th>
                             <th class="font-bold-tr">DESTINATION PORT</th>
-                            <th class="font-bold-tr">DOCS</th>
-                            <th class="font-bold-tr">ACTIONS</th>
+                            <th class="font-bold-tr">CONTAINER SIZE</th>
+                            <th class="font-bold-tr">INVOICE NO:</th>
+                            <th class="font-bold-tr">INVOICE AMOUNT</th>
+                            <th class="font-bold-tr">INVOICE DATE</th>
+                            <th class="font-bold-tr">DUE DATE</th>
+                            <th class="font-bold-tr">PAYMENT DATE</th>
+                            <th class="font-bold-tr">RECIEVED AMOUNT</th>
+                            <th class="font-bold-tr">BALANCE</th>
+                            {{-- <th class="font-bold-tr">ACTIONS</th> --}}
                         </tr>
                     </thead>
                     <tbody id="inovice_body">
@@ -141,7 +138,7 @@
                 searchPlaceholder: "Search",
                 processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
             },
-            ajax: "{{ route('shipments.records') }}",
+            ajax: "{{ route('invoice.records') }}",
             columns: [{
                     // class: 'details-control',
                     className: 'dt-control',
@@ -150,54 +147,47 @@
                     defaultContent: '',
 
                 },
+                
                 {
-                    data: 'id'
+                    data: 'ar_number'
                 },
                 {
-                    data: 'select_consignee'
+                    data: 'company_name'
                 },
                 {
-                    data: 'container_no'
-                },
-                {
-                    data: 'booking_number'
-                },
-                {
-                    data: 'shipping_line'
-                },
-                {
-                    data: 'shipment_id'
-                },
-                {
-                    data: 'container_size'
-                },
-                {
-                    data: 'loading_date'
-                },
-                {
-                    data: 'sale_date'
-                },
-                {
-                    data: 'est_arrival_date'
-                },
-                {
-                    data: 'ship_date'
-                },
-                {
-                    data: 'shipper'
-                },
-                {
-                    data: 'loading_port'
+                    data: 'port_of_loading'
                 },
                 {
                     data: 'destination_port'
                 },
                 {
-                    data: 'notes'
+                    data: 'container_size'
                 },
                 {
-                    data: 'action'
+                    data: 'invoice_no'
                 },
+                {
+                    data: 'invoice_amount'
+                },
+                {
+                    data: 'invoice_date'
+                },
+                {
+                    data: 'due_date'
+                },
+                {
+                    data: 'payment_date'
+                },
+                {
+                    data: 'received_amount'
+                },
+                {
+                    data: 'balance'
+                },
+                
+                // {
+                //     data: 'action'
+                // },
             ],
             order: [
                 [1, 'asc']

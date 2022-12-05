@@ -21,6 +21,11 @@ class Invoice extends Model
         return $this->belongsTo('App\Models\Export');
     }
 
+    public function vehicle()
+    {
+        return $this->hasMany('App\Models\Vehicle', 'inovice_id', 'id');
+    }
+
 
     public function consignee()
     {

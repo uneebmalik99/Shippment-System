@@ -19,6 +19,10 @@ class Vehicle extends Model
     {
         return $this->belongsTo('App\Models\User', 'buyer_id', 'id');
     }
+    public function invoice()
+    {
+        return $this->belongsTo('App\Models\Invoice', 'inovice_id', 'id');
+    }
 
     public function location()
     {

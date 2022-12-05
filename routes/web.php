@@ -189,6 +189,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::post('/invoice/saveData',                     [InvoiceController::class, 'saveInovice'])->name('inovice.save');
 
+    Route::get('/invoice/records', [InvoiceController::class, 'serverside'])->name('invoice.records');
 
 
     // destination countries 
