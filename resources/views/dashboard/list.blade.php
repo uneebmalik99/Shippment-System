@@ -789,7 +789,7 @@
 
                         <div class="row mt-2 mb-2">
                             <div class="col-12">
-                                <table class="table table-responsive" id="dashboard_shipment" style="width:100%!important">
+                                <table class="" id="dashboard_shipment" style="width:100%!important;">
                                     <thead>
                                         <tr class="font-size" style="font-size:11px!important;font-weight:300!important">
                                             <th>REFERENCE</th>

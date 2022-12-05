@@ -126,7 +126,7 @@ class VehicleController extends Controller
             $data['no_titles'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '4')->get();
             $data['towing'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '5')->get();
             $data['location'] = Location::all();
-            $data['status'] = VehicleStatus::all();
+            $data['status'] = VehicleStatus::limit(3)->get()->toArray();
             $data['make'] = MMS::select('make')->where('status', '1')->groupBy('make')->get()->toArray();
             $data['model'] = MMS::select('model')->where('status', '1')->groupBy('model')->get()->toArray();
         }
@@ -138,7 +138,7 @@ class VehicleController extends Controller
             $data['no_titles'] = Vehicle::where('status', '4')->get();
             $data['towing'] = Vehicle::where('status', '5')->get();
             $data['location'] = Location::all();
-            $data['status'] = VehicleStatus::all();
+            $data['status'] = VehicleStatus::limit(3)->get()->toArray();
             $data['make'] = MMS::select('make')->where('status', '1')->groupBy('make')->get()->toArray();
             $data['model'] = MMS::select('model')->where('status', '1')->groupBy('model')->get()->toArray();
         }
@@ -318,7 +318,13 @@ class VehicleController extends Controller
 
             if ($year) {
                 if ($year != "") {
-                    $records = $records->where('year', $year)->get()->toArray();
+                    if ($year == "all") {
+                        $records = Vehicle::with('user', 'vehicle_status')->get()->toArray();
+                    }
+                    else{
+
+                        $records = $records->where('year', $year)->get()->toArray();
+                    }
                 }
             }
             if ($make) {
@@ -334,10 +340,10 @@ class VehicleController extends Controller
             if ($status) {
                 if ($status != "") {
                     if ($status == 'all') {
-                        $records = $records;
+                        $records = Vehicle::all();
 
                     } else {
-                        $records = $records->with('images')->where('status', $status)->paginate($this->perpage);
+                        $records = Vehicle::with('user', 'vehicle_status')->where('status', $status)->paginate($this->perpage);
                         $data['records'] = $records;
                         $output['view'] = view('vehicle.' . $status_name, $data)->render();
                         return Response($output);

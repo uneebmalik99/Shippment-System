@@ -104,7 +104,7 @@
     //     });
     // }
         $('#dashboard_shipment').DataTable({
-                //    scrollX: true,
+                   scrollX: true,
                     "lengthChange": false,
                     "info": false,
                     "bPaginate": false,
