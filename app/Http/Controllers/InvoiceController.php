@@ -8,6 +8,7 @@ use App\Models\Invoice;
 use App\Models\Consignee;
 use App\Models\Notification;
 use App\Models\Shipment;
+use App\Models\Vehicle;
 use Carbon\Carbon;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
@@ -190,5 +191,34 @@ class InvoiceController extends Controller
         return Response($data);
         // dd($data['shipments']);
 
+    }
+    public function saveInovice(Request $req){
+        $data = [];
+        $output = [];
+        $data = $req->all();
+        $output['vehicle'] = $data['vehicles'];
+        $data['added_by_role'] = auth()->user()->id;
+        unset($data['vehicles']);
+
+        $obj = new Invoice;
+        $id = $obj->create($data);
+
+        if($id){
+            $invoice_id = $id->id;
+            if($output['vehicle']){
+                foreach ($output['vehicle'] as $vehicle_id) {
+                    $get_vehicle = Vehicle::find($vehicle_id);
+                    $get_vehicle->inovice_id  = $invoice_id;
+                    $get_vehicle->update();
+                }
+            }
+
+
+        }
+
+        return 'Invoice Added Successfully!';
+
+
+        
     }
 }

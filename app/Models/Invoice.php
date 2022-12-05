@@ -14,25 +14,7 @@ class Invoice extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     protected $table = "invoices";
-    protected $fillable = [
-        'export_id',
-        'customer_user_id',
-        'consignee_id',
-        'total_amount',
-        'paid_amount',
-        'export_invoice',
-        'note',
-        'adjustment_damaged',
-        'adjustment_storage',
-        'adjustment_discount',
-        'adjustment_other',
-        'is_deleted',
-        'currency',
-        'discount',
-        'before_discount',
-        'upload_invoice',
-        'added_by_role',
-    ];
+    protected $guarded = [];
 
     public function export()
     {

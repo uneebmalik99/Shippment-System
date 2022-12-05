@@ -133,17 +133,17 @@
 
 
                     {{-- add cart --}}
-                    {{-- <li class="header-notification"> --}}
-                        {{-- <a style="cursor: pointer;"> --}}
-                            {{-- <i class="fa-solid fa-cart-shopping"></i> --}}
-                            {{-- <span class="badge">{{ count(@$vehicles_cart) }}</span> --}}
-                        {{-- </a> --}}
-                        {{-- <ul class="show-notification"> --}}
-                            {{-- <li> --}}
-                                {{-- <h6>Vehicles</h6> --}}
-                                {{-- <label class="label label-danger">New</label> --}}
-                            {{-- </li> --}}
-                            {{-- @if (@$vehicles_cart) --}}
+                    <li class="header-notification">
+                        <a style="cursor: pointer;">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="badge">{{ count(@$vehicles_cart) }}</span>
+                        </a>
+                        <ul class="show-notification">
+                            <li>
+                                <h6>Vehicles</h6>
+                                <label class="label label-danger">New</label>
+                            </li>
+                            @if (@$vehicles_cart)
                                 {{-- @dd($vehicles_cart[0]) --}}
                                 {{-- <li class="notification_body" value="{{ @$notifications['id'] }}"
                                         style="cursor: pointer;"
@@ -176,35 +176,35 @@
                                             </div>
                                         </div>
                                     </li> --}}
-                                {{-- <table class="table" id="vehicle_cart"> --}}
+                                <table class="table" id="vehicle_cart">
                                     
                                         {{-- {{dd($vehicles_cart)}} --}}
-                                        {{-- @foreach ($vehicles_cart as $vc) --}}
+                                        @foreach ($vehicles_cart as $vc)
                                        
                                         
-                                        {{-- <tr> --}}
-                                            {{-- <td>{{@$vc['vehicle']['vin']}}</td> --}}
-                                            {{-- <td>{{@$vc['vehicle']['year']}}</td> --}}
-                                            {{-- <td>{{@$vc['vehicle']['make']}}</td> --}}
-                                            {{-- <td>{{@$vc['vehicle']['model']}}</td> --}}
-                                        {{-- </tr> --}}
+                                        <tr>
+                                            <td>{{@$vc['vehicle']['vin']}}</td>
+                                            <td>{{@$vc['vehicle']['year']}}</td>
+                                            <td>{{@$vc['vehicle']['make']}}</td>
+                                            <td>{{@$vc['vehicle']['model']}}</td>
+                                        </tr>
                                       
-                                        {{-- @endforeach --}}
-                                    {{-- </tbody> --}}
-                                {{-- </table> --}}
-                            {{-- @else --}}
-                                {{-- <div class="text-center"> --}}
-                                    {{-- Nothing to display --}}
-                                {{-- </div> --}}
-                            {{-- @endif --}}
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                <div class="text-center">
+                                    Nothing to display
+                                </div>
+                            @endif
 
-                            {{-- @if ($vehicles_cart) --}}
-                            {{-- <li> --}}
-                                {{-- <label class="label label-danger" onclick="addtoshipment()">Add to Shippment</label> --}}
-                            {{-- </li> --}}
-                            {{-- @endif --}}
-                        {{-- </ul> --}}
-                    {{-- </li> --}}
+                            @if ($vehicles_cart)
+                            <li>
+                                <label class="label label-danger" onclick="addtoshipment()">Add to Shippment</label>
+                            </li>
+                            @endif
+                        </ul>
+                    </li>
 
 
 

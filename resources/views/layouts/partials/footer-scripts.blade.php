@@ -895,7 +895,7 @@
                             });
                         }
 
-                        $('#customer_email').val(data.shipments[0]['company_name']);
+                        $('#company_name').val(data.shipments[0]['company_name']);
                         $('#port_of_loading').val(data.shipments[0]['loading_port']);
                         $('#destination_port').val(data.shipments[0]['destination_port']);
                         $('#container_size').val(data.shipments[0]['container_size']);
@@ -905,7 +905,7 @@
                                 "</td><td>" + element.model + "</td><td>" + element.vin +
                                 "</td><td>" + element.vin + "</td><td>" + element.vin +
                                 "</td><td>" + element.vin + "</td><td>" + element.vin +
-                                "</td><td class='text-center'><input type='checkbox' value='' id='vehicle' name=''></td></tr>";
+                                "</td><td class='text-center'><input type='checkbox' value='"+element.id+"' id='vehicle' name='vehicles[]'></td></tr>";
 
                             html.push(output);
                         });
@@ -2024,7 +2024,30 @@
 <script>
     function create_invoice_form(){
       
-        var formData = new FormData($('#shipment_form'));
-         console.log(formData);
+        var formData = new FormData(jQuery('#invoice_shipment_form')[0]);
+
+        $.ajax({
+            method: "post",
+            url: "{{ route('inovice.save') }}",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function(data) {
+                $('#exampleModal').modal('hide');
+
+                iziToast.success({
+                    title: 'Invoice',
+                    message: data,
+                    position: 'topCenter',
+                    zindex: '9999999999999',
+
+                });
+
+                setTimeout(function() {
+            location.reload();
+        }, 1000);
+            }
+        });
+        
     }
 </script>

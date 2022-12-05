@@ -5,7 +5,7 @@
             
             <div class="mt-3">
                 
-                <form method="POST" class="col-12" id="shipment_form">
+                <form method="POST" class="col-12" id="invoice_shipment_form" enctype="multipart/form-data">
                     @csrf
                     
                     @if(@$shipment[0]['id'])
@@ -34,7 +34,7 @@
                                             <div id="container_ar_no">
                                                 <div class="col-12 py-2">
                                                     <div class="d-flex align-items-center">
-                                                        <label for="container_num" class="col-6 px-0 font-size font-bold">Container AR Number <span
+                                                        <label for="ar_number" class="col-6 px-0 font-size font-bold">Container AR Number <span
                                                                 class="text-danger">*</span></label>
                                                         <div
                                                             class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
@@ -198,7 +198,7 @@
                     </div>
                     
                     <div class="mt-2 bg-light" id="shipment_body">
-                        <table id="" class="table ">
+                        <table id="" class="table inovice_table_vehicle" style="width: 100%important;">
                             <thead class="bg-custom">
                                 <tr style="font-size: 11px!important">
                                     <th>YEAR</th>
@@ -213,21 +213,7 @@
                                 </tr>
                             </thead>
                             <tbody id="inovice_shipment_table">
-                                {{-- @foreach ($vehicles as $vehicle)
-                                <tr>
-                                        <td>{{ @$vehicle['year'] }}</td>
-                                        <td>{{ @$vehicle['make'] }}</td>
-                                        <td>{{ @$vehicle['model'] }}</td>
-                                        <td>{{ @$vehicle['vin'] }}</td>
-                                        <td>{{ @$vehicle['title'] }}</td>
-                                        <td>{{ @$vehicle['title_state'] }}</td>
-                                        <td>{{ @$vehicle['title_number'] }}</td>
-                                        <td>{{ @$vehicle['customer_name'] }}</td>
-                                        <td class="text-center"><input type="checkbox" value="{{ @$vehicle['id'] }}"
-                                                id="vehicle" name="vehicle[]"></td>
-                                        
-                                </tr>
-                                @endforeach --}}
+                               
                             </tbody>
                         </table>
 
