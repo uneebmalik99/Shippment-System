@@ -298,7 +298,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/inventory',                            function(){return "Coming Soon!";});
     //Inventory
     Route::get('/invoice',                              [InvoiceController::class, 'index'])->name('invoice.index');
-    Route::get('/invoices/create',                      [InvoiceController::class, 'create'])->name('invoice.create');
+    Route::get('/invoices/create',                      [InvoiceController::class, 'create_invoice'])->name('invoice.create');
     Route::post('/invoices/create',                      [InvoiceController::class, 'create'])->name('invoice.post_create');
 
     Route::get('/invoices/update/{id?}',                      [InvoiceController::class, 'update'])->name('invoice.get_update');

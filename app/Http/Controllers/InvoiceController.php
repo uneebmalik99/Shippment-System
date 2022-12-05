@@ -87,8 +87,15 @@ class InvoiceController extends Controller
         return view($this->view . 'list', $data, $notification);
     }
 
+    public function create_invoice(Request $request){
+        $data['export'] = Export::all()->toArray();
+        $data['customer'] = Consignee::all();
+        $output = view('invoice.create_edit',$data)->render();
+        return Response($output);
+    }
     public function create(Request $request)
     {
+        
         if ($request->isMethod('post')) {
             $invoice = $request->all();
 
