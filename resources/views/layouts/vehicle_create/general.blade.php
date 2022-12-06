@@ -316,7 +316,7 @@
                                         <option selected disabled>Select Buyer Id</option>
                                         @endif
                                         
-                                        @if($update_buyer_id)
+                                        @if(@$update_buyer_id)
                                         @foreach ($update_buyer_id[0]['billings'] as $buyer)
                                             @php
                                                 $buyerid = explode(',', $buyer['buyer_number']);
