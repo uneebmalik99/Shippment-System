@@ -28,9 +28,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $i = 1;
+                            @endphp
                             @foreach($documents as $document)
                             <tr>
-                                <td>1</td>
+                                <td>{{$i}}</td>
                                 <td>{{@$document['user']['customer_type']}}</td>
                                 <td>{{@$document['thumbnail']}}</td>
                                 <td style="text-align: center;
@@ -64,6 +67,10 @@
 
                                 </td>
                             </tr>
+
+                            @php
+                                $i++;
+                            @endphp
                             @endforeach
 
                         </tbody>

@@ -644,6 +644,16 @@
         @endif
 
 
+        @if (Session::has('fail'))
+            <script>
+                iziToast.warning({
+                    position: 'topRight',
+                    message: '{{ Session::get('fail') }}',
+                });
+            </script>
+        @endif
+
+
         <script>
             $('#dispatched_table').DataTable({
                 scrollX: true,

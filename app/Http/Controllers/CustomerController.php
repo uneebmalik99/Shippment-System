@@ -219,7 +219,6 @@ class CustomerController extends Controller
                 ],
             ];
         }
-       
 
         if ($request->ajax()) {
             $tab = $request->tab;
@@ -229,7 +228,6 @@ class CustomerController extends Controller
             $data['loading_ports'] = LoadingCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
             $data['shipping_lines'] = ShipmentLine::where('status', '1')->get();
             $data['no_of_vehicle'] = NoOfVehicle::where('status', '1')->get();
-
             $output = view('layouts.customer_create.' . $tab, $data)->render();
             return Response($output);
         }
@@ -956,9 +954,9 @@ class CustomerController extends Controller
                         $files->move(public_path($this->directory), $docname);
                         $documents['user_id'] = $user_id;
 
-                        $Obj = CustomerDocument::updateOrCreate(['user_id' => $request->id], $documents);
-                        // $Obj = new CustomerDocument;
-                        // $Obj->create($documents);
+                        // $Obj = CustomerDocument::updateOrCreate(['user_id' => $request->id], $documents);
+                        $Obj = new CustomerDocument;
+                        $Obj->create($documents);
                     }
                 }
                 $output =

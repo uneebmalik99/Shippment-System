@@ -670,9 +670,16 @@ class VehicleController extends Controller
 
     public function import(Request $request)
     {
+       
+        
         if ($request->ajax()) {
             $output = view('layouts.vehicle.import_vehicles')->render();
             return Response($output);
+        }
+       
+
+        if($request->file('import_document') == null){
+            return redirect()->route('vehicle.list')->with('fail', "Please Select file then submit");
         }
         $path1 = $request->file('import_document')->store('temp');
         $path = storage_path('app').'/'.$path1;

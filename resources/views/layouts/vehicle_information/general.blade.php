@@ -427,10 +427,10 @@
 
                                 <div class="image_section">
 
-                                    <div class="mx-auto changeImages" style="margin-left:35px!important;">
+                                    <div class="col-11 mx-auto d-flex flex-wrap changeImages" style="">
                                         @if(@$vehicle['pickupimages'])
                                             @foreach(@$vehicle['pickupimages'] as $img)  
-                                            <img src="{{asset($img['name'])}}" alt=""class="item_1 my-1"  class="showMainImage" style="width:90px!important;height:60px!important;" onclick="showAsMainImage(this.src)">
+                                            <img src="{{asset($img['name'])}}" alt=""class="item_1"  class="showMainImage" style="width:120px!important;height:80px!important;" onclick="showAsMainImage(this.src)">
                                             @endforeach
                                         @endif
                                     </div>

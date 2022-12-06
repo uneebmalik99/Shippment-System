@@ -64,7 +64,7 @@
     <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
         <div class="information_second_div">
             <div class="row" style="padding-bottom:60px">
-                <div class="col-sm-12 col-md-5 col-lg-6 mx-auto mb-4">
+                <div class="col-sm-12 col-md-5 col-lg-7 mx-auto mb-4">
                     <div class="row">
                         <div class="col-12">
                             <h4>Documents</h4>
@@ -206,7 +206,7 @@
 
 
                 </div>
-                <div class="col-sm-12 col-md-7 col-lg-6 mb-4 mt-5">
+                <div class="col-sm-12 col-md-7 col-lg-5 mb-4 mt-5">
                     <div class="information_gallary">
                         <div class="gallary_header d-flex">
                             <div class="row">
@@ -395,7 +395,7 @@
                                 @endif
                                 <div class="image_section">
 
-                                    <div class="col-12 changeImages">
+                                    <div class="col-11 mx-auto d-flex flex-wrap changeImages">
                                         @if (@$vehicle['pickupimages'])
                                             @foreach (@$vehicle['pickupimages'] as $img)
                                                 <img src="{{ asset($img['name']) }}" alt=""class="item_1"
