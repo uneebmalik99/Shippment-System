@@ -314,7 +314,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/invoices/update/{id?}',                     [InvoiceController::class, 'update'])->name('invoice.post_update');
 
     Route::get('/invoices/delete/{id?}',                     [InvoiceController::class, 'delete'])->name('invoice.get_delete');
-
+    
     // Route::get('/invoices/pdf', function(){
     //     return view('invoice/pdf');
     //     });

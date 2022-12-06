@@ -27,6 +27,7 @@ class CreateInvoicesTable extends Migration
             $table->string("payment_date")->nullable();
             $table->integer("received_amount")->nullable();
             $table->integer("balance")->nullable();
+            $table->string("invoice_document")->nullable();
             $table->foreignId('added_by_role')->constrained('user')->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();

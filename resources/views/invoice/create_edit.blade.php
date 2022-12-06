@@ -155,7 +155,7 @@
                                                     <div class="d-flex align-items-center">
                                                         <label for="payment_date"
                                                             class="col-6 px-0 font-size font-bold">Payment Date</label>
-                                                        <input type="text"
+                                                        <input type="date"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
                                                             name="payment_date" id="payment_date" value="">
     
@@ -167,7 +167,7 @@
                                                             class="col-6 px-0 font-size font-bold">Recieved Amount</label>
                                                         <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="received_amount" id="received_amount" value="">
+                                                            name="received_amount" id="received_amount" value="" onchange="findbalance()" >
     
                                                     </div>
                                                 </div>
@@ -182,14 +182,30 @@
                                                     </div>
                                                 </div>
                                                 
+                                                
                                             </div>
                                         </div>
                                     </div>
 
                                     
                                 </div>
-                            
-                            
+                                <div class="col-6 d-flex align-items-center">
+                                <label for="invoice_document" style="cursor: pointer;
+                                
+                                padding: 9px 96px;">
+                                    
+                                    <img src="{{asset('images/file.png')}}" alt="" style="width: 5rem;">
+    
+                                    <input id="invoice_document" class="invoice_document" type="file" name="invoice_document"/>
+                                    <br/>
+                                    <div class="imageName">
+    
+                                    </div>
+                                    {{-- <span id="imageName"></span> --}}
+                                    <br>
+                                    <p>Upload Invoice</p> <br/>
+                                  </label>
+                                </div>
                             </div>
                         
                         </div>
@@ -254,3 +270,21 @@
         </div>
     </div>
 </div>
+<script>
+    let input = document.getElementById("invoice_document");
+    let imageName = document.getElementById("imageName");
+    input.addEventListener("change", ()=>{
+        let inputImage = document.querySelector("#invoice_document").files[0];
+        // console.log(inputImage);
+        imageName.innerText = inputImage.name;
+    })
+</script>
+<script>
+    function findbalance() {
+        invoice_amount = $('#invoice_amount').val();
+        received_amount = $('#received_amount').val();
+        var balance = Math.abs(Math.floor(invoice_amount)-Math.floor(received_amount))
+        
+        $('#balance').val(balance);
+    }
+</script>

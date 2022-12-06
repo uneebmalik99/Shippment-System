@@ -625,8 +625,7 @@
                 'id': $id
             },
             success: function(data) {
-                console.log(data[0].id);
-
+                
                 $('#subject').html(data[0].subject);
                 $('#expiry_date').html(data[0].expiry_date);
                 $('#message').html(data[0].message);

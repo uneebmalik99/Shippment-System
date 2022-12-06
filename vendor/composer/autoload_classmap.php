@@ -9,6 +9,7 @@ return array(
     'App\\Console\\Commands\\ShipmentUpdate' => $baseDir . '/app/Console/Commands/ShipmentUpdate.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Exports\\ShipmentExport' => $baseDir . '/app/Exports/ShipmentExport.php',
     'App\\Exports\\UsersExport' => $baseDir . '/app/Exports/UsersExport.php',
     'App\\Exports\\VehicleExport' => $baseDir . '/app/Exports/VehicleExport.php',
     'App\\Http\\Controllers\\AuditController' => $baseDir . '/app/Http/Controllers/AuditController.php',

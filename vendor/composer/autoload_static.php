@@ -226,11 +226,11 @@ class ComposerStaticInitc987a06e3e3eee1c2bbe0526b0fd63ad
         ),
         'Yajra\\DataTables\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
-            1 => __DIR__ . '/..' . '/yajra/laravel-datatables-html/src',
+            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-buttons/src',
+            1 => __DIR__ . '/..' . '/yajra/laravel-datatables-editor/src',
             2 => __DIR__ . '/..' . '/yajra/laravel-datatables-fractal/src',
-            3 => __DIR__ . '/..' . '/yajra/laravel-datatables-editor/src',
-            4 => __DIR__ . '/..' . '/yajra/laravel-datatables-buttons/src',
+            3 => __DIR__ . '/..' . '/yajra/laravel-datatables-html/src',
+            4 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
         ),
         'Whoops\\' => 
         array (
@@ -390,8 +390,8 @@ class ComposerStaticInitc987a06e3e3eee1c2bbe0526b0fd63ad
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -665,6 +665,7 @@ class ComposerStaticInitc987a06e3e3eee1c2bbe0526b0fd63ad
         'App\\Console\\Commands\\ShipmentUpdate' => __DIR__ . '/../..' . '/app/Console/Commands/ShipmentUpdate.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Exports\\ShipmentExport' => __DIR__ . '/../..' . '/app/Exports/ShipmentExport.php',
         'App\\Exports\\UsersExport' => __DIR__ . '/../..' . '/app/Exports/UsersExport.php',
         'App\\Exports\\VehicleExport' => __DIR__ . '/../..' . '/app/Exports/VehicleExport.php',
         'App\\Http\\Controllers\\AuditController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuditController.php',
