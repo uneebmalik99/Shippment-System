@@ -81,9 +81,8 @@ class NotificationController extends Controller
 
 
         $notification = $this->Notification();
-        $data['user'] = User::where('role_id', '4')->get();
-        // dd($data['user']);
-        // return $notification;
+        $data['user'] = User::role('Customer')->get();
+        
         return view($this->view . 'list', $data, $notification);
     }
 
