@@ -360,6 +360,9 @@ class CustomerController extends Controller
     public function profile($id)
     {
         // return $id;
+        // dd($id);
+        $customer = User::whereid($id)->get()->toArray();
+        // dd($customer[0]['company_name']);
         $action = url($this->action . '/profile/');
         $data = [
             'user' => User::find($id),
@@ -382,7 +385,7 @@ class CustomerController extends Controller
         $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
 
         $all_vehicles = Vehicle::all()->count();
-        $customer_vehicles = Vehicle::where('added_by_user', $id)->count();
+        $customer_vehicles = Vehicle::where('status', '1')->where('customer_name', $customer[0]['company_name'])->count();
         $CustomerVehicles_value = Vehicle::get()->sum('value');
         if ($all_vehicles != 0) {
             $customer_vehicles_percentage = ($customer_vehicles / $all_vehicles) * 100;
@@ -393,7 +396,7 @@ class CustomerController extends Controller
         $data['customer_vehicles'] = $customer_vehicles;
         $data['allVehicles_value'] = $CustomerVehicles_value;
 
-        $onhand = Vehicle::where('status', '1')->where('added_by_user', $id)->get();
+        $onhand = Vehicle::where('status', '3')->where('customer_name', $customer[0]['company_name'])->get();
         $onhand_count = $onhand->count();
         $onhand_value = $onhand->sum('value');
         $data['onhand_count'] = $onhand_count;
@@ -405,7 +408,7 @@ class CustomerController extends Controller
             $data['onhand_count_percentage'] = 0;
         }
 
-        $dispatch = Vehicle::where('status', '2')->where('added_by_user', $id)->get();
+        $dispatch = Vehicle::where('status', '2')->where('customer_name', $customer[0]['company_name'])->get();
         $dispatch_count = $dispatch->count();
         $dispatch_value = $dispatch->sum('value');
         $data['dispatch_count'] = $dispatch_count;
@@ -418,7 +421,7 @@ class CustomerController extends Controller
         }
         
         
-        $shipped = Vehicle::where('status', '4')->where('added_by_user', $id)->get();
+        $shipped = Vehicle::where('status', '5')->where('customer_name', $customer[0]['company_name'])->get();
         $shipped_count = $shipped->count();
         $shipped_value = $shipped->sum('value');
         $data['shipped_count'] = $shipped_count;
@@ -430,7 +433,7 @@ class CustomerController extends Controller
             $data['shipped_count_percentage'] = 0;
         }
 
-        $arrived = Vehicle::where('status', '5')->where('added_by_user', $id)->get();
+        $arrived = Vehicle::where('status', '6')->where('customer_name', $customer[0]['company_name'])->get();
         $arrived_count = $arrived->count();
         $arrived_value = $arrived->sum('value');
         $data['arrived_count'] = $arrived_count;
@@ -442,7 +445,7 @@ class CustomerController extends Controller
             $data['arrived_count_percentage'] = 0;
         }
 
-        $posted = Vehicle::where('status', '6')->where('added_by_user', $id)->get();
+        $posted = Vehicle::where('status', '4')->where('customer_name', $customer[0]['company_name'])->get();
         // dd($posted);
         $posted_count = $posted->count();
         $posted_value = $posted->sum('value');
@@ -455,7 +458,7 @@ class CustomerController extends Controller
             $data['posted_count_percentage'] = 0;
         }
 
-        $booked = Vehicle::where('status', '7')->where('added_by_user', $id)->get();
+        $booked = Vehicle::where('status', '7')->where('customer_name', $customer[0]['company_name'])->get();
         $booked_count = $booked->count();
         $booked_value = $booked->sum('value');
         $data['booked_count'] = $booked_count;

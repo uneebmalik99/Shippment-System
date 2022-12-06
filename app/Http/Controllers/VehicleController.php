@@ -61,9 +61,9 @@ class VehicleController extends Controller
     private $directory = "/vehicle_images";
     private $action = "/admin/vehicles";
 
-    public function Notification()
+    private function Notification()
     {
-        $data['notification'] = Notification::with('user')->get();
+        $data['notification'] = Notification::with('user')->paginate($this->perpage);
         $data['location'] = Location::all()->toArray();
         // dd();
         if ($data['notification']->toArray()) {
@@ -87,11 +87,11 @@ class VehicleController extends Controller
                     $data['notification'][$key]['date'] = (int) $seconds . 's ';
                 }
             }
-            $unread = Notification::with('user')->where('status', '0')->get();
+            $unread = Notification::with('user')->where('status', '0')->paginate($this->perpage);
             $data['notification_count'] = count($unread);
         } else {
-            // $data['notification'] = "";
         }
+        // dd($data);
         return $data;
     }
 

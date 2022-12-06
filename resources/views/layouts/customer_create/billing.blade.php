@@ -318,7 +318,7 @@
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="createForm(this.id)"
             id="billing_customer" name="{{ $module['button'] }}" style="padding: 4px;"
             data-next="shipper_customer_tab">
-            <div class="unskew">Update</div>
+            <div class="unskew">Next</div>
         </button>
         @else
         <button type="button" class="btn next-style text-white col-1 py-1 mx-2" onclick="createForm(this.id)"

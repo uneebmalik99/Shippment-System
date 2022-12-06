@@ -219,7 +219,7 @@
                              <option selected value="null">Select</option>
                             @endif
                              @foreach ($loading_ports as $lports)
-                             <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
+                             <option value="{{ @$lports['port'] }}">{{ @$lports['port'] }}</option>
                          @endforeach
                          </select>
                      </div>
@@ -296,9 +296,9 @@
                         <select name="vehicle[]" id="vehicle"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
                             <option selected value="null">Select</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @foreach ($no_of_vehicle as $no)
+                             <option value="{{@$no['name']}}">{{$no['name']}}</option>
+                             @endforeach
                         </select>
                     </div>
                 </div>
@@ -309,7 +309,7 @@
                             <option selected value="null">Select</option>
 
                             @foreach ($loading_ports as $lports)
-                            <option value="{{ @$lports['destination'] }}">{{ @$lports['destination'] }}</option>
+                            <option value="{{ @$lports['port'] }}">{{ @$lports['port'] }}</option>
                         @endforeach
                         </select>
                     </div>
