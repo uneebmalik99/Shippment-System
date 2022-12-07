@@ -16,6 +16,7 @@
                         <div class="col-12 d-lg-flex p-0">
                             <div class="col-lg-12 col-12 p-0">
                                 <div class="col-12 p-0">
+                                    
                                     <div class="row">
 
                                         <div class="tab_card col-6">
@@ -40,7 +41,7 @@
                                                             class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                                             
                                                             <input type="text" class="col-8 general_input" name="ar_number" id="ar_number"
-                                                                value="">
+                                                                value="{{ @$invoice[0]['ar_number'] }}">
                     
                                                             <a class="prefix text-dark px-2 getinf"
                                                                 style="text-decoration: none!important;
@@ -59,7 +60,7 @@
                                                             class="col-6 px-0 font-size font-bold">Company Name</label>
                                                         <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="company_name" id="company_name" value="">
+                                                            name="company_name" id="company_name" value="{{ @$invoice[0]['company_name'] }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 py-2">
@@ -68,7 +69,7 @@
                                                             class="col-6 px-0 font-size font-bold">Port Of Loading</label>
                                                         <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="port_of_loading" id="port_of_loading" value="">
+                                                            name="port_of_loading" id="port_of_loading" value="{{ @$invoice[0]['port_of_loading'] }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 py-2">
@@ -78,7 +79,7 @@
     
                                                             <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="destination_port" id="destination_port" value="">   
+                                                            name="destination_port" id="destination_port" value="{{ @$invoice[0]['destination_port'] }}">   
                                                         
                                                     </div>
                                                 </div>
@@ -89,7 +90,7 @@
     
                                                             <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="container_size" id="container_size" value="">   
+                                                            name="container_size" id="container_size" value="{{ @$invoice[0]['container_size'] }}">   
                                                         {{-- <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
                                                             name="shipment_type" id="shipment_type"> --}}
@@ -118,7 +119,7 @@
                                                             class="col-6 px-0 font-size font-bold">Invoice#</label>
                                                         <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="invoice_no" id="invoice_no" value="">
+                                                            name="invoice_no" id="invoice_no" value="{{ @$invoice[0]['invoice_no'] }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 py-2">
@@ -127,7 +128,7 @@
                                                             Invoice Date</label>
                                                         <input type="date"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="invoice_date" id="invoice_date" value="">
+                                                            name="invoice_date" id="invoice_date" value="{{ @$invoice[0]['invoice_date'] }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 py-2">
@@ -136,7 +137,7 @@
                                                             class="col-6 px-0 font-size font-bold">Invoice Amount</label>
                                                         <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="invoice_amount" id="invoice_amount" value="">
+                                                            name="invoice_amount" id="invoice_amount" value="{{ @$invoice[0]['invoice_amount'] }}">
     
                                                     </div>
                                                 </div>
@@ -146,7 +147,7 @@
                                                             class="col-6 px-0 font-size font-bold">Due Date</label>
                                                         <input type="date"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="due_date" id="due_date" value="">
+                                                            name="due_date" id="due_date" value="{{ @$invoice[0]['due_date'] }}">
     
                                                     </div>
                                                 </div>
@@ -157,7 +158,7 @@
                                                             class="col-6 px-0 font-size font-bold">Payment Date</label>
                                                         <input type="date"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="payment_date" id="payment_date" value="">
+                                                            name="payment_date" id="payment_date" value="{{ @$invoice[0]['payment_date'] }}">
     
                                                     </div>
                                                 </div>
@@ -167,7 +168,7 @@
                                                             class="col-6 px-0 font-size font-bold">Recieved Amount</label>
                                                         <input type="text"
                                                             class="form-control-sm border border-0 rounded-pill bg col-6"
-                                                            name="received_amount" id="received_amount" value="" onchange="findbalance()" >
+                                                            name="received_amount" id="received_amount" value="{{ @$invoice[0]['received_amount'] }}" onchange="findbalance()" >
     
                                                     </div>
                                                 </div>

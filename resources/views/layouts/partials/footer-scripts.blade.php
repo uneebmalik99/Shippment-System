@@ -942,7 +942,23 @@
         }
     }
 </script>
-
+{{-- Edit invoices --}}
+<script>
+    function updateinvoice(id){
+        $id = id;
+        $.ajax({
+            type: 'GET',
+            url: '{{ route('invoice.edit') }}',
+            data: {
+                id: $id
+            },
+            success: function(data) {
+                $('.modal-body').html(data);
+                $('#exampleModal').modal('show');
+            }
+        });
+    }
+</script>
 {{-- add records --}}
 <script>
     $("#popup_button").click(function() {
@@ -2050,3 +2066,5 @@
         
     }
 </script>
+
+
