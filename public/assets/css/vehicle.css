@@ -54,8 +54,8 @@
     color: #ff7a00;
 }
 
-.dataTable > thead > tr > th[class*="sort"]:before,
-.dataTable > thead > tr > th[class*="sort"]:after {
+.dataTable>thead>tr>th[class*="sort"]:before,
+.dataTable>thead>tr>th[class*="sort"]:after {
     content: "" !important;
 }
 
@@ -107,6 +107,7 @@ div.dataTables_length select {
     font-size: 14px;
     line-height: 27px;
 }
+
 
 /* .dataTables_info, */
 
@@ -176,16 +177,13 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .main_page {
-    background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.72),
-        rgba(189, 226, 252, 0.48)
-    ) !important;
+    background: linear-gradient( to bottom, rgba(255, 255, 255, 0.72), rgba(189, 226, 252, 0.48)) !important;
 }
 
 .paginate_button.current {
     color: #ffffff !important;
 }
+
 
 /* Vehicle attachments style */
 
@@ -199,11 +197,7 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .attach {
-    background: linear-gradient(
-        254.26deg,
-        rgba(28, 113, 176, 0.9) 45.03%,
-        #10c2ea 72.6%
-    ) !important;
+    background: linear-gradient( 254.26deg, rgba(28, 113, 176, 0.9) 45.03%, #10c2ea 72.6%) !important;
 }
 
 .image {
@@ -264,35 +258,19 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .box-bg-1 {
-    background: linear-gradient(
-        14.48deg,
-        #e93f78 -244.13%,
-        #ffffff 61.62%
-    ) !important;
+    background: linear-gradient( 14.48deg, #e93f78 -244.13%, #ffffff 61.62%) !important;
 }
 
 .box-bg-2 {
-    background: linear-gradient(
-        41.21deg,
-        #b0e9ff -14.28%,
-        #ffffff 55.03%
-    ) !important;
+    background: linear-gradient( 41.21deg, #b0e9ff -14.28%, #ffffff 55.03%) !important;
 }
 
 .box-bg-3 {
-    background: linear-gradient(
-        20.8deg,
-        #ffa003 -199.34%,
-        #ffffff 63.93%
-    ) !important;
+    background: linear-gradient( 20.8deg, #ffa003 -199.34%, #ffffff 63.93%) !important;
 }
 
 .box-bg-4 {
-    background: linear-gradient(
-        29.98deg,
-        #ff7a00 -113.42%,
-        #ffffff 59.04%
-    ) !important;
+    background: linear-gradient( 29.98deg, #ff7a00 -113.42%, #ffffff 59.04%) !important;
 }
 
 .parallelogram {
@@ -346,11 +324,7 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .active_information_button {
-    background: linear-gradient(
-        254.1deg,
-        #10c3ea 4.82%,
-        #337fb8 61.08%
-    ) !important;
+    background: linear-gradient( 254.1deg, #10c3ea 4.82%, #337fb8 61.08%) !important;
     border: 1px solid #1c71b0 !important;
     box-shadow: 6px 6px 4px rgba(48, 148, 175, 0.47) !important;
     transform: skew(-30deg) !important;
@@ -374,7 +348,7 @@ div.dataTables_wrapper div.dataTables_info {
     font-family: "Inter";
     font-style: normal;
     /* font-weight: 600; */
-    color: #6d8da6;
+    color: black!important;
     margin-left: 15px;
     font-size: 13px;
 }

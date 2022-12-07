@@ -320,22 +320,22 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                         style="width:100%!important;overflow-x:scroll!important;">
                         <thead class="bg-custom">
                             <tr class="font-size">
-                                <th class="font-bold-tr">VIEW VEHICLES</th>
+                                <th class="font-bold-tr">VIEW</th>
                                 <th class="font-bold-tr">IMAGE</th>
                                 <th class="font-bold-tr">CONSIGNEES</th>
                                 <th class="font-bold-tr">CONTAINER NO:</th>
                                 <th class="font-bold-tr">BOOKING NO:</th>
                                 <th class="font-bold-tr">LINES</th>
-                                <th class="font-bold-tr">NO OF VEHICLES</th>
+                                <th class="font-bold-tr">VEHICLES</th>
                                 <th class="font-bold-tr">SIZE</th>
                                 <th class="font-bold-tr">LOAD DATE</th>
                                 <th class="font-bold-tr">CUT OFF DATE</th>
                                 <th class="font-bold-tr">EXPORT DATE</th>
                                 <th class="font-bold-tr">ARR Date</th>
                                 <th class="font-bold-tr">Shipper</th>
-                                <th class="font-bold-tr">LOADING PORT</th>
-                                <th class="font-bold-tr">DESTINATION PORT</th>
-                                <th class="font-bold-tr">DOCS</th>
+                                <th class="font-bold-tr">P.O.L</th>
+                                <th class="font-bold-tr">P.O.D</th>
+                                <th class="font-bold-tr">BAL</th>
                                 <th class="font-bold-tr">ACTIONS</th>
                             </tr>
                         </thead>

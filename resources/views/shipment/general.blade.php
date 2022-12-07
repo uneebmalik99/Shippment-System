@@ -401,8 +401,7 @@
                                                         name="select_consignee" id="select_consignee">
                                                         @if(@$shipment[0]['select_consignee'])
                                                         <option value="{{@$shipment[0]['select_consignee']}}" selected disabled>{{@$shipment[0]['select_consignee']}}</option>
-                                                        @else
-                                                        <option selected disabled>Select Consignee</option>
+                                                        
                                                         @endif
                                                         {{-- @foreach ($buyer_ids as $buyer_id)
                                                         @if(@$buyer_id['billings'][0]['company_name'])

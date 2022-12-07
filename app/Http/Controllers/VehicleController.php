@@ -996,15 +996,24 @@ class VehicleController extends Controller
         $data = [];
         $data['vehicle_id'] = $request->vehicle_id;
 
-       $ch = VehicleCart::create($data);
+        $check = VehicleCart::wherevehicle_id($request->vehicle_id)->get()->toArray();
+        if($check == null){
+            // dd($check);
+            $ch = VehicleCart::create($data);
+            if($ch){
+                return 'Vehicle added to cart successfully!';
+               }
+               else{
+                return 'Some Error Occurs';
+               }
+        
+        }
+        else{
+            // dd('exit');
+            return 'Vehicle Already Exits In Cart';
+        }
 
-       if($ch){
-        return 'Vehicle added to cart successfully!';
-       }
-       else{
-        return 'Some Error Occurs';
-       }
-
+       
 
 
     }

@@ -265,7 +265,7 @@
                 // alert(data[0]['shipper']['id']);
                 $('#customer_email').val(data[0]['email']);
                 $('#customer_phone').val(data[0]['phone']);
-                $('#select_consignee').append('<option selected disabled>'+data[0]['shippers'][0]['consignee']+'</option>');
+                $('#select_consignee').append('<option selected disabled value="'+data[0]['shippers'][0]['consignee']+'">'+data[0]['shippers'][0]['consignee']+'</option>');
                 $('#notifier').append('<option selected disabled>'+data[0]['shippers'][0]['consignee']+'</option>');
             }
         });
@@ -335,7 +335,6 @@
             // },
             success: function(data) {
                 console.log(data);
-
                 $('.modal-body').html(data);
                 $('#exampleModal').modal('show');
             }

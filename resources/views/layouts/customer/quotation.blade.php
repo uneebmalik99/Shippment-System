@@ -46,8 +46,10 @@
                     <div>
                         <select name="container_size[]" id="container_size"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            @if(@$quotation[0]['container_size'])
+                            @if(@$quotation[0]['container_size'] != 'null')
                             <option value="{{@$quotation[0]['container_size']}}" selected>{{@$quotation[0]['container_size']}}</option>
+                            @elseif (@$quotation[0]['container_size'] == 'null')
+                            <option selected value="null">Select Container Size</option>
                             @else
                             <option selected value="null">Select Container Size</option>
                             @endif
@@ -62,8 +64,10 @@
                     <div>
                         <select name="vehicle[]" id="vehicle"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            @if(@$quotation[0]['vehicle'])
+                            @if(@$quotation[0]['vehicle'] != 'null')
                             <option value="{{@$quotation[0]['vehicle']}}" selected>{{@$quotation[0]['vehicle']}}</option>
+                            @elseif (@$quotation[0]['vehicle'] == 'null')
+                            <option selected value="null">Select Vehicles</option>
                             @else
                             <option selected value="null">Select Vehicles</option>
                             @endif
@@ -78,8 +82,10 @@
                     <div>
                         <select name="loading_port[]" id="loading_port"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            @if(@$quotation[0]['loading_port'])
+                            @if(@$quotation[0]['loading_port'] != 'null')
                             <option value="{{@$quotation[0]['loading_port']}}" selected>{{@$quotation[0]['loading_port']}}</option>
+                            @elseif (@$quotation[0]['loading_port'] == 'null')
+                            <option selected value="null">Select Loading Port</option>
                             @else
                             <option selected value="null">Select Loading Port</option>
                             @endif
@@ -94,8 +100,10 @@
                     <div>
                         <select name="shipping_line[]" id="shipping_line"
                             class="form-control-sm border border-0 rounded-pill bg col-10">
-                            @if(@$quotation[0]['shipping_line'])
+                            @if(@$quotation[0]['shipping_line'] != 'null')
                             <option value="{{@$quotation[0]['shipping_line']}}" selected>{{@$quotation[0]['shipping_line']}}</option>
+                            @elseif (@$quotation[0]['shipping_line'] == 'null')
+                            <option selected value="null">Select Shipping Line</option>
                             @else
                             <option selected value="null">Select Shipping Line</option>
                             @endif
@@ -146,8 +154,10 @@
                      <div>
                          <select name="container_size[]" id="container_size"
                              class="form-control-sm border border-0 rounded-pill bg col-10">
-                             @if(@$quotation[$i]['container_size'])
+                             @if(@$quotation[$i]['container_size'] != 'null')
                              <option value="{{@$quotation[$i]['container_size']}}" selected>{{@$quotation[$i]['container_size']}}</option>
+                             @elseif (@$quotation[$i]['container_size'] == 'null')
+                             <option selected value="null">Select</option>
                              @else
                              <option selected value="null">Select</option>
                              @endif
@@ -160,8 +170,10 @@
                      <div>
                          <select name="vehicle[]" id="vehicle"
                              class="form-control-sm border border-0 rounded-pill bg col-10">
-                             @if(@$quotation[$i]['vehicle'])
+                             @if(@$quotation[$i]['vehicle'] != 'null')
                              <option value="{{@$quotation[$i]['vehicle']}}" selected>{{@$quotation[$i]['vehicle']}}</option>
+                             @elseif (@$quotation[$i]['vehicle'] == 'null')
+                             <option selected value="null">Select</option>
                              @else
                              <option selected value="null">Select</option>
                              @endif
@@ -174,8 +186,10 @@
                      <div>
                          <select name="loading_port[]" id="loading_port"
                              class="form-control-sm border border-0 rounded-pill bg col-10">
-                             @if(@$quotation[$i]['loading_port'])
+                             @if(@$quotation[$i]['loading_port'] != 'null')
                              <option value="{{@$quotation[$i]['loading_port']}}" selected>{{@$quotation[$i]['loading_port']}}</option>
+                             @elseif (@$quotation[$i]['loading_port'] == 'null')
+                             <option selected value="null">Select</option>
                              @else
                              <option selected value="null">Select</option>
                             @endif
@@ -188,8 +202,10 @@
                      <div>
                          <select name="shipping_line[]" id="shipping_line"
                              class="form-control-sm border border-0 rounded-pill bg col-10">
-                             @if(@$quotation[$i]['shipping_line'])
+                             @if(@$quotation[$i]['shipping_line'] != 'null')
                              <option value="{{@$quotation[$i]['shipping_line']}}" selected>{{@$quotation[$i]['shipping_line']}}</option>
+                             @elseif (@$quotation[$i]['shipping_line'] == 'null')
+                             <option selected value="null">Select</option>
                              @else
                              <option selected value="null">Select</option>
                              @endif

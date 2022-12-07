@@ -27,10 +27,10 @@
             <th class="font-bold-tr">BUYER ID</th>
             <th class="font-bold-tr">LOT</th>
             <th class="font-bold-tr">TITLE</th>
+            <th class="font-bold-tr">TITLE TYPE</th>
             <th class="font-bold-tr">KEY</th>
             <th class="font-bold-tr">DEL DATE</th>
             <th class="font-bold-tr">AGE</th>
-            <th class="font-bold-tr">TOW</th>
             <th class="font-bold-tr">SHIPPER</th>
             <th class="font-bold-tr">ACTIONS</th>
         </tr>
@@ -71,10 +71,10 @@
                 <td>{{ @$val['buyer_id'] }}</td>
                 <td>{{ @$val['lot'] }}</td>
                 <td>{{ @$val['title'] }}</td>
+                <td>{{ @$val['title_type'] }}</td>
                 <td>{{ @$val['keys'] }}</td>
                 <td>{{ @$val['delivered_date'] }}</td>
                 <td>{{ @$val['age'] }}</td>
-                <td>{{ @$val['towing_charges'] }}</td>
                 <td>{{ @$val['shipper'] }}</td>
                 <td>
                     <button class='profile-button'><a href={{route('vehicle.profile', @$val['id'])}}>

@@ -277,7 +277,7 @@
                                         class="d-flex align-items-center d-flex align-items-center form-control-sm border border-0 rounded-pill bg col-6">
                                         {{-- <span class="prefix text-dark">$</span> --}}
                                        
-                                        <input type="number" class="general_input col-11" name="lot"
+                                        <input type="text" class="general_input col-11" name="lot"
                                             id="lot" value="{{ @$user[0]['lot'] }}">
                                     </div>
                                 </div>
@@ -795,12 +795,15 @@
                                     <label for="port" class="col-6 px-0 font-size font-bold">Warehouse</label>
                                     <select class="form-control-sm border border-0 rounded-pill bg col-6"
                                         name="port" id="port">
-                                        
+                                    @if(@$user[0]['port'])
+                                        <option value="{{@$user[0]['port']}}">{{@$user[0]['port']}}</option>
+                                        @else
                                         <option selected disabled>Select Warehouse</option>
+                                        @endif
                                         
                                         @if($warehouses)
                                         @foreach ($warehouses as $warehouse)
-                                            <option value="{{ $warehouse['id'] }}">{{ $warehouse['name'] }}</option>
+                                            <option value="{{ $warehouse['name'] }}">{{ $warehouse['name'] }}</option>
                                         @endforeach
                                         @endif
                                     </select>
