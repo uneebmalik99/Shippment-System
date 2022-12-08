@@ -197,6 +197,7 @@ class InvoiceController extends Controller
 
     }
     public function saveInovice(Request $req){
+        dd($req);
         $data = [];
         $output = [];
         $data = $req->all();
