@@ -308,13 +308,15 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     //Inventory
     Route::get('/invoice',                              [InvoiceController::class, 'index'])->name('invoice.index');
     Route::get('/invoices/create',                      [InvoiceController::class, 'create_invoice'])->name('invoice.create');
+    Route::get('/invoices/edit/{id?}',                      [InvoiceController::class, 'create_invoice'])->name('invoice.edit');
+
     Route::post('/invoices/create',                      [InvoiceController::class, 'create'])->name('invoice.post_create');
 
     Route::get('/invoices/update/{id?}',                      [InvoiceController::class, 'update'])->name('invoice.get_update');
     Route::post('/invoices/update/{id?}',                     [InvoiceController::class, 'update'])->name('invoice.post_update');
 
     Route::get('/invoices/delete/{id?}',                     [InvoiceController::class, 'delete'])->name('invoice.get_delete');
-
+    
     // Route::get('/invoices/pdf', function(){
     //     return view('invoice/pdf');
     //     });

@@ -44,16 +44,6 @@
         </div>
         <br>
         <div class="card">
-            <div class="card-head">
-                <div class="container-fluid">
-                    <div class="p-3">
-                        <div class="bg-view p-3 ">
-                            <span class="text-clr"><b>View</b></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
             <div class="card-body overflow-auto">
                 <table class="table" id="inovice_table">
                     <thead>
@@ -71,7 +61,8 @@
                             <th class="font-bold-tr">PAYMENT DATE</th>
                             <th class="font-bold-tr">RECIEVED AMOUNT</th>
                             <th class="font-bold-tr">BALANCE</th>
-                            {{-- <th class="font-bold-tr">ACTIONS</th> --}}
+                            
+                            <th class="font-bold-tr">ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody id="inovice_body">
@@ -185,9 +176,9 @@
                     data: 'balance'
                 },
                 
-                // {
-                //     data: 'action'
-                // },
+                {
+                    data: 'action'
+                },
             ],
             order: [
                 [1, 'asc']

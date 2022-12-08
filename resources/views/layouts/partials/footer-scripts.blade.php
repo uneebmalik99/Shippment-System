@@ -625,8 +625,7 @@
                 'id': $id
             },
             success: function(data) {
-                console.log(data[0].id);
-
+                
                 $('#subject').html(data[0].subject);
                 $('#expiry_date').html(data[0].expiry_date);
                 $('#message').html(data[0].message);
@@ -943,7 +942,23 @@
         }
     }
 </script>
-
+{{-- Edit invoices --}}
+<script>
+    function updateinvoice(id){
+        $id = id;
+        $.ajax({
+            type: 'GET',
+            url: '{{ route('invoice.edit') }}',
+            data: {
+                id: $id
+            },
+            success: function(data) {
+                $('.modal-body').html(data);
+                $('#exampleModal').modal('show');
+            }
+        });
+    }
+</script>
 {{-- add records --}}
 <script>
     $("#popup_button").click(function() {
@@ -2051,3 +2066,5 @@
         
     }
 </script>
+
+
