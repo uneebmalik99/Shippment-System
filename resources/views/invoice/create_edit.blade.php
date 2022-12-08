@@ -42,13 +42,15 @@
                                                             
                                                             <input type="text" class="col-8 general_input" name="ar_number" id="ar_number"
                                                                 value="{{ @$invoice[0]['ar_number'] }}">
-                    
+                                                            @empty(@$invoice[0]['vehicle'])
                                                             <a class="prefix text-dark px-2 getinf"
-                                                                style="text-decoration: none!important;
-                                                                 background:rgb(175, 197, 234);border-radius:20px;cursor:pointer"
-                                                                id="getshipmentinfo" onclick="getshipmentInfo(this.id)">
-                                                                <span class="text-white px-1" id="getshippmentinfo">GetInfo</span>
+                                                            style="text-decoration: none!important;
+                                                             background:rgb(175, 197, 234);border-radius:20px;cursor:pointer"
+                                                            id="getshipmentinfo" onclick="getshipmentInfo(this.id)">
+                                                            <span class="text-white px-1" id="getshippmentinfo">GetInfo</span>
                                                             </a>
+                                                            @endempty
+                                                            
                                                             
                                                         </div>
                                                         
@@ -243,8 +245,10 @@
                                         <td>{{ @$vehicles['title_number'] }}</td>
                                         <td>{{ @$vehicles['title_state '] }}</td>
                                         <td>{{ @$vehicles['customer_name'] }}</td>
-                                        <td class='text-center'><input type='checkbox' value='"{{ @$vehicles['id']  }}"' id='vehicle' name='vehicle_id'></td></tr>
+                                        <td id="delete" class='text-center' onclick="delete_row(this.id)">X</td>
                                         </tr>
+                                        
+                                        
                                         @empty
                                         <td>No Vehicle Found</td>
                                         @endforelse
@@ -306,5 +310,10 @@
         var balance = Math.abs(Math.floor(invoice_amount)-Math.floor(received_amount))
         
         $('#balance').val(balance);
+    }
+</script>
+<script>
+    function delete_row(id){
+        $("#"+id).parent().remove();
     }
 </script>

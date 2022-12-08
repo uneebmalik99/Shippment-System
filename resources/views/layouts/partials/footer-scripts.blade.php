@@ -790,11 +790,9 @@
 
 <script>
     function getInfo(tab) {
-        // vin = KM8JUCAC4DU604504;
-        // tab = $('#getinfo').attr('tab');
-        // document.getElementById('contents').style.visibility = "hidden";
+        
         document.getElementById('load').style.visibility = "visible";
-        // $("#load").css("display", "block");
+        
         tab = tab;
         vin = $('#vin').val();
         // alert(vin);
@@ -861,7 +859,7 @@
 {{-- - get Shipment Info --}}
 <script>
     function getshipmentInfo(tab) {
-
+        $("#inovice_shipment_table").empty();
         document.getElementById('load').style.visibility = "visible";
 
         tab = tab;
@@ -879,7 +877,7 @@
 
             } else {
                 $.ajax({
-                    type: 'Post',
+                    type: 'POST',
                     url: '{{ route('invoice.shipments') }}',
                     data: {
                         ar_number: ar_number
@@ -904,10 +902,12 @@
                                 "</td><td>" + element.model + "</td><td>" + element.status +
                                 "</td><td>" + element.title_number + "</td><td>" + element.title_state +
                                 "</td><td>" + element.customer_name + "</td><td>" + element.vin +
-                                "</td><td class='text-center'><input type='checkbox' value='"+element.id+"' id='vehicle' name='vehicles[]'></td></tr>";
+                                "</td><td class='text-center'><input type='checkbox' value='"+element.id+"' id='vehicle' name='vehicles[]'></td></tr>"+
+                                "</td><td class='text-center'><input type='checkbox' value='"+element.id+"' id='vehicle' name='vehicles[]'>X</td></tr>";
 
                             html.push(output);
                         });
+                        
                         $('#inovice_shipment_table').append(html);
 
                     },
@@ -916,7 +916,6 @@
                     },
                     error: function() {
                         document.getElementById('load').style.visibility = "hidden";
-                        alert('not match with any shipment');
                         iziToast.warning({
                             message: 'not match with any shipment',
                             position: 'topCenter',
