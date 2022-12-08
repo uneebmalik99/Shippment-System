@@ -919,11 +919,11 @@ class ShipmentController extends Controller
         $data = [];
         if ($req->searchText) {
             if(Auth::user()->hasRole('Customer')){
-                $data['vehicles'] = Vehicle::where('added_by_user', auth()->user()->id)->where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->get()->toArray();
+                $data['vehicles'] = Vehicle::where('added_by_user', auth()->user()->id)->where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->whereshipment_status('0')->get()->toArray();
                 // dd($data['vehicles']);
 
             }else{
-                $data['vehicles'] = Vehicle::where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->get()->toArray();
+                $data['vehicles'] = Vehicle::where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->whereshipment_status('0')->get()->toArray();
                 // dd($data['vehicles']);
             }
                 
@@ -941,6 +941,12 @@ class ShipmentController extends Controller
 
     public function add_vehicles(Request $req){
         // return $req->id;
+
+        $vehicle = Vehicle::find($req->id);
+        $vehicle->shipment_status = '1';
+        $vehicle->save();
+
+
         $data  = [];
 
         $data['vehicles'] = Vehicle::where('id', $req->id)->get()->toArray();
@@ -954,6 +960,13 @@ class ShipmentController extends Controller
 
     public function deleteFromCart(Request $req){
         $data = [];
+
+        $vehicle = Vehicle::find($req->value);
+        $vehicle->shipment_status = '0';
+        $vehicle->save();
+
+
+
         $data = VehicleCart::find($req->id);
 
         if($data){

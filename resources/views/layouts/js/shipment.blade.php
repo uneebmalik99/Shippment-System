@@ -290,6 +290,8 @@
 
     function removerow(id) {
 
+        $value = $('#'+id).val();
+
         var td = event.target.parentNode;
         var tr = td.parentNode; // the row to be removed
         tr.parentNode.removeChild(tr);
@@ -299,6 +301,7 @@
             url: '{{ route('shipment.deleteFromCart') }}',
             data: {
                 'id': id,
+                'value':$value,
             },
             success: function(data) {
 

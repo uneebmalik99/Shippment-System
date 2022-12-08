@@ -996,6 +996,10 @@ class VehicleController extends Controller
         $data = [];
         $data['vehicle_id'] = $request->vehicle_id;
 
+        $vehicle = Vehicle::find($request->vehicle_id);
+        $vehicle->shipment_status = '1';
+        $vehicle->save();
+
         $check = VehicleCart::wherevehicle_id($request->vehicle_id)->get()->toArray();
         if($check == null){
             // dd($check);
