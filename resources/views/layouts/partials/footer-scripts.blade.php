@@ -901,9 +901,9 @@
                         var html = [];
                         data.shipments[0]['vehicle'].forEach(element => {
                             output = "<tr><td>" + element.year + "</td><td>" + element.make +
-                                "</td><td>" + element.model + "</td><td>" + element.vin +
-                                "</td><td>" + element.vin + "</td><td>" + element.vin +
-                                "</td><td>" + element.vin + "</td><td>" + element.vin +
+                                "</td><td>" + element.model + "</td><td>" + element.status +
+                                "</td><td>" + element.title_number + "</td><td>" + element.title_state +
+                                "</td><td>" + element.customer_name + "</td><td>" + element.vin +
                                 "</td><td class='text-center'><input type='checkbox' value='"+element.id+"' id='vehicle' name='vehicles[]'></td></tr>";
 
                             html.push(output);

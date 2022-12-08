@@ -230,6 +230,25 @@
                                 </tr>
                             </thead>
                             <tbody id="inovice_shipment_table">
+                                @isset($invoice[0]['vehicle'])
+                                        @forelse (@$invoice[0]['vehicle'] as $vehicles )
+                                        <tr>
+                                        
+                                        
+                                        <td>{{ @$vehicles['year'] }}</td>
+                                        <td>{{ @$vehicles['make'] }}</td>
+                                        <td>{{ @$vehicles['model '] }}</td>
+                                        <td>{{ @$vehicles['vin'] }}</td>
+                                        <td>{{ @$vehicles['status'] }}</td>
+                                        <td>{{ @$vehicles['title_number'] }}</td>
+                                        <td>{{ @$vehicles['title_state '] }}</td>
+                                        <td>{{ @$vehicles['customer_name'] }}</td>
+                                        <td class='text-center'><input type='checkbox' value='"{{ @$vehicles['id']  }}"' id='vehicle' name='vehicle_id'></td></tr>
+                                        </tr>
+                                        @empty
+                                        <td>No Vehicle Found</td>
+                                        @endforelse
+                                @endisset
                                
                             </tbody>
                         </table>
