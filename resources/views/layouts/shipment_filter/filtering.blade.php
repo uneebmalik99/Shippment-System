@@ -94,12 +94,21 @@
 <script type="text/javascript">
     $(document).ready(function() {
         v = '{{@$value}}';
+        s = '{{@$state}}';
         if(v){
             value = v;
         }
         else{
             value = '';
         }
+
+        if(s){
+            state = s;
+        }
+        else{
+            state = '';
+        }
+
         tab = '{{@$tab}}';
         
 
@@ -154,6 +163,7 @@
                     data: {
                 'tab': tab,
                 'value': value,
+                'state': state,
             },
 
                 },

@@ -163,6 +163,83 @@ class CustomerController extends Controller
         return view($this->view . 'list', $data, $notification);
     }
 
+
+    public function changeState($state){
+
+        if($state == 'All'){
+            return redirect()->route('customer.list');
+        }
+
+        $data = [];
+        $data = [
+            "state" => $state,
+            "page_heading" => $this->plural . ' List',
+            "breadcrumbs" => array('#' => $this->plural . " List"),
+            "module" => [
+                'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'list',
+            ],
+        ];
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+        $notification = $this->Notification();
+        $data['records'] = User::role('Customer')->where('state', $state)->get();
+        $data['consignees'] = Shipper::where('consignee', '!=' , Null)->where('address', $state)->count();
+        $data['active_customer'] = User::role('Customer')->where('state', $state)->where('status', '1')->get()->count();
+
+        $data['Inactive_customer'] = User::role('Customer')->where('state', $state)->where('status', '0')->get()->count();
+
+        $Obj = new User;
+        $data['inactive'] = $Obj->where('status', '0')->where('state', $state)->get();
+        $data['active'] = $Obj->where('status', '1')->where('state', $state)->get();
+
+        $lastweekshipper = Shipper::select('*')
+            ->whereBetween('created_at',
+                [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]
+            )->get()->count();
+
+        $currentweekshipper = Shipper::select("*")
+            ->whereBetween('created_at',
+                [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]
+            )
+            ->get()->count();
+        if ($lastweekshipper > 0) {
+            $diff = $currentweekshipper - $lastweekshipper;
+            $data['lastweekanalysis'] = ($diff / $lastweekshipper) * 100;
+
+        } else {
+            $data['lastweekanalysis'] = 100;
+        }
+        $lastweekconsignee = Consignee::select('*')
+            ->whereBetween('created_at',
+                [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]
+            )->get()->count();
+
+        $currentweekconsignee = Consignee::select("*")
+            ->whereBetween('created_at',
+                [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]
+            )
+            ->get()->count();
+        // dd($lastweekconsignee);
+
+        if ($lastweekconsignee > 0) {
+            $differ = $currentweekconsignee - $lastweekconsignee;
+            $data['lastweekconsigneeanalysis'] = ($differ / $lastweekconsignee) * 100;
+        } else {
+            $data['lastweekconsigneeanalysis'] = 100;
+        }
+
+        $data['shipper'] = Shipper::where('address', $state);
+        // $data['consignees'] = Consignee::all();
+        return view($this->view . 'list', $data, $notification);
+
+        
+    }
+
     public function create(Request $request)
     {
         
@@ -1094,17 +1171,25 @@ class CustomerController extends Controller
     //     Excel::import(new CustomersImport, request()->file('import_document'));
     // }
 
-    public function serverside(Request $request)
+    public function serverside(Request $request, $state = null)
     {
+       
+        
         if ($request->ajax()) {
+
+            if($state != null){
+                $data = User::role('Customer')->where('state', $state);
+        }
+        else{
             $data = User::role('Customer');
+        }
+
+
+            
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $data['row'] = $row;
-                    // $url_view = url('admin/shipments/profile/' . $row->id);
-                    // $url_delete = url('admin/shipments/delete/' . $row->id);
-                    // $url_edit = url('admin/shipments/edit/' . $row->id);
                     $output = view('layouts.customer.action_buttons', $data)->render();
                     return $output;
                 })

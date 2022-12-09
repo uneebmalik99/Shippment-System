@@ -147,6 +147,61 @@ class VehicleController extends Controller
         return view($this->view . 'list', $data, $notification);
     }
 
+    public function changeState($state){
+        if($state == 'All'){
+            return redirect()->route('vehicle.list');
+        }
+        $data = [];
+        $data = [
+            "state" => $state,
+            "page_heading" => $this->plural . ' List',
+            "breadcrumbs" => array('#' => $this->plural . " List"),
+            "module" => [
+                'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'list',
+            ],
+        ];
+
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+        // dd($data['vehicles_cart']);
+
+
+        if(Auth::user()->hasRole('Customer')){
+
+            $data['records'] = Vehicle::with('user','pickupimages')->where('added_by_user', auth()->user()->id)->where('status', 3)->where('pickup_location', $state)->get()->toArray();
+            $data['new_orders'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '1')->where('pickup_location', $state)->get();
+            $data['dispatched'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '2')->where('pickup_location', $state)->get();
+            $data['on_hand'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '3')->where('pickup_location', $state)->get();
+            $data['no_titles'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '4')->where('pickup_location', $state)->get();
+            $data['towing'] = Vehicle::where('added_by_user', auth()->user()->id)->where('status', '5')->where('pickup_location', $state)->get();
+            $data['location'] = Location::all();
+            $data['status'] = VehicleStatus::limit(3)->get()->toArray();
+            $data['make'] = MMS::select('make')->where('status', '1')->groupBy('make')->get()->toArray();
+            $data['model'] = MMS::select('model')->where('status', '1')->groupBy('model')->get()->toArray();
+        }
+        else{
+            $data['records'] = Vehicle::with('user','pickupimages')->where('status', 3)->where('pickup_location', $state)->get()->toArray();
+            $data['new_orders'] = Vehicle::where('status', '1')->where('pickup_location', $state)->get();
+            $data['dispatched'] = Vehicle::where('status', '2')->where('pickup_location', $state)->get();
+            $data['on_hand'] = Vehicle::where('status', '3')->where('pickup_location', $state)->get();
+            $data['no_titles'] = Vehicle::where('status', '4')->where('pickup_location', $state)->get();
+            $data['towing'] = Vehicle::where('status', '5')->where('pickup_location', $state)->get();
+            $data['location'] = Location::all();
+            $data['status'] = VehicleStatus::limit(3)->get()->toArray();
+            $data['make'] = MMS::select('make')->where('status', '1')->groupBy('make')->get()->toArray();
+            $data['model'] = MMS::select('model')->where('status', '1')->groupBy('model')->get()->toArray();
+        }
+
+        $notification = $this->Notification();
+        return view($this->view . 'list', $data, $notification);
+
+    }
+
     public function create(Request $request)
     {
 
@@ -909,24 +964,41 @@ class VehicleController extends Controller
 
     public function fetchVehicles(Request $req)
     {
+        
         if ($req->ajax()) {
             $output = [];
             $table = "";
             $page = "";
             $status = $req->id;
             $status_name = $req->tab;
-            if(Auth::user()->hasRole('Customer')){  
-                $total = Vehicle::where('added_by_user', auth()->user()->id)->get();
-                $records = Vehicle::with('user')->where('added_by_user', auth()->user()->id);
+
+            if($req->state){
+                if(Auth::user()->hasRole('Customer')){  
+                    $total = Vehicle::where('added_by_user', auth()->user()->id)->where('pickup_location', $req->state)->get();
+                    $records = Vehicle::with('user')->where('added_by_user', auth()->user()->id);
+                }
+                else{
+                    $total = Vehicle::where('pickup_location', $req->state)->get()->toArray();
+                    $records = Vehicle::with('user','pickupimages')->where('pickup_location', $req->state);
+                }
             }
             else{
-                $total = Vehicle::all()->toArray();
-                $records = Vehicle::with('user','pickupimages');
+                if(Auth::user()->hasRole('Customer')){  
+                    $total = Vehicle::where('added_by_user', auth()->user()->id)->get();
+                    $records = Vehicle::with('user')->where('added_by_user', auth()->user()->id);
+                }
+                else{
+                    $total = Vehicle::all()->toArray();
+                    $records = Vehicle::with('user','pickupimages');
+                }
             }
+
+
+
+          
             if ($status) {
-                $records = $records->with('images')->where('status', $status)->paginate($this->perpage);
+                $records = $records->where('status', $status)->paginate($this->perpage);
                 $data['records'] = $records;
-                // dd($data['records']);
                 $output['view'] = view('vehicle.' . $status_name, $data)->render();
                 return Response($output);
             }
@@ -995,6 +1067,10 @@ class VehicleController extends Controller
 
         $data = [];
         $data['vehicle_id'] = $request->vehicle_id;
+
+        $vehicle = Vehicle::find($request->vehicle_id);
+        $vehicle->shipment_status = '1';
+        $vehicle->save();
 
         $check = VehicleCart::wherevehicle_id($request->vehicle_id)->get()->toArray();
         if($check == null){

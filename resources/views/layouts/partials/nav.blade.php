@@ -55,9 +55,30 @@
                             style="border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
                             @foreach ($location as $locations)
                                 <li>
-                                    <a href="#" data-lng="en">
+                                    @if(@$module['type'] == 'Customers')
+                                    <a href="{{route('customer.changeState', @$locations['name'])}}" data-tab="{{@$module['type']}}" style="cursor:pointer;">
                                         {{ @$locations['name'] }}
                                     </a>
+                                    @elseif (@$module['type'] == 'Vehicles')
+
+                                    <a href="{{route('vehicle.changeState', @$locations['name'])}}" data-tab="{{@$module['type']}}"  style="cursor:pointer;">
+                                        {{ @$locations['name'] }}
+                                    </a>
+
+                                    @elseif (@$module['type'] == 'Shipments')
+
+                                    <a href="{{route('shipment.changeState', @$locations['name'])}}" data-tab="{{@$module['type']}}" style="cursor:pointer;">
+                                        {{ @$locations['name'] }}
+                                    </a>
+
+                                    @elseif (@$module['type'] == 'Dashboard')
+                                    <a href="{{route('dashboard.changeState', @$locations['name'])}}" data-tab="{{@$module['type']}}" style="cursor:pointer;">
+                                        {{ @$locations['name'] }}
+                                    </a>
+                                    @else
+
+                                    @endif
+
                                 </li>
                             @endforeach
                             {{-- <li>

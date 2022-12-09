@@ -154,6 +154,70 @@ class ShipmentController extends Controller
         return view($this->view . 'list', $data, $notification);
     }
 
+
+    public function changeState($state){
+        if($state == 'All'){
+            return redirect()->route('shipment.list');
+        }
+        $data = [];
+        $data = [
+            "state" => $state,
+            "page_heading" => $this->plural . ' List',
+            "breadcrumbs" => array('#' => $this->plural . " List"),
+            "module" => [
+                'type' => $this->type,
+                'singular' => $this->singular,
+                'plural' => $this->plural,
+                'view' => $this->view,
+                'db_key' => $this->db_key,
+                'action' => $this->action,
+                'page' => 'list',
+            ],
+        ];
+
+        $notification = $this->Notification();
+        $data['vehicles_cart'] = VehicleCart::with('vehicle')->get()->toArray();
+
+
+        if(Auth::user()->hasRole('Customer')){
+            $data['records'] = Shipment::with('consignee')->where('customer_email', auth()->user()->email)->get();
+            $data['booked'] = Shipment::with('consignee')->where('customer_email', auth()->user()->email)->where('status', '1')->where('loading_state', $state)->get();
+            $data['shipped'] = Shipment::with('consignee')->where('customer_email', auth()->user()->email)->where('status', '2')->where('loading_state', $state)->get();
+            $data['arrived'] = Shipment::with('consignee')->where('customer_email', auth()->user()->email)->where('status', '3')->where('loading_state', $state)->get();
+            $data['completed'] = Shipment::with('consignee')->where('customer_email', auth()->user()->email)->where('status', '4')->where('loading_state', $state)->get();
+        $data['shipments'] = Shipment::with('vehicle')->where('customer_email', auth()->user()->email)->get()->toArray();
+
+        $data['loading_port'] = LoadingCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
+        $data['destination_port'] = DCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
+
+           
+        }
+        else{
+            $data['records'] = Shipment::with('consignee')->paginate($this->perpage);
+            $data['booked'] = Shipment::with('consignee')->where('status', '1')->where('loading_state', $state)->paginate($this->perpage);
+            $data['shipped'] = Shipment::with('consignee')->where('status', '2')->where('loading_state', $state)->paginate($this->perpage);
+            $data['arrived'] = Shipment::with('consignee')->where('status', '3')->where('loading_state', $state)->paginate($this->perpage);
+            $data['completed'] = Shipment::with('consignee')->where('status', '4')->where('loading_state', $state)->paginate($this->perpage);
+        $data['shipments'] = Shipment::with('vehicle')->get()->toArray();
+        $data['loading_port'] = LoadingCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
+
+        $data['destination_port'] = DCountry::select('port')->where('status', '1')->groupBy('port')->get()->toArray();
+        
+
+        }
+       
+        
+        $current_date = Carbon::now();
+        $period = CarbonPeriod::create('2022-09-09', $current_date);
+        $period = CarbonPeriod::create('2022-09-09', $current_date);
+        foreach ($period as $date) {
+            $data['date'][] = $date->format('Y-m-d');
+        }
+
+        return view($this->view . 'list', $data, $notification);
+
+    }
+
     public function create(Request $request)
     {
         $action = url($this->action . '/create');
@@ -294,7 +358,7 @@ class ShipmentController extends Controller
         $data['shipment_lines'] = ShipmentLine::where('status', '1')->get();
         $data['shipment_types'] = ShipmentType::where('status', '1')->get();
         // $data['companies'] = Company::where('status', '1')->get();
-        $data['companies'] = User::all();
+        $data['companies'] = User::role('Customer')->get();
         $data['destination_country'] = DCountry::select('country')->where('status', '1')->groupBy('country')->get()->toArray();
 
         $output = view('shipment.general', $data);
@@ -696,30 +760,76 @@ class ShipmentController extends Controller
     public function FetchStatusRecords(Request $request)
     {
         
+        
         if ($request->ajax()) {
-            if(Auth::user()->hasRole('Customer')){
-                $data = Shipment::with('vehicle')->where('status', $request->columns[0]['data']['tab'])->where('customer_email', auth()->user()->email)->get();
-            }
-            else{
-                if($request->columns[0]['data']['tab'] == 'loading_port'){
-                    $data = Shipment::with('vehicle')->where('loading_port', $request->columns[0]['data']['value'])->get();
-                }
-                elseif($request->columns[0]['data']['tab'] == 'destination_port'){
-                    $data = Shipment::with('vehicle')->where('destination_port', $request->columns[0]['data']['value'])->get();
-                }
-                elseif($request->columns[0]['data']['tab'] == 'loading_date'){
-                    $data = Shipment::with('vehicle')->where('loading_date', $request->columns[0]['data']['value'])->get();
-                }
-                elseif($request->columns[0]['data']['tab'] == 'arrival_date'){
-                    $data = Shipment::with('vehicle')->where('arrival_date', $request->columns[0]['data']['value'])->get();
-                }
-                elseif($request->columns[0]['data']['tab'] == 'all'){
-                    $data = Shipment::with('vehicle')->get();
+
+
+            if($request->columns[0]['data']['state'] != ''){
+
+                if(Auth::user()->hasRole('Customer')){
+                    $data = Shipment::with('vehicle')->where('status', $request->columns[0]['data']['tab'])->where('customer_email', auth()->user()->email)->where('loading_state', $request->columns[0]['data']['state'])->get();
                 }
                 else{
-                    $data = Shipment::with('vehicle')->where('status', $request->columns[0]['data']['tab'])->get();
+                    if($request->columns[0]['data']['tab'] == 'loading_port'){
+                        $data = Shipment::with('vehicle')->where('loading_port', $request->columns[0]['data']['value'])->where('loading_state', $request->columns[0]['data']['state'])->get();
+                    }
+                    elseif($request->columns[0]['data']['tab'] == 'destination_port'){
+                        $data = Shipment::with('vehicle')->where('destination_port', $request->columns[0]['data']['value'])->where('loading_state', $request->columns[0]['data']['state'])->get();
+                    }
+                    elseif($request->columns[0]['data']['tab'] == 'loading_date'){
+                        $data = Shipment::with('vehicle')->where('loading_date', $request->columns[0]['data']['value'])->where('loading_state', $request->columns[0]['data']['state'])->get();
+                    }
+                    elseif($request->columns[0]['data']['tab'] == 'arrival_date'){
+                        $data = Shipment::with('vehicle')->where('arrival_date', $request->columns[0]['data']['value'])->where('loading_state', $request->columns[0]['data']['state'])->get();
+                    }
+                    elseif($request->columns[0]['data']['tab'] == 'all'){
+                        $data = Shipment::with('vehicle')->where('loading_state', $request->columns[0]['data']['state'])->get();
+                    }
+                    else{
+                        $data = Shipment::with('vehicle')->where('status', $request->columns[0]['data']['tab'])->where('loading_state', $request->columns[0]['data']['state'])->get();
+                    }
                 }
+
+
+
+
+            
             }
+            else{
+
+
+                if(Auth::user()->hasRole('Customer')){
+                    $data = Shipment::with('vehicle')->where('status', $request->columns[0]['data']['tab'])->where('customer_email', auth()->user()->email)->get();
+                }
+                else{
+                    if($request->columns[0]['data']['tab'] == 'loading_port'){
+                        $data = Shipment::with('vehicle')->where('loading_port', $request->columns[0]['data']['value'])->get();
+                    }
+                    elseif($request->columns[0]['data']['tab'] == 'destination_port'){
+                        $data = Shipment::with('vehicle')->where('destination_port', $request->columns[0]['data']['value'])->get();
+                    }
+                    elseif($request->columns[0]['data']['tab'] == 'loading_date'){
+                        $data = Shipment::with('vehicle')->where('loading_date', $request->columns[0]['data']['value'])->get();
+                    }
+                    elseif($request->columns[0]['data']['tab'] == 'arrival_date'){
+                        $data = Shipment::with('vehicle')->where('arrival_date', $request->columns[0]['data']['value'])->get();
+                    }
+                    elseif($request->columns[0]['data']['tab'] == 'all'){
+                        $data = Shipment::with('vehicle')->get();
+                    }
+                    else{
+                        $data = Shipment::with('vehicle')->where('status', $request->columns[0]['data']['tab'])->get();
+                    }
+                }
+                
+            }
+
+
+
+
+
+
+           
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('id', function($row){
@@ -796,15 +906,32 @@ class ShipmentController extends Controller
         return $data;
     }
 
-    public function serverside(Request $request)
+    public function serverside(Request $request, $state = null)
     {
+        
         if ($request->ajax()) {
+
+            
+            if($state != null){
+                if(Auth::user()->hasRole('Customer')){
+                    $data = Shipment::with('vehicle')->where('customer_email', auth()->user()->email)->where('loading_state', $state)->get();
+                }
+                else{
+                    $data = Shipment::with('vehicle')->where('loading_state', $state)->get();
+                }
+        }
+        else{
             if(Auth::user()->hasRole('Customer')){
                 $data = Shipment::with('vehicle')->where('customer_email', auth()->user()->email)->get();
             }
             else{
                 $data = Shipment::with('vehicle')->get();
             }
+        }
+
+
+
+            
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('id', function($row){
@@ -822,21 +949,16 @@ class ShipmentController extends Controller
                     $vehicles = $totalVehicles;
                     return $vehicles;
                 })
+                ->addColumn('notes', function($row){
+                    $bol = view('layouts.shipment_filter.shipment_bol', $row)->render();
+                    return $bol;
+                })
                 ->addColumn('action', function ($row) {
                     $url_view = url('admin/shipments/profile/' . $row->id);
                     $url_delete = url('admin/shipments/delete/' . $row->id);
                     $url_edit = url('admin/shipments/edit/' . $row->id);
                     $id = $row->id;
-                //     <button class='edit-button' id='$id' onclick='editShipment(this.id)'>
-                //     <a>
-                //         <svg width='14' height='13' viewBox='0 0 16 16' fill='none'
-                //             xmlns='http://www.w3.org/2000/svg'>
-                //             <path
-                //                 d='M2.66708 14.0004C2.72022 14.0068 2.77394 14.0068 2.82708 14.0004L5.49375 13.3338C5.61205 13.3056 5.7204 13.2457 5.80708 13.1604L14.0004 4.94042C14.2488 4.69061 14.3881 4.35267 14.3881 4.00042C14.3881 3.64818 14.2488 3.31024 14.0004 3.06042L12.9471 2.00042C12.8233 1.87646 12.6762 1.77811 12.5143 1.71101C12.3525 1.64391 12.179 1.60938 12.0037 1.60938C11.8285 1.60938 11.655 1.64391 11.4932 1.71101C11.3313 1.77811 11.1842 1.87646 11.0604 2.00042L2.86708 10.1938C2.78094 10.2808 2.71891 10.3888 2.68708 10.5071L2.02042 13.1738C1.99645 13.26 1.99011 13.3502 2.00177 13.439C2.01342 13.5277 2.04284 13.6133 2.08826 13.6904C2.13368 13.7676 2.19417 13.8348 2.26613 13.888C2.33808 13.9413 2.42003 13.9795 2.50708 14.0004C2.56022 14.0068 2.61394 14.0068 2.66708 14.0004ZM12.0004 2.94042L13.0604 4.00042L12.0004 5.06042L10.9471 4.00042L12.0004 2.94042ZM3.94042 11.0071L10.0004 4.94042L11.0604 6.00042L4.99375 12.0671L3.58708 12.4138L3.94042 11.0071Z'
-                //                 fill='#2C77E7' />
-                //         </svg>
-                //     </a>
-                // </button>
+                
 
                     $btn = "<button class='profile-button'>
                                             <a href='$url_view'>
@@ -876,7 +998,7 @@ class ShipmentController extends Controller
                                         ";
                     return $btn;
                 })
-                ->rawColumns(['id','action','shipment_id'])
+                ->rawColumns(['id','action','shipment_id', 'notes'])
                 ->make(true);
         }
         if(Auth::user()->hasRole('Customer')){
@@ -896,14 +1018,30 @@ class ShipmentController extends Controller
         if ($req->ajax()) {
             $data = [];
 
-            if(Auth::user()->hasRole('Customer')){
-                $data['records'] = Shipment::where('customer_email', auth()->user()->email)->where('status', $req->id)->get();
+            if($req->state){
+
+                if(Auth::user()->hasRole('Customer')){
+                    $data['records'] = Shipment::where('customer_email', auth()->user()->email)->where('status', $req->id)->where('loading_state', $req->state)->get();
+    
+                }
+                else{
+                    $data['records'] = Shipment::where('loading_state', $req->state)->where('status', $req->id)->get();
+                }
+
 
             }
             else{
-                $data['records'] = Shipment::where('status', $req->id)->get();
+                if(Auth::user()->hasRole('Customer')){
+                    $data['records'] = Shipment::where('customer_email', auth()->user()->email)->where('status', $req->id)->get();
+                }
+                else{
+                    $data['records'] = Shipment::where('status', $req->id)->get();
+                }
             }
+
+            
             $data['tab'] = $req->id;
+            $data['state'] = $req->state;
             if($req->tab == 'Completed'){
                 $output = view('layouts.shipment_filter.CompletedShipments', $data)->render();
             }
@@ -919,11 +1057,11 @@ class ShipmentController extends Controller
         $data = [];
         if ($req->searchText) {
             if(Auth::user()->hasRole('Customer')){
-                $data['vehicles'] = Vehicle::where('added_by_user', auth()->user()->id)->where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->get()->toArray();
+                $data['vehicles'] = Vehicle::where('added_by_user', auth()->user()->id)->where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->whereshipment_status('0')->get()->toArray();
                 // dd($data['vehicles']);
 
             }else{
-                $data['vehicles'] = Vehicle::where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->get()->toArray();
+                $data['vehicles'] = Vehicle::where('vin', 'LIKE', '%' . $search_text . "%")->where('shipment_id', null)->whereshipment_status('0')->get()->toArray();
                 // dd($data['vehicles']);
             }
                 
@@ -941,6 +1079,12 @@ class ShipmentController extends Controller
 
     public function add_vehicles(Request $req){
         // return $req->id;
+
+        $vehicle = Vehicle::find($req->id);
+        $vehicle->shipment_status = '1';
+        $vehicle->save();
+
+
         $data  = [];
 
         $data['vehicles'] = Vehicle::where('id', $req->id)->get()->toArray();
@@ -954,6 +1098,13 @@ class ShipmentController extends Controller
 
     public function deleteFromCart(Request $req){
         $data = [];
+
+        $vehicle = Vehicle::find($req->value);
+        $vehicle->shipment_status = '0';
+        $vehicle->save();
+
+
+
         $data = VehicleCart::find($req->id);
 
         if($data){

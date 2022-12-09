@@ -369,9 +369,9 @@
 
                             <div class="col-12 py-2">
                                 <div class="d-flex align-items-center">
-                                    <label for="notes" class="col-6 px-0 font-size font-bold">Notes</label>
+                                    <label for="note" class="col-6 px-0 font-size font-bold">Notes</label>
                                     <textarea type="text" class="form-control-sm border border-0 nonrounded-pill bg col-6" name="note"
-                                        id="note" value="{{ @$user[0]['notes'] }}"></textarea>
+                                        id="note" value="{{ @$user[0]['note'] }}">{{ @$user[0]['note'] }}</textarea>
                                 </div>
                             </div>
                             {{-- <div class="col-12 py-2">

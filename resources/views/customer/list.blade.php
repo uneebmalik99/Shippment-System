@@ -346,7 +346,16 @@
 
         <script type="text/javascript">
             $(function() {
+        s = '{{@$state}}';
+                
+                if(s){
+            state = s;
+        }
+        else{
+            state = '';
+        }
                 var table = $('#customer_table').DataTable({
+                    
                     processing: true,
                     serverSide: true,
                     "lengthMenu": [
@@ -360,8 +369,10 @@
                         searchPlaceholder: "Search",
                         processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
                     },
-                    ajax: "{{ route('customer.records') }}",
-                    columns: [{
+                    ajax: "{{ route('customer.records') }}" + "/" + state,
+                    columns: [
+                       
+                        {
                             data: 'id',
                             name: 'id'
                         },
