@@ -2063,8 +2063,16 @@
         }, 1000);
             }
         });
-        
     }
+
+    // function selectState(state){
+
+    //     page = $('#'+state).attr('data-tab');
+
+    //     alert(state);
+    //     alert(page);
+
+    // }
 </script>
 
 

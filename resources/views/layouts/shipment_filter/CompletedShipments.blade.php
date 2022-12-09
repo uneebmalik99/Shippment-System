@@ -95,6 +95,13 @@
 <script type="text/javascript">
     $(document).ready(function() {
         tab = '{{@$tab}}';
+        s = '{{@$state}}';
+        if(s){
+            state = s;
+        }
+        else{
+            state = '';
+        }
         
         function format(d) {
             console.log(d);
@@ -144,6 +151,7 @@
                     defaultContent: '',
                     data: {
                 'tab': tab,
+                'state':state,
             },
 
                 },

@@ -89,7 +89,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::post('/customer/update', [App\Http\Controllers\CustomerController::class, 'customerUpdate'])->name('customers.update');
 
-    Route::get('/customers/records', [CustomerController::class, 'serverside'])->name('customer.records');
+    Route::get('/customers/records/{state?}', [CustomerController::class, 'serverside'])->name('customer.records');
+
+
+    Route::get('/customers/changeState/{state?}', [CustomerController::class, 'changeState'])->name('customer.changeState');
+
 
     //Vehicle Routes
     Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicle.list');
@@ -143,6 +147,10 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/vehicle/addToCart',       [VehicleController::class, 'AddToCart'])->name('vehicle.add_to_cart');
 
 
+    Route::get('/vehicle/changeState/{state?}',       [VehicleController::class, 'changeState'])->name('vehicle.changeState');
+
+
+
     //Sticky Notes Routes
     Route::get('/stickynotes', [StickyController::class, 'index'])->name('sticky.list');
     Route::post('/stickynotes', [StickyController::class, 'create'])->name('sticky.create');
@@ -161,7 +169,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
 
     Route::get('/shipments/filtering', [ShipmentController::class, 'filtering'])->name('shipment.filter');
-    Route::get('/shipments/records', [ShipmentController::class, 'serverside'])->name('shipments.records');
+    Route::get('/shipments/records/{state?}', [ShipmentController::class, 'serverside'])->name('shipments.records');
 
     Route::get('/shipments/FetchStatusRecords', [ShipmentController::class, 'FetchStatusRecords'])->name('shipments.FetchStatusRecords');
 
@@ -182,6 +190,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/shipment/vehicle_deleteFromCart',       [ShipmentController::class, 'deleteFromCart'])->name('shipment.deleteFromCart');
 
     Route::get('/shipment/export',                     [ShipmentController::class, 'export'])->name('shipment.export');
+
+
+    Route::get('/shipment/changeState/{state?}',                     [ShipmentController::class, 'changeState'])->name('shipment.changeState');
 
 
 
@@ -303,6 +314,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     //  Dashboard
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.list');
+
+    Route::get('/dashboard/changeState/{state?}', [DashboardController::class, 'changeState'])->name('dashboard.changeState');
+
 
     Route::get('/inventory',                            function(){return "Coming Soon!";});
     //Inventory

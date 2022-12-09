@@ -71,7 +71,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
     <div class="bg-white rounded p-2">
         {{-- badges start --}}
         <div class="d-flex m-2">
-            <div class="col-3 p-1" id="1" tab="Booked" onclick="fetchCustomers(this.id)" style="cursor: pointer;">
+            <div class="col-3 p-1" value="{{@$state}}" id="1" tab="Booked" onclick="fetchCustomers(this.id)" style="cursor: pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -99,7 +99,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                     </div>
                 </div>
             </div>
-            <div class="col-3 p-1" id="2" tab="Shipped" onclick="fetchCustomers(this.id)" style="cursor: pointer;">
+            <div class="col-3 p-1" value="{{@$state}}" id="2" tab="Shipped" onclick="fetchCustomers(this.id)" style="cursor: pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -126,7 +126,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                     </div>
                 </div>
             </div>
-            <div class="col-3 p-1" id="3" tab="Arrived" onclick="fetchCustomers(this.id)" style="cursor: pointer;">
+            <div class="col-3 p-1" value="{{@$state}}" id="3" tab="Arrived" onclick="fetchCustomers(this.id)" style="cursor: pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
                         <div class="d-flex">
@@ -153,7 +153,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                     </div>
                 </div>
             </div>
-            <div class="col-3 p-1" id="4" tab="Completed" onclick="fetchCustomers(this.id)"
+            <div class="col-3 p-1" value="{{@$state}}" id="4" tab="Completed" onclick="fetchCustomers(this.id)"
                 style="cursor: pointer;">
                 <div class="col-12 py-0 px-1">
                     <div class="col-12 border-style card-rounded py-2 px-3">
@@ -349,6 +349,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
+            state = "{{@$state}}";
             function format(d) {
                 console.log(d);
                 html =
@@ -389,7 +390,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                     searchPlaceholder: "Search",
                     processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
                 },
-                ajax: "{{ route('shipments.records') }}",
+                ajax: "{{ route('shipments.records') }}"+"/"+state,
                 columns: [{
                         // class: 'details-control',
                         className: 'dt-control',
@@ -479,6 +480,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
         });
         function fetchCustomers(id) {
             $tab = $('#' + id).attr('tab');
+            $value = $('#' + id).attr('value');
             $id = id;
             $.ajax({
                 type: 'post',
@@ -486,6 +488,7 @@ table.dataTable tr.dt-hasChild td.dt-control:before {
                 data: {
                     'tab': $tab,
                     'id': $id,
+                    'state':$value,
                 },
                 success: function(data) {
                     // $('#shipment_tbody').html(data);

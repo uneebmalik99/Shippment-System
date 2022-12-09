@@ -296,6 +296,7 @@
 
     function fetchVehicles(id) {
         $tab = $('#' + id).attr('tab');
+        $value = $('#' + id).attr('value');
         $id = id;
 
 
@@ -305,6 +306,8 @@
             data: {
                 'tab': $tab,
                 'id': $id,
+                'state': $value,
+
             },
             success: function(data) {
                 $route = '{{ route('vehicle.export') . '/' }}' + id;

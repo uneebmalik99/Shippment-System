@@ -1,12 +1,14 @@
 <script>
     function create_shipment_form(id) {
-
+        alert('kashif');
         // $('#general_shipment_tab').removeClass('next-style');
         // $('#general_shipment_tab').addClass('tab_style');
        
         var formData = new FormData(jQuery('#shipment_form')[0]);
         $next_tab = $('.next_tab').attr('id');
         formData.append('tab', $next_tab);
+
+        console.log(...formData);
 
 
         document.getElementById('load').style.visibility = "visible";
@@ -265,8 +267,8 @@
                 // alert(data[0]['shipper']['id']);
                 $('#customer_email').val(data[0]['email']);
                 $('#customer_phone').val(data[0]['phone']);
-                $('#select_consignee').append('<option selected disabled value="'+data[0]['shippers'][0]['consignee']+'">'+data[0]['shippers'][0]['consignee']+'</option>');
-                $('#notifier').append('<option selected disabled>'+data[0]['shippers'][0]['consignee']+'</option>');
+                $('#select_consignee').html('<option selected value="'+data[0]['shippers'][0]['consignee']+'">'+data[0]['shippers'][0]['consignee']+'</option>');
+                $('#notifier').html('<option selected>'+data[0]['shippers'][0]['consignee']+'</option>');
             }
         });
     }

@@ -87,7 +87,7 @@
         <div class="bg-white rounded p-2">
             {{-- badges start --}}
             <div class="d-flex m-2">
-                <div class="col-4 p-1" id="1" tab="New Order" onclick="fetchVehicles(this.id)"
+                <div class="col-4 p-1" value="{{@$state}}" id="1" tab="New Order" onclick="fetchVehicles(this.id)"
                     style="cursor: pointer">
                     <div class="col-12 py-0 px-1">
                         <div class="col-12 border-style card-rounded py-2 px-3">
@@ -113,7 +113,7 @@
                     </div>
                 </div>
 
-                <div class="col-4 p-1" id="2" tab="Dispatched" onclick="fetchVehicles(this.id)"
+                <div class="col-4 p-1" value="{{@$state}}" id="2" tab="Dispatched" onclick="fetchVehicles(this.id)"
                     style="cursor:pointer">
                     <div class="col-12 py-0 px-1">
                         <div class="col-12 border-style card-rounded py-2 px-3">
@@ -138,7 +138,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4 p-1" id="3" tab="On Hand" onclick="fetchVehicles(this.id)"
+                <div class="col-4 p-1" value="{{@$state}}" id="3" tab="On Hand" onclick="fetchVehicles(this.id)"
                     style="cursor: pointer;">
                     <div class="col-12 py-0 px-1">
                         <div class="col-12 border-style card-rounded py-2 px-3">
@@ -164,7 +164,7 @@
                 </div>
             </div>
             <div class="d-flex m-2">
-                <div class="col-4 p-1" id="4" tab="No Title" onclick="fetchVehicles(this.id)"
+                <div class="col-4 p-1" value="{{@$state}}" id="4" tab="No Title" onclick="fetchVehicles(this.id)"
                     style="cursor:pointer;">
                     <div class="col-12 py-0 px-1">
                         <div class="col-12 border-style card-rounded py-2 px-3">
@@ -187,7 +187,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4 p-1" id="5" tab="Towing" onclick="fetchVehicles(this.id)"
+                <div class="col-4 p-1" value="{{@$state}}" id="5" tab="Towing" onclick="fetchVehicles(this.id)"
                     style="cursor:pointer;">
                     <div class="col-12 py-0 px-1">
                         <div class="col-12 border-style card-rounded py-2 px-3">
@@ -212,7 +212,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4 p-1" id="6" tab="Inventory Value" onclick="fetchVehicles(this.id)"
+                <div class="col-4 p-1" value="{{@$state}}" id="6" tab="Inventory Value" onclick="fetchVehicles(this.id)"
                     style="cursor:pointer;">
                     <div class="col-12 py-0 px-1">
                         <div class="col-12 border-style card-rounded py-2 px-3">
