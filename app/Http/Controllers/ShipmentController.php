@@ -936,7 +936,6 @@ class ShipmentController extends Controller
                 ->addIndexColumn()
                 ->addColumn('id', function($row){
                     $data['row'] = $row;
-                    // $data['vehicles'] = Vehicle::where('shipment_id', $row->id)->get();
                     
                     $data['img'] = Loading_Image::where('shipment_id', $row->id)->get();
                     // return $data['img'];

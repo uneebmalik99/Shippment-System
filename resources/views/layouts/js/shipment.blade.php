@@ -1,8 +1,6 @@
 <script>
     function create_shipment_form(id) {
-        alert('kashif');
-        // $('#general_shipment_tab').removeClass('next-style');
-        // $('#general_shipment_tab').addClass('tab_style');
+        
        
         var formData = new FormData(jQuery('#shipment_form')[0]);
         $next_tab = $('.next_tab').attr('id');
@@ -19,7 +17,6 @@
             processData: false,
             contentType: false,
             success: function(data) {
-            // $('#attachments_shipment_tab').addClass('next-style');
                 
                 document.getElementById('load').style.visibility = "hidden";
                 
