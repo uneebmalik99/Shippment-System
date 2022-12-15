@@ -289,6 +289,7 @@
         .col-3 p-1 {
             width: 188px !important;
         }
+        
 .dataTables_wrapper .dataTables_filter input {
     width: 190px!important;
     border: 2px solid #3e5871!important;
@@ -318,10 +319,22 @@
                 margin-bottom: 20px !important;
             }
         }
-    </style>
+        @media screen and (max-width: 767px) {
+/* start of medium tablet styles */
+.ship{
+margin-top: 12px;
+    margin-left: -10px;
+  
+
+}
+}
+
+     
+        
+ </style>
     <div class="container-fluid p-0">
         <div class="row">
-            <div class="col-12 mx-auto">
+            <div class="col-12 mx-auto min-auto">
                 <div class="d-flex dashboard_heading" style="margin-top:-40px!important">
                     <div style="margin-top:3px!important">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -344,14 +357,15 @@
                 </div>
             </div>
         </div>
-
+        </div>
+        <div class="bg-white rounded p-2 ">
 
         <div class="bg-white rounded p-2 ">
             {{-- badges start --}}
             <div class="pt-3">
-                @can('Page Access')                    
-                <div class="d-flex m-2">
-                    <div class="col-3 p-1">
+                @can('Page Access') 
+                <div class="row">                   
+                <div class="col-lg-3 col-md-3 order-sm-12 col-12 "style="margin-top: 12px;" >
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -379,7 +393,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3 p-1">
+                    <div class="col-lg-3 col-md-3 order-sm-12 col-12"style="margin-top: 12px;">
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -409,7 +423,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3 p-1">
+                    <div class="col-lg-3 col-md-3 order-sm-12 col-12"style="margin-top: 12px;">
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -437,7 +451,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3 p-1">
+                    <div class="col-lg-3 col-md-3 order-sm-12 col-12"style="margin-top: 12px;">
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -471,10 +485,15 @@
                         </div>
                     </div>
                 </div>
-                @endcan
+                 </div>
+               
 
-                <div class="d-flex m-2">
-                    <div class="col-3 p-1">
+                @endcan
+               
+                
+                
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 order-sm-12 col-12"style="margin-top: 12px;">
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -498,7 +517,7 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="col-3 p-1">
+                    {{-- <div class="col-lg-3 col-md-3 order-sm-12 col-12"style="margin-top: 12px;">
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -524,7 +543,7 @@
                             </div>
                         </div>
                     </div> --}}
-                    <div class="col-3 p-1">
+                    <div class="col-lg-3 col-md-3 order-sm-12 col-12"style="margin-top: 12px;">
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -549,7 +568,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3 p-1">
+                    <div class="col-lg-3 col-md-3 order-sm-12 col-12"style="margin-top: 12px;">
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -574,7 +593,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3 p-1">
+                    <div class="col-lg-3 col-md-3 order-sm-12 col-12"style="margin-top: 12px;">
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -599,9 +618,9 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="d-flex m-2">
-                    <div class="col-3 p-1">
+                </div>
+                <div class="row" style="width:103%;margin-left:1px; margin-top:-6px">
+                    <div class="col-lg-3 col-md-3 order-sm-12 col-12"style="margin-top: 12px; margin-left:-9px">
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -631,7 +650,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3 p-1">
+                    <div class="col-lg-3 col-md-3 order-sm-12 col-12 ship"style="margin-top: 12px; margin-left:-5px">
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -661,7 +680,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3 p-1">
+                    <div class="col-lg-3 col-md-3 order-sm-12 col-12"style="margin-top: 12px;margin-left:-3px">
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -691,7 +710,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3 p-1">
+                    <div class="col-lg-3 col-md-3 order-sm-12 col-12"style="margin-top: 12px;margin-left:-5px">
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -726,7 +745,7 @@
                 </div>
 
                 {{-- <div class="d-flex m-2">
-                    <div class="col-3 p-1">
+                    <div class="col-lg-3 col-md-3 order-sm-12 "style="margin-left: -6px;">
                         <div class="col-12 py-0 px-1">
                             <div class="col-12 border-style card-rounded py-2 px-3">
                                 <div class="d-flex">
@@ -756,13 +775,10 @@
                         </div>
                     </div>
                 </div> --}}
-
-
-
-
-
-
-            </div>
+                </div>
+                </div>
+                
+                </div>
             {{-- badges end --}}
 
             {{-- listing start --}}
@@ -787,7 +803,7 @@
                             {{-- </div> --}}
                         {{-- </div> --}}
 
-                        <div class="row mt-2 mb-2">
+                        <div class="row mt-4 mb-4">
                             <div class="col-12">
                                 <table class="" id="dashboard_shipment" style="width:100%!important;">
                                     <thead>
